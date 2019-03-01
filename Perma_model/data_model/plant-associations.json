@@ -1,0 +1,173 @@
+{
+  "Carotte":
+            {
+              "category": "plante potagère",
+              "color": "orange",
+              "plantsCombinations": {
+                                      "Carotte":
+                                                {
+                                                  "distance" : 1
+                                                },
+                                      "Poireau":
+                                                {
+                                                  "distance": 1
+                                                },
+                                      "Ail":
+                                              {
+                                                "distance": 1
+                                              },
+                                      "Pois":
+                                              {
+                                                "distance": 1
+                                              },
+                                      "Oignon":
+                                                {
+                                                  "distance": 1
+                                                }
+                                    },
+              "sunExposureTimeInHour": 6,
+              "soilTypeAvoided":  [
+                                    "Calcaire",
+                                    "Azote",
+                                    "Pauvre",
+                                    "Compact"
+                                  ]
+            },
+  "Poireau":
+              {
+                "category": "plante potagère",
+                "color": "green",
+                "plantsCombinations": {
+                                        "Carotte":
+                                                  {
+                                                    "distance" : 1
+                                                  },
+                                        "Poireau":
+                                                  {
+                                                    "distance": 1
+                                                  },
+                                        "Ail":
+                                                {
+                                                  "distance": 1
+                                                },
+                                        "Pois":
+                                                {
+                                                  "distance": 1
+                                                },
+                                        "Oignon":
+                                                  {
+                                                    "distance": 1
+                                                  }
+                                      },
+                "sunExposureTimeInHour": 13,
+                "soilTypeAvoided":  [
+                                      "Calcaire",
+                                      "Azote",
+                                      "Pauvre",
+                                      "Compact"
+                                    ]
+              },
+  "Ail":
+          {
+            "category": "plante potagère",
+            "color": "pink",
+            "plantsCombinations": {
+                                    "Carotte":
+                                              {
+                                                "distance" : 1
+                                              },
+                                    "Poireau":
+                                              {
+                                                "distance": 1
+                                              },
+                                    "Ail":
+                                            {
+                                              "distance": 1
+                                            },
+                                    "Pois":
+                                            {
+                                              "distance": 1
+                                            },
+                                    "Oignon":
+                                              {
+                                                "distance": 2
+                                              }
+                                  },
+            "sunExposureTimeInHour": 3,
+            "soilTypeAvoided":  [
+                                  "Humifere",
+                                  "Azote",
+                                  "Pauvre",
+                                  "Compact"
+                                ]
+          },
+  "Pois":
+          {
+            "category": "plante potagère",
+            "color": "yellowgreen",
+            "plantsCombinations": {
+                                    "Carotte":
+                                              {
+                                                "distance" : 1
+                                              },
+                                    "Poireau":
+                                              {
+                                                "distance": 1
+                                              },
+                                    "Ail":
+                                            {
+                                              "distance": 1
+                                            },
+                                    "Pois":
+                                            {
+                                              "distance": 1
+                                            },
+                                    "Oignon":
+                                              {
+                                                "distance": 1
+                                              }
+                                  },
+            "sunExposureTimeInHour": 12,
+            "soilTypeAvoided":  [
+                                  "Calcaire",
+                                  "Azote",
+                                  "Pauvre",
+                                  "Compact",
+                                  "ArgileuxLimoneux"
+                                ]
+          },
+  "Oignon":
+            {
+              "category": "plante potagère",
+              "color": "purple",
+              "plantsCombinations": {
+                                      "Carotte":
+                                                {
+                                                  "distance" : 1
+                                                },
+                                      "Poireau":
+                                                {
+                                                  "distance": 1
+                                                },
+                                      "Ail":
+                                              {
+                                                "distance": 2
+                                              },
+                                      "Pois":
+                                              {
+                                                "distance": 1
+                                              },
+                                      "Oignon":
+                                                {
+                                                  "distance": 1
+                                                }
+                                    },
+              "sunExposureTimeInHour": 5,
+              "soilTypeAvoided":  [
+                                    "Azote",
+                                    "Pauvre",
+                                    "Compact",
+                                    "Humifere"
+                                  ]
+            }
+}
