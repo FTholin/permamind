@@ -1,533 +1,1997 @@
-[{
-		"TAILLE_W": 8,
-		"TAILLE_H": 6,
-		"climat": "Peut être une idée intéressante"
+[
+	{
+		"dimensions": {
+											"TAILLE_W": 8,
+											"TAILLE_H": 6
+									},
+		"soil_squares": [
+										{
+											"id": 0,
+											"category": "Humifere",
+											"color": "k",
+											"pos_x": 0,
+											"pos_y": 4,
+											"dim_x": 8,
+											"dim_y": 2
+										},
+										{
+											"id": 1,
+											"category": "Humifere",
+											"color": "k",
+											"pos_x": 2,
+											"pos_y": 3,
+											"dim_x": 6,
+											"dim_y": 1
+										},
+										{
+											"id": 2,
+											"category": "ArgileuxLimoneux",
+											"color": "tan",
+											"pos_x": 4,
+											"pos_y": 0,
+											"dim_x": 4,
+											"dim_y": 3
+										},
+										{
+											"id": 3,
+											"category": "Calcaire",
+											"color": "aliceblue",
+											"pos_x": 0,
+											"pos_y": 0,
+											"dim_x": 2,
+											"dim_y": 4
+										},
+										{
+											"id": 4,
+											"category": "Calcaire",
+											"color": "aliceblue",
+											"pos_x": 2,
+											"pos_y": 0,
+											"dim_x": 2,
+											"dim_y": 3
+										}
+									],
+		"sunlight_squares": [
+													{
+														"id": 0,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 0,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 1,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 1,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 2,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 3,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 3,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 4,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 5,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 5,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 6,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 6,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 7,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 7,
+														"pos_y": 5,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 8,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 0,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 9,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 1,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 10,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 11,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 3,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 12,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 13,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 5,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 14,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 15,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 7,
+														"pos_y": 4,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 16,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 17,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 1,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 18,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 2,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 19,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 3,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 20,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 4,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 21,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 5,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 22,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 23,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 7,
+														"pos_y": 3,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 24,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 25,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 1,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 26,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 2,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 27,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 3,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 28,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 4,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 29,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 5,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 30,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 6,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 31,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 7,
+														"pos_y": 2,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 32,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 33,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 1,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 34,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 35,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 3,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 36,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 37,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 5,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 38,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 39,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 7,
+														"pos_y": 1,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 40,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 0,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 41,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 1,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 42,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 43,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 3,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 44,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 45,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 5,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 46,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 6,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 47,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 7,
+														"pos_y": 0,
+														"dim_x": 1,
+														"dim_y": 1,
+														"sunExposureTimeInHour": 14
+													}
+												]
 	},
-	[{
-			"id": 0,
-			"category": "Humifere",
-			"color": "k",
-			"pos_x": 0,
-			"pos_y": 4,
-			"dim_x": 8,
-			"dim_y": 2
-		},
-		{
-			"id": 1,
-			"category": "Humifere",
-			"color": "k",
-			"pos_x": 2,
-			"pos_y": 3,
-			"dim_x": 6,
-			"dim_y": 1
-		},
-		{
-			"id": 2,
-			"category": "ArgileuxLimoneux",
-			"color": "tan",
-			"pos_x": 4,
-			"pos_y": 0,
-			"dim_x": 4,
-			"dim_y": 3
-		},
-		{
-			"id": 3,
-			"category": "Calcaire",
-			"color": "aliceblue",
-			"pos_x": 0,
-			"pos_y": 0,
-			"dim_x": 2,
-			"dim_y": 4
-		},
-		{
-			"id": 4,
-			"category": "Calcaire",
-			"color": "aliceblue",
-			"pos_x": 2,
-			"pos_y": 0,
-			"dim_x": 2,
-			"dim_y": 3
-		}
-	],
-	[{
-			"id": 0,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 0,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 1,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 1,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 2,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 2,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 3,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 3,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 4,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 4,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 5,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 5,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 6,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 6,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 7,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 7,
-			"pos_y": 5,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 8,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 0,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 9,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 1,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 10,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 2,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 11,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 3,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 12,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 4,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 13,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 5,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 14,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 6,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 15,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 7,
-			"pos_y": 4,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 16,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 0,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 17,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 1,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 18,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 2,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 19,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 3,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 20,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 4,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 21,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 5,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 22,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 6,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 23,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 7,
-			"pos_y": 3,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 24,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 0,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 25,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 1,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 26,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 2,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 27,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 3,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 28,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 4,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 29,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 5,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 30,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 6,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 31,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 7,
-			"pos_y": 2,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 32,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 0,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 33,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 1,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 34,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 2,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 35,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 3,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 36,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 4,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 37,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 5,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 38,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 6,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 39,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 7,
-			"pos_y": 1,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 40,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 0,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		},
-		{
-			"id": 41,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 1,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 42,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 2,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 43,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 3,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 44,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 4,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 45,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 5,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 46,
-			"category": "light_sunlight",
-			"color": "lightgoldenrodyellow",
-			"pos_x": 6,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 6
-		},
-		{
-			"id": 47,
-			"category": "full_sunlight",
-			"color": "yellow",
-			"pos_x": 7,
-			"pos_y": 0,
-			"dim_x": 1,
-			"dim_y": 1,
-			"sunExposureTimeInHour": 14
-		}
-	]
+	{
+		"dimensions": {
+											"TAILLE_W": 18,
+											"TAILLE_H": 16
+									},
+		"soil_squares": [
+											{
+													"id": 0,
+													"category": "Calcaire",
+													"color": "aliceblue",
+													"pos_x": 0,
+													"pos_y": 0,
+													"dim_x": 8,
+													"dim_y": 5
+											},
+											{
+												"id": 1,
+												"category": "ArgileuxLimoneux",
+												"color": "tan",
+												"pos_x": 0,
+												"pos_y": 10,
+												"dim_x": 10,
+												"dim_y": 6
+											},
+											{
+												"id": 2,
+												"category": "Humifere",
+												"color": "k",
+												"pos_x": 0,
+												"pos_y": 5,
+												"dim_x": 18,
+												"dim_y": 5
+											},
+											{
+												"id": 3,
+												"category": "Humifere",
+												"color": "k",
+												"pos_x": 10,
+												"pos_y": 10,
+												"dim_x": 8,
+												"dim_y": 6
+											},
+											{
+												"id": 4,
+												"category": "ArgileuxLimoneux",
+												"color": "tan",
+												"pos_x": 8,
+												"pos_y": 0,
+												"dim_x": 4.5,
+												"dim_y": 5
+											},
+											{
+												"id": 5,
+												"category": "Humifere",
+												"color": "k",
+												"pos_x": 12.5,
+												"pos_y": 0,
+												"dim_x": 5.5,
+												"dim_y": 5
+											}
+										],
+		"sunlight_squares": [
+													{
+														"id": 0,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 1,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 2,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 3,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 6,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 4,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 8,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 5,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 10,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 6,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 12,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 7,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 14,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 8,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 16,
+														"pos_y": 14,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 9,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 10,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 11,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 12,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 6,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 13,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 8,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 14,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 10,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 15,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 12,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 16,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 14,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 17,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 16,
+														"pos_y": 12,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 18,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 19,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 20,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 21,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 22,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 8,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 23,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 10,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 24,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 12,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 25,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 14,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 26,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 16,
+														"pos_y": 10,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 27,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 28,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 29,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 30,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 31,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 8,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 32,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 10,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 33,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 12,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 34,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 14,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 35,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 16,
+														"pos_y": 8,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 36,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 37,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 38,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 39,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 40,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 8,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 41,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 10,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 42,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 12,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 43,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 14,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 44,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 16,
+														"pos_y": 6,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 45,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 46,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 47,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 48,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 6,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 49,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 8,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 50,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 10,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 51,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 12,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 52,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 14,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 53,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 16,
+														"pos_y": 4,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 54,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 0,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 55,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 2,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 56,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 4,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 57,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 58,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 8,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 59,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 10,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 60,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 12,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 61,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 14,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 62,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 16,
+														"pos_y": 2,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 63,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 0,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 64,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 2,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 65,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 4,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 66,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 6,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 67,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 8,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 68,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 10,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 69,
+														"category": "full_sunlight",
+														"color": "yellow",
+														"pos_x": 12,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 14
+													},
+													{
+														"id": 70,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 14,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													},
+													{
+														"id": 71,
+														"category": "light_sunlight",
+														"color": "lightgoldenrodyellow",
+														"pos_x": 16,
+														"pos_y": 0,
+														"dim_x": 2,
+														"dim_y": 2,
+														"sunExposureTimeInHour": 6
+													}
+												]
+	},
+	{
+		"dimensions": {
+											"TAILLE_W": 14,
+											"TAILLE_H": 18
+									},
+		"soil_squares": [
+											{
+												"id": 0,
+												"category": "Calcaire",
+												"color": "aliceblue",
+												"pos_x": 8,
+												"pos_y": 0,
+												"dim_x": 6,
+												"dim_y": 6
+											},
+											{
+												"id": 1,
+												"category": "ArgileuxLimoneux",
+												"color": "tan",
+												"pos_x": 8,
+												"pos_y": 10,
+												"dim_x": 6,
+												"dim_y": 8
+											},
+											{
+												"id": 2,
+												"category": "Humifere",
+												"color": "k",
+												"pos_x": 0,
+												"pos_y": 0,
+												"dim_x": 8,
+												"dim_y": 18
+											},
+											{
+												"id": 2,
+												"category": "Humifere",
+												"color": "k",
+												"pos_x": 8,
+												"pos_y": 6,
+												"dim_x": 6,
+												"dim_y": 4
+											}
+										],
+		"sunlight_squares": [
+														{
+															"id": 0,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 0,
+															"pos_y": 16,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 1,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 2,
+															"pos_y": 16,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 2,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 4,
+															"pos_y": 16,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 3,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 6,
+															"pos_y": 16,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 4,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 8,
+															"pos_y": 16,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 5,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 10,
+															"pos_y": 16,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 6,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 12,
+															"pos_y": 16,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 7,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 0,
+															"pos_y": 14,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 8,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 2,
+															"pos_y": 14,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 9,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 4,
+															"pos_y": 14,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 10,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 6,
+															"pos_y": 14,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 11,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 8,
+															"pos_y": 14,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 12,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 10,
+															"pos_y": 14,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 13,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 12,
+															"pos_y": 14,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 14,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 0,
+															"pos_y": 12,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 15,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 2,
+															"pos_y": 12,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 16,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 4,
+															"pos_y": 12,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 17,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 6,
+															"pos_y": 12,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 18,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 8,
+															"pos_y": 12,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 19,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 10,
+															"pos_y": 12,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 20,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 12,
+															"pos_y": 12,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 21,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 0,
+															"pos_y": 10,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 22,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 2,
+															"pos_y": 10,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 23,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 4,
+															"pos_y": 10,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 24,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 6,
+															"pos_y": 10,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 25,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 8,
+															"pos_y": 10,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 26,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 10,
+															"pos_y": 10,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 27,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 12,
+															"pos_y": 10,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 28,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 0,
+															"pos_y": 8,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 29,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 2,
+															"pos_y": 8,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 30,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 4,
+															"pos_y": 8,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 31,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 6,
+															"pos_y": 8,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 32,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 8,
+															"pos_y": 8,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 33,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 10,
+															"pos_y": 8,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 34,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 12,
+															"pos_y": 8,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 35,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 0,
+															"pos_y": 6,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 36,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 2,
+															"pos_y": 6,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 37,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 4,
+															"pos_y": 6,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 38,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 6,
+															"pos_y": 6,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 39,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 8,
+															"pos_y": 6,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 40,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 10,
+															"pos_y": 6,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 41,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 12,
+															"pos_y": 6,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 42,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 0,
+															"pos_y": 4,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 43,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 2,
+															"pos_y": 4,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 44,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 4,
+															"pos_y": 4,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 45,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 6,
+															"pos_y": 4,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 46,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 8,
+															"pos_y": 4,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 47,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 10,
+															"pos_y": 4,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 48,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 12,
+															"pos_y": 4,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 49,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 0,
+															"pos_y": 2,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 50,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 2,
+															"pos_y": 2,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 51,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 4,
+															"pos_y": 2,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 52,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 6,
+															"pos_y": 2,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 53,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 8,
+															"pos_y": 2,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 54,
+															"category": "full_sunlight",
+															"color": "yellow",
+															"pos_x": 10,
+															"pos_y": 2,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 14
+														},
+														{
+															"id": 55,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 12,
+															"pos_y": 2,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 56,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 0,
+															"pos_y": 0,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 57,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 2,
+															"pos_y": 0,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 58,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 4,
+															"pos_y": 0,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 59,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 6,
+															"pos_y": 0,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 60,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 8,
+															"pos_y": 0,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 61,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 10,
+															"pos_y": 0,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														},
+														{
+															"id": 62,
+															"category": "light_sunlight",
+															"color": "lightgoldenrodyellow",
+															"pos_x": 12,
+															"pos_y": 0,
+															"dim_x": 2,
+															"dim_y": 2,
+															"sunExposureTimeInHour": 6
+														}
+												]
+	}
 ]
