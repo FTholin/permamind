@@ -61,10 +61,10 @@
                                       },
                 "sunExposureTimeInHour": 13,
                 "soilTypeAvoided":  [
-                                      "Calcaire",
                                       "Azote",
                                       "Pauvre",
-                                      "Compact"
+                                      "Compact",
+                                      "ArgileuxLimoneux"
                                     ]
               },
   "Ail":
