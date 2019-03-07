@@ -6,23 +6,28 @@
               "plantsCombinations": {
                                       "Carotte":
                                                 {
-                                                  "distance" : 1
+                                                  "dist_min" : 0.05,
+                                                  "dist_max" : 0.20
                                                 },
                                       "Poireau":
                                                 {
-                                                  "distance": 1
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 0.47
                                                 },
                                       "Ail":
                                               {
-                                                "distance": 1
+                                                "dist_min" : 0.3,
+                                                "dist_max" : 0.65
                                               },
                                       "Pois":
                                               {
-                                                "distance": 1
+                                                "dist_min" : 0.42,
+                                                "dist_max" : 1.0
                                               },
                                       "Oignon":
                                                 {
-                                                  "distance": 1
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 0.45
                                                 }
                                     },
               "sunExposureTimeInHour": 6,
@@ -40,23 +45,28 @@
                 "plantsCombinations": {
                                         "Carotte":
                                                   {
-                                                    "distance" : 1
+                                                    "dist_min" : 0,
+                                                    "dist_max" : 0.47
                                                   },
                                         "Poireau":
                                                   {
-                                                    "distance": 1
+                                                    "dist_min" : 0,
+                                                    "dist_max" : 0.4
                                                   },
                                         "Ail":
                                                 {
-                                                  "distance": 1
+                                                  "dist_min" : 0.4,
+                                                  "dist_max" : 0.86
                                                 },
                                         "Pois":
                                                 {
-                                                  "distance": 1
+                                                  "dist_min" : 0.9,
+                                                  "dist_max" : 1.5
                                                 },
                                         "Oignon":
                                                   {
-                                                    "distance": 1
+                                                    "dist_min" : 0.1,
+                                                    "dist_max" : 0.87
                                                   }
                                       },
                 "sunExposureTimeInHour": 13,
@@ -74,23 +84,28 @@
             "plantsCombinations": {
                                     "Carotte":
                                               {
-                                                "distance" : 1
+                                                "dist_min" : 0.3,
+                                                "dist_max" : 0.65
                                               },
                                     "Poireau":
                                               {
-                                                "distance": 1
+                                                "dist_min" : 0.4,
+                                                "dist_max" : 0.86
                                               },
                                     "Ail":
                                             {
-                                              "distance": 1
+                                              "dist_min" : 0.35,
+                                              "dist_max" : 0.7
                                             },
                                     "Pois":
                                             {
-                                              "distance": 1
+                                              "dist_min" : 0.45,
+                                              "dist_max" : 0.72
                                             },
                                     "Oignon":
                                               {
-                                                "distance": 2
+                                                "dist_min" : 0.2,
+                                                "dist_max" : 0.87
                                               }
                                   },
             "sunExposureTimeInHour": 3,
@@ -108,23 +123,28 @@
             "plantsCombinations": {
                                     "Carotte":
                                               {
-                                                "distance" : 1
+                                                "dist_min" : 0.42,
+                                                "dist_max" : 1.0
                                               },
                                     "Poireau":
                                               {
-                                                "distance": 1
+                                                "dist_min" : 0.9,
+                                                "dist_max" : 1.5
                                               },
                                     "Ail":
                                             {
-                                              "distance": 1
+                                              "dist_min" : 0.45,
+                                              "dist_max" : 0.72
                                             },
                                     "Pois":
                                             {
-                                              "distance": 1
+                                              "dist_min" : 0.86,
+                                              "dist_max" : 1
                                             },
                                     "Oignon":
                                               {
-                                                "distance": 1
+                                                "dist_min" : 0.9,
+                                                "dist_max" : 1
                                               }
                                   },
             "sunExposureTimeInHour": 12,
@@ -143,23 +163,28 @@
               "plantsCombinations": {
                                       "Carotte":
                                                 {
-                                                  "distance" : 1
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 0.45
                                                 },
                                       "Poireau":
                                                 {
-                                                  "distance": 1
+                                                  "dist_min" : 0.1,
+                                                  "dist_max" : 0.87
                                                 },
                                       "Ail":
                                               {
-                                                "distance": 2
+                                                "dist_min" : 0.2,
+                                                "dist_max" : 0.87
                                               },
                                       "Pois":
                                               {
-                                                "distance": 1
+                                                "dist_min" : 0.9,
+                                                "dist_max" : 1
                                               },
                                       "Oignon":
                                                 {
-                                                  "distance": 1
+                                                  "dist_min" : 0.08,
+                                                  "dist_max" : 1
                                                 }
                                     },
               "sunExposureTimeInHour": 5,
