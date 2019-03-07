@@ -1,0 +1,117 @@
+{
+  "Aneth":
+  {
+    "category": "hote",
+    "color": "orange",
+    "plantsCombinations":
+    {
+        "Choux":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Concombre":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Cornichon":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Laitue":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Oignon":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        }
+      },
+  },
+
+  "Asperge":
+  {
+    "category": "auxiliaire",
+    "color": "green",
+    "plantsCombinations":
+    {
+        "Patate":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Tomate":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Courge":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Poireau":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Pois":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        }
+      },
+  },
+
+  "Basilic":
+  {
+    "category": "auxiliaire",
+    "color": "green",
+    "plantsCombinations":
+    {
+        "Tomate":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Concombre":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Choux":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Asperge":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+      },
+  },
+
+  "Celeri":
+  {
+    "category": "auxiliaire",
+    "color": "green",
+    "plantsCombinations":
+    {
+        "Poireau":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+        "Choux":
+        {
+          "dist_min" : 0,
+          "dist_max" : 0.5
+        },
+      },
+  },
+}
