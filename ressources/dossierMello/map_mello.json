@@ -1,0 +1,22 @@
+[
+	{
+		"dimensions": {
+											"TAILLE_W": 1.5,
+											"TAILLE_H": 1.5
+									},
+		"soil_squares": [
+										{
+											"id": 0,
+											"category": "Humifere",
+											"color": "k",
+											"pos_x": 0,
+											"pos_y": 0,
+											"dim_x": 1.5,
+											"dim_y": 1.5
+										}
+									],
+		"sunlight_squares": [
+
+    ]
+  }
+]

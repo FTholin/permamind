@@ -6,11 +6,11 @@
               "plantsCombinations": {
                                       "Carotte":
                                                 {
-                                                  "distance" : 1
+                                                  "distance" : 0
                                                 },
                                       "Poireau":
                                                 {
-                                                  "distance": 1
+                                                  "distance": 0.3
                                                 },
                                       "Ail":
                                               {
@@ -40,11 +40,11 @@
                 "plantsCombinations": {
                                         "Carotte":
                                                   {
-                                                    "distance" : 1
+                                                    "distance" : 0
                                                   },
                                         "Poireau":
                                                   {
-                                                    "distance": 1
+                                                    "distance": 0.3
                                                   },
                                         "Ail":
                                                 {
