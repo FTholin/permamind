@@ -29,6 +29,26 @@
         {
           "dist_min" : 0,
           "dist_max" : 1
+        },
+        "Aneth":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Asperge":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Basilic":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Celeri":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
         }
     }
   },
@@ -63,6 +83,26 @@
         {
           "dist_min" : 0,
           "dist_max" : 0.5
+        },
+        "Aneth":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Asperge":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Basilic":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Celeri":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
         }
     }
   },
@@ -92,6 +132,21 @@
         {
           "dist_min" : 0,
           "dist_max" : 0.5
+        },
+        "Aneth":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Basilic":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Celeri":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
         }
     }
   },
@@ -111,6 +166,26 @@
         {
           "dist_min" : 0,
           "dist_max" : 0.5
+        },
+        "Aneth":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Asperge":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Basilic":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
+        },
+        "Celeri":
+        {
+          "dist_min" : 0,
+          "dist_max" : 1
         }
     }
   }
