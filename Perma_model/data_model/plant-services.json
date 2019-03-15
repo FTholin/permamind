@@ -91,7 +91,7 @@
         },
         "Asperge":
         {
-          "dist_min" : 0,
+          "dist_min" : 0.5,
           "dist_max" : 1
         },
         "Basilic":
@@ -101,7 +101,7 @@
         },
         "Celeri":
         {
-          "dist_min" : 0,
+          "dist_min" : 0.5,
           "dist_max" : 1
         }
     }
@@ -174,7 +174,7 @@
         },
         "Asperge":
         {
-          "dist_min" : 0,
+          "dist_min" : 0.5,
           "dist_max" : 1
         },
         "Basilic":
@@ -184,8 +184,8 @@
         },
         "Celeri":
         {
-          "dist_min" : 0,
-          "dist_max" : 1
+          "dist_min" : 0.9,
+          "dist_max" : 1.5
         }
     }
   }
