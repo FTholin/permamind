@@ -8,47 +8,47 @@
         "Choux":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Concombre":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Cornichon":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Laitue":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Oignon":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Aneth":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Asperge":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Basilic":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Celeri":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         }
     }
   },
@@ -87,7 +87,7 @@
         "Aneth":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Asperge":
         {
@@ -97,7 +97,7 @@
         "Basilic":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Celeri":
         {
@@ -136,17 +136,17 @@
         "Aneth":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Basilic":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Celeri":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         }
     }
   },
@@ -170,17 +170,17 @@
         "Aneth":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Asperge":
         {
           "dist_min" : 0.5,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Basilic":
         {
           "dist_min" : 0,
-          "dist_max" : 1
+          "dist_max" : 0.5
         },
         "Celeri":
         {
