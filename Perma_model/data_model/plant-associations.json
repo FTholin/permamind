@@ -11,8 +11,8 @@
                                                 },
                                       "Poireau":
                                                 {
-                                                  "dist_min" : 0,
-                                                  "dist_max" : 0.47
+                                                  "dist_min" : 1,
+                                                  "dist_max" : 1
                                                 },
                                       "Ail":
                                               {
@@ -45,8 +45,8 @@
                 "plantsCombinations": {
                                         "Carotte":
                                                   {
-                                                    "dist_min" : 0,
-                                                    "dist_max" : 0.47
+                                                    "dist_min" : 1,
+                                                    "dist_max" : 1
                                                   },
                                         "Poireau":
                                                   {
