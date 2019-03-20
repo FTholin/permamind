@@ -7,11 +7,11 @@
                                       "Carotte":
                                                 {
                                                   "dist_min" : 0.05,
-                                                  "dist_max" : 0.20
+                                                  "dist_max" : 1
                                                 },
                                       "Poireau":
                                                 {
-                                                  "dist_min" : 1,
+                                                  "dist_min" : 0.8,
                                                   "dist_max" : 1
                                                 },
                                       "Ail":
@@ -28,6 +28,11 @@
                                                 {
                                                   "dist_min" : 0,
                                                   "dist_max" : 0.45
+                                                },
+                                      "Tomate":
+                                                {
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 0.30
                                                 }
                                     },
               "sunExposureTimeInHour": 6,
@@ -36,7 +41,9 @@
                                     "Azote",
                                     "Pauvre",
                                     "Compact"
-                                  ]
+                                  ],
+              "distSamePlant": 0.05,
+              "distLine": 0.25
             },
   "Poireau":
               {
@@ -46,12 +53,12 @@
                                         "Carotte":
                                                   {
                                                     "dist_min" : 1,
-                                                    "dist_max" : 1
+                                                    "dist_max" : 2
                                                   },
                                         "Poireau":
                                                   {
-                                                    "dist_min" : 0,
-                                                    "dist_max" : 0.4
+                                                    "dist_min" : 0.15,
+                                                    "dist_max" : 2
                                                   },
                                         "Ail":
                                                 {
@@ -75,7 +82,9 @@
                                       "Pauvre",
                                       "Compact",
                                       "ArgileuxLimoneux"
-                                    ]
+                                    ],
+              "distSamePlant": 0.15,
+              "distLine": 0.15
               },
   "Ail":
           {
@@ -114,7 +123,9 @@
                                   "Azote",
                                   "Pauvre",
                                   "Compact"
-                                ]
+                                ],
+              "distSamePlant": 0.08,
+              "distLine": 0.15
           },
   "Pois":
           {
@@ -154,7 +165,9 @@
                                   "Pauvre",
                                   "Compact",
                                   "ArgileuxLimoneux"
-                                ]
+                                ],
+              "distSamePlant": 0.10,
+              "distLine": 0.50
           },
   "Oignon":
             {
@@ -193,6 +206,102 @@
                                     "Pauvre",
                                     "Compact",
                                     "Humifere"
-                                  ]
+                                  ],
+              "distSamePlant": 0.10,
+              "distLine": 0.30
+            },
+   "Tomate":
+            {
+              "category": "plante potagère",
+              "color": "red",
+              "plantsCombinations": {
+                                      "Carotte":
+                                                {
+                                                  "dist_min" : 0.05,
+                                                  "dist_max" : 0.5
+                                                },
+                                      "Celeri":
+                                                {
+                                                  "dist_min" : 0.1,
+                                                  "dist_max" : 0.5
+                                                },
+                                      "Ail":
+                                              {
+                                                "dist_min" : 0.3,
+                                                "dist_max" : 0.7
+                                              },
+                                      "Patate":
+                                              {
+                                                "dist_min" : 0.9,
+                                                "dist_max" : 2.0
+                                              },
+                                      "Chou":
+                                                {
+                                                  "dist_min" : 0.9,
+                                                  "dist_max" : 2
+                                                },
+                                      "Tomate":
+                                                {
+                                                  "dist_min" : 0.9,
+                                                  "dist_max" : 2
+                                                }
+                                    },
+              "sunExposureTimeInHour": 6,
+              "soilTypeAvoided":  [
+                                    "Calcaire",
+                                    "Azote",
+                                    "Pauvre",
+                                    "Compact"
+                                  ],
+              "distSamePlant": 0.9,
+              "distLine": 0.9
+            },
+    "Patate":
+            {
+              "category": "plante potagère",
+              "color": "yellow",
+              "plantsCombinations": {
+                                      "Chou":
+                                                {
+                                                  "dist_min" : 0.05,
+                                                  "dist_max" : 0.5
+                                                },
+                                      "Pois":
+                                                {
+                                                  "dist_min" : 0.1,
+                                                  "dist_max" : 0.5
+                                                },
+                                      "Oignon":
+                                              {
+                                                "dist_min" : 1,
+                                                "dist_max" : 1.5
+                                              },
+                                      "Tomate":
+                                              {
+                                                "dist_min" : 0.9,
+                                                "dist_max" : 1.5
+                                              },
+                                      "Poivron":
+                                                {
+                                                  "dist_min" : 0.9,
+                                                  "dist_max" : 1.5
+                                                },
+                                      "Patate":
+                                                {
+                                                  "dist_min" : 0.6,
+                                                  "dist_max" : 1
+                                                }
+                                     
+                                    },
+              "sunExposureTimeInHour": 6,
+              "soilTypeAvoided":  [
+                                    "Calcaire",
+                                    "Azote",
+                                    "Pauvre",
+                                    "Compact"
+                                  ],
+              "distSamePlant": 0.30,
+              "distLine": 0.60
             }
+                
 }
