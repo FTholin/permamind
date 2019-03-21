@@ -6,33 +6,28 @@
               "plantsCombinations": {
                                       "Carotte":
                                                 {
-                                                  "dist_min" : 0.05,
+                                                  "dist_min" : 0,
                                                   "dist_max" : 1
                                                 },
                                       "Poireau":
                                                 {
-                                                  "dist_min" : 0.8,
+                                                  "dist_min" : 0,
                                                   "dist_max" : 1
                                                 },
-                                      "Ail":
-                                              {
-                                                "dist_min" : 0.3,
-                                                "dist_max" : 0.65
-                                              },
                                       "Pois":
                                               {
-                                                "dist_min" : 0.42,
+                                                "dist_min" : 0,
                                                 "dist_max" : 1.0
                                               },
                                       "Oignon":
                                                 {
                                                   "dist_min" : 0,
-                                                  "dist_max" : 0.45
+                                                  "dist_max" : 1
                                                 },
                                       "Tomate":
                                                 {
                                                   "dist_min" : 0,
-                                                  "dist_max" : 0.30
+                                                  "dist_max" : 1
                                                 }
                                     },
               "sunExposureTimeInHour": 6,
@@ -51,30 +46,25 @@
                 "color": "green",
                 "plantsCombinations": {
                                         "Carotte":
-                                                  {
-                                                    "dist_min" : 1,
-                                                    "dist_max" : 2
-                                                  },
-                                        "Poireau":
-                                                  {
-                                                    "dist_min" : 0.15,
-                                                    "dist_max" : 2
-                                                  },
-                                        "Ail":
                                                 {
-                                                  "dist_min" : 0.4,
-                                                  "dist_max" : 0.86
+                                                    "dist_min" : 0,
+                                                    "dist_max" : 1
                                                 },
-                                        "Pois":
+                                        "Tomate":
                                                 {
-                                                  "dist_min" : 0.9,
-                                                  "dist_max" : 1.5
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 1
                                                 },
                                         "Oignon":
-                                                  {
-                                                    "dist_min" : 0.1,
-                                                    "dist_max" : 0.87
-                                                  }
+                                                {
+                                                    "dist_min" : 0,
+                                                    "dist_max" : 1
+                                                },
+                                        "Celeri":
+                                                {
+                                                    "dist_min" : 0,
+                                                    "dist_max" : 1
+                                                }
                                       },
                 "sunExposureTimeInHour": 13,
                 "soilTypeAvoided":  [
@@ -93,29 +83,19 @@
             "plantsCombinations": {
                                     "Carotte":
                                               {
-                                                "dist_min" : 0.3,
-                                                "dist_max" : 0.65
+                                                "dist_min" : 0,
+                                                "dist_max" : 1
                                               },
-                                    "Poireau":
+                                    "Tomate":
                                               {
-                                                "dist_min" : 0.4,
-                                                "dist_max" : 0.86
+                                                "dist_min" : 0,
+                                                "dist_max" : 1
                                               },
-                                    "Ail":
-                                            {
-                                              "dist_min" : 0.35,
-                                              "dist_max" : 0.7
-                                            },
                                     "Pois":
                                             {
-                                              "dist_min" : 0.45,
-                                              "dist_max" : 0.72
-                                            },
-                                    "Oignon":
-                                              {
-                                                "dist_min" : 0.2,
-                                                "dist_max" : 0.87
-                                              }
+                                              "dist_min" : 0.5,
+                                              "dist_max" : 2
+                                            }
                                   },
             "sunExposureTimeInHour": 3,
             "soilTypeAvoided":  [
@@ -134,28 +114,28 @@
             "plantsCombinations": {
                                     "Carotte":
                                               {
-                                                "dist_min" : 0.42,
-                                                "dist_max" : 1.0
+                                                "dist_min" : 0,
+                                                "dist_max" : 1
                                               },
-                                    "Poireau":
+                                    "Patate":
                                               {
-                                                "dist_min" : 0.9,
-                                                "dist_max" : 1.5
+                                                "dist_min" : 0,
+                                                "dist_max" : 1
                                               },
                                     "Ail":
                                             {
-                                              "dist_min" : 0.45,
-                                              "dist_max" : 0.72
+                                              "dist_min" : 0.5,
+                                              "dist_max" : 2
                                             },
                                     "Pois":
                                             {
-                                              "dist_min" : 0.86,
-                                              "dist_max" : 1
+                                              "dist_min" : 0.5,
+                                              "dist_max" : 2
                                             },
                                     "Oignon":
                                               {
-                                                "dist_min" : 0.9,
-                                                "dist_max" : 1
+                                                "dist_min" : 0.5,
+                                                "dist_max" : 2
                                               }
                                   },
             "sunExposureTimeInHour": 12,
@@ -174,31 +154,11 @@
               "category": "plante potagère",
               "color": "purple",
               "plantsCombinations": {
-                                      "Carotte":
-                                                {
-                                                  "dist_min" : 0,
-                                                  "dist_max" : 0.45
-                                                },
-                                      "Poireau":
-                                                {
-                                                  "dist_min" : 0.1,
-                                                  "dist_max" : 0.87
-                                                },
-                                      "Ail":
-                                              {
-                                                "dist_min" : 0.2,
-                                                "dist_max" : 0.87
-                                              },
                                       "Pois":
                                               {
-                                                "dist_min" : 0.9,
-                                                "dist_max" : 1
-                                              },
-                                      "Oignon":
-                                                {
-                                                  "dist_min" : 0.08,
-                                                  "dist_max" : 1
-                                                }
+                                                "dist_min" : 0.5,
+                                                "dist_max" : 2
+                                              }
                                     },
               "sunExposureTimeInHour": 5,
               "soilTypeAvoided":  [
@@ -217,33 +177,43 @@
               "plantsCombinations": {
                                       "Carotte":
                                                 {
-                                                  "dist_min" : 0.05,
-                                                  "dist_max" : 0.5
+                                                  "dist_min" : 0,
+                                                "dist_max" : 1
                                                 },
                                       "Celeri":
                                                 {
-                                                  "dist_min" : 0.1,
-                                                  "dist_max" : 0.5
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 1
+                                                },
+                                      "Oignon":
+                                                {
+                                                  "dist_min" : 0,
+                                                   "dist_max" : 1
+                                                },
+                                       "Basilic":
+                                                {
+                                                  "dist_min" : 0,
+                                                "dist_max" : 1
                                                 },
                                       "Ail":
                                               {
-                                                "dist_min" : 0.3,
-                                                "dist_max" : 0.7
+                                                "dist_min" : 0,
+                                                "dist_max" : 1
                                               },
                                       "Patate":
                                               {
                                                 "dist_min" : 0.9,
                                                 "dist_max" : 2.0
                                               },
-                                      "Chou":
+                                      "Asperge":
                                                 {
-                                                  "dist_min" : 0.9,
-                                                  "dist_max" : 2
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 1
                                                 },
-                                      "Tomate":
+                                      "Poireau":
                                                 {
-                                                  "dist_min" : 0.9,
-                                                  "dist_max" : 2
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 1
                                                 }
                                     },
               "sunExposureTimeInHour": 6,
@@ -261,35 +231,25 @@
               "category": "plante potagère",
               "color": "yellow",
               "plantsCombinations": {
-                                      "Chou":
-                                                {
-                                                  "dist_min" : 0.05,
-                                                  "dist_max" : 0.5
-                                                },
                                       "Pois":
                                                 {
-                                                  "dist_min" : 0.1,
-                                                  "dist_max" : 0.5
+                                                  "dist_min" : 0,
+                                                  "dist_max" : 1
                                                 },
                                       "Oignon":
                                               {
-                                                "dist_min" : 1,
-                                                "dist_max" : 1.5
+                                                "dist_min" : 0.5,
+                                                "dist_max" : 2
                                               },
                                       "Tomate":
                                               {
-                                                "dist_min" : 0.9,
-                                                "dist_max" : 1.5
+                                                "dist_min" :0.5,
+                                                "dist_max" : 2
                                               },
-                                      "Poivron":
+                                      "Carotte":
                                                 {
-                                                  "dist_min" : 0.9,
-                                                  "dist_max" : 1.5
-                                                },
-                                      "Patate":
-                                                {
-                                                  "dist_min" : 0.6,
-                                                  "dist_max" : 1
+                                                  "dist_min" : 0.5,
+                                                "dist_max" : 2
                                                 }
                                      
                                     },

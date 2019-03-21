@@ -5,104 +5,35 @@
     "color": "orange",
     "plantsCombinations":
     {
-        "Choux":
+        "Carotte":
         {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Concombre":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Cornichon":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Laitue":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Oignon":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Aneth":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Asperge":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Basilic":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Celeri":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
+          "dist_min" : 0.5,
+          "dist_max" : 1
         }
     }
   },
-
+      
   "Asperge":
   {
+    "commentary":"Je rajoute ici l'Ail pour mes test",
     "category": "auxiliaire",
     "color": "green",
     "plantsCombinations":
     {
-        "Patate":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
         "Tomate":
         {
           "dist_min" : 0,
           "dist_max" : 0.5
         },
-        "Courge":
+        "Persil":
         {
           "dist_min" : 0,
           "dist_max" : 0.5
         },
-        "Poireau":
+        "Ail":
         {
           "dist_min" : 0,
           "dist_max" : 0.5
-        },
-        "Pois":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Aneth":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Asperge":
-        {
-          "dist_min" : 0.5,
-          "dist_max" : 1
-        },
-        "Basilic":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Celeri":
-        {
-          "dist_min" : 0.5,
-          "dist_max" : 1
         }
     }
   },
@@ -114,36 +45,6 @@
     "plantsCombinations":
     {
         "Tomate":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Concombre":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Choux":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Asperge":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Aneth":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Basilic":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Celeri":
         {
           "dist_min" : 0,
           "dist_max" : 0.5
@@ -160,32 +61,12 @@
         "Poireau":
         {
           "dist_min" : 0,
-          "dist_max" : 0.5
+          "dist_max" : 10
         },
-        "Choux":
+        "Tomates":
         {
           "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Aneth":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Asperge":
-        {
-          "dist_min" : 0.5,
-          "dist_max" : 0.5
-        },
-        "Basilic":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Celeri":
-        {
-          "dist_min" : 0.9,
-          "dist_max" : 1.5
+          "dist_max" : 10
         }
     }
   }
