@@ -1,57 +1,57 @@
 [
-	{
-		"dimensions": {
-											"TAILLE_W": 3,
-											"TAILLE_H": 5
-									},
-		"soil_squares": [
-										{
-											"id": 0,
-											"category": "Humifere",
-											"color": "k",
-											"pos_x": 0,
-											"pos_y": 4,
-											"dim_x": 8,
-											"dim_y": 2
-										},
-										{
-											"id": 1,
-											"category": "Humifere",
-											"color": "k",
-											"pos_x": 2,
-											"pos_y": 3,
-											"dim_x": 6,
-											"dim_y": 1
-										},
-										{
-											"id": 2,
-											"category": "ArgileuxLimoneux",
-											"color": "tan",
-											"pos_x": 4,
-											"pos_y": 0,
-											"dim_x": 4,
-											"dim_y": 3
-										},
-										{
-											"id": 3,
-											"category": "Calcaire",
-											"color": "aliceblue",
-											"pos_x": 0,
-											"pos_y": 0,
-											"dim_x": 2,
-											"dim_y": 4
-										},
-										{
-											"id": 4,
-											"category": "Calcaire",
-											"color": "aliceblue",
-											"pos_x": 2,
-											"pos_y": 0,
-											"dim_x": 2,
-											"dim_y": 3
-										}
-									],
-		"sunlight_squares": [
+    {
+        "dimensions": {
+                        "TAILLE_W": 3,
+                        "TAILLE_H": 5
+                      },
+        "soil_squares": [
+                            {
+                                "id": 0,
+                                "category": "Humifere",
+                                "color": "k",
+                                "pos_x": 0,
+                                "pos_y": 4,
+                                "dim_x": 8,
+                                "dim_y": 2
+                            },
+                            {
+                                "id": 1,
+                                "category": "Humifere",
+                                "color": "k",
+                                "pos_x": 2,
+                                "pos_y": 3,
+                                "dim_x": 6,
+                                "dim_y": 1
+                            },
+                            {
+                                "id": 2,
+                                "category": "ArgileuxLimoneux",
+                                "color": "tan",
+                                "pos_x": 4,
+                                "pos_y": 0,
+                                "dim_x": 4,
+                                "dim_y": 3
+                            },
+                            {
+                                "id": 3,
+                                "category": "Calcaire",
+                                "color": "aliceblue",
+                                "pos_x": 0,
+                                "pos_y": 0,
+                                "dim_x": 2,
+                                "dim_y": 4
+                            },
+                            {
+                                "id": 4,
+                                "category": "Calcaire",
+                                "color": "aliceblue",
+                                "pos_x": 2,
+                                "pos_y": 0,
+                                "dim_x": 2,
+                                "dim_y": 3
+                            }
+                        ],
+        "sunlight_squares": [
 													{
 														"id": 0,
 														"category": "full_sunlight",

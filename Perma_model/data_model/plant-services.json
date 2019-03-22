@@ -7,47 +7,43 @@
     {
         "Carotte":
         {
-          "dist_min" : 0.5,
-          "dist_max" : 1
+          "dist_min" : 0,
+          "dist_max" : 0.2
         }
     }
   },
       
   "Asperge":
   {
-    "commentary":"Je rajoute ici l'Ail pour mes test",
+    "commentary": "la Tomate a été remplacé par Pois",
     "category": "auxiliaire",
     "color": "green",
     "plantsCombinations":
     {
-        "Tomate":
+        "Pois":
         {
           "dist_min" : 0,
-          "dist_max" : 0.5
+          "dist_max" : 0.2
         },
         "Persil":
         {
           "dist_min" : 0,
-          "dist_max" : 0.5
-        },
-        "Ail":
-        {
-          "dist_min" : 0,
-          "dist_max" : 0.5
+          "dist_max" : 0.2
         }
     }
   },
 
   "Basilic":
   {
+    "commentary": "la Tomate a été remplacé par Oignon",
     "category": "auxiliaire",
     "color": "green",
     "plantsCombinations":
     {
-        "Tomate":
+        "Oignon":
         {
           "dist_min" : 0,
-          "dist_max" : 0.5
+          "dist_max" : 0.2
         }
     }
   },
@@ -61,12 +57,12 @@
         "Poireau":
         {
           "dist_min" : 0,
-          "dist_max" : 10
+          "dist_max" : 0.2
         },
         "Tomates":
         {
           "dist_min" : 0,
-          "dist_max" : 10
+          "dist_max" : 0.2
         }
     }
   }
