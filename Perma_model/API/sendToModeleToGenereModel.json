@@ -1,0 +1,20 @@
+{
+    "Poireau":{
+       "plants":10
+    },
+    "Oignon":{
+        "plants":20
+    },
+    "Carotte":{
+        "plants":10
+    },
+    "Pois":{
+        "plants":20
+    },
+    "Ail":{
+        "plants":10
+    },
+    "Patate":{
+        "plants":15
+    }
+}
