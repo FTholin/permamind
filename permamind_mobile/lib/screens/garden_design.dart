@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/widgets/garden_dimensions.dart';
-import 'package:permamind_mobile/widgets/garden_soil.dart';
-
+import 'package:permamind_mobile/widgets/garden_soil_list.dart';
+import 'package:permamind_mobile/widgets/vegetable_selection.dart';
 class GardenDesigner extends StatefulWidget {
   @override
   GardenDesignerState createState() => new GardenDesignerState();
@@ -19,13 +19,19 @@ class GardenDesignerState extends State<GardenDesigner> {
         isActive: true),
     new Step(
         title: new Text("Type de sol"),
-        content: new GardenSoil()
-        // You can change the style of the step icon i.e number, editing, etc.
-        state: StepState.editing,
+        content: Container(
+          height: 100,
+          width: 250,
+          child: new GardenSoilList()
+        ),
         isActive: true),
     new Step(
         title: new Text("Choisis tes légumes"),
-        content: new Text("Hello World!"),
+        content: Container(
+            height: 350,
+            width: 310,
+            child:  new RandomWords()
+        ),
         isActive: true),
     new Step(
         title: new Text("Génération de ton jardin"),
