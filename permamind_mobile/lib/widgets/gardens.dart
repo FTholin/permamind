@@ -1,34 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
-import 'package:permamind_mobile/screens/home.dart';
-import 'package:permamind_mobile/blocs/bloc_provider.dart';
-
+import 'package:permamind_mobile/blocs/gardens_bloc.dart';
+import 'package:permamind_mobile/screens/garden_design.dart';
 
 
 class GardensPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      child: new Center(
-        child: new Column(
-          // center the children
+    final GardensBloc bloc = BlocProvider.of<GardensBloc>(context);
+    return Scaffold(
+
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Icon(
-              Icons.terrain,
-              size: 160.0,
-              color: Colors.yellow[100],
-            ),
-            new Text("gardens"),
-            RaisedButton(
-              child: Text('Maître'),
-              onPressed: () {
-                //_openOnePage(context);
-              },
-            ),
+            Text("Liste de jardins")
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          _gardenDesigning(context);
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+
+void _gardenDesigning(BuildContext context) {
+  Navigator
+      .of(context)
+      .push(MaterialPageRoute(builder: (BuildContext context) {
+    return BlocProvider<GardensBloc>(
+      bloc: GardensBloc(),
+      child: GardenDesigner(),
+    );
+  }));
 }
