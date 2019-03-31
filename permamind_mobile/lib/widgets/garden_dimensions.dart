@@ -7,20 +7,11 @@ class GardenDimensions extends StatelessWidget {
       child: new Center(
         child: new Column(
           // center the children
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("Longueur"),
-             Container(
-                 height: 40,
-                 width: 200,
-                 child: PlusMinusButton()
-             ),
-            Text("Largeur "),
-            Container(
-                height: 40,
-                width: 200,
-                child: PlusMinusButton()
-            )
+            PlusMinusButton(),
+            Text("Largeur"),
+            PlusMinusButton(),
           ],
         ),
       ),
