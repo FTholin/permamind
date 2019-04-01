@@ -6,6 +6,7 @@ import 'package:permamind_mobile/widgets/vegetable_selection.dart';
 // Import blocs modules
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 import 'package:permamind_mobile/blocs/gardens_bloc.dart';
+import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
 
 class GardenDesigner extends StatefulWidget {
   @override
@@ -43,8 +44,8 @@ class GardenDesignerState extends State<GardenDesigner> {
         content: Container(
             height: 350,
             width: 310,
-            child: BlocProvider<GardensBloc>(
-              bloc: GardensBloc(),
+            child: BlocProvider<VegetableBloc>(
+              bloc: VegetableBloc(),
               child: new RandomWords(),
             )
         ),

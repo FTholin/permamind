@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:permamind_mobile/widgets/plus_minus_button.dart';
+import 'package:permamind_mobile/blocs/bloc_provider.dart';
 
 import 'package:permamind_mobile/models/vegetable_card.dart';
 import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
 
 
-void main() => runApp(new MyApp());
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new RandomWords();
-  }
-}
 class RandomWords extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -20,15 +14,21 @@ class RandomWords extends StatefulWidget {
   }
 }
 class RandomWordsState extends State<RandomWords> {
-  final _veggies = <VegetableCard>[];
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+  VegetableBloc _vegBloc;
+
+
+  bool _isInit = false;
+
+
   @override
   Widget build(BuildContext context) {
+    //_vegBloc = BlocProvider.of<VegetableBloc>(context);
+
     return Column(
       children: <Widget>[
-        new TextField(
-          decoration: new InputDecoration.collapsed(hintText: 'Recherche'),
-        ),
+//        new TextField(
+//          decoration: new InputDecoration.collapsed(hintText: 'Recherche'),
+//        ),
         Expanded(
           child:
             _buildSuggestions()
@@ -38,9 +38,12 @@ class RandomWordsState extends State<RandomWords> {
   }
   Widget _buildSuggestions() {
     return new ListView.builder(
-        itemCount: _veggies.length,
+        itemCount:  _vegBloc.veggies.length,
       padding: const EdgeInsets.all(10.0),
-      itemBuilder: (context, i) => _buildRow(_veggies[i])
+      itemBuilder: (context, i) {
+        if (i.isOdd) return Divider();
+          return _buildRow(_vegBloc.veggies[i]);
+      }
     );
   }
   Widget _buildRow(VegetableCard veg) {
@@ -60,13 +63,14 @@ class RandomWordsState extends State<RandomWords> {
   @override
   void initState() {
     super.initState();
+    _vegBloc = BlocProvider.of<VegetableBloc>(context);
     listenForVeggies();
   }
 
   void listenForVeggies() async {
-    final Stream<VegetableCard> stream = await getVegetables();
+    final Stream<VegetableCard> stream = await _vegBloc.getVegetables();
     stream.listen((VegetableCard veg) =>
-        setState(() =>  _veggies.add(veg))
+        setState(() =>  _vegBloc.veggies.add(veg))
     );
   }
 }
