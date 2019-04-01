@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:permamind_mobile/widgets/plus_minus_button.dart';
+
+import 'package:permamind_mobile/models/vegetable_card.dart';
+import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
+
+
 void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: "List in Flutter",
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: Text("List"),
-        ),
-        body: RandomWords(),
-      ),
-    );
+    return new RandomWords();
   }
 }
 class RandomWords extends StatefulWidget {
@@ -22,36 +20,53 @@ class RandomWords extends StatefulWidget {
   }
 }
 class RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
+  final _veggies = <VegetableCard>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
-      body: _buildSuggestions(),
+    return Column(
+      children: <Widget>[
+        new TextField(
+          decoration: new InputDecoration.collapsed(hintText: 'Recherche'),
+        ),
+        Expanded(
+          child:
+            _buildSuggestions()
+        )
+      ],
     );
   }
   Widget _buildSuggestions() {
     return new ListView.builder(
+        itemCount: _veggies.length,
       padding: const EdgeInsets.all(10.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return Divider();
-        final index = i ~/ 2;
-        // If you've reached the end of the available word pairings...
-        if (index >= _suggestions.length) {
-          // ...then generate 10 more and add them to the suggestions list.
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      },
+      itemBuilder: (context, i) => _buildRow(_veggies[i])
     );
   }
-  Widget _buildRow(WordPair pair) {
+  Widget _buildRow(VegetableCard veg) {
     return new ListTile(
-      title:  new Icon(
-      Icons.local_florist,
-      size: 100.0,
-      color: Colors.red,
-    )//title: new Text(pair.asPascalCase, style: _biggerFont),
+      leading: Container(
+        child: Image.network(veg.imagePath, height: 60.0, fit: BoxFit.fill)
+      ),
+      title: Column(
+        children: <Widget>[
+          Text(veg.vegetableName),
+          PlusMinusButton(height: 40, width:100)
+        ],
+      )
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    listenForVeggies();
+  }
+
+  void listenForVeggies() async {
+    final Stream<VegetableCard> stream = await getVegetables();
+    stream.listen((VegetableCard veg) =>
+        setState(() =>  _veggies.add(veg))
     );
   }
 }

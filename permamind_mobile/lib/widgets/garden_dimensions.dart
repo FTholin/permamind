@@ -9,9 +9,9 @@ class GardenDimensions extends StatelessWidget {
           // center the children
           children: <Widget>[
             Text("Longueur"),
-            PlusMinusButton(),
+            PlusMinusButton(height: 40, width: 100),
             Text("Largeur"),
-            PlusMinusButton(),
+            PlusMinusButton(height: 40, width: 100),
           ],
         ),
       ),

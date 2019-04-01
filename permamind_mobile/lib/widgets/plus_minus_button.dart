@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 * */
 
 class PlusMinusButton extends StatefulWidget {
+
+  final double height, width;
+  PlusMinusButton({Key key, this.height, this.width}): super(key: key);
+
+
   @override
   _PlusMinusButtonState createState() => new _PlusMinusButtonState();
 }
@@ -24,7 +29,7 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
 
   void _subtract() {
     setState(() {
-      if(_value > 1) {
+      if(_value > 0) {
         _value--;
         _controller.text = '${_value}';
       }
@@ -34,8 +39,8 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 115,
+      height: widget.height,
+      width: widget.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(
