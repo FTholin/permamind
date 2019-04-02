@@ -9,7 +9,6 @@ class GardensPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final GardensBloc bloc = BlocProvider.of<GardensBloc>(context);
     return Scaffold(
-
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

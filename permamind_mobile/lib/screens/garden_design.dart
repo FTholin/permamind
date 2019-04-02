@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/widgets/garden_dimensions.dart';
-import 'package:permamind_mobile/widgets/garden_soil.dart';
+import 'package:permamind_mobile/widgets/garden_soil_list.dart';
+import 'package:permamind_mobile/widgets/vegetable_selection.dart';
+
+// Import blocs modules
+import 'package:permamind_mobile/blocs/bloc_provider.dart';
+import 'package:permamind_mobile/blocs/gardens_bloc.dart';
+import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
 
 class GardenDesigner extends StatefulWidget {
   @override
@@ -12,25 +18,43 @@ class GardenDesignerState extends State<GardenDesigner> {
   int current_step = 0;
   List<Step> my_steps = [
     new Step(
-      // Title of the Step
+        // Title of the Step
         title: new Text("Dimensions du jardin"),
         // Content, it can be any widget here. Using basic Text for this example
-        content: new GardenDimensions(),
-        isActive: true),
+        content: BlocProvider<GardensBloc>(
+          bloc: GardensBloc(),
+          child: new GardenDimensions(),
+        ),
+        isActive: true
+    ),
     new Step(
         title: new Text("Type de sol"),
-        content: new GardenSoil()
-        // You can change the style of the step icon i.e number, editing, etc.
-        state: StepState.editing,
-        isActive: true),
+        content: Container(
+          height: 100,
+          width: 250,
+          child: BlocProvider<GardensBloc>(
+            bloc: GardensBloc(),
+            child: new GardenSoilList(),
+          )
+        ),
+        isActive: true
+    ),
     new Step(
         title: new Text("Choisis tes légumes"),
-        content: new Text("Hello World!"),
+        content: Container(
+            height: 350,
+            width: 310,
+            child: BlocProvider<VegetableBloc>(
+              bloc: VegetableBloc(),
+              child: new RandomWords(),
+            )
+        ),
         isActive: true),
     new Step(
         title: new Text("Génération de ton jardin"),
         content: new Text("Hello World!"),
-        isActive: true),
+        isActive: true
+    ),
   ];
 
   @override
