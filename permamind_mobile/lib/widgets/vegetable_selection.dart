@@ -45,12 +45,19 @@ class VeggiesSelectionListState extends State<VeggiesSelectionList> {
   Widget _buildRow(VegetableItem veg) {
     return new ListTile(
       leading: Container(
+        color: Colors.red,
+        height: 70,
+        width: 70,
         // TODO ICI on charge une image dans Assets
-        child: Image.network(veg.imagePath, height: 60.0, fit: BoxFit.fill)
+       // child: new Image.asset('images/2.0x/test.png', scale: 2.0, width: 48.0, height: 48.0)
+//        child: Image.network(veg.imagePath, height: 60.0, fit: BoxFit.fill)
       ),
       title: Column(
         children: <Widget>[
-          Text(veg.vegetableName),
+          Text(
+            veg.vegetableName,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           PlusMinusButton(height: 40, width:100)
         ],
       )

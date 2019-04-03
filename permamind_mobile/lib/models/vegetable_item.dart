@@ -15,8 +15,8 @@ class VegetableItem {
     return VegetableItem(
         id: json['id'],
         vegetableName: json['name'],
-        imagePath: json['image_url'],
-        overview: json['description']
+//        imagePath: json['image_url'],
+//        overview: json['description']
     );
   }
 

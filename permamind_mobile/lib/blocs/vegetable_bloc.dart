@@ -18,7 +18,8 @@ class VegetableBloc implements BlocBase {
 
 
   Future<Stream<VegetableItem>> fetchVeggies() async {
-    final String url = 'https://api.punkapi.com/v2/beers';
+//    final String url = 'https://api.punkapi.com/v2/beers';
+   final String url = 'http://127.0.0.1:5000/get/vegetable';
 
     final client = new http.Client();
     final streamedRest = await client.send(
