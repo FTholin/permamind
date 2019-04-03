@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:permamind_mobile/widgets/plus_minus_button.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 
-import 'package:permamind_mobile/models/vegetable_card.dart';
+import 'package:permamind_mobile/models/vegetable_item.dart';
 import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
 
 /*
@@ -42,7 +42,7 @@ class VeggiesSelectionListState extends State<VeggiesSelectionList> {
       }
     );
   }
-  Widget _buildRow(VegetableCard veg) {
+  Widget _buildRow(VegetableItem veg) {
     return new ListTile(
       leading: Container(
         // TODO ICI on charge une image dans Assets
@@ -65,8 +65,8 @@ class VeggiesSelectionListState extends State<VeggiesSelectionList> {
   }
 
   void listenForVeggies() async {
-    final Stream<VegetableCard> stream = await _vegBloc.getVegetables();
-    stream.listen((VegetableCard veg) =>
+    final Stream<VegetableItem> stream = await _vegBloc.fetchVeggies();
+    stream.listen((VegetableItem veg) =>
         setState(() =>  _vegBloc.veggies.add(veg))
     );
   }
