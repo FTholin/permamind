@@ -12,6 +12,11 @@ class GardensBloc implements BlocBase {
   // Ici on va appeler l'api
 
 
+  GardensBloc() {
+    print("création GardensBloc");
+  }
+
   void dispose() {
+    print("destruction GardensBloc");
   }
 }

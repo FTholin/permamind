@@ -3,7 +3,7 @@ import 'package:permamind_mobile/blocs/bloc_provider.dart';
 import 'package:permamind_mobile/blocs/gardens_bloc.dart';
 
 // Import widgets to embed them
-import 'package:permamind_mobile/widgets/gardens.dart';
+import 'package:permamind_mobile/screens/gardens.dart';
 import 'package:permamind_mobile/widgets/vegetables.dart';
 import 'package:permamind_mobile/widgets/others.dart';
 
@@ -25,6 +25,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
 
     // Initialize the Tab Controller
     controller = new TabController(length: 3, vsync: this);
+
   }
 
   @override
@@ -77,20 +78,12 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
             backgroundColor: Colors.green,
             // Set the bottom property of the Appbar to include a Tab Bar
             bottom: getTabBar()),
-        // Set the TabBar view as the body of the Scaffold
-        body: getTabBarView(<Widget>[
-          BlocProvider<GardensBloc>(
-            bloc: GardensBloc(),
-            child: GardensPage(),
-          ),
-          BlocProvider<GardensBloc>(
-            bloc: GardensBloc(),
-            child: VegetablesPage(),
-          ),
-          BlocProvider<GardensBloc>(
-            bloc: GardensBloc(),
-            child: OthersPage(),
-          ),
-        ]));
+            // Set the TabBar view as the body of the Scaffold
+            body:  getTabBarView(<Widget>[
+                  GardensPage(),
+                  VegetablesPage(),
+                  OthersPage(),
+                ])
+    );
   }
 }

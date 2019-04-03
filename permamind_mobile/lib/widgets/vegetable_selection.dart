@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import 'package:permamind_mobile/widgets/plus_minus_button.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 
 import 'package:permamind_mobile/models/vegetable_card.dart';
 import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
 
-
-class RandomWords extends StatefulWidget {
+/*
+* Widget that handle the vegetables selected to send to the model.
+* */
+class VeggiesSelectionList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new RandomWordsState();
+    return new VeggiesSelectionListState();
   }
 }
-class RandomWordsState extends State<RandomWords> {
+class VeggiesSelectionListState extends State<VeggiesSelectionList> {
   VegetableBloc _vegBloc;
-
-
-  bool _isInit = false;
 
 
   @override
   Widget build(BuildContext context) {
-    //_vegBloc = BlocProvider.of<VegetableBloc>(context);
-
     return Column(
       children: <Widget>[
 //        new TextField(
@@ -49,6 +45,7 @@ class RandomWordsState extends State<RandomWords> {
   Widget _buildRow(VegetableCard veg) {
     return new ListTile(
       leading: Container(
+        // TODO ICI on charge une image dans Assets
         child: Image.network(veg.imagePath, height: 60.0, fit: BoxFit.fill)
       ),
       title: Column(

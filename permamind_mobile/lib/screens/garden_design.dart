@@ -14,6 +14,7 @@ class GardenDesigner extends StatefulWidget {
 }
 
 class GardenDesignerState extends State<GardenDesigner> {
+
   // init the step to 0th position
   int current_step = 0;
   List<Step> my_steps = [
@@ -21,10 +22,7 @@ class GardenDesignerState extends State<GardenDesigner> {
         // Title of the Step
         title: new Text("Dimensions du jardin"),
         // Content, it can be any widget here. Using basic Text for this example
-        content: BlocProvider<GardensBloc>(
-          bloc: GardensBloc(),
-          child: new GardenDimensions(),
-        ),
+        content: new GardenDimensions(),
         isActive: true
     ),
     new Step(
@@ -32,10 +30,8 @@ class GardenDesignerState extends State<GardenDesigner> {
         content: Container(
           height: 100,
           width: 250,
-          child: BlocProvider<GardensBloc>(
-            bloc: GardensBloc(),
-            child: new GardenSoilList(),
-          )
+          child: new GardenSoilList(),
+
         ),
         isActive: true
     ),
@@ -44,21 +40,25 @@ class GardenDesignerState extends State<GardenDesigner> {
         content: Container(
             height: 350,
             width: 310,
-            child: BlocProvider<VegetableBloc>(
-              bloc: VegetableBloc(),
-              child: new RandomWords(),
-            )
+              child: new VeggiesSelectionList(),
         ),
-        isActive: true),
-    new Step(
-        title: new Text("Génération de ton jardin"),
-        content: new Text("Hello World!"),
         isActive: true
     ),
+    new Step(
+        title: new Text("Génération de ton jardin"),
+        content: new RaisedButton(onPressed: null,
+          textColor: Colors.white,
+          color: Colors.green,
+          padding: const EdgeInsets.all(8.0),
+          child: new Text(
+            "Générer",
+          )),
+        isActive: true)
   ];
 
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       // Appbar
       appBar: new AppBar(

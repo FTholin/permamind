@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
-import 'package:permamind_mobile/blocs/gardens_bloc.dart';
+import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
 import 'package:permamind_mobile/screens/garden_design.dart';
 
 
 class GardensPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final GardensBloc bloc = BlocProvider.of<GardensBloc>(context);
+//    final GardensBloc bloc = BlocProvider.of<GardensBloc>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -33,8 +33,8 @@ void _gardenDesigning(BuildContext context) {
   Navigator
       .of(context)
       .push(MaterialPageRoute(builder: (BuildContext context) {
-    return BlocProvider<GardensBloc>(
-      bloc: GardensBloc(),
+    return BlocProvider<VegetableBloc>(
+      bloc: VegetableBloc(),
       child: GardenDesigner(),
     );
   }));

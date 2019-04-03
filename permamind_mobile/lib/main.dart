@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
-import 'package:permamind_mobile/blocs/application_bloc.dart';
+import 'package:permamind_mobile/blocs/gardens_bloc.dart';
 import 'package:permamind_mobile/screens/home.dart';
 
 
@@ -10,7 +10,8 @@ import 'package:permamind_mobile/screens/home.dart';
 Future<void> main() async {
 //  debugPrintRebuildDirtyWidgets = true;
   return runApp(
-    BlocProvider<ApplicationBloc>(
+    BlocProvider<GardensBloc>(
+      bloc: GardensBloc(),
       child: MyApp(),
     ),
   );

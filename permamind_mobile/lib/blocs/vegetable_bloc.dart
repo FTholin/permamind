@@ -6,7 +6,8 @@ import 'package:permamind_mobile/blocs/bloc_provider.dart';
 
 /*
 *
-* This class handle all business logic for vegetables components
+* This bloc component allows to get plants from the server.
+*
 * */
 class VegetableBloc implements BlocBase {
 
@@ -30,9 +31,13 @@ class VegetableBloc implements BlocBase {
         .map((data) => VegetableCard.fromJSON(data));
   }
 
+  VegetableBloc(){
+    print("création VegetableBloc");
+  }
 
   @override
   void dispose() {
     // TODO: implement dispose
+    print("destruction VegetableBloc");
   }
 }
