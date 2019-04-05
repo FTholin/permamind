@@ -1,10 +1,8 @@
 // Import blocs modules
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
-import 'package:permamind_mobile/blocs/gardens_bloc.dart';
-
 // Import widgets to embed them
 import 'package:permamind_mobile/screens/gardens.dart';
-import 'package:permamind_mobile/widgets/vegetables.dart';
+import 'package:permamind_mobile/widgets/vegetables_panorama.dart';
 import 'package:permamind_mobile/widgets/others.dart';
 
 import 'package:flutter/material.dart';
@@ -80,10 +78,10 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
             bottom: getTabBar()),
             // Set the TabBar view as the body of the Scaffold
             body:  getTabBarView(<Widget>[
-                  GardensPage(),
-                  VegetablesPage(),
-                  OthersPage(),
-                ])
+                GardensPage(),
+                VegetablesPanorama(),
+                OthersPage(),
+              ])
     );
   }
 }

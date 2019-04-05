@@ -33,9 +33,6 @@ void _gardenDesigning(BuildContext context) {
   Navigator
       .of(context)
       .push(MaterialPageRoute(builder: (BuildContext context) {
-    return BlocProvider<VegetableBloc>(
-      bloc: VegetableBloc(),
-      child: GardenDesigner(),
-    );
+    return  GardenDesigner();
   }));
 }
