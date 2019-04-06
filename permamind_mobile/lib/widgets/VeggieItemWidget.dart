@@ -100,11 +100,25 @@ class _VegetableItemWidgetState extends State<VegetableItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-          color: Colors.amber,
-          child: Center(
-            child: _buildButton(),
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title:Column(
+            children: <Widget>[
+              Text(
+                widget.vegetableItem.vegetableName,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              _buildButton()
+            ],
           ),
-        );
+          leading: Container(
+              margin: EdgeInsets.only(left: 6.0),
+              child: new Image.asset('assets/vegetables/${widget.vegetableItem.vegetableName}.png', width: 70.0, height: 70.0)
+          ),
+        ),
+        Divider()
+      ],
+    );
   }
 }

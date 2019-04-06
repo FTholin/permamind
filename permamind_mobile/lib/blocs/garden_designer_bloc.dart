@@ -9,7 +9,7 @@ import 'dart:convert';
 
 class GardenDesignerBloc implements BlocBase {
 
-  // List of all items, part of the shopping basket
+  // List ici tous les items que l'on veut ajouter !
   Set<VegetableItem> _gardenVeggies = Set<VegetableItem>();
 
   // Stream to list of all possible items
@@ -25,21 +25,28 @@ class GardenDesignerBloc implements BlocBase {
 
   GardenDesignerBloc() {
     print("création GardenDesignerBloc");
-    listenForVeggies();
+    getAllPosts();
   }
 
 
   void addToGardenVeggies(VegetableItem item){
     _gardenVeggies.add(item);
     _postActionOnGarden();
+
+    print("Ajout");
+    print(_gardenVeggies);
   }
 
   void removeFromGardenVeggies(VegetableItem item){
+
     _gardenVeggies.remove(item);
     _postActionOnGarden();
+    print("Suppression");
+    print(_gardenVeggies);
   }
 
   void _postActionOnGarden(){
+
     // Feed the garden Veggies Controller  stream with the new content
     _gardenVeggiesController.sink.add(_gardenVeggies.toList());
 
@@ -48,35 +55,18 @@ class GardenDesignerBloc implements BlocBase {
     // number of items, part of the basket...
   }
 
-  //
-  // Generates a series of Shopping Items
-  // Normally this should come from a call to the server
-  // but for this sample, we simply simulate
-  //
-  
 
-
-  Future<Stream<VegetableItem>> fetchVeggies() async {
-    final String url = 'http://127.0.0.1:5000/get/vegetable';
-
-    final client = new http.Client();
-    final streamedRest = await client.send(
-        http.Request('get', Uri.parse(url))
-    );
-
-    return streamedRest.stream
-        .transform(utf8.decoder)
-        .transform(json.decoder)
-        .expand((data) => (data as List))
-        .map((data) => VegetableItem.fromJSON(data));
+    List<VegetableItem> allPostsFromJson(String str) {
+    final jsonData = json.decode(str);
+    return new List<VegetableItem>.from(jsonData.map((x) => VegetableItem.fromJson(x)));
   }
 
 
-    void listenForVeggies() async {
-    final Stream<VegetableItem> stream = await fetchVeggies();
-    print(stream);
-    stream.listen((VegetableItem veg) => () =>  _itemsController.sink.add(veg as List<VegetableItem>)
-    );
+  void getAllPosts() async {
+    final response = await http.get('http://109.238.10.82:5000/get/vegetable');
+
+    print(response.body);
+    _itemsController.sink.add(allPostsFromJson(response.body));
   }
 
   void dispose() {

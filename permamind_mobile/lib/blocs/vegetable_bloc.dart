@@ -13,7 +13,7 @@ class VegetableBloc implements BlocBase {
 
 
   Future<Stream<VegetableItem>> fetchVeggies() async {
-    final String url = 'http://127.0.0.1:5000/get/vegetable';
+    final String url = 'http://109.238.10.82:5000/get/vegetable';
 
     final client = new http.Client();
     final streamedRest = await client.send(
@@ -24,7 +24,7 @@ class VegetableBloc implements BlocBase {
         .transform(utf8.decoder)
         .transform(json.decoder)
         .expand((data) => (data as List))
-        .map((data) => VegetableItem.fromJSON(data));
+        .map((data) => VegetableItem.fromJson(data));
   }
 
   VegetableBloc(){
