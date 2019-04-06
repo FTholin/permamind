@@ -8,12 +8,11 @@ import 'package:rxdart/rxdart.dart';
 
 class GardensBloc implements BlocBase {
 
-  Stream<List<int>>  outFavorites ;
-  // Ici on va appeler l'api
 
 
   GardensBloc() {
     print("création GardensBloc");
+
   }
 
   void dispose() {

@@ -20,7 +20,6 @@ class VegetableBloc implements BlocBase {
         http.Request('get', Uri.parse(url))
     );
 
-    print(streamedRest);
     return streamedRest.stream
         .transform(utf8.decoder)
         .transform(json.decoder)

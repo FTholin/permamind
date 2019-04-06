@@ -40,7 +40,7 @@ class GardenDesignerState extends State<GardenDesigner> {
         content: Container(
             height: 350,
             width: 310,
-              child: new VeggiesSelectionList(),
+              child: new VeggiesSelectionPage(),
         ),
         isActive: true
     ),
