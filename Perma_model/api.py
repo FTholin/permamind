@@ -57,4 +57,4 @@ def generateModel(name, iteration):
     return "ok"
 
 app.debug = True
-app.run(host= '0.0.0.0')
+app.run(host='109.238.10.82', port='5000')
