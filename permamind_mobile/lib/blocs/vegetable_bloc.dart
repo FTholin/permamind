@@ -13,7 +13,7 @@ class VegetableBloc implements BlocBase {
 
 
   Future<Stream<VegetableItem>> fetchVeggies() async {
-    final String url = 'http://127.0.0.1:5000/get/vegetable';
+    final String url = 'http://109.238.10.82:5000/get/vegetable';
 
     final client = new http.Client();
     final streamedRest = await client.send(
