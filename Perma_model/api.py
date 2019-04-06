@@ -49,7 +49,7 @@ def getVegetable():
             cpt+=1
             plants.append(dict)
         print(str(plants))
-        return str(plants)
+        return json.dumps(plants)
 
 @app.route('/generate/<string:name>/<int:iteration>')
 def generateModel(name, iteration):
