@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
-import 'package:permamind_mobile/blocs/vegetable_bloc.dart';
+import 'package:permamind_mobile/blocs/garden_designer_bloc.dart';
 import 'package:permamind_mobile/screens/garden_design.dart';
 
 
@@ -33,9 +33,9 @@ void _gardenDesigning(BuildContext context) {
   Navigator
       .of(context)
       .push(MaterialPageRoute(builder: (BuildContext context) {
-    return BlocProvider<VegetableBloc>(
-      bloc: VegetableBloc(),
-      child: GardenDesigner(),
+    return  BlocProvider<GardenDesignerBloc>(
+        bloc: GardenDesignerBloc(),
+        child: GardenDesigner()
     );
   }));
 }
