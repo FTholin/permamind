@@ -3,7 +3,7 @@ import 'package:permamind_mobile/models/vegetable_item.dart';
 import 'package:permamind_mobile/blocs/garden_designer_bloc.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 import 'package:permamind_mobile/blocs/vegetableItemBloc.dart';
-
+import 'package:permamind_mobile/widgets/plus_minus_button.dart';
 import 'dart:async';
 
 
@@ -53,50 +53,21 @@ class _VegetableItemWidgetState extends State<VegetableItemWidget> {
   // This routine is reponsible for creating the links
   void _initBloc() {
     // Create an instance of the VegetableItemBloc
-    _bloc = VegetableItemBloc(widget.vegetableItem);
+    //_bloc = VegetableItemBloc(widget.vegetableItem);
 
     // Retrieve the BLoC that handles the Shopping Basket content 
     _gardenDesignerBloc = BlocProvider.of<GardenDesignerBloc>(context);
 
     // Simple pipe that transfers the content of the shopping
     // basket to the VegetableItemBloc
-    _subscription = _gardenDesignerBloc.gardenVeggies.listen(_bloc.shoppingBasket);
+    //_subscription = _gardenDesignerBloc.gardenVeggies.listen(_bloc.shoppingBasket);
   }
 
   void _disposeBloc() {
-    _subscription?.cancel();
+   // _subscription?.cancel();
     _bloc?.dispose();
   }
 
-  Widget _buildButton() {
-    return StreamBuilder<bool>(
-      stream: _bloc.isInShoppingBasket,
-      initialData: false,
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        return snapshot.data
-            ? _buildRemoveFromGardenVeggies()
-            : _buildAddToGardenVeggies();
-      },
-    );
-  }
-
-  Widget _buildAddToGardenVeggies(){
-    return RaisedButton(
-      child: Text('Add...'),
-      onPressed: (){
-        _gardenDesignerBloc.addToGardenVeggies(widget.vegetableItem);
-      },
-    );
-  }
-
-  Widget _buildRemoveFromGardenVeggies(){
-    return RaisedButton(
-      child: Text('Remove...'),
-      onPressed: (){
-        _gardenDesignerBloc.removeFromGardenVeggies(widget.vegetableItem);
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +80,9 @@ class _VegetableItemWidgetState extends State<VegetableItemWidget> {
                 widget.vegetableItem.vegetableName,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              _buildButton()
+              PlusMinusButton(height:40,
+                  width:100,
+                  vegetableItem: widget.vegetableItem)
             ],
           ),
           leading: Container(

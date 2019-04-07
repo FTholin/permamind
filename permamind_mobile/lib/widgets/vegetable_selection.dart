@@ -93,7 +93,6 @@ class VeggiesSelectionPage extends StatelessWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<List<VegetableItem>> snapshot) {
                 if (!snapshot.hasData) {
-                  print("vide");
                   return Container();
                 }
                 return ListView.builder(

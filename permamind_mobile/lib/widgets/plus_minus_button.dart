@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
-
+import 'package:permamind_mobile/blocs/bloc_provider.dart';
+import 'package:permamind_mobile/blocs/garden_designer_bloc.dart';
 /*
 *  This class create a minus plus button and handle his behaviors
 * */
 
+
+
 class PlusMinusButton extends StatefulWidget {
 
   final double height, width;
-  PlusMinusButton({Key key, this.height, this.width}): super(key: key);
+  final  vegetableItem;
+
+  PlusMinusButton({
+    Key key,
+    this.height,
+    this.width,
+    this.vegetableItem
+  }): super(key: key);
 
 
   @override
@@ -38,58 +48,68 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-              color: Colors.green,
-              width: 2.0
-          )
-      ),
-      child: new Row(
-        //crossAxisAlignment: CrossAxisAlignment.start,
 
-        children: <Widget>[
-          // Minus button
-          new Expanded(
-              child: new FlatButton(
-                  padding: EdgeInsets.all(2.0),
-                  onPressed: _subtract,
-                  child: Icon(Icons.remove)
+      GardenDesignerBloc _bloc = BlocProvider.of<GardenDesignerBloc>(context);
+
+      return Container(
+          height: widget.height,
+          width: widget.width,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              border: Border.all(
+                  color: Colors.green,
+                  width: 2.0
               )
           ),
-          // TextField linked with buttons
-          new Expanded(
-              child: new Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                      border: Border.all(
-                          color: Colors.green,
-                          width: 2.0
-                      )
-                  ),
-                padding: EdgeInsets.all(2.0),
-                child: new TextField(
-                    decoration: new InputDecoration.collapsed(hintText: '${_value}'),
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    controller: _controller
+          child: new Row(
+            //crossAxisAlignment: CrossAxisAlignment.start,
 
-                )
+            children: <Widget>[
+              // Minus button
+              new Expanded(
+                  child: new FlatButton(
+                      padding: EdgeInsets.all(2.0),
+                      onPressed: () {
+                        _subtract();
+                        _bloc.removeFromGardenVeggies(widget.vegetableItem);
+                      },
+                      child: Icon(Icons.remove)
+                  )
               ),
-          ),
-          // Plus button
-          new Expanded(
-              child: new FlatButton(
-                  padding: EdgeInsets.all(2.0),
-                  onPressed: _add,
-                  child: Icon(Icons.add)
+              // TextField linked with buttons
+              new Expanded(
+                child: new Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        border: Border.all(
+                            color: Colors.green,
+                            width: 2.0
+                        )
+                    ),
+                    padding: EdgeInsets.all(2.0),
+                    child: new TextField(
+                        decoration: new InputDecoration.collapsed(hintText: '${_value}'),
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        controller: _controller
+
+                    )
+                ),
+              ),
+              // Plus button
+              new Expanded(
+                  child: new FlatButton(
+                      padding: EdgeInsets.all(2.0),
+                      onPressed: () {
+                        _add();
+                        _bloc.addToGardenVeggies(widget.vegetableItem);
+                      },
+                      child: Icon(Icons.add)
+                  )
               )
+            ],
           )
-        ],
-      )
-    );
+      );
+
   }
 }

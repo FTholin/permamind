@@ -10,7 +10,7 @@ import 'dart:convert';
 class GardenDesignerBloc implements BlocBase {
 
   // List ici tous les items que l'on veut ajouter !
-  Set<VegetableItem> _gardenVeggies = Set<VegetableItem>();
+  List<VegetableItem> _gardenVeggies = List<VegetableItem>();
 
   // Stream to list of all possible items
   BehaviorSubject<List<VegetableItem>> _itemsController = BehaviorSubject<List<VegetableItem>>();
@@ -34,7 +34,10 @@ class GardenDesignerBloc implements BlocBase {
     _postActionOnGarden();
 
     print("Ajout");
-    print(_gardenVeggies);
+
+    for (var e in _gardenVeggies) {
+      print(e.vegetableName);
+    }
   }
 
   void removeFromGardenVeggies(VegetableItem item){
@@ -42,7 +45,9 @@ class GardenDesignerBloc implements BlocBase {
     _gardenVeggies.remove(item);
     _postActionOnGarden();
     print("Suppression");
-    print(_gardenVeggies);
+    for (var e in _gardenVeggies) {
+      print(e.vegetableName);
+    }
   }
 
   void _postActionOnGarden(){
@@ -62,10 +67,10 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
+  // TODO A terme cette fonction va être dans le bloc api
   void getAllPosts() async {
     final response = await http.get('http://109.238.10.82:5000/get/vegetable');
 
-    print(response.body);
     _itemsController.sink.add(allPostsFromJson(response.body));
   }
 
