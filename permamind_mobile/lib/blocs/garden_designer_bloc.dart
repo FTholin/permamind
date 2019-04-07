@@ -29,6 +29,17 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
+  void alterHeightGarden(double value) {
+    print("longueur modifiée");
+  }
+
+  void alterWidthGarden(double value) {
+    print("largeur modifiée");
+  }
+
+  /*
+  * This function add a new item in list of veggies with stream mechanism
+  * */
   void addToGardenVeggies(VegetableItem item){
     _gardenVeggies.add(item);
     _postActionOnGarden();
@@ -40,6 +51,9 @@ class GardenDesignerBloc implements BlocBase {
     }
   }
 
+  /*
+  * This function remove a new item in list of veggies with stream mechanism
+  * */
   void removeFromGardenVeggies(VegetableItem item){
 
     _gardenVeggies.remove(item);

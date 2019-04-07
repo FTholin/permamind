@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:permamind_mobile/blocs/garden_designer_bloc.dart';
 
 String dropdownValue = 'Humifère';
 
 class GardenSoilList extends StatefulWidget {
-  GardenSoilList({Key key}) : super(key: key);
+
+  final GardenDesignerBloc bloc;
+
+  GardenSoilList({
+    Key key,
+    this.bloc
+  }):super(key: key);
 
   @override
   _GardenSoilListState createState() => _GardenSoilListState();

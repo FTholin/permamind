@@ -7,7 +7,6 @@ import 'package:permamind_mobile/screens/garden_design.dart';
 class GardensPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-//    final GardensBloc bloc = BlocProvider.of<GardensBloc>(context);
     return Scaffold(
       body: Center(
         child: Column(

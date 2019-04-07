@@ -11,9 +11,11 @@ class VegetableItemWidget extends StatefulWidget {
   VegetableItemWidget({
     Key key,
     @required this.vegetableItem,
+    @required this.gardenBloc
   }) : super(key: key);
 
   final VegetableItem vegetableItem;
+  final GardenDesignerBloc gardenBloc;
 
   @override
   _VegetableItemWidgetState createState() => _VegetableItemWidgetState();
@@ -80,9 +82,12 @@ class _VegetableItemWidgetState extends State<VegetableItemWidget> {
                 widget.vegetableItem.vegetableName,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              PlusMinusButton(height:40,
+              PlusMinusButton.vegSelection(
+                  height:40,
                   width:100,
-                  vegetableItem: widget.vegetableItem)
+                  vegetableItem: widget.vegetableItem,
+                  parentBloc: widget.gardenBloc
+              )
             ],
           ),
           leading: Container(

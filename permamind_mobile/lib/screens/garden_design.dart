@@ -16,48 +16,61 @@ class GardenDesigner extends StatefulWidget {
 
 class GardenDesignerState extends State<GardenDesigner> {
 
-  // init the step to 0th position
+  GardenDesignerBloc _gardenDesignerBloc;
+
   int current_step = 0;
-  List<Step> my_steps = [
-    new Step(
+  List<Step> my_steps;
+
+  @override
+  void initState() {
+    super.initState();
+    _gardenDesignerBloc = GardenDesignerBloc();
+
+    // init the step to 0th position
+    current_step = 0;
+    my_steps = [
+      new Step(
         // Title of the Step
         title: new Text("Dimensions du jardin"),
-        // Content, it can be any widget here. Using basic Text for this example
-        content: new GardenDimensions(),
-        isActive: true
-    ),
-    new Step(
-        title: new Text("Type de sol"),
-        content: Container(
-          height: 100,
-          width: 250,
-          child: new GardenSoilList(),
+        content: new GardenDimensions(bloc: _gardenDesignerBloc),
+      ),
+      new Step(
+          title: new Text("Type de sol"),
+          content: Container(
+            height: 100,
+            width: 250,
+            child: new GardenSoilList(bloc: _gardenDesignerBloc),
 
-        ),
-        isActive: true
-    ),
-    new Step(
-        title: new Text("Choisis tes légumes"),
-        content: Container(
-            height: 350,
-            width: 310,
-              child:  new BlocProvider<GardenDesignerBloc>(
-                          bloc: GardenDesignerBloc(),
-                          child: new VeggiesSelectionPage())
-        ),
-        isActive: true
-    ),
-    new Step(
-        title: new Text("Génération de ton jardin"),
-        content: new RaisedButton(onPressed: null,
-          textColor: Colors.white,
-          color: Colors.green,
-          padding: const EdgeInsets.all(8.0),
-          child: new Text(
-            "Générer",
-          )),
-        isActive: true)
-  ];
+          ),
+          isActive: true
+      ),
+      new Step(
+          title: new Text("Choisis tes légumes"),
+          content: Container(
+              height: 350,
+              width: 310,
+              child: VeggiesSelectionPage(bloc: _gardenDesignerBloc)
+          ),
+          isActive: true
+      ),
+      new Step(
+          title: new Text("Génération de ton jardin"),
+          content: new RaisedButton(onPressed: null,
+              textColor: Colors.white,
+              color: Colors.green,
+              padding: const EdgeInsets.all(8.0),
+              child: new Text(
+                "Générer",
+              )),
+          isActive: true)
+    ];
+  }
+
+  @override
+  void dispose() {
+    _gardenDesignerBloc?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,4 +104,5 @@ class GardenDesignerState extends State<GardenDesigner> {
           )),
     );
   }
+
 }
