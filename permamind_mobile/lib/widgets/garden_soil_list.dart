@@ -30,6 +30,7 @@ class _GardenSoilListState extends State<GardenSoilList> {
               onChanged: (String newValue) {
                 setState(() {
                   dropdownValue = newValue;
+                  widget.bloc.alterGardenSoil(dropdownValue);
                 });
               }, // TODO A terme les items devront être sélectionnés dans la base
               items: <String>['Humifère', 'Argileux', 'Sableux', 'Limoneux', 'ArgileuxHumique']

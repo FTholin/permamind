@@ -24,7 +24,10 @@ class GardenDesignerBloc implements BlocBase {
   // Variables to stores garden dimensions
   double _gardenHeightDimension  = 0.0, _gardenWidthDimension = 0.0;
 
+  String _gardenSoilType;
 
+
+  // TODO A terme faire un controller comme itemController pour remplir dynamiquement les types de sol
 
 
   GardenDesignerBloc() {
@@ -33,16 +36,22 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
-  void alterHeightGarden(double value) {
+  void alterGardenHeight(double value) {
     print("longueur modifiée");
     _gardenHeightDimension = value;
     print(_gardenHeightDimension);
   }
 
-  void alterWidthGarden(double value) {
+  void alterGardenWidth(double value) {
     print("largeur modifiée");
     _gardenWidthDimension = value;
     print(_gardenWidthDimension);
+  }
+
+  void alterGardenSoil(String value) {
+    print("Type de sol modifié");
+    _gardenSoilType = value;
+    print(_gardenSoilType);
   }
 
   /*

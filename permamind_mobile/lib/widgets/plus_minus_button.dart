@@ -83,7 +83,7 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
   }
 
   void _alterValue(double newValue) {
-    if(_value > 0.0) {
+    if(newValue > 0.0) {
       _value = newValue;
     }
   }
@@ -169,9 +169,6 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
 
   Widget buildHeightDimensionsButton(){
 
-//    _controller.addListener(() {
-//      print("Hello Flooooo");
-//    });
     return  Container(
         height: widget.height,
         width: widget.width,
@@ -192,7 +189,7 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                     padding: EdgeInsets.all(2.0),
                     onPressed: () {
                       _subtract();
-                      widget.parentBloc.alterHeightGarden(_value);
+                      widget.parentBloc.alterGardenHeight(_value);
                     },
                     child: Icon(Icons.remove)
                 )
@@ -213,11 +210,11 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       controller: _controller,
-                    onEditingComplete: () {
-                        double newValue = _controller.text as double;
-                        print(newValue);
-                      _alterValue(newValue);
-                    },
+                      onEditingComplete: () {
+                          var newValue = double.parse(_controller.text);
+                          _alterValue(newValue);
+                          widget.parentBloc.alterGardenHeight(_value);
+                      },
                   )
               ),
             ),
@@ -226,8 +223,7 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                 child: new FlatButton(
                     padding: EdgeInsets.all(2.0),
                     onPressed: () {
-                      _add();
-                      widget.parentBloc.alterHeightGarden(_value);
+                      widget.parentBloc.alterGardenHeight(_value);
                     },
                     child: Icon(Icons.add)
                 )
@@ -260,7 +256,7 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                     padding: EdgeInsets.all(2.0),
                     onPressed: () {
                       _subtract();
-                      widget.parentBloc.alterWidthGarden(_value);
+                      widget.parentBloc.alterGardenWidth(_value);
                     },
                     child: Icon(Icons.remove)
                 )
@@ -280,7 +276,12 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                       decoration: new InputDecoration.collapsed(hintText: '${_value}'),
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
-                      controller: _controller
+                      controller: _controller,
+                      onEditingComplete: () {
+                        var newValue = double.parse(_controller.text);
+                        _alterValue(newValue);
+                        widget.parentBloc.alterGardenWidth(_value);
+                      },
 
                   )
               ),
@@ -291,7 +292,7 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                     padding: EdgeInsets.all(2.0),
                     onPressed: () {
                       _add();
-                      widget.parentBloc.alterWidthGarden(_value);
+                      widget.parentBloc.alterGardenWidth(_value);
                     },
                     child: Icon(Icons.add)
                 )
