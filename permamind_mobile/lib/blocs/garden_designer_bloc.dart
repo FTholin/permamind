@@ -6,6 +6,8 @@ import 'package:permamind_mobile/models/vegetable_item.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
+
 
 class GardenDesignerBloc implements BlocBase {
 
@@ -63,9 +65,9 @@ class GardenDesignerBloc implements BlocBase {
 
     print("Ajout");
 
-//    for (var e in _gardenVeggies) {
-//      print(e.vegetableName);
-//    }
+    for (var e in _gardenVeggies) {
+      print(e.vegetableName);
+    }
 
   }
 
@@ -77,9 +79,9 @@ class GardenDesignerBloc implements BlocBase {
     _gardenVeggies.remove(item);
     _postActionOnGarden();
     print("Suppression");
-//    for (var e in _gardenVeggies) {
-//      print(e.vegetableName);
-//    }
+    for (var e in _gardenVeggies) {
+      print(e.vegetableName);
+    }
 
   }
 
@@ -92,6 +94,42 @@ class GardenDesignerBloc implements BlocBase {
     // computation of the total price of the basket
     // number of items, part of the basket...
   }
+
+  void generateModel() {
+
+    // TODO Fonction qui check que tous les champs sont ok
+    var veggiesQt = Map();
+
+    _gardenVeggies.forEach((x) => veggiesQt[x.vegetableName] = !veggiesQt.containsKey(x.vegetableName) ? (1) : (veggiesQt[x.vegetableName] + 1));
+
+    var response = createPost(dataToJsonFormat(veggiesQt));
+
+    print(response);
+  }
+
+  String dataToJsonFormat(Map veggiesQt) {
+
+    String str = "{\"vegetables\": {";
+    veggiesQt.forEach((element, value) {
+      str += "${element}:{\"plants\": ${value}},";
+    });
+    str += "}, \"map\":{\"sizeW\":${_gardenWidthDimension},\"sizeH\": ${_gardenHeightDimension},\"soilType\":${_gardenSoilType}}, \"name\": \"mello_123456789\"}}";
+
+    return json.encode(str);
+  }
+
+  Future<http.Response> createPost(String jsonData) async{
+    final response = await http.post('http://109.238.10.82:5000/send/mello_123456789/1',
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader : ''
+        },
+        body: jsonData
+    );
+    return response;
+  }
+
+
 
 
     List<VegetableItem> allPostsFromJson(String str) {

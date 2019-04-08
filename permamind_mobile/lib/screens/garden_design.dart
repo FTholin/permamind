@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:permamind_mobile/widgets/garden_dimensions.dart';
 import 'package:permamind_mobile/widgets/garden_soil_list.dart';
 import 'package:permamind_mobile/widgets/vegetable_selection.dart';
+import 'package:permamind_mobile/widgets/garden_generator.dart';
 
 // Import blocs modules
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
@@ -33,6 +34,8 @@ class GardenDesignerState extends State<GardenDesigner> {
         // Title of the Step
         title: new Text("Dimensions du jardin"),
         content: new GardenDimensions(bloc: _gardenDesignerBloc),
+        isActive: true
+
       ),
       new Step(
           title: new Text("Type de sol"),
@@ -55,14 +58,13 @@ class GardenDesignerState extends State<GardenDesigner> {
       ),
       new Step(
           title: new Text("Génération de ton jardin"),
-          content: new RaisedButton(onPressed: null,
-              textColor: Colors.white,
-              color: Colors.green,
-              padding: const EdgeInsets.all(8.0),
-              child: new Text(
-                "Générer",
-              )),
-          isActive: true)
+          content: Container(
+              height: 350,
+              width: 310,
+              child: GardenGenerator(bloc: _gardenDesignerBloc)
+    ),
+          isActive: true
+      )
     ];
   }
 
