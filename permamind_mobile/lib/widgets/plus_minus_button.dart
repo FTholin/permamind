@@ -82,6 +82,13 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
     });
   }
 
+  void _alterValue(double newValue) {
+    if(_value > 0.0) {
+      _value = newValue;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     if (widget.buttonType == ButtonType.vegSelection) {
@@ -162,6 +169,9 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
 
   Widget buildHeightDimensionsButton(){
 
+//    _controller.addListener(() {
+//      print("Hello Flooooo");
+//    });
     return  Container(
         height: widget.height,
         width: widget.width,
@@ -202,8 +212,12 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                       decoration: new InputDecoration.collapsed(hintText: '${_value}'),
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
-                      controller: _controller
-
+                      controller: _controller,
+                    onEditingComplete: () {
+                        double newValue = _controller.text as double;
+                        print(newValue);
+                      _alterValue(newValue);
+                    },
                   )
               ),
             ),

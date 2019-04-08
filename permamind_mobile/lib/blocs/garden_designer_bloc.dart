@@ -12,7 +12,7 @@ class GardenDesignerBloc implements BlocBase {
   // List ici tous les items que l'on veut ajouter !
   List<VegetableItem> _gardenVeggies = List<VegetableItem>();
 
-  // Stream to list of all possible items
+  // Ce Stream nous permet de nourrir notre liste de légumes initiale
   BehaviorSubject<List<VegetableItem>> _itemsController = BehaviorSubject<List<VegetableItem>>();
   Stream<List<VegetableItem>> get items => _itemsController;
 
@@ -20,6 +20,10 @@ class GardenDesignerBloc implements BlocBase {
   // Stream to list the items part of the shopping basket
   BehaviorSubject<List<VegetableItem>> _gardenVeggiesController = BehaviorSubject<List<VegetableItem>>(seedValue: <VegetableItem>[]);
   Stream<List<VegetableItem>> get gardenVeggies => _gardenVeggiesController;
+
+  // Variables to stores garden dimensions
+  double _gardenHeightDimension  = 0.0, _gardenWidthDimension = 0.0;
+
 
 
 
@@ -31,10 +35,14 @@ class GardenDesignerBloc implements BlocBase {
 
   void alterHeightGarden(double value) {
     print("longueur modifiée");
+    _gardenHeightDimension = value;
+    print(_gardenHeightDimension);
   }
 
   void alterWidthGarden(double value) {
     print("largeur modifiée");
+    _gardenWidthDimension = value;
+    print(_gardenWidthDimension);
   }
 
   /*
@@ -46,9 +54,10 @@ class GardenDesignerBloc implements BlocBase {
 
     print("Ajout");
 
-    for (var e in _gardenVeggies) {
-      print(e.vegetableName);
-    }
+//    for (var e in _gardenVeggies) {
+//      print(e.vegetableName);
+//    }
+
   }
 
   /*
@@ -59,9 +68,10 @@ class GardenDesignerBloc implements BlocBase {
     _gardenVeggies.remove(item);
     _postActionOnGarden();
     print("Suppression");
-    for (var e in _gardenVeggies) {
-      print(e.vegetableName);
-    }
+//    for (var e in _gardenVeggies) {
+//      print(e.vegetableName);
+//    }
+
   }
 
   void _postActionOnGarden(){
