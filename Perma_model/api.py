@@ -29,7 +29,7 @@ def getVegetable():
             cpt+=1
             plants.append(dict)
         print(str(plants))
-        return str(plants)
+        return json.dumps(plants)
 
 # Envoi un fichier json pour le sauvegarder sur le serveur
 @app.route('/send/<string:name>/<string:idJardin>', methods=["POST"])
@@ -60,4 +60,5 @@ def getFromServer(name, idJardin, version):
         return jsonify(sendToModele)
 
 app.debug = True
-app.run(host='109.238.10.82', port='5000')
+#app.run(host='109.238.10.82', port='5000')
+app.run()

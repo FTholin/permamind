@@ -109,6 +109,9 @@ class GardenDesignerBloc implements BlocBase {
 
   String dataToJsonFormat(Map veggiesQt) {
 
+    var jsonData = {};
+    var vegetables = {};
+
     String str = "{\"vegetables\": {";
     veggiesQt.forEach((element, value) {
       str += "${element}:{\"plants\": ${value}},";
@@ -119,7 +122,18 @@ class GardenDesignerBloc implements BlocBase {
   }
 
   Future<http.Response> createPost(String jsonData) async{
-    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
+    // server distant
+//    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
+////        headers: {
+////          HttpHeaders.contentTypeHeader: 'application/json',
+////          HttpHeaders.authorizationHeader : ''
+////        },
+////        body: jsonData
+////    );
+////    return response;
+
+  // localhost
+    final response = await http.post('http://127.0.0.1:5000/send/flo_123456789/1',
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           HttpHeaders.authorizationHeader : ''
@@ -138,7 +152,8 @@ class GardenDesignerBloc implements BlocBase {
 
   // TODO A terme cette fonction va être dans le bloc api
   void getAllPosts() async {
-    final response = await http.get('http://109.238.10.82:5000/get/vegetable');
+    //final response = await http.get('http://109.238.10.82:5000/get/vegetable');
+    final response = await http.get('http://127.0.0.1:5000/get/vegetable');
 
     _itemsController.sink.add(allPostsFromJson(response.body));
   }
