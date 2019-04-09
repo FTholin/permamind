@@ -119,7 +119,7 @@ class GardenDesignerBloc implements BlocBase {
   }
 
   Future<http.Response> createPost(String jsonData) async{
-    final response = await http.post('http://109.238.10.82:5000/send/mello_123456789/1',
+    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           HttpHeaders.authorizationHeader : ''
@@ -128,8 +128,6 @@ class GardenDesignerBloc implements BlocBase {
     );
     return response;
   }
-
-
 
 
     List<VegetableItem> allPostsFromJson(String str) {

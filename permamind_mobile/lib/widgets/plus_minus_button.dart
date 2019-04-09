@@ -223,6 +223,7 @@ class _PlusMinusButtonState extends State<PlusMinusButton>{
                 child: new FlatButton(
                     padding: EdgeInsets.all(2.0),
                     onPressed: () {
+                      _add();
                       widget.parentBloc.alterGardenHeight(_value);
                     },
                     child: Icon(Icons.add)
