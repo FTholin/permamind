@@ -1,7 +1,7 @@
 // Import blocs modules
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 // Import widgets to embed them
-import 'package:permamind_mobile/screens/gardens.dart';
+import 'package:permamind_mobile/screens/gardens_page.dart';
 import 'package:permamind_mobile/widgets/vegetables_panorama.dart';
 import 'package:permamind_mobile/widgets/others.dart';
 

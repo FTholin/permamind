@@ -11,7 +11,7 @@ class VegetableItem {
 
   VegetableItem({this.id,  this.vegetableName, this.imagePath, this.overview});
 
-  factory VegetableItem.fromJSON(Map<String, dynamic> json) {
+  factory VegetableItem.fromJson(Map<String, dynamic> json) {
     return VegetableItem(
         id: json['id'],
         vegetableName: json['name'],
