@@ -34,7 +34,7 @@ class GardenDesignerBloc implements BlocBase {
 
   GardenDesignerBloc() {
     print("création GardenDesignerBloc");
-    getAllPosts();
+    getAllVeggies();
   }
 
 
@@ -102,26 +102,35 @@ class GardenDesignerBloc implements BlocBase {
 
     _gardenVeggies.forEach((x) => veggiesQt[x.vegetableName] = !veggiesQt.containsKey(x.vegetableName) ? (1) : (veggiesQt[x.vegetableName] + 1));
 
-    var response = createPost(dataToJsonFormat(veggiesQt));
+    var response = createGarden(dataToJsonFormat(veggiesQt));
 
     print(response);
+
   }
 
   String dataToJsonFormat(Map veggiesQt) {
-
     var jsonData = {};
     var vegetables = {};
+    var elem = {};
+    var mapCharacteristics = {};
 
-    String str = "{\"vegetables\": {";
     veggiesQt.forEach((element, value) {
-      str += "${element}:{\"plants\": ${value}},";
+      elem["plants"] = value;
+      vegetables[element] = elem;
     });
-    str += "}, \"map\":{\"sizeW\":${_gardenWidthDimension},\"sizeH\": ${_gardenHeightDimension},\"soilType\":${_gardenSoilType}}, \"name\": \"mello_123456789\"}}";
 
-    return json.encode(str);
+    mapCharacteristics["sizeW"] = _gardenWidthDimension;
+    mapCharacteristics["sizeH"] = _gardenHeightDimension;
+    mapCharacteristics["soilType"] = _gardenSoilType;
+    mapCharacteristics["name"] = "flo_123456789";
+
+    jsonData["vegetables"] = vegetables;
+    jsonData["map"] = mapCharacteristics;
+
+    return json.encode(jsonData);
   }
 
-  Future<http.Response> createPost(String jsonData) async{
+  Future<http.Response> createGarden(String jsonData) async{
     // server distant
 //    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
 ////        headers: {
@@ -151,9 +160,10 @@ class GardenDesignerBloc implements BlocBase {
 
 
   // TODO A terme cette fonction va être dans le bloc api
-  void getAllPosts() async {
-    //final response = await http.get('http://109.238.10.82:5000/get/vegetable');
-    final response = await http.get('http://127.0.0.1:5000/get/vegetable');
+  void getAllVeggies() async {
+    final response = await http.get('http://109.238.10.82:5000/get/vegetable');
+    //final response = await http.get('http://127.0.0.1:5000/get/vegetable');
+
 
     _itemsController.sink.add(allPostsFromJson(response.body));
   }
