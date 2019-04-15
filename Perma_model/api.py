@@ -1,15 +1,16 @@
-import sys
+# encoding: utf-8
+
+import sys 
 import os
 import matplotlib
 import matplotlib.pyplot as plt
 import json
-
+from gevent.pywsgi import WSGIServer
 # https://github.com/grst/nbimporter | pip install nbimporter
 import nbimporter
 from packingModelisation import problemResolution
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource, reqparse
-
 
 app = Flask(__name__)
 api = Api(app)
@@ -60,4 +61,5 @@ def getFromServer(name, idJardin, version):
         return jsonify(sendToModele)
 
 app.debug = True
-app.run(host='109.238.10.82', port='5000')
+http_server = WSGIServer(('109.238.10.82', 5000), app)
+http_server.serve_forever()
