@@ -140,13 +140,13 @@ class GardenDesignerBloc implements BlocBase {
   Future<http.Response> createGarden(String jsonData) async{
 
     // server distant
-    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789',
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader : ''
-        },
-        body: jsonData
-    );
+    final response = await http.get('http://109.238.10.82:5000/send/flo_123456789/1');//,
+        //headers: {
+          //HttpHeaders.contentTypeHeader: 'application/json',
+          //HttpHeaders.authorizationHeader : ''
+          //   },
+    //body: jsonData
+    //);
     return response;
   }
 
