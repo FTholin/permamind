@@ -128,7 +128,7 @@ class _GardenGeneratorState extends State<GardenGenerator> {
                                     height: MediaQuery.of(context).size.height / 1.2,
                                     viewportFraction: 1.0,
                                     aspectRatio: 1.0,
-                                    autoPlay: true,
+                                    autoPlay: false,
                                     enlargeCenterPage: true,
                                     pauseAutoPlayOnTouch: Duration(seconds: 2),
                                     items: <Widget>[
