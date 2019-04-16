@@ -134,6 +134,7 @@ class GardenDesignerBloc implements BlocBase {
     jsonData["vegetables"] = vegetables;
     jsonData["map"] = mapCharacteristics;
 
+
     return json.encode(jsonData);
   }
 

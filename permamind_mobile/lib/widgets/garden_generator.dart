@@ -11,7 +11,7 @@ Map<String, dynamic> jsonMap = jsonDecode('''{"map": {"soilType": "Humifere", "n
       "dimX": 0.3,
       "dimY": 3.0,
       "posX": 2.7,
-      "posY": 1.8
+      "posY": 2.0
     },
     "Aneth": {
       "dimX": 0.2,
@@ -104,9 +104,7 @@ class _GardenGeneratorState extends State<GardenGenerator> {
 
   Widget build(BuildContext context) {
 
-    final GardenChartWidget myGarden = GardenChartWidget(dataJson: jsonMap);
-
-//    final CarouselSlider gardenCarousel =
+    final GardenChartWidget myGarden = GardenChartWidget(dataJson: jsonMap, ratio: (MediaQuery.of(context).size.height / 1.2) * 74.7 / 406.0);
 
     return Scaffold(
       body: new Center(
@@ -120,44 +118,33 @@ class _GardenGeneratorState extends State<GardenGenerator> {
 //                  widget.bloc.generateModel();
                   showDemoDialog<DialogDemoAction>(
                       context: context,
-                      child: Dialog(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)), //this right here
-                        child: Container(
-                          color: Colors.red,
-                          height: MediaQuery.of(context).size.height / 1.5,
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: new Row(
-                                  children: <Widget>[
-                                    new IconButton(
-                                      icon: new Icon(Icons.close),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                  ],
+
+                      child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                new CarouselSlider(
+                                    height: MediaQuery.of(context).size.height / 1.2,
+                                    viewportFraction: 1.0,
+                                    aspectRatio: 1.0,
+                                    autoPlay: true,
+                                    enlargeCenterPage: true,
+                                    pauseAutoPlayOnTouch: Duration(seconds: 2),
+                                    items: <Widget>[
+                                      myGarden,
+                                      myGarden,
+                                      myGarden
+                                    ]
                                 ),
-                              ),
-                              Expanded(
-                                flex: 12,
-                                  child:
-                                  CarouselSlider(
-//                                      viewportFraction: 1.0,
-//                                      aspectRatio: 0.6,
-                                      autoPlay: true,
-                                      enlargeCenterPage: true,
-                                      pauseAutoPlayOnTouch: Duration(seconds: 2),
-                                      items: <Widget>[
-                                        myGarden,
-                                        myGarden,
-                                        myGarden
-                                      ]
-                                  )
-                              )
-                            ],
-                          ),
-                        ),
+                                new Container(),
+                                FloatingActionButton(
+                                  backgroundColor: Colors.white,
+                                  child: new Icon(Icons.close),
+                                  onPressed: () => Navigator.pop(context),
+                                )
+                              ],
+                            )
                       )
                   );
                 },

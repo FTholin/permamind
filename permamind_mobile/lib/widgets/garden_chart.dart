@@ -8,6 +8,7 @@ class GardenChartWidget extends StatefulWidget {
   GardenChartWidget({
     Key key,
     @required this.dataJson,
+    @required this.ratio,
   }) : super(key: key) {
     gardenProperties = getGardenProperties();
     veggies = getVeggies();
@@ -22,7 +23,7 @@ class GardenChartWidget extends StatefulWidget {
 
   final Map<String, dynamic> dataJson;
 
-  final double ratio = 60.0;
+  final double ratio;
 
 
   @override
@@ -44,7 +45,7 @@ class GardenChartWidget extends StatefulWidget {
             color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(1.0),
             child: new Text(k,
               style: TextStyle(
-                  fontSize: 15.0
+                  fontSize: 10.0
               ),
             ),
             alignment: Alignment(0.0, 0.0),
