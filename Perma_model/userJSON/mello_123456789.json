@@ -1,1 +1,1 @@
-{"vegetables": {"Poireau": {"plants": 30}, "Oignon": {"plants": 10}, "Carotte": {"plants": 50}, "Pois": {"plants": 20}, "Ail": {"plants": 40}, "Patate": {"plants": 10}}, "map": {"sizeW": 3, "sizeH": 5, "soilType": "Humifere"}, "name": "mello_123456789"}
+{"map": {"soilType": "Humifere", "sizeW": 3, "sizeH": 5}, "vegetables": {"Carotte": {"plants": 50}, "Oignon": {"plants": 10}, "Patate": {"plants": 10}, "Poireau": {"plants": 30}, "Ail": {"plants": 40}, "Pois": {"plants": 20}}, "name": "mello_123456789"}
