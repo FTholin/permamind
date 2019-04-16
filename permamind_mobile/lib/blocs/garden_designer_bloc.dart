@@ -7,6 +7,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import 'package:uuid/uuid.dart';
 
 
 class GardenDesignerBloc implements BlocBase {
@@ -95,20 +96,26 @@ class GardenDesignerBloc implements BlocBase {
     // number of items, part of the basket...
   }
 
-  void generateModel() {
+  void sendModel() {
 
     // TODO Fonction qui check que tous les champs sont ok
     var veggiesQt = Map();
 
     _gardenVeggies.forEach((x) => veggiesQt[x.vegetableName] = !veggiesQt.containsKey(x.vegetableName) ? (1) : (veggiesQt[x.vegetableName] + 1));
 
-    var response = createGarden(dataToJsonFormat(veggiesQt));
-
-    print(response);
-
+    createGarden(dataToJsonFormat(veggiesQt));
   }
 
+
+  void generateModel() {
+    final response = askModelResolution();
+    print(response);
+  }
+
+
+
   String dataToJsonFormat(Map veggiesQt) {
+
     var jsonData = {};
     var vegetables = {};
     var elem = {};
@@ -131,18 +138,9 @@ class GardenDesignerBloc implements BlocBase {
   }
 
   Future<http.Response> createGarden(String jsonData) async{
-    // server distant
-//    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
-////        headers: {
-////          HttpHeaders.contentTypeHeader: 'application/json',
-////          HttpHeaders.authorizationHeader : ''
-////        },
-////        body: jsonData
-////    );
-////    return response;
 
-  // localhost
-    final response = await http.post('http://127.0.0.1:5000/send/flo_123456789/1',
+    // server distant
+    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           HttpHeaders.authorizationHeader : ''
@@ -153,6 +151,11 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
+  Future<http.Response> askModelResolution() async{
+    final response = await http.get('http://109.238.10.82:5000/generate/flo_123456789/10');
+    return response;
+  }
+
     List<VegetableItem> allPostsFromJson(String str) {
     final jsonData = json.decode(str);
     return new List<VegetableItem>.from(jsonData.map((x) => VegetableItem.fromJson(x)));
@@ -162,8 +165,6 @@ class GardenDesignerBloc implements BlocBase {
   // TODO A terme cette fonction va être dans le bloc api
   void getAllVeggies() async {
     final response = await http.get('http://109.238.10.82:5000/get/vegetable');
-    //final response = await http.get('http://127.0.0.1:5000/get/vegetable');
-
 
     _itemsController.sink.add(allPostsFromJson(response.body));
   }
