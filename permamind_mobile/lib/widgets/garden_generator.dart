@@ -106,18 +106,7 @@ class _GardenGeneratorState extends State<GardenGenerator> {
 
     final GardenChartWidget myGarden = GardenChartWidget(dataJson: jsonMap);
 
-    final CarouselSlider gardenCarousel = CarouselSlider(
-        viewportFraction: 1.0,
-        aspectRatio: 0.6,
-        autoPlay: true,
-        enlargeCenterPage: true,
-        pauseAutoPlayOnTouch: Duration(seconds: 2),
-        items: <Widget>[
-          myGarden,
-          myGarden,
-          myGarden
-        ]
-    );
+//    final CarouselSlider gardenCarousel =
 
     return Scaffold(
       body: new Center(
@@ -127,26 +116,45 @@ class _GardenGeneratorState extends State<GardenGenerator> {
             children: <Widget>[
               new RaisedButton(
                 onPressed: () {
-                  widget.bloc.sendModel();
-                  widget.bloc.generateModel();
+//                  widget.bloc.sendModel();
+//                  widget.bloc.generateModel();
                   showDemoDialog<DialogDemoAction>(
                       context: context,
                       child: Dialog(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)), //this right here
                         child: Container(
+                          color: Colors.red,
                           height: MediaQuery.of(context).size.height / 1.5,
+                          width: MediaQuery.of(context).size.width,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              new Row(
-                                children: <Widget>[
-                                  new IconButton(
-                                    icon: new Icon(Icons.close),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
-                                ],
+                              Expanded(
+                                child: new Row(
+                                  children: <Widget>[
+                                    new IconButton(
+                                      icon: new Icon(Icons.close),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              gardenCarousel
+                              Expanded(
+                                flex: 12,
+                                  child:
+                                  CarouselSlider(
+//                                      viewportFraction: 1.0,
+//                                      aspectRatio: 0.6,
+                                      autoPlay: true,
+                                      enlargeCenterPage: true,
+                                      pauseAutoPlayOnTouch: Duration(seconds: 2),
+                                      items: <Widget>[
+                                        myGarden,
+                                        myGarden,
+                                        myGarden
+                                      ]
+                                  )
+                              )
                             ],
                           ),
                         ),
@@ -165,3 +173,17 @@ class _GardenGeneratorState extends State<GardenGenerator> {
     );
   }
 }
+
+
+//new CarouselSlider(
+//viewportFraction: 1.0,
+//height: MediaQuery.of(context).size.height / 0.8,
+//autoPlay: true,
+//enlargeCenterPage: true,
+//pauseAutoPlayOnTouch: Duration(seconds: 2),
+//items: <Widget>[
+//myGarden,
+//myGarden,
+//myGarden
+//]
+//)

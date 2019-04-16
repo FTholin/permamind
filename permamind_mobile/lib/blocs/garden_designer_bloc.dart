@@ -129,8 +129,8 @@ class GardenDesignerBloc implements BlocBase {
     mapCharacteristics["sizeW"] = _gardenWidthDimension;
     mapCharacteristics["sizeH"] = _gardenHeightDimension;
     mapCharacteristics["soilType"] = _gardenSoilType;
-    mapCharacteristics["name"] = "flo_123456789";
 
+    jsonData["name"] = "flo_123456789";
     jsonData["vegetables"] = vegetables;
     jsonData["map"] = mapCharacteristics;
 
@@ -140,7 +140,7 @@ class GardenDesignerBloc implements BlocBase {
   Future<http.Response> createGarden(String jsonData) async{
 
     // server distant
-    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
+    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789',
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           HttpHeaders.authorizationHeader : ''
@@ -152,7 +152,7 @@ class GardenDesignerBloc implements BlocBase {
 
 
   Future<http.Response> askModelResolution() async{
-    final response = await http.get('http://109.238.10.82:5000/generate/flo_123456789/10');
+    final response = await http.get('http://109.238.10.82:5000/generate/flo_123456789/50');
     return response;
   }
 

@@ -22,7 +22,7 @@ class GardenChartWidget extends StatefulWidget {
 
   final Map<String, dynamic> dataJson;
 
-  final double ratio = 96.0;
+  final double ratio = 60.0;
 
 
   @override
