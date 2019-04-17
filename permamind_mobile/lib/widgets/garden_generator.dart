@@ -114,13 +114,7 @@ class _GardenGeneratorState extends State<GardenGenerator> {
             children: <Widget>[
               new RaisedButton(
                 onPressed: () {
-//                  try {
-//                    widget.bloc.sendModel();
-//                  }
-//                  catch (e)
-//                  {
-//                    print(e);
-//                  }
+                  widget.bloc.sendModel();
                   widget.bloc.generateModel();
                   showDemoDialog<DialogDemoAction>(
                       context: context,
@@ -166,17 +160,3 @@ class _GardenGeneratorState extends State<GardenGenerator> {
     );
   }
 }
-
-
-//new CarouselSlider(
-//viewportFraction: 1.0,
-//height: MediaQuery.of(context).size.height / 0.8,
-//autoPlay: true,
-//enlargeCenterPage: true,
-//pauseAutoPlayOnTouch: Duration(seconds: 2),
-//items: <Widget>[
-//myGarden,
-//myGarden,
-//myGarden
-//]
-//)

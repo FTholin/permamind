@@ -145,7 +145,7 @@ class GardenDesignerBloc implements BlocBase {
 
   void askModelResolution() async {
     print("askModelResolution");
-    await Dio().get("http://109.238.10.82:5000/generate/flo_123456789/1");
+    await Dio().get("http://109.238.10.82:5000/generate/flo_123456789/50");
   }
 
     List<VegetableItem> allVeggiesFromJson(String str) {
