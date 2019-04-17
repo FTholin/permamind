@@ -104,13 +104,12 @@ class GardenDesignerBloc implements BlocBase {
 
 
   void generateModel() {
-    final response = askModelResolution();
-    print(response);
+    askModelResolution();
   }
 
 
 
-  String dataToJsonFormat(Map veggiesQt) {
+  Map dataToJsonFormat(Map veggiesQt) {
 
     var jsonData = {};
     var vegetables = {};
@@ -131,38 +130,22 @@ class GardenDesignerBloc implements BlocBase {
     jsonData["map"] = mapCharacteristics;
 
 
-    return json.encode(jsonData);
+    return jsonData;
   }
 
-  Future<http.Response> createGarden(String jsonData) async{
 
-    print("createGarden");
-    // server distant
-    final response = await http.get('http://109.238.10.82:5000/send/flo_123456789/1');//,
-        //headers: {
-          //HttpHeaders.contentTypeHeader: 'application/json',
-          //HttpHeaders.authorizationHeader : ''
-          //   },
-    //body: jsonData
-    //);
-    return response;
+  void createGarden(Map jsonData) async {
+    try {
+      await Dio().post("http://109.238.10.82:5000/send/flo_123456789", data: jsonData);
+    } catch (e) {
+      print(e);
+    }
   }
 
-//  void createGarden() async {
-//    try {
-//      Response response = await Dio().get("http://109.238.10.82:5000/send/flo_123456789/1");
-//      _itemsController.sink.add(allVeggiesFromJson(response.data));
-//    } catch (e) {
-//      print(e);
-//    }
-//  }
 
-
-  Future<http.Response> askModelResolution() async{
+  void askModelResolution() async {
     print("askModelResolution");
-
-    final response = await http.get('http://109.238.10.82:5000/generate/flo_123456789/50');
-    return response;
+    await Dio().get("http://109.238.10.82:5000/generate/flo_123456789/1");
   }
 
     List<VegetableItem> allVeggiesFromJson(String str) {

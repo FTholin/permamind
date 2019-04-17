@@ -114,7 +114,13 @@ class _GardenGeneratorState extends State<GardenGenerator> {
             children: <Widget>[
               new RaisedButton(
                 onPressed: () {
-                  widget.bloc.sendModel();
+//                  try {
+//                    widget.bloc.sendModel();
+//                  }
+//                  catch (e)
+//                  {
+//                    print(e);
+//                  }
                   widget.bloc.generateModel();
                   showDemoDialog<DialogDemoAction>(
                       context: context,
