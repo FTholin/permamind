@@ -1,14 +1,10 @@
 import 'dart:async';
-import 'dart:collection';
-import 'package:flutter/material.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 import 'package:permamind_mobile/models/vegetable_item.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
-import 'package:uuid/uuid.dart';
-
+import 'package:dio/dio.dart';
 
 class GardenDesignerBloc implements BlocBase {
 
@@ -140,6 +136,7 @@ class GardenDesignerBloc implements BlocBase {
 
   Future<http.Response> createGarden(String jsonData) async{
 
+    print("createGarden");
     // server distant
     final response = await http.get('http://109.238.10.82:5000/send/flo_123456789/1');//,
         //headers: {
@@ -151,24 +148,39 @@ class GardenDesignerBloc implements BlocBase {
     return response;
   }
 
+//  void createGarden() async {
+//    try {
+//      Response response = await Dio().get("http://109.238.10.82:5000/send/flo_123456789/1");
+//      _itemsController.sink.add(allVeggiesFromJson(response.data));
+//    } catch (e) {
+//      print(e);
+//    }
+//  }
+
 
   Future<http.Response> askModelResolution() async{
+    print("askModelResolution");
+
     final response = await http.get('http://109.238.10.82:5000/generate/flo_123456789/50');
     return response;
   }
 
-    List<VegetableItem> allPostsFromJson(String str) {
+    List<VegetableItem> allVeggiesFromJson(String str) {
     final jsonData = json.decode(str);
     return new List<VegetableItem>.from(jsonData.map((x) => VegetableItem.fromJson(x)));
   }
 
 
-  // TODO A terme cette fonction va être dans le bloc api
   void getAllVeggies() async {
-    final response = await http.get('http://109.238.10.82:5000/get/vegetable');
-
-    _itemsController.sink.add(allPostsFromJson(response.body));
+    try {
+      Response response = await Dio().get("http://109.238.10.82:5000/get/vegetable");
+      _itemsController.sink.add(allVeggiesFromJson(response.data));
+    } catch (e) {
+      print(e);
+    }
   }
+
+
 
   void dispose() {
     print("destruction GardensBloc");
