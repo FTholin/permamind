@@ -523,7 +523,7 @@ class plantBoxProblem():
         """ Set noOverlap constraints with squares having farthest sunExposure values.
         Args:
             plant (Plant): reference plant.
-            data (Json file): json file containing sun infos.
+            data (........ file): json file containing sun infos.
         Side effect:
             set noOverlap constraints in model.
         Returns:
@@ -667,13 +667,13 @@ class GardenUser():
         self.listOfPlants = []
         self.path = []
 
-        with open("./data_model/plant-associations.json", 'r') as f:
+        with open("./data_model/plant-associations.json", 'r', encoding='utf-8') as f:
             self.dataPlants = json.load(f)
 
-        with open("./data_model/plant-services.json", 'r') as f:
+        with open("./data_model/plant-services.json", 'r', encoding='utf-8') as f:
             self.dataAux = json.load(f)
 
-        with open(modelAPI, 'r') as f:
+        with open(modelAPI, 'r', encoding='utf-8') as f:
             self.jsonFromAPI = json.load(f)
 
 #         import pdb
