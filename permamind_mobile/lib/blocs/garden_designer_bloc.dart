@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 import 'package:permamind_mobile/models/vegetable_item.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dio/dio.dart';
 
@@ -25,13 +24,26 @@ class GardenDesignerBloc implements BlocBase {
 
   String _gardenSoilType;
 
+  // On met en place le mécanisme des stream pour récupérer les différentes
+  // configurations  qui sont sur le server
+
+
+  // Liste ici tous les items que l'on veut dans notre carrousel
+  List<Map<String, dynamic>> _gardenConfigurations = List<Map<String, dynamic>>();
+
+  // Ce Stream nous permet de nourrir notre liste de légumes initiale
+  BehaviorSubject<List<Map<String, dynamic>>> _configurationsController = BehaviorSubject<List<Map<String, dynamic>>>();
+  Stream<List<Map<String, dynamic>>> get configurations => _configurationsController;
+
+
 
   // TODO A terme faire un controller comme itemController pour remplir dynamiquement les types de sol
 
 
   GardenDesignerBloc() {
     print("création GardenDesignerBloc");
-    getAllVeggies();
+    fetchVeggies();
+    fetchGardenConfiguration();
   }
 
 
@@ -125,7 +137,7 @@ class GardenDesignerBloc implements BlocBase {
     mapCharacteristics["sizeH"] = _gardenHeightDimension;
     mapCharacteristics["soilType"] = _gardenSoilType;
 
-    jsonData["name"] = "flo_123456789";
+    jsonData["name"] = "flo";
     jsonData["vegetables"] = vegetables;
     jsonData["map"] = mapCharacteristics;
 
@@ -153,14 +165,28 @@ class GardenDesignerBloc implements BlocBase {
     return new List<VegetableItem>.from(jsonData.map((x) => VegetableItem.fromJson(x)));
   }
 
-
-  void getAllVeggies() async {
+  void fetchVeggies() async {
     try {
       Response response = await Dio().get("http://109.238.10.82:5000/get/vegetable");
       _itemsController.sink.add(allVeggiesFromJson(response.data));
     } catch (e) {
       print(e);
     }
+  }
+  
+  void fetchGardenConfiguration() async {
+
+    List<Map<String, dynamic>> requests = List<Map<String, dynamic>>();
+    for (var i = 1; i <= 5; i++) {
+      try {
+        Response response = await Dio().get('http://109.238.10.82:5000/get/flo/123456789/$i');
+        requests.add(jsonDecode(response.data));
+      } catch (e) {
+        print(e);
+      }
+    }
+    _configurationsController.sink.add(requests);
+
   }
 
 
@@ -169,5 +195,6 @@ class GardenDesignerBloc implements BlocBase {
     print("destruction GardensBloc");
     _itemsController?.close();
     _gardenVeggiesController?.close();
+    _configurationsController.close();
   }
 }

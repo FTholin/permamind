@@ -104,7 +104,7 @@ class _GardenGeneratorState extends State<GardenGenerator> {
 
   Widget build(BuildContext context) {
 
-    final GardenChartWidget myGarden = GardenChartWidget(dataJson: jsonMap, ratio: (MediaQuery.of(context).size.height / 1.2) * 74.7 / 406.0);
+//    final GardenChartWidget myGarden = GardenChartWidget(dataJson: jsonMap, ratio: (MediaQuery.of(context).size.height / 1.2) * 74.7 / 406.0);
 
     return Scaffold(
       body: new Center(
@@ -124,19 +124,49 @@ class _GardenGeneratorState extends State<GardenGenerator> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                new CarouselSlider(
-                                    height: MediaQuery.of(context).size.height / 1.2,
-                                    viewportFraction: 1.0,
-                                    aspectRatio: 1.0,
-                                    autoPlay: false,
-                                    enlargeCenterPage: true,
-                                    pauseAutoPlayOnTouch: Duration(seconds: 2),
-                                    items: <Widget>[
-                                      myGarden,
-                                      myGarden,
-                                      myGarden
-                                    ]
+                                new StreamBuilder<List<Map<String, dynamic>>>(
+                                    stream: widget.bloc.configurations,
+                                    builder: (context, snapshot) {
+                                      // If stream empty we display circular indicator
+                                      if (!snapshot.hasData) {
+                                        return new Container(
+                                          padding: EdgeInsets.all(80.0),
+                                          child:CircularProgressIndicator()
+                                        );
+                                      }
+                                      else {
+                                        return CarouselSlider(
+                                            height: MediaQuery.of(context).size.height / 1.2,
+                                            viewportFraction: 1.0,
+                                            aspectRatio: 1.0,
+                                            autoPlay: false,
+                                            enlargeCenterPage: true,
+                                            pauseAutoPlayOnTouch: Duration(seconds: 2),
+                                            items: snapshot.data.map(
+                                                    (jsonItem) => new GardenChartWidget(
+                                                        dataJson: jsonItem,
+                                                        ratio: (MediaQuery.of(context).size.height / 1.2) * 74.7 / 406.0
+                                                    )
+                                            ).toList()
+                                        );
+                                      }
+                                    }
                                 ),
+
+//
+//                                new CarouselSlider(
+//                                    height: MediaQuery.of(context).size.height / 1.2,
+//                                    viewportFraction: 1.0,
+//                                    aspectRatio: 1.0,
+//                                    autoPlay: false,
+//                                    enlargeCenterPage: true,
+//                                    pauseAutoPlayOnTouch: Duration(seconds: 2),
+//                                    items: <Widget>[
+//                                      myGarden,
+//                                      myGarden,
+//                                      myGarden
+//                                    ]
+//                                ),
                                 new Container(),
                                 FloatingActionButton(
                                   backgroundColor: Colors.white,
