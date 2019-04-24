@@ -172,14 +172,14 @@ class VarArraySolutionPrinter(cp_model.CpSolverSolutionCallback):
             name = shape[5]
 
             if self.__solution_count % 10 == 0:
-                dictVege = {
-                  "posX": pos_x,
-                  "posY": pos_y,
-                  "dimX": dim_x,
-                  "dimY": dim_y
-                }
-
-                data[name] = dictVege
+                if name != 'Humifere' and name != "ArgileuxLimoneux" and name != "Calcaire":
+                    dictVege = {
+                      "posX": pos_x,
+                      "posY": pos_y,
+                      "dimX": dim_x,
+                      "dimY": dim_y
+                    }
+                    data[name] = dictVege
 
             if name != 'Humifere' and name != "ArgileuxLimoneux" and name != "Calcaire":
                 print('name = %s' % name)
