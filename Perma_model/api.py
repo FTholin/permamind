@@ -46,6 +46,7 @@ def send(name):
 # Genere un fichier json sur le serveur contenant les positions des legumes
 @app.route('/generate/<string:user>/<string:iteration>')
 def generateModel(user, iteration):
+    print(user)
     problemResolution("./userJSON/"+ str(user) +'.json', int(iteration))
     return "200"
 
