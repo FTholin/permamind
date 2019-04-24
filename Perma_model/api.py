@@ -33,12 +33,12 @@ def getVegetable():
         return json.dumps(plants)
 
 # Envoi un fichier json pour le sauvegarder sur le serveur
-@app.route('/send/<string:name>/<string:idJardin>', methods=["POST"])
-def send(name, idJardin):
+@app.route('/send/<string:name>', methods = ['POST'])
+def send(name):
     # Ici on ira pas dans ce dossier à terme vu qu'on sera dans l'application là ou sont
     # save les données de l'utilisateur
     input_json = request.get_json()
-    with open('./userJSON/'+ str(name) +'_'+ str(idJardin) +'.json', 'w', encoding='utf-8') as outfile:
+    with open('./userJSON/'+ str(name) + '.json', 'w', encoding='utf-8') as outfile:
         json.dump(input_json, outfile)
     # Je dois enregistrer ce json sur le serveur
     return str(input_json)
@@ -56,9 +56,9 @@ def getFromServer(name, idJardin, version):
     # Ici ca sera le dossier present sur le serveur, apres que le modele est sauvegardé ce json
     # unique avec un identifiant bien distinct : toDisplay-Identifiant-Number (Number of jardin) pour
     # pouvoir lui en afficher plusieurs qui sont à lui (à terme ils seront enregistré dans l'application)
-    with open('./userJSON/'+str(name) +'_'+ str(idJardin) +'_'+ str(version)+'.json', 'r', encoding='utf-8') as f:
-        sendToModele = json.load(f)
-        return jsonify(sendToModele)
+   with open('./userJSON/'+str(name) +'_'+ str(idJardin) +'_'+ str(version)+'.json', 'r', encoding='utf-8') as f:
+      sendToModele = json.load(f)
+      return json.dumps(sendToModele)
 
 app.debug = True
 http_server = WSGIServer(('109.238.10.82', 5000), app)
