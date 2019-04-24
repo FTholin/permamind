@@ -159,6 +159,7 @@ class VarArraySolutionPrinter(cp_model.CpSolverSolutionCallback):
         legend_list = []
 
         data = {}
+        map = {}
         jsonToSave = {}
 
         for shape in self.__variable_list:
@@ -199,6 +200,9 @@ class VarArraySolutionPrinter(cp_model.CpSolverSolutionCallback):
                 ax.text(pos_x + (dim_x / 2) , pos_y + (dim_y / 2) , name, fontsize=8, horizontalalignment='center',verticalalignment='center')
             # Display in right legend
             else:
+                map["soilType"] = name
+                map["sizeW"] = gardenUser.dim_x
+                map["sizeH"] = gardenUser.dim_y
                 if len(legend_list) == 0:
                     ax.scatter(pos_x, pos_y, c=color, s=None, label=name, alpha=alpha, edgecolors='none')
                     legend_list.append(name)
@@ -208,6 +212,7 @@ class VarArraySolutionPrinter(cp_model.CpSolverSolutionCallback):
                         legend_list.append(name)
 
         if self.__solution_count % 10 == 0:
+            jsonToSave["map"] = map
             jsonToSave["vegetables"] = data
             print(jsonToSave)
             with open('userJSON/' + str(self.garden.nameUser) + '_' + str(self.cpt) + '.json', 'w') as outfile:
@@ -903,7 +908,7 @@ def createModel(field, gardenUser):
             blockProblem.addVegetables(listTemp)
             blockProblem.setAssociationsConstraints(listTemp, gardenUser)
             print(len(blockProblem.elem_list))
-            
+
             if blockProblem.checkVegetablesFeasability(listTemp, gardenUser):
                 print("ALLER ON AUGMENTE")
                 index += 1
