@@ -137,7 +137,7 @@ class GardenDesignerBloc implements BlocBase {
     mapCharacteristics["sizeH"] = _gardenHeightDimension;
     mapCharacteristics["soilType"] = _gardenSoilType;
 
-    jsonData["name"] = "flo";
+    jsonData["name"] = "flo_123456789";
     jsonData["vegetables"] = vegetables;
     jsonData["map"] = mapCharacteristics;
 
