@@ -179,7 +179,7 @@ class GardenDesignerBloc implements BlocBase {
     List<Map<String, dynamic>> requests = List<Map<String, dynamic>>();
     for (var i = 1; i <= 5; i++) {
       try {
-        Response response = await Dio().get('http://109.238.10.82:5000/get/flo/123456789/$i');
+        Response response = await Dio().get('http://109.238.10.82:5000/getFromServer/flo/123456789/$i');
         requests.add(jsonDecode(response.data));
       } catch (e) {
         print(e);
