@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:collection';
-import 'package:flutter/material.dart';
 import 'package:permamind_mobile/blocs/bloc_provider.dart';
 import 'package:permamind_mobile/models/vegetable_item.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
-
+import 'package:dio/dio.dart';
 
 class GardenDesignerBloc implements BlocBase {
 
@@ -28,13 +24,26 @@ class GardenDesignerBloc implements BlocBase {
 
   String _gardenSoilType;
 
+  // On met en place le mécanisme des stream pour récupérer les différentes
+  // configurations  qui sont sur le server
+
+
+  // Liste ici tous les items que l'on veut dans notre carrousel
+  List<Map<String, dynamic>> _gardenConfigurations = List<Map<String, dynamic>>();
+
+  // Ce Stream nous permet de nourrir notre liste de légumes initiale
+  BehaviorSubject<List<Map<String, dynamic>>> _configurationsController = BehaviorSubject<List<Map<String, dynamic>>>();
+  Stream<List<Map<String, dynamic>>> get configurations => _configurationsController;
+
+
 
   // TODO A terme faire un controller comme itemController pour remplir dynamiquement les types de sol
 
 
   GardenDesignerBloc() {
     print("création GardenDesignerBloc");
-    getAllVeggies();
+    fetchVeggies();
+    fetchGardenConfiguration();
   }
 
 
@@ -95,20 +104,25 @@ class GardenDesignerBloc implements BlocBase {
     // number of items, part of the basket...
   }
 
-  void generateModel() {
+  void sendModel() {
 
     // TODO Fonction qui check que tous les champs sont ok
     var veggiesQt = Map();
 
     _gardenVeggies.forEach((x) => veggiesQt[x.vegetableName] = !veggiesQt.containsKey(x.vegetableName) ? (1) : (veggiesQt[x.vegetableName] + 1));
 
-    var response = createGarden(dataToJsonFormat(veggiesQt));
-
-    print(response);
-
+    createGarden(dataToJsonFormat(veggiesQt));
   }
 
-  String dataToJsonFormat(Map veggiesQt) {
+
+  void generateModel() {
+    askModelResolution();
+  }
+
+
+
+  Map dataToJsonFormat(Map veggiesQt) {
+
     var jsonData = {};
     var vegetables = {};
     var elem = {};
@@ -122,55 +136,65 @@ class GardenDesignerBloc implements BlocBase {
     mapCharacteristics["sizeW"] = _gardenWidthDimension;
     mapCharacteristics["sizeH"] = _gardenHeightDimension;
     mapCharacteristics["soilType"] = _gardenSoilType;
-    mapCharacteristics["name"] = "flo_123456789";
 
+    jsonData["name"] = "flo";
     jsonData["vegetables"] = vegetables;
     jsonData["map"] = mapCharacteristics;
 
-    return json.encode(jsonData);
-  }
 
-  Future<http.Response> createGarden(String jsonData) async{
-    // server distant
-//    final response = await http.post('http://109.238.10.82:5000/send/flo_123456789/1',
-////        headers: {
-////          HttpHeaders.contentTypeHeader: 'application/json',
-////          HttpHeaders.authorizationHeader : ''
-////        },
-////        body: jsonData
-////    );
-////    return response;
-
-  // localhost
-    final response = await http.post('http://127.0.0.1:5000/send/flo_123456789/1',
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader : ''
-        },
-        body: jsonData
-    );
-    return response;
+    return jsonData;
   }
 
 
-    List<VegetableItem> allPostsFromJson(String str) {
+  void createGarden(Map jsonData) async {
+    try {
+      await Dio().post("http://109.238.10.82:5000/send/flo_123456789", data: jsonData);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+
+  void askModelResolution() async {
+    print("askModelResolution");
+    await Dio().get("http://109.238.10.82:5000/generate/flo_123456789/50");
+  }
+
+    List<VegetableItem> allVeggiesFromJson(String str) {
     final jsonData = json.decode(str);
     return new List<VegetableItem>.from(jsonData.map((x) => VegetableItem.fromJson(x)));
   }
 
-
-  // TODO A terme cette fonction va être dans le bloc api
-  void getAllVeggies() async {
-    final response = await http.get('http://109.238.10.82:5000/get/vegetable');
-    //final response = await http.get('http://127.0.0.1:5000/get/vegetable');
-
-
-    _itemsController.sink.add(allPostsFromJson(response.body));
+  void fetchVeggies() async {
+    try {
+      Response response = await Dio().get("http://109.238.10.82:5000/get/vegetable");
+      _itemsController.sink.add(allVeggiesFromJson(response.data));
+    } catch (e) {
+      print(e);
+    }
   }
+  
+  void fetchGardenConfiguration() async {
+
+    List<Map<String, dynamic>> requests = List<Map<String, dynamic>>();
+    for (var i = 1; i <= 5; i++) {
+      try {
+        Response response = await Dio().get('http://109.238.10.82:5000/get/flo/123456789/$i');
+        requests.add(jsonDecode(response.data));
+      } catch (e) {
+        print(e);
+      }
+    }
+    _configurationsController.sink.add(requests);
+
+  }
+
+
 
   void dispose() {
     print("destruction GardensBloc");
     _itemsController?.close();
     _gardenVeggiesController?.close();
+    _configurationsController.close();
   }
 }

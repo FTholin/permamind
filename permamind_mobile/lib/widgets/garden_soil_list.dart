@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/blocs/garden_designer_bloc.dart';
 
-String dropdownValue = 'Humifère';
+String dropdownValue = 'Humifere';
 
 class GardenSoilList extends StatefulWidget {
 
@@ -33,7 +33,7 @@ class _GardenSoilListState extends State<GardenSoilList> {
                   widget.bloc.alterGardenSoil(dropdownValue);
                 });
               }, // TODO A terme les items devront être sélectionnés dans la base
-              items: <String>['Humifère', 'Argileux', 'Sableux', 'Limoneux', 'ArgileuxHumique']
+              items: <String>['Humifere', 'Argileux', 'Sableux', 'Limoneux', 'ArgileuxHumique']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,

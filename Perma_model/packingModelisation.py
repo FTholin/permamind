@@ -523,7 +523,7 @@ class plantBoxProblem():
         """ Set noOverlap constraints with squares having farthest sunExposure values.
         Args:
             plant (Plant): reference plant.
-            data (Json file): json file containing sun infos.
+            data (........ file): json file containing sun infos.
         Side effect:
             set noOverlap constraints in model.
         Returns:

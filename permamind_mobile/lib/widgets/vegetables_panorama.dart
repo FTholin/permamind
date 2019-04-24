@@ -27,7 +27,6 @@ class VegetablesPanoramaState extends State<VegetablesPanorama> {
           // Generate 100 Widgets that display their index in the List
           children: List.generate(_veggies.length, (index) {
             return Center(
-
               child: Container(
                 height: 150,
                 width: 150,

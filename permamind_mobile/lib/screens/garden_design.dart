@@ -50,7 +50,7 @@ class GardenDesignerState extends State<GardenDesigner> {
       new Step(
           title: new Text("Choisis tes légumes"),
           content: Container(
-              height: 350,
+              height: 240,
               width: 310,
               child: VeggiesSelectionPage(bloc: _gardenDesignerBloc)
           ),
@@ -59,8 +59,8 @@ class GardenDesignerState extends State<GardenDesigner> {
       new Step(
           title: new Text("Génération de ton jardin"),
           content: Container(
-              height: 350,
-              width: 310,
+              height: 150,
+              width: 250,
               child: GardenGenerator(bloc: _gardenDesignerBloc)
     ),
           isActive: true
