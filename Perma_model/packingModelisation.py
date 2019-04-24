@@ -214,6 +214,7 @@ class VarArraySolutionPrinter(cp_model.CpSolverSolutionCallback):
         if self.__solution_count % 10 == 0:
             jsonToSave["map"] = map
             jsonToSave["vegetables"] = data
+            print(self.garden.nameUser)
             print(jsonToSave)
             with open('userJSON/' + str(self.garden.nameUser) + '_' + str(self.cpt) + '.json', 'w') as outfile:
                 json.dump(jsonToSave, outfile)
