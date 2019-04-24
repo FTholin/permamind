@@ -201,8 +201,8 @@ class VarArraySolutionPrinter(cp_model.CpSolverSolutionCallback):
             # Display in right legend
             else:
                 map["soilType"] = name
-                map["sizeW"] = gardenUser.dim_x
-                map["sizeH"] = gardenUser.dim_y
+                map["sizeW"] = self.garden.sizeW
+                map["sizeH"] = self.garden.sizeH
                 if len(legend_list) == 0:
                     ax.scatter(pos_x, pos_y, c=color, s=None, label=name, alpha=alpha, edgecolors='none')
                     legend_list.append(name)
