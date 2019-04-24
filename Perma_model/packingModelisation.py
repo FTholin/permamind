@@ -667,13 +667,13 @@ class GardenUser():
         self.listOfPlants = []
         self.path = []
 
-        with open("./data_model/plant-associations.json", 'r') as f:
+        with open("./data_model/plant-associations.json",'r', encoding='utf-8') as f:
             self.dataPlants = json.load(f)
 
-        with open("./data_model/plant-services.json", 'r') as f:
+        with open("./data_model/plant-services.json",'r', encoding='utf-8') as f:
             self.dataAux = json.load(f)
 
-        with open(modelAPI, 'r') as f:
+        with open(modelAPI, 'r', encoding='utf-8') as f:
             self.jsonFromAPI = json.load(f)
 
 #         import pdb
@@ -733,14 +733,14 @@ def openInfoFromApiTEST(gardenUser):
 def loadPlantsDebug(gardenUser, iteration):
     print("loadPlantDebug")
     gardenWithDim = openInfoFromApiTEST(gardenUser)
+    print(gardenWithDim)
     for vegetables in gardenWithDim:
         gardenUser.listOfPlants.append(Plant(vegetables, 0, 0,
                                   gardenWithDim[vegetables][0], gardenWithDim[vegetables][1],
                                   gardenUser.dataPlants[vegetables]["color"], 6, ["Humifere","Calcaire","Azote","Pauvre","Compact"]))
-
     garden = BoxFixed('Box', 0, 0, gardenUser.sizeW, gardenUser.sizeH, "white")
     blockProblem = createModel(garden, gardenUser)
-
+    print("After error, so it's in createModel")
     if blockProblem != -1:
         blockProblem.solve(gardenUser, iteration)
         print('Statistics')
@@ -872,7 +872,6 @@ def createModel(field, gardenUser):
     vegetableList.append(gardenUser.soilType)
 
     blockProblem.addVegetables(listBis)
-
     if blockProblem.checkVegetablesFeasability(listBis, gardenUser):
         listOfPlants = []
 
@@ -882,33 +881,29 @@ def createModel(field, gardenUser):
             lenCombination = len(gardenUser.dataAux[veg]["plantsCombinations"])
             if lenCombination > maxDim:
                 maxDim = lenCombination
-
         # Here we create a dictionnary for each plant and his auxPlants
         for veg in vegetableList:
-            print("veg",veg.name)
             myDict = {'vegetable': veg, 'aux_plants': blockProblem.getAuxiliaryPlants(veg, gardenUser.dataAux)}
             listOfPlants.append(myDict)
-
         index = 0
         listBis = copy.deepcopy(vegetableList)
         while index <= maxDim:
             if emptyAuxList(listOfPlants):
+                print("Empty aux")
                 blockProblem = plantBoxProblem(field)
                 blockProblem.setAssociationsConstraints(listBis, gardenUser)
-                print(len(blockProblem.elem_list), blockProblem)
+                print("len blockproblem:", len(blockProblem.elem_list))
                 return blockProblem
-
             auxPlant = addServicePlant(listOfPlants, index)
             if auxPlant != -1:
                 print("JAJOUTE OKLM UN AUXILIAIRE")
                 listBis.append(auxPlant)
             listTemp = copy.deepcopy(listBis)
-
             blockProblem = plantBoxProblem(field)
             blockProblem.addVegetables(listTemp)
             blockProblem.setAssociationsConstraints(listTemp, gardenUser)
             print(len(blockProblem.elem_list))
-
+            
             if blockProblem.checkVegetablesFeasability(listTemp, gardenUser):
                 print("ALLER ON AUGMENTE")
                 index += 1
@@ -920,7 +915,6 @@ def createModel(field, gardenUser):
                 blockProblem.setAssociationsConstraints(listBis, gardenUser)
                 print(len(blockProblem.elem_list))
                 return blockProblem
-
         return blockProblem
     else:
         print("Il y a trop de plantes potagere pour ton terrain. Revois tes ambitions mon grand")
