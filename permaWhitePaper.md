@@ -25,6 +25,8 @@ de céréales est passée de 420 à 1 176 millions de tonnes par an.
 Malgré ces conclusions encourageantes, il semble que notre modèle
 actuel soit préjudiciable envers notre biosphère.
 
+[^1518]
+
 - L'utilisation de fertilisants chimiques couplés à une irrigation sans limite, porté par des engins mécaniques ayant recours aux énergies fossiles. Participe à l'épuisement des matières organiques contenu dans les sols, celui-ci devient d'avantage vulnérable à l'érosion et à l'explosion des sels minéraux qui stérilise progressivement les terres arables. [Pour chaque tonne de nourriture produite dans le monde, entre 6 et 16 tonnes de terres arables sont définitivement perdues](https://blog.kokopelli-semences.fr/2007/05/planete-terre-planete-desert/).
 
 - La globalisation du marché agroalimentaire s'est traduit par un éloignement significatif entre le lieu de production et celui de la consommation d'un produit. Selon une étude menée aux États-Unis, [un produit alimentaire parcourt en moyenne 2500 à 4000 kilomètres, soit 25% de plus qu'en 1980](http://bibvir2.uqac.ca/archivage/17833301.pdf). Le transport de ces marchandises accentue ainsi d'avantage l'empreinte écologique de l'Homme sur l'environnement (pollution, construction d'infrastructures...), cela impose également des cueillettes avant maturité, provoquant une dimminution des qualités nutritionnelle des produits ainsi que des traitements supplémentaires après récolte.
@@ -32,13 +34,15 @@ actuel soit préjudiciable envers notre biosphère.
 - Dans une logique de production alimentaire bon marché, le producteur est souvent contraint de privilégier la quantité au détriment de la qualité. De nombreux scandales alimentaires notamment celui de Spanghero avec ses lasagnes à la viande de cheval souligne le manque de tracabilité du produit ainsi que de la logique d'économie prôné par le marché agroalimentaire. En France,  [30% des exploitants avaient un revenu inférieur à 350 euros par mois](https://www.lemonde.fr/idees/article/2017/10/30/30-des-agriculteurs-gagnent-moins-de-350-euros-par-mois-scandale-ou-pas_5207780_3232.html).
 
 Ce paradigme de consommation qui émergea dans les années 50, semble avoir tenu sa promesse en terme de quantité alimentaire produite. Cependant à l'heure actuelle pour produire [1 calorie alimentaire nous avons besoin de 10 à 15 calories d'énergie fossile](https://www.cias.wisc.edu/wp-content/uploads/2008/07/energyuse.pdf).   
-Peut on  nourrir l'humanité d'aujourdhui et celle de demain ?
+
+Comment peut on continuer de nourrir l'humanité d'aujourdhui et celle de demain en respectant notre environnement ?
 
 [^4493]
 [^d218]
 
 #### Outline of the Vision
-Ici on va expliquer notre vision de l'affaire
+
+S'inspirer des espaces naturels afin de cultiver les terres arables semble être  une nouvelle voie vers un changement profond de nos sociétés. Voici trois axes à étudier:
 
 - Qualité environnementale
   + Respect des sols
@@ -46,6 +50,7 @@ Ici on va expliquer notre vision de l'affaire
   + Jolie jardin éthique
   + Revitalisation d'anciens terrains
 
+- 
 - Circuit court
   + Produits locaux -> + emploi local
   + Baisser empreinte carbone
@@ -97,3 +102,12 @@ Graphique des prédictions symbolisant une augmentation significative de la popu
 
 [^d218]:
 Illustration 1 cereales -> 10 à 15 barilles de petrole
+
+
+
+
+
+
+
+[^1518]:
+Manque de phrase introductive des trois notions abordées après.
