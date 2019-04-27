@@ -5,6 +5,12 @@ Notre papier a besoin de nombreuses illustrations.
 - Diagramme urgence climatique  
 - Graphique coloré (chomage)
 
+# Definir quelques termes utiles à la lecture
+- Permaculture
+- bio-abondance
+- ecoculture
+- ...
+
 ## Summary
 ### Page de Garde stylée
 ### Introduction
@@ -40,26 +46,19 @@ Comment peut on continuer de nourrir l'humanité d'aujourdhui et celle de demain
 [^4493]
 [^d218]
 
-#### Outline of the Vision
+#### Les grandes lignes de notre vision
 
 S'inspirer des espaces naturels afin de cultiver les terres arables semble être  une nouvelle voie vers un changement profond de nos sociétés. Voici trois axes à étudier:
 
-- Qualité environnementale
-  + Respect des sols
-  + ecoculture
-  + Jolie jardin éthique
-  + Revitalisation d'anciens terrains
 
-- 
-- Circuit court
-  + Produits locaux -> + emploi local
-  + Baisser empreinte carbone
+- Lorsque nous entrons dans une démarche bio-inspirée, il est possible de régénerer rapidement les milieux naturels. Les sols en buttes permanentes favorisant ainsi le développement organique et minéral, participe à la revitalisation de terres arables.
+Pratiquer la permaculture permet de concevoir des espaces harmonieux et abondants en fruits & légumes. L'écoculture telle qu'elle est pratiquée a la [ferme du Bec Hellouin a permis de cultiver plus de fruits & légumes sur 1000 mètres carrés à la main que sur 10 000 mètres carrés avec un tracteur](https://www.fermedubec.com/wp-content/uploads/2017/11/Novembre-2015-rapport-5-Etude-INRA-AgroParisTech-maraîchage-biologique-permaculturel-et-performance-économique.pdf).
 
-- Produits d'une autre qualité
-  + Produit frais et locaux, semence paysannes traditionnelles
-  + qualitatif
-  + gustatif
+- Structurée localement notre production alimentaire, va permettre de réduire le transports des biens et des personnes. De plus, cela favorise l'émergence d'initiative pour le développement d'emploi verts, les énergies renouvelables ou la transition en générale.
+[La coopérative "La Ceinture Aliment-Terre" a notamment permis l'installation de 70 maraîchers en province de Liège.](http://www.vivreici.be/article/detail_la-ceinture-aliment-terre-liegeoise-c-est-quoi?id=239760)
 
+
+- En transformant notre alimentation avec d'avantage de légumes, fruits, baies et autres plantes sauvages. Nous consommons d'avantage d'aliments frais et de saisons, ayant une qualité nutritive bien supérieur à une alimentation classique. (Trouver une étude alimentaire ou des chiffres à l'appui).
 
 ### Permamind
 Description de la solution en quelques termes simples posés par Mello
