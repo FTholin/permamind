@@ -9,7 +9,9 @@ Notre papier a besoin de nombreuses illustrations.
 - Permaculture
 - bio-abondance
 - ecoculture
-- ...
+- biotope
+- climax
+- niche ecologique
 
 ## Summary
 ### Page de Garde stylée
@@ -58,7 +60,8 @@ Pratiquer la permaculture permet de concevoir des espaces harmonieux et abondant
 [La coopérative "La Ceinture Aliment-Terre" a notamment permis l'installation de 70 maraîchers en province de Liège.](http://www.vivreici.be/article/detail_la-ceinture-aliment-terre-liegeoise-c-est-quoi?id=239760)
 
 
-- En transformant notre alimentation avec d'avantage de légumes, fruits, baies et autres plantes sauvages. Nous consommons d'avantage d'aliments frais et de saisons, ayant une qualité nutritive bien supérieur à une alimentation classique. (Trouver une étude alimentaire ou des chiffres à l'appui).
+- En transformant notre alimentation avec d'avantage de légumes, fruits, baies et autres plantes sauvages. Nous consommons d'avantage d'aliments frais et de saisons, ayant une qualité nutritive bien supérieur à une alimentation classique.
+[^a450]
 
 ### Permamind
 Description de la solution en quelques termes simples posés par Mello
@@ -110,3 +113,6 @@ Illustration 1 cereales -> 10 à 15 barilles de petrole
 
 [^1518]:
 Manque de phrase introductive des trois notions abordées après.
+
+[^a450]:
+Voir biodiversité cultivée pour des chiffres sur les différentes espèces cultivées.

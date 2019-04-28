@@ -3,7 +3,7 @@ import 'package:permamind_mobile/blocs/garden_designer_bloc.dart';
 import 'package:permamind_mobile/blocs/garden_designer_bloc.dart';
 import 'custom_carousel_slider.dart';
 import 'garden_chart.dart';
-
+import 'dart:async';
 import 'dart:convert';
 
 Map<String, dynamic> jsonMap = jsonDecode('''{"map": {"soilType": "Humifere", "name": "flo_123456789", "sizeW": 3.0, "sizeH": 5.0}, "vegetables": {
@@ -114,8 +114,7 @@ class _GardenGeneratorState extends State<GardenGenerator> {
             children: <Widget>[
               new RaisedButton(
                 onPressed: () {
-                  widget.bloc.sendModel();
-                  widget.bloc.generateModel();
+                  widget.bloc.generateConfigurations();
                   showDemoDialog<DialogDemoAction>(
                       context: context,
 
@@ -136,7 +135,7 @@ class _GardenGeneratorState extends State<GardenGenerator> {
                                       }
                                       else {
                                         return CarouselSlider(
-                                            height: MediaQuery.of(context).size.height / 1.2,
+                                            height: MediaQuery.of(context).size.height / 2,
                                             viewportFraction: 1.0,
                                             aspectRatio: 1.0,
                                             autoPlay: false,
@@ -145,7 +144,8 @@ class _GardenGeneratorState extends State<GardenGenerator> {
                                             items: snapshot.data.map(
                                                     (jsonItem) => new GardenChartWidget(
                                                         dataJson: jsonItem,
-                                                        ratio: (MediaQuery.of(context).size.height / 1.2) * 74.7 / 406.0
+                                                        // Calcul à reprendre
+                                                        ratio: (MediaQuery.of(context).size.height / 2) * 74.7 / 406.0
                                                     )
                                             ).toList()
                                         );

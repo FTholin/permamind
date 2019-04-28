@@ -205,7 +205,7 @@ class _CarouselSliderState extends State<CarouselSlider> with TickerProviderStat
       GestureDetector(onTap: () => tapDetected(), child: child);
 
 
-  //TODO Function to do
+  // TODO Function to do
   Widget tapDetected(){
     timer.cancel();
     print("Tap");

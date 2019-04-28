@@ -43,7 +43,7 @@ class GardenDesignerBloc implements BlocBase {
   GardenDesignerBloc() {
     print("création GardenDesignerBloc");
     fetchVeggies();
-    fetchGardenConfiguration();
+//    fetchGardenConfiguration();
   }
 
 
@@ -104,7 +104,7 @@ class GardenDesignerBloc implements BlocBase {
     // number of items, part of the basket...
   }
 
-  void sendModel() {
+  Future<void> sendModel() async {
 
     // TODO Fonction qui check que tous les champs sont ok
     var veggiesQt = Map();
@@ -115,8 +115,10 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
-  void generateModel() {
-    askModelResolution();
+  void generateConfigurations() async {
+    await sendModel();
+    await askModelResolution();
+    await fetchGardenConfiguration();
   }
 
 
@@ -155,7 +157,7 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
-  void askModelResolution() async {
+  Future<void> askModelResolution() async {
     print("askModelResolution");
     await Dio().get("http://109.238.10.82:5000/generate/flo_123456789/50");
   }
@@ -174,19 +176,17 @@ class GardenDesignerBloc implements BlocBase {
     }
   }
   
-  void fetchGardenConfiguration() async {
-
+  Future<void> fetchGardenConfiguration() async {
     List<Map<String, dynamic>> requests = List<Map<String, dynamic>>();
     for (var i = 1; i <= 5; i++) {
       try {
-        Response response = await Dio().get('http://109.238.10.82:5000/getFromServer/flo/123456789/$i');
+        Response response = await Dio().get('http://109.238.10.82:5000/models/flo/123456789/$i');
         requests.add(jsonDecode(response.data));
       } catch (e) {
         print(e);
       }
     }
     _configurationsController.sink.add(requests);
-
   }
 
 
