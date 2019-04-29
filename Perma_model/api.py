@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-import sys 
+import sys
 import os
 import matplotlib
 import matplotlib.pyplot as plt
@@ -51,7 +51,7 @@ def generateModel(user, iteration):
     return "200"
 
 # Recupere un fichier json du serveur contenant les positions des legumes
-@app.route('/get/<string:name>/<string:idJardin>/<string:version>')
+@app.route('/models/<string:name>/<string:idJardin>/<string:version>')
 def getFromServer(name, idJardin, version):
 
     # Ici ca sera le dossier present sur le serveur, apres que le modele est sauvegardé ce json

@@ -28,7 +28,7 @@ class GardenDesignerBloc implements BlocBase {
   // configurations  qui sont sur le server
 
 
-  // Liste ici tous les items que l'on veut dans notre carrousel
+
   List<Map<String, dynamic>> _gardenConfigurations = List<Map<String, dynamic>>();
 
   // Ce Stream nous permet de nourrir notre liste de légumes initiale

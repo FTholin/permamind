@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 
-
 class GardenChartWidget extends StatefulWidget {
 
   GardenChartWidget({
@@ -56,6 +55,7 @@ class GardenChartWidget extends StatefulWidget {
   }
 
   Map<String, dynamic> getGardenProperties(){
+
     return dataJson['map'];
   }
 
@@ -71,7 +71,7 @@ class _GardenChartWidgetState extends State<GardenChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.brown,
+        color: Colors.grey[100],
         height: (widget.gardenProperties['sizeH'] * widget.ratio),
         width: (widget.gardenProperties['sizeW'] * widget.ratio),
         child: new Stack(
