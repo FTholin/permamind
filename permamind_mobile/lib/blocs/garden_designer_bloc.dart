@@ -111,14 +111,22 @@ class GardenDesignerBloc implements BlocBase {
 
     _gardenVeggies.forEach((x) => veggiesQt[x.vegetableName] = !veggiesQt.containsKey(x.vegetableName) ? (1) : (veggiesQt[x.vegetableName] + 1));
 
-    createGarden(dataToJsonFormat(veggiesQt));
+    await createGarden(dataToJsonFormat(veggiesQt));
+
   }
 
 
-  void generateConfigurations() async {
+  Future<String> generateConfigurations() async {
+    Response serverResponse;
     await sendModel();
-    await askModelResolution();
-    await fetchGardenConfiguration();
+    serverResponse = await askModelResolution();
+    if (serverResponse.data == "200") {
+      await fetchGardenConfiguration();
+      return "200";
+    }
+    else {
+      return "505";
+    }
   }
 
 
@@ -148,7 +156,7 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
-  void createGarden(Map jsonData) async {
+  Future<void> createGarden(Map jsonData) async {
     try {
       await Dio().post("http://109.238.10.82:5000/send/flo_123456789", data: jsonData);
     } catch (e) {
@@ -157,9 +165,14 @@ class GardenDesignerBloc implements BlocBase {
   }
 
 
-  Future<void> askModelResolution() async {
-    print("askModelResolution");
-    await Dio().get("http://109.238.10.82:5000/generate/flo_123456789/50");
+  Future<Response> askModelResolution() async {
+    Response response;
+    try {
+      response = await Dio().get("http://109.238.10.82:5000/generate/flo_123456789/50");
+    } catch (e) {
+      print(e);
+    }
+    return response;
   }
 
     List<VegetableItem> allVeggiesFromJson(String str) {
