@@ -89,7 +89,11 @@ Fonctionnelles
 
 
 #### Stratégie de croissance et developpments futurs
+Faut parler ici de notre strategie de croissance, avec l'idée d'aller voir des institutions (metropole, ecole, fac, bureau) pour proposer la création d'un jardin dans leurs locaux
 ##### Proposition de valeurs
+Notre application va d'elle meme, pendant la modelisation, se charger d'ajouter des plantes compagnes qui sont adaptés au terrains et aux autre plantes deja presentent sur le terrain.
+Un coté blog sera présent sur l'application et le site pour federer une communauté de nouveau agriculteur urbain.
+Une place de marché de semence Paysanne sera mise en place sur notre site avec differents partenaires, pour promouvoir ce type de semence sur le long terme.
 
 ##### Force
 
