@@ -4,6 +4,7 @@ import 'package:permamind_mobile/blocs/bloc_provider.dart';
 import 'custom_carousel_slider.dart';
 import 'package:permamind_mobile/screens/models_list.dart';
 import 'garden_chart.dart';
+
 //
 //
 //
@@ -181,10 +182,15 @@ class _GardenGeneratorState extends State<GardenGenerator> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new RaisedButton(
-                  onPressed: () {
-                    widget.bloc.generateConfigurations();
-                    _gardensModels(context, widget.bloc);
-                  },
+                    onPressed: () async {
+                      String result = await widget.bloc.generateConfigurations();
+                      if (result as String == "200") {
+                        _gardensModels(context, widget.bloc);
+                      }
+                      else {
+                        _ackAlert(context);
+                      }
+                    },
                   textColor: Colors.white,
                   color: Colors.green,
                   child: new Text(
@@ -206,3 +212,26 @@ void _gardensModels(BuildContext context, GardenDesignerBloc parentBloc) {
   }));
 }
 
+
+
+Future<void> _ackAlert(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+
+        return AlertDialog(
+          backgroundColor: Colors.red[300],
+          title: Text('Dommage'),
+          content: const Text("La modélisation n'a pu être réaliséz"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      }
+  );
+}
