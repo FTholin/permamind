@@ -114,11 +114,12 @@ L'histoire de Permamind est avant tout l'histoire d'une amitié. Nous nous somme
 Presentation de notre CV (De ce qu'on sait faire)
 S'inspirer de TON avec les employés avec dessin (Explication)
 
+##### Melvin
 Photo en rond me presentant
 "Je m'appelle Melvin Naudion, j'ai 20 ans et je suis alternant dans une société specialisé dans l'IoT pour mon master 1 d'informatique, en parcours Data Science et IA. Je viens de la campagne du Nord Isere, j'ai toujours eu les mains dans la terre dès mon plus jeune age, cela s'etait néanmoins perdu pendant mon adolescence, mais cela est rapidement revenu il y a quelques années. Ce fut par conviction personelle de sortir plus ou moins des circuits traditionelles de consommation. Le paradigme actuel n'est pas assez pereine, nous souhaitons changer cela en apportant une solution s'inscrivant dans la transition."
 
-
-
+##### Florian
+Je suis Florian Tholin, j'ai 23 ans et je suis actuellement étudiant en Master informatique spécialisé aux techniques d'intelligence artificielle à l'Université Claude Bernard Lyon 1.
 
 
 
