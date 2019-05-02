@@ -64,22 +64,33 @@ Pratiquer la permaculture permet de concevoir des espaces harmonieux et abondant
 [^a450]
 
 ### Permamind
-Description de la solution en quelques termes simples posés par Mello
+Permamind est une application et un site internet qui se propose de faciliter la creation de son potager personnel. L'application est créé pour repondre aux envies et aux egigences de vie de n'importe quel client,
+en ville avec un bac ou sur un toit, en campagne avec les carrés potager ou avec un jardin.
+Le but est d'accompagner de bout à bout un projet de création de potager, sans oublier les premieres étapes qui sont de recuperer des informations de sa terre en étant soit meme acteur. Nous refusons l'utilisation de
+capteur, mettre les mains dans sa terre et la sentir ne peut etre remplacé par les "sensations" d'un capteur.
+Notre application s'inscrit dans le mouvement de Transition lancé par Rob Hopkins en 2006. L'idée de ce mouvement est d'apporter des solutions, plus pereines et plus fiables, de consommation. Nos convictions s'inscrivent dans ce mouvement, nous souhaitons participer à ce dernier tout en proposant une solution interessante qui pourra etre suivi par differents organismes institutionnelles dans le but d'éduquer les futurs
+acteurs de la consommation.
+
 #### PermaMobile
-Explication de la solutin mobile application qui est la pour faciliter interaction IHM
+PermaMobile est le nom actuel de notre application iOS et Android. Cette derniere permet de faciliter l'interaction entre le systeme de règle naturelles, que nous avons codé, et l'utilisateur. Nous sommes donc parti sur une application dite "user friendly" avec des couleurs et des logos jeunes, permettant d'atirer un maximum de personne.
 
 ##### Fonctionnalités
-
 ###### Actuelles
+- Actuellement, notre application permet de modeliser 5 jardins tous differents, tout en respectant les règles de base de l'éco culture.
+- 6 légumes sont actuellement dans notre base dans le bon formalisme, cela nous a permis de valider notre idée de modélisation, il sera largement amelioré dans un futur proche.
+- Nous pouvons donc passer en mode "création de potager" en 3 étapes, en mentionnant donc les tailles du terrains, le type de sol, ainsi que le nombre de plants souhaité pour chaque legume.
 
 ###### Futures
-
+- L'interface sera amelioré, et le systeme de sauvegarde de jardin sera mis en place. Une fois un jardin choisi parmi les differentes modelisation, l'utilisateur pourra le sauvegarder pour pouvoir y acceder à nouveau dans le futur. Cela permettra de le modifier à la volée, et d'avoir une base d'enseignement incroyable. Il y aura pare exemple la présence d'un scheduler permettant d'expliquer à l'utilisateur quand realiser une action pour etre le plus en adéquation avec son sol, la météo actuelle ou encore la période de l'année. L'utilisateur aura aussi acces à une page reprennant tout les légumes que nous avons en base, il pourra les lister, les filtrer ou encore obtenir des informations complémentaires sur comment cette derniere pousse, comment la planter ou encore comment la manger.  
+- Une centaine de légume environ seront rajoutés à notre base, avec toutes les informations possibles. C'est une étape longue et fastidieuse, là ou il faut mentionner les distances entre les plantes ou encore renseigner ses plantes compagnes, nous manquons encore de ces données puisque pour la plupart, ces ressources ne sont pas synthetisé. Il y aura donc un travail à recuperer ses informations pour les inscrire dans notre base.
+- Les informations de ces 3 étapes seront largement revu, nous nous sommes par exemple apercus que le type de sol ne peut etre demandé de cette maniere. Cela sera donc remplacé par un tutoriel simple de quelques secondes expliquant comment comprendre son sol. Pour la taille du terrain nous avons pensé à l'utilisation de google maps, ou encore de l'AR. Concernant les légumes, le nombre de plants peut ne pas etre tres clair, il y aura donc une surcouche à cela demandant à l'utilisateur ce qu'il souhaite faire de son potager (devenir la seule source de consommation pour sa famille par exemple), tout en demandant le nombre de personnes (enfants et adultes) pour permettre de realiser un calcul basé sur des moyennes de consommation.
 ###### Diagramme Récapitulatif
 Fonctionnelles
 
 
 #### Stratégie de croissance et developpments futurs
 ##### Proposition de valeurs
+
 ##### Force
 
 ### Who benefits / Bénéficiaires / Clients potentiels
@@ -87,13 +98,23 @@ Peut etre ici décrire les clients cibles (OUI !)
 
 ### Paysage compétitif
 S'inspirer tableau liquid one ou on a tous les différents acteurs avec un tableau des caractéritiques (Pas compris)
+
 ### Roadmap
-Une road map stylée
+Une road map stylée, sortir celle du slack
+
 ### Equipe
 La creation de permamind (sur notre temps libre, technologies nouvelles, conference), relation entre nous, creation de l'équipe
+L'histoire de Permamind est avant tout l'histoire d'une amitié. Nous nous sommes rencontré en premiere année, sans etre réellement tres proche au debut. Florian a su me tendre la main quand, lors d'un cours d'analyse mathématique, je ne comprennais strictement rien. Son humanité m'a touché et une amitié est donc né entre nous deux. Pendant nos études nous étions chacun sur des projets personnels exterieurs à la fac, j'ai beaucoup aimé certains de ses premiers projet, mais nos convictions se sont fortements retrouvés sur son idée de "facilitateur à la création d'un potager". Il m'en a parlé un peu plus, j'ai apporté mes idées, et nous avons commencé à reflechir à ce que l'on pourrait faire avec cette idée. C'est cette idée qui nous amene à etre ici, mais un réel travail de 3-4 mois à été realisé par nous deux. Nos profils sont tres complémentaires, avec mon alternance j'ai acquis des notions de management et de business, Florian possède ses dernieres combinés à des competences techniques interessante. Ce travail fut realisé sur notre temps libre, en parallele de nos cours. L'investissement pour le moment est plus en terme de temps que d'argent.    
+
 #### Fondateurs
 Presentation de notre CV (De ce qu'on sait faire)
 S'inspirer de TON avec les employés avec dessin (Explication)
+
+Photo en rond me presentant
+"Je m'appelle Melvin Naudion, j'ai 20 ans et je suis alternant dans une société specialisé dans l'IoT pour mon master 1 d'informatique, en parcours Data Science et IA. Je viens de la campagne du Nord Isere, j'ai toujours eu les mains dans la terre dès mon plus jeune age, cela s'etait néanmoins perdu pendant mon adolescence, mais cela est rapidement revenu il y a quelques années. Ce fut par conviction personelle de sortir plus ou moins des circuits traditionelles de consommation. Le paradigme actuel n'est pas assez pereine, nous souhaitons changer cela en apportant une solution s'inscrivant dans la transition."
+
+
+
 
 
 
@@ -120,9 +141,11 @@ Voir biodiversité cultivée pour des chiffres sur les différentes espèces cul
 
 Un produit alimentaire parcours en moyenne 2500 - 4000km pour arriver jusqu'à nous. 25% de plus qu'il y a 30 ans.
 
-1 calorie alimentaire créé doit consomme 10 à 15 calories d'énergies fossiles.
+1 calorie alimentaire créé consomme de 10 à 15 calories d'énergies fossiles.
 
-Actuellement 7,6 milliards, 8,6 milliards en 2030, 9,8 milliards en 2050 et 11,2 milliards en 2100, selon l'ONU.
+Actuellement 7,6 milliards de personnes, 8,6 milliards en 2030, 9,8 milliards en 2050 et 11,2 milliards en 2100, selon l'ONU.
 
 31% pour Monsanto, 21% pour DuPontDow et 7% pour Syngenta, 2016
 2.6 milliards de $ de vente en 2016.
+
+Création de 1kg de viande, 4kg de vegetaux
