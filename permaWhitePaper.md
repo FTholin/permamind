@@ -5,6 +5,10 @@ Notre papier a besoin de nombreuses illustrations.
 - Diagramme urgence climatique  
 - Graphique coloré (chomage)
 
+
+# En choisisant petit au peut produire beaucoup.
+Recupérer règle dans le livre à réétudier
+
 # Definir quelques termes utiles à la lecture
 - Permaculture
 - bio-abondance
@@ -89,7 +93,24 @@ Fonctionnelles
 
 
 #### Stratégie de croissance et developpments futurs
-Faut parler ici de notre strategie de croissance, avec l'idée d'aller voir des institutions (metropole, ecole, fac, bureau) pour proposer la création d'un jardin dans leurs locaux
+*Faut parler ici de notre strategie de croissance, avec l'idée d'aller voir des institutions (metropole, ecole, fac, bureau) pour proposer la création d'un jardin dans leurs locaux*
+
+***A RETRAVAILLER <3 strategie de croissance, avec l'idée d'aller voir des institutions (metropole, ecole, fac, bureau)***
+
+Notre application s'inscrit dans une démarche à double vision.
+
+- D'un côté nous voulons permettre à utilisateur désirant être entierement assisté de lui fournir de nombreuses configurations de jardins bio-inspirés.
+
+- De l'autre côté notre projet rentrant dans une démarche d'enseignement et de préparation à la transition, nous voulons fournir à un utilisateur ayant un profil plus impliqué ou entreprenant à avoir les outils nécessaires pour poursuivre son apprentissage de l'écoculture en créant lui meme sa propre configuration. Tout en étant guidé à chaque étape de la conception du jardin.
+
+Nous pouvons imaginer que l'utilisateur a à sa disposition de nombreux outils de différentes catégories:
+
+- une jauge qui évolue à chaque modification du terrain pour guider l'utilisateur vers une conception d'avantage optimisé.
+
+- possibilité d'ajouter à son terrain différents éléments de paysage (butte / modbilier/ légumes / fruits/ ...).
+
+- Des conseils / tips dans le but de faire apprendre les principes de l'écoculture. Tout en l'avertissant sur la viabilité de sa conception.
+
 ##### Proposition de valeurs
 Notre application va d'elle meme, pendant la modelisation, se charger d'ajouter des plantes compagnes qui sont adaptés au terrains et aux autre plantes deja presentent sur le terrain.
 Un coté blog sera présent sur l'application et le site pour federer une communauté de nouveau agriculteur urbain.
@@ -102,6 +123,7 @@ Peut etre ici décrire les clients cibles (OUI !)
 
 ### Paysage compétitif
 S'inspirer tableau liquid one ou on a tous les différents acteurs avec un tableau des caractéritiques (Pas compris)
+Mettre le jolie tableau
 
 ### Roadmap
 Une road map stylée, sortir celle du slack
@@ -111,20 +133,20 @@ La creation de permamind (sur notre temps libre, technologies nouvelles, confere
 L'histoire de Permamind est avant tout l'histoire d'une amitié. Nous nous sommes rencontré en premiere année, sans etre réellement tres proche au debut. Florian a su me tendre la main quand, lors d'un cours d'analyse mathématique, je ne comprennais strictement rien. Son humanité m'a touché et une amitié est donc né entre nous deux. Pendant nos études nous étions chacun sur des projets personnels exterieurs à la fac, j'ai beaucoup aimé certains de ses premiers projet, mais nos convictions se sont fortements retrouvés sur son idée de "facilitateur à la création d'un potager". Il m'en a parlé un peu plus, j'ai apporté mes idées, et nous avons commencé à reflechir à ce que l'on pourrait faire avec cette idée. C'est cette idée qui nous amene à etre ici, mais un réel travail de 3-4 mois à été realisé par nous deux. Nos profils sont tres complémentaires, avec mon alternance j'ai acquis des notions de management et de business, Florian possède ses dernieres combinés à des competences techniques interessante. Ce travail fut realisé sur notre temps libre, en parallele de nos cours. L'investissement pour le moment est plus en terme de temps que d'argent.    
 
 #### Fondateurs
-Presentation de notre CV (De ce qu'on sait faire)
-S'inspirer de TON avec les employés avec dessin (Explication)
+
 
 ##### Melvin
 Photo en rond me presentant
 "Je m'appelle Melvin Naudion, j'ai 20 ans et je suis alternant dans une société specialisé dans l'IoT pour mon master 1 d'informatique, en parcours Data Science et IA. Je viens de la campagne du Nord Isere, j'ai toujours eu les mains dans la terre dès mon plus jeune age, cela s'etait néanmoins perdu pendant mon adolescence, mais cela est rapidement revenu il y a quelques années. Ce fut par conviction personelle de sortir plus ou moins des circuits traditionelles de consommation. Le paradigme actuel n'est pas assez pereine, nous souhaitons changer cela en apportant une solution s'inscrivant dans la transition."
 
 ##### Florian
-Je suis Florian Tholin, j'ai 23 ans et je suis actuellement étudiant en Master informatique spécialisé aux techniques d'intelligence artificielle à l'Université Claude Bernard Lyon 1.
 
-
+"Je m'appelle Florian Tholin, un amoureux de la nature et des sciences appliquées depuis ma plus tendre enfance.
+En assistant mon père dans notre jardin familiale, j'ai rapidement compris que faire pousser sa propre nourriture était un gage d'indépendance et d'épanouissement personnel.
+C'est au terme de nombreuses lectures et après des études informatique que j'ai pu identifier les technologies nous permettant de réponde aux enjeux de demain.
+J'ai la profonde conviction, que permettre aux générations de demain de cultiver leur nourriture, est une étape importante dans la préparation d'une transition à venir".
 
 ## Footnotes
-
 [^4493]:
 Graphique des prédictions symbolisant une augmentation significative de la population mondial regarder en 2050.
 
