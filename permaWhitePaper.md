@@ -1,3 +1,4 @@
+
 # Rapport
 
 Notre papier a besoin de nombreuses illustrations.
@@ -68,9 +69,9 @@ Pratiquer la permaculture permet de concevoir des espaces harmonieux et abondant
 [^a450]
 
 ### Permamind
-Permamind est une application et un site internet qui se propose de faciliter la creation de son potager personnel. L'application est créé pour repondre aux envies et aux egigences de vie de n'importe quel client,
-en ville avec un bac ou sur un toit, en campagne avec les carrés potager ou avec un jardin.
-Le but est d'accompagner de bout à bout un projet de création de potager, sans oublier les premieres étapes qui sont de recuperer des informations de sa terre en étant soit meme acteur. Nous refusons l'utilisation de
+
+Permamind est une application et un site internet qui se propose de faciliter la creation et l'entretien de son potager personnel. L'application est créé pour répondre aux envies et aux exigences de vie de n'importe quel client. /  L'application est créé pour s'adapter au plus grand nombre d'environnements (urbain, campagne, ...) ainsi qu'aux exigences des jardiniers. En ville avec un bac ou sur un toit, en campagne avec les carrés potager ou avec un jardin.
+Le but est d'accompagner de bout en bout un projet de création de potager, sans oublier les premieres étapes qui sont de recuperer des informations de sa terre en étant soit meme acteur. Nous refusons l'utilisation de
 capteur, mettre les mains dans sa terre et la sentir ne peut etre remplacé par les "sensations" d'un capteur.
 Notre application s'inscrit dans le mouvement de Transition lancé par Rob Hopkins en 2006. L'idée de ce mouvement est d'apporter des solutions, plus pereines et plus fiables, de consommation. Nos convictions s'inscrivent dans ce mouvement, nous souhaitons participer à ce dernier tout en proposant une solution interessante qui pourra etre suivi par differents organismes institutionnelles dans le but d'éduquer les futurs
 acteurs de la consommation.
@@ -79,12 +80,12 @@ acteurs de la consommation.
 PermaMobile est le nom actuel de notre application iOS et Android. Cette derniere permet de faciliter l'interaction entre le systeme de règle naturelles, que nous avons codé, et l'utilisateur. Nous sommes donc parti sur une application dite "user friendly" avec des couleurs et des logos jeunes, permettant d'atirer un maximum de personne.
 
 ##### Fonctionnalités
-###### Actuelles
+###### Ce que nous avons actuellement
 - Actuellement, notre application permet de modeliser 5 jardins tous differents, tout en respectant les règles de base de l'éco culture.
 - 6 légumes sont actuellement dans notre base dans le bon formalisme, cela nous a permis de valider notre idée de modélisation, il sera largement amelioré dans un futur proche.
 - Nous pouvons donc passer en mode "création de potager" en 3 étapes, en mentionnant donc les tailles du terrains, le type de sol, ainsi que le nombre de plants souhaité pour chaque legume.
 
-###### Futures
+###### Ce que nous planifions
 - L'interface sera amelioré, et le systeme de sauvegarde de jardin sera mis en place. Une fois un jardin choisi parmi les differentes modelisation, l'utilisateur pourra le sauvegarder pour pouvoir y acceder à nouveau dans le futur. Cela permettra de le modifier à la volée, et d'avoir une base d'enseignement incroyable. Il y aura pare exemple la présence d'un scheduler permettant d'expliquer à l'utilisateur quand realiser une action pour etre le plus en adéquation avec son sol, la météo actuelle ou encore la période de l'année. L'utilisateur aura aussi acces à une page reprennant tout les légumes que nous avons en base, il pourra les lister, les filtrer ou encore obtenir des informations complémentaires sur comment cette derniere pousse, comment la planter ou encore comment la manger.  
 - Une centaine de légume environ seront rajoutés à notre base, avec toutes les informations possibles. C'est une étape longue et fastidieuse, là ou il faut mentionner les distances entre les plantes ou encore renseigner ses plantes compagnes, nous manquons encore de ces données puisque pour la plupart, ces ressources ne sont pas synthetisé. Il y aura donc un travail à recuperer ses informations pour les inscrire dans notre base.
 - Les informations de ces 3 étapes seront largement revu, nous nous sommes par exemple apercus que le type de sol ne peut etre demandé de cette maniere. Cela sera donc remplacé par un tutoriel simple de quelques secondes expliquant comment comprendre son sol. Pour la taille du terrain nous avons pensé à l'utilisation de google maps, ou encore de l'AR. Concernant les légumes, le nombre de plants peut ne pas etre tres clair, il y aura donc une surcouche à cela demandant à l'utilisateur ce qu'il souhaite faire de son potager (devenir la seule source de consommation pour sa famille par exemple), tout en demandant le nombre de personnes (enfants et adultes) pour permettre de realiser un calcul basé sur des moyennes de consommation.
@@ -109,9 +110,11 @@ Nous pouvons imaginer que l'utilisateur a à sa disposition de nombreux outils d
 
 - possibilité d'ajouter à son terrain différents éléments de paysage (butte / modbilier/ légumes / fruits/ ...).
 
-- Des conseils / tips dans le but de faire apprendre les principes de l'écoculture. Tout en l'avertissant sur la viabilité de sa conception.
+
+- Des conseils lui permettant d'apprendre les principes de l'écoculture, en l'avertissant "en temps réel" sur la viabilité de sa conception.
 
 ##### Proposition de valeurs
+**a retravailler / ajouter les différents business plans ?!**  
 Notre application va d'elle meme, pendant la modelisation, se charger d'ajouter des plantes compagnes qui sont adaptés au terrains et aux autre plantes deja presentent sur le terrain.
 Un coté blog sera présent sur l'application et le site pour federer une communauté de nouveau agriculteur urbain.
 Une place de marché de semence Paysanne sera mise en place sur notre site avec differents partenaires, pour promouvoir ce type de semence sur le long terme.
@@ -119,7 +122,9 @@ Une place de marché de semence Paysanne sera mise en place sur notre site avec 
 ##### Force
 
 ### Who benefits / Bénéficiaires / Clients potentiels
-Peut etre ici décrire les clients cibles (OUI !)
+
+Notre coeur de cible principal a entre 20 et 45 ans. Ce sont des personnes qui ont accès à un espace cultivable personnel ou partagé désirant se nourrir plus sainement.
+Débutant dans l'élaboration et l'entretien d'un potager, celui-ci cherchera une véritable boîte à outils lui permettant de progresser dans cette discipline. La personne plus expérimentée cherchera l'automatisation de certaines tâches fastidieuses comme le placement des variétés, rappels de tâches d'entretiens.
 
 ### Paysage compétitif
 S'inspirer tableau liquid one ou on a tous les différents acteurs avec un tableau des caractéritiques (Pas compris)
