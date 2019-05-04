@@ -18,77 +18,86 @@ Recupérer règle dans le livre à réétudier
 - climax
 - niche ecologique
 
-## Summary
-### Page de Garde stylée
-### Introduction
+# Permamind WhitePaper
 
-Depuis 12 000 ans, l'Homme n'a cessé de réinventer les méthodes agricoles lui permettant de subsister. Durant les dernières décennies celui-ci a choisi l'agriculture industrielle, fortement dependante des énergies fossiles et nuisible pour la biosphère.
+## Introduction
+Depuis 12 000 ans, l’Homme n’a cessé de réinventer les méthodes agricoles lui permettant de  subsister.  Durant  les  dernières  décennies  celui-ci  a  choisi  l’agriculture  industrielle,  fortement dépendante des énergies fossiles et nuisible pour la biosphère
 
+Ce papier expose notre vision pour une nouvelle agriculture ainsi qu’un nouvel écosystème afin de réintroduire au sein des foyers la création et l’entretien d’un jardin bio-inspiré.
 
-Ce papier expose notre vision pour une nouvelle agriculture ainsi qu'un nouvel écosystème afin de réintroduire au sein des foyers la création et l'entretien d'un jardin bio-inspiré.
+### Remerciments
+Mettre les Remerciments des gens.
 
+### Énoncé du problème
 
-#### Énoncé du problème
-
-Le modèle agricole actuel prônée par la Révolution Verte au sortir
-du second conflit mondial a permis une augmentation de 25% de la
-production alimentaire mondiale alors que les prix diminuaient
-d'environ 40%. Par exemple, de 1960 à 1990, la production totale
-de céréales est passée de 420 à 1 176 millions de tonnes par an.
-Malgré ces conclusions encourageantes, il semble que notre modèle
-actuel soit préjudiciable envers notre biosphère.
-
-[^1518]
-
-- L'utilisation de fertilisants chimiques couplés à une irrigation sans limite, porté par des engins mécaniques ayant recours aux énergies fossiles. Participe à l'épuisement des matières organiques contenu dans les sols, celui-ci devient d'avantage vulnérable à l'érosion et à l'explosion des sels minéraux qui stérilise progressivement les terres arables. [Pour chaque tonne de nourriture produite dans le monde, entre 6 et 16 tonnes de terres arables sont définitivement perdues](https://blog.kokopelli-semences.fr/2007/05/planete-terre-planete-desert/).
-
-- La globalisation du marché agroalimentaire s'est traduit par un éloignement significatif entre le lieu de production et celui de la consommation d'un produit. Selon une étude menée aux États-Unis, [un produit alimentaire parcourt en moyenne 2500 à 4000 kilomètres, soit 25% de plus qu'en 1980](http://bibvir2.uqac.ca/archivage/17833301.pdf). Le transport de ces marchandises accentue ainsi d'avantage l'empreinte écologique de l'Homme sur l'environnement (pollution, construction d'infrastructures...), cela impose également des cueillettes avant maturité, provoquant une dimminution des qualités nutritionnelle des produits ainsi que des traitements supplémentaires après récolte.
-
-- Dans une logique de production alimentaire bon marché, le producteur est souvent contraint de privilégier la quantité au détriment de la qualité. De nombreux scandales alimentaires notamment celui de Spanghero avec ses lasagnes à la viande de cheval souligne le manque de tracabilité du produit ainsi que de la logique d'économie prôné par le marché agroalimentaire. En France,  [30% des exploitants avaient un revenu inférieur à 350 euros par mois](https://www.lemonde.fr/idees/article/2017/10/30/30-des-agriculteurs-gagnent-moins-de-350-euros-par-mois-scandale-ou-pas_5207780_3232.html).
-
-Ce paradigme de consommation qui émergea dans les années 50, semble avoir tenu sa promesse en terme de quantité alimentaire produite. Cependant à l'heure actuelle pour produire [1 calorie alimentaire nous avons besoin de 10 à 15 calories d'énergie fossile](https://www.cias.wisc.edu/wp-content/uploads/2008/07/energyuse.pdf).   
-
-Comment peut on continuer de nourrir l'humanité d'aujourdhui et celle de demain en respectant notre environnement ?
-
-[^4493]
-[^d218]
-
-#### Les grandes lignes de notre vision
-
-S'inspirer des espaces naturels afin de cultiver les terres arables semble être  une nouvelle voie vers un changement profond de nos sociétés. Voici trois axes à étudier:
+Le modèle agricole actuel prônée par la Révolution Verte a permis une augmentation de 25% de la production alimentaire mondiale. Cependant il semble que notre modèle actuel soit préjudiciable envers notre biosphère.
 
 
-- Lorsque nous entrons dans une démarche bio-inspirée, il est possible de régénerer rapidement les milieux naturels. Les sols en buttes permanentes favorisant ainsi le développement organique et minéral, participe à la revitalisation de terres arables.
-Pratiquer la permaculture permet de concevoir des espaces harmonieux et abondants en fruits & légumes. L'écoculture telle qu'elle est pratiquée a la [ferme du Bec Hellouin a permis de cultiver plus de fruits & légumes sur 1000 mètres carrés à la main que sur 10 000 mètres carrés avec un tracteur](https://www.fermedubec.com/wp-content/uploads/2017/11/Novembre-2015-rapport-5-Etude-INRA-AgroParisTech-maraîchage-biologique-permaculturel-et-performance-économique.pdf).
-
-- Structurée localement notre production alimentaire, va permettre de réduire le transports des biens et des personnes. De plus, cela favorise l'émergence d'initiative pour le développement d'emploi verts, les énergies renouvelables ou la transition en générale.
-[La coopérative "La Ceinture Aliment-Terre" a notamment permis l'installation de 70 maraîchers en province de Liège.](http://www.vivreici.be/article/detail_la-ceinture-aliment-terre-liegeoise-c-est-quoi?id=239760)
+- L'abus de fertilisants, l'utilisation excessive d'engins motorisés ainsi qu'une irrigation intensive dégrade considérablement les sols[^d2cc].
 
 
-- En transformant notre alimentation avec d'avantage de légumes, fruits, baies et autres plantes sauvages. Nous consommons d'avantage d'aliments frais et de saisons, ayant une qualité nutritive bien supérieur à une alimentation classique.
-[^a450]
+- L'augmentation de la distance moyenne parcourue par un produit alimentaire[^66f3], accentue  d’avantage l’empreinte écologique de l’Homme sur son environnement (pollution, construction d’infrastructures...).
 
-### Permamind
 
-Permamind est une application et un site internet qui se propose de faciliter la creation et l'entretien de son potager personnel. L'application est créé pour répondre aux envies et aux exigences de vie de n'importe quel client. /  L'application est créé pour s'adapter au plus grand nombre d'environnements (urbain, campagne, ...) ainsi qu'aux exigences des jardiniers. En ville avec un bac ou sur un toit, en campagne avec les carrés potager ou avec un jardin.
-Le but est d'accompagner de bout en bout un projet de création de potager, sans oublier les premieres étapes qui sont de recuperer des informations de sa terre en étant soit meme acteur. Nous refusons l'utilisation de
-capteur, mettre les mains dans sa terre et la sentir ne peut etre remplacé par les "sensations" d'un capteur.
-Notre application s'inscrit dans le mouvement de Transition lancé par Rob Hopkins en 2006. L'idée de ce mouvement est d'apporter des solutions, plus pereines et plus fiables, de consommation. Nos convictions s'inscrivent dans ce mouvement, nous souhaitons participer à ce dernier tout en proposant une solution interessante qui pourra etre suivi par differents organismes institutionnelles dans le but d'éduquer les futurs
+- Pour être compétitif, le  producteur est contraint de privilégier la quantité au détriment de la qualité. Avec cette logique de marché, beaucoup d'exploitants peinent à vivre de leurs production[^1ce4].
+
+
+Ce paradigme de consommation qui émergea dans les années 50, semble avoir tenu sa promesse en terme de quantité alimentaire produite. Cependant à l’heure actuelle pour produire [1 calorie alimentaire nous avons besoin de 10 à 15 calories d’énergie fossile](https://www.cias.wisc.edu/wp-content/uploads/2008/07/energyuse.pdf).
+
+Peut on trouver de nouveaux moyens de nous nourrir qui soient d'avantage respectueux de notre environnement ?
+
+### Notre vision
+
+S’inspirer des espaces naturels afin de cultiver les terres arables semble être une nouvelle voie vers un changement profond de nos sociétés. Voici trois axes à étudier:
+
+- Concevoir des espace optimisés selon la permaculture, couplée à des méthodes de cultures bio-intensive, permettent la revitalisation de terres arables ainsi qu'un rendement plus performant[^d373].
+
+- Restructurer localement notre production alimentaire va permettre de réduire le transports des biens et des personnes. Cela favorisera également l’émergence d’initiatives écocitoyennes[^4f7a].
+
+- Diversifier notre alimentation avec d’avantage de légumes et fruits de saison. Nous permettra d'avoir des qualités nutritives bien supérieur à une alimentation classique[^7100].
+
+
+## Permamind
+
+Permamind est une application qui rend accessible la création et l'entretien d'un potager bio-inspiré.
+Elle fonctionne  sur Android, iOS et navigateur web.
+
+
+Adaptable à plusieurs environnements, que ce soit avec un bac ou sur un toit en agglomération ou bien en campagne avec les carrés potager ou  simples jardins.
+
+Notre souhait est d’accompagner  l'utilisateur dans son projet d'élaboration et d'entretien de son potager afin qu'il soit acteur de la transition.
+
+Des premières étapes qui commence par l'étude du site, l'élaboration d'un plan structurel, du choix des cultures et enfin la plannification des tâches à réaliser. L'utilisateur se familiarise avec des concepts innovants produits par des pionniers en permaculture & écoculture.
+
+Nous ne croyons pas en l’utilisation de
+capteur fruits de l'internet des objets (IOT). En effet nous sommes convaincus que  mettre les mains dans sa terre et la sentir ne peut etre remplacé par les «sensations» d’un capteur.
+
+Notre application s’inscrit dans le mouvement de Transition lancé par Rob Hopkins en 2006. L’idée de ce mouvement est d’apporter des solutions plus pereines et plus fiables de consommation. Nos convictions s’inscrivent dans ce mouvement, nous souhaitons participer à ce dernier tout en proposant une solution interessante qui pourra être suivi par differents organismes institutionnelles dans le but d’éduquer les futurs
 acteurs de la consommation.
 
-#### PermaMobile
-PermaMobile est le nom actuel de notre application iOS et Android. Cette derniere permet de faciliter l'interaction entre le systeme de règle naturelles, que nous avons codé, et l'utilisateur. Nous sommes donc parti sur une application dite "user friendly" avec des couleurs et des logos jeunes, permettant d'atirer un maximum de personne.
+### Permamobile
 
-##### Fonctionnalités
-###### Ce que nous avons actuellement
-- Actuellement, notre application permet de modeliser 5 jardins tous differents, tout en respectant les règles de base de l'éco culture.
-- 6 légumes sont actuellement dans notre base dans le bon formalisme, cela nous a permis de valider notre idée de modélisation, il sera largement amelioré dans un futur proche.
-- Nous pouvons donc passer en mode "création de potager" en 3 étapes, en mentionnant donc les tailles du terrains, le type de sol, ainsi que le nombre de plants souhaité pour chaque legume.
+PermaMobile est le nom actuel de notre application iOS et Android. Cette derniere permet de faciliter l’interaction entre le systeme de règle naturelles, que nous avons codé, et l’utilisateur. Nous sommes donc parti sur une application dite «user friendly» avec des couleurs et des logos jeunes, permettant d’atirer un maximum de personne.
 
-###### Ce que nous planifions
-- L'interface sera amelioré, et le systeme de sauvegarde de jardin sera mis en place. Une fois un jardin choisi parmi les differentes modelisation, l'utilisateur pourra le sauvegarder pour pouvoir y acceder à nouveau dans le futur. Cela permettra de le modifier à la volée, et d'avoir une base d'enseignement incroyable. Il y aura pare exemple la présence d'un scheduler permettant d'expliquer à l'utilisateur quand realiser une action pour etre le plus en adéquation avec son sol, la météo actuelle ou encore la période de l'année. L'utilisateur aura aussi acces à une page reprennant tout les légumes que nous avons en base, il pourra les lister, les filtrer ou encore obtenir des informations complémentaires sur comment cette derniere pousse, comment la planter ou encore comment la manger.  
-- Une centaine de légume environ seront rajoutés à notre base, avec toutes les informations possibles. C'est une étape longue et fastidieuse, là ou il faut mentionner les distances entre les plantes ou encore renseigner ses plantes compagnes, nous manquons encore de ces données puisque pour la plupart, ces ressources ne sont pas synthetisé. Il y aura donc un travail à recuperer ses informations pour les inscrire dans notre base.
-- Les informations de ces 3 étapes seront largement revu, nous nous sommes par exemple apercus que le type de sol ne peut etre demandé de cette maniere. Cela sera donc remplacé par un tutoriel simple de quelques secondes expliquant comment comprendre son sol. Pour la taille du terrain nous avons pensé à l'utilisation de google maps, ou encore de l'AR. Concernant les légumes, le nombre de plants peut ne pas etre tres clair, il y aura donc une surcouche à cela demandant à l'utilisateur ce qu'il souhaite faire de son potager (devenir la seule source de consommation pour sa famille par exemple), tout en demandant le nombre de personnes (enfants et adultes) pour permettre de realiser un calcul basé sur des moyennes de consommation.
+
+#### Fonctionnalités
+
+##### Ce que nous avons
+- Actuellement, notre application permet de modeliser 5 jardins tous differents, tout en respectant les règles de base de l’éco culture.
+
+- 6 légumes sont actuellement dans notre base dans le bon formalisme, cela nous a permis de valider notre idée de modélisation, il sera largement amelioré dans un futur proche.
+
+-  Nous pouvons donc passer en mode «création de potager» en 3 étapes, en mentionnant donc les tailles du terrains, le type de sol, ainsi que le nombre de plants souhaité pour chaque legume.
+
+##### Sur quoi nous travaillons
+
+- L’interface sera ameliorée, et le système de sauvegarde de jardin sera mis en place. Une fois un jardin choisi parmi les différentes modelisations, l’utilisateur pourra le sauvegarder pour pouvoir y accéder à nouveau dans le futur. Cela permettra de le modifier à la volée, et d’avoir une base d’enseignements. Il y aura par exemple la présence d’un scheduler permettant d’expliquer à l’utilisateur quand réaliser une action pour être le plus en adéquation avec son sol, la météo actuelle ou encore la période de l’année. L’utilisateur aura également accès à une
+page reprennant tout les légumes que nous avons en base, il pourra les lister, les filtrer ou encore obtenir des informations complémentaires sur comment cette derniere pousse, comment la planter ou encore comment la manger.
+
+- Une centaine de légume environ seront rajoutés à notre base, avec toutes les informations possibles. C’est une étape longue et fastidieuse, là ou il faut mentionner les distances entre les plantes ou encore renseigner ses plantes compagnes, nous manquons encore de ces données puisque pour la plupart, ces ressources ne sont pas synthetisé. Il y aura donc un travail à recuperer ses informations pour les inscrire dans notre base.
+
+- Les informations de ces 3 étapes seront largement revu, nous nous sommes par exemple apercus que le type de sol ne peut etre demandé de cette maniere. Cela sera donc remplacé par un tutoriel simple de quelques secondes expliquant comment comprendre son sol. Pour la taille du terrain nous avons pensé à l’utilisation de google maps, ou encore de l’AR. Concernant les légumes, le nombre de plants peut ne pas etre tres clair, il y aura donc une surcouche à cela demandant à l’utilisateur ce qu’il souhaite faire de son potager (devenir la seule source de consommation pour sa famille par exemple), tout en demandant le nombre de personnes (enfants et adultes) pour permettre de realiser un calcul basé sur des moyennes de consommation.
+
 ###### Diagramme Récapitulatif
 Fonctionnelles
 
@@ -119,9 +128,8 @@ Notre application va d'elle meme, pendant la modelisation, se charger d'ajouter 
 Un coté blog sera présent sur l'application et le site pour federer une communauté de nouveau agriculteur urbain.
 Une place de marché de semence Paysanne sera mise en place sur notre site avec differents partenaires, pour promouvoir ce type de semence sur le long terme.
 
-##### Force
 
-### Who benefits / Bénéficiaires / Clients potentiels
+##### Segment de clientèle
 
 Notre coeur de cible principal a entre 20 et 45 ans. Ce sont des personnes qui ont accès à un espace cultivable personnel ou partagé désirant se nourrir plus sainement.
 Débutant dans l'élaboration et l'entretien d'un potager, celui-ci cherchera une véritable boîte à outils lui permettant de progresser dans cette discipline. La personne plus expérimentée cherchera l'automatisation de certaines tâches fastidieuses comme le placement des variétés, rappels de tâches d'entretiens.
@@ -151,22 +159,31 @@ En assistant mon père dans notre jardin familiale, j'ai rapidement compris que 
 C'est au terme de nombreuses lectures et après des études informatique que j'ai pu identifier les technologies nous permettant de réponde aux enjeux de demain.
 J'ai la profonde conviction, que permettre aux générations de demain de cultiver leur nourriture, est une étape importante dans la préparation d'une transition à venir".
 
-## Footnotes
-[^4493]:
-Graphique des prédictions symbolisant une augmentation significative de la population mondial regarder en 2050.
-
-[^d218]:
-Illustration 1 cereales -> 10 à 15 barilles de petrole
 
 
+## Notes bas de pages
 
-[^1518]:
-Manque de phrase introductive des trois notions abordées après.
-
-[^a450]:
-Voir biodiversité cultivée pour des chiffres sur les différentes espèces cultivées.
+[^66f3]:
+[un  produit  alimentaire  parcourt  en  moyenne 2500 à 4000 kilomètres, soit 25% de plus qu’en 1980](http://bibvir2.uqac.ca/archivage/17833301.pdf).
 
 
+[^1ce4]:
+[30%  des  exploitants avaient un revenu inférieur à 350 euros par mois](https://www.lemonde.fr/idees/article/2017/10/30/30-des-agriculteurs-gagnent-moins-de-350-euros-par-mois-scandale-ou-pas_5207780_3232.html).
+
+
+
+[^d2cc]:
+[Pour  chaque  tonne  de  nourriture  produite  dans le monde, entre 6 et 16 tonnes de terres arables sont définitivement perdues](https://blog.kokopelli-semences.fr/2007/05/planete-terre-planete-desert/).
+
+[^d373]:
+[ferme du Bec Hellouin a permis de cultiver plus de fruits & légumes sur 1000 mètres carrés à la main que sur 10 000 mètres carrés avec un tracteur] (https://www.fermedubec.com/wp-content/uploads/2017/11/Novembre-2015- rapport-5-Etude-INRA-AgroParisTech-maraîchage-biologique-permaculturel-et- performance-économique.pdf)
+
+[^4f7a]:
+[La coopérative «La Ceinture Aliment-Terre» a notamment permis l’installation de 70 maraîchers en province de Liège.](http://www.vivreici.be/article/ detail_la-ceinture-aliment-terre-liegeoise-c-est-quoi?id=239760)
+
+
+[^7100]:
+Voir biodiversité cultivée pour des chiffres sur les différentes espèces cultivées.
 
 
 1000m² sans mecanisation créé plus de legumes, tout en étant plus pereine que 10.000m² mecanisé, tout en  appovrissant les sols.
