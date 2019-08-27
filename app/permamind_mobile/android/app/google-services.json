@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "739862729237",
+    "firebase_url": "https://permamind-mobile-2305.firebaseio.com",
+    "project_id": "permamind-mobile-2305",
+    "storage_bucket": "permamind-mobile-2305.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739862729237:android:7d345a9af8183dca",
+        "android_client_info": {
+          "package_name": "com.permamind.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739862729237-m2b5t3i0sfhkf43buounih3buhiqao0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6Z9MB5lZG7DbMe27J46nkhVG8H1iCYag"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739862729237-m2b5t3i0sfhkf43buounih3buhiqao0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "739862729237-vvh6bhqdecbcdlfbi7u4159elfbk2885.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.permamind.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
