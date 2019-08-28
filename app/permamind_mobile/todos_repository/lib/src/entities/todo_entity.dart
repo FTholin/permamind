@@ -1,4 +1,7 @@
-class TodoEntity {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
+
+class TodoEntity extends Equatable {
   final bool complete;
   final String id;
   final String note;
@@ -6,40 +9,43 @@ class TodoEntity {
 
   TodoEntity(this.task, this.id, this.note, this.complete);
 
-  @override
-  int get hashCode =>
-      complete.hashCode ^ task.hashCode ^ note.hashCode ^ id.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is TodoEntity &&
-              runtimeType == other.runtimeType &&
-              complete == other.complete &&
-              task == other.task &&
-              note == other.note &&
-              id == other.id;
-
   Map<String, Object> toJson() {
     return {
-      "complete": complete,
-      "task": task,
-      "note": note,
-      "id": id,
+      'complete': complete,
+      'task': task,
+      'note': note,
+      'id': id,
     };
   }
 
   @override
   String toString() {
-    return 'TodoEntity{complete: $complete, task: $task, note: $note, id: $id}';
+    return 'TodoEntity { complete: $complete, task: $task, note: $note, id: $id }';
   }
 
   static TodoEntity fromJson(Map<String, Object> json) {
     return TodoEntity(
-      json["task"] as String,
-      json["id"] as String,
-      json["note"] as String,
-      json["complete"] as bool,
+      json['task'] as String,
+      json['id'] as String,
+      json['note'] as String,
+      json['complete'] as bool,
     );
+  }
+
+  static TodoEntity fromSnapshot(DocumentSnapshot snap) {
+    return TodoEntity(
+      snap.data['task'],
+      snap.documentID,
+      snap.data['note'],
+      snap.data['complete'],
+    );
+  }
+
+  Map<String, Object> toDocument() {
+    return {
+      'complete': complete,
+      'task': task,
+      'note': note,
+    };
   }
 }

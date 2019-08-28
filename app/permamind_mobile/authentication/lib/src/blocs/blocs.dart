@@ -1,0 +1,1 @@
+export 'package:authentication/authentication.dart';
