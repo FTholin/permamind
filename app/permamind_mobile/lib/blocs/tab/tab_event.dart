@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_basic_architecture/models/models.dart';
+import 'package:permamind_mobile/models/models.dart';
 
 
 @immutable

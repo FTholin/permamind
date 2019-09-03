@@ -1,7 +1,7 @@
+import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_firebase_login/user_repository.dart';
-import 'package:flutter_firebase_login/register/register.dart';
+
 
 class RegisterScreen extends StatelessWidget {
   final UserRepository _userRepository;

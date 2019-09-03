@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_basic_architecture/arch_bricks/arch_bricks.dart';
-import 'package:flutter_basic_architecture/blocs/stats/stats.dart';
-import 'package:flutter_basic_architecture/widgets/widgets.dart';
-import 'package:flutter_basic_architecture/arch_bricks/flutter_todos_keys.dart';
+import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
+import 'package:permamind_mobile/blocs/stats/stats.dart';
+import 'package:permamind_mobile/widgets/widgets.dart';
+import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
 
 
 class Stats extends StatelessWidget {

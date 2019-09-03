@@ -1,7 +1,7 @@
+import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_firebase_login/authentication_bloc/bloc.dart';
-import 'package:flutter_firebase_login/register/register.dart';
+
 
 class RegisterForm extends StatefulWidget {
   State<RegisterForm> createState() => _RegisterFormState();
@@ -123,19 +123,19 @@ class _RegisterFormState extends State<RegisterForm> {
 
   void _onEmailChanged() {
     _registerBloc.dispatch(
-      EmailChanged(email: _emailController.text),
+      RegisterEmailChanged(email: _emailController.text),
     );
   }
 
   void _onPasswordChanged() {
     _registerBloc.dispatch(
-      PasswordChanged(password: _passwordController.text),
+      RegisterPasswordChanged(password: _passwordController.text),
     );
   }
 
   void _onFormSubmitted() {
     _registerBloc.dispatch(
-      Submitted(
+      RegisterSubmitted(
         email: _emailController.text,
         password: _passwordController.text,
       ),

@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'package:authentication/authentication.dart';
+import 'package:authentication/src/validators.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:flutter_firebase_login/user_repository.dart';
-import 'package:flutter_firebase_login/register/register.dart';
-import 'package:flutter_firebase_login/validators.dart';
+
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRepository _userRepository;
@@ -23,10 +23,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) {
     final observableStream = events as Observable<RegisterEvent>;
     final nonDebounceStream = observableStream.where((event) {
-      return (event is! EmailChanged && event is! PasswordChanged);
+      return (event is! RegisterEmailChanged && event is! RegisterPasswordChanged);
     });
     final debounceStream = observableStream.where((event) {
-      return (event is EmailChanged || event is PasswordChanged);
+      return (event is RegisterEmailChanged || event is RegisterPasswordChanged);
     }).debounceTime(Duration(milliseconds: 300));
     return super.transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
   }
@@ -35,11 +35,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> mapEventToState(
     RegisterEvent event,
   ) async* {
-    if (event is EmailChanged) {
+    if (event is RegisterEmailChanged) {
       yield* _mapEmailChangedToState(event.email);
-    } else if (event is PasswordChanged) {
+    } else if (event is RegisterPasswordChanged) {
       yield* _mapPasswordChangedToState(event.password);
-    } else if (event is Submitted) {
+    } else if (event is RegisterSubmitted) {
       yield* _mapFormSubmittedToState(event.email, event.password);
     }
   }

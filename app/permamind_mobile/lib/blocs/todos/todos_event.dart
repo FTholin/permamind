@@ -49,3 +49,11 @@ class ToggleAll extends TodosEvent {
   String toString() => 'ToggleAll';
 }
 
+class TodosUpdated extends TodosEvent {
+  final List<Todo> todos;
+
+  TodosUpdated(this.todos);
+
+  @override
+  String toString() => 'TodosUpdated';
+}

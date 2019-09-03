@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_architecture/widgets/widgets.dart';
-import 'package:flutter_basic_architecture/arch_bricks/arch_bricks.dart';
+import 'package:permamind_mobile/widgets/widgets.dart';
+import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_basic_architecture/blocs/blocs.dart';
-import 'package:flutter_basic_architecture/models/models.dart';
-import 'package:flutter_basic_architecture/arch_bricks/localization.dart';
+import 'package:permamind_mobile/blocs/blocs.dart';
+import 'package:permamind_mobile/models/models.dart';
 
 
 class HomeScreen extends StatelessWidget {

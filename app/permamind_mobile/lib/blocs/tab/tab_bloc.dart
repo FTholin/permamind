@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:flutter_basic_architecture/blocs/blocs.dart';
-import 'package:flutter_basic_architecture/models/models.dart';
+import 'package:permamind_mobile/blocs/blocs.dart';
+import 'package:permamind_mobile/models/models.dart';
 
 
 class TabBloc extends Bloc<TabEvent, AppTab> {

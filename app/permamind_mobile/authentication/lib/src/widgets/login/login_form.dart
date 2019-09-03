@@ -1,8 +1,7 @@
+import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_firebase_login/user_repository.dart';
-import 'package:flutter_firebase_login/authentication_bloc/bloc.dart';
-import 'package:flutter_firebase_login/login/login.dart';
+
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -143,13 +142,13 @@ class _LoginFormState extends State<LoginForm> {
 
   void _onEmailChanged() {
     _loginBloc.dispatch(
-      EmailChanged(email: _emailController.text),
+      LoginEmailChanged(email: _emailController.text),
     );
   }
 
   void _onPasswordChanged() {
     _loginBloc.dispatch(
-      PasswordChanged(password: _passwordController.text),
+      LoginPasswordChanged(password: _passwordController.text),
     );
   }
 

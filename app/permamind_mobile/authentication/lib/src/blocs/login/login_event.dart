@@ -6,29 +6,29 @@ abstract class LoginEvent extends Equatable {
   LoginEvent([List props = const []]) : super(props);
 }
 
-class EmailChanged extends LoginEvent {
+class LoginEmailChanged extends LoginEvent {
   final String email;
 
-  EmailChanged({@required this.email}) : super([email]);
+  LoginEmailChanged({@required this.email}) : super([email]);
 
   @override
   String toString() => 'EmailChanged { email :$email }';
 }
 
-class PasswordChanged extends LoginEvent {
+class LoginPasswordChanged extends LoginEvent {
   final String password;
 
-  PasswordChanged({@required this.password}) : super([password]);
+  LoginPasswordChanged({@required this.password}) : super([password]);
 
   @override
   String toString() => 'PasswordChanged { password: $password }';
 }
 
-class Submitted extends LoginEvent {
+class LoginSubmitted extends LoginEvent {
   final String email;
   final String password;
 
-  Submitted({@required this.email, @required this.password})
+  LoginSubmitted({@required this.email, @required this.password})
       : super([email, password]);
 
   @override

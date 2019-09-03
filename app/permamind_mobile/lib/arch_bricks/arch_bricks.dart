@@ -1,7 +1,7 @@
 export 'keys.dart';
 export 'routes.dart';
 export 'theme.dart';
-export 'localization.dart';
+export 'bloc_localization.dart';
 export 'flutter_todos_keys.dart';
 
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:flutter_basic_architecture/models/models.dart';
+import 'package:permamind_mobile/models/models.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_basic_architecture/blocs/blocs.dart';
+import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 

@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'package:authentication/authentication.dart';
+import 'package:authentication/src/validators.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:flutter_firebase_login/login/login.dart';
-import 'package:flutter_firebase_login/user_repository.dart';
-import 'package:flutter_firebase_login/validators.dart';
+
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   UserRepository _userRepository;
@@ -24,10 +24,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) {
     final observableStream = events as Observable<LoginEvent>;
     final nonDebounceStream = observableStream.where((event) {
-      return (event is! EmailChanged && event is! PasswordChanged);
+      return (event is! LoginEmailChanged && event is! LoginPasswordChanged);
     });
     final debounceStream = observableStream.where((event) {
-      return (event is EmailChanged || event is PasswordChanged);
+      return (event is LoginEmailChanged || event is LoginPasswordChanged);
     }).debounceTime(Duration(milliseconds: 300));
     return super
         .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
@@ -35,9 +35,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is EmailChanged) {
+    if (event is LoginEmailChanged) {
       yield* _mapEmailChangedToState(event.email);
-    } else if (event is PasswordChanged) {
+    } else if (event is LoginPasswordChanged) {
       yield* _mapPasswordChangedToState(event.password);
     } else if (event is LoginWithGooglePressed) {
       yield* _mapLoginWithGooglePressedToState();
