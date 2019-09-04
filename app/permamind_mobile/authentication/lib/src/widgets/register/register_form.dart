@@ -8,12 +8,14 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+
+  final TextEditingController _pseudoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   RegisterBloc _registerBloc;
 
-  bool get isPopulated =>
+  bool get isPopulated => _pseudoController.text.isNotEmpty &&
       _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
 
   bool isRegisterButtonEnabled(RegisterState state) {
@@ -24,6 +26,7 @@ class _RegisterFormState extends State<RegisterForm> {
   void initState() {
     super.initState();
     _registerBloc = BlocProvider.of<RegisterBloc>(context);
+    _pseudoController.addListener(_onPseudoChanged);
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
   }
@@ -76,6 +79,19 @@ class _RegisterFormState extends State<RegisterForm> {
               child: ListView(
                 children: <Widget>[
                   TextFormField(
+                    controller: _pseudoController,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.perm_identity),
+                      labelText: 'Pseudo',
+                    ),
+                    autocorrect: false,
+                    autovalidate: true,
+                    validator: (_) {
+                      // TODO changer pseudo
+                      return !state.isEmailValid ? 'Invalid Pseudo' : null;
+                    },
+                  ),
+                  TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.email),
@@ -116,9 +132,16 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   void dispose() {
+    _pseudoController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _onPseudoChanged() {
+    _registerBloc.dispatch(
+      RegisterPseudoChanged(pseudo: _pseudoController.text),
+    );
   }
 
   void _onEmailChanged() {
@@ -136,6 +159,7 @@ class _RegisterFormState extends State<RegisterForm> {
   void _onFormSubmitted() {
     _registerBloc.dispatch(
       RegisterSubmitted(
+        pseudo: _pseudoController.text,
         email: _emailController.text,
         password: _passwordController.text,
       ),
