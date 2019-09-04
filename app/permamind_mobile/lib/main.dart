@@ -10,18 +10,26 @@ import 'blocs/simple_bloc_delegate.dart';
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
-  runApp(TodosApp());
+  final userRepository = UserRepository();
+
+  runApp(App(userRepository: userRepository));
 }
 
-class TodosApp extends StatelessWidget {
+class App extends StatelessWidget {
+
+  final UserRepository userRepository;
+
+  App({@required this.userRepository});
+
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthenticationBloc>(
           builder: (context) {
             return AuthenticationBloc(
-              userRepository: UserRepository(),
+              userRepository: userRepository,
             )..dispatch(AppStarted());
           },
         ),
@@ -63,9 +71,7 @@ class TodosApp extends StatelessWidget {
                   );
                 }
                 if (state is Unauthenticated) {
-                  return Center(
-                    child: Text('Could not authenticate with Firestore'),
-                  );
+                  return LoginScreen(userRepository: userRepository);
                 }
                 return Center(child: CircularProgressIndicator());
               },

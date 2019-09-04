@@ -85,6 +85,13 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
+  String get loggingOut => Intl.message(
+    'Logging Out',
+    name: 'loggingOut',
+    args: [],
+    locale: locale.toString()
+  );
+
   String get addTodo => Intl.message(
     'Add Todo',
     name: 'addTodo',

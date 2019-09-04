@@ -1,3 +1,4 @@
+import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabBloc = BlocProvider.of<TabBloc>(context);
+    final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     return BlocBuilder<TabBloc, AppTab>(
       builder: (context, activeTab) {
         return Scaffold(
@@ -17,6 +19,7 @@ class HomeScreen extends StatelessWidget {
             title: Text(FlutterBlocLocalizations.of(context).appTitle),
             actions: [
               FilterButton(visible: activeTab == AppTab.todos),
+
               ExtraActions(),
             ],
           ),

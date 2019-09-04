@@ -22,45 +22,50 @@ class FilteredTodos extends StatelessWidget {
           return LoadingIndicator(key: ArchSampleKeys.todosLoading);
         } else if (state is FilteredTodosLoaded) {
           final todos = state.filteredTodos;
-          return ListView.builder(
+
+          return GridView.builder(
             key: ArchSampleKeys.todoList,
-              itemCount: todos.length,
-              itemBuilder: (BuildContext context, int index) {
-              final todo = todos[index];
-              return TodoItem(
-                todo: todo,
-                onDismissed: (direction) {
-                  todosBloc.dispatch(DeleteTodo(todo));
-                  Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-                    key: ArchSampleKeys.snackbar,
-                    todo: todo,
-                    onUndo: () => todosBloc.dispatch(AddTodo(todo)),
-                    localizations: localizations,
-                  ));
-                },
+            itemCount: todos.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
+            itemBuilder: (BuildContext context, int index) {
+              return InkResponse(
+                enableFeedback: true,
+                child: Container(
+                  padding: EdgeInsets.all(20.0),
+                  child: Center(
+                    child: GridTile(
+                      footer: Text(
+                        'Item $index',
+                        textAlign: TextAlign.center,
+                      ),
+                      child: Icon(Icons.local_florist,
+                          size: 40.0, color: Colors.white30),
+                    ),
+                  ),
+                  color: Colors.blue[400],
+                  margin: EdgeInsets.all(10.0),
+                ),
                 onTap: () async {
                   final removedTodo = await Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) {
-                      return DetailsScreen(id: todo.id);
-                    })
+                      MaterialPageRoute(builder: (_) {
+                        return DetailsScreen(id: todos[index].id);
+                      })
                   );
                   if (removedTodo != null) {
                     Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
                       key: ArchSampleKeys.snackbar,
-                      todo: todo,
-                      onUndo: () => todosBloc.dispatch(AddTodo(todo)),
+                      todo: todos[index],
+                      onUndo: () => todosBloc.dispatch(AddTodo(todos[index])),
                       localizations: localizations,
                     ));
                   }
                 },
-                  onCheckboxChanged: (_) {
-                  todosBloc.dispatch(
-                    UpdateTodo(todo.copyWith(complete: !todo.complete)),
-                  );
-                }
               );
-            }
+
+            },
           );
+
         }
         else {
           return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);

@@ -1,3 +1,4 @@
+import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -13,42 +14,28 @@ class ExtraActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todosBloc = BlocProvider.of<TodosBloc>(context);
+    final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     return BlocBuilder<TodosBloc, TodosState>(
       builder: (context, state) {
         if (state is TodosLoaded) {
-          bool allComplete = (todosBloc.currentState as TodosLoaded)
-              .todos
-              .every((todo) => todo.complete);
+
           return PopupMenuButton<ExtraAction>(
             key: FlutterTodosKeys.extraActionsPopupMenuButton,
             onSelected: (action) {
               switch (action) {
-                case ExtraAction.clearCompleted:
-                  todosBloc.dispatch(ClearCompleted());
-                  break;
-                case ExtraAction.toggleAllComplete:
-                  todosBloc.dispatch(ToggleAll());
+                case ExtraAction.LoggingOut:
+                  authenticationBloc.dispatch(LoggedOut());
                   break;
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuItem<ExtraAction>>[
               PopupMenuItem<ExtraAction>(
-                key: ArchSampleKeys.toggleAll,
-                value: ExtraAction.toggleAllComplete,
+                key: ArchSampleKeys.loggedOut,
+                value: ExtraAction.LoggingOut,
                 child: Text(
-                  allComplete
-                      ? ArchSampleLocalizations.of(context)
-                      .markAllComplete
-                      : ArchSampleLocalizations.of(context).markAllComplete,
+                  ArchSampleLocalizations.of(context).loggingOut,
                 ),
               ),
-              PopupMenuItem<ExtraAction>(
-                key: ArchSampleKeys.clearCompleted,
-                value: ExtraAction.clearCompleted,
-                child: Text(
-                  ArchSampleLocalizations.of(context).clearCompleted,
-                ),
-              )
             ],
           );
         }

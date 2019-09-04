@@ -10,7 +10,7 @@ class FlutterBlocLocalizations {
     );
   }
 
-  String get appTitle => "Flutter Todos";
+  String get appTitle => "Permamind";
 }
 
 class FlutterBlocLocalizationsDelegate
