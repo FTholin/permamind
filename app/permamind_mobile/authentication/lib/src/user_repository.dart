@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:authentication/authentication.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -6,6 +8,9 @@ class UserRepository {
 
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+
+  final userCollection = Firestore.instance.collection('users');
+
 
   UserRepository({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
@@ -51,5 +56,11 @@ class UserRepository {
 
   Future<String> getUser() async {
     return (await _firebaseAuth.currentUser()).email;
+  }
+
+
+  @override
+  Future<void> addNewUser(User user) {
+    return userCollection.add(user.toEntity().toDocument());
   }
 }

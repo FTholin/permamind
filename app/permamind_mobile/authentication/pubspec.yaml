@@ -18,8 +18,6 @@ dependencies:
   meta: ^1.1.6
   font_awesome_flutter: ^8.4.0
 
-  todos_repository:
-    path: ../todos_repository
 
 dev_dependencies:
   flutter_test:
