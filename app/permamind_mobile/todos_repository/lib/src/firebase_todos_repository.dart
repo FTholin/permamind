@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todos_repository/todos_repository.dart';
 import 'entities/entities.dart';
+import 'package:meta/meta.dart';
+
 
 class FirebaseTodosRepository implements TodosRepository {
+  
 
   final todoCollection = Firestore.instance.collection('todos');
 
@@ -18,6 +21,7 @@ class FirebaseTodosRepository implements TodosRepository {
     return todoCollection.document(todo.id).delete();
   }
 
+  // TODO get todos en fonction de l'utilisateur id
   @override
   Stream<List<Todo>> todos() {
     return todoCollection.snapshots().map((snapshot) {

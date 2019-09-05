@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tabBloc = BlocProvider.of<TabBloc>(context);
-    final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     return BlocBuilder<TabBloc, AppTab>(
       builder: (context, activeTab) {
         return Scaffold(

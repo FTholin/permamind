@@ -9,10 +9,33 @@ import 'arch_bricks/arch_bricks.dart';
 import 'blocs/simple_bloc_delegate.dart';
 
 void main() {
+//  BlocSupervisor.delegate = SimpleBlocDelegate();
+//  final userRepository = UserRepository();
+//
+//  runApp(App(userRepository: userRepository));
+
+
+/*
+TODO
+  - Rajouter AppStarted Event dans TodosBloc comme AuthenticationBloc
+  - Remettre TodosBloc comme avant dans un multiBlocProvider
+  - Rajouter dans FirebaseTodosBloc un lien à AuthenticationBloc
+    -> Voir Bloc-to-Bloc Communication
+  - Voir pour requeter sur Firestore
+*/
+
+
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final userRepository = UserRepository();
-
-  runApp(App(userRepository: userRepository));
+  runApp(
+    BlocProvider<AuthenticationBloc>(
+      builder: (context) {
+        return AuthenticationBloc(userRepository: userRepository)
+          ..dispatch(AppStarted());
+      },
+      child: App(userRepository: userRepository),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -24,24 +47,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthenticationBloc>(
-          builder: (context) {
-            return AuthenticationBloc(
-              userRepository: userRepository,
-            )..dispatch(AppStarted());
-          },
-        ),
-        BlocProvider<TodosBloc>(
-          builder: (context) {
-            return TodosBloc(
-              todosRepository: FirebaseTodosRepository(),
-            )..dispatch(LoadTodos());
-          },
-        )
-      ],
-      child: MaterialApp(
+    return  MaterialApp(
         title: FlutterBlocLocalizations().appTitle,
         theme: ArchSampleTheme.theme,
         localizationsDelegates: [
@@ -53,22 +59,36 @@ class App extends StatelessWidget {
             return BlocBuilder<AuthenticationBloc, AuthenticationState>(
               builder: (context, state) {
                 if (state is Authenticated) {
-                  final todosBloc = BlocProvider.of<TodosBloc>(context);
-                  return MultiBlocProvider(
-                    providers: [
-                      BlocProvider<TabBloc>(
-                        builder: (context) => TabBloc(),
-                      ),
-                      BlocProvider<FilteredTodosBloc>(
-                        builder: (context) =>
-                            FilteredTodosBloc(todosBloc: todosBloc),
-                      ),
-                      BlocProvider<StatsBloc>(
-                        builder: (context) => StatsBloc(todosBloc: todosBloc),
-                      ),
-                    ],
-                    child: HomeScreen(),
-                  );
+//
+//                  return BlocProvider<TodosBloc>(
+//                    builder: (context) => TodosBloc(
+//                            todosRepository: FirebaseTodosRepository(),
+//                          )..dispatch(LoadTodos()),
+//                    child: context.,
+//                  );
+
+//                  return MultiBlocProvider(
+//                    providers: [
+//                        BlocProvider<TodosBloc>(
+//                        builder: (context) {
+//                          return TodosBloc(
+//                            todosRepository: FirebaseTodosRepository(),
+//                          )..dispatch(LoadTodos());
+//                        },
+//                      ),
+//                      BlocProvider<TabBloc>(
+//                        builder: (context) => TabBloc(),
+//                      ),
+//                      BlocProvider<FilteredTodosBloc>(
+//                        builder: (context) =>
+//                            FilteredTodosBloc(todosBloc: todosBloc),
+//                      ),
+//                      BlocProvider<StatsBloc>(
+//                        builder: (context) => StatsBloc(todosBloc: todosBloc),
+//                      ),
+//                    ],
+//                    child: HomeScreen(),
+//                  );
                 }
                 if (state is Unauthenticated) {
                   return LoginScreen(userRepository: userRepository);
@@ -89,7 +109,6 @@ class App extends StatelessWidget {
             );
           },
         },
-      ),
-    );
+      );
   }
 }
