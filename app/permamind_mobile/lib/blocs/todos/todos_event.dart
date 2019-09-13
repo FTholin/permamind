@@ -7,9 +7,19 @@ abstract class TodosEvent extends Equatable {
   TodosEvent([List props = const []]) : super(props);
 }
 
-class LoadTodos extends TodosEvent {
+class TodosInit extends TodosEvent {
   @override
-  String toString() => 'LoadTodos';
+  String toString() => 'TodosInit';
+}
+
+class LoadTodos extends TodosEvent {
+
+  final String userId;
+
+  LoadTodos(this.userId) : super([userId]);
+
+  @override
+  String toString() => 'LoadTodos { userId: $userId}';
 }
 
 class AddTodo extends TodosEvent {

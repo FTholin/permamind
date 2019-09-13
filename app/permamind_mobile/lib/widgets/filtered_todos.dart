@@ -36,7 +36,7 @@ class FilteredTodos extends StatelessWidget {
                   child: Center(
                     child: GridTile(
                       footer: Text(
-                        'Item $index',
+                        '${todos[index].id}',
                         textAlign: TextAlign.center,
                       ),
                       child: Icon(Icons.local_florist,

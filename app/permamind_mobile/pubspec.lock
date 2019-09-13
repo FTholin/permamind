@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.3.0"
   authentication:
     dependency: "direct main"
     description:
@@ -22,20 +22,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.0"
-  boolean_selector:
-    dependency: transitive
-    description:
-      name: boolean_selector
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
-  charcode:
-    dependency: transitive
-    description:
-      name: charcode
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.2"
   cloud_firestore:
     dependency: "direct main"
     description:
@@ -97,11 +83,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.21.0"
-  flutter_test:
-    dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   font_awesome_flutter:
     dependency: transitive
     description:
@@ -123,13 +104,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.8"
-  matcher:
-    dependency: transitive
-    description:
-      name: matcher
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.12.5"
   meta:
     dependency: "direct main"
     description:
@@ -151,13 +125,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.5.0"
   provider:
     dependency: transitive
     description:
@@ -165,13 +132,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-  quiver:
-    dependency: transitive
-    description:
-      name: quiver
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
   rxdart:
     dependency: transitive
     description:
@@ -184,48 +144,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  source_span:
-    dependency: transitive
-    description:
-      name: source_span
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.5.5"
-  stack_trace:
-    dependency: transitive
-    description:
-      name: stack_trace
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.9.3"
-  stream_channel:
-    dependency: transitive
-    description:
-      name: stream_channel
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
-  string_scanner:
-    dependency: transitive
-    description:
-      name: string_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
-  term_glyph:
-    dependency: transitive
-    description:
-      name: term_glyph
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
-  test_api:
-    dependency: transitive
-    description:
-      name: test_api
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.4"
   todos_repository:
     dependency: "direct main"
     description:

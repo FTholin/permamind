@@ -7,7 +7,9 @@ abstract class TodosRepository {
 
   Future<void> deleteTodo(Todo todo);
 
-  Stream<List<Todo>> todos();
+  Stream<List<Todo>> todos(String userId);
+//  Future<Stream> todos(String userId);
+
 
   Future<void> updateTodo(Todo todo);
 }

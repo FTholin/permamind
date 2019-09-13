@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:authentication/authentication.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
@@ -8,17 +9,28 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
   final TodosRepository _todosRepository;
   StreamSubscription _todosSubscription;
 
-  TodosBloc({@required TodosRepository todosRepository})
-      : assert(todosRepository != null),
-        _todosRepository = todosRepository;
+
+  final AuthenticationBloc _authenticationBloc;
+  StreamSubscription _authenticationBlocSubscription;
+
+  TodosBloc(this._authenticationBloc, this._todosRepository) {
+    _authenticationBlocSubscription = _authenticationBloc.state.listen((state) {
+      // React to state changes here.
+      // Dispatch events here to trigger changes in MyBloc.
+      if (state is Authenticated) {
+        dispatch(LoadTodos(state.userId));
+      }
+    });
+  }
+
 
   @override
-  TodosState get initialState => TodosLoading();
+  TodosState get initialState => TodosNotLoaded();
 
   @override
   Stream<TodosState> mapEventToState(TodosEvent event) async* {
     if (event is LoadTodos) {
-      yield* _mapLoadTodosToState();
+      yield* _mapLoadTodosToState(event);
     } else if (event is AddTodo) {
       yield* _mapAddTodoToState(event);
     } else if (event is UpdateTodo) {
@@ -32,17 +44,23 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     } else if (event is TodosUpdated) {
       yield* _mapTodosUpdateToState(event);
     }
+//    } else if (event is TodosInit) {
+//      yield* _mapTodosInitToState();
+//    }
   }
 
-  Stream<TodosState> _mapLoadTodosToState() async* {
+  Stream<TodosState> _mapLoadTodosToState(LoadTodos event) async* {
+
     _todosSubscription?.cancel();
-    _todosSubscription = _todosRepository.todos().listen(
+
+    _todosSubscription = _todosRepository.todos(event.userId).listen(
           (todos) {
         dispatch(
           TodosUpdated(todos),
         );
       },
     );
+
   }
 
   Stream<TodosState> _mapAddTodoToState(AddTodo event) async* {
@@ -88,6 +106,22 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
   @override
   void dispose() {
     _todosSubscription?.cancel();
+    _authenticationBlocSubscription?.cancel();
     super.dispose();
   }
+
+
+//  Stream<TodosState> _mapTodosInitToState() async* {
+//    try {
+//      final isSignedIn = await _userRepository.isSignedIn();
+//      if (isSignedIn) {
+//        final name = await _userRepository.getUserId();
+//        yield Authenticated(name);
+//      } else {
+//        yield Unauthenticated();
+//      }
+//    } catch (_) {
+//      yield Unauthenticated();
+//    }
+//  }
 }
