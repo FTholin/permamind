@@ -11,15 +11,6 @@ import 'blocs/simple_bloc_delegate.dart';
 void main() {
 
 
-/*
-TODO
-  - Rajouter AppStarted Event dans TodosBloc comme AuthenticationBloc
-  - Rajouter dans FirebaseTodosBloc un lien à AuthenticationBloc
-    -> Voir Bloc-to-Bloc Communication
-  - Voir pour requeter sur Firestore
-*/
-
-
   BlocSupervisor.delegate = SimpleBlocDelegate();
   
   final userRepository = UserRepository();
@@ -102,6 +93,11 @@ class App extends StatelessWidget {
               isEditing: false,
             );
           },
+          '/addParcel' : (context) {
+            final todosBloc = BlocProvider.of<TodosBloc>(context);
+            return ModelisationsDiscoverScreen(
+            );
+          }
         },
       );
   }

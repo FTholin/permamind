@@ -11,6 +11,8 @@ class FlutterBlocLocalizations {
   }
 
   String get appTitle => "Permamind";
+
+  String get modelisationsName => "Modelisations";
 }
 
 class FlutterBlocLocalizationsDelegate

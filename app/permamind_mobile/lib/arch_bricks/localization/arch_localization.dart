@@ -99,6 +99,13 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
+  String get addParcel => Intl.message(
+    'Add Parcel',
+    name: 'addParcel',
+    args: [],
+    locale: locale.toString(),
+  );
+
   String get editTodo => Intl.message(
     'Edit Todo',
     name: 'editTodo',

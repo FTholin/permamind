@@ -6,6 +6,7 @@ import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/screens/screens.dart';
 import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
 
+// TODO La detail screen sera a changé plus tard nous mettrons les tâches courantes à réaliser dans le jardin
 class DetailsScreen extends StatelessWidget {
   final String id;
 
@@ -71,7 +72,7 @@ class DetailsScreen extends StatelessWidget {
                                 bottom: 16.0,
                               ),
                               child: Text(
-                                todo.task,
+                                "Coucou",
                                 key: ArchSampleKeys.detailsTodoItemTask,
                                 style: Theme.of(context).textTheme.headline,
                               ),
