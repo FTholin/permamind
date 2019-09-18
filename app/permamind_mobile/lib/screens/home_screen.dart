@@ -1,11 +1,9 @@
-import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/models/models.dart';
-
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -18,7 +16,6 @@ class HomeScreen extends StatelessWidget {
             title: Text(FlutterBlocLocalizations.of(context).appTitle),
             actions: [
               FilterButton(visible: activeTab == AppTab.todos),
-
               ExtraActions(),
             ],
           ),

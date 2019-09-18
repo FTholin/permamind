@@ -23,7 +23,6 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     });
   }
 
-
   @override
   TodosState get initialState => TodosNotLoaded();
 

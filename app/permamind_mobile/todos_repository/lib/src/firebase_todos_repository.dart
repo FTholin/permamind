@@ -15,7 +15,9 @@ class FirebaseTodosRepository implements TodosRepository {
   final todoCollection = Firestore.instance.collection('todos');
   
   final parcelsCollection = Firestore.instance.collection('parcels');
-  
+
+  final vegetablesCollection = Firestore.instance.collection('parcels');
+
 
   @override
   Future<void> addNewTodo(Todo todo) {
@@ -64,6 +66,9 @@ class FirebaseTodosRepository implements TodosRepository {
 
     return controller.stream;
   }
+
+//  @override
+//  Stream<List<>>
 
   @override
   Future<void> updateTodo(Todo update) {

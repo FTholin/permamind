@@ -94,8 +94,17 @@ class App extends StatelessWidget {
             );
           },
           '/addParcel' : (context) {
+
             final todosBloc = BlocProvider.of<TodosBloc>(context);
-            return ModelisationsDiscoverScreen(
+
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider<ModelisationsBloc>(
+                  builder: (context) =>
+                      ModelisationsBloc(todosBloc: todosBloc),
+                ),
+            ],
+            child: ModelisationsDiscoverScreen(),
             );
           }
         },
