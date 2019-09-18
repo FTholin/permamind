@@ -16,7 +16,7 @@ class FirebaseTodosRepository implements TodosRepository {
   
   final parcelsCollection = Firestore.instance.collection('parcels');
 
-  final vegetablesCollection = Firestore.instance.collection('parcels');
+  final modelisationsCollection = Firestore.instance.collection('modelisations');
 
 
   @override
@@ -67,8 +67,16 @@ class FirebaseTodosRepository implements TodosRepository {
     return controller.stream;
   }
 
-//  @override
-//  Stream<List<>>
+
+  @override
+  Stream<List<Todo>> fetchModelisations() {
+    return todoCollection.snapshots().map((snapshot) {
+      return snapshot.documents
+        .map((doc) => Todo.fromEntity(TodoEntity.fromSnapshot(doc)))
+        .toList();
+    });
+  }
+
 
   @override
   Future<void> updateTodo(Todo update) {

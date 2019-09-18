@@ -22,7 +22,7 @@ class FilteredModelisations extends StatelessWidget {
           if (state is ModelisationsLoading) {
             return LoadingIndicator(key: ArchSampleKeys.todosLoading);
           } else if (state is ModelisationsLoaded) {
-            final todos = state.plantsFetched;
+            final todos = state.modelisationsFetched;
 
             return GridView.builder(
               key: ArchSampleKeys.todoList,

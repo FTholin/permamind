@@ -7,12 +7,30 @@ abstract class ModelisationsEvent extends Equatable {
   ModelisationsEvent([List props = const []]) : super(props);
 }
 
-class UpdatedModelisations extends ModelisationsEvent {
-  final List<Todo> plants;
+class FetchModelisations extends ModelisationsEvent {
 
-  UpdatedModelisations(this.plants) : super([plants]);
+
+  FetchModelisations() : super([]);
 
   @override
-  String toString() => 'UpdateModelisations { plants: $plants }';
+  String toString() => 'FetchModelisations ';
 }
+
+class UpdatedModelisations extends ModelisationsEvent {
+  final List<Todo> modelisations;
+
+  UpdatedModelisations(this.modelisations) : super([modelisations]);
+
+  @override
+  String toString() => 'FetchModelisations { modelisations: $modelisations }';
+}
+
+//class UpdatedModelisations extends ModelisationsEvent {
+//  final List<Todo> modelisations;
+//
+//  UpdatedModelisations(this.modelisations) : super([modelisations]);
+//
+//  @override
+//  String toString() => 'UpdateModelisations { modelisations: $modelisations }';
+//}
 

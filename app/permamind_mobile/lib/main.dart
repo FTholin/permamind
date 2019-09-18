@@ -14,6 +14,9 @@ void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   
   final userRepository = UserRepository();
+
+  final firebaseRepository = FirebaseTodosRepository();
+
   final authenticationBloc = AuthenticationBloc(userRepository: userRepository);
   
   runApp(
@@ -26,11 +29,11 @@ void main() {
                       ),
                       BlocProvider<TodosBloc>(
                         builder: (context) {
-                          return TodosBloc(authenticationBloc, FirebaseTodosRepository())..dispatch(TodosInit());
+                          return TodosBloc(authenticationBloc, firebaseRepository)..dispatch(TodosInit());
                         },
                       ),
                     ],
-        child: App(userRepository: userRepository),
+        child: App(userRepository: userRepository, firebaseRepository: firebaseRepository),
       )
   );
 }
@@ -39,7 +42,9 @@ class App extends StatelessWidget {
 
   final UserRepository userRepository;
 
-  App({@required this.userRepository});
+  final FirebaseTodosRepository firebaseRepository;
+
+  App({@required this.userRepository, @required this.firebaseRepository});
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +106,7 @@ class App extends StatelessWidget {
               providers: [
                 BlocProvider<ModelisationsBloc>(
                   builder: (context) =>
-                      ModelisationsBloc(todosBloc: todosBloc),
+                      ModelisationsBloc(todosRepository: firebaseRepository)..dispatch(FetchModelisations()),
                 ),
             ],
             child: ModelisationsDiscoverScreen(),

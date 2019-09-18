@@ -5,38 +5,39 @@ import 'package:bloc/bloc.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 class ModelisationsBloc extends Bloc<ModelisationsEvent, ModelisationsState> {
-  final TodosBloc todosBloc;
-  StreamSubscription todosSubscription;
 
-  ModelisationsBloc({@required this.todosBloc}) {
-    todosSubscription = todosBloc.state.listen((state) {
-      if (state is TodosLoaded) {
-        dispatch(UpdatedModelisations((todosBloc.currentState as TodosLoaded).todos));
-      }
-    });
-  }
+  final TodosRepository todosRepository;
+  StreamSubscription _todosSubscription;
+
+  ModelisationsBloc({@required this.todosRepository});
 
   @override
   ModelisationsState get initialState => ModelisationsLoading();
 
   @override
   Stream<ModelisationsState> mapEventToState(ModelisationsEvent event) async* {
-    if (event is UpdatedModelisations) {
-      yield* _mapModelisationsUpdatedToState(event);
+    if (event is FetchModelisations) {
+      yield* _mapFetchModelisationsToState(event);
+    }
+    else if (event is UpdatedModelisations) {
+      yield* _mapTodosUpdateToState(event);
     }
   }
 
-  Stream<ModelisationsState> _mapModelisationsUpdatedToState(
-      UpdatedModelisations event,
-      ) async* {
-    yield ModelisationsLoaded(
-      (todosBloc.currentState as TodosLoaded).todos);
+
+  Stream<ModelisationsState> _mapFetchModelisationsToState(ModelisationsEvent event) async* {
+    _todosSubscription?.cancel();
+    _todosSubscription = todosRepository.fetchModelisations().listen(
+          (todos) {
+        dispatch(
+          UpdatedModelisations(todos),
+        );
+      },
+    );
   }
 
-
-  @override
-  void dispose() {
-    todosSubscription.cancel();
-    super.dispose();
+  Stream<ModelisationsState> _mapTodosUpdateToState(UpdatedModelisations event) async* {
+    yield ModelisationsLoaded(event.modelisations);
   }
+
 }

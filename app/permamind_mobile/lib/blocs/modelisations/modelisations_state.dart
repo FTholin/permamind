@@ -13,11 +13,11 @@ class ModelisationsLoading extends ModelisationsState {
 }
 
 class ModelisationsLoaded extends ModelisationsState {
-  final List<Todo> plantsFetched;
+  final List<Todo> modelisationsFetched;
 
-  ModelisationsLoaded(this.plantsFetched)
-      : super([plantsFetched]);
+  ModelisationsLoaded(this.modelisationsFetched)
+      : super([modelisationsFetched]);
 
   @override
-  String toString() => 'ModelisationsLoaded { plantsFetched: $plantsFetched }';
+  String toString() => 'ModelisationsLoaded { modelisationsFetched: $modelisationsFetched }';
 }
