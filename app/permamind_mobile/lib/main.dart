@@ -109,7 +109,7 @@ class App extends StatelessWidget {
                       ModelisationsBloc(todosRepository: firebaseRepository)..dispatch(FetchModelisations()),
                 ),
             ],
-            child: ModelisationsDiscoverScreen(),
+            child: DiscoverModelisationsScreen(),
             );
           }
         },

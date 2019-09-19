@@ -27,30 +27,31 @@ class FilteredModelisations extends StatelessWidget {
             return GridView.builder(
               key: ArchSampleKeys.todoList,
               itemCount: todos.length,
+
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
+                  crossAxisCount: 2,
+                childAspectRatio: MediaQuery.of(context).size.width /
+                  (MediaQuery.of(context).size.height / 4) ),
+
               itemBuilder: (BuildContext context, int index) {
                 return InkResponse(
                   enableFeedback: true,
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    child: Center(
-                      child: GridTile(
-                        footer: Text(
-                          '${todos[index].id}',
-                          textAlign: TextAlign.center,
+                  child: Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const ListTile(
+                          leading: Icon(Icons.ac_unit, size: 50),
+                          title: Text('Heart Shaker'),
+                          subtitle: Text('TWICE'),
                         ),
-                        child: Icon(Icons.local_florist,
-                            size: 40.0, color: Colors.white30),
-                      ),
+                      ],
                     ),
-                    color: Colors.blue[400],
-                    margin: EdgeInsets.all(10.0),
                   ),
                   onTap: () async {
                     final removedTodo = await Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) {
-                          return DetailsScreen(id: todos[index].id);
+                          return DetailsModelisationScreen(id: todos[index].id);
                         })
                     );
                     if (removedTodo != null) {
