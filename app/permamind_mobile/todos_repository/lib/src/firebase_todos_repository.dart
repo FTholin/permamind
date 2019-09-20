@@ -72,7 +72,7 @@ class FirebaseTodosRepository implements TodosRepository {
 
   @override
   Stream<List<Todo>> fetchModelisations() {
-    return plantsCollection.snapshots().map((snapshot) {
+    return modelisationsCollection.snapshots().map((snapshot) {
       return snapshot.documents
         .map((doc) => Todo.fromEntity(TodoEntity.fromSnapshot(doc)))
         .toList();
