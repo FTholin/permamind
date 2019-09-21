@@ -10,13 +10,12 @@ import 'entities/entities.dart';
 
 
 class FirebaseTodosRepository implements TodosRepository {
-  
 
   final todoCollection = Firestore.instance.collection('todos');
   
   final parcelsCollection = Firestore.instance.collection('parcels');
 
-  final modelisationsCollection = Firestore.instance.collection('modelisations');
+  final modellingsCollection = Firestore.instance.collection('modellings');
 
   final plantsCollection = Firestore.instance.collection('vegetables');
 
@@ -71,10 +70,10 @@ class FirebaseTodosRepository implements TodosRepository {
 
 
   @override
-  Stream<List<Todo>> fetchModelisations() {
-    return modelisationsCollection.snapshots().map((snapshot) {
+  Stream<List<Modelling>> fetchModellings() {
+    return modellingsCollection.snapshots().map((snapshot) {
       return snapshot.documents
-        .map((doc) => Todo.fromEntity(TodoEntity.fromSnapshot(doc)))
+        .map((doc) => Modelling.fromEntity(ModellingEntity.fromSnapshot(doc)))
         .toList();
     });
   }

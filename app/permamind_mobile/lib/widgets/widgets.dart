@@ -6,4 +6,4 @@ export 'todo_item.dart';
 export 'stats.dart';
 export 'delete_todo_snack_bar.dart';
 export 'loading_indicator.dart';
-export 'filtered_modelisations.dart';
+export 'filtered_modellings.dart';

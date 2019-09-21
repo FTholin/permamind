@@ -104,12 +104,12 @@ class App extends StatelessWidget {
 
             return MultiBlocProvider(
               providers: [
-                BlocProvider<ModelisationsBloc>(
+                BlocProvider<ModellingsBloc>(
                   builder: (context) =>
-                      ModelisationsBloc(todosRepository: firebaseRepository)..dispatch(FetchModelisations()),
+                  ModellingsBloc(todosRepository: firebaseRepository)..dispatch(FetchModellings()),
                 ),
             ],
-            child: DiscoverModelisationsScreen(),
+            child: DiscoverModellingsScreen(),
             );
           }
         },

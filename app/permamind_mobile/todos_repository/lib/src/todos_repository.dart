@@ -9,7 +9,7 @@ abstract class TodosRepository {
 
   Stream<List<Todo>> todos(String userId);
 
-  Stream<List<Todo>> fetchModelisations();
+  Stream<List<Modelling>> fetchModellings();
 
   Future<void> updateTodo(Todo todo);
 }

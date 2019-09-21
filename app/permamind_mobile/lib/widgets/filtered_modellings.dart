@@ -7,9 +7,12 @@ import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
 import 'package:permamind_mobile/screens/screens.dart';
 import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
+import 'package:todos_repository/todos_repository.dart';
 
-class FilteredModelisations extends StatelessWidget {
-  FilteredModelisations({Key key}) : super(key: key);
+class FilteredModellings extends StatelessWidget {
+  final List<Modelling> modellings;
+
+  FilteredModellings({this.modellings, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +20,9 @@ class FilteredModelisations extends StatelessWidget {
     final todosBloc = BlocProvider.of<TodosBloc>(context);
     final localizations = ArchSampleLocalizations.of(context);
 
-    return BlocBuilder<ModelisationsBloc, ModelisationsState>(
-        builder: (context, state) {
-          if (state is ModelisationsLoading) {
-            return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-          } else if (state is ModelisationsLoaded) {
-            final todos = state.modelisationsFetched;
-
-            return GridView.builder(
+    return GridView.builder(
               key: ArchSampleKeys.todoList,
-              itemCount: todos.length,
+              itemCount: modellings.length,
 
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -40,10 +36,10 @@ class FilteredModelisations extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        const ListTile(
+                         ListTile(
                           leading: Icon(Icons.ac_unit, size: 50),
-                          title: Text('Heart Shaker'),
-                          subtitle: Text('TWICE'),
+                          title: Text('${modellings[index].modellingName}'),
+                          subtitle: Text('${modellings[index].modellingId}'),
                         ),
                       ],
                     ),
@@ -51,28 +47,20 @@ class FilteredModelisations extends StatelessWidget {
                   onTap: () async {
                     final removedTodo = await Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) {
-                          return DetailsModelisationScreen(id: todos[index].id);
+                          return DetailsModellingScreen(modelling: modellings[index]);
                         })
                     );
-                    if (removedTodo != null) {
-                      Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-                        key: ArchSampleKeys.snackbar,
-                        todo: todos[index],
-                        onUndo: () => todosBloc.dispatch(AddTodo(todos[index])),
-                        localizations: localizations,
-                      ));
-                    }
+//                    if (removedTodo != null) {
+//                      Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+//                        key: ArchSampleKeys.snackbar,
+//                        todo: modellings[index],
+//                        onUndo: () => todosBloc.dispatch(AddTodo(todos[index])),
+//                        localizations: localizations,
+//                      ));
+//                    }
                   },
                 );
-
               },
             );
-
-          }
-          else {
-            return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
-          }
-        }
-    );
   }
 }

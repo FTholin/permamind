@@ -5,22 +5,19 @@ import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/screens/screens.dart';
 import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
+import 'package:todos_repository/todos_repository.dart';
 
-class DetailsModelisationScreen extends StatelessWidget {
-  final String id;
+class DetailsModellingScreen extends StatelessWidget {
+  final Modelling modelling;
 
-  DetailsModelisationScreen({Key key, @required this.id})
+  DetailsModellingScreen({Key key, @required this.modelling})
       : super(key: key ?? ArchSampleKeys.todoDetailsScreen);
 
   @override
   Widget build(BuildContext context) {
     final todosBloc = BlocProvider.of<TodosBloc>(context);
-    return BlocBuilder<TodosBloc, TodosState>(
-      builder: (BuildContext context, TodosState state) {
-        final todo = (state as TodosLoaded)
-            .todos
-            .firstWhere((todo) => todo.id == id, orElse: () => null);
-        final localizations = ArchSampleLocalizations.of(context);
+    final localizations = ArchSampleLocalizations.of(context);
+
         return Scaffold(
           appBar: AppBar(
             actions: <Widget>[
@@ -30,7 +27,7 @@ class DetailsModelisationScreen extends StatelessWidget {
                 icon: Icon(Icons.favorite),
                 onPressed: () {
 //                  todosBloc.dispatch(DeleteTodo(todo));
-                  Navigator.pop(context, todo);
+                  Navigator.pop(context, modelling);
                 },
               )
             ],
@@ -253,7 +250,7 @@ class DetailsModelisationScreen extends StatelessWidget {
                                         width: MediaQuery.of(context).size.width,
                                         padding: EdgeInsets.only(top: 10),
 
-                                        child: Text('Douceur printanière',
+                                        child: Text('${modelling.modellingName}',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
@@ -286,7 +283,7 @@ class DetailsModelisationScreen extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 10),
                                         color: Colors.lightBlueAccent,
                                         width: MediaQuery.of(context).size.width,
-                                        child: Text('5 weeks',
+                                        child: Text('${modelling.modellingAverageDuration} weeks',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
@@ -561,25 +558,23 @@ class DetailsModelisationScreen extends StatelessWidget {
               key: ArchSampleKeys.editTodoFab,
               tooltip: localizations.editTodo,
               child: Icon(Icons.edit),
-              onPressed: todo == null
+              onPressed: modelling == null
                   ? null
                   : () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return AddEditScreen(
-                          key: ArchSampleKeys.editTodoScreen,
-                          onSave: (task, note) {
-                            todosBloc.dispatch(UpdateTodo(
-                              todo.copyWith(task: task, note: note),
-                            ));
-                          },
-                          isEditing: true,
-                          todo: todo,
-                        );
+//                        return AddEditScreen(
+//                          key: ArchSampleKeys.editTodoScreen,
+//                          onSave: (task, note) {
+//                            todosBloc.dispatch(UpdateTodo(
+//                              modelling.copyWith(modellingId: modelling.modellingId, note: note),
+//                            ));
+//                          },
+//                          isEditing: true,
+//                          todo: modelling,
+//                        );
                       }));
                     }),
         );
-      },
-    );
   }
 }

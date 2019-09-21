@@ -7,7 +7,7 @@ import 'package:todos_repository/todos_repository.dart';
 
 //typedef OnSaveCallback = Function(String task, String note);
 
-class DiscoverModelisationsScreen extends StatelessWidget {
+class DiscoverModellingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DiscoverModelisationsScreen extends StatelessWidget {
               margin: const EdgeInsets.only(left: 20, right: 20),
               width: MediaQuery.of(context).size.width,
               child: Text(
-                  '${FlutterBlocLocalizations.of(context).modelisationsName}',
+                  '${FlutterBlocLocalizations.of(context).modellingsName}',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -81,16 +81,28 @@ class DiscoverModelisationsScreen extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
               color: Colors.blue,
-              child: FilteredModelisations(),
+              child: BlocBuilder<ModellingsBloc, ModellingsState>(
+                  builder: (context, state) {
+                    if (state is ModellingsLoading) {
+                      return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+                    }
+                    else if (state is ModellingsLoaded) {
+                      final modellings = state.modellingsFetched;
+                      return FilteredModellings(modellings: modellings);
+                    }
+                    else {
+                      return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                    }
+                  }),
             ),
           ),
-          Flexible(
-            flex: 2,
-            child: Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                width: MediaQuery.of(context).size.width,
-                child: Text(
-                    '${FlutterBlocLocalizations.of(context).browseAllModelisations}',
+    Flexible(
+    flex: 2,
+    child: Container(
+    margin: const EdgeInsets.only(left: 20, right: 20),
+    width: MediaQuery.of(context).size.width,
+    child: Text(
+    '${FlutterBlocLocalizations.of(context).browseAllModellings}',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.normal,
@@ -103,7 +115,19 @@ class DiscoverModelisationsScreen extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
               color: Colors.blue,
-              child: FilteredModelisations(),
+              child: BlocBuilder<ModellingsBloc, ModellingsState>(
+                  builder: (context, state) {
+                    if (state is ModellingsLoading) {
+                      return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+                    }
+                    else if (state is ModellingsLoaded) {
+                      final modellings = state.modellingsFetched;
+                      return FilteredModellings(modellings: modellings);
+                    }
+                    else {
+                      return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                    }
+                  }),
             ),
           )
         ],
