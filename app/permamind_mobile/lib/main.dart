@@ -98,18 +98,27 @@ class App extends StatelessWidget {
               isEditing: false,
             );
           },
-          '/addParcel' : (context) {
+          '/addGarden' : (context) {
 
             final todosBloc = BlocProvider.of<TodosBloc>(context);
 
-            return MultiBlocProvider(
-              providers: [
-                BlocProvider<ModellingsBloc>(
-                  builder: (context) =>
-                  ModellingsBloc(todosRepository: firebaseRepository)..dispatch(FetchModellings()),
-                ),
-            ],
-            child: DiscoverModellingsScreen(),
+//            return MultiBlocProvider(
+//              providers: [
+//                BlocProvider<ModellingsBloc>(
+//                  builder: (context) =>
+//                  ModellingsBloc(todosRepository: firebaseRepository)..dispatch(FetchModellings()),
+//                ),
+//            ],
+//            child: DiscoverModellingsScreen(),
+//            );
+
+            return AddEditGardenScreen(
+//              onSave: (task, note) {
+//                todosBloc.dispatch(
+//                  AddTodo(Todo(task, note: note)),
+//                );
+//              },
+              isEditing: false,
             );
           }
         },

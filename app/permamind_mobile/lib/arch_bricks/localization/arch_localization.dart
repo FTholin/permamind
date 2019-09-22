@@ -99,9 +99,9 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
-  String get addParcel => Intl.message(
-    'Add Parcel',
-    name: 'addParcel',
+  String get addGarden => Intl.message(
+    'Add Garden',
+    name: 'addGarden',
     args: [],
     locale: locale.toString(),
   );

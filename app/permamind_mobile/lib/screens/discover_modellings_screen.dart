@@ -15,7 +15,9 @@ class DiscoverModellingsScreen extends StatelessWidget {
     final localizations = ArchSampleLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Choose a modelling"),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -129,7 +131,7 @@ class DiscoverModellingsScreen extends StatelessWidget {
                     }
                   }),
             ),
-          )
+          ),
         ],
       ),
     );

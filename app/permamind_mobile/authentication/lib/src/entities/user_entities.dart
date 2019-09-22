@@ -6,10 +6,10 @@ class UserEntity extends Equatable {
   final String pseudo;
   final String nationality;
   final String email;
-  final List<String> parcelsAssociated;
+  final List<String> gardensAssociated;
   final List<String> activitiesAssignated;
 
-  UserEntity(this.id, this.pseudo, this.email, this.parcelsAssociated, this.activitiesAssignated, this.nationality);
+  UserEntity(this.id, this.pseudo, this.email, this.gardensAssociated, this.activitiesAssignated, this.nationality);
 
   Map<String, Object> toJson() {
     return {
@@ -17,14 +17,14 @@ class UserEntity extends Equatable {
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,
-      'parcelsAssociated': parcelsAssociated,
+      'gardensAssociated': gardensAssociated,
       'activitiesAssignated': activitiesAssignated,
     };
   }
 
   @override
   String toString() {
-    return 'UserEntity { id: $id, pseudo: $pseudo, email: $email, parcels: $parcelsAssociated, activities: $activitiesAssignated, nationality: $nationality }';
+    return 'UserEntity { id: $id, pseudo: $pseudo, email: $email, gardens: $gardensAssociated, activities: $activitiesAssignated, nationality: $nationality }';
   }
 
   static UserEntity fromJson(Map<String, Object> json) {
@@ -32,7 +32,7 @@ class UserEntity extends Equatable {
       json['id'] as String,
       json['pseudo'] as String,
       json['email'] as String,
-      json['parcelsAssociated'] as List<String>,
+      json['gardensAssociated'] as List<String>,
       json['activitiesAssignated'] as List<String>,
       json['nationality'] as String,
     );
@@ -43,7 +43,7 @@ class UserEntity extends Equatable {
       snap.data['id'],
       snap.data['pseudo'],
       snap.data['email'],
-      snap.data['parcelsAssociated'],
+      snap.data['gardensAssociated'],
       snap.data['activitiesAssignated'],
       snap.data['nationality'],
     );
@@ -54,7 +54,7 @@ class UserEntity extends Equatable {
       'id': id,
       'pseudo': pseudo,
       'email': email,
-      'parcelsAssociated': parcelsAssociated,
+      'gardensAssociated': gardensAssociated,
       'activitiesAssignated': activitiesAssignated,
       'nationality': nationality,
     };

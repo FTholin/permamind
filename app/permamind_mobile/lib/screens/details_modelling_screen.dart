@@ -60,7 +60,8 @@ class DetailsModellingScreen extends StatelessWidget {
                             border: InputBorder.none,
                             hintText: 'Eden 2 '),
                       ),
-                    )),
+                    )
+                ),
                 Flexible(
                   flex: 1,
                   child: Container(

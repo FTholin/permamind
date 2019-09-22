@@ -13,7 +13,7 @@ class FirebaseTodosRepository implements TodosRepository {
 
   final todoCollection = Firestore.instance.collection('todos');
   
-  final parcelsCollection = Firestore.instance.collection('parcels');
+  final gardensCollection = Firestore.instance.collection('gardens');
 
   final modellingsCollection = Firestore.instance.collection('modellings');
 
@@ -33,11 +33,11 @@ class FirebaseTodosRepository implements TodosRepository {
 
   Stream<List<QuerySnapshot>> _combineStreams(String userId) {
 
-    var stream1 = parcelsCollection
+    var stream1 = gardensCollection
         .where("owners", arrayContains: userId)
         .snapshots();
 
-    var stream2 = parcelsCollection
+    var stream2 = gardensCollection
       .where("contributors", arrayContains: userId)
       .snapshots();
 

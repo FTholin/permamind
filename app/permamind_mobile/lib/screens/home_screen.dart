@@ -21,12 +21,12 @@ class HomeScreen extends StatelessWidget {
           ),
           body: activeTab == AppTab.todos ? FilteredTodos() : Stats(),
           floatingActionButton: FloatingActionButton(
-            key: ArchSampleKeys.addParcelFab,
+            key: ArchSampleKeys.addGardenFab,
             onPressed: () {
-              Navigator.pushNamed(context, ArchSampleRoutes.addParcel);
+              Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
             },
             child: Icon(Icons.add),
-            tooltip: ArchSampleLocalizations.of(context).addParcel,
+            tooltip: ArchSampleLocalizations.of(context).addGarden,
           ),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
