@@ -10,7 +10,6 @@ import 'package:todos_repository/todos_repository.dart';
 
 typedef SaveGardenCallback = Function(String gardenName, bool gardenPublicVisibility);
 
-
 class DetailsModellingScreen extends StatelessWidget {
 
   final SaveGardenCallback onSaveGarden;
@@ -27,17 +26,7 @@ class DetailsModellingScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            actions: <Widget>[
-              IconButton(
-//                tooltip: localizations.deleteTodo,
-//                key: ArchSampleKeys.deleteTodoButton,
-                icon: Icon(Icons.favorite),
-                onPressed: () {
-//                  todosBloc.dispatch(DeleteTodo(todo));
-                  Navigator.pop(context, args);
-                },
-              )
-            ],
+           title: Text("${args.gardenName}"),
           ),
           body: Container(
             child: Column(
@@ -571,7 +560,6 @@ class DetailsModellingScreen extends StatelessWidget {
         );
   }
 }
-
 
 class DetailsModellingsScreenArguments {
   final Modelling modelling;

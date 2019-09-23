@@ -34,11 +34,11 @@ class FirebaseTodosRepository implements TodosRepository {
   Stream<List<QuerySnapshot>> _combineStreams(String userId) {
 
     var stream1 = gardensCollection
-        .where("owners", arrayContains: userId)
+        .where("gardenOwners", arrayContains: userId)
         .snapshots();
 
     var stream2 = gardensCollection
-      .where("contributors", arrayContains: userId)
+      .where("gardenContributors", arrayContains: userId)
       .snapshots();
 
     return StreamZip(([stream1, stream2])).asBroadcastStream();
