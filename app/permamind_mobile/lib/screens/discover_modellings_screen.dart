@@ -8,33 +8,33 @@ import 'package:todos_repository/todos_repository.dart';
 //typedef OnSaveCallback = Function(String task, String note);
 
 class DiscoverModellingsScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final todosBloc = BlocProvider.of<TodosBloc>(context);
     final localizations = ArchSampleLocalizations.of(context);
 
+    final ModellingsScreenArguments args =
+        ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Choose a modelling"),
-      ),
+//        title: Text("Choose a modelling"),
+          title: Text("${args.gardenName}")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Flexible(
-          flex: 3,
-          child: Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              width: MediaQuery.of(context).size.width,
-              child: Text(
-                  '${FlutterBlocLocalizations.of(context).modellingsName}',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 32)
-              )
+            flex: 3,
+            child: Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                    '${FlutterBlocLocalizations.of(context).modellingsName}',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32))),
           ),
-        ),
           Flexible(
             flex: 2,
             child: Column(
@@ -59,8 +59,7 @@ class DiscoverModellingsScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                    )
-                ),
+                    )),
               ],
             ),
           ),
@@ -74,9 +73,7 @@ class DiscoverModellingsScreen extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.normal,
-                        fontSize: 20)
-                )
-            ),
+                        fontSize: 20))),
           ),
           Flexible(
             flex: 9,
@@ -85,32 +82,32 @@ class DiscoverModellingsScreen extends StatelessWidget {
               color: Colors.blue,
               child: BlocBuilder<ModellingsBloc, ModellingsState>(
                   builder: (context, state) {
-                    if (state is ModellingsLoading) {
-                      return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-                    }
-                    else if (state is ModellingsLoaded) {
-                      final modellings = state.modellingsFetched;
-                      return FilteredModellings(modellings: modellings);
-                    }
-                    else {
-                      return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
-                    }
-                  }),
+                if (state is ModellingsLoading) {
+                  return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+                } else if (state is ModellingsLoaded) {
+                  final modellings = state.modellingsFetched;
+                  return FilteredModellings(
+                      modellings: modellings,
+                      gardenName: 'jardin des espérides',
+                      gardenPublicVisibility: false);
+                } else {
+                  return Container(
+                      key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                }
+              }),
             ),
           ),
-    Flexible(
-    flex: 2,
-    child: Container(
-    margin: const EdgeInsets.only(left: 20, right: 20),
-    width: MediaQuery.of(context).size.width,
-    child: Text(
-    '${FlutterBlocLocalizations.of(context).browseAllModellings}',
+          Flexible(
+            flex: 2,
+            child: Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                    '${FlutterBlocLocalizations.of(context).browseAllModellings}',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.normal,
-                        fontSize: 20)
-                )
-            ),
+                        fontSize: 20))),
           ),
           Flexible(
             flex: 9,
@@ -119,21 +116,30 @@ class DiscoverModellingsScreen extends StatelessWidget {
               color: Colors.blue,
               child: BlocBuilder<ModellingsBloc, ModellingsState>(
                   builder: (context, state) {
-                    if (state is ModellingsLoading) {
-                      return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-                    }
-                    else if (state is ModellingsLoaded) {
-                      final modellings = state.modellingsFetched;
-                      return FilteredModellings(modellings: modellings);
-                    }
-                    else {
-                      return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
-                    }
-                  }),
+                if (state is ModellingsLoading) {
+                  return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+                } else if (state is ModellingsLoaded) {
+                  final modellings = state.modellingsFetched;
+                  return FilteredModellings(
+                      modellings: modellings,
+                      gardenName: 'jardin des espérides',
+                      gardenPublicVisibility: false);
+                } else {
+                  return Container(
+                      key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                }
+              }),
             ),
           ),
         ],
       ),
     );
   }
+}
+
+class ModellingsScreenArguments {
+  final String gardenName;
+  final bool gardenPublicVisibility;
+
+  ModellingsScreenArguments(this.gardenName, this.gardenPublicVisibility);
 }

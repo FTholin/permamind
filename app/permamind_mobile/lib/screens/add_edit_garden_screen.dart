@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
+import 'package:permamind_mobile/screens/screens.dart';
 import 'package:todos_repository/todos_repository.dart';
 
 class AddEditGardenScreen extends StatefulWidget {
@@ -42,7 +43,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                 Flexible(
                   flex: 2,
                   child: Container(
-//                color: Colors.indigoAccent,
                       margin: const EdgeInsets.only(left: 15),
                       width: MediaQuery.of(context).size.width,
                       child: Text("Garden's Name",
@@ -130,7 +130,16 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              onPressed: ,
+              onPressed:() {
+                // TODO retrieve all form infos
+                Navigator.pushNamed(context,
+                  ArchSampleRoutes.discoverModellings,
+                  arguments: ModellingsScreenArguments(
+                  'Jardin des espérides',
+                    false
+                  ),
+                );
+              },
               child: Text("Choose a modelling",
                   style: TextStyle(
                       color: Colors.white,

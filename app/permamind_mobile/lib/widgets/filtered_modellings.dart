@@ -11,8 +11,10 @@ import 'package:todos_repository/todos_repository.dart';
 
 class FilteredModellings extends StatelessWidget {
   final List<Modelling> modellings;
+  final String gardenName;
+  final bool gardenPublicVisibility;
 
-  FilteredModellings({this.modellings, Key key}) : super(key: key);
+  FilteredModellings({this.modellings, this.gardenName, this.gardenPublicVisibility, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +47,23 @@ class FilteredModellings extends StatelessWidget {
                     ),
                   ),
                   onTap: () async {
-                    final removedTodo = await Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) {
-                          return DetailsModellingScreen(modelling: modellings[index]);
-                        })
+
+                      // TODO retrieve all form infos and transfer them
+                    
+                    final todo = await Navigator.pushNamed(context,
+                      ArchSampleRoutes.detailsModelling,
+                      arguments: DetailsModellingsScreenArguments(
+                          modelling: modellings[index],
+                          gardenName: 'jardin des espérides',
+                          gardenPublicVisibility: false
+                      ),
                     );
+//
+//                    final removedTodo = await Navigator.of(context).push(
+//                        MaterialPageRoute(builder: (_) {
+//                          return DetailsModellingScreen(modelling: modellings[index], gardenName: 'jardin des espérides', gardenPublicVisibility: false);
+//                        })
+//                    );
 //                    if (removedTodo != null) {
 //                      Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
 //                        key: ArchSampleKeys.snackbar,

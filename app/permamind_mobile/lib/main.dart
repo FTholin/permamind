@@ -9,37 +9,34 @@ import 'arch_bricks/arch_bricks.dart';
 import 'blocs/simple_bloc_delegate.dart';
 
 void main() {
-
-
   BlocSupervisor.delegate = SimpleBlocDelegate();
-  
+
   final userRepository = UserRepository();
 
   final firebaseRepository = FirebaseTodosRepository();
 
   final authenticationBloc = AuthenticationBloc(userRepository: userRepository);
-  
-  runApp(
-      MultiBlocProvider(
-                    providers: [
-                      BlocProvider<AuthenticationBloc>(
-                        builder: (context) {
-                          return authenticationBloc..dispatch(AppStarted());
-                        },
-                      ),
-                      BlocProvider<TodosBloc>(
-                        builder: (context) {
-                          return TodosBloc(authenticationBloc, firebaseRepository)..dispatch(TodosInit());
-                        },
-                      ),
-                    ],
-        child: App(userRepository: userRepository, firebaseRepository: firebaseRepository),
-      )
-  );
+
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<AuthenticationBloc>(
+        builder: (context) {
+          return authenticationBloc..dispatch(AppStarted());
+        },
+      ),
+      BlocProvider<TodosBloc>(
+        builder: (context) {
+          return TodosBloc(authenticationBloc, firebaseRepository)
+            ..dispatch(TodosInit());
+        },
+      ),
+    ],
+    child: App(
+        userRepository: userRepository, firebaseRepository: firebaseRepository),
+  ));
 }
 
 class App extends StatelessWidget {
-
   final UserRepository userRepository;
 
   final FirebaseTodosRepository firebaseRepository;
@@ -48,60 +45,56 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      title: FlutterBlocLocalizations().appTitle,
+      theme: ArchSampleTheme.theme,
+      localizationsDelegates: [
+        ArchSampleLocalizationsDelegate(),
+        FlutterBlocLocalizationsDelegate(),
+      ],
+      routes: {
+        '/': (context) {
+          return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
+              if (state is Authenticated) {
+                final todosBloc = BlocProvider.of<TodosBloc>(context);
 
-    return  MaterialApp(
-        title: FlutterBlocLocalizations().appTitle,
-        theme: ArchSampleTheme.theme,
-        localizationsDelegates: [
-          ArchSampleLocalizationsDelegate(),
-          FlutterBlocLocalizationsDelegate(),
-        ],
-        routes: {
-          '/': (context) {
-            return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
-                if (state is Authenticated) {
-
-                  final todosBloc = BlocProvider.of<TodosBloc>(context);
-
-                  return MultiBlocProvider(
-                    providers: [
-                      BlocProvider<TabBloc>(
-                        builder: (context) => TabBloc(),
-                      ),
-                      BlocProvider<FilteredTodosBloc>(
-                        builder: (context) =>
-                            FilteredTodosBloc(todosBloc: todosBloc),
-                      ),
-                      BlocProvider<StatsBloc>(
-                        builder: (context) => StatsBloc(todosBloc: todosBloc),
-                      ),
-                    ],
-                    child: HomeScreen(),
-                  );
-                }
-                if (state is Unauthenticated) {
-                  return LoginScreen(userRepository: userRepository);
-                }
-                return Center(child: CircularProgressIndicator());
-              },
-            );
-          },
-          '/addTodo': (context) {
-            final todosBloc = BlocProvider.of<TodosBloc>(context);
-            return AddEditScreen(
-              onSave: (task, note) {
-                todosBloc.dispatch(
-                  AddTodo(Todo(task, note: note)),
+                return MultiBlocProvider(
+                  providers: [
+                    BlocProvider<TabBloc>(
+                      builder: (context) => TabBloc(),
+                    ),
+                    BlocProvider<FilteredTodosBloc>(
+                      builder: (context) =>
+                          FilteredTodosBloc(todosBloc: todosBloc),
+                    ),
+                    BlocProvider<StatsBloc>(
+                      builder: (context) => StatsBloc(todosBloc: todosBloc),
+                    ),
+                  ],
+                  child: HomeScreen(),
                 );
-              },
-              isEditing: false,
-            );
-          },
-          '/addGarden' : (context) {
-
-            final todosBloc = BlocProvider.of<TodosBloc>(context);
-
+              }
+              if (state is Unauthenticated) {
+                return LoginScreen(userRepository: userRepository);
+              }
+              return Center(child: CircularProgressIndicator());
+            },
+          );
+        },
+        '/addTodo': (context) {
+          final todosBloc = BlocProvider.of<TodosBloc>(context);
+          return AddEditScreen(
+            onSave: (task, note) {
+              todosBloc.dispatch(
+                AddTodo(Todo(task, note: note)),
+              );
+            },
+            isEditing: false,
+          );
+        },
+        '/addGarden': (context) {
+          final todosBloc = BlocProvider.of<TodosBloc>(context);
 //            return MultiBlocProvider(
 //              providers: [
 //                BlocProvider<ModellingsBloc>(
@@ -111,17 +104,35 @@ class App extends StatelessWidget {
 //            ],
 //            child: DiscoverModellingsScreen(),
 //            );
-
-            return AddEditGardenScreen(
+          return AddEditGardenScreen(
 //              onSave: (task, note) {
 //                todosBloc.dispatch(
 //                  AddTodo(Todo(task, note: note)),
 //                );
 //              },
-              isEditing: false,
-            );
-          }
+            isEditing: false,
+          );
         },
-      );
+        '/discoverModellings': (context) {
+          final todosBloc = BlocProvider.of<TodosBloc>(context);
+          return BlocProvider<ModellingsBloc>(
+            builder: (context) =>
+                ModellingsBloc(todosRepository: firebaseRepository)
+                  ..dispatch(FetchModellings()),
+            child: DiscoverModellingsScreen(),
+          );
+        },
+        '/detailsModelling': (context) {
+          final todosBloc = BlocProvider.of<TodosBloc>(context);
+          return DetailsModellingScreen(
+              onSaveGarden: (gardenName, gardenPublicVisibility) {
+              todosBloc.dispatch(
+                AddTodo(Todo(gardenName)),
+              );
+            }
+          );
+        }
+      },
+    );
   }
 }

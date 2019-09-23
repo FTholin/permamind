@@ -55,6 +55,13 @@ class ArchSampleKeys {
   static final taskField = const Key('__taskField__');
   static final noteField = const Key('__noteField__');
 
+  // Add Garden Screen
+  // TODO put all addGardenScreen's widgets id
+
+  // Discover Modellings Screen
+  // TODO put all DiscoverModellings's widgets id
+
+
   // Edit Screen
   static final editTodoScreen = const Key('__editTodoScreen__');
   static final saveTodoFab = const Key('__saveTodoFab__');

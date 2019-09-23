@@ -7,16 +7,23 @@ import 'package:permamind_mobile/screens/screens.dart';
 import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
 import 'package:todos_repository/todos_repository.dart';
 
-class DetailsModellingScreen extends StatelessWidget {
-  final Modelling modelling;
 
-  DetailsModellingScreen({Key key, @required this.modelling})
-      : super(key: key ?? ArchSampleKeys.todoDetailsScreen);
+typedef SaveGardenCallback = Function(String gardenName, bool gardenPublicVisibility);
+
+
+class DetailsModellingScreen extends StatelessWidget {
+
+  final SaveGardenCallback onSaveGarden;
+
+  DetailsModellingScreen({@required this.onSaveGarden});
 
   @override
   Widget build(BuildContext context) {
     final todosBloc = BlocProvider.of<TodosBloc>(context);
     final localizations = ArchSampleLocalizations.of(context);
+
+    final DetailsModellingsScreenArguments args =
+        ModalRoute.of(context).settings.arguments;
 
         return Scaffold(
           appBar: AppBar(
@@ -27,7 +34,7 @@ class DetailsModellingScreen extends StatelessWidget {
                 icon: Icon(Icons.favorite),
                 onPressed: () {
 //                  todosBloc.dispatch(DeleteTodo(todo));
-                  Navigator.pop(context, modelling);
+                  Navigator.pop(context, args);
                 },
               )
             ],
@@ -43,24 +50,6 @@ class DetailsModellingScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 10, left: 40, right: 40),
 //                      width: MediaQuery.of(context).size.width,
                       child: Container()),
-                ),
-                Flexible(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 20, bottom: 10, left: 60, right: 60),
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.all(Radius.circular(18)),
-                      ),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                            hintStyle:
-                                TextStyle(fontSize: 17.0, color: Colors.white),
-                            border: InputBorder.none,
-                            hintText: 'Eden 2 '),
-                      ),
-                    )
                 ),
                 Flexible(
                   flex: 1,
@@ -251,7 +240,7 @@ class DetailsModellingScreen extends StatelessWidget {
                                         width: MediaQuery.of(context).size.width,
                                         padding: EdgeInsets.only(top: 10),
 
-                                        child: Text('${modelling.modellingName}',
+                                        child: Text('${args.modelling.modellingName}',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
@@ -284,7 +273,7 @@ class DetailsModellingScreen extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 10),
                                         color: Colors.lightBlueAccent,
                                         width: MediaQuery.of(context).size.width,
-                                        child: Text('${modelling.modellingAverageDuration} weeks',
+                                        child: Text('${args.modelling.modellingAverageDuration} weeks',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
@@ -558,24 +547,42 @@ class DetailsModellingScreen extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
               key: ArchSampleKeys.editTodoFab,
               tooltip: localizations.editTodo,
-              child: Icon(Icons.edit),
-              onPressed: modelling == null
+              child: Icon(Icons.local_florist),
+              onPressed: args.modelling == null
                   ? null
                   : () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-//                        return AddEditScreen(
-//                          key: ArchSampleKeys.editTodoScreen,
-//                          onSave: (task, note) {
-//                            todosBloc.dispatch(UpdateTodo(
-//                              modelling.copyWith(modellingId: modelling.modellingId, note: note),
-//                            ));
-//                          },
-//                          isEditing: true,
-//                          todo: modelling,
-//                        );
-                      }));
-                    }),
+//                      Navigator.of(context)
+//                          .push(MaterialPageRoute(builder: (context) {
+////                        return AddEditScreen(
+////                          key: ArchSampleKeys.editTodoScreen,
+////                          onSave: (task, note) {
+////                            todosBloc.dispatch(UpdateTodo(
+////                              modelling.copyWith(modellingId: modelling.modellingId, note: note),
+////                            ));
+////                          },
+////                          isEditing: true,
+////                          todo: modelling,
+////                        );
+//                      }));
+                onSaveGarden(args.gardenName, args.gardenPublicVisibility);
+                Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
+
+              }),
         );
   }
+}
+
+
+class DetailsModellingsScreenArguments {
+  final Modelling modelling;
+  final String gardenName;
+  final bool gardenPublicVisibility;
+
+//  final SaveGardenCallback onSaveGarden;
+
+  DetailsModellingsScreenArguments({Key key, @required this.modelling,
+    @required this.gardenName,
+    @required this.gardenPublicVisibility,
+//    @required this.onSaveGarden,
+  });
 }
