@@ -1,6 +1,6 @@
 export 'extra_actions.dart';
 export 'filter_button.dart';
-export 'filtered_todos.dart';
+export 'filtered_gardens.dart';
 export 'tab_selector.dart';
 export 'todo_item.dart';
 export 'stats.dart';

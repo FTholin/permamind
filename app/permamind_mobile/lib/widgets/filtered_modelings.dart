@@ -12,9 +12,9 @@ import 'package:data_repository/data_repository.dart';
 class FilteredModelings extends StatelessWidget {
   final List<Modeling> modelings;
   final String gardenName;
-  final bool gardenPublicVisibility;
+  final bool publicVisibility;
 
-  FilteredModelings({this.modelings, this.gardenName, this.gardenPublicVisibility, Key key}) : super(key: key);
+  FilteredModelings({this.modelings, this.gardenName, this.publicVisibility, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +55,13 @@ class FilteredModelings extends StatelessWidget {
                       arguments: DetailsModelingsScreenArguments(
                           modeling: modelings[index],
                           gardenName: 'jardin des espérides',
-                          gardenPublicVisibility: false
+                          publicVisibility: false
                       ),
                     );
 //
 //                    final removedTodo = await Navigator.of(context).push(
 //                        MaterialPageRoute(builder: (_) {
-//                          return DetailsModelingScreen(modeling: modelings[index], gardenName: 'jardin des espérides', gardenPublicVisibility: false);
+//                          return DetailsModelingScreen(modeling: modelings[index], gardenName: 'jardin des espérides', publicVisibility: false);
 //                        })
 //                    );
 //                    if (removedTodo != null) {

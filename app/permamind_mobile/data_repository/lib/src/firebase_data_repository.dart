@@ -1,6 +1,8 @@
 
 import 'dart:async';
 
+import 'package:async/async.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_repository/data_repository.dart';
 import 'entities/entities.dart';
@@ -76,9 +78,9 @@ class FirebaseDataRepository implements DataRepository {
 
 
   @override
-  Future<void> updateTodo(Todo update) {
+  Future<void> updateGarden(Garden update) {
     return todoCollection
-        .document(update.id)
+        .document(update.gardenId)
         .updateData(update.toEntity().toDocument());
   }
 }

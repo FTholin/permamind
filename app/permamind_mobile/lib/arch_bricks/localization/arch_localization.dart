@@ -127,6 +127,13 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
+  String get filterGardens => Intl.message(
+    'Filter Gardens',
+    name: 'filterGardens',
+    args: [],
+    locale: locale.toString(),
+  );
+
   String get deleteTodo => Intl.message(
     'Delete Todo',
     name: 'deleteTodo',

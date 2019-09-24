@@ -16,16 +16,16 @@ class FilterButton extends StatelessWidget {
         .textTheme
         .body1
         .copyWith(color: Theme.of(context).accentColor);
-    final FilteredTodosBloc filteredTodosBloc =
-        BlocProvider.of<FilteredTodosBloc>(context);
-    return BlocBuilder<FilteredTodosBloc, FilteredTodosState>(
+    final FilteredGardensBloc filteredGardensBloc =
+        BlocProvider.of<FilteredGardensBloc>(context);
+    return BlocBuilder<FilteredGardensBloc, FilteredGardensState>(
       builder: (context, state) {
 
         final button = _Button(
           onSelected: (filter) {
-            filteredTodosBloc.dispatch(UpdateFilter(filter));
+            filteredGardensBloc.dispatch(UpdateFilter(filter));
           },
-          activeFilter: state is FilteredTodosLoaded
+          activeFilter: state is FilteredGardensLoaded
               ? state.activeFilter
               : VisibilityFilter.all,
           activeStyle: activeStyle,

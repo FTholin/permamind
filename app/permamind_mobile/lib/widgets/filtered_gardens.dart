@@ -6,7 +6,6 @@ import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
 import 'package:permamind_mobile/screens/screens.dart';
-import 'package:permamind_mobile/arch_bricks/flutter_gardens_keys.dart';
 
 class FilteredGardens extends StatelessWidget {
   FilteredGardens({Key key}) : super(key: key);
@@ -19,7 +18,8 @@ class FilteredGardens extends StatelessWidget {
     return BlocBuilder<FilteredGardensBloc, FilteredGardensState>(
       builder: (context, state) {
         if (state is FilteredGardensLoading) {
-          return LoadingIndicator(key: ArchSampleKeys.gardensLoading);
+          // TODO ArchSampleKeys
+          return LoadingIndicator(key: ArchSampleKeys.todosLoading);
         } else if (state is FilteredGardensLoaded) {
           final gardens = state.filteredGardens;
 
@@ -36,7 +36,7 @@ class FilteredGardens extends StatelessWidget {
                   child: Center(
                     child: GridTile(
                       footer: Text(
-                        '${gardens[index].id}',
+                        '${gardens[index].gardenName}',
                         textAlign: TextAlign.center,
                       ),
                       child: Icon(Icons.local_florist,
@@ -47,19 +47,19 @@ class FilteredGardens extends StatelessWidget {
                   margin: EdgeInsets.all(10.0),
                 ),
                 onTap: () async {
-                  final removedTodo = await Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) {
-                        return DetailsScreen(id: gardens[index].id);
-                      })
-                  );
-                  if (removedTodo != null) {
-                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-                      key: ArchSampleKeys.snackbar,
-                      todo: gardens[index],
-                      onUndo: () => gardensBloc.dispatch(AddTodo(gardens[index])),
-                      localizations: localizations,
-                    ));
-                  }
+//                  final removedTodo = await Navigator.of(context).push(
+//                      MaterialPageRoute(builder: (_) {
+//                        return DetailsScreen(id: gardens[index].id);
+//                      })
+//                  );
+//                  if (removedTodo != null) {
+//                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+//                      key: ArchSampleKeys.snackbar,
+//                      garden: gardens[index],
+//                      onUndo: () => gardensBloc.dispatch(AddTodo(gardens[index])),
+//                      localizations: localizations,
+//                    ));
+//                  }
                 },
               );
 
@@ -68,7 +68,8 @@ class FilteredGardens extends StatelessWidget {
 
         }
         else {
-          return Container(key: FlutterGardensKeys.filteredGardensEmptyContainer);
+          // TODO FlutterTodosKeys
+          return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
         }
       }
     );

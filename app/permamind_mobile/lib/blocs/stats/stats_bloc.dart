@@ -4,13 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 
 class StatsBloc extends Bloc<StatsEvent, StatsState> {
-  final TodosBloc todosBloc;
-  StreamSubscription todosSubscription;
+  final GardensBloc gardensBloc;
+  StreamSubscription gardensSubscription;
 
-  StatsBloc({@required this.todosBloc}) {
-    todosSubscription = todosBloc.state.listen((state) {
-      if (state is TodosLoaded) {
-        dispatch(UpdateStats(state.todos));
+  StatsBloc({@required this.gardensBloc}) {
+    gardensSubscription = gardensBloc.state.listen((state) {
+      if (state is GardensLoaded) {
+        dispatch(UpdateStats(state.gardens));
       }
     });
   }
@@ -22,17 +22,9 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   @override
   Stream<StatsState> mapEventToState(StatsEvent event) async* {
     if (event is UpdateStats) {
-      int numActive =
-          event
-              .todos
-              .where((todo) => !todo.complete)
-              .toList().length;
+      int numActive = 42;
 
-      int numCompleted =
-          event
-              .todos
-              .where((todo) => todo.complete)
-              .toList().length;
+      int numCompleted = 42;
 
       yield StatsLoaded(numActive, numCompleted);
     }
@@ -41,7 +33,7 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
 
   @override
   void dispose() {
-    todosSubscription.cancel();
+    gardensSubscription.cancel();
     super.dispose();
   }
 }

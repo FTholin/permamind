@@ -27,7 +27,7 @@ void main() {
       BlocProvider<GardensBloc>(
         builder: (context) {
           return GardensBloc(authenticationBloc, firebaseRepository)
-            ..dispatch(TodosInit());
+            ..dispatch(GardensInit());
         },
       ),
     ],
@@ -57,19 +57,19 @@ class App extends StatelessWidget {
           return BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
               if (state is Authenticated) {
-                final todosBloc = BlocProvider.of<GardensBloc>(context);
+                final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
                 return MultiBlocProvider(
                   providers: [
                     BlocProvider<TabBloc>(
                       builder: (context) => TabBloc(),
                     ),
-                    BlocProvider<FilteredTodosBloc>(
+                    BlocProvider<FilteredGardensBloc>(
                       builder: (context) =>
-                          FilteredTodosBloc(todosBloc: todosBloc),
+                          FilteredGardensBloc(gardensBloc: gardensBloc),
                     ),
                     BlocProvider<StatsBloc>(
-                      builder: (context) => StatsBloc(todosBloc: todosBloc),
+                      builder: (context) => StatsBloc(gardensBloc: gardensBloc),
                     ),
                   ],
                   child: HomeScreen(),
@@ -83,10 +83,10 @@ class App extends StatelessWidget {
           );
         },
 //        '/addTodo': (context) {
-//          final todosBloc = BlocProvider.of<GardensBloc>(context);
+//          final gardensBloc = BlocProvider.of<GardensBloc>(context);
 //          return AddEditScreen(
 //            onSave: (task, note) {
-//              todosBloc.dispatch(
+//              gardensBloc.dispatch(
 //                Add(Todo(task, note: note)),
 //              );
 //            },
@@ -94,19 +94,19 @@ class App extends StatelessWidget {
 //          );
 //        },
         '/addGarden': (context) {
-          final todosBloc = BlocProvider.of<GardensBloc>(context);
+          final gardensBloc = BlocProvider.of<GardensBloc>(context);
 //            return MultiBlocProvider(
 //              providers: [
 //                BlocProvider<ModelingsBloc>(
 //                  builder: (context) =>
-//                  ModelingsBloc(todosRepository: firebaseRepository)..dispatch(FetchModelings()),
+//                  ModelingsBloc(gardensRepository: firebaseRepository)..dispatch(FetchModelings()),
 //                ),
 //            ],
 //            child: DiscoverModelingsScreen(),
 //            );
           return AddEditGardenScreen(
 //              onSave: (task, note) {
-//                todosBloc.dispatch(
+//                gardensBloc.dispatch(
 //                  AddTodo(Todo(task, note: note)),
 //                );
 //              },
@@ -114,10 +114,10 @@ class App extends StatelessWidget {
           );
         },
         '/discoverModelings': (context) {
-          final todosBloc = BlocProvider.of<GardensBloc>(context);
+          final gardensBloc = BlocProvider.of<GardensBloc>(context);
           return BlocProvider<ModelingsBloc>(
             builder: (context) =>
-                ModelingsBloc(todosRepository: firebaseRepository)
+                ModelingsBloc(dataRepository: firebaseRepository)
                   ..dispatch(FetchModelings()),
             child: DiscoverModelingsScreen(),
           );
@@ -125,7 +125,7 @@ class App extends StatelessWidget {
         '/detailsModeling': (context) {
           final gardensBloc = BlocProvider.of<GardensBloc>(context);
           return DetailsModelingScreen(
-              onSaveGarden: (gardenName, gardenPublicVisibility) {
+              onSaveGarden: (gardenName, publicVisibility) {
               gardensBloc.dispatch(
                 AddGarden(Garden(gardenName, false, [])),
               );

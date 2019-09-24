@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
-import 'package:todos_repository/data_repository.dart';
+import 'package:data_repository/data_repository.dart';
 
 class DeleteTodoSnackBar extends SnackBar {
   final ArchSampleLocalizations localizations;
 
   DeleteTodoSnackBar({
     Key key,
-    @required Todo todo,
+    @required Garden garden,
     @required VoidCallback onUndo,
     @required this.localizations
 }) : super(
     key: key,
     content: Text(
-      localizations.todoDeleted(todo.task),
+      localizations.todoDeleted(garden.gardenId),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     ),

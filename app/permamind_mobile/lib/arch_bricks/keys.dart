@@ -57,6 +57,7 @@ class ArchSampleKeys {
 
   // Add Garden Screen
   // TODO put all addGardenScreen's widgets id
+  static final addGardenScreen = const Key('__addGardenScreen__');
 
   // Discover Modelings Screen
   // TODO put all DiscoverModelings's widgets id

@@ -2,14 +2,15 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:bloc/bloc.dart';
-import 'package:todos_repository/data_repository.dart';
+import 'package:data_repository/data_repository.dart';
+
 
 class ModelingsBloc extends Bloc<ModelingsEvent, ModelingsState> {
 
-  final TodosRepository todosRepository;
-  StreamSubscription _todosSubscription;
+  final DataRepository dataRepository;
+  StreamSubscription _dataSubscription;
 
-  ModelingsBloc({@required this.todosRepository});
+  ModelingsBloc({@required this.dataRepository});
 
   @override
   ModelingsState get initialState => ModelingsLoading();
@@ -20,23 +21,23 @@ class ModelingsBloc extends Bloc<ModelingsEvent, ModelingsState> {
       yield* _mapFetchModelingsToState(event);
     }
     else if (event is UpdatedModelings) {
-      yield* _mapTodosUpdateToState(event);
+      yield* _mapGardensUpdateToState(event);
     }
   }
 
 
   Stream<ModelingsState> _mapFetchModelingsToState(ModelingsEvent event) async* {
-    _todosSubscription?.cancel();
-    _todosSubscription = todosRepository.fetchModelings().listen(
-          (todos) {
+    _dataSubscription?.cancel();
+    _dataSubscription = dataRepository.fetchModelings().listen(
+          (gardens) {
         dispatch(
-          UpdatedModelings(todos),
+          UpdatedModelings(gardens),
         );
       },
     );
   }
 
-  Stream<ModelingsState> _mapTodosUpdateToState(UpdatedModelings event) async* {
+  Stream<ModelingsState> _mapGardensUpdateToState(UpdatedModelings event) async* {
     yield ModelingsLoaded(event.modelings);
   }
 

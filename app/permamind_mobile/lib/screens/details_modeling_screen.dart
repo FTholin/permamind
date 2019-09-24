@@ -4,11 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/screens/screens.dart';
-import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
-import 'package:todos_repository/data_repository.dart';
+import 'package:data_repository/data_repository.dart';
 
 
-typedef SaveGardenCallback = Function(String gardenName, bool gardenPublicVisibility);
+typedef SaveGardenCallback = Function(String gardenName, bool publicVisibility);
 
 class DetailsModelingScreen extends StatelessWidget {
 
@@ -18,7 +17,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todosBloc = BlocProvider.of<TodosBloc>(context);
+    final gardensBloc = BlocProvider.of<GardensBloc>(context);
     final localizations = ArchSampleLocalizations.of(context);
 
     final DetailsModelingsScreenArguments args =
@@ -534,6 +533,7 @@ class DetailsModelingScreen extends StatelessWidget {
             ),
           ),
           floatingActionButton: FloatingActionButton(
+            //TODO Changer la localisation et le tooltip
               key: ArchSampleKeys.editTodoFab,
               tooltip: localizations.editTodo,
               child: Icon(Icons.local_florist),
@@ -543,17 +543,17 @@ class DetailsModelingScreen extends StatelessWidget {
 //                      Navigator.of(context)
 //                          .push(MaterialPageRoute(builder: (context) {
 ////                        return AddEditScreen(
-////                          key: ArchSampleKeys.editTodoScreen,
+////                          key: ArchSampleKeys.editGardenScreen,
 ////                          onSave: (task, note) {
-////                            todosBloc.dispatch(UpdateTodo(
+////                            gardensBloc.dispatch(UpdateGarden(
 ////                              modeling.copyWith(modelingId: modeling.modelingId, note: note),
 ////                            ));
 ////                          },
 ////                          isEditing: true,
-////                          todo: modeling,
+////                          garden: modeling,
 ////                        );
 //                      }));
-                onSaveGarden(args.gardenName, args.gardenPublicVisibility);
+                onSaveGarden(args.gardenName, args.publicVisibility);
                 Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
               }),
@@ -564,13 +564,13 @@ class DetailsModelingScreen extends StatelessWidget {
 class DetailsModelingsScreenArguments {
   final Modeling modeling;
   final String gardenName;
-  final bool gardenPublicVisibility;
+  final bool publicVisibility;
 
 //  final SaveGardenCallback onSaveGarden;
 
   DetailsModelingsScreenArguments({Key key, @required this.modeling,
     @required this.gardenName,
-    @required this.gardenPublicVisibility,
+    @required this.publicVisibility,
 //    @required this.onSaveGarden,
   });
 }

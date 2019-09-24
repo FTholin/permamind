@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
               ExtraActions(),
             ],
           ),
-          body: activeTab == AppTab.todos ? FilteredTodos() : Stats(),
+          body: activeTab == AppTab.todos ? FilteredGardens() : Stats(),
           floatingActionButton: FloatingActionButton(
             key: ArchSampleKeys.addGardenFab,
             onPressed: () {

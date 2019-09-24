@@ -6,18 +6,18 @@ import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/models/models.dart';
-import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
 
 class ExtraActions extends StatelessWidget {
+  // TODO key
   ExtraActions({Key key}) : super(key: ArchSampleKeys.extraActionsButton);
 
   @override
   Widget build(BuildContext context) {
-    final todosBloc = BlocProvider.of<TodosBloc>(context);
+    final gardensBloc = BlocProvider.of<GardensBloc>(context);
     final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
-    return BlocBuilder<TodosBloc, TodosState>(
+    return BlocBuilder<GardensBloc, GardensState>(
       builder: (context, state) {
-        if (state is TodosLoaded) {
+        if (state is GardensLoaded) {
 
           return PopupMenuButton<ExtraAction>(
             key: FlutterTodosKeys.extraActionsPopupMenuButton,
@@ -39,6 +39,7 @@ class ExtraActions extends StatelessWidget {
             ],
           );
         }
+        // TODO key
         return Container(key: FlutterTodosKeys.extraActionsEmptyContainer);
       }
     );

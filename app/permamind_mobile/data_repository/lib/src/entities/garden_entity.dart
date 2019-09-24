@@ -4,15 +4,15 @@ import 'package:equatable/equatable.dart';
 class GardenEntity extends Equatable {
   final String gardenId;
   final String gardenName;
-  final bool gardenPublicVisibility;
-  final List<String> gardenOwners;
+  final bool publicVisibility;
+  final List<dynamic> gardenOwners;
 
-  GardenEntity(this.gardenId, this.gardenName, this.gardenPublicVisibility, this.gardenOwners);
+  GardenEntity(this.gardenId, this.gardenName, this.publicVisibility, this.gardenOwners);
 
   Map<String, Object> toJson() {
     return {
       'gardenName': gardenName,
-      'gardenPublicVisibility': gardenPublicVisibility,
+      'publicVisibility': publicVisibility,
       'gardenOwners': gardenOwners,
       'gardenId': gardenId,
     };
@@ -20,15 +20,15 @@ class GardenEntity extends Equatable {
 
   @override
   String toString() {
-    return 'GardenEntity { gardenId: $gardenId, gardenName: $gardenName, gardenPublicVisibility: $gardenPublicVisibility, gardenOwners: $gardenOwners }';
+    return 'GardenEntity { gardenId: $gardenId, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenOwners: $gardenOwners }';
   }
 
   static GardenEntity fromJson(Map<String, Object> json) {
     return GardenEntity(
       json['gardenId'] as String,
       json['gardenName'] as String,
-      json['gardenPublicVisibility'] as bool,
-      json['gardenOwners'] as List<String>
+      json['publicVisibility'] as bool,
+      json['gardenOwners']
     );
   }
 
@@ -36,7 +36,7 @@ class GardenEntity extends Equatable {
     return GardenEntity(
       snap.documentID,
       snap.data['gardenName'],
-      snap.data['gardenPublicVisibility'],
+      snap.data['publicVisibility'],
       snap.data['gardenOwners'],
     );
   }
@@ -45,7 +45,7 @@ class GardenEntity extends Equatable {
     return {
       'gardenId': gardenId,
       'gardenName': gardenName,
-      'gardenPublicVisibility': gardenPublicVisibility,
+      'publicVisibility': publicVisibility,
       'gardenOwners': gardenOwners
     };
   }

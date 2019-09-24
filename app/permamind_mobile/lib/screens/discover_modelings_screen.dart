@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
-import 'package:todos_repository/data_repository.dart';
+import 'package:data_repository/data_repository.dart';
 
 //typedef OnSaveCallback = Function(String task, String note);
 
 class DiscoverModelingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final todosBloc = BlocProvider.of<TodosBloc>(context);
+    final gardenBloc = BlocProvider.of<GardensBloc>(context);
     final localizations = ArchSampleLocalizations.of(context);
 
     final ModelingsScreenArguments args =
@@ -83,14 +83,16 @@ class DiscoverModelingsScreen extends StatelessWidget {
               child: BlocBuilder<ModelingsBloc, ModelingsState>(
                   builder: (context, state) {
                 if (state is ModelingsLoading) {
+                  // TODO ArchSampleKeys
                   return LoadingIndicator(key: ArchSampleKeys.todosLoading);
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
                   return FilteredModelings(
                       modelings: modelings,
                       gardenName: 'jardin des espérides',
-                      gardenPublicVisibility: false);
+                      publicVisibility: false);
                 } else {
+                  // TODO ArchSampleKeys
                   return Container(
                       key: FlutterTodosKeys.filteredTodosEmptyContainer);
                 }
@@ -117,16 +119,18 @@ class DiscoverModelingsScreen extends StatelessWidget {
               child: BlocBuilder<ModelingsBloc, ModelingsState>(
                   builder: (context, state) {
                 if (state is ModelingsLoading) {
+                  // TODO ArchSampleKeys
                   return LoadingIndicator(key: ArchSampleKeys.todosLoading);
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
                   return FilteredModelings(
                       modelings: modelings,
                       gardenName: 'jardin des espérides',
-                      gardenPublicVisibility: false);
+                      publicVisibility: false);
                 } else {
                   return Container(
-                      key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                    // TODO ArchSampleKeys
+                  key: FlutterTodosKeys.filteredTodosEmptyContainer);
                 }
               }),
             ),
@@ -139,7 +143,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
 
 class ModelingsScreenArguments {
   final String gardenName;
-  final bool gardenPublicVisibility;
+  final bool publicVisibility;
 
-  ModelingsScreenArguments(this.gardenName, this.gardenPublicVisibility);
+  ModelingsScreenArguments(this.gardenName, this.publicVisibility);
 }

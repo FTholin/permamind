@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:todos_repository/data_repository.dart';
+import 'package:data_repository/data_repository.dart';
 
 @immutable
 abstract class ModelingsState extends Equatable {

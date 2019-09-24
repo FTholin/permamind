@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:todos_repository/data_repository.dart';
+import 'package:data_repository/data_repository.dart';
 
 @immutable
 abstract class StatsEvent extends Equatable {
@@ -8,11 +8,11 @@ abstract class StatsEvent extends Equatable {
 }
 
 class UpdateStats extends StatsEvent {
-  final List<Todo> todos;
+  final List<Garden> gardens;
 
-  UpdateStats(this.todos) : super([todos]);
+  UpdateStats(this.gardens) : super([gardens]);
 
   @override
-  String toString() => 'UpdateStats { todos: $todos }';
+  String toString() => 'UpdateStats { todos: $gardens }';
 }
 
