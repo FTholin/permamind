@@ -58,8 +58,8 @@ class ArchSampleKeys {
   // Add Garden Screen
   // TODO put all addGardenScreen's widgets id
 
-  // Discover Modellings Screen
-  // TODO put all DiscoverModellings's widgets id
+  // Discover Modelings Screen
+  // TODO put all DiscoverModelings's widgets id
 
 
   // Edit Screen

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/screens/screens.dart';
-import 'package:todos_repository/todos_repository.dart';
+import 'package:todos_repository/data_repository.dart';
 
 class AddEditGardenScreen extends StatefulWidget {
   final bool isEditing;
@@ -133,14 +133,14 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
               onPressed:() {
                 // TODO retrieve all form infos
                 Navigator.pushNamed(context,
-                  ArchSampleRoutes.discoverModellings,
-                  arguments: ModellingsScreenArguments(
+                  ArchSampleRoutes.discoverModelings,
+                  arguments: ModelingsScreenArguments(
                   'Jardin des espérides',
                     false
                   ),
                 );
               },
-              child: Text("Choose a modelling",
+              child: Text("Choose a modeling",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.normal,

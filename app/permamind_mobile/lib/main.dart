@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/screens/screens.dart';
-import 'package:todos_repository/todos_repository.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:authentication/authentication.dart';
 import 'arch_bricks/arch_bricks.dart';
 import 'blocs/simple_bloc_delegate.dart';
@@ -13,7 +13,7 @@ void main() {
 
   final userRepository = UserRepository();
 
-  final firebaseRepository = FirebaseTodosRepository();
+  final firebaseRepository = FirebaseDataRepository();
 
   final authenticationBloc = AuthenticationBloc(userRepository: userRepository);
 
@@ -24,9 +24,9 @@ void main() {
           return authenticationBloc..dispatch(AppStarted());
         },
       ),
-      BlocProvider<TodosBloc>(
+      BlocProvider<GardensBloc>(
         builder: (context) {
-          return TodosBloc(authenticationBloc, firebaseRepository)
+          return GardensBloc(authenticationBloc, firebaseRepository)
             ..dispatch(TodosInit());
         },
       ),
@@ -39,7 +39,7 @@ void main() {
 class App extends StatelessWidget {
   final UserRepository userRepository;
 
-  final FirebaseTodosRepository firebaseRepository;
+  final FirebaseDataRepository firebaseRepository;
 
   App({@required this.userRepository, @required this.firebaseRepository});
 
@@ -57,7 +57,7 @@ class App extends StatelessWidget {
           return BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
               if (state is Authenticated) {
-                final todosBloc = BlocProvider.of<TodosBloc>(context);
+                final todosBloc = BlocProvider.of<GardensBloc>(context);
 
                 return MultiBlocProvider(
                   providers: [
@@ -82,27 +82,27 @@ class App extends StatelessWidget {
             },
           );
         },
-        '/addTodo': (context) {
-          final todosBloc = BlocProvider.of<TodosBloc>(context);
-          return AddEditScreen(
-            onSave: (task, note) {
-              todosBloc.dispatch(
-                AddTodo(Todo(task, note: note)),
-              );
-            },
-            isEditing: false,
-          );
-        },
+//        '/addTodo': (context) {
+//          final todosBloc = BlocProvider.of<GardensBloc>(context);
+//          return AddEditScreen(
+//            onSave: (task, note) {
+//              todosBloc.dispatch(
+//                Add(Todo(task, note: note)),
+//              );
+//            },
+//            isEditing: false,
+//          );
+//        },
         '/addGarden': (context) {
-          final todosBloc = BlocProvider.of<TodosBloc>(context);
+          final todosBloc = BlocProvider.of<GardensBloc>(context);
 //            return MultiBlocProvider(
 //              providers: [
-//                BlocProvider<ModellingsBloc>(
+//                BlocProvider<ModelingsBloc>(
 //                  builder: (context) =>
-//                  ModellingsBloc(todosRepository: firebaseRepository)..dispatch(FetchModellings()),
+//                  ModelingsBloc(todosRepository: firebaseRepository)..dispatch(FetchModelings()),
 //                ),
 //            ],
-//            child: DiscoverModellingsScreen(),
+//            child: DiscoverModelingsScreen(),
 //            );
           return AddEditGardenScreen(
 //              onSave: (task, note) {
@@ -113,21 +113,21 @@ class App extends StatelessWidget {
             isEditing: false,
           );
         },
-        '/discoverModellings': (context) {
-          final todosBloc = BlocProvider.of<TodosBloc>(context);
-          return BlocProvider<ModellingsBloc>(
+        '/discoverModelings': (context) {
+          final todosBloc = BlocProvider.of<GardensBloc>(context);
+          return BlocProvider<ModelingsBloc>(
             builder: (context) =>
-                ModellingsBloc(todosRepository: firebaseRepository)
-                  ..dispatch(FetchModellings()),
-            child: DiscoverModellingsScreen(),
+                ModelingsBloc(todosRepository: firebaseRepository)
+                  ..dispatch(FetchModelings()),
+            child: DiscoverModelingsScreen(),
           );
         },
-        '/detailsModelling': (context) {
-          final todosBloc = BlocProvider.of<TodosBloc>(context);
-          return DetailsModellingScreen(
+        '/detailsModeling': (context) {
+          final gardensBloc = BlocProvider.of<GardensBloc>(context);
+          return DetailsModelingScreen(
               onSaveGarden: (gardenName, gardenPublicVisibility) {
-              todosBloc.dispatch(
-                AddTodo(Todo(gardenName)),
+              gardensBloc.dispatch(
+                AddGarden(Garden(gardenName, false, [])),
               );
             }
           );

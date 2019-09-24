@@ -6,26 +6,26 @@ import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
 import 'package:permamind_mobile/screens/screens.dart';
-import 'package:permamind_mobile/arch_bricks/flutter_todos_keys.dart';
+import 'package:permamind_mobile/arch_bricks/flutter_gardens_keys.dart';
 
-class FilteredTodos extends StatelessWidget {
-  FilteredTodos({Key key}) : super(key: key);
+class FilteredGardens extends StatelessWidget {
+  FilteredGardens({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final todosBloc = BlocProvider.of<TodosBloc>(context);
+    final gardensBloc = BlocProvider.of<GardensBloc>(context);
     final localizations = ArchSampleLocalizations.of(context);
 
-    return BlocBuilder<FilteredTodosBloc, FilteredTodosState>(
+    return BlocBuilder<FilteredGardensBloc, FilteredGardensState>(
       builder: (context, state) {
-        if (state is FilteredTodosLoading) {
-          return LoadingIndicator(key: ArchSampleKeys.todosLoading);
-        } else if (state is FilteredTodosLoaded) {
-          final todos = state.filteredTodos;
+        if (state is FilteredGardensLoading) {
+          return LoadingIndicator(key: ArchSampleKeys.gardensLoading);
+        } else if (state is FilteredGardensLoaded) {
+          final gardens = state.filteredGardens;
 
           return GridView.builder(
             key: ArchSampleKeys.todoList,
-            itemCount: todos.length,
+            itemCount: gardens.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (BuildContext context, int index) {
@@ -36,7 +36,7 @@ class FilteredTodos extends StatelessWidget {
                   child: Center(
                     child: GridTile(
                       footer: Text(
-                        '${todos[index].id}',
+                        '${gardens[index].id}',
                         textAlign: TextAlign.center,
                       ),
                       child: Icon(Icons.local_florist,
@@ -49,14 +49,14 @@ class FilteredTodos extends StatelessWidget {
                 onTap: () async {
                   final removedTodo = await Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) {
-                        return DetailsScreen(id: todos[index].id);
+                        return DetailsScreen(id: gardens[index].id);
                       })
                   );
                   if (removedTodo != null) {
                     Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
                       key: ArchSampleKeys.snackbar,
-                      todo: todos[index],
-                      onUndo: () => todosBloc.dispatch(AddTodo(todos[index])),
+                      todo: gardens[index],
+                      onUndo: () => gardensBloc.dispatch(AddTodo(gardens[index])),
                       localizations: localizations,
                     ));
                   }
@@ -68,7 +68,7 @@ class FilteredTodos extends StatelessWidget {
 
         }
         else {
-          return Container(key: FlutterTodosKeys.filteredTodosEmptyContainer);
+          return Container(key: FlutterGardensKeys.filteredGardensEmptyContainer);
         }
       }
     );

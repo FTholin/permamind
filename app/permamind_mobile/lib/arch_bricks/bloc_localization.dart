@@ -12,11 +12,11 @@ class FlutterBlocLocalizations {
 
   String get appTitle => "Permamind";
 
-  String get modellingsName => "Modellings";
+  String get modelingsName => "Modelings";
 
   String get tendencyHeader => "Tendency";
 
-  String get browseAllModellings => "Browse All";
+  String get browseAllModelings => "Browse All";
 }
 
 class FlutterBlocLocalizationsDelegate

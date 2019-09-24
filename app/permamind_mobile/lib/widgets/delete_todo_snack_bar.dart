@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
-import 'package:todos_repository/todos_repository.dart';
+import 'package:todos_repository/data_repository.dart';
 
 class DeleteTodoSnackBar extends SnackBar {
   final ArchSampleLocalizations localizations;
