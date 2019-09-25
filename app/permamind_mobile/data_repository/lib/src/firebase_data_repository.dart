@@ -80,7 +80,7 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> updateGarden(Garden update) {
-    return todoCollection
+    return gardensCollection
         .document(update.gardenId)
         .updateData(update.toEntity().toDocument());
   }
