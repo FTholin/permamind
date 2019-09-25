@@ -539,7 +539,7 @@ class DetailsModelingScreen extends StatelessWidget {
               child: Icon(Icons.local_florist),
               onPressed: args.modeling == null
                   ? null
-                  : () {
+                  : () async {
 //                      Navigator.of(context)
 //                          .push(MaterialPageRoute(builder: (context) {
 ////                        return AddEditScreen(
@@ -553,6 +553,7 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                          garden: modeling,
 ////                        );
 //                      }));
+//                gardensBloc.d
                 onSaveGarden(args.gardenName, args.publicVisibility);
                 Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 

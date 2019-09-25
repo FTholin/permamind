@@ -1,23 +1,26 @@
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import '../entities/entities.dart';
+import 'package:uuid/uuid.dart';
 
 @immutable
-class Garden {
+class Garden extends Equatable {
   final String gardenId;
   final String gardenName;
   final bool publicVisibility;
-  final List<dynamic> gardenOwners;
+  final List<String> gardenOwners;
 
-  Garden(this.gardenName,
+  Garden( this.gardenName,
     this.publicVisibility,
-    this.gardenOwners, {String gardenId}) : this.gardenId = gardenId;
+    this.gardenOwners,{String gardenId})
+      :  this.gardenId = gardenId ??  Uuid().v4();
 
-  Garden copyWith({String gardenName, bool publicVisibility, List<String> gardenOwners}) {
+  Garden copyWith({String gardenName, String gardenId, bool publicVisibility, List<String> gardenOwners}) {
     return Garden(
-        gardenName ?? this.gardenName,
-        publicVisibility ?? this.publicVisibility,
-        gardenOwners ?? this.gardenOwners,
-        gardenId: gardenId ?? this.gardenId,
+      gardenName ?? this.gardenName,
+      publicVisibility ?? this.publicVisibility,
+      gardenOwners ?? this.gardenOwners,
+      gardenId: gardenId ?? this.gardenId,
     );
   }
 
@@ -46,11 +49,12 @@ class Garden {
   }
 
   static Garden fromEntity(GardenEntity entity) {
+
     return Garden(
       entity.gardenName,
       entity.publicVisibility,
       entity.gardenOwners,
-      gardenId: entity.gardenId,
+      gardenId: entity.gardenId ?? Uuid().v4(),
     );
   }
 }

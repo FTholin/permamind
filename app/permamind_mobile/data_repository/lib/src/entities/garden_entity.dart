@@ -5,16 +5,16 @@ class GardenEntity extends Equatable {
   final String gardenId;
   final String gardenName;
   final bool publicVisibility;
-  final List<dynamic> gardenOwners;
+  final List<String> gardenOwners;
 
   GardenEntity(this.gardenId, this.gardenName, this.publicVisibility, this.gardenOwners);
 
   Map<String, Object> toJson() {
     return {
+      'gardenId': gardenId,
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
       'gardenOwners': gardenOwners,
-      'gardenId': gardenId,
     };
   }
 
@@ -33,11 +33,14 @@ class GardenEntity extends Equatable {
   }
 
   static GardenEntity fromSnapshot(DocumentSnapshot snap) {
+
+    List<String> gardenList = new List<String>.from(snap.data['gardenOwners']);
+
     return GardenEntity(
-      snap.documentID,
+      snap.data['gardenId'],
       snap.data['gardenName'],
       snap.data['publicVisibility'],
-      snap.data['gardenOwners'],
+      gardenList
     );
   }
 

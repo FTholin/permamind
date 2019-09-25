@@ -123,14 +123,36 @@ class App extends StatelessWidget {
           );
         },
         '/detailsModeling': (context) {
-          final gardensBloc = BlocProvider.of<GardensBloc>(context);
-          return DetailsModelingScreen(
-              onSaveGarden: (gardenName, publicVisibility) {
-              gardensBloc.dispatch(
-                AddGarden(Garden(gardenName, false, [])),
-              );
-            }
+
+          return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
+              if (state is Authenticated) {
+                final gardensBloc = BlocProvider.of<GardensBloc>(context);
+                return DetailsModelingScreen(
+                    onSaveGarden: (gardenName, publicVisibility) {
+                      gardensBloc.dispatch(
+                        AddGarden(Garden(gardenName, publicVisibility, [state.userId])),
+                      );
+                    }
+                );
+              }
+              return Center(child: CircularProgressIndicator());
+            },
           );
+
+
+
+
+
+//          final gardensBloc = BlocProvider.of<GardensBloc>(context);
+
+//          return DetailsModelingScreen(
+//              onSaveGarden: (gardenName, publicVisibility) {
+//              gardensBloc.dispatch(
+//                AddGarden(Garden(gardenName, publicVisibility, [])),
+//              );
+//            }
+//          );
         }
       },
     );

@@ -20,7 +20,7 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> addNewGarden(Garden garden) {
-    return todoCollection.add(garden.toEntity().toDocument());
+    return gardensCollection.add(garden.toEntity().toDocument());
   }
 
   @override
@@ -57,7 +57,8 @@ class FirebaseDataRepository implements DataRepository {
       });
 
       final gardens = documents.map((doc) {
-        return Garden.fromEntity(GardenEntity.fromSnapshot(doc));
+        final garden = Garden.fromEntity(GardenEntity.fromSnapshot(doc));
+        return garden;
       }).toList();
 
       controller.add(gardens);
