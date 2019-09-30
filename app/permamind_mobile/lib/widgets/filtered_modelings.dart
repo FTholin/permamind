@@ -12,9 +12,9 @@ import 'package:data_repository/data_repository.dart';
 class FilteredModelings extends StatelessWidget {
   final List<Modeling> modelings;
   final String gardenName;
-  final bool publicVisibility;
+  final bool gardenVisibility;
 
-  FilteredModelings({this.modelings, this.gardenName, this.publicVisibility, Key key}) : super(key: key);
+  FilteredModelings({this.modelings, this.gardenName, this.gardenVisibility, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +29,16 @@ class FilteredModelings extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 childAspectRatio: MediaQuery.of(context).size.width /
-                  (MediaQuery.of(context).size.height / 2) ),
+                  (MediaQuery.of(context).size.height / 3) ),
 
               itemBuilder: (BuildContext context, int index) {
                 return InkResponse(
                   enableFeedback: true,
                   child: Card(
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+//                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                         ListTile(
-                          leading: Icon(Icons.ac_unit, size: 50),
-                          title: Text('${modelings[index].modelingName}'),
-//                          subtitle: Text('${modelings[index].modelingId}'),
-                        ),
+                        Text("${modelings[index].modelingName}"),
                       ],
                     ),
                   ),
@@ -54,8 +50,8 @@ class FilteredModelings extends StatelessWidget {
                       ArchSampleRoutes.detailsModeling,
                       arguments: DetailsModelingsScreenArguments(
                           modeling: modelings[index],
-                          gardenName: 'jardin des espérides',
-                          publicVisibility: false
+                          gardenName: gardenName,
+                          publicVisibility: gardenVisibility
                       ),
                     );
 //

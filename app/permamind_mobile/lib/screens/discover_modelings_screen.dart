@@ -18,7 +18,6 @@ class DiscoverModelingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-//        title: Text("Choose a modeling"),
           title: Text("${args.gardenName}")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,9 +87,10 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
                   return FilteredModelings(
-                      modelings: modelings,
-                      gardenName: 'jardin des espérides',
-                      publicVisibility: false);
+                    modelings: modelings,
+                    gardenName: args.gardenName,
+                    gardenVisibility: args.gardenVisibility,
+                  );
                 } else {
                   // TODO ArchSampleKeys
                   return Container(
@@ -124,9 +124,14 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
                   return FilteredModelings(
-                      modelings: modelings,
-                      gardenName: 'jardin des espérides',
-                      publicVisibility: false);
+                    modelings: modelings,
+                    gardenName: args.gardenName,
+                    gardenVisibility: args.gardenVisibility,
+                  );
+//                  return FilteredModelings(
+//                      modelings: modelings,
+//                      gardenName: ${args.gardenName},
+//                      publicVisibility: ${args.gardenVisibility});
                 } else {
                   return Container(
                     // TODO ArchSampleKeys
@@ -143,7 +148,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
 
 class ModelingsScreenArguments {
   final String gardenName;
-  final bool publicVisibility;
+  final bool gardenVisibility;
 
-  ModelingsScreenArguments(this.gardenName, this.publicVisibility);
+  ModelingsScreenArguments(this.gardenName, this.gardenVisibility);
 }
