@@ -29,7 +29,7 @@ class FilteredModelings extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 childAspectRatio: MediaQuery.of(context).size.width /
-                  (MediaQuery.of(context).size.height / 4) ),
+                  (MediaQuery.of(context).size.height / 2) ),
 
               itemBuilder: (BuildContext context, int index) {
                 return InkResponse(
@@ -41,7 +41,7 @@ class FilteredModelings extends StatelessWidget {
                          ListTile(
                           leading: Icon(Icons.ac_unit, size: 50),
                           title: Text('${modelings[index].modelingName}'),
-                          subtitle: Text('${modelings[index].modelingId}'),
+//                          subtitle: Text('${modelings[index].modelingId}'),
                         ),
                       ],
                     ),

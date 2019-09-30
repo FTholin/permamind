@@ -140,11 +140,12 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                   ),
                 );
               },
-              child: Text("Choose a modeling",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 20)),
+              child: Icon(Icons.add),
+//              child: Text("Choose a modeling",
+//                  style: TextStyle(
+//                      color: Colors.white,
+//                      fontWeight: FontWeight.normal,
+//                      fontSize: 20)),
             )
           )
         ],

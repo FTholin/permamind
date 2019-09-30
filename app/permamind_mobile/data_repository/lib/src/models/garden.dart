@@ -8,25 +8,25 @@ class Garden extends Equatable {
   final String gardenId;
   final String gardenName;
   final bool publicVisibility;
-  final List<String> gardenOwners;
+  final List<String> gardenMembers;
 
   Garden( this.gardenName,
     this.publicVisibility,
-    this.gardenOwners,{String gardenId})
+    this.gardenMembers,{String gardenId})
       :  this.gardenId = gardenId ??  Uuid().v4();
 
-  Garden copyWith({String gardenName, String gardenId, bool publicVisibility, List<String> gardenOwners}) {
+  Garden copyWith({String gardenName, String gardenId, bool publicVisibility, List<String> gardenMembers}) {
     return Garden(
       gardenName ?? this.gardenName,
       publicVisibility ?? this.publicVisibility,
-      gardenOwners ?? this.gardenOwners,
+      gardenMembers ?? this.gardenMembers,
       gardenId: gardenId ?? this.gardenId,
     );
   }
 
   @override
   int get hashCode =>
-      gardenId.hashCode ^ gardenName.hashCode ^ publicVisibility.hashCode ^ gardenOwners.hashCode;
+      gardenId.hashCode ^ gardenName.hashCode ^ publicVisibility.hashCode ^ gardenMembers.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -36,16 +36,16 @@ class Garden extends Equatable {
               gardenId == other.gardenId &&
               gardenName == other.gardenName &&
               publicVisibility == other.publicVisibility &&
-              gardenOwners == other.gardenOwners;
+              gardenMembers == other.gardenMembers;
 
 
   @override
   String toString() {
-    return 'Garden { gardenId: $gardenId, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenOwners: $gardenOwners }';
+    return 'Garden { gardenId: $gardenId, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenMembers: $gardenMembers }';
   }
 
   GardenEntity toEntity() {
-    return GardenEntity(gardenId, gardenName, publicVisibility, gardenOwners);
+    return GardenEntity(gardenId, gardenName, publicVisibility, gardenMembers);
   }
 
   static Garden fromEntity(GardenEntity entity) {
@@ -53,7 +53,7 @@ class Garden extends Equatable {
     return Garden(
       entity.gardenName,
       entity.publicVisibility,
-      entity.gardenOwners,
+      entity.gardenMembers,
       gardenId: entity.gardenId ?? Uuid().v4(),
     );
   }

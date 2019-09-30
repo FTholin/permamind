@@ -52,7 +52,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
 
     _gardensSubscription?.cancel();
-
     _gardensSubscription = _dataRepository.gardens(event.userId).listen(
           (gardens) {
         dispatch(

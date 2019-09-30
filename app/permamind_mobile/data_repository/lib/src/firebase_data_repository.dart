@@ -6,6 +6,8 @@ import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_repository/data_repository.dart';
 import 'entities/entities.dart';
+import 'package:rxdart/rxdart.dart';
+
 
 class FirebaseDataRepository implements DataRepository {
 
@@ -28,43 +30,30 @@ class FirebaseDataRepository implements DataRepository {
     return todoCollection.document(garden.gardenId).delete();
   }
 
+//  ///private method to zip QuerySnapshot streams
+//  Stream<QuerySnapshot> _combineStreams(String userId) {
+//
+//    var stream1 = gardensCollection
+//        .where("gardenMembers", arrayContains: userId)
+//        .snapshots();
+//
+//    var stream2 = gardensCollection
+//        .where("gardenOwners", arrayContains: userId)
+//        .snapshots();
+//
+//    return StreamGroup.merge([stream2,stream1]);
+//
+//  }
 
-  Stream<List<QuerySnapshot>> _combineStreams(String userId) {
-
-    var stream1 = gardensCollection
-        .where("gardenOwners", arrayContains: userId)
-        .snapshots();
-
-    var stream2 = gardensCollection
-      .where("gardenContributors", arrayContains: userId)
-      .snapshots();
-
-    return StreamZip(([stream1, stream2])).asBroadcastStream();
-  }
-
-
-  @override
   Stream<List<Garden>> gardens(String userId) {
 
-    var controller = StreamController<List<Garden>>();
-
-    _combineStreams(userId).listen((snapshots) {
-
-      List<DocumentSnapshot> documents = List<DocumentSnapshot>();
-
-      snapshots.forEach((snapshot) {
-        documents.addAll(snapshot.documents);
-      });
-
-      final gardens = documents.map((doc) {
-        final garden = Garden.fromEntity(GardenEntity.fromSnapshot(doc));
-        return garden;
-      }).toList();
-
-      controller.add(gardens);
+    return gardensCollection
+        .where("gardenMembers",arrayContains: userId)
+        .snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => Garden.fromEntity(GardenEntity.fromSnapshot(doc)))
+          .toList();
     });
-
-    return controller.stream;
   }
 
 

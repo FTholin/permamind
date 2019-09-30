@@ -5,22 +5,22 @@ class GardenEntity extends Equatable {
   final String gardenId;
   final String gardenName;
   final bool publicVisibility;
-  final List<String> gardenOwners;
+  final List<String> gardenMembers;
 
-  GardenEntity(this.gardenId, this.gardenName, this.publicVisibility, this.gardenOwners);
+  GardenEntity(this.gardenId, this.gardenName, this.publicVisibility, this.gardenMembers);
 
   Map<String, Object> toJson() {
     return {
       'gardenId': gardenId,
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
-      'gardenOwners': gardenOwners,
+      'gardenMembers': gardenMembers,
     };
   }
 
   @override
   String toString() {
-    return 'GardenEntity { gardenId: $gardenId, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenOwners: $gardenOwners }';
+    return 'GardenEntity { gardenId: $gardenId, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenMembers: $gardenMembers }';
   }
 
   static GardenEntity fromJson(Map<String, Object> json) {
@@ -28,13 +28,13 @@ class GardenEntity extends Equatable {
       json['gardenId'] as String,
       json['gardenName'] as String,
       json['publicVisibility'] as bool,
-      json['gardenOwners']
+      json['gardenMembers']
     );
   }
 
   static GardenEntity fromSnapshot(DocumentSnapshot snap) {
 
-    List<String> gardenList = new List<String>.from(snap.data['gardenOwners']);
+    List<String> gardenList = new List<String>.from(snap.data['gardenMembers']);
 
     return GardenEntity(
       snap.data['gardenId'],
@@ -49,7 +49,7 @@ class GardenEntity extends Equatable {
       'gardenId': gardenId,
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
-      'gardenOwners': gardenOwners
+      'gardenMembers': gardenMembers
     };
   }
 }
