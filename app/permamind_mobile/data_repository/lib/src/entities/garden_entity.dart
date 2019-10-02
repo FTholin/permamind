@@ -37,7 +37,7 @@ class GardenEntity extends Equatable {
     List<String> gardenList = new List<String>.from(snap.data['gardenMembers']);
 
     return GardenEntity(
-      snap.data['gardenId'],
+      snap.documentID,
       snap.data['gardenName'],
       snap.data['publicVisibility'],
       gardenList

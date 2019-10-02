@@ -27,7 +27,7 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteGarden(Garden garden) async {
-    return todoCollection.document(garden.gardenId).delete();
+    return gardensCollection.document(garden.gardenId).delete();
   }
 
 //  ///private method to zip QuerySnapshot streams

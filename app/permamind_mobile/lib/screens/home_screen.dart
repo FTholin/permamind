@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title:  Image.asset(
-              'assets/logo-fond-transparent.png',
+              'assets/logo-light.png',
               width:  MediaQuery.of(context).size.width / 2,
               fit: BoxFit.contain,
             ),
@@ -23,7 +23,9 @@ class HomeScreen extends StatelessWidget {
               ExtraActions(),
             ],
           ),
-          body: activeTab == AppTab.todos ? FilteredGardens() : Stats(),
+          body: activeTab == AppTab.todos ? FilteredGardens(
+
+          ) : Stats(),
           floatingActionButton: FloatingActionButton(
             key: ArchSampleKeys.addGardenFab,
             onPressed: () {

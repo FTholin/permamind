@@ -47,19 +47,19 @@ class FilteredGardens extends StatelessWidget {
                   margin: EdgeInsets.all(10.0),
                 ),
                 onTap: () async {
-//                  final removedTodo = await Navigator.of(context).push(
-//                      MaterialPageRoute(builder: (_) {
-//                        return DetailsScreen(id: gardens[index].id);
-//                      })
-//                  );
-//                  if (removedTodo != null) {
-//                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-//                      key: ArchSampleKeys.snackbar,
-//                      garden: gardens[index],
-//                      onUndo: () => gardensBloc.dispatch(AddTodo(gardens[index])),
-//                      localizations: localizations,
-//                    ));
-//                  }
+                  final removedTodo = await Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) {
+                        return DetailsGardenScreen(garden: gardens[index]);
+                      })
+                  );
+                  if (removedTodo != null) {
+                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+                      key: ArchSampleKeys.snackbar,
+                      garden: gardens[index],
+                      onUndo: () => gardensBloc.dispatch(AddGarden(gardens[index])),
+                      localizations: localizations,
+                    ));
+                  }
                 },
               );
 

@@ -17,7 +17,7 @@ class DeleteTodoSnackBar extends SnackBar {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     ),
-    duration: Duration(seconds: 2),
+    duration: Duration(seconds: 5),
     action: SnackBarAction(
         label: localizations.undo,
         onPressed: onUndo
