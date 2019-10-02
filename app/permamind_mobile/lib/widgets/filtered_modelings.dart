@@ -38,6 +38,13 @@ class FilteredModelings extends StatelessWidget {
                     child: Column(
 //                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
+                        Flexible(
+                          flex: 3,
+                          child: Image.asset(
+                            'assets/modelisations/${modelings[index].modelingName}.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         Text("${modelings[index].modelingName}"),
                       ],
                     ),
@@ -45,7 +52,7 @@ class FilteredModelings extends StatelessWidget {
                   onTap: () async {
 
                       // TODO retrieve all form infos and transfer them
-                    
+
                     final todo = await Navigator.pushNamed(context,
                       ArchSampleRoutes.detailsModeling,
                       arguments: DetailsModelingsScreenArguments(

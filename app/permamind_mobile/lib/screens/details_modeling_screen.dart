@@ -25,20 +25,13 @@ class DetailsModelingScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-           title: Text("${args.gardenName}"),
+           title: Text("${args.modeling.modelingName}"),
           ),
           body: Container(
             child: Column(
 //              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Flexible(
-                  flex: 3,
-                  child: Container(
-                      color: Colors.lightGreenAccent,
-                      margin: const EdgeInsets.only(top: 10, left: 40, right: 40),
-//                      width: MediaQuery.of(context).size.width,
-                      child: Container()),
-                ),
+                _buildModelingImage(context, args.modeling.modelingName),
                 Flexible(
                   flex: 1,
                   child: Container(
@@ -215,11 +208,11 @@ class DetailsModelingScreen extends StatelessWidget {
                                         color: Colors.lightBlueAccent,
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        child: Text('Name',
+                                        child: Text('Production duration',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
-                                                fontSize: 20))),
+                                                fontSize: 18))),
                                   ),
                                   Flexible(
                                     flex: 1,
@@ -228,7 +221,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                         width: MediaQuery.of(context).size.width,
                                         padding: EdgeInsets.only(top: 10),
 
-                                        child: Text('${args.modeling.modelingName}',
+                                        child: Text('${args.modeling.modelingProductionDuration} months',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
@@ -245,28 +238,17 @@ class DetailsModelingScreen extends StatelessWidget {
 //                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Flexible(
-                                    flex: 1,
+                                    flex: 2,
                                     child: Container(
                                         color: Colors.lightBlueAccent,
                                         width: MediaQuery.of(context).size.width,
-                                        child: Text('Duration',
+                                        child: Text('Difficulty Level',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
-                                                fontSize: 20))),
+                                                fontSize: 18))),
                                   ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(top: 10),
-                                        color: Colors.lightBlueAccent,
-                                        width: MediaQuery.of(context).size.width,
-                                        child: Text('${args.modeling.modelingAverageDuration} weeks',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 16))),
-                                  )
+                                  _buildModelingNotation(context, args.modeling.modelingDifficultyLevel),
                                 ],
                               ),
                             ),
@@ -292,31 +274,13 @@ class DetailsModelingScreen extends StatelessWidget {
                                     child: Container(
                                         color: Colors.lightBlueAccent,
                                         width: MediaQuery.of(context).size.width,
-                                        child: Text('Season',
+                                        child: Text('Sunlight requirements',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
-                                                fontSize: 20))),
+                                                fontSize: 18))),
                                   ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.brightness_high ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
+                                  _buildModelingNotation(context, args.modeling.modelingSunlightRequirement),
                                 ],
                               ),
                             ),
@@ -332,55 +296,13 @@ class DetailsModelingScreen extends StatelessWidget {
                                         color: Colors.lightBlueAccent,
                                         width:
                                         MediaQuery.of(context).size.width,
-                                        child: Text('Difficulty level',
+                                        child: Text('Water requiremements',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
-                                                fontSize: 20))),
+                                                fontSize: 18))),
                                   ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star_half ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star_border ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
+                                  _buildModelingNotation(context, args.modeling.modelingWaterRequirement),
                                 ],
                               ),
                             ),
@@ -412,51 +334,9 @@ class DetailsModelingScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
-                                                fontSize: 20))),
+                                                fontSize: 18))),
                                   ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star_border ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star_border ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
+                                  _buildModelingNotation(context, args.modeling.modelingYield),
                                 ],
                               ),
                             ),
@@ -477,7 +357,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
-                                                fontSize: 20))),
+                                                fontSize: 18))),
                                   ),
                                   Flexible(
                                     flex: 1,
@@ -562,6 +442,59 @@ class DetailsModelingScreen extends StatelessWidget {
   }
 }
 
+Widget _buildModelingNotation(BuildContext context, int difficulty) {
+  Row notationsRowItems = Row(
+    children: <Widget>[
+    ],
+  );
+
+  for(var i = 1; i <= 3; i++) {
+    if (i <= difficulty) {
+      notationsRowItems.children.add( Flexible(
+        flex: 2,
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.star ,
+              color: Colors.black,
+              size: MediaQuery.of(context).size.width / 9,
+            )
+          ],
+        ),
+      ),
+    );
+    } else {
+      notationsRowItems.children.add( Flexible(
+        flex: 2,
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.star_border ,
+              color: Colors.black,
+              size: MediaQuery.of(context).size.width / 9,
+            )
+          ],
+        ),
+      ),
+      );
+    }
+  }
+  return Flexible(
+      child: notationsRowItems
+  );
+}
+
+Widget _buildModelingImage(BuildContext context, String modelisationName) {
+
+  return Flexible(
+    flex: 3,
+    child: Image.asset(
+      'assets/modelisations/${modelisationName}.png',
+      fit: BoxFit.cover,
+    ),
+  );
+}
+
 class DetailsModelingsScreenArguments {
   final Modeling modeling;
   final String gardenName;
@@ -575,3 +508,4 @@ class DetailsModelingsScreenArguments {
 //    @required this.onSaveGarden,
   });
 }
+

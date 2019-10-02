@@ -5,22 +5,40 @@ import 'package:data_repository/src/entities/entities.dart';
 class Modeling {
   final String modelingId;
   final String modelingName;
-  final int modelingAverageDuration;
+  final String modelingProductionDuration;
+  final int modelingDifficultyLevel;
+  final int modelingSunlightRequirement;
+  final int modelingWaterRequirement;
+  final int modelingYield;
 
-  Modeling(this.modelingName, this.modelingAverageDuration, {String modelingId})
+  Modeling(this.modelingName, this.modelingProductionDuration,
+      this.modelingDifficultyLevel, this.modelingSunlightRequirement,
+      this.modelingWaterRequirement,
+      this.modelingYield, {String modelingId})
       : this.modelingId = modelingId;
 
-  Modeling copyWith({String modelingId, String modelingName, double modelingAverageDuration}) {
+  Modeling copyWith({String modelingId, String modelingName,
+    String modelingProductionDuration,
+    int modelingSunlightRequirement, int modelingWaterRequirement,
+    int modelingYield
+  }) {
     return Modeling(
       modelingName ?? this.modelingName,
-      modelingAverageDuration ?? this.modelingAverageDuration,
+      modelingProductionDuration ?? this.modelingProductionDuration,
+      modelingDifficultyLevel ?? this.modelingDifficultyLevel,
+      modelingSunlightRequirement ?? this.modelingSunlightRequirement,
+      modelingWaterRequirement ?? this.modelingWaterRequirement,
+      modelingYield ?? this.modelingYield,
       modelingId: modelingId ?? this.modelingId
     );
   }
 
   @override
   int get hashCode =>
-      modelingId.hashCode ^ modelingName.hashCode ^ modelingAverageDuration.hashCode;
+      modelingId.hashCode ^ modelingName.hashCode ^
+      modelingProductionDuration.hashCode ^ modelingDifficultyLevel.hashCode ^
+      modelingSunlightRequirement.hashCode ^
+      modelingWaterRequirement.hashCode ^ modelingYield.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -29,21 +47,36 @@ class Modeling {
               runtimeType == other.runtimeType &&
               modelingId == other.modelingId &&
               modelingName == other.modelingName &&
-              modelingAverageDuration == other.modelingAverageDuration;
+              modelingSunlightRequirement == other.modelingSunlightRequirement &&
+              modelingWaterRequirement == other.modelingWaterRequirement &&
+              modelingYield == other.modelingYield &&
+              modelingProductionDuration == other.modelingProductionDuration &&
+              modelingDifficultyLevel == other.modelingDifficultyLevel;
 
   @override
   String toString() {
-    return 'Modeling { modelingId: $modelingId, modelingName: $modelingName, modelingAverageDuration: $modelingAverageDuration }';
+    return 'Modeling { modelingId: $modelingId, modelingName: $modelingName,'
+        ' modelingProductionDuration: $modelingProductionDuration'
+        ' modelingDifficultyLevel: $modelingDifficultyLevel'
+        ' modelingSunlightRequirement: $modelingSunlightRequirement'
+        ' modelingWaterRequirement: $modelingWaterRequirement '
+        ' modelingYield: $modelingYield}';
   }
 
   ModelingEntity toEntity() {
-    return ModelingEntity(modelingId, modelingName, modelingAverageDuration);
+    return ModelingEntity(modelingId, modelingName, modelingProductionDuration,
+        modelingDifficultyLevel, modelingSunlightRequirement,
+        modelingWaterRequirement, modelingYield);
   }
 
   static Modeling fromEntity(ModelingEntity entity) {
     return Modeling(
       entity.modelingName,
-      entity.modelingAverageDuration,
+      entity.modelingProductionDuration,
+      entity.modelingDifficultyLevel,
+      entity.modelingSunlightRequirement,
+      entity.modelingWaterRequirement,
+      entity.modelingYield,
       modelingId: entity.modelingId,
     );
   }

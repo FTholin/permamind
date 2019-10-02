@@ -13,7 +13,11 @@ class HomeScreen extends StatelessWidget {
       builder: (context, activeTab) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(FlutterBlocLocalizations.of(context).appTitle),
+            title:  Image.asset(
+              'assets/logo-fond-transparent.png',
+              width:  MediaQuery.of(context).size.width / 2,
+              fit: BoxFit.contain,
+            ),
             actions: [
               FilterButton(visible: activeTab == AppTab.todos),
               ExtraActions(),

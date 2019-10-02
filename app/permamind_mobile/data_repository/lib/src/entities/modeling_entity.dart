@@ -4,29 +4,48 @@ import 'package:equatable/equatable.dart';
 class ModelingEntity extends Equatable {
   final String modelingId;
   final String modelingName;
-  final int modelingAverageDuration;
+  final String modelingProductionDuration;
+  final int modelingDifficultyLevel;
+  final int modelingSunlightRequirement;
+  final int modelingWaterRequirement;
+  final int modelingYield;
 
   ModelingEntity(this.modelingId, this.modelingName,
-      this.modelingAverageDuration);
+      this.modelingProductionDuration, this.modelingDifficultyLevel,
+      this.modelingSunlightRequirement,
+      this.modelingWaterRequirement, this.modelingYield);
 
   Map<String, Object> toJson() {
     return {
       'modelingId': modelingId,
       'modelingName': modelingName,
-      'modelingAverageDuration': modelingAverageDuration,
+      'modelingProductionDuration': modelingProductionDuration,
+      'modelingDifficultyLevel': modelingDifficultyLevel,
+      'modelingSunlightRequirement': modelingSunlightRequirement,
+      'modelingWaterRequirement': modelingWaterRequirement,
+      'modelingYield': modelingYield
     };
   }
 
   @override
   String toString() {
-    return 'ModelingEntity { modelingId: $modelingId, modelingName: $modelingName, modelingAverageDuration: $modelingAverageDuration}';
+    return 'Modeling { modelingId: $modelingId, modelingName: $modelingName,'
+        ' modelingProductionDuration: $modelingProductionDuration'
+        ' modelingDifficultyLevel: $modelingDifficultyLevel'
+        ' modelingSunlightRequirement: $modelingSunlightRequirement'
+        ' modelingWaterRequirement: $modelingWaterRequirement '
+        ' modelingYield: $modelingYield}';
   }
 
   static ModelingEntity fromJson(Map<String, Object> json) {
     return ModelingEntity(
       json['modelingId'] as String,
       json['modelingName'] as String,
-      json['modelingAverageDuration'] as int,
+      json['modelingProductionDuration'] as String,
+      json['modelingDifficultyLevel'] as int,
+      json['modelingSunlightRequirement'] as int,
+      json['modelingWaterRequirement'] as int,
+      json['modelingYield'] as int,
     );
   }
 
@@ -34,8 +53,11 @@ class ModelingEntity extends Equatable {
     return ModelingEntity(
       snap.documentID,
       snap.data['modelingName'],
-      snap.data['modelingAverageDuration'],
-
+      snap.data['modelingProductionDuration'],
+      snap.data['modelingDifficultyLevel'],
+      snap.data['modelingSunlightRequirement'],
+      snap.data['modelingWaterRequirement'],
+      snap.data['modelingYield'],
     );
   }
 
@@ -43,7 +65,11 @@ class ModelingEntity extends Equatable {
     return {
       'modelingId': modelingId,
       'modelingName': modelingName,
-      'modelingAverageDuration': modelingAverageDuration,
+      'modelingProductionDuration': modelingProductionDuration,
+      'modelingDifficultyLevel': modelingDifficultyLevel,
+      'modelingSunlightRequirement': modelingSunlightRequirement,
+      'modelingWaterRequirement': modelingWaterRequirement,
+      'modelingYield': modelingYield
     };
   }
 }
