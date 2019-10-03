@@ -20,6 +20,10 @@ class ArchSampleKeys {
   // Tabs
   static final tabs = const Key('__tabs__');
   static final todoTab = const Key('__todoTab__');
+  static final gardenTab = const Key('__gardenTab__');
+  static final abcTab = const Key('__abcTab__');
+  static final learningTab = const Key('_learningTab__');
+  static final settingsTab = const Key('__settingTab__');
   static final statsTab = const Key('__statsTab__');
 
   // Extra Actions

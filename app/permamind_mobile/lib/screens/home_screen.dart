@@ -19,11 +19,11 @@ class HomeScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             actions: [
-              FilterButton(visible: activeTab == AppTab.todos),
+              FilterButton(visible: activeTab == AppTab.gardens),
               ExtraActions(),
             ],
           ),
-          body: activeTab == AppTab.todos ? FilteredGardens(
+          body: activeTab == AppTab.gardens ? FilteredGardens(
 
           ) : Stats(),
           floatingActionButton: FloatingActionButton(

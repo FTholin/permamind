@@ -1,1 +1,1 @@
-enum AppTab { todos, stats }
+enum AppTab { gardens, abc, learning, settings }

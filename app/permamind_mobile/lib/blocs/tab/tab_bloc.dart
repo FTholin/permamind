@@ -6,7 +6,7 @@ import 'package:permamind_mobile/models/models.dart';
 
 class TabBloc extends Bloc<TabEvent, AppTab> {
   @override
-  AppTab get initialState => AppTab.todos;
+  AppTab get initialState => AppTab.gardens;
 
   @override
   Stream<AppTab> mapEventToState(TabEvent event) async* {

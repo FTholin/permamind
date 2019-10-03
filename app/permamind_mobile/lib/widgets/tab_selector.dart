@@ -20,17 +20,31 @@ class TabSelector extends StatelessWidget {
       key: ArchSampleKeys.tabs,
       currentIndex: AppTab.values.indexOf(activeTab),
       onTap: (index) => onTabSelected(AppTab.values[index]),
+
       items: AppTab.values.map((tab) {
+        Icon icon;
+        Text text;
+        switch (tab) {
+          case AppTab.gardens:
+            icon = Icon(Icons.list, key: ArchSampleKeys.gardenTab);
+            text = Text(ArchSampleLocalizations.of(context).gardens);
+            break;
+          case AppTab.abc:
+            icon = Icon(Icons.import_contacts, key: ArchSampleKeys.abcTab);
+            text = Text(ArchSampleLocalizations.of(context).abc);
+            break;
+          case AppTab.learning:
+            icon = Icon(Icons.school, key: ArchSampleKeys.learningTab);
+            text = Text(ArchSampleLocalizations.of(context).learning);
+            break;
+          case AppTab.settings:
+            icon = Icon(Icons.settings, key: ArchSampleKeys.settingsTab);
+            text = Text(ArchSampleLocalizations.of(context).settings);
+            break;
+        }
         return BottomNavigationBarItem(
-          icon: Icon(
-            tab == AppTab.todos ? Icons.list : Icons.show_chart,
-            key: tab == AppTab.todos
-                ? ArchSampleKeys.todoTab
-                : ArchSampleKeys.statsTab,
-          ),
-          title: Text(tab == AppTab.stats
-              ? ArchSampleLocalizations.of(context).stats
-              : ArchSampleLocalizations.of(context).todos),
+          icon: icon,
+          title: text,
         );
       }).toList(),
     );

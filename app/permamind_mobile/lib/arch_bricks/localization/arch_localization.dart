@@ -29,6 +29,34 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
+  String get gardens => Intl.message(
+    'Gardens',
+    name: 'gardens',
+    args: [],
+    locale: locale.toString(),
+  );
+
+  String get abc => Intl.message(
+    'ABC',
+    name: 'abc',
+    args: [],
+    locale: locale.toString(),
+  );
+
+  String get learning => Intl.message(
+    'Learning',
+    name: 'learning',
+    args: [],
+    locale: locale.toString(),
+  );
+
+  String get settings => Intl.message(
+    'Settings',
+    name: 'settings',
+    args: [],
+    locale: locale.toString(),
+  );
+
   String get stats => Intl.message(
     'Stats',
     name: 'stats',
