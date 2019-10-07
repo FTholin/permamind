@@ -141,6 +141,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                 ),
                 Flexible(
                   flex: 3,
+                  // TODO Ajouter Chip Input ici
                   child: TextField(
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(left: 15.0, top: 30),
