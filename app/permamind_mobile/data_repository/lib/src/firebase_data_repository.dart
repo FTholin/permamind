@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
+import 'package:authentication/authentication.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_repository/data_repository.dart';
@@ -19,6 +20,7 @@ class FirebaseDataRepository implements DataRepository {
 
   final plantsCollection = Firestore.instance.collection('vegetables');
 
+  final usersCollection = Firestore.instance.collection('users');
 
   @override
   Future<void> addNewGarden(Garden garden) {
@@ -46,7 +48,6 @@ class FirebaseDataRepository implements DataRepository {
 //  }
 
   Stream<List<Garden>> gardens(String userId) {
-
     return gardensCollection
         .where("gardenMembers",arrayContains: userId)
         .snapshots().map((snapshot) {
@@ -66,6 +67,13 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+
+  Future<QuerySnapshot> searchByName(String value) {
+    return usersCollection
+    .where('searchKey',
+    isEqualTo: value.substring(0, 1).toUpperCase())
+    .getDocuments();
+  }
 
   @override
   Future<void> updateGarden(Garden update) {

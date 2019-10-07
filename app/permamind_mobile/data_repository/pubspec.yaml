@@ -20,6 +20,9 @@ dependencies:
   firebase_core: ^0.4.0+1
   uuid: ^2.0.2
 
+  authentication:
+    path: ../authentication
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

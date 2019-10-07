@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
@@ -7,9 +9,9 @@ import 'package:data_repository/data_repository.dart';
 class AddEditGardenScreen extends StatefulWidget {
   final bool isEditing;
   final Garden garden;
+  final FirebaseDataRepository dataProvider;
 
-
-  AddEditGardenScreen({Key key, @required this.isEditing, this.garden})
+  AddEditGardenScreen({Key key, @required this.dataProvider, @required this.isEditing, this.garden})
       : super(key: key ?? ArchSampleKeys.addTodoScreen);
 
   @override
@@ -142,17 +144,79 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                 Flexible(
                   flex: 3,
                   // TODO Ajouter Chip Input ici
-                  child: TextField(
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 15.0, top: 30),
-                      border: OutlineInputBorder(),
-                      hintText: "Invite some friends to have fun !",
-//                      errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                    ),
-                    onChanged: (value){
-                      setState(() {});
-                    },
+                  child: ChipsInput(
+              initialValue: [
+//                AppProfile('John Doe', 'jdoe@flutter.io',
+//                    'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'),
+              ],
+              keyboardAppearance: Brightness.dark,
+              textCapitalization: TextCapitalization.words,
+              enabled: true,
+              maxChips: 15,
+              textStyle:
+                  TextStyle(height: 1.5, fontFamily: "Roboto", fontSize: 16),
+              decoration: InputDecoration(
+                // prefixIcon: Icon(Icons.search),
+                // hintText: formControl.hint,
+                // enabled: false,
+                // errorText: field.errorText,
+              ),
+              findSuggestions: (String query) async {
+                if (query.length != 0) {
+
+                  var queryResultSet = [];
+                  var queryRes = await widget.dataProvider.searchByName(query);
+
+                  for (int i = 0; i < queryRes.documents.length; ++i) {
+                    var data = queryRes.documents[i].data;
+                    queryResultSet.add(AppProfile(data["pseudo"], data["email"], 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+                  }
+
+                  return queryResultSet;
+//                  return searchByName
+//                  var lowercaseQuery = query.toLowerCase();
+//                  return mockResults.where((profile) {
+//                    return profile.name
+//                            .toLowerCase()
+//                            .contains(query.toLowerCase()) ||
+//                        profile.email
+//                            .toLowerCase()
+//                            .contains(query.toLowerCase());
+//                  }).toList(growable: false)
+//                    ..sort((a, b) => a.name
+//                        .toLowerCase()
+//                        .indexOf(lowercaseQuery)
+//                        .compareTo(
+//                            b.name.toLowerCase().indexOf(lowercaseQuery)));
+                }
+                return [];
+              },
+              onChanged: (data) {
+                print(data);
+              },
+              chipBuilder: (context, state, profile) {
+                return InputChip(
+                  key: ObjectKey(profile),
+                  label: Text(profile.pseudo),
+                  avatar: CircleAvatar(
+                    backgroundImage: NetworkImage(profile.imageUrl),
                   ),
+                  onDeleted: () => state.deleteChip(profile),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                );
+              },
+              suggestionBuilder: (context, state, profile) {
+                return ListTile(
+                  key: ObjectKey(profile),
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(profile.imageUrl),
+                  ),
+                  title: Text(profile.pseudo),
+                  subtitle: Text(profile.email),
+                  onTap: () => state.selectSuggestion(profile),
+                );
+              },
+            ),
                 ),
               ],
             ),
@@ -185,5 +249,28 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
         ],
       ),
     );
+  }
+}
+
+class AppProfile {
+  final String pseudo;
+  final String email;
+  final String imageUrl;
+
+  const AppProfile(this.pseudo, this.email, this.imageUrl);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is AppProfile &&
+              runtimeType == other.runtimeType &&
+              pseudo == other.pseudo;
+
+  @override
+  int get hashCode => pseudo.hashCode;
+
+  @override
+  String toString() {
+    return pseudo;
   }
 }

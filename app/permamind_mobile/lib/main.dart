@@ -105,6 +105,7 @@ class App extends StatelessWidget {
 //            child: DiscoverModelingsScreen(),
 //            );
           return AddEditGardenScreen(
+            dataProvider: firebaseRepository,
 //              onSave: (task, note) {
 //                gardensBloc.dispatch(
 //                  AddTodo(Todo(task, note: note)),
