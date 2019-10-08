@@ -8,8 +8,10 @@ class UserEntity extends Equatable {
   final String email;
   final List<String> gardensAssociated;
   final List<String> activitiesAssignated;
+  final String searchKey;
 
-  UserEntity(this.id, this.pseudo, this.email, this.gardensAssociated, this.activitiesAssignated, this.nationality);
+  UserEntity(this.id, this.pseudo, this.email, this.gardensAssociated,
+      this.activitiesAssignated, this.nationality, this.searchKey);
 
   Map<String, Object> toJson() {
     return {
@@ -19,12 +21,13 @@ class UserEntity extends Equatable {
       'nationality': nationality,
       'gardensAssociated': gardensAssociated,
       'activitiesAssignated': activitiesAssignated,
+      'searchKey': searchKey
     };
   }
 
   @override
   String toString() {
-    return 'UserEntity { id: $id, pseudo: $pseudo, email: $email, gardens: $gardensAssociated, activities: $activitiesAssignated, nationality: $nationality }';
+    return 'UserEntity { id: $id, pseudo: $pseudo, email: $email, gardens: $gardensAssociated, activities: $activitiesAssignated, nationality: $nationality, searchKey: $searchKey }';
   }
 
   static UserEntity fromJson(Map<String, Object> json) {
@@ -35,6 +38,7 @@ class UserEntity extends Equatable {
       json['gardensAssociated'] as List<String>,
       json['activitiesAssignated'] as List<String>,
       json['nationality'] as String,
+      json['searchKey'] as String
     );
   }
 
@@ -46,6 +50,7 @@ class UserEntity extends Equatable {
       snap.data['gardensAssociated'],
       snap.data['activitiesAssignated'],
       snap.data['nationality'],
+      snap.data['searchKey']
     );
   }
 
@@ -57,6 +62,7 @@ class UserEntity extends Equatable {
       'gardensAssociated': gardensAssociated,
       'activitiesAssignated': activitiesAssignated,
       'nationality': nationality,
+      'searchKey': searchKey
     };
   }
 }

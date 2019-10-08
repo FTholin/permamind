@@ -48,7 +48,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
     final localizations = ArchSampleLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
 
-    List<String> _gardenContributors = [];
+    List<String> _gardenMembers = [];
 
     var queryResProfile = [];
 
@@ -146,7 +146,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 //                color: Colors.indigoAccent,
                       margin: const EdgeInsets.only(left: 15),
                       width: MediaQuery.of(context).size.width,
-                      child: Text("Send invitations to",
+                      child: Text("Invite some friends",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.normal,
@@ -154,7 +154,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                 ),
                 Flexible(
                   flex: 3,
-                  // TODO Ajouter Chip Input ici
                   child: ChipsInput(
                     keyboardAppearance: Brightness.dark,
                     textCapitalization: TextCapitalization.words,
@@ -171,14 +170,14 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                     findSuggestions: (String query) async {
                       queryResProfile = [];
                       if (query.length != 0) {
-                        _gardenContributors = [];
+                        _gardenMembers = [];
                         var queryRes =
                             await widget.dataProvider.searchByName(query);
 
                         for (int i = 0; i < queryRes.documents.length; ++i) {
                           var data = queryRes.documents[i].data;
-
                           queryResProfile.add(AppProfile(
+                              data["id"],
                               data["pseudo"],
                               data["email"],
                               'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
@@ -188,9 +187,9 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                     },
                     onChanged: (data) {
 
-                      _gardenContributors.clear();
+                      _gardenMembers.clear();
                       data.forEach((elem){
-                        _gardenContributors.add(elem.pseudo);
+                        _gardenMembers.add(elem.id);
                       });
                     },
                     chipBuilder: (context, state, profile) {
@@ -232,7 +231,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                       context,
                       ArchSampleRoutes.discoverModelings,
                       arguments: ModelingsScreenArguments(
-                          '${_gardenNameController.text}', _gardenVisibility, _gardenContributors),
+                          '${_gardenNameController.text}', _gardenVisibility, _gardenMembers),
                     );
                   } else {
                     setState(() {
@@ -251,18 +250,20 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 }
 
 class AppProfile {
+  final String id;
   final String pseudo;
   final String email;
   final String imageUrl;
 
-  const AppProfile(this.pseudo, this.email, this.imageUrl);
+  const AppProfile(this.id, this.pseudo, this.email, this.imageUrl);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is AppProfile &&
           runtimeType == other.runtimeType &&
-          pseudo == other.pseudo;
+          pseudo == other.pseudo &&
+          id == other.id;
 
   @override
   int get hashCode => pseudo.hashCode;

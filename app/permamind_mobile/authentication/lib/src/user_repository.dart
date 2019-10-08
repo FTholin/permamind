@@ -42,7 +42,7 @@ class UserRepository {
       password: password,
     );
 
-    User newUser = User(user.uid, pseudo, email, [], []);
+    User newUser = User(user.uid, pseudo, email, [], [], pseudo.substring(0, 1).toUpperCase());
     await addNewUser(newUser);
   }
 
