@@ -16,6 +16,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
     final ModelingsScreenArguments args =
         ModalRoute.of(context).settings.arguments;
 
+    print("jardin: ${args.gardenContributors}");
     return Scaffold(
       appBar: AppBar(
           title: Text("${args.gardenName}")),
@@ -149,6 +150,6 @@ class DiscoverModelingsScreen extends StatelessWidget {
 class ModelingsScreenArguments {
   final String gardenName;
   final bool gardenVisibility;
-
-  ModelingsScreenArguments(this.gardenName, this.gardenVisibility);
+  final List<String> gardenContributors;
+  ModelingsScreenArguments(this.gardenName, this.gardenVisibility, this.gardenContributors);
 }

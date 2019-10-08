@@ -11,7 +11,11 @@ class AddEditGardenScreen extends StatefulWidget {
   final Garden garden;
   final FirebaseDataRepository dataProvider;
 
-  AddEditGardenScreen({Key key, @required this.dataProvider, @required this.isEditing, this.garden})
+  AddEditGardenScreen(
+      {Key key,
+      @required this.dataProvider,
+      @required this.isEditing,
+      this.garden})
       : super(key: key ?? ArchSampleKeys.addTodoScreen);
 
   @override
@@ -19,19 +23,19 @@ class AddEditGardenScreen extends StatefulWidget {
 }
 
 class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
-
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _gardenNameController = TextEditingController();
-
 
   final String _publicTitle = "Public";
 
   final String _privateTitle = "Private";
 
-  final String _privateParagraph = "Private gardens are accessible by invitation only and are not displayed on the map";
+  final String _privateParagraph =
+      "Private gardens are accessible by invitation only and are not displayed on the map";
 
-  final String _publicParagraph = "Public gardens are accessible and are  displayed on the map";
+  final String _publicParagraph =
+      "Public gardens are accessible and are  displayed on the map";
 
   bool _validate = false;
 
@@ -43,6 +47,10 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
   Widget build(BuildContext context) {
     final localizations = ArchSampleLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
+
+    List<String> _gardenContributors = [];
+
+    var queryResProfile = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -67,19 +75,21 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                 ),
                 Flexible(
                   flex: 3,
-                    child: TextField(
-                      controller: _gardenNameController,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 15.0, top: 30),
-                          border: OutlineInputBorder(),
-                          hintText: "Enter a Garden's name",
-                          errorText: _validate ? 'Value Can\'t Be Empty' : null,
-                      ),
-                      onChanged: (value){
-                        _gardenNameController.text.isEmpty ? _validate = true : _validate = false;
-                        setState(() {});
-                      },
+                  child: TextField(
+                    controller: _gardenNameController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 15.0, top: 30),
+                      border: OutlineInputBorder(),
+                      hintText: "Enter a Garden's name",
+                      errorText: _validate ? 'Value Can\'t Be Empty' : null,
                     ),
+                    onChanged: (value) {
+                      _gardenNameController.text.isEmpty
+                          ? _validate = true
+                          : _validate = false;
+                      setState(() {});
+                    },
+                  ),
                 ),
               ],
             ),
@@ -92,7 +102,8 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                   Flexible(
                     flex: 1,
                     child: SwitchListTile(
-                      title: Text("${_gardenVisibility == false ? _privateTitle : _publicTitle}",
+                      title: Text(
+                          "${_gardenVisibility == false ? _privateTitle : _publicTitle}",
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.normal,
@@ -107,15 +118,15 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                   ),
                   Flexible(
                     child: Container(
-                        color: Colors.indigoAccent,
-                        margin: const EdgeInsets.only(left: 15, right: 20),
-                        width: MediaQuery.of(context).size.width,
-                        child: Text(
-                            "${_gardenVisibility == false ? _privateParagraph : _publicParagraph}",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 14)),
+                      color: Colors.indigoAccent,
+                      margin: const EdgeInsets.only(left: 15, right: 20),
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                          "${_gardenVisibility == false ? _privateParagraph : _publicParagraph}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 14)),
                     ),
                   ),
                 ],
@@ -145,107 +156,94 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                   flex: 3,
                   // TODO Ajouter Chip Input ici
                   child: ChipsInput(
-              initialValue: [
-//                AppProfile('John Doe', 'jdoe@flutter.io',
-//                    'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'),
-              ],
-              keyboardAppearance: Brightness.dark,
-              textCapitalization: TextCapitalization.words,
-              enabled: true,
-              maxChips: 15,
-              textStyle:
-                  TextStyle(height: 1.5, fontFamily: "Roboto", fontSize: 16),
-              decoration: InputDecoration(
-                // prefixIcon: Icon(Icons.search),
-                // hintText: formControl.hint,
-                // enabled: false,
-                // errorText: field.errorText,
-              ),
-              findSuggestions: (String query) async {
-                if (query.length != 0) {
+                    keyboardAppearance: Brightness.dark,
+                    textCapitalization: TextCapitalization.words,
+                    enabled: true,
+                    maxChips: 15,
+                    textStyle: TextStyle(
+                        height: 1.5, fontFamily: "Roboto", fontSize: 16),
+                    decoration: InputDecoration(
+                         prefixIcon: Icon(Icons.search),
+                        // hintText: formControl.hint,
+                        // enabled: false,
+                        // errorText: field.errorText,
+                        ),
+                    findSuggestions: (String query) async {
+                      queryResProfile = [];
+                      if (query.length != 0) {
+                        _gardenContributors = [];
+                        var queryRes =
+                            await widget.dataProvider.searchByName(query);
 
-                  var queryResultSet = [];
-                  var queryRes = await widget.dataProvider.searchByName(query);
+                        for (int i = 0; i < queryRes.documents.length; ++i) {
+                          var data = queryRes.documents[i].data;
 
-                  for (int i = 0; i < queryRes.documents.length; ++i) {
-                    var data = queryRes.documents[i].data;
-                    queryResultSet.add(AppProfile(data["pseudo"], data["email"], 'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
-                  }
+                          queryResProfile.add(AppProfile(
+                              data["pseudo"],
+                              data["email"],
+                              'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+                        }
+                      }
+                      return queryResProfile;
+                    },
+                    onChanged: (data) {
 
-                  return queryResultSet;
-//                  return searchByName
-//                  var lowercaseQuery = query.toLowerCase();
-//                  return mockResults.where((profile) {
-//                    return profile.name
-//                            .toLowerCase()
-//                            .contains(query.toLowerCase()) ||
-//                        profile.email
-//                            .toLowerCase()
-//                            .contains(query.toLowerCase());
-//                  }).toList(growable: false)
-//                    ..sort((a, b) => a.name
-//                        .toLowerCase()
-//                        .indexOf(lowercaseQuery)
-//                        .compareTo(
-//                            b.name.toLowerCase().indexOf(lowercaseQuery)));
-                }
-                return [];
-              },
-              onChanged: (data) {
-                print(data);
-              },
-              chipBuilder: (context, state, profile) {
-                return InputChip(
-                  key: ObjectKey(profile),
-                  label: Text(profile.pseudo),
-                  avatar: CircleAvatar(
-                    backgroundImage: NetworkImage(profile.imageUrl),
+                      _gardenContributors.clear();
+                      data.forEach((elem){
+                        _gardenContributors.add(elem.pseudo);
+                      });
+                    },
+                    chipBuilder: (context, state, profile) {
+                      return InputChip(
+                        key: ObjectKey(profile),
+                        label: Text(profile.pseudo),
+                        avatar: CircleAvatar(
+                          backgroundImage: NetworkImage(profile.imageUrl),
+                        ),
+                        onDeleted: () => state.deleteChip(profile),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      );
+                    },
+                    suggestionBuilder: (context, state, profile) {
+                      return ListTile(
+                        key: ObjectKey(profile),
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(profile.imageUrl),
+                        ),
+                        title: Text(profile.pseudo),
+                        subtitle: Text(profile.email),
+                        onTap: () => state.selectSuggestion(profile),
+                      );
+                    },
                   ),
-                  onDeleted: () => state.deleteChip(profile),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                );
-              },
-              suggestionBuilder: (context, state, profile) {
-                return ListTile(
-                  key: ObjectKey(profile),
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(profile.imageUrl),
-                  ),
-                  title: Text(profile.pseudo),
-                  subtitle: Text(profile.email),
-                  onTap: () => state.selectSuggestion(profile),
-                );
-              },
-            ),
                 ),
               ],
             ),
           ),
           Flexible(
-            flex: 3,
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              onPressed:() {
-
-                if (_gardenNameController.text.isNotEmpty) {
-                  Navigator.pushNamed(context,
-                    ArchSampleRoutes.discoverModelings,
-                    arguments: ModelingsScreenArguments(
-                        '${_gardenNameController.text}',
-                        _gardenVisibility
-                    ),
-                  );
-                } else {
-                  setState(() {
-                    _gardenNameController.text.isEmpty ? _validate = true : _validate = false;
-                  });
-                }
-              },
-              child: Text("Continue"),
-            )
-          )
+              flex: 3,
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                onPressed: () {
+                  if (_gardenNameController.text.isNotEmpty) {
+                    Navigator.pushNamed(
+                      context,
+                      ArchSampleRoutes.discoverModelings,
+                      arguments: ModelingsScreenArguments(
+                          '${_gardenNameController.text}', _gardenVisibility, _gardenContributors),
+                    );
+                  } else {
+                    setState(() {
+                      _gardenNameController.text.isEmpty
+                          ? _validate = true
+                          : _validate = false;
+                    });
+                  }
+                },
+                child: Text("Continue"),
+              ))
         ],
       ),
     );
@@ -262,9 +260,9 @@ class AppProfile {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is AppProfile &&
-              runtimeType == other.runtimeType &&
-              pseudo == other.pseudo;
+      other is AppProfile &&
+          runtimeType == other.runtimeType &&
+          pseudo == other.pseudo;
 
   @override
   int get hashCode => pseudo.hashCode;
