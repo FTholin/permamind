@@ -23,17 +23,8 @@ class HomeScreen extends StatelessWidget {
               ExtraActions(),
             ],
           ),
-          body: activeTab == AppTab.gardens ? FilteredGardens(
-
-          ) : Stats(),
-          floatingActionButton: FloatingActionButton(
-            key: ArchSampleKeys.addGardenFab,
-            onPressed: () {
-              Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
-            },
-            child: Icon(Icons.add),
-            tooltip: ArchSampleLocalizations.of(context).addGarden,
-          ),
+          body: _buildTabPage(activeTab),
+          floatingActionButton: _buildFloatActionBUtton(activeTab, context),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
             onTabSelected: (tab) => tabBloc.dispatch(UpdateTab(tab)),
@@ -43,3 +34,58 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+Widget _buildTabPage(AppTab activeTab) {
+  switch (activeTab) {
+    case AppTab.gardens:
+      return FilteredGardens();
+      break;
+    case AppTab.abc:
+      return Scaffold(
+        body: Center(
+          child: Text("ABCédaire des plantes..."),
+        ),
+      );
+      break;
+    case AppTab.learning:
+      return Scaffold(
+        body: Center(
+          child: Text("Learning..."),
+        ),
+      );
+      break;
+    case AppTab.settings:
+      return Scaffold(
+        body: Center(
+          child: Text("Settings..."),
+        ),
+      );
+      break;
+  }
+}
+
+
+Widget _buildFloatActionBUtton(AppTab activeTab, context) {
+  switch (activeTab) {
+    case AppTab.gardens:
+      return FloatingActionButton(
+        key: ArchSampleKeys.addGardenFab,
+        onPressed: () {
+          Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
+        },
+        child: Icon(Icons.add),
+        tooltip: ArchSampleLocalizations.of(context).addGarden,
+      );
+      break;
+    case AppTab.abc:
+      return null;
+      break;
+    case AppTab.learning:
+      return null;
+      break;
+    case AppTab.settings:
+      return null;
+      break;
+  }
+}
+
