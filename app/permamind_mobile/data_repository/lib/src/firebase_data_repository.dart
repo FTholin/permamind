@@ -22,6 +22,9 @@ class FirebaseDataRepository implements DataRepository {
 
   final usersCollection = Firestore.instance.collection('users');
 
+  final tutorialsCollection = Firestore.instance.collection('tutos');
+
+
   @override
   Future<void> addNewGarden(Garden garden) {
     return gardensCollection.add(garden.toEntity().toDocument());
@@ -66,6 +69,25 @@ class FirebaseDataRepository implements DataRepository {
         .toList();
     });
   }
+
+
+  Stream<List<Tutorial>> loadTutorials() {
+    return tutorialsCollection.snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => Tutorial.fromEntity(TutorialEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
+
+  Stream<List<TutorialActivity>> fetchTutoActivities(String tutoId) {
+    return tutorialsCollection.document(tutoId).collection("activities").snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
+
+//  .document("Film").collection("firstFilm").getDocuments();
 
 
   Future<QuerySnapshot> searchByName(String value) {

@@ -71,6 +71,9 @@ class App extends StatelessWidget {
                     BlocProvider<StatsBloc>(
                       builder: (context) => StatsBloc(gardensBloc: gardensBloc),
                     ),
+                    BlocProvider<TutorialsBloc>(
+                      builder: (context) => TutorialsBloc(tutosRepository: firebaseRepository)..dispatch(LoadTutos()),
+                    ),
                   ],
                   child: HomeScreen(),
                 );
@@ -115,7 +118,6 @@ class App extends StatelessWidget {
           );
         },
         '/discoverModelings': (context) {
-          final gardensBloc = BlocProvider.of<GardensBloc>(context);
           return BlocProvider<ModelingsBloc>(
             builder: (context) =>
                 ModelingsBloc(dataRepository: firebaseRepository)
@@ -124,7 +126,6 @@ class App extends StatelessWidget {
           );
         },
         '/detailsModeling': (context) {
-
           return BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {
               if (state is Authenticated) {

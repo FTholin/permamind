@@ -6,6 +6,7 @@ import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/models/models.dart';
 
 class HomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final tabBloc = BlocProvider.of<TabBloc>(context);
@@ -24,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           body: _buildTabPage(activeTab),
-          floatingActionButton: _buildFloatActionBUtton(activeTab, context),
+          floatingActionButton: _buildFloatActionButton(activeTab, context),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
             onTabSelected: (tab) => tabBloc.dispatch(UpdateTab(tab)),
@@ -48,11 +49,7 @@ Widget _buildTabPage(AppTab activeTab) {
       );
       break;
     case AppTab.learning:
-      return Scaffold(
-        body: Center(
-          child: Text("Learning..."),
-        ),
-      );
+      return EnumeratedTutorials();
       break;
     case AppTab.settings:
       return Scaffold(
@@ -65,7 +62,7 @@ Widget _buildTabPage(AppTab activeTab) {
 }
 
 
-Widget _buildFloatActionBUtton(AppTab activeTab, context) {
+Widget _buildFloatActionButton(AppTab activeTab, context) {
   switch (activeTab) {
     case AppTab.gardens:
       return FloatingActionButton(
