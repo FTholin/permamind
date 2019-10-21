@@ -11,6 +11,8 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
 
   TutorialsBloc({@required this.tutosRepository});
   StreamSubscription _tutosSubscription;
+  StreamSubscription _activitiesSubscription;
+
 
 
   @override
@@ -20,16 +22,14 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
   Stream<TutorialsState> mapEventToState(TutorialsEvent event) async* {
     if (event is LoadTutos) {
       yield* _mapLoadTutosToState();
+    } else if (event is LoadActivities) {
+      yield* _mapLoadActivitiesToState(event);
     } else if (event is CompleteActivity) {
       yield* _mapCompleteActivityToState(event);
-    } else if (event is UncompleteActivity) {
-      yield* _mapUncompleteActivityTodoToState(event);
-    } else if (event is CompleteTuto) {
-      yield* _mapCompleteTutoToState(event);
-    } else if (event is UncompleteTuto) {
-      yield* _mapUncompleteTutoToState(event);
     } else if (event is TutosUpdated) {
       yield* _mapTutosUpdateToState(event);
+    } else if (event is ActivitiesUpdated) {
+      yield* _mapActivitiesUpdateToState(event);
     }
   }
 
@@ -45,23 +45,33 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
     );
   }
 
+  Stream<TutorialsState> _mapLoadActivitiesToState(LoadActivities event) async* {
+    _activitiesSubscription?.cancel();
+    _activitiesSubscription = tutosRepository.fetchTutoActivities(event.tutoId).listen(
+          (activities) {
+        dispatch(
+          ActivitiesUpdated(activities),
+        );
+      },
+    );
+  }
+
+  // TODO COnnect activities
+//  Stream<TutorialsState> _mapLoadActivitiesToState() async* {
+//    _tutosSubscription = tutosRepository.loadTutorials();
+//  }
+
   Stream<TutorialsState> _mapCompleteActivityToState(
       CompleteActivity event) async* {
 
   }
 
-  Stream<TutorialsState> _mapUncompleteActivityTodoToState(
-      UncompleteActivity event) async* {
 
+
+  Stream<TutorialsState> _mapActivitiesUpdateToState(ActivitiesUpdated event) async* {
+    yield ActivitiesLoaded(event.activities);
   }
 
-  Stream<TutorialsState> _mapCompleteTutoToState(CompleteTuto event) async* {
-
-  }
-
-  Stream<TutorialsState> _mapUncompleteTutoToState(unComplete) async* {
-
-  }
 
   Stream<TutorialsState> _mapTutosUpdateToState(TutosUpdated event) async* {
     yield TutosLoaded(event.tutos);
@@ -70,6 +80,7 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
   @override
   void dispose() {
     _tutosSubscription?.cancel();
+    _activitiesSubscription?.cancel();
     super.dispose();
   }
 }

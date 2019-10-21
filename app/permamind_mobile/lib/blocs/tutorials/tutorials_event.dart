@@ -1,7 +1,6 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:permamind_mobile/models/models.dart';
 
 @immutable
 abstract class TutorialsEvent extends Equatable {
@@ -13,6 +12,15 @@ class LoadTutos extends TutorialsEvent {
   String toString() => 'LoadTutos';
 }
 
+class LoadActivities extends TutorialsEvent {
+  final String tutoId;
+
+  LoadActivities(this.tutoId) : super([tutoId]);
+  
+  @override
+  String toString() => 'LoadActivities { tutoId: $tutoId}';
+}
+
 class CompleteActivity extends TutorialsEvent {
   final TutorialActivity activity;
 
@@ -22,31 +30,13 @@ class CompleteActivity extends TutorialsEvent {
   String toString() => 'CompleteActivity { activity: $activity }';
 }
 
-class UncompleteActivity extends TutorialsEvent {
-  final TutorialActivity activity;
+class ActivitiesUpdated extends TutorialsEvent {
+  final List<TutorialActivity> activities;
 
-  UncompleteActivity(this.activity) : super([activity]);
-
-  @override
-  String toString() => 'UncompleteActivity { activity: $activity }';
-}
-
-class CompleteTuto extends TutorialsEvent {
-  final Tutorial tutorial;
-
-  CompleteTuto(this.tutorial) : super([tutorial]);
+  ActivitiesUpdated(this.activities);
 
   @override
-  String toString() => 'CompleteTuto { tutorial: $tutorial }';
-}
-
-class UncompleteTuto extends TutorialsEvent {
-  final Tutorial tutorial;
-
-  UncompleteTuto(this.tutorial) : super([tutorial]);
-
-  @override
-  String toString() => 'UncompleteTuto { tutorial: $tutorial }';
+  String toString() => 'ActivitiesUpdated';
 }
 
 class TutosUpdated extends TutorialsEvent {
