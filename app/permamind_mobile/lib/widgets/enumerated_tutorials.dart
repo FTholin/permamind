@@ -27,9 +27,9 @@ class EnumeratedTutorials extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: ListTile(
-                    title: Text('${tutorials[index].tutorialName}'),
+                    title: Text('${tutorials[index].heading}'),
                     leading: CircularCheckBox(
-                        value: true,
+                        value: false,
                         materialTapTargetSize: MaterialTapTargetSize.padded,
                         onChanged: (bool x) {
                         }
@@ -43,8 +43,8 @@ class EnumeratedTutorials extends StatelessWidget {
                           MaterialPageRoute(builder: (_) {
                             return BlocProvider.value(
                               value: BlocProvider.of<TutorialsBloc>(context),
-                              child: EnumeratedActivitiesScreen(tutorialName: tutorials[index].tutorialName,
-                                  tutorialId: tutorials[index].tutorialId),
+                              child: EnumeratedActivitiesScreen(tutorialName: tutorials[index].heading,
+                                  tutorialId: tutorials[index].id),
                             );
                           })
                       );
@@ -54,7 +54,7 @@ class EnumeratedTutorials extends StatelessWidget {
               }
           );
         } else {
-          return Container(child: Text("Else statement"),);
+          return Container();
         }
       },
     );

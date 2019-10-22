@@ -6,23 +6,24 @@ import 'package:data_repository/src/entities/entities.dart';
 @immutable
 class TutorialActivity {
   final String id;
-  final String name;
+  final String heading;
+  final String content;
 
-
-  TutorialActivity(this.name,{String id})
+  TutorialActivity(this.heading, this.content, {String id})
       : this.id = id;
 
-  TutorialActivity copyWith({String id, String name
+  TutorialActivity copyWith({String id, String heading
   }) {
     return TutorialActivity(
-        name ?? this.name,
+        heading ?? this.heading,
+        content ?? this.content,
         id: id ?? this.id
     );
   }
 
   @override
   int get hashCode =>
-      id.hashCode ^ name.hashCode;
+      id.hashCode ^ heading.hashCode ^ content.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -30,20 +31,22 @@ class TutorialActivity {
           other is TutorialActivity &&
               runtimeType == other.runtimeType &&
               id == other.id &&
-              name == other.name;
+              heading == other.heading &&
+              content == other.content;
 
   @override
   String toString() {
-    return 'TutorialActivity { id: $id, name: $name}';
+    return 'TutorialActivity { id: $id, heading: $heading, content: $content}';
   }
 
   TutorialActivityEntity toEntity() {
-    return TutorialActivityEntity(id, name);
+    return TutorialActivityEntity(id, heading, content);
   }
 
   static TutorialActivity fromEntity(TutorialActivityEntity entity) {
     return TutorialActivity(
-      entity.name,
+      entity.heading,
+      entity.content,
       id: entity.id,
     );
   }

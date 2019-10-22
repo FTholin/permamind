@@ -22,7 +22,7 @@ class FirebaseDataRepository implements DataRepository {
 
   final usersCollection = Firestore.instance.collection('users');
 
-  final tutorialsCollection = Firestore.instance.collection('tutos');
+  final tutorialsCollection = Firestore.instance.collection('tutorials');
 
 
   @override
@@ -72,7 +72,9 @@ class FirebaseDataRepository implements DataRepository {
 
 
   Stream<List<Tutorial>> loadTutorials() {
-    return tutorialsCollection.snapshots().map((snapshot) {
+    return tutorialsCollection
+        .orderBy('classificationOrder', descending: false)
+        .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Tutorial.fromEntity(TutorialEntity.fromSnapshot(doc)))
           .toList();
@@ -80,7 +82,10 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   Stream<List<TutorialActivity>> fetchTutoActivities(String tutoId) {
-    return tutorialsCollection.document(tutoId).collection("activities").snapshots().map((snapshot) {
+    return tutorialsCollection
+        .document(tutoId).collection("activities")
+        .orderBy('classificationOrder', descending: false)
+        .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
           .toList();

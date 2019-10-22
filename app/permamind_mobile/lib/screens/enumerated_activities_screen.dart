@@ -59,8 +59,9 @@ class ActivitiesPanel extends StatefulWidget {
   void generateItems(List<TutorialActivity> activities) {
     for (var item in activities) {
       _data.add(new Item(
-        headerValue: '${item.name}',
-        expandedValue: 'Coucou',
+        id: item.id,
+        headerValue: '${item.heading}',
+        expandedValue: '${item.content}'
       ));
     }
   }
@@ -76,31 +77,31 @@ class _ActivitiesPanelState extends State<ActivitiesPanel> {
     );
   }
 
+
   Widget _buildPanel() {
-    return ExpansionPanelList(
+    return ExpansionPanelList.radio(
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
           widget._data[index].isExpanded = !isExpanded;
         });
       },
-      children: widget._data.map<ExpansionPanel>((Item item) {
-        return ExpansionPanel(
+      children: widget._data.map<ExpansionPanelRadio>((Item item) {
+        return ExpansionPanelRadio(
+          value: item.id,
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
                 title: Text(item.headerValue),
                 leading: CircularCheckBox(
                     value: item.isChecked,
                     materialTapTargetSize: MaterialTapTargetSize.padded,
-                    onChanged: (bool x) {}));
+                    onChanged: null));
           },
           body: Card(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  'Pavlova is a meringue-based dessert named after the Russian ballerina '
-                  'Anna Pavlova. Pavlova features a crisp crust and soft, light inside, '
-                  'topped with fruit and whipped cream.',
+                  '${item.expandedValue}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Georgia',
@@ -124,23 +125,9 @@ class _ActivitiesPanelState extends State<ActivitiesPanel> {
                     children: [
                       Column(
                         children: [
-                          Icon(Icons.kitchen, color: Colors.green[500]),
-                          Text('PREP:'),
-                          Text('25 min'),
-                        ],
-                      ),
-                      Column(
-                        children: [
                           Icon(Icons.timer, color: Colors.green[500]),
-                          Text('COOK:'),
-                          Text('1 hr'),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Icon(Icons.restaurant, color: Colors.green[500]),
-                          Text('FEEDS:'),
-                          Text('4-6'),
+                          Text('Duration:'),
+                          Text('25 min'),
                         ],
                       ),
                     ],
@@ -149,16 +136,17 @@ class _ActivitiesPanelState extends State<ActivitiesPanel> {
                 ButtonTheme.bar(
                   child: ButtonBar(
                     children: <Widget>[
-                      FlatButton(
-                        child: const Text('Cancel'),
-                        onPressed: () {
-                          /* ... */
-                        },
-                      ),
+//                      FlatButton(
+//                        child: const Text('Cancel'),
+//                        onPressed: () {
+//                          /* ... */
+//                        },
+//                      ),
                       FlatButton(
                         child: const Text('Done'),
                         onPressed: () {
                           item.isChecked = true;
+                          item.isExpanded = false;
                         },
                       ),
                     ],
@@ -167,7 +155,6 @@ class _ActivitiesPanelState extends State<ActivitiesPanel> {
               ],
             ),
           ),
-          isExpanded: item.isExpanded,
         );
       }).toList(),
     );

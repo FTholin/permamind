@@ -6,46 +6,46 @@ import 'package:equatable/equatable.dart';
 @immutable
 class Tutorial extends Equatable {
   
-  final String tutorialId;
-  final String tutorialName;
+  final String id;
+  final String heading;
 
 
-  Tutorial(this.tutorialName, {String tutorialId})
-      : this.tutorialId = tutorialId;
+  Tutorial(this.heading, {String id})
+      : this.id = id;
 
-  Tutorial copyWith({String tutorialId, String tutorialName,
+  Tutorial copyWith({String id, String heading,
   }) {
     return Tutorial(
-        tutorialName ?? this.tutorialName,
-        tutorialId: tutorialId ?? this.tutorialId
+        heading ?? this.heading,
+        id: id ?? this.id
     );
   }
 
   @override
   int get hashCode =>
-      tutorialId.hashCode ^ tutorialName.hashCode;
+      id.hashCode ^ heading.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
           other is Tutorial &&
               runtimeType == other.runtimeType &&
-              tutorialId == other.tutorialId &&
-              tutorialName == other.tutorialName;
+              id == other.id &&
+              heading == other.heading;
 
   @override
   String toString() {
-    return 'Tutorial { tutorialId: $tutorialId, tutorialName: $tutorialName}';
+    return 'Tutorial { id: $id, heading: $heading}';
   }
 
 //  TutorialEntity toEntity() {
-//    return TutorialEntity(tutorialId, tutorialName, activities);
+//    return TutorialEntity(id, heading, activities);
 //  }
 
   static Tutorial fromEntity(TutorialEntity entity) {
     return Tutorial(
-      entity.tutorialName,
-      tutorialId: entity.tutorialId,
+      entity.heading,
+      id: entity.id,
     );
   }
 }

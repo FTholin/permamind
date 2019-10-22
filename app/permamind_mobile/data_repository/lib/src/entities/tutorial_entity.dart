@@ -4,41 +4,41 @@ import 'package:data_repository/src/entities/entities.dart';
 import 'package:equatable/equatable.dart';
 
 class TutorialEntity extends Equatable {
-  final String tutorialId;
-  final String tutorialName;
+  final String id;
+  final String heading;
 
-  TutorialEntity(this.tutorialId, this.tutorialName);
+  TutorialEntity(this.id, this.heading);
 
   Map<String, Object> toJson() {
     return {
-      'tutorialId': tutorialId,
-      'tutorialName': tutorialName,
+      'id': id,
+      'heading': heading,
     };
   }
 
   @override
   String toString() {
-    return 'Tutorial { tutorialId: $tutorialId, tutorialName: $tutorialName}';
+    return 'Tutorial { id: $id, heading: $heading}';
   }
 
   static TutorialEntity fromJson(Map<String, Object> json) {
     return TutorialEntity(
-      json['tutorialId'] as String,
-      json['tutorialName'] as String,
+      json['id'] as String,
+      json['tutorialHeading'] as String,
     );
   }
 
   static TutorialEntity fromSnapshot(DocumentSnapshot snap) {
     return TutorialEntity(
       snap.documentID,
-      snap.data['tutorialName']
+      snap.data['tutorialHeading']
     );
   }
 
   Map<String, Object> toDocument() {
     return {
-      'tutorialId': tutorialId,
-      'tutorialName': tutorialName,
+      'id': id,
+      'heading': heading,
     };
   }
 }
