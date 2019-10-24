@@ -27,6 +27,8 @@ dependencies:
 
   firebase_core: ^0.4.0+1
   circular_check_box: ^1.0.1
+  table_calendar: ^2.1.0
+
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^4.0.2
