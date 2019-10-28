@@ -49,7 +49,6 @@ class GardenEntity extends Equatable {
 
   Map<String, Object> toDocument() {
     return {
-      'id': id,
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
       'gardenMembers': gardenMembers,

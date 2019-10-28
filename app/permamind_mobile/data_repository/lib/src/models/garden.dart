@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import '../entities/entities.dart';
-import 'package:uuid/uuid.dart';
 
 @immutable
 class Garden extends Equatable {
@@ -15,7 +14,7 @@ class Garden extends Equatable {
     this.publicVisibility,
     this.gardenMembers,
     this.modelisationId, {String id})
-      :  this.id = id ??  Uuid().v4();
+      :  this.id = id;
 
   Garden copyWith({String gardenName, String id, bool publicVisibility, String modelisationId, List<String> gardenMembers}) {
     return Garden(
@@ -58,7 +57,7 @@ class Garden extends Equatable {
       entity.publicVisibility,
       entity.gardenMembers,
       entity.modelisationId,
-      id: entity.id ?? Uuid().v4(),
+      id: entity.id,
     );
   }
 }

@@ -18,6 +18,8 @@ class DetailsGardenScreen extends StatelessWidget {
     return BlocBuilder<GardensBloc, GardensState>(
       builder: (BuildContext context, GardensState state) {
 
+        print("Garden id ${garden.id}");
+
         final localizations = ArchSampleLocalizations.of(context);
         return Scaffold(
           appBar: AppBar(
