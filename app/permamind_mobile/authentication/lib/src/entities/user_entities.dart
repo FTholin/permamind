@@ -44,7 +44,7 @@ class UserEntity extends Equatable {
 
   static UserEntity fromSnapshot(DocumentSnapshot snap) {
     return UserEntity(
-      snap.data['id'],
+      snap.documentID,
       snap.data['pseudo'],
       snap.data['email'],
       snap.data['gardensAssociated'],

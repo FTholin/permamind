@@ -13,7 +13,7 @@ class DeleteTodoSnackBar extends SnackBar {
 }) : super(
     key: key,
     content: Text(
-      localizations.todoDeleted(garden.gardenId),
+      localizations.todoDeleted(garden.gardenName),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     ),

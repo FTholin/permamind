@@ -30,9 +30,10 @@ class FirebaseDataRepository implements DataRepository {
     return gardensCollection.add(garden.toEntity().toDocument());
   }
 
+
   @override
   Future<void> deleteGarden(Garden garden) async {
-    return gardensCollection.document(garden.gardenId).delete();
+    return gardensCollection.document(garden.id).delete();
   }
 
 //  ///private method to zip QuerySnapshot streams
@@ -105,7 +106,7 @@ class FirebaseDataRepository implements DataRepository {
   @override
   Future<void> updateGarden(Garden update) {
     return gardensCollection
-        .document(update.gardenId)
+        .document(update.id)
         .updateData(update.toEntity().toDocument());
   }
 }

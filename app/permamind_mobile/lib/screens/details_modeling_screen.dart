@@ -7,7 +7,7 @@ import 'package:permamind_mobile/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 
 
-typedef SaveGardenCallback = Function(String gardenName, bool publicVisibility, List<String> gardenMembers);
+typedef SaveGardenCallback = Function(String gardenName, bool publicVisibility, List<String> gardenMembers, String gardenModelisationId);
 
 class DetailsModelingScreen extends StatelessWidget {
 
@@ -434,7 +434,7 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                        );
 //                      }));
 //                gardensBloc.d
-                onSaveGarden(args.gardenName, args.publicVisibility, args.gardenMembers);
+                onSaveGarden(args.gardenName, args.publicVisibility, args.gardenMembers, args.modeling.modelingId);
                 Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
               }),

@@ -131,11 +131,11 @@ class App extends StatelessWidget {
               if (state is Authenticated) {
                 final gardensBloc = BlocProvider.of<GardensBloc>(context);
                 return DetailsModelingScreen(
-                    onSaveGarden: (gardenName, publicVisibility, gardenMembers) {
+                    onSaveGarden: (gardenName, publicVisibility, gardenMembers, modelisationId) {
 
                       List<String> allGardenMembers = new List.from([state.userId])..addAll(gardenMembers);
                       gardensBloc.dispatch(
-                        AddGarden(Garden(gardenName, publicVisibility, allGardenMembers)),
+                        AddGarden(Garden(gardenName, publicVisibility, allGardenMembers, modelisationId)),
                       );
                     }
                 );

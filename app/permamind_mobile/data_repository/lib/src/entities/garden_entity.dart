@@ -2,16 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class GardenEntity extends Equatable {
-  final String gardenId;
+  final String id;
   final String gardenName;
   final bool publicVisibility;
+  final String modelisationId;
   final List<String> gardenMembers;
 
-  GardenEntity(this.gardenId, this.gardenName, this.publicVisibility, this.gardenMembers);
+  GardenEntity(this.id, this.gardenName, this.publicVisibility, this.gardenMembers, this.modelisationId);
 
   Map<String, Object> toJson() {
     return {
-      'gardenId': gardenId,
+      'id': id,
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
       'gardenMembers': gardenMembers,
@@ -20,15 +21,16 @@ class GardenEntity extends Equatable {
 
   @override
   String toString() {
-    return 'GardenEntity { gardenId: $gardenId, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenMembers: $gardenMembers }';
+    return 'GardenEntity { id: $id, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenMembers: $gardenMembers }';
   }
 
   static GardenEntity fromJson(Map<String, Object> json) {
     return GardenEntity(
-      json['gardenId'] as String,
+      json['id'] as String,
       json['gardenName'] as String,
       json['publicVisibility'] as bool,
-      json['gardenMembers']
+      json['gardenMembers'],
+      json['modelisationId'] as String,
     );
   }
 
@@ -40,16 +42,18 @@ class GardenEntity extends Equatable {
       snap.documentID,
       snap.data['gardenName'],
       snap.data['publicVisibility'],
-      gardenList
+      gardenList,
+      snap.data['modelisationId']
     );
   }
 
   Map<String, Object> toDocument() {
     return {
-      'gardenId': gardenId,
+      'id': id,
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
-      'gardenMembers': gardenMembers
+      'gardenMembers': gardenMembers,
+      'modelisationId': modelisationId
     };
   }
 }
