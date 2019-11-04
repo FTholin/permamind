@@ -23,16 +23,15 @@ class FilteredGardens extends StatelessWidget {
         } else if (state is FilteredGardensLoaded) {
           final gardens = state.filteredGardens;
 
-          return GridView.builder(
-            key: ArchSampleKeys.todoList,
-            itemCount: gardens.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
+          return ListView.builder(
+              key: ArchSampleKeys.todoList,
+              itemCount: gardens.length,
             itemBuilder: (BuildContext context, int index) {
               return InkResponse(
                 enableFeedback: true,
                 child: Container(
-                  padding: EdgeInsets.all(20.0),
+                  height: MediaQuery.of(context).size.height / 4.5,
+                  margin: EdgeInsets.only(top: 14.0, left:15.0, right: 15.0),
                   child: Center(
                     child: GridTile(
                       footer: Text(
@@ -44,7 +43,6 @@ class FilteredGardens extends StatelessWidget {
                     ),
                   ),
                   color: Colors.blue[400],
-                  margin: EdgeInsets.all(10.0),
                 ),
                 onTap: () async {
                   final removedTodo = await Navigator.of(context).push(
@@ -62,6 +60,13 @@ class FilteredGardens extends StatelessWidget {
                   }
                 },
               );
+
+//            return Container(
+//              height: 100,
+//              width: 100,
+////              margin: EdgeInsets.all(10.0),
+//              color: Colors.red,
+//            );
 
             },
           );

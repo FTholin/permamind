@@ -70,7 +70,7 @@ Widget _buildFloatActionButton(AppTab activeTab, context) {
         onPressed: () {
           Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, color: Colors.white),
         tooltip: ArchSampleLocalizations.of(context).addGarden,
       );
       break;

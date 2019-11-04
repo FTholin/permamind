@@ -54,7 +54,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("New garden"),
+        title: Text("Create a garden"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,7 +69,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: Text("Garden's Name",
                           style: TextStyle(
-                              color: Colors.white,
                               fontWeight: FontWeight.normal,
                               fontSize: 20))),
                 ),
@@ -105,7 +104,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                       title: Text(
                           "${_gardenVisibility == false ? _privateTitle : _publicTitle}",
                           style: TextStyle(
-                              color: Colors.white,
                               fontWeight: FontWeight.normal,
                               fontSize: 20)),
                       value: _gardenVisibility,
@@ -124,7 +122,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                       child: Text(
                           "${_gardenVisibility == false ? _privateParagraph : _publicParagraph}",
                           style: TextStyle(
-                              color: Colors.white,
                               fontWeight: FontWeight.normal,
                               fontSize: 14)),
                     ),
@@ -148,7 +145,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                       width: MediaQuery.of(context).size.width,
                       child: Text("Invite some friends",
                           style: TextStyle(
-                              color: Colors.white,
                               fontWeight: FontWeight.normal,
                               fontSize: 20))),
                 ),

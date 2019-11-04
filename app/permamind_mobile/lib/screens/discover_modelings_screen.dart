@@ -30,7 +30,6 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 child: Text(
                     '${FlutterBlocLocalizations.of(context).modelingsName}',
                     style: TextStyle(
-                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 32))),
           ),
@@ -108,7 +107,6 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 child: Text(
                     '${FlutterBlocLocalizations.of(context).browseAllModelings}',
                     style: TextStyle(
-                        color: Colors.white,
                         fontWeight: FontWeight.normal,
                         fontSize: 20))),
           ),
