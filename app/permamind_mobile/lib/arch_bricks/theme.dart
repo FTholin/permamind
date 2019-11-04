@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//
 class ArchSampleTheme {
   static get theme {
     final originalTextTheme = ThemeData.dark().textTheme;
@@ -18,6 +18,7 @@ class ArchSampleTheme {
         toggleableActiveColor: Colors.cyan[300],
         textTheme: originalTextTheme.copyWith(
             body1:
-            originalBody1.copyWith(decorationColor: Colors.transparent)));
+            originalBody1.copyWith(decorationColor: Colors.transparent))
+    );
   }
 }

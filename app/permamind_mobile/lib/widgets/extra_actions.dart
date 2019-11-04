@@ -20,6 +20,11 @@ class ExtraActions extends StatelessWidget {
         if (state is GardensLoaded) {
 
           return PopupMenuButton<ExtraAction>(
+            icon: Icon(
+              Icons.dehaze,
+              size: 24.0,
+              semanticLabel: 'Text to announce in accessibility modes',
+            ),
             key: FlutterTodosKeys.extraActionsPopupMenuButton,
             onSelected: (action) {
               switch (action) {

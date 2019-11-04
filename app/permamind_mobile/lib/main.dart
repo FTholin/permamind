@@ -30,6 +30,9 @@ void main() {
             ..dispatch(GardensInit());
         },
       ),
+      BlocProvider<ThemeBloc>(
+        builder: (context) => ThemeBloc(),
+      ),
     ],
     child: App(
         userRepository: userRepository, firebaseRepository: firebaseRepository),
@@ -37,6 +40,8 @@ void main() {
 }
 
 class App extends StatelessWidget {
+
+
   final UserRepository userRepository;
 
   final FirebaseDataRepository firebaseRepository;
@@ -45,46 +50,51 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: FlutterBlocLocalizations().appTitle,
-      theme: ArchSampleTheme.theme,
-      localizationsDelegates: [
-        ArchSampleLocalizationsDelegate(),
-        FlutterBlocLocalizationsDelegate(),
-      ],
-      routes: {
-        '/': (context) {
-          return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-              if (state is Authenticated) {
-                final gardensBloc = BlocProvider.of<GardensBloc>(context);
+    return BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, themeState) {
+          return MaterialApp(
+            title: FlutterBlocLocalizations().appTitle,
+            theme: themeState.theme,
+            localizationsDelegates: [
+              ArchSampleLocalizationsDelegate(),
+              FlutterBlocLocalizationsDelegate(),
+            ],
+            routes: {
+              '/': (context) {
+                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    if (state is Authenticated) {
+                      final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
-                return MultiBlocProvider(
-                  providers: [
-                    BlocProvider<TabBloc>(
-                      builder: (context) => TabBloc(),
-                    ),
-                    BlocProvider<FilteredGardensBloc>(
-                      builder: (context) =>
-                          FilteredGardensBloc(gardensBloc: gardensBloc),
-                    ),
-                    BlocProvider<StatsBloc>(
-                      builder: (context) => StatsBloc(gardensBloc: gardensBloc),
-                    ),
-                    BlocProvider<TutorialsBloc>(
-                      builder: (context) => TutorialsBloc(tutosRepository: firebaseRepository)..dispatch(LoadTutos()),
-                    ),
-                  ],
-                  child: HomeScreen(),
+                      return MultiBlocProvider(
+                        providers: [
+                          BlocProvider<TabBloc>(
+                            builder: (context) => TabBloc(),
+                          ),
+                          BlocProvider<FilteredGardensBloc>(
+                            builder: (context) =>
+                                FilteredGardensBloc(gardensBloc: gardensBloc),
+                          ),
+                          BlocProvider<StatsBloc>(
+                            builder: (context) =>
+                                StatsBloc(gardensBloc: gardensBloc),
+                          ),
+                          BlocProvider<TutorialsBloc>(
+                            builder: (context) =>
+                            TutorialsBloc(tutosRepository: firebaseRepository)
+                              ..dispatch(LoadTutos()),
+                          ),
+                        ],
+                        child: HomeScreen(),
+                      );
+                    }
+                    if (state is Unauthenticated) {
+                      return LoginScreen(userRepository: userRepository);
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
                 );
-              }
-              if (state is Unauthenticated) {
-                return LoginScreen(userRepository: userRepository);
-              }
-              return Center(child: CircularProgressIndicator());
-            },
-          );
-        },
+              },
 //        '/addTodo': (context) {
 //          final gardensBloc = BlocProvider.of<GardensBloc>(context);
 //          return AddEditScreen(
@@ -96,8 +106,8 @@ class App extends StatelessWidget {
 //            isEditing: false,
 //          );
 //        },
-        '/addGarden': (context) {
-          final gardensBloc = BlocProvider.of<GardensBloc>(context);
+              '/addGarden': (context) {
+                final gardensBloc = BlocProvider.of<GardensBloc>(context);
 //            return MultiBlocProvider(
 //              providers: [
 //                BlocProvider<ModelingsBloc>(
@@ -107,45 +117,45 @@ class App extends StatelessWidget {
 //            ],
 //            child: DiscoverModelingsScreen(),
 //            );
-          return AddEditGardenScreen(
-            dataProvider: firebaseRepository,
+                return AddEditGardenScreen(
+                  dataProvider: firebaseRepository,
 //              onSave: (task, note) {
 //                gardensBloc.dispatch(
 //                  AddTodo(Todo(task, note: note)),
 //                );
 //              },
-            isEditing: false,
-          );
-        },
-        '/discoverModelings': (context) {
-          return BlocProvider<ModelingsBloc>(
-            builder: (context) =>
-                ModelingsBloc(dataRepository: firebaseRepository)
-                  ..dispatch(FetchModelings()),
-            child: DiscoverModelingsScreen(),
-          );
-        },
-        '/detailsModeling': (context) {
-          return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            builder: (context, state) {
-              if (state is Authenticated) {
-                final gardensBloc = BlocProvider.of<GardensBloc>(context);
-                return DetailsModelingScreen(
-                    onSaveGarden: (gardenName, publicVisibility, gardenMembers, modelisationId) {
-
-                      List<String> allGardenMembers = new List.from([state.userId])..addAll(gardenMembers);
-                      gardensBloc.dispatch(
-                        AddGarden(Garden(gardenName, publicVisibility, allGardenMembers, modelisationId)),
+                  isEditing: false,
+                );
+              },
+              '/discoverModelings': (context) {
+                return BlocProvider<ModelingsBloc>(
+                  builder: (context) =>
+                  ModelingsBloc(dataRepository: firebaseRepository)
+                    ..dispatch(FetchModelings()),
+                  child: DiscoverModelingsScreen(),
+                );
+              },
+              '/detailsModeling': (context) {
+                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    if (state is Authenticated) {
+                      final gardensBloc = BlocProvider.of<GardensBloc>(context);
+                      return DetailsModelingScreen(
+                          onSaveGarden: (gardenName, publicVisibility,
+                              gardenMembers, modelisationId) {
+                            List<String> allGardenMembers = new List.from(
+                                [state.userId])
+                              ..addAll(gardenMembers);
+                            gardensBloc.dispatch(
+                              AddGarden(Garden(gardenName, publicVisibility,
+                                  allGardenMembers, modelisationId)),
+                            );
+                          }
                       );
                     }
+                    return Center(child: CircularProgressIndicator());
+                  },
                 );
-              }
-              return Center(child: CircularProgressIndicator());
-            },
-          );
-
-
-
 
 
 //          final gardensBloc = BlocProvider.of<GardensBloc>(context);
@@ -157,8 +167,10 @@ class App extends StatelessWidget {
 //              );
 //            }
 //          );
+              }
+            },
+          );
         }
-      },
     );
   }
 }
