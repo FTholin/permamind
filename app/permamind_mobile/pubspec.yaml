@@ -29,6 +29,8 @@ dependencies:
   circular_check_box: ^1.0.1
   table_calendar: ^2.1.0
   flutter_svg: ^0.14.3
+  flutter_speed_dial: ^1.2.4
+
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^4.0.2
@@ -72,6 +74,7 @@ flutter:
     - assets/
     - assets/modelisations/
     - assets/bar_buttons_icons/
+    - assets/utils_icons/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

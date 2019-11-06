@@ -50,9 +50,9 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
-  String get settings => Intl.message(
-    'Settings',
-    name: 'settings',
+  String get profile => Intl.message(
+    'Profile',
+    name: 'profile',
     args: [],
     locale: locale.toString(),
   );
@@ -113,11 +113,18 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
-  String get loggingOut => Intl.message(
-    'Logging Out',
-    name: 'loggingOut',
+  String get logOut => Intl.message(
+    'log Out',
+    name: 'logOut',
     args: [],
     locale: locale.toString()
+  );
+
+  String get settings => Intl.message(
+      'Settings',
+      name: 'settings',
+      args: [],
+      locale: locale.toString()
   );
 
   String get addTodo => Intl.message(

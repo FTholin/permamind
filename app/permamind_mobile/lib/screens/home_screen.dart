@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,8 @@ class HomeScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             actions: [
-              FilterButton(visible: activeTab == AppTab.gardens),
+//              FilterButton(visible: activeTab == AppTab.gardens),
+              Container(),
               ExtraActions(),
             ],
           ),
@@ -44,17 +46,17 @@ Widget _buildTabPage(AppTab activeTab) {
     case AppTab.abc:
       return Scaffold(
         body: Center(
-          child: Text("ABCédaire des plantes..."),
+          child: Text("Plants encyclopedia..."),
         ),
       );
       break;
     case AppTab.learning:
       return EnumeratedTutorials();
       break;
-    case AppTab.settings:
+    case AppTab.profile:
       return Scaffold(
         body: Center(
-          child: Text("Settings..."),
+          child: Text("Profile..."),
         ),
       );
       break;
@@ -63,26 +65,34 @@ Widget _buildTabPage(AppTab activeTab) {
 
 
 Widget _buildFloatActionButton(AppTab activeTab, context) {
-  switch (activeTab) {
-    case AppTab.gardens:
-      return FloatingActionButton(
-        key: ArchSampleKeys.addGardenFab,
-        onPressed: () {
-          Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
-        },
-        child: Icon(Icons.add, color: Colors.white),
-        tooltip: ArchSampleLocalizations.of(context).addGarden,
-      );
-      break;
-    case AppTab.abc:
-      return null;
-      break;
-    case AppTab.learning:
-      return null;
-      break;
-    case AppTab.settings:
-      return null;
-      break;
-  }
-}
 
+  if (activeTab == AppTab.gardens) {
+    return GardenSpeedDial(visible: true);
+  } else {
+    return GardenSpeedDial(visible: false);
+  }
+//  switch (activeTab) {
+//    case AppTab.gardens:
+//
+//
+////      return FloatingActionButton(
+////        key: ArchSampleKeys.addGardenFab,
+////        onPressed: () {
+////          Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
+////        },
+////        child: Icon(Icons.add, color: Colors.white),
+////        tooltip: ArchSampleLocalizations.of(context).addGarden,
+////      );
+//      return GardenSpeedDial(visible: true);
+//      break;
+//    case AppTab.abc:
+//      return GardenSpeedDial(visible: false);
+//      break;
+//    case AppTab.learning:
+//      return GardenSpeedDial(visible: false);
+//      break;
+//    case AppTab.profile:
+//      return GardenSpeedDial(visible: false);
+//      break;
+
+}

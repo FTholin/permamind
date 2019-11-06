@@ -1,1 +1,1 @@
-enum ExtraAction {LoggingOut}
+enum ExtraAction {Settings, LogOut}

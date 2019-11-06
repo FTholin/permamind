@@ -23,23 +23,34 @@ class ExtraActions extends StatelessWidget {
             icon: Icon(
               Icons.dehaze,
               size: 24.0,
-              semanticLabel: 'Text to announce in accessibility modes',
+              semanticLabel: 'Settings menu',
             ),
             key: FlutterTodosKeys.extraActionsPopupMenuButton,
             onSelected: (action) {
               switch (action) {
-                case ExtraAction.LoggingOut:
+                case ExtraAction.LogOut:
                   authenticationBloc.dispatch(LoggedOut());
+                  break;
+                case ExtraAction.Settings:
                   break;
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuItem<ExtraAction>>[
               PopupMenuItem<ExtraAction>(
-                key: ArchSampleKeys.loggedOut,
-                value: ExtraAction.LoggingOut,
-                child: Text(
-                  ArchSampleLocalizations.of(context).loggingOut,
+                key: ArchSampleKeys.settingsButton,
+                child: ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text(ArchSampleLocalizations.of(context).settings),
                 ),
+              ),
+              PopupMenuItem<ExtraAction>(
+                key: ArchSampleKeys.loggedOut,
+                value: ExtraAction.LogOut,
+                child: ListTile(
+                  leading: Icon(Icons.exit_to_app),
+                  title: Text(ArchSampleLocalizations.of(context).logOut),
+                ),
+
               ),
             ],
           );

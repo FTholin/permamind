@@ -1,1 +1,1 @@
-enum AppTab { gardens, abc, learning, settings }
+enum AppTab { gardens, abc, learning, profile }

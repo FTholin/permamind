@@ -32,6 +32,8 @@ class ArchSampleKeys {
   static final clearCompleted = const Key('__clearCompleted__');
   static final loggedOut = const Key('__loggedOut__');
   static final loggedOutButton = const Key('__loggedOutButton__');
+  static final settingsButton = const Key('__settingsButton__');
+
 
   // Filters
   static final filterButton = const Key('__filterButton__');

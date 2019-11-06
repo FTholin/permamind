@@ -52,12 +52,12 @@ class TabSelector extends StatelessWidget {
               );
               text = Text(ArchSampleLocalizations.of(context).learning);
               break;
-            case AppTab.settings:
+            case AppTab.profile:
               svgPicture = SvgPicture.asset(
                   "assets/bar_buttons_icons/profil.svg",
                   semanticsLabel: 'profile icon bottom nav bar'
               );
-              text = Text(ArchSampleLocalizations.of(context).settings);
+              text = Text(ArchSampleLocalizations.of(context).profile);
               break;
           }
           return BottomNavigationBarItem(
