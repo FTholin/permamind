@@ -32,6 +32,7 @@ class ExtraActions extends StatelessWidget {
                   authenticationBloc.dispatch(LoggedOut());
                   break;
                 case ExtraAction.Settings:
+                  // TODO
                   break;
               }
             },
@@ -50,7 +51,6 @@ class ExtraActions extends StatelessWidget {
                   leading: Icon(Icons.exit_to_app),
                   title: Text(ArchSampleLocalizations.of(context).logOut),
                 ),
-
               ),
             ],
           );

@@ -114,7 +114,7 @@ class ArchSampleLocalizations {
   );
 
   String get logOut => Intl.message(
-    'log Out',
+    'Log out',
     name: 'logOut',
     args: [],
     locale: locale.toString()
