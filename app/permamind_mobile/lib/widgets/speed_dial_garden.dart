@@ -5,19 +5,24 @@ import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 
 class GardenSpeedDial extends StatefulWidget {
   final bool visible;
+
   GardenSpeedDial({this.visible});
 
   @override
   GardenSpeedDialState createState() => GardenSpeedDialState();
 }
 
-class GardenSpeedDialState extends State<GardenSpeedDial> with TickerProviderStateMixin {
+class GardenSpeedDialState extends State<GardenSpeedDial>
+    with TickerProviderStateMixin {
   bool addButtonSelected = false;
 
   SpeedDial buildSpeedDial() {
     return SpeedDial(
       visible: widget.visible,
-      child: Icon(addButtonSelected ? Icons.clear : Icons.add),
+      child: new IconTheme(
+        data: new IconThemeData(color: Colors.white),
+        child: new Icon(addButtonSelected ? Icons.clear : Icons.add),
+      ),
       animatedIconTheme: IconThemeData(size: 22.0),
       onOpen: () {
         setState(() {
@@ -30,7 +35,6 @@ class GardenSpeedDialState extends State<GardenSpeedDial> with TickerProviderSta
         });
       },
       curve: Curves.bounceIn,
-
       children: [
         SpeedDialChild(
           child: Image.asset("assets/utils_icons/group.png"),

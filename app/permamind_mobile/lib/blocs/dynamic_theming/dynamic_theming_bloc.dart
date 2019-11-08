@@ -20,7 +20,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       theme: ThemeData(
         primaryColor: const Color(0xFF01534F),
         buttonColor: const Color(0xFF34CC67),
-        accentColor: const Color(0xFF34CC67),
+        accentColor: const Color(0xFF4FB06E),
         canvasColor: const Color(0xFFF9F9F9)
       ),
       color: Colors.yellow,
