@@ -31,7 +31,7 @@ class FilteredGardens extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return InkResponse(
                   enableFeedback: true,
-                  child: GardenItem(name: gardens[index].gardenName, membersCount: gardens[index].gardenMembers.length.toString()),
+                  child: GardenItem(name: gardens[index].gardenName, membersCount: gardens[index].gardenMembers.length.toString(), index: index),
                   onTap: () async {
                     final removedTodo = await Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) {

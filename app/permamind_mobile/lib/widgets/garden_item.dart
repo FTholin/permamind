@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class GardenItem extends StatelessWidget {
   final String name;
   final String membersCount;
+  final int index;
 
-  GardenItem({@required this.name, @required this.membersCount});
+  GardenItem({@required this.name, @required this.membersCount, @required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class GardenItem extends StatelessWidget {
       margin: EdgeInsets.all(15),
       child: Stack(
         children: <Widget>[
-          Image.asset("assets/gardens/garden1.jpg",
+          Image.asset("assets/gardens/garden-$index.jpg",
               width: 400, fit: BoxFit.fill),
           Positioned(
             bottom: 20,
