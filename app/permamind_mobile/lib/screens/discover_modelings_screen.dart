@@ -68,7 +68,6 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 child: Text(
                     '${FlutterBlocLocalizations.of(context).tendencyHeader}',
                     style: TextStyle(
-                        color: Colors.white,
                         fontWeight: FontWeight.normal,
                         fontSize: 20))),
           ),
@@ -76,7 +75,6 @@ class DiscoverModelingsScreen extends StatelessWidget {
             flex: 9,
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
-              color: Colors.blue,
               child: BlocBuilder<ModelingsBloc, ModelingsState>(
                   builder: (context, state) {
                 if (state is ModelingsLoading) {
@@ -113,7 +111,6 @@ class DiscoverModelingsScreen extends StatelessWidget {
             flex: 9,
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
-              color: Colors.blue,
               child: BlocBuilder<ModelingsBloc, ModelingsState>(
                   builder: (context, state) {
                 if (state is ModelingsLoading) {
