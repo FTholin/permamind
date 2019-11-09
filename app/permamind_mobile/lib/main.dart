@@ -156,17 +156,9 @@ class App extends StatelessWidget {
                     return Center(child: CircularProgressIndicator());
                   },
                 );
-
-
-//          final gardensBloc = BlocProvider.of<GardensBloc>(context);
-
-//          return DetailsModelingScreen(
-//              onSaveGarden: (gardenName, publicVisibility) {
-//              gardensBloc.dispatch(
-//                AddGarden(Garden(gardenName, publicVisibility, [])),
-//              );
-//            }
-//          );
+              },
+              '/settings': (context) {
+                return SettingsScreen();
               }
             },
           );

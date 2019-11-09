@@ -23,52 +23,33 @@ class FilteredGardens extends StatelessWidget {
         } else if (state is FilteredGardensLoaded) {
           final gardens = state.filteredGardens;
 
-          return ListView.builder(
+          return Padding(
+            padding: EdgeInsets.all(10.0),
+            child: ListView.builder(
               key: ArchSampleKeys.todoList,
               itemCount: gardens.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkResponse(
-                enableFeedback: true,
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 4.5,
-                  margin: EdgeInsets.only(top: 14.0, left:15.0, right: 15.0),
-                  child: Center(
-                    child: GridTile(
-                      footer: Text(
-                        '${gardens[index].gardenName}',
-                        textAlign: TextAlign.center,
-                      ),
-                      child: Icon(Icons.local_florist,
-                          size: 40.0, color: Colors.white30),
-                    ),
-                  ),
-                  color: Colors.blue[400],
-                ),
-                onTap: () async {
-                  final removedTodo = await Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) {
-                        return DetailsGardenScreen(garden: gardens[index]);
-                      })
-                  );
-                  if (removedTodo != null) {
-                    Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
-                      key: ArchSampleKeys.snackbar,
-                      garden: gardens[index],
-                      onUndo: () => gardensBloc.dispatch(AddGarden(gardens[index])),
-                      localizations: localizations,
-                    ));
-                  }
-                },
-              );
-
-//            return Container(
-//              height: 100,
-//              width: 100,
-////              margin: EdgeInsets.all(10.0),
-//              color: Colors.red,
-//            );
-
-            },
+              itemBuilder: (BuildContext context, int index) {
+                return InkResponse(
+                  enableFeedback: true,
+                  child: GardenItem(name: gardens[index].gardenName, membersCount: gardens[index].gardenMembers.length.toString()),
+                  onTap: () async {
+                    final removedTodo = await Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) {
+                          return DetailsGardenScreen(garden: gardens[index]);
+                        })
+                    );
+                    if (removedTodo != null) {
+                      Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+                        key: ArchSampleKeys.snackbar,
+                        garden: gardens[index],
+                        onUndo: () => gardensBloc.dispatch(AddGarden(gardens[index])),
+                        localizations: localizations,
+                      ));
+                    }
+                  },
+                );
+              },
+            )
           );
 
         }

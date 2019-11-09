@@ -5,4 +5,5 @@ class ArchSampleRoutes {
   static final discoverModelings = "/discoverModelings";
   static final detailsModeling = "/detailsModeling";
   static final tutorialActivities = "/tutorialActivities";
+  static final settings = "/settings";
 }

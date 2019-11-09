@@ -13,7 +13,6 @@ class ExtraActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gardensBloc = BlocProvider.of<GardensBloc>(context);
     final authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     return BlocBuilder<GardensBloc, GardensState>(
       builder: (context, state) {
@@ -32,17 +31,21 @@ class ExtraActions extends StatelessWidget {
                   authenticationBloc.dispatch(LoggedOut());
                   break;
                 case ExtraAction.Settings:
-                  // TODO
+                  Navigator.pushNamed(
+                    context,
+                    ArchSampleRoutes.settings);
                   break;
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuItem<ExtraAction>>[
               PopupMenuItem<ExtraAction>(
                 key: ArchSampleKeys.settingsButton,
+                value: ExtraAction.Settings,
                 child: ListTile(
                   leading: Icon(Icons.settings),
                   title: Text(ArchSampleLocalizations.of(context).settings),
                 ),
+
               ),
               PopupMenuItem<ExtraAction>(
                 key: ArchSampleKeys.loggedOut,

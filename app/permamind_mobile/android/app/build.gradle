@@ -26,6 +26,8 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 28
+    buildToolsVersion "21.1.2"
+    project.archivesBaseName = "Permamind"
 
     lintOptions {
         disable 'InvalidPackage'

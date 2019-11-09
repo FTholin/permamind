@@ -148,6 +148,7 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
       calendarController: _calendarController,
       events: _events,
       holidays: _holidays,
+      initialCalendarFormat: CalendarFormat.week,
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
         selectedColor: Colors.deepOrange[400],
