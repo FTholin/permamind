@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
 Widget _buildTabPage(AppTab activeTab) {
   switch (activeTab) {
     case AppTab.gardens:
-      return FilteredGardens();
+      return EnumeratedGardens();
       break;
     case AppTab.abc:
       return Scaffold(

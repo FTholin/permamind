@@ -71,10 +71,6 @@ class App extends StatelessWidget {
                           BlocProvider<TabBloc>(
                             builder: (context) => TabBloc(),
                           ),
-                          BlocProvider<FilteredGardensBloc>(
-                            builder: (context) =>
-                                FilteredGardensBloc(gardensBloc: gardensBloc),
-                          ),
                           BlocProvider<StatsBloc>(
                             builder: (context) =>
                                 StatsBloc(gardensBloc: gardensBloc),
