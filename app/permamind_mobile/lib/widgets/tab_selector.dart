@@ -34,34 +34,42 @@ class TabSelector extends StatelessWidget {
               elevation: 8,
 
               items: AppTab.values.map((tab) {
-                SvgPicture svgPicture;
+                Image picture;
                 Text text;
                 switch (tab) {
                   case AppTab.gardens:
-                    svgPicture = SvgPicture.asset(
-                        "assets/bar_buttons_icons/garden.svg",
-                        semanticsLabel: 'garden icon bottom nav bar'
+                    picture = Image.asset(
+                        "assets/bar_buttons_icons/garden.png",
+                        height: 40,
+                        width: 37,
+                        semanticLabel: 'garden icon bottom nav bar'
                     );
                     text = Text("Gardens");
                     break;
                   case AppTab.abc:
-                    svgPicture = SvgPicture.asset(
-                        "assets/bar_buttons_icons/home.svg",
-                        semanticsLabel: 'plants abcédaire bottom nav bar'
+                    picture = Image.asset(
+                        "assets/bar_buttons_icons/home.png",
+                        height: 40,
+                        width: 37,
+                        semanticLabel: 'plants abcédaire bottom nav bar'
                     );
                     text = Text("ABC");
                     break;
                   case AppTab.learning:
-                    svgPicture = SvgPicture.asset(
-                        "assets/bar_buttons_icons/knowledge.svg",
-                        semanticsLabel: 'Learning icon bottom nav bar'
+                    picture = Image.asset(
+                        "assets/bar_buttons_icons/knowledge.png",
+                        height: 40,
+                        width: 37,
+                        semanticLabel: 'Learning icon bottom nav bar'
                     );
                     text = Text("Tutorials");
                     break;
                   case AppTab.profile:
-                    svgPicture = SvgPicture.asset(
-                        "assets/bar_buttons_icons/profil.svg",
-                        semanticsLabel: 'profile icon bottom nav bar'
+                    picture = Image.asset(
+                        "assets/bar_buttons_icons/profil.png",
+                        semanticLabel: 'profile icon bottom nav bar',
+                        height: 40,
+                      width: 37,
                     );
                     text = Text("Profile");
                     break;
@@ -69,9 +77,8 @@ class TabSelector extends StatelessWidget {
 
                 return BubbleBottomBarItem(
                   backgroundColor: Colors.green,
-                  icon: svgPicture,
-                  activeIcon: svgPicture,
-                    title: text
+                  icon: picture,
+                  title: text
                 );
               }).toList()
           );
