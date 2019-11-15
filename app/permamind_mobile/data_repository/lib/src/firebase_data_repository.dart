@@ -96,6 +96,17 @@ class FirebaseDataRepository implements DataRepository {
 //  .document("Film").collection("firstFilm").getDocuments();
 
 
+  Stream<List<TutorialActivity>> fetchActivities(String activityId) {
+    return tutorialsCollection
+        .document(activityId)
+        .collection("activities")
+        .snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
+
   Future<QuerySnapshot> searchByName(String value) {
     return usersCollection
     .where('searchKey',
