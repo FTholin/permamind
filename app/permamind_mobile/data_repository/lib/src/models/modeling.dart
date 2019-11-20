@@ -1,3 +1,4 @@
+import 'package:data_repository/data_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:data_repository/src/entities/entities.dart';
 
@@ -11,10 +12,13 @@ class Modeling {
   final int modelingWaterRequirement;
   final int modelingYield;
 
+  List<PlanningDay> activities = new List<PlanningDay>();
+
+
   Modeling(this.modelingName, this.modelingProductionDuration,
       this.modelingDifficultyLevel, this.modelingSunlightRequirement,
       this.modelingWaterRequirement,
-      this.modelingYield, {String modelingId})
+      this.modelingYield, this.activities, {String modelingId})
       : this.modelingId = modelingId;
 
   Modeling copyWith({String modelingId, String modelingName,
@@ -29,6 +33,7 @@ class Modeling {
       modelingSunlightRequirement ?? this.modelingSunlightRequirement,
       modelingWaterRequirement ?? this.modelingWaterRequirement,
       modelingYield ?? this.modelingYield,
+      activities ?? this.activities,
       modelingId: modelingId ?? this.modelingId
     );
   }
@@ -66,7 +71,7 @@ class Modeling {
   ModelingEntity toEntity() {
     return ModelingEntity(modelingId, modelingName, modelingProductionDuration,
         modelingDifficultyLevel, modelingSunlightRequirement,
-        modelingWaterRequirement, modelingYield);
+        modelingWaterRequirement, modelingYield, activities);
   }
 
   static Modeling fromEntity(ModelingEntity entity) {
@@ -77,6 +82,7 @@ class Modeling {
       entity.modelingSunlightRequirement,
       entity.modelingWaterRequirement,
       entity.modelingYield,
+      entity.activities,
       modelingId: entity.modelingId,
     );
   }

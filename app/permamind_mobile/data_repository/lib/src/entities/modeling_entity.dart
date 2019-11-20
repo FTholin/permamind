@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class ModelingEntity extends Equatable {
@@ -9,11 +10,13 @@ class ModelingEntity extends Equatable {
   final int modelingSunlightRequirement;
   final int modelingWaterRequirement;
   final int modelingYield;
+  List<PlanningDay> activities = new List<PlanningDay>();
+
 
   ModelingEntity(this.modelingId, this.modelingName,
       this.modelingProductionDuration, this.modelingDifficultyLevel,
       this.modelingSunlightRequirement,
-      this.modelingWaterRequirement, this.modelingYield);
+      this.modelingWaterRequirement, this.modelingYield, this.activities);
 
   Map<String, Object> toJson() {
     return {
@@ -46,6 +49,7 @@ class ModelingEntity extends Equatable {
       json['modelingSunlightRequirement'] as int,
       json['modelingWaterRequirement'] as int,
       json['modelingYield'] as int,
+      json['planning']
     );
   }
 
@@ -58,6 +62,9 @@ class ModelingEntity extends Equatable {
       snap.data['modelingSunlightRequirement'],
       snap.data['modelingWaterRequirement'],
       snap.data['modelingYield'],
+      snap.data['planning'].map<PlanningDay>((item) {
+          return PlanningDay.fromMap(item);
+        }).toList()
     );
   }
 
