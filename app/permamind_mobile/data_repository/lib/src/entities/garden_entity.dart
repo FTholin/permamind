@@ -8,10 +8,16 @@ class GardenEntity extends Equatable {
   final bool publicVisibility;
   final String modelisationId;
   final List<String> gardenMembers;
-
   List<PlanningDay> planning = new List<PlanningDay>();
+  final DateTime creationDate;
 
-  GardenEntity(this.id, this.gardenName, this.publicVisibility, this.gardenMembers, this.modelisationId, this.planning);
+  GardenEntity(this.id,
+      this.gardenName,
+      this.publicVisibility,
+      this.gardenMembers,
+      this.modelisationId,
+      this.planning,
+      this.creationDate);
 
   Map<String, Object> toJson() {
     return {
@@ -21,7 +27,8 @@ class GardenEntity extends Equatable {
       'gardenMembers': gardenMembers,
       'planning': planning.map((item) {
         return item.toJson();
-      }).toList()
+      }).toList(),
+      'creationDate': creationDate
     };
   }
 
@@ -37,7 +44,8 @@ class GardenEntity extends Equatable {
       json['publicVisibility'] as bool,
       json['gardenMembers'],
       json['modelisationId'] as String,
-      json['planning'] as List<PlanningDay>
+      json['planning'] as List<PlanningDay>,
+      json['creationDate']
     );
   }
 
@@ -54,6 +62,8 @@ class GardenEntity extends Equatable {
       snap.data['planning'].map<PlanningDay>((item) {
         return PlanningDay.fromMap(item);
       }).toList(),
+        DateTime.fromMillisecondsSinceEpoch(
+            snap.data["creationDate"].millisecondsSinceEpoch)
     );
   }
 
@@ -65,7 +75,8 @@ class GardenEntity extends Equatable {
       'modelisationId': modelisationId,
       'planning': planning.map((item) {
         return item.toJson();
-      }).toList()
+      }).toList(),
+      'creationDate': creationDate
     };
   }
 }

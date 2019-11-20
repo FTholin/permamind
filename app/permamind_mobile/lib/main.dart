@@ -144,7 +144,7 @@ class App extends StatelessWidget {
                               ..addAll(gardenMembers);
                             gardensBloc.dispatch(
                               AddGarden(Garden(gardenName, publicVisibility,
-                                  allGardenMembers, modelisationId, activities)),
+                                  allGardenMembers, modelisationId, activities, DateTime.now())),
                             );
                           }
                       );

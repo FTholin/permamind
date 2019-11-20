@@ -10,13 +10,14 @@ class Garden extends Equatable {
   final String modelisationId;
   final List<String> gardenMembers;
   List<PlanningDay> planning = new List<PlanningDay>();
-
+  final DateTime creationDate;
 
   Garden( this.gardenName,
     this.publicVisibility,
     this.gardenMembers,
     this.modelisationId,
-    this.planning, {String id})
+    this.planning,
+    this.creationDate,{String id})
       :  this.id = id;
 
   Garden copyWith({String gardenName, String id, bool publicVisibility, String modelisationId, List<String> gardenMembers}) {
@@ -26,6 +27,7 @@ class Garden extends Equatable {
       gardenMembers ?? this.gardenMembers,
       modelisationId ?? this.modelisationId,
       planning ?? this.planning,
+      creationDate ?? this.creationDate,
       id: id ?? this.id,
     );
   }
@@ -51,7 +53,14 @@ class Garden extends Equatable {
   }
 
   GardenEntity toEntity() {
-    return GardenEntity(id, gardenName, publicVisibility, gardenMembers, modelisationId, planning);
+    return GardenEntity(id,
+        gardenName,
+        publicVisibility,
+        gardenMembers,
+        modelisationId,
+        planning,
+        creationDate
+    );
   }
 
   static Garden fromEntity(GardenEntity entity) {
@@ -62,6 +71,7 @@ class Garden extends Equatable {
       entity.gardenMembers,
       entity.modelisationId,
       entity.planning,
+      entity.creationDate,
       id: entity.id,
     );
   }

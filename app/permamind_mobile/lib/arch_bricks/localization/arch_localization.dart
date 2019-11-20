@@ -219,9 +219,9 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
-  String todoDeleted(String task) => Intl.message(
+  String gardenDeleted(String task) => Intl.message(
     'Deleted "$task"',
-    name: 'todoDeleted',
+    name: 'gardenDeleted',
     args: [task],
     locale: locale.toString(),
   );

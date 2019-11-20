@@ -72,7 +72,7 @@ class FilteredModelings extends StatelessWidget {
 //                        })
 //                    );
 //                    if (removedTodo != null) {
-//                      Scaffold.of(context).showSnackBar(DeleteTodoSnackBar(
+//                      Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
 //                        key: ArchSampleKeys.snackbar,
 //                        todo: modelings[index],
 //                        onUndo: () => todosBloc.dispatch(AddTodo(todos[index])),

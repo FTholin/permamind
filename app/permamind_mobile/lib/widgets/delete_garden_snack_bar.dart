@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:data_repository/data_repository.dart';
 
-class DeleteTodoSnackBar extends SnackBar {
+class DeleteGardenSnackBar extends SnackBar {
   final ArchSampleLocalizations localizations;
 
-  DeleteTodoSnackBar({
+  DeleteGardenSnackBar({
     Key key,
     @required Garden garden,
     @required VoidCallback onUndo,
@@ -13,7 +13,7 @@ class DeleteTodoSnackBar extends SnackBar {
 }) : super(
     key: key,
     content: Text(
-      localizations.todoDeleted(garden.gardenName),
+      localizations.gardenDeleted(garden.gardenName),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     ),
