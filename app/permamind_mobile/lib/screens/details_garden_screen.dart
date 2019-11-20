@@ -26,19 +26,18 @@ class DetailsGardenScreen extends StatelessWidget {
             title: Text("${garden.gardenName}"),
             actions: <Widget>[
               IconButton(
-                tooltip: localizations.deleteGarden,
-                // TODO ArchSampleKeys
+          tooltip: localizations.deleteGarden,
+          // TODO ArchSampleKeys
 //                key: ArchSampleKeys.deleteGardenButton,
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  gardensBloc.dispatch(DeleteGarden(garden));
-                  Navigator.pop(context, garden);
-                },
-              )
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            gardensBloc.dispatch(DeleteGarden(garden));
+            Navigator.pop(context, garden);
+          },
+        ),
             ],
           ),
-          body:  Scheduler(title: 'Table Calendar Demo')
-
+          body: Scheduler(title: 'Table Calendar Demo')
         );
       },
     );

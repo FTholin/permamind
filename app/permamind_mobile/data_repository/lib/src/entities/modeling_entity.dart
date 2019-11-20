@@ -10,13 +10,13 @@ class ModelingEntity extends Equatable {
   final int modelingSunlightRequirement;
   final int modelingWaterRequirement;
   final int modelingYield;
-  List<PlanningDay> activities = new List<PlanningDay>();
+  List<PlanningDay> planning = new List<PlanningDay>();
 
 
   ModelingEntity(this.modelingId, this.modelingName,
       this.modelingProductionDuration, this.modelingDifficultyLevel,
       this.modelingSunlightRequirement,
-      this.modelingWaterRequirement, this.modelingYield, this.activities);
+      this.modelingWaterRequirement, this.modelingYield, this.planning);
 
   Map<String, Object> toJson() {
     return {

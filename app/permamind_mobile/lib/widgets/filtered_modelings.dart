@@ -14,6 +14,7 @@ class FilteredModelings extends StatelessWidget {
   final String gardenName;
   final bool gardenVisibility;
   final List<String> gardenMembers;
+
   FilteredModelings({this.modelings, this.gardenName, this.gardenVisibility, this.gardenMembers, Key key}) : super(key: key);
 
   @override
@@ -59,7 +60,9 @@ class FilteredModelings extends StatelessWidget {
                           modeling: modelings[index],
                           gardenName: gardenName,
                           publicVisibility: gardenVisibility,
-                          gardenMembers: gardenMembers
+                          gardenMembers: gardenMembers,
+                          planning: modelings[index].planning
+
                       ),
                     );
 //

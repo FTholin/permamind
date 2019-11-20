@@ -12,13 +12,13 @@ class Modeling {
   final int modelingWaterRequirement;
   final int modelingYield;
 
-  List<PlanningDay> activities = new List<PlanningDay>();
+  List<PlanningDay> planning = new List<PlanningDay>();
 
 
   Modeling(this.modelingName, this.modelingProductionDuration,
       this.modelingDifficultyLevel, this.modelingSunlightRequirement,
       this.modelingWaterRequirement,
-      this.modelingYield, this.activities, {String modelingId})
+      this.modelingYield, this.planning, {String modelingId})
       : this.modelingId = modelingId;
 
   Modeling copyWith({String modelingId, String modelingName,
@@ -33,7 +33,7 @@ class Modeling {
       modelingSunlightRequirement ?? this.modelingSunlightRequirement,
       modelingWaterRequirement ?? this.modelingWaterRequirement,
       modelingYield ?? this.modelingYield,
-      activities ?? this.activities,
+      planning ?? this.planning,
       modelingId: modelingId ?? this.modelingId
     );
   }
@@ -71,7 +71,7 @@ class Modeling {
   ModelingEntity toEntity() {
     return ModelingEntity(modelingId, modelingName, modelingProductionDuration,
         modelingDifficultyLevel, modelingSunlightRequirement,
-        modelingWaterRequirement, modelingYield, activities);
+        modelingWaterRequirement, modelingYield, planning);
   }
 
   static Modeling fromEntity(ModelingEntity entity) {
@@ -82,7 +82,7 @@ class Modeling {
       entity.modelingSunlightRequirement,
       entity.modelingWaterRequirement,
       entity.modelingYield,
-      entity.activities,
+      entity.planning,
       modelingId: entity.modelingId,
     );
   }

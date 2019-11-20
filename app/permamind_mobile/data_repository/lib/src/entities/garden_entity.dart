@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class GardenEntity extends Equatable {
@@ -8,7 +9,9 @@ class GardenEntity extends Equatable {
   final String modelisationId;
   final List<String> gardenMembers;
 
-  GardenEntity(this.id, this.gardenName, this.publicVisibility, this.gardenMembers, this.modelisationId);
+  List<PlanningDay> planning = new List<PlanningDay>();
+
+  GardenEntity(this.id, this.gardenName, this.publicVisibility, this.gardenMembers, this.modelisationId, this.planning);
 
   Map<String, Object> toJson() {
     return {
@@ -16,6 +19,9 @@ class GardenEntity extends Equatable {
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
       'gardenMembers': gardenMembers,
+      'planning': planning.map((item) {
+        return item.toJson();
+      }).toList()
     };
   }
 
@@ -31,6 +37,7 @@ class GardenEntity extends Equatable {
       json['publicVisibility'] as bool,
       json['gardenMembers'],
       json['modelisationId'] as String,
+      json['planning'] as List<PlanningDay>
     );
   }
 
@@ -43,7 +50,10 @@ class GardenEntity extends Equatable {
       snap.data['gardenName'],
       snap.data['publicVisibility'],
       gardenList,
-      snap.data['modelisationId']
+      snap.data['modelisationId'],
+      snap.data['planning'].map<PlanningDay>((item) {
+        return PlanningDay.fromMap(item);
+      }).toList(),
     );
   }
 
@@ -52,7 +62,10 @@ class GardenEntity extends Equatable {
       'gardenName': gardenName,
       'publicVisibility': publicVisibility,
       'gardenMembers': gardenMembers,
-      'modelisationId': modelisationId
+      'modelisationId': modelisationId,
+      'planning': planning.map((item) {
+        return item.toJson();
+      }).toList()
     };
   }
 }

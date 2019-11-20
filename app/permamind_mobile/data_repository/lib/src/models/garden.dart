@@ -1,19 +1,22 @@
+import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import '../entities/entities.dart';
 
-@immutable
 class Garden extends Equatable {
   final String id;
   final String gardenName;
   final bool publicVisibility;
   final String modelisationId;
   final List<String> gardenMembers;
+  List<PlanningDay> planning = new List<PlanningDay>();
+
 
   Garden( this.gardenName,
     this.publicVisibility,
     this.gardenMembers,
-    this.modelisationId, {String id})
+    this.modelisationId,
+    this.planning, {String id})
       :  this.id = id;
 
   Garden copyWith({String gardenName, String id, bool publicVisibility, String modelisationId, List<String> gardenMembers}) {
@@ -22,6 +25,7 @@ class Garden extends Equatable {
       publicVisibility ?? this.publicVisibility,
       gardenMembers ?? this.gardenMembers,
       modelisationId ?? this.modelisationId,
+      planning ?? this.planning,
       id: id ?? this.id,
     );
   }
@@ -47,7 +51,7 @@ class Garden extends Equatable {
   }
 
   GardenEntity toEntity() {
-    return GardenEntity(id, gardenName, publicVisibility, gardenMembers, modelisationId);
+    return GardenEntity(id, gardenName, publicVisibility, gardenMembers, modelisationId, planning);
   }
 
   static Garden fromEntity(GardenEntity entity) {
@@ -57,6 +61,7 @@ class Garden extends Equatable {
       entity.publicVisibility,
       entity.gardenMembers,
       entity.modelisationId,
+      entity.planning,
       id: entity.id,
     );
   }

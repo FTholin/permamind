@@ -5,6 +5,13 @@ class Activity {
   Activity.fromMap(Map<dynamic, dynamic> data)
       : name = data['name'],
         isDone = data['isDone'];
+
+  Map<String, Object> toJson() {
+    return {
+      'name': name,
+      'isDone': isDone,
+    };
+  }
 }
 
 class PlanningDay {
@@ -16,4 +23,13 @@ class PlanningDay {
         dayActivities = data['activities'].map<Activity>((item) {
           return Activity.fromMap(item);
         }).toList();
+
+  Map<String, Object> toJson() {
+    return {
+      'dayValue': dayValue,
+      'activities': dayActivities.map((item) {
+        return item.toJson();
+    }).toList()
+    };
+  }
 }
