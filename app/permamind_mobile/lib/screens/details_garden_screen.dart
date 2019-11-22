@@ -21,7 +21,7 @@ class DetailsGardenScreen extends StatelessWidget {
         final localizations = ArchSampleLocalizations.of(context);
         return Scaffold(
           appBar: AppBar(
-            title: Text("${garden.gardenName}"),
+            title: Text("${garden.name}"),
             actions: <Widget>[
               IconButton(
           tooltip: localizations.deleteGarden,

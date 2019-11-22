@@ -4,17 +4,17 @@ import 'package:equatable/equatable.dart';
 
 class GardenEntity extends Equatable {
   final String id;
-  final String gardenName;
+  final String name;
   final bool publicVisibility;
   final String modelisationId;
-  final List<String> gardenMembers;
+  final List<String> members;
   List<PlanningDay> planning = new List<PlanningDay>();
   final DateTime creationDate;
 
   GardenEntity(this.id,
-      this.gardenName,
+      this.name,
       this.publicVisibility,
-      this.gardenMembers,
+      this.members,
       this.modelisationId,
       this.planning,
       this.creationDate);
@@ -22,9 +22,9 @@ class GardenEntity extends Equatable {
   Map<String, Object> toJson() {
     return {
       'id': id,
-      'gardenName': gardenName,
+      'name': name,
       'publicVisibility': publicVisibility,
-      'gardenMembers': gardenMembers,
+      'members': members,
       'planning': planning.map((item) {
         return item.toJson();
       }).toList(),
@@ -34,15 +34,15 @@ class GardenEntity extends Equatable {
 
   @override
   String toString() {
-    return 'GardenEntity { id: $id, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenMembers: $gardenMembers }';
+    return 'GardenEntity { id: $id, name: $name, publicVisibility: $publicVisibility, members: $members }';
   }
 
   static GardenEntity fromJson(Map<String, Object> json) {
     return GardenEntity(
       json['id'] as String,
-      json['gardenName'] as String,
+      json['name'] as String,
       json['publicVisibility'] as bool,
-      json['gardenMembers'],
+      json['members'],
       json['modelisationId'] as String,
       json['planning'] as List<PlanningDay>,
       json['creationDate']
@@ -51,11 +51,11 @@ class GardenEntity extends Equatable {
 
   static GardenEntity fromSnapshot(DocumentSnapshot snap) {
 
-    List<String> gardenList = new List<String>.from(snap.data['gardenMembers']);
+    List<String> gardenList = new List<String>.from(snap.data['members']);
 
     return GardenEntity(
       snap.documentID,
-      snap.data['gardenName'],
+      snap.data['name'],
       snap.data['publicVisibility'],
       gardenList,
       snap.data['modelisationId'],
@@ -69,9 +69,9 @@ class GardenEntity extends Equatable {
 
   Map<String, Object> toDocument() {
     return {
-      'gardenName': gardenName,
+      'name': name,
       'publicVisibility': publicVisibility,
-      'gardenMembers': gardenMembers,
+      'members': members,
       'modelisationId': modelisationId,
       'planning': planning.map((item) {
         return item.toJson();

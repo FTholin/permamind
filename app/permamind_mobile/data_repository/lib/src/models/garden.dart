@@ -5,26 +5,26 @@ import '../entities/entities.dart';
 
 class Garden extends Equatable {
   final String id;
-  final String gardenName;
+  final String name;
   final bool publicVisibility;
   final String modelisationId;
-  final List<String> gardenMembers;
+  final List<String> members;
   List<PlanningDay> planning = new List<PlanningDay>();
   final DateTime creationDate;
 
-  Garden( this.gardenName,
+  Garden( this.name,
     this.publicVisibility,
-    this.gardenMembers,
+    this.members,
     this.modelisationId,
     this.planning,
     this.creationDate,{String id})
       :  this.id = id;
 
-  Garden copyWith({String gardenName, String id, bool publicVisibility, String modelisationId, List<String> gardenMembers}) {
+  Garden copyWith({String name, String id, bool publicVisibility, String modelisationId, List<String> members}) {
     return Garden(
-      gardenName ?? this.gardenName,
+      name ?? this.name,
       publicVisibility ?? this.publicVisibility,
-      gardenMembers ?? this.gardenMembers,
+      members ?? this.members,
       modelisationId ?? this.modelisationId,
       planning ?? this.planning,
       creationDate ?? this.creationDate,
@@ -34,7 +34,7 @@ class Garden extends Equatable {
 
   @override
   int get hashCode =>
-      id.hashCode ^ gardenName.hashCode ^ publicVisibility.hashCode ^ gardenMembers.hashCode;
+      id.hashCode ^ name.hashCode ^ publicVisibility.hashCode ^ members.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -42,21 +42,21 @@ class Garden extends Equatable {
           other is Garden &&
               runtimeType == other.runtimeType &&
               id == other.id &&
-              gardenName == other.gardenName &&
+              name == other.name &&
               publicVisibility == other.publicVisibility &&
-              gardenMembers == other.gardenMembers;
+              members == other.members;
 
 
   @override
   String toString() {
-    return 'Garden { id: $id, gardenName: $gardenName, publicVisibility: $publicVisibility, gardenMembers: $gardenMembers }';
+    return 'Garden { id: $id, name: $name, publicVisibility: $publicVisibility, members: $members }';
   }
 
   GardenEntity toEntity() {
     return GardenEntity(id,
-        gardenName,
+        name,
         publicVisibility,
-        gardenMembers,
+        members,
         modelisationId,
         planning,
         creationDate
@@ -66,9 +66,9 @@ class Garden extends Equatable {
   static Garden fromEntity(GardenEntity entity) {
 
     return Garden(
-      entity.gardenName,
+      entity.name,
       entity.publicVisibility,
-      entity.gardenMembers,
+      entity.members,
       entity.modelisationId,
       entity.planning,
       entity.creationDate,

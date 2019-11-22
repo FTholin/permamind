@@ -53,7 +53,7 @@ class FirebaseDataRepository implements DataRepository {
 
   Stream<List<Garden>> gardens(String userId) {
     return gardensCollection
-        .where("gardenMembers",arrayContains: userId)
+        .where("members",arrayContains: userId)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Garden.fromEntity(GardenEntity.fromSnapshot(doc)))
