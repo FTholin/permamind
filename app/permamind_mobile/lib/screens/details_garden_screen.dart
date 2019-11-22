@@ -15,55 +15,39 @@ class DetailsGardenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gardensBloc = BlocProvider.of<GardensBloc>(context);
-    return BlocBuilder<GardensBloc, GardensState>(
-      builder: (BuildContext context, GardensState state) {
 
-        final localizations = ArchSampleLocalizations.of(context);
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("${garden.name}"),
-            actions: <Widget>[
-              IconButton(
-          tooltip: localizations.deleteGarden,
-          // TODO ArchSampleKeys
+    final localizations = ArchSampleLocalizations.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("${garden.name}"),
+        actions: <Widget>[
+          IconButton(
+            tooltip: localizations.deleteGarden,
+            // TODO ArchSampleKeys
 //                key: ArchSampleKeys.deleteGardenButton,
-          icon: Icon(Icons.delete),
-          onPressed: () {
-            gardensBloc.dispatch(DeleteGarden(garden));
-            Navigator.pop(context, garden);
-          },
-        ),
-            ],
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              gardensBloc.dispatch(DeleteGarden(garden));
+              Navigator.pop(context, garden);
+            },
           ),
-          body: Scheduler(garden: garden),
-        );
-      },
+        ],
+      ),
+      body: Scheduler(gardenId: garden.id),
     );
   }
 }
 
-
-
-// Example holidays
-final Map<DateTime, List> _holidays = {
-  DateTime(2019, 1, 1): ['New Year\'s Day'],
-  DateTime(2019, 10, 28): ['Epiphany'],
-  DateTime(2019, 2, 14): ['Valentine\'s Day'],
-  DateTime(2019, 4, 21): ['Easter Sunday'],
-  DateTime(2019, 4, 22): ['Easter Monday'],
-};
-
 class Scheduler extends StatefulWidget {
-  Scheduler({Key key, this.garden}) : super(key: key);
+  Scheduler({Key key, this.gardenId}) : super(key: key);
 
-  final Garden garden;
+  final String gardenId;
 
   @override
   _SchedulerState createState() => _SchedulerState();
 }
 
 class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
-
   Map<DateTime, List> _events;
   List _selectedEvents;
   AnimationController _animationController;
@@ -72,29 +56,11 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    final _selectedDay = DateTime.now();
 
-    _events = {
-      _selectedDay.add(Duration(days: 1)): ['Event A12', 'Event B12', 'Event C12', 'Event D12'],
+    _events = new Map<DateTime, List>();
 
-//      _selectedDay.subtract(Duration(days: 30)): ['Event A0', 'Event B0', 'Event C0'],
-//      _selectedDay.subtract(Duration(days: 27)): ['Event A1'],
-//      _selectedDay.subtract(Duration(days: 20)): ['Event A2', 'Event B2', 'Event C2', 'Event D2'],
-//      _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
-//      _selectedDay.subtract(Duration(days: 10)): ['Event A4', 'Event B4', 'Event C4'],
-//      _selectedDay.subtract(Duration(days: 4)): ['Event A5', 'Event B5', 'Event C5'],
-//      _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
-//      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-//      _selectedDay.add(Duration(days: 1)): ['Event A8', 'Event B8', 'Event C8', 'Event D8'],
-//      _selectedDay.add(Duration(days: 7)): ['Event A10', 'Event B10', 'Event C10'],
-//      _selectedDay.add(Duration(days: 11)): ['Event A11', 'Event B11'],
-//      _selectedDay.add(Duration(days: 22)): ['Event A13', 'Event B13'],
-//      _selectedDay.add(Duration(days: 26)): ['Event A14', 'Event B14', 'Event C14'],
-    };
+    _selectedEvents = new List();
 
-
-
-    _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
 
     _animationController = AnimationController(
@@ -112,25 +78,27 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _onDaySelected(DateTime day, List events) {
-    print('CALLBACK: _onDaySelected');
-    setState(() {
-      _selectedEvents = events;
-    });
-  }
-
-  void _onVisibleDaysChanged(DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onVisibleDaysChanged');
+  void synchroniseSchedule(
+      List<PlanningDay> schedule, DateTime gardenCreationDate) {
+    DateTime referencePoint = gardenCreationDate;
+    _events.clear();
+    for (var i = 0; i < schedule.length; i++) {
+      _events[referencePoint.add(Duration(days: i))] =
+          schedule[i].dayActivities.map((activity) => activity.name).toList();
+    }
+//    _onDaySelected(_calendarController.selectedDay,_events[_calendarController.selectedDay]);
   }
 
   @override
   Widget build(BuildContext context) {
+    print("Reconstruction du widget");
     return Scaffold(
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           // Switch out 2 lines below to play with TableCalendar's settings
           //-----------------------
+
           _buildTableCalendar(),
           // _buildTableCalendarWithBuilders(),
           const SizedBox(height: 8.0),
@@ -144,28 +112,47 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
 
   // Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
-    return TableCalendar(
-      calendarController: _calendarController,
-      events: _events,
-      holidays: _holidays,
-      initialCalendarFormat: CalendarFormat.week,
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      calendarStyle: CalendarStyle(
-        selectedColor: Colors.deepOrange[400],
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.yellow[700],
-        outsideDaysVisible: false,
-      ),
-      headerStyle: HeaderStyle(
-        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-        formatButtonDecoration: BoxDecoration(
-          color: Colors.deepOrange[400],
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-      ),
-      onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-    );
+
+    return BlocBuilder<GardensBloc, GardensState>(
+        builder: (BuildContext context, GardensState state) {
+      if (state is GardensLoaded) {
+        print("Reconstruction du calendrier");
+        print("----------------------------");
+        // récupérer le garden correspondant
+        var garden =
+            state.gardens.singleWhere((user) => user.id == widget.gardenId);
+
+        // Faire une fonction qui va traduire les activités pour les poser dans event
+        synchroniseSchedule(garden.schedule, garden.creationDate);
+
+
+        return TableCalendar(
+          calendarController: _calendarController,
+          events: _events,
+          holidays: _holidays,
+          initialCalendarFormat: CalendarFormat.week,
+          startingDayOfWeek: StartingDayOfWeek.monday,
+          calendarStyle: CalendarStyle(
+            selectedColor: Colors.deepOrange[400],
+            todayColor: Colors.deepOrange[200],
+            markersColor: Colors.yellow[700],
+            outsideDaysVisible: false,
+          ),
+          headerStyle: HeaderStyle(
+            formatButtonTextStyle:
+                TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+            formatButtonDecoration: BoxDecoration(
+              color: Colors.deepOrange[400],
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+          ),
+          onDaySelected: _onDaySelected,
+          onVisibleDaysChanged: _onVisibleDaysChanged,
+        );
+      } else {
+        return Container();
+      }
+    });
   }
 
   // More advanced TableCalendar configuration (using Builders & Styles)
@@ -266,7 +253,9 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
         shape: BoxShape.rectangle,
         color: _calendarController.isSelected(date)
             ? Colors.brown[500]
-            : _calendarController.isToday(date) ? Colors.brown[300] : Colors.blue[400],
+            : _calendarController.isToday(date)
+                ? Colors.brown[300]
+                : Colors.blue[400],
       ),
       width: 16.0,
       height: 16.0,
@@ -311,7 +300,8 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
               child: Text('2 weeks'),
               onPressed: () {
                 setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.twoWeeks);
+                  _calendarController
+                      .setCalendarFormat(CalendarFormat.twoWeeks);
                 });
               },
             ),
@@ -327,7 +317,8 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
         ),
         const SizedBox(height: 8.0),
         RaisedButton(
-          child: Text('Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
+          child: Text(
+              'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
           onPressed: () {
             _calendarController.setSelectedDay(
               DateTime(dateTime.year, dateTime.month, dateTime.day),
@@ -343,21 +334,43 @@ class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
     return ListView(
       children: _selectedEvents
           .map((event) => Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.8),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: ListTile(
-          leading: CircularCheckBox(
-            value: true,
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            onChanged: null),
-          title: Text(event.toString()),
-          onTap: () => print('$event tapped!'),
-        ),
-      ))
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.8),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                child: ListTile(
+                  leading: CircularCheckBox(
+                      value: true,
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                      onChanged: null),
+                  title: Text(event.toString()),
+                  onTap: () => print('$event tapped!'),
+                ),
+              ))
           .toList(),
     );
   }
+
+  void _onDaySelected(DateTime day, List events) {
+    print('CALLBACK: _onDaySelected');
+    setState(() {
+      _selectedEvents = events;
+    });
+  }
+
+  void _onVisibleDaysChanged(
+      DateTime first, DateTime last, CalendarFormat format) {
+    print('CALLBACK: _onVisibleDaysChanged');
+  }
 }
+
+// Example holidays
+final Map<DateTime, List> _holidays = {
+  DateTime(2019, 1, 1): ['New Year\'s Day'],
+  DateTime(2019, 10, 28): ['Epiphany'],
+  DateTime(2019, 2, 14): ['Valentine\'s Day'],
+  DateTime(2019, 4, 21): ['Easter Sunday'],
+  DateTime(2019, 4, 22): ['Easter Monday'],
+};
