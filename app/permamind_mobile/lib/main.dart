@@ -71,10 +71,10 @@ class App extends StatelessWidget {
                           BlocProvider<TabBloc>(
                             builder: (context) => TabBloc(),
                           ),
-                          BlocProvider<StatsBloc>(
-                            builder: (context) =>
-                                StatsBloc(gardensBloc: gardensBloc),
-                          ),
+//                          BlocProvider<StatsBloc>(
+//                            builder: (context) =>
+//                                StatsBloc(gardensBloc: gardensBloc),
+//                          ),
                           BlocProvider<TutorialsBloc>(
                             builder: (context) =>
                             TutorialsBloc(tutosRepository: firebaseRepository)
