@@ -3,52 +3,52 @@ import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class ModelingEntity extends Equatable {
-  final String modelingId;
-  final String modelingName;
-  final String modelingProductionDuration;
-  final int modelingDifficultyLevel;
-  final int modelingSunlightRequirement;
-  final int modelingWaterRequirement;
-  final int modelingYield;
+  final String id;
+  final String name;
+  final String productionDuration;
+  final int difficultyLevel;
+  final int sunlightRequirement;
+  final int waterRequirement;
+  final int yield;
   List<PlanningDay> schedule = new List<PlanningDay>();
 
 
-  ModelingEntity(this.modelingId, this.modelingName,
-      this.modelingProductionDuration, this.modelingDifficultyLevel,
-      this.modelingSunlightRequirement,
-      this.modelingWaterRequirement, this.modelingYield, this.schedule);
+  ModelingEntity(this.id, this.name,
+      this.productionDuration, this.difficultyLevel,
+      this.sunlightRequirement,
+      this.waterRequirement, this.yield, this.schedule);
 
   Map<String, Object> toJson() {
     return {
-      'modelingId': modelingId,
-      'modelingName': modelingName,
-      'modelingProductionDuration': modelingProductionDuration,
-      'modelingDifficultyLevel': modelingDifficultyLevel,
-      'modelingSunlightRequirement': modelingSunlightRequirement,
-      'modelingWaterRequirement': modelingWaterRequirement,
-      'modelingYield': modelingYield
+      'id': id,
+      'name': name,
+      'productionDuration': productionDuration,
+      'difficultyLevel': difficultyLevel,
+      'sunlightRequirement': sunlightRequirement,
+      'waterRequirement': waterRequirement,
+      'yield': yield
     };
   }
 
   @override
   String toString() {
-    return 'Modeling { modelingId: $modelingId, modelingName: $modelingName,'
-        ' modelingProductionDuration: $modelingProductionDuration'
-        ' modelingDifficultyLevel: $modelingDifficultyLevel'
-        ' modelingSunlightRequirement: $modelingSunlightRequirement'
-        ' modelingWaterRequirement: $modelingWaterRequirement '
-        ' modelingYield: $modelingYield}';
+    return 'Modeling { id: $id, name: $name,'
+        ' productionDuration: $productionDuration'
+        ' difficultyLevel: $difficultyLevel'
+        ' sunlightRequirement: $sunlightRequirement'
+        ' waterRequirement: $waterRequirement '
+        ' yield: $yield}';
   }
 
   static ModelingEntity fromJson(Map<String, Object> json) {
     return ModelingEntity(
-      json['modelingId'] as String,
-      json['modelingName'] as String,
-      json['modelingProductionDuration'] as String,
-      json['modelingDifficultyLevel'] as int,
-      json['modelingSunlightRequirement'] as int,
-      json['modelingWaterRequirement'] as int,
-      json['modelingYield'] as int,
+      json['id'] as String,
+      json['name'] as String,
+      json['productionDuration'] as String,
+      json['difficultyLevel'] as int,
+      json['sunlightRequirement'] as int,
+      json['waterRequirement'] as int,
+      json['yield'] as int,
       json['schedule']
     );
   }
@@ -56,12 +56,12 @@ class ModelingEntity extends Equatable {
   static ModelingEntity fromSnapshot(DocumentSnapshot snap) {
     return ModelingEntity(
       snap.documentID,
-      snap.data['modelingName'],
-      snap.data['modelingProductionDuration'],
-      snap.data['modelingDifficultyLevel'],
-      snap.data['modelingSunlightRequirement'],
-      snap.data['modelingWaterRequirement'],
-      snap.data['modelingYield'],
+      snap.data['name'],
+      snap.data['productionDuration'],
+      snap.data['difficultyLevel'],
+      snap.data['sunlightRequirement'],
+      snap.data['waterRequirement'],
+      snap.data['yield'],
       snap.data['schedule'].map<PlanningDay>((item) {
           return PlanningDay.fromMap(item);
         }).toList()
@@ -70,13 +70,13 @@ class ModelingEntity extends Equatable {
 
   Map<String, Object> toDocument() {
     return {
-      'modelingId': modelingId,
-      'modelingName': modelingName,
-      'modelingProductionDuration': modelingProductionDuration,
-      'modelingDifficultyLevel': modelingDifficultyLevel,
-      'modelingSunlightRequirement': modelingSunlightRequirement,
-      'modelingWaterRequirement': modelingWaterRequirement,
-      'modelingYield': modelingYield
+      'id': id,
+      'name': name,
+      'productionDuration': productionDuration,
+      'difficultyLevel': difficultyLevel,
+      'sunlightRequirement': sunlightRequirement,
+      'waterRequirement': waterRequirement,
+      'yield': yield
     };
   }
 }

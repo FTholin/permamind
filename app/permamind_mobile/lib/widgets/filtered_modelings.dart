@@ -42,11 +42,11 @@ class FilteredModelings extends StatelessWidget {
                         Flexible(
                           flex: 3,
                           child: Image.asset(
-                            'assets/modelisations/${modelings[index].modelingName}.png',
+                            'assets/modelisations/${modelings[index].name}.png',
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Text("${modelings[index].modelingName}"),
+                        Text("${modelings[index].name}"),
                       ],
                     ),
                   ),

@@ -65,8 +65,7 @@ class FirebaseDataRepository implements DataRepository {
   @override
   Stream<List<Modeling>> fetchModelings() {
     return modelingsCollection
-        .where("modelingName", isEqualTo: "Carotte - Radis").
-    snapshots().map((snapshot) {
+    .snapshots().map((snapshot) {
       return snapshot.documents
         .map((doc) => Modeling.fromEntity(ModelingEntity.fromSnapshot(doc)))
         .toList();

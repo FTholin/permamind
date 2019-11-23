@@ -6,7 +6,8 @@ class GardenEntity extends Equatable {
   final String id;
   final String name;
   final bool publicVisibility;
-  final String modelisationId;
+  final String modelingId;
+  final String modelingName;
   final List<String> members;
   List<PlanningDay> schedule = new List<PlanningDay>();
   final DateTime creationDate;
@@ -15,7 +16,8 @@ class GardenEntity extends Equatable {
       this.name,
       this.publicVisibility,
       this.members,
-      this.modelisationId,
+      this.modelingId,
+      this.modelingName,
       this.schedule,
       this.creationDate);
 
@@ -25,6 +27,7 @@ class GardenEntity extends Equatable {
       'name': name,
       'publicVisibility': publicVisibility,
       'members': members,
+      'modelingName': modelingName,
       'schedule': schedule.map((item) {
         return item.toJson();
       }).toList(),
@@ -43,7 +46,8 @@ class GardenEntity extends Equatable {
       json['name'] as String,
       json['publicVisibility'] as bool,
       json['members'],
-      json['modelisationId'] as String,
+      json['modelingId'] as String,
+      json['modelingName'] as String,
       json['schedule'] as List<PlanningDay>,
       json['creationDate']
     );
@@ -58,7 +62,8 @@ class GardenEntity extends Equatable {
       snap.data['name'],
       snap.data['publicVisibility'],
       gardenList,
-      snap.data['modelisationId'],
+      snap.data['modelingId'],
+      snap.data['modelingName'],
       snap.data['schedule'].map<PlanningDay>((item) {
         return PlanningDay.fromMap(item);
       }).toList(),
@@ -72,7 +77,8 @@ class GardenEntity extends Equatable {
       'name': name,
       'publicVisibility': publicVisibility,
       'members': members,
-      'modelisationId': modelisationId,
+      'modelingId': modelingId,
+      'modelingName': modelingName,
       'schedule': schedule.map((item) {
         return item.toJson();
       }).toList(),

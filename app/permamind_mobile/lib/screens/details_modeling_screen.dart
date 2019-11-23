@@ -7,7 +7,7 @@ import 'package:permamind_mobile/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 
 
-typedef SaveGardenCallback = Function(String gardenName, bool publicVisibility, List<String> gardenMembers, String gardenModelisationId, List<PlanningDay> schedule);
+typedef SaveGardenCallback = Function(String gardenName, bool publicVisibility, List<String> gardenMembers, String gardenModelisationId, String modelisationName, List<PlanningDay> schedule);
 
 class DetailsModelingScreen extends StatelessWidget {
 
@@ -25,13 +25,13 @@ class DetailsModelingScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-           title: Text("${args.modeling.modelingName}"),
+           title: Text("${args.modeling.name}"),
           ),
           body: Container(
             child: Column(
 //              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                _buildModelingImage(context, args.modeling.modelingName),
+                _buildModelingImage(context, args.modeling.name),
                 Flexible(
                   flex: 1,
                   child: Container(
@@ -221,7 +221,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                         width: MediaQuery.of(context).size.width,
                                         padding: EdgeInsets.only(top: 10),
 
-                                        child: Text('${args.modeling.modelingProductionDuration} months',
+                                        child: Text('${args.modeling.productionDuration} months',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.normal,
@@ -248,7 +248,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.normal,
                                                 fontSize: 18))),
                                   ),
-                                  _buildModelingNotation(context, args.modeling.modelingDifficultyLevel),
+                                  _buildModelingNotation(context, args.modeling.difficultyLevel),
                                 ],
                               ),
                             ),
@@ -280,7 +280,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.normal,
                                                 fontSize: 18))),
                                   ),
-                                  _buildModelingNotation(context, args.modeling.modelingSunlightRequirement),
+                                  _buildModelingNotation(context, args.modeling.sunlightRequirement),
                                 ],
                               ),
                             ),
@@ -302,7 +302,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.normal,
                                                 fontSize: 18))),
                                   ),
-                                  _buildModelingNotation(context, args.modeling.modelingWaterRequirement),
+                                  _buildModelingNotation(context, args.modeling.waterRequirement),
                                 ],
                               ),
                             ),
@@ -336,7 +336,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.normal,
                                                 fontSize: 18))),
                                   ),
-                                  _buildModelingNotation(context, args.modeling.modelingYield),
+                                  _buildModelingNotation(context, args.modeling.yield),
                                 ],
                               ),
                             ),
@@ -434,7 +434,7 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                        );
 //                      }));
 //                gardensBloc.d
-                onSaveGarden(args.gardenName, args.publicVisibility, args.gardenMembers, args.modeling.modelingId, args.schedule);
+                onSaveGarden(args.gardenName, args.publicVisibility, args.gardenMembers, args.modeling.id, args.modeling.name, args.schedule);
                 Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
               }),

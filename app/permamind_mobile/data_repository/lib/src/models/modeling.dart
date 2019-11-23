@@ -1,89 +1,87 @@
 import 'package:data_repository/data_repository.dart';
-import 'package:meta/meta.dart';
 import 'package:data_repository/src/entities/entities.dart';
 
-@immutable
 class Modeling {
-  final String modelingId;
-  final String modelingName;
-  final String modelingProductionDuration;
-  final int modelingDifficultyLevel;
-  final int modelingSunlightRequirement;
-  final int modelingWaterRequirement;
-  final int modelingYield;
+  final String id;
+  final String name;
+  final String productionDuration;
+  final int difficultyLevel;
+  final int sunlightRequirement;
+  final int waterRequirement;
+  final int yield;
 
   List<PlanningDay> schedule = new List<PlanningDay>();
 
 
-  Modeling(this.modelingName, this.modelingProductionDuration,
-      this.modelingDifficultyLevel, this.modelingSunlightRequirement,
-      this.modelingWaterRequirement,
-      this.modelingYield, this.schedule, {String modelingId})
-      : this.modelingId = modelingId;
+  Modeling(this.name, this.productionDuration,
+      this.difficultyLevel, this.sunlightRequirement,
+      this.waterRequirement,
+      this.yield, this.schedule, {String id})
+      : this.id = id;
 
-  Modeling copyWith({String modelingId, String modelingName,
-    String modelingProductionDuration,
-    int modelingSunlightRequirement, int modelingWaterRequirement,
-    int modelingYield
+  Modeling copyWith({String id, String name,
+    String productionDuration,
+    int sunlightRequirement, int waterRequirement,
+    int yield
   }) {
     return Modeling(
-      modelingName ?? this.modelingName,
-      modelingProductionDuration ?? this.modelingProductionDuration,
-      modelingDifficultyLevel ?? this.modelingDifficultyLevel,
-      modelingSunlightRequirement ?? this.modelingSunlightRequirement,
-      modelingWaterRequirement ?? this.modelingWaterRequirement,
-      modelingYield ?? this.modelingYield,
+      name ?? this.name,
+      productionDuration ?? this.productionDuration,
+      difficultyLevel ?? this.difficultyLevel,
+      sunlightRequirement ?? this.sunlightRequirement,
+      waterRequirement ?? this.waterRequirement,
+      yield ?? this.yield,
       schedule ?? this.schedule,
-      modelingId: modelingId ?? this.modelingId
+      id: id ?? this.id
     );
   }
 
   @override
   int get hashCode =>
-      modelingId.hashCode ^ modelingName.hashCode ^
-      modelingProductionDuration.hashCode ^ modelingDifficultyLevel.hashCode ^
-      modelingSunlightRequirement.hashCode ^
-      modelingWaterRequirement.hashCode ^ modelingYield.hashCode;
+      id.hashCode ^ name.hashCode ^
+      productionDuration.hashCode ^ difficultyLevel.hashCode ^
+      sunlightRequirement.hashCode ^
+      waterRequirement.hashCode ^ yield.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
           other is Modeling &&
               runtimeType == other.runtimeType &&
-              modelingId == other.modelingId &&
-              modelingName == other.modelingName &&
-              modelingSunlightRequirement == other.modelingSunlightRequirement &&
-              modelingWaterRequirement == other.modelingWaterRequirement &&
-              modelingYield == other.modelingYield &&
-              modelingProductionDuration == other.modelingProductionDuration &&
-              modelingDifficultyLevel == other.modelingDifficultyLevel;
+              id == other.id &&
+              name == other.name &&
+              sunlightRequirement == other.sunlightRequirement &&
+              waterRequirement == other.waterRequirement &&
+              yield == other.yield &&
+              productionDuration == other.productionDuration &&
+              difficultyLevel == other.difficultyLevel;
 
   @override
   String toString() {
-    return 'Modeling { modelingId: $modelingId, modelingName: $modelingName,'
-        ' modelingProductionDuration: $modelingProductionDuration'
-        ' modelingDifficultyLevel: $modelingDifficultyLevel'
-        ' modelingSunlightRequirement: $modelingSunlightRequirement'
-        ' modelingWaterRequirement: $modelingWaterRequirement '
-        ' modelingYield: $modelingYield}';
+    return 'Modeling { id: $id, name: $name,'
+        ' productionDuration: $productionDuration'
+        ' difficultyLevel: $difficultyLevel'
+        ' sunlightRequirement: $sunlightRequirement'
+        ' waterRequirement: $waterRequirement '
+        ' yield: $yield}';
   }
 
   ModelingEntity toEntity() {
-    return ModelingEntity(modelingId, modelingName, modelingProductionDuration,
-        modelingDifficultyLevel, modelingSunlightRequirement,
-        modelingWaterRequirement, modelingYield, schedule);
+    return ModelingEntity(id, name, productionDuration,
+        difficultyLevel, sunlightRequirement,
+        waterRequirement, yield, schedule);
   }
 
   static Modeling fromEntity(ModelingEntity entity) {
     return Modeling(
-      entity.modelingName,
-      entity.modelingProductionDuration,
-      entity.modelingDifficultyLevel,
-      entity.modelingSunlightRequirement,
-      entity.modelingWaterRequirement,
-      entity.modelingYield,
+      entity.name,
+      entity.productionDuration,
+      entity.difficultyLevel,
+      entity.sunlightRequirement,
+      entity.waterRequirement,
+      entity.yield,
       entity.schedule,
-      modelingId: entity.modelingId,
+      id: entity.id,
     );
   }
 }
