@@ -29,7 +29,7 @@ class EnumeratedGardens extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return InkResponse(
                     enableFeedback: true,
-                    child: GardenItem(name: gardens[index].name, membersCount: gardens[index].members.length.toString(), index: index),
+                    child: GardenItem(name: gardens[index].name, modelingName: gardens[index].modelingName, membersCount: gardens[index].members.length.toString(), index: index),
                     onTap: () async {
                       final removedTodo = await Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) {

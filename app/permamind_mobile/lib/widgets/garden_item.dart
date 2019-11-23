@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 class GardenItem extends StatelessWidget {
   final String name;
+  final String modelingName;
   final String membersCount;
   final int index;
 
-  GardenItem({@required this.name, @required this.membersCount, @required this.index});
+  GardenItem({@required this.name, @required this.modelingName, @required this.membersCount, @required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class GardenItem extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Text(
-                          'Ail-Mâche',
+                          '${modelingName}',
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: 12,
