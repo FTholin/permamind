@@ -34,23 +34,16 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
   Stream<SchedulerState> mapEventToState(SchedulerEvent event) async* {
     if (event is UpdateScheduler) {
       yield* _mapScheduleUpdatedToState(event);
+    } else if (event is SelectDayActivities) {
+      yield* _mapSelectDayActivitiesToState(event);
+
     }
   }
-//
-//  Stream<SchedulerState> _mapUpdateFilterToState(
-//      UpdateFilter event,
-//      ) async* {
-//    if (gardensBloc.state is TodosLoaded) {
-//      yield SchedulerLoaded(
-//        _mapTodosToScheduler(
-//          (gardensBloc.state as TodosLoaded).todos,
-//          event.filter,
-//        ),
-//        event.filter,
-//      );
-//    }
-//  }
-//
+
+  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
+   yield DayActivitiesLoaded(event.dayActivities, event.schedule);
+  }
+
   Stream<SchedulerState> _mapScheduleUpdatedToState(
       UpdateScheduler event,
       ) async* {

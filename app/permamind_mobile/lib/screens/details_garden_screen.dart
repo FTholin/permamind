@@ -1,3 +1,4 @@
+import 'package:circular_check_box/circular_check_box.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,27 +40,35 @@ class DetailsGardenScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
           BlocBuilder<SchedulerBloc, SchedulerState>(
-//            condition: (previousState, currentState) =>
-//            currentState.runtimeType != previousState.runtimeType,
+            condition: (previousState, currentState) =>
+            currentState.runtimeType != previousState.runtimeType,
             builder: (context, state) {
+              print("reconstruction du calendrier");
               if (state is SchedulerLoaded) {
                 return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-              } else {
-                return Container();
-              }
+              } else if (state is DayActivitiesLoaded ) {
+                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+              } else {return Container();}
             }
           ),
             const SizedBox(height: 8.0),
 //          _buildButtons(),
             const SizedBox(height: 8.0),
             BlocBuilder<SchedulerBloc, SchedulerState>(
+//                condition: (previousState, currentState) =>
+//                currentState.runtimeType != previousState.runtimeType,
                 builder: (context, state) {
-                  if (state is SchedulerLoaded) {
+                  print("reconstruction de la liste");
+                  if (state is DayActivitiesLoaded) {
                     return Expanded(
-                      child: Container(color: Colors.red,),
+                      child: Container(child: _buildEventList(state.dayActivities)),
                     );
-                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-                  } else {
+                  } else if (state is DayActivitiesLoaded) {
+                    return Expanded(
+                      child: Container(child: _buildEventList(state.dayActivities)),
+                    );
+                  }
+                  else {
                     return Expanded(
                       child: Container(),
                     );
@@ -69,7 +78,6 @@ class DetailsGardenScreen extends StatelessWidget {
 //          Expanded(child: _buildEventList()),
           ],
         ),
-
     );
   }
 }
@@ -359,28 +367,28 @@ class DetailsGardenScreen extends StatelessWidget {
 //    );
 //  }
 //
-//  Widget _buildEventList() {
-//    return ListView(
-//      children: _selectedEvents
-//          .map((event) => Container(
-//                decoration: BoxDecoration(
-//                  border: Border.all(width: 0.8),
-//                  borderRadius: BorderRadius.circular(12.0),
-//                ),
-//                margin:
-//                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-//                child: ListTile(
-//                  leading: CircularCheckBox(
-//                      value: true,
-//                      materialTapTargetSize: MaterialTapTargetSize.padded,
-//                      onChanged: null),
-//                  title: Text(event.toString()),
-//                  onTap: () => print('$event tapped!'),
-//                ),
-//              ))
-//          .toList(),
-//    );
-//  }
+  Widget _buildEventList(List selectedEvents) {
+    return ListView(
+      children: selectedEvents
+          .map((event) => Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.8),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                child: ListTile(
+                  leading: CircularCheckBox(
+                      value: true,
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                      onChanged: null),
+                  title: Text(event.toString()),
+                  onTap: () => print('$event tapped!'),
+                ),
+              ))
+          .toList(),
+    );
+  }
 //
 //  void _onDaySelected(DateTime day, List events) {
 //    print('CALLBACK: _onDaySelected');

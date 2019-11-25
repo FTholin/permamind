@@ -23,3 +23,18 @@ class SchedulerLoaded extends SchedulerState {
     return 'SchedulerLoaded { filteredTodos: $schedule }';
   }
 }
+
+class DayActivitiesLoaded extends SchedulerState {
+  final List<Activity> dayActivities;
+  final List<PlanningDay> schedule;
+
+  DayActivitiesLoaded(this.dayActivities, this.schedule);
+
+  @override
+  List<Object> get props => [dayActivities, schedule];
+
+  @override
+  String toString() {
+    return 'DayActivitiesLoaded { filteredTodos: $dayActivities }';
+  }
+}

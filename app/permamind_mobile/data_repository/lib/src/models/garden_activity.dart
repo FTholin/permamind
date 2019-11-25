@@ -12,6 +12,11 @@ class Activity {
       'isDone': isDone,
     };
   }
+
+  @override
+  String toString() {
+    return name;
+  }
 }
 
 class PlanningDay {

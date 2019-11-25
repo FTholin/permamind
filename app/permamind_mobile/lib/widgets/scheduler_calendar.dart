@@ -1,5 +1,7 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SchedulerCalendar extends StatefulWidget {
@@ -15,14 +17,14 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   CalendarController _calendarController;
   Map<DateTime, List> _events;
 
+  SchedulerBloc _schedulerBloc;
+
   @override
   void initState() {
     super.initState();
     _events = Map<DateTime, List>();
-
     fillEvents(widget.schedule, widget.referenceDate);
     _calendarController = CalendarController();
-
   }
 
   @override
@@ -33,7 +35,11 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
 
   @override
   Widget build(BuildContext context) {
+
+    _schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
+
     fillEvents(widget.schedule, widget.referenceDate);
+    _onDaySelected(widget.referenceDate, _events[widget.referenceDate]);
 
     return TableCalendar(
 //      locale: 'fr_FR',
@@ -44,6 +50,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
         CalendarFormat.week: '',
       },
       calendarController: _calendarController,
+      onDaySelected: _onDaySelected,
     );
   }
 
@@ -54,8 +61,14 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
     _events.clear();
     for (var i = 0; i < schedule.length; i++) {
       _events[referencePoint.add(Duration(days: i))] =
-          schedule[i].dayActivities.map((activity) => activity.name).toList();
+          schedule[i].dayActivities.map((activity) => activity).toList();
     }
-//    _onDaySelected(_calendarController.selectedDay,_events[_calendarController.selectedDay]);
+  }
+
+  void _onDaySelected(DateTime day, List events) {
+    print("daySelected");
+    _schedulerBloc.add(SelectDayActivities(events, widget.schedule));
+//    schedulerBloc.add(events);
   }
 }
+
