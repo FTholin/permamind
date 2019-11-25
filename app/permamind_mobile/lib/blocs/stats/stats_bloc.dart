@@ -8,9 +8,9 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   StreamSubscription gardensSubscription;
 
   StatsBloc({@required this.gardensBloc}) {
-    gardensSubscription = gardensBloc.state.listen((state) {
+    gardensSubscription = gardensBloc.listen((state) {
       if (state is GardensLoaded) {
-        dispatch(UpdateStats(state.gardens));
+        add(UpdateStats(state.gardens));
       }
     });
   }
@@ -34,6 +34,6 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   @override
   void dispose() {
     gardensSubscription.cancel();
-    super.dispose();
+//    super.dispose();
   }
 }

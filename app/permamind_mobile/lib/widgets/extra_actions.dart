@@ -28,7 +28,7 @@ class ExtraActions extends StatelessWidget {
             onSelected: (action) {
               switch (action) {
                 case ExtraAction.LogOut:
-                  authenticationBloc.dispatch(LoggedOut());
+                  authenticationBloc.add(LoggedOut());
                   break;
                 case ExtraAction.Settings:
                   Navigator.pushNamed(

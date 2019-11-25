@@ -21,13 +21,13 @@ void main() {
     providers: [
       BlocProvider<AuthenticationBloc>(
         builder: (context) {
-          return authenticationBloc..dispatch(AppStarted());
+          return authenticationBloc..add(AppStarted());
         },
       ),
       BlocProvider<GardensBloc>(
         builder: (context) {
           return GardensBloc(authenticationBloc, firebaseRepository)
-            ..dispatch(GardensInit());
+            ..add(GardensInit());
         },
       ),
       BlocProvider<ThemeBloc>(
@@ -78,7 +78,7 @@ class App extends StatelessWidget {
                           BlocProvider<TutorialsBloc>(
                             builder: (context) =>
                             TutorialsBloc(tutosRepository: firebaseRepository)
-                              ..dispatch(LoadTutos()),
+                              ..add(LoadTutos()),
                           ),
                         ],
                         child: HomeScreen(),
@@ -127,7 +127,7 @@ class App extends StatelessWidget {
                 return BlocProvider<ModelingsBloc>(
                   builder: (context) =>
                   ModelingsBloc(dataRepository: firebaseRepository)
-                    ..dispatch(FetchModelings()),
+                    ..add(FetchModelings()),
                   child: DiscoverModelingsScreen(),
                 );
               },
@@ -142,7 +142,7 @@ class App extends StatelessWidget {
                             List<String> allGardenMembers = new List.from(
                                 [state.userId])
                               ..addAll(gardenMembers);
-                            gardensBloc.dispatch(
+                            gardensBloc.add(
                               AddGarden(Garden(gardenName, publicVisibility,
                                   allGardenMembers, modelisationId, activities, modelingName, DateTime.now())),
                             );

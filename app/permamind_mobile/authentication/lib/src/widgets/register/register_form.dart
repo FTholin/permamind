@@ -51,7 +51,7 @@ class _RegisterFormState extends State<RegisterForm> {
             );
         }
         if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
+          BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
           Navigator.of(context).pop();
         }
         if (state.isFailure) {
@@ -139,25 +139,25 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void _onPseudoChanged() {
-    _registerBloc.dispatch(
+    _registerBloc.add(
       RegisterPseudoChanged(pseudo: _pseudoController.text),
     );
   }
 
   void _onEmailChanged() {
-    _registerBloc.dispatch(
+    _registerBloc.add(
       RegisterEmailChanged(email: _emailController.text),
     );
   }
 
   void _onPasswordChanged() {
-    _registerBloc.dispatch(
+    _registerBloc.add(
       RegisterPasswordChanged(password: _passwordController.text),
     );
   }
 
   void _onFormSubmitted() {
-    _registerBloc.dispatch(
+    _registerBloc.add(
       RegisterSubmitted(
         pseudo: _pseudoController.text,
         email: _emailController.text,

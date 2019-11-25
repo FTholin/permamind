@@ -18,7 +18,7 @@ class EnumeratedActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final tutorialsBloc = BlocProvider.of<TutorialsBloc>(context);
 
-    tutorialsBloc.dispatch(LoadActivities(tutorialId));
+    tutorialsBloc.add(LoadActivities(tutorialId));
 
     return BlocBuilder<TutorialsBloc, TutorialsState>(
       builder: (context, state) {
@@ -34,7 +34,7 @@ class EnumeratedActivitiesScreen extends StatelessWidget {
                   leading: IconButton(
                       icon: Icon(Icons.arrow_back_ios),
                       onPressed: () {
-                        tutorialsBloc.dispatch(LoadTutos());
+                        tutorialsBloc.add(LoadTutos());
                         Navigator.pop(context, false);
                       })),
               body: ActivitiesPanel(activities));

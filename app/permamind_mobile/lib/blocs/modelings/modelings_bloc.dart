@@ -30,7 +30,7 @@ class ModelingsBloc extends Bloc<ModelingsEvent, ModelingsState> {
     _dataSubscription?.cancel();
     _dataSubscription = dataRepository.fetchModelings().listen(
           (gardens) {
-        dispatch(
+        add(
           UpdatedModelings(gardens),
         );
       },

@@ -14,11 +14,11 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   StreamSubscription _authenticationBlocSubscription;
 
   GardensBloc(this._authenticationBloc, this._dataRepository) {
-    _authenticationBlocSubscription = _authenticationBloc.state.listen((state) {
+    _authenticationBlocSubscription = _authenticationBloc.listen((state) {
       // React to state changes here.
       // Dispatch events here to trigger changes in MyBloc.
       if (state is Authenticated) {
-        dispatch(LoadGardens(state.userId));
+        add(LoadGardens(state.userId));
       }
     });
   }
@@ -37,7 +37,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     } else if (event is DeleteGarden) {
       yield* _mapDeleteGardensToState(event);
     } else if (event is ToggleAll) {
-      yield* _mapToggleAllToState();
+//      yield* _mapToggleAllToState();
     }
     else if (event is ClearCompleted) {
       yield* _mapClearCompletedToState();
@@ -54,7 +54,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _gardensSubscription?.cancel();
     _gardensSubscription = _dataRepository.gardens(event.userId).listen(
           (gardens) {
-        dispatch(
+        add(
           GardensUpdated(gardens),
         );
       },
@@ -74,18 +74,18 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _dataRepository.deleteGarden(event.garden);
   }
 
-  Stream<GardensState> _mapToggleAllToState() async* {
-    final state = currentState;
-//    if (state is GardensLoaded) {
-//      final allComplete = state.gardens.every((todo) => todo.complete);
-//      final List<Garden> updatedGardens = state.gardens
-//          .map((todo) => todo.copyWith(complete: !allComplete))
-//          .toList();
-//      updatedGardens.forEach((updatedGardens) {
-//        _dataRepository.updateGardens(updatedGardens);
-//      });
-//    }
-  }
+//  Stream<GardensState> _mapToggleAllToState() async* {
+//    final state = state;
+////    if (state is GardensLoaded) {
+////      final allComplete = state.gardens.every((todo) => todo.complete);
+////      final List<Garden> updatedGardens = state.gardens
+////          .map((todo) => todo.copyWith(complete: !allComplete))
+////          .toList();
+////      updatedGardens.forEach((updatedGardens) {
+////        _dataRepository.updateGardens(updatedGardens);
+////      });
+////    }
+//  }
 
   Stream<GardensState> _mapClearCompletedToState() async* {
 //    final state = currentState;
@@ -107,7 +107,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   void dispose() {
     _gardensSubscription?.cancel();
     _authenticationBlocSubscription?.cancel();
-    super.dispose();
+//    super.dispose();
   }
 
 //  Stream<GardensState> _mapGardensInitToState() async* {

@@ -27,7 +27,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //                key: ArchSampleKeys.deleteGardenButton,
             icon: Icon(Icons.delete),
             onPressed: () {
-              gardensBloc.dispatch(DeleteGarden(garden));
+              gardensBloc.add(DeleteGarden(garden));
               Navigator.pop(context, garden);
             },
           ),

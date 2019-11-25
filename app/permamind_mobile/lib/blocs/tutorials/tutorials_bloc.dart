@@ -38,7 +38,7 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
     _tutosSubscription?.cancel();
     _tutosSubscription = tutosRepository.loadTutorials().listen(
           (tutos) {
-        dispatch(
+        add(
           TutosUpdated(tutos),
         );
       },
@@ -49,7 +49,7 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
     _activitiesSubscription?.cancel();
     _activitiesSubscription = tutosRepository.fetchTutoActivities(event.tutoId).listen(
           (activities) {
-        dispatch(
+        add(
           ActivitiesUpdated(activities),
         );
       },
@@ -81,6 +81,6 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
   void dispose() {
     _tutosSubscription?.cancel();
     _activitiesSubscription?.cancel();
-    super.dispose();
+//    super.dispose();
   }
 }
