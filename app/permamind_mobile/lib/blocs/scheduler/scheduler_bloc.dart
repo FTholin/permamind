@@ -12,7 +12,6 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
   SchedulerBloc({@required this.gardensBloc, @required this.gardenId}) {
     gardensSubscription = gardensBloc.listen((state) {
       if (state is GardensLoaded) {
-        // TODO Ajouter une vérification lorsque l'on a supprimé un jardin et que c'est justement celui-ci
         add(UpdateScheduler(
             state.gardens.singleWhere(
                     (garden) => garden.id == gardenId).schedule

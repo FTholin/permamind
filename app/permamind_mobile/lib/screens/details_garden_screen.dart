@@ -39,8 +39,8 @@ class DetailsGardenScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
           BlocBuilder<SchedulerBloc, SchedulerState>(
-            condition: (previousState, currentState) =>
-            currentState.runtimeType != previousState.runtimeType,
+//            condition: (previousState, currentState) =>
+//            currentState.runtimeType != previousState.runtimeType,
             builder: (context, state) {
               if (state is SchedulerLoaded) {
                 return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
@@ -48,13 +48,24 @@ class DetailsGardenScreen extends StatelessWidget {
                 return Container();
               }
             }
-          ), // _buildTableCalendarWithBuilders(),
+          ),
             const SizedBox(height: 8.0),
 //          _buildButtons(),
             const SizedBox(height: 8.0),
-            Expanded(
-              child: Container(color: Colors.red,),
-            )
+            BlocBuilder<SchedulerBloc, SchedulerState>(
+                builder: (context, state) {
+                  if (state is SchedulerLoaded) {
+                    return Expanded(
+                      child: Container(color: Colors.red,),
+                    );
+                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+                  } else {
+                    return Expanded(
+                      child: Container(),
+                    );
+                  }
+                }
+            ),
 //          Expanded(child: _buildEventList()),
           ],
         ),
@@ -127,8 +138,8 @@ class DetailsGardenScreen extends StatelessWidget {
 //  }
 
 
-//
-//  // Simple TableCalendar configuration (using Styles)
+
+  // Simple TableCalendar configuration (using Styles)
 //  Widget _buildTableCalendar() {
 //
 //    return BlocBuilder<GardensBloc, GardensState>(

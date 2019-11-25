@@ -26,5 +26,6 @@ class UpdateScheduler extends SchedulerEvent {
   List<Object> get props => [schedule];
 
   @override
-  String toString() => 'UpdateTodos { todos: $schedule }';
+  String toString() => 'UpdateScheduler { schedule: $schedule }';
 }
+
