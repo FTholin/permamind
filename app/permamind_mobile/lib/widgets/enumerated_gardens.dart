@@ -33,7 +33,12 @@ class EnumeratedGardens extends StatelessWidget {
                     onTap: () async {
                       final removedTodo = await Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) {
-                            return DetailsGardenScreen(garden: gardens[index]);
+
+                            return BlocProvider(
+                                builder: (context) => SchedulerBloc(gardensBloc: gardensBloc, gardenId: gardens[index].id),
+                                child: DetailsGardenScreen(garden: gardens[index]),
+                            );
+
                           })
                       );
                       if (removedTodo != null) {

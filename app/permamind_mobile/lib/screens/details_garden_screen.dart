@@ -17,6 +17,8 @@ class DetailsGardenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
+    final schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
+
     final localizations = ArchSampleLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -28,6 +30,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //                key: ArchSampleKeys.deleteGardenButton,
             icon: Icon(Icons.delete),
             onPressed: () {
+              schedulerBloc.close();
               gardensBloc.add(DeleteGarden(garden));
               Navigator.pop(context, garden);
             },
@@ -35,24 +38,25 @@ class DetailsGardenScreen extends StatelessWidget {
         ],
       ),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
 //          BlocBuilder<TimerBloc, TimerState>(
 ////            condition: (previousState, currentState) =>
 ////            currentState.runtimeType != previousState.runtimeType,
 //            builder: (context, state) => Actions(),
 //          ),
-          SchedulerCalendar(),
-          // _buildTableCalendarWithBuilders(),
-          const SizedBox(height: 8.0),
+            SchedulerCalendar(),
+            // _buildTableCalendarWithBuilders(),
+            const SizedBox(height: 8.0),
 //          _buildButtons(),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: Container(color: Colors.red,),
-          )
+            const SizedBox(height: 8.0),
+            Expanded(
+              child: Container(color: Colors.red,),
+            )
 //          Expanded(child: _buildEventList()),
-        ],
-      ),
+          ],
+        ),
+
     );
   }
 }
