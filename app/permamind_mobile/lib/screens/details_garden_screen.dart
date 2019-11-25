@@ -1,11 +1,9 @@
-import 'package:circular_check_box/circular_check_box.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind_mobile/arch_bricks/arch_bricks.dart';
 import 'package:permamind_mobile/blocs/blocs.dart';
 import 'package:permamind_mobile/widgets/widgets.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
   final Garden garden;
@@ -40,13 +38,17 @@ class DetailsGardenScreen extends StatelessWidget {
       body: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-//          BlocBuilder<TimerBloc, TimerState>(
-////            condition: (previousState, currentState) =>
-////            currentState.runtimeType != previousState.runtimeType,
-//            builder: (context, state) => Actions(),
-//          ),
-            SchedulerCalendar(),
-            // _buildTableCalendarWithBuilders(),
+          BlocBuilder<SchedulerBloc, SchedulerState>(
+            condition: (previousState, currentState) =>
+            currentState.runtimeType != previousState.runtimeType,
+            builder: (context, state) {
+              if (state is SchedulerLoaded) {
+                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+              } else {
+                return Container();
+              }
+            }
+          ), // _buildTableCalendarWithBuilders(),
             const SizedBox(height: 8.0),
 //          _buildButtons(),
             const SizedBox(height: 8.0),
@@ -101,16 +103,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //    super.dispose();
 //  }
 //
-//  void synchroniseSchedule(
-//      List<PlanningDay> schedule, DateTime gardenCreationDate) {
-//    DateTime referencePoint = gardenCreationDate;
-//    _events.clear();
-//    for (var i = 0; i < schedule.length; i++) {
-//      _events[referencePoint.add(Duration(days: i))] =
-//          schedule[i].dayActivities.map((activity) => activity.name).toList();
-//    }
-////    _onDaySelected(_calendarController.selectedDay,_events[_calendarController.selectedDay]);
-//  }
+
 //
 //  @override
 //  Widget build(BuildContext context) {
