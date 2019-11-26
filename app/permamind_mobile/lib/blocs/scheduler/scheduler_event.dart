@@ -42,6 +42,22 @@ class SelectDayActivities extends SchedulerEvent {
 
   @override
   String toString() => 'selectDayActivities { dayActivities: $dayActivities, schedule: $schedule }';
-
 }
 
+
+class UpdateActivity extends SchedulerEvent {
+
+  final List<PlanningDay> schedule;
+
+  final List<Activity> dayActivities;
+
+  final Activity activityUpdated;
+
+  UpdateActivity(this.dayActivities, this.schedule, this.activityUpdated);
+
+  @override
+  List<Object> get props => [dayActivities, schedule, activityUpdated];
+
+  @override
+  String toString() => 'selectDayActivities { dayActivities: $dayActivities, schedule: $schedule }';
+}

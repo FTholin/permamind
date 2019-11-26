@@ -5,6 +5,7 @@ import 'package:permamind_mobile/blocs/blocs.dart';
 
 
 class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
+
   final GardensBloc gardensBloc;
   final String gardenId;
   StreamSubscription gardensSubscription;
@@ -36,12 +37,18 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
       yield* _mapScheduleUpdatedToState(event);
     } else if (event is SelectDayActivities) {
       yield* _mapSelectDayActivitiesToState(event);
-
+    } else if (event is UpdateActivity) {
+      yield* _mapUpdateActivityToState(event);
     }
   }
 
   Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
    yield DayActivitiesLoaded(event.dayActivities, event.schedule);
+  }
+
+  Stream<SchedulerState> _mapUpdateActivityToState(UpdateActivity event) async* {
+    print("_mapUpdateActivityToState");
+    yield DayActivitiesLoaded(event.dayActivities, event.schedule);
   }
 
   Stream<SchedulerState> _mapScheduleUpdatedToState(

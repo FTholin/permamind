@@ -63,12 +63,7 @@ class DetailsGardenScreen extends StatelessWidget {
                     return Expanded(
                       child: Container(child: _buildEventList(state.dayActivities)),
                     );
-                  } else if (state is DayActivitiesLoaded) {
-                    return Expanded(
-                      child: Container(child: _buildEventList(state.dayActivities)),
-                    );
-                  }
-                  else {
+                  } else {
                     return Expanded(
                       child: Container(),
                     );
@@ -81,6 +76,23 @@ class DetailsGardenScreen extends StatelessWidget {
     );
   }
 }
+
+
+  Widget _buildEventList(List selectedEvents) {
+    return ListView(
+      children: selectedEvents
+          .map((event) => Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.8),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                child: ScheduleListItem(data: event),
+              ))
+          .toList(),
+    );
+  }
 
 //class Scheduler extends StatefulWidget {
 //  Scheduler({Key key, this.gardenId}) : super(key: key);
@@ -147,7 +159,7 @@ class DetailsGardenScreen extends StatelessWidget {
 
 
 
-  // Simple TableCalendar configuration (using Styles)
+// Simple TableCalendar configuration (using Styles)
 //  Widget _buildTableCalendar() {
 //
 //    return BlocBuilder<GardensBloc, GardensState>(
@@ -367,21 +379,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //    );
 //  }
 //
-  Widget _buildEventList(List selectedEvents) {
-    return ListView(
-      children: selectedEvents
-          .map((event) => Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.8),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                child: ScheduleListItem(data: event.toString()),
-              ))
-          .toList(),
-    );
-  }
+
 
 
 
