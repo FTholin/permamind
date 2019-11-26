@@ -33,31 +33,31 @@ class SelectDayActivities extends SchedulerEvent {
 
   final List<PlanningDay> schedule;
 
-  final List<Activity> dayActivities;
+  final int dayIndex;
 
-  SelectDayActivities(this.dayActivities, this.schedule);
-
-  @override
-  List<Object> get props => [dayActivities, schedule];
+  SelectDayActivities(this.dayIndex, this.schedule);
 
   @override
-  String toString() => 'selectDayActivities { dayActivities: $dayActivities, schedule: $schedule }';
+  List<Object> get props => [dayIndex, schedule];
+
+  @override
+  String toString() => 'selectDayActivities { dayActivities: $dayIndex, schedule: $schedule }';
 }
 
 
-class UpdateActivity extends SchedulerEvent {
-
-  final List<PlanningDay> schedule;
-
-  final List<Activity> dayActivities;
-
-  final Activity activityUpdated;
-
-  UpdateActivity(this.dayActivities, this.schedule, this.activityUpdated);
-
-  @override
-  List<Object> get props => [dayActivities, schedule, activityUpdated];
-
-  @override
-  String toString() => 'selectDayActivities { dayActivities: $dayActivities, schedule: $schedule }';
-}
+//class UpdateActivity extends SchedulerEvent {
+//
+//  final List<PlanningDay> schedule;
+//
+//  final List<Activity> dayActivities;
+//
+//  final Activity activityUpdated;
+//
+//  UpdateActivity(this.dayActivities, this.schedule, this.activityUpdated);
+//
+//  @override
+//  List<Object> get props => [dayActivities, schedule, activityUpdated];
+//
+//  @override
+//  String toString() => 'selectDayActivities { dayActivities: $dayActivities, schedule: $schedule }';
+//}

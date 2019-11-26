@@ -37,19 +37,20 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
       yield* _mapScheduleUpdatedToState(event);
     } else if (event is SelectDayActivities) {
       yield* _mapSelectDayActivitiesToState(event);
-    } else if (event is UpdateActivity) {
-      yield* _mapUpdateActivityToState(event);
     }
+//    else if (event is UpdateActivity) {
+//      yield* _mapUpdateActivityToState(event);
+//    }
   }
 
   Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
-   yield DayActivitiesLoaded(event.dayActivities, event.schedule);
+   yield DayActivitiesLoaded(event.schedule, event.dayIndex);
   }
 
-  Stream<SchedulerState> _mapUpdateActivityToState(UpdateActivity event) async* {
-    print("_mapUpdateActivityToState");
-    yield DayActivitiesLoaded(event.dayActivities, event.schedule);
-  }
+//  Stream<SchedulerState> _mapUpdateActivityToState(UpdateActivity event) async* {
+//    print("_mapUpdateActivityToState");
+//    yield DayActivitiesLoaded(event.dayActivities, event.schedule);
+//  }
 
   Stream<SchedulerState> _mapScheduleUpdatedToState(
       UpdateScheduler event,

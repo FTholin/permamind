@@ -25,16 +25,16 @@ class SchedulerLoaded extends SchedulerState {
 }
 
 class DayActivitiesLoaded extends SchedulerState {
-  final List<Activity> dayActivities;
   final List<PlanningDay> schedule;
+  final int dayIndex;
 
-  DayActivitiesLoaded(this.dayActivities, this.schedule);
+  DayActivitiesLoaded(this.schedule, this.dayIndex);
 
   @override
-  List<Object> get props => [dayActivities, schedule];
+  List<Object> get props => [schedule, dayIndex];
 
   @override
   String toString() {
-    return 'DayActivitiesLoaded { filteredTodos: $dayActivities }';
+    return 'DayActivitiesLoaded { filteredTodos: $schedule }';
   }
 }

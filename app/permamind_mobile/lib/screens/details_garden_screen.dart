@@ -60,9 +60,16 @@ class DetailsGardenScreen extends StatelessWidget {
                 builder: (context, state) {
                   print("reconstruction de la liste");
                   if (state is DayActivitiesLoaded) {
-                    return Expanded(
-                      child: Container(child: _buildEventList(state.dayActivities)),
-                    );
+                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
+                      return Expanded(
+                        child: Container(child: _buildEventList(state.schedule[state.dayIndex].dayActivities)),
+                      );
+                    } else {
+                      return Expanded(
+                        child: Container(),
+                      );
+                    }
+
                   } else {
                     return Expanded(
                       child: Container(),
