@@ -46,7 +46,6 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
       events: _events,
       initialCalendarFormat: CalendarFormat.week,
       availableCalendarFormats: const {
-        CalendarFormat.month: '',
         CalendarFormat.week: '',
       },
       calendarController: _calendarController,
@@ -55,8 +54,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   }
 
 
-  void fillEvents(
-      List<PlanningDay> schedule, DateTime gardenCreationDate) {
+  void fillEvents(List<PlanningDay> schedule, DateTime gardenCreationDate) {
     DateTime referencePoint = gardenCreationDate;
     _events.clear();
     for (var i = 0; i < schedule.length; i++) {
@@ -68,7 +66,6 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   void _onDaySelected(DateTime day, List events) {
     print("daySelected");
     _schedulerBloc.add(SelectDayActivities(events, widget.schedule));
-//    schedulerBloc.add(events);
   }
 }
 

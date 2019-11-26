@@ -377,18 +377,25 @@ class DetailsGardenScreen extends StatelessWidget {
                 ),
                 margin:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                child: ListTile(
-                  leading: CircularCheckBox(
-                      value: true,
-                      materialTapTargetSize: MaterialTapTargetSize.padded,
-                      onChanged: null),
-                  title: Text(event.toString()),
-                  onTap: () => print('$event tapped!'),
-                ),
+                child: ScheduleListItem(data: event.toString()),
               ))
           .toList(),
     );
   }
+
+
+
+//ListTile(
+//leading: CircularCheckBox(
+//value: true,
+//materialTapTargetSize: MaterialTapTargetSize.padded,
+//onChanged: null
+//),
+//title: Text(event.toString()),
+//onTap: () => print('$event tapped!'),
+//),
+
+
 //
 //  void _onDaySelected(DateTime day, List events) {
 //    print('CALLBACK: _onDaySelected');
