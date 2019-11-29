@@ -38,8 +38,8 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
     } else if (event is SelectDayActivities) {
       yield* _mapSelectDayActivitiesToState(event);
     }
-//    else if (event is UpdateActivity) {
-//      yield* _mapUpdateActivityToState(event);
+//    else if (event is UpdateGardenActivities) {
+//      yield* _mapUpdateGardenActivitiesToState(event);
 //    }
   }
 
@@ -47,9 +47,10 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
    yield DayActivitiesLoaded(event.schedule, event.dayIndex);
   }
 
-//  Stream<SchedulerState> _mapUpdateActivityToState(UpdateActivity event) async* {
-//    print("_mapUpdateActivityToState");
-//    yield DayActivitiesLoaded(event.dayActivities, event.schedule);
+//  Stream<SchedulerState> _mapUpdateGardenActivitiesToState(UpdateGardenActivities event) async* {
+//    print("_mapUpdateGardenActivitiesToState");
+////    gardensBloc.add(UpdateGarden(event.garden));
+//    yield DayActivitiesLoaded(event.garden.schedule, 3);
 //  }
 
   Stream<SchedulerState> _mapScheduleUpdatedToState(

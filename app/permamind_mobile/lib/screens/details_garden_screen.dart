@@ -9,8 +9,16 @@ import 'package:permamind_mobile/widgets/widgets.dart';
 class DetailsGardenScreen extends StatelessWidget {
   final Garden garden;
 
+  int _currentDay;
+
   DetailsGardenScreen({Key key, @required this.garden})
-      : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
+      : super(key: key ?? ArchSampleKeys.detailsGardenScreen) {
+    final DateTime date = DateTime.now();
+    final d1 = DateTime.utc(garden.creationDate.year, garden.creationDate.month, garden.creationDate.day);
+    final d2 = DateTime.utc(date.year,date.month,date.day);
+    _currentDay = d2.difference(d1).inDays;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,21 +63,29 @@ class DetailsGardenScreen extends StatelessWidget {
 //          _buildButtons(),
             const SizedBox(height: 8.0),
             BlocBuilder<SchedulerBloc, SchedulerState>(
-//                condition: (previousState, currentState) =>
-//                currentState.runtimeType != previousState.runtimeType,
                 builder: (context, state) {
-                  print("reconstruction de la liste");
                   if (state is DayActivitiesLoaded) {
+                    _currentDay = state.dayIndex;
                     if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
                       return Expanded(
-                        child: Container(child: _buildEventList(state.schedule[state.dayIndex].dayActivities)),
+                        child: Container(child: _buildEventList(state.schedule, state.dayIndex)),
                       );
                     } else {
                       return Expanded(
                         child: Container(),
                       );
                     }
-
+                  } else if (state is SchedulerLoaded) {
+                    print(_currentDay);
+                    if(_currentDay >= 0 && _currentDay < state.schedule.length) {
+                      return Expanded(
+                        child: Container(child: _buildEventList(state.schedule, _currentDay)),
+                      );
+                    } else {
+                      return Expanded(
+                        child: Container(),
+                      );
+                    }
                   } else {
                     return Expanded(
                       child: Container(),
@@ -82,24 +98,34 @@ class DetailsGardenScreen extends StatelessWidget {
         ),
     );
   }
+
+  Widget _buildEventList(List<PlanningDay> schedule, int dayIndex) {
+    // Changer ici mettre  un index au lieu d'une activité
+    //schedule[dayIndex].dayActivities
+    List<Container> items = List<Container>();
+
+    for (int activityIndex = 0; activityIndex < schedule[dayIndex].dayActivities.length; activityIndex++) {
+      items.add(
+          Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 0.8),
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        margin:
+        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: ScheduleListItem(garden: garden, schedule: schedule, dayIndex: dayIndex, activityIndex: activityIndex),
+      ));
+    }
+
+    return ListView(
+      children: items
+    );
+
+  }
+
 }
 
 
-  Widget _buildEventList(List selectedEvents) {
-    return ListView(
-      children: selectedEvents
-          .map((event) => Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.8),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                child: ScheduleListItem(data: event),
-              ))
-          .toList(),
-    );
-  }
 
 //class Scheduler extends StatefulWidget {
 //  Scheduler({Key key, this.gardenId}) : super(key: key);

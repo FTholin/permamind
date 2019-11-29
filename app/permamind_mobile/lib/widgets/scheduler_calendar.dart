@@ -6,7 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class SchedulerCalendar extends StatefulWidget {
   final List<PlanningDay> schedule;
-  final DateTime referenceDate;
+  DateTime referenceDate;
   SchedulerCalendar({Key key, @required this.schedule, @required this.referenceDate}) : super(key: key);
 
   @override
@@ -18,6 +18,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   Map<DateTime, List> _events;
 
   SchedulerBloc _schedulerBloc;
+
 
   @override
   void initState() {
@@ -39,7 +40,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
     _schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
 
     fillEvents(widget.schedule, widget.referenceDate);
-    _onDaySelected(widget.referenceDate, _events[widget.referenceDate]);
+//
 
     return TableCalendar(
 //      locale: 'fr_FR',

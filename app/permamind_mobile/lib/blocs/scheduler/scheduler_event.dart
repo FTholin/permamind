@@ -5,18 +5,6 @@ abstract class SchedulerEvent extends Equatable {
   SchedulerEvent();
 }
 
-//class UpdateFilter extends SchedulerEvent {
-////  final VisibilityFilter filter;
-//
-//  const UpdateFilter(this.filter);
-//
-//  @override
-//  List<Object> get props => [filter];
-//
-//  @override
-//  String toString() => 'UpdateFilter { filter: $filter }';
-//}
-
 class UpdateScheduler extends SchedulerEvent {
   final List<PlanningDay> schedule;
 
@@ -45,19 +33,15 @@ class SelectDayActivities extends SchedulerEvent {
 }
 
 
-//class UpdateActivity extends SchedulerEvent {
-//
-//  final List<PlanningDay> schedule;
-//
-//  final List<Activity> dayActivities;
-//
-//  final Activity activityUpdated;
-//
-//  UpdateActivity(this.dayActivities, this.schedule, this.activityUpdated);
-//
-//  @override
-//  List<Object> get props => [dayActivities, schedule, activityUpdated];
-//
-//  @override
-//  String toString() => 'selectDayActivities { dayActivities: $dayActivities, schedule: $schedule }';
-//}
+class UpdateGardenActivities extends SchedulerEvent {
+
+  final Garden garden;
+
+  UpdateGardenActivities(this.garden);
+
+  @override
+  List<Object> get props => [garden];
+
+  @override
+  String toString() => 'UpdateGardenActivities { garden: $garden }';
+}
