@@ -39,7 +39,7 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
   @override
   Widget build(BuildContext context) {
 
-    checkboxValue = widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].isDone;
+    checkboxValue = widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].complete;
 
     return Center(
       child: CheckboxListTile(
@@ -48,7 +48,7 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
         onChanged: (bool value) {
           setState((){
             checkboxValue = value;
-            widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].isDone = checkboxValue;
+            widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].complete = checkboxValue;
             widget.garden.schedule = widget.schedule;
 
             BlocProvider.of<GardensBloc>(context).add(

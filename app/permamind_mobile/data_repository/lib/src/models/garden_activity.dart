@@ -1,15 +1,15 @@
 class Activity {
   String name;
-  bool isDone;
+  bool complete;
 
   Activity.fromMap(Map<dynamic, dynamic> data)
       : name = data['name'],
-        isDone = data['isDone'];
+        complete = data['complete'];
 
   Map<String, Object> toJson() {
     return {
       'name': name,
-      'isDone': isDone,
+      'complete': complete,
     };
   }
 
