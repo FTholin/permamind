@@ -25,7 +25,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-           title: Text("${args.modeling.name}"),
+           title: Text('${args.modeling.composition.join("-")}'),
           ),
           body: Container(
             child: Column(
@@ -434,7 +434,7 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                        );
 //                      }));
 //                gardensBloc.d
-                onSaveGarden(args.gardenName, args.publicVisibility, args.gardenMembers, args.modeling.id, args.modeling.name, args.schedule);
+                onSaveGarden(args.gardenName, args.publicVisibility, args.gardenMembers, args.modeling.id, args.modeling.composition.join("-"), args.schedule);
                 Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
               }),

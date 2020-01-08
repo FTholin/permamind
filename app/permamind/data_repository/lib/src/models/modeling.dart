@@ -11,12 +11,12 @@ class Modeling {
   final int yield;
 
   List<PlanningDay> schedule = new List<PlanningDay>();
-
+  final List<String> composition;
 
   Modeling(this.name, this.productionDuration,
       this.difficultyLevel, this.sunlightRequirement,
       this.waterRequirement,
-      this.yield, this.schedule, {String id})
+      this.yield, this.schedule, this.composition, {String id})
       : this.id = id;
 
   Modeling copyWith({String id, String name,
@@ -32,6 +32,7 @@ class Modeling {
       waterRequirement ?? this.waterRequirement,
       yield ?? this.yield,
       schedule ?? this.schedule,
+      composition ?? this.composition,
       id: id ?? this.id
     );
   }
@@ -58,18 +59,13 @@ class Modeling {
 
   @override
   String toString() {
-    return 'Modeling { id: $id, name: $name,'
-        ' productionDuration: $productionDuration'
-        ' difficultyLevel: $difficultyLevel'
-        ' sunlightRequirement: $sunlightRequirement'
-        ' waterRequirement: $waterRequirement '
-        ' yield: $yield}';
+    return 'Modeling { id: $id, name: $name,}';
   }
 
   ModelingEntity toEntity() {
     return ModelingEntity(id, name, productionDuration,
         difficultyLevel, sunlightRequirement,
-        waterRequirement, yield, schedule);
+        waterRequirement, yield, schedule, composition);
   }
 
   static Modeling fromEntity(ModelingEntity entity) {
@@ -81,6 +77,7 @@ class Modeling {
       entity.waterRequirement,
       entity.yield,
       entity.schedule,
+      entity.composition,
       id: entity.id,
     );
   }

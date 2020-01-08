@@ -34,8 +34,6 @@ class FilteredModelings extends StatelessWidget {
 
               itemBuilder: (BuildContext context, int index) {
 
-                print('assets/modelings/${modelings[index].name}.png-');
-
                 return InkResponse(
                   enableFeedback: true,
                   child: Card(
@@ -44,9 +42,12 @@ class FilteredModelings extends StatelessWidget {
                       children: <Widget>[
                         Flexible(
                           flex: 3,
-                        child: Image.asset('assets/modelings/${modelings[index].name}.png')
+                            child: Image(
+                              image: AssetImage('assets/modelings/${modelings[index].name}.png'),
+                              fit: BoxFit.cover
+                            )
                         ),
-                        Text("${modelings[index].name}"),
+                        Text("${modelings[index].composition.join("-")}"),
                       ],
                     ),
                   ),

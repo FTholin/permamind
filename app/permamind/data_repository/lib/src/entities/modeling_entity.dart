@@ -11,12 +11,12 @@ class ModelingEntity extends Equatable {
   final int waterRequirement;
   final int yield;
   List<PlanningDay> schedule = new List<PlanningDay>();
-
+  final List<String> composition;
 
   ModelingEntity(this.id, this.name,
       this.productionDuration, this.difficultyLevel,
       this.sunlightRequirement,
-      this.waterRequirement, this.yield, this.schedule);
+      this.waterRequirement, this.yield, this.schedule, this.composition);
 
   Map<String, Object> toJson() {
     return {
@@ -49,11 +49,15 @@ class ModelingEntity extends Equatable {
       json['sunlightRequirement'] as int,
       json['waterRequirement'] as int,
       json['yield'] as int,
-      json['schedule']
+      json['schedule'],
+      json['composition']
     );
   }
 
   static ModelingEntity fromSnapshot(DocumentSnapshot snap) {
+
+    List<String> compositionList = new List<String>.from(snap.data['composition']);
+
     return ModelingEntity(
       snap.documentID,
       snap.data['name'],
@@ -64,7 +68,8 @@ class ModelingEntity extends Equatable {
       snap.data['yield'],
       snap.data['schedule'].map<PlanningDay>((item) {
           return PlanningDay.fromMap(item);
-        }).toList()
+        }).toList(),
+      compositionList,
     );
   }
 

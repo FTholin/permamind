@@ -88,6 +88,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                             setState(() {});
                           },
                         ),
+                        // TODO Rajouter champs supplémentaires
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 20),
                           child: SwitchListTile(
