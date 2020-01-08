@@ -9,22 +9,32 @@ class Garden extends Equatable {
   final bool publicVisibility;
   final String modelingId;
   final String modelingName;
+  final double length;
+  final double width;
+  final bool gardenGround;
   final List<String> members;
   List<PlanningDay> schedule = new List<PlanningDay>();
   final DateTime creationDate;
 
-  Garden( this.name,
-    this.publicVisibility,
-    this.members,
-    this.modelingId,
-    this.schedule,
-    this.modelingName,
-    this.creationDate,{String id})
+  Garden(
+      this.name,
+      this.length,
+      this.width,
+      this.gardenGround,
+      this.publicVisibility,
+      this.members,
+      this.modelingId,
+      this.schedule,
+      this.modelingName,
+      this.creationDate,{String id})
       :  this.id = id;
 
-  Garden copyWith({String name, String id, bool publicVisibility, String modelingId, List<String> members}) {
+  Garden copyWith({String name, double length, double width, bool gardenGround, String id, bool publicVisibility, String modelingId, List<String> members}) {
     return Garden(
       name ?? this.name,
+      length ?? this.length,
+      width ?? this.width,
+      gardenGround ?? this.gardenGround,
       publicVisibility ?? this.publicVisibility,
       members ?? this.members,
       modelingId ?? this.modelingId,
@@ -59,6 +69,9 @@ class Garden extends Equatable {
     return GardenEntity(
         id,
         name,
+        length,
+        width,
+        gardenGround,
         publicVisibility,
         members,
         modelingId,
@@ -72,6 +85,9 @@ class Garden extends Equatable {
 
     return Garden(
       entity.name,
+      entity.length,
+      entity.width,
+      entity.gardenGround,
       entity.publicVisibility,
       entity.members,
       entity.modelingId,

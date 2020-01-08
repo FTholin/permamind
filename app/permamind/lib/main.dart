@@ -144,13 +144,18 @@ class App extends StatelessWidget {
                       final gardensBloc = BlocProvider.of<GardensBloc>(context);
                       return DetailsModelingScreen(
                           onSaveGarden: (gardenName, publicVisibility,
-                              gardenMembers, modelisationId, modelingName, activities) {
+                              gardenMembers, modelisationId, modelingName, gardenLength,
+                              gardenWidth, gardenGround, activities) {
                             List<String> allGardenMembers = new List.from(
                                 [state.userId])
                               ..addAll(gardenMembers);
                             gardensBloc.add(
-                              AddGarden(Garden(gardenName, publicVisibility,
-                                  allGardenMembers, modelisationId, activities, modelingName, DateTime.now())),
+                              AddGarden(Garden(gardenName, gardenLength,
+                                  gardenWidth, gardenGround,
+                                  publicVisibility, allGardenMembers,
+                                  modelisationId, activities,
+                                  modelingName, DateTime.now())
+                              ),
                             );
                           }
                       );

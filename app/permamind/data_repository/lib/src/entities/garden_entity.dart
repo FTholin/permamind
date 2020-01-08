@@ -8,12 +8,18 @@ class GardenEntity extends Equatable {
   final bool publicVisibility;
   final String modelingId;
   final String modelingName;
+  final double length;
+  final double width;
+  final bool gardenGround;
   final List<String> members;
   List<PlanningDay> schedule = new List<PlanningDay>();
   final DateTime creationDate;
 
   GardenEntity(this.id,
       this.name,
+      this.length,
+      this.width,
+      this.gardenGround,
       this.publicVisibility,
       this.members,
       this.modelingId,
@@ -44,6 +50,9 @@ class GardenEntity extends Equatable {
     return GardenEntity(
       json['id'] as String,
       json['name'] as String,
+      json['length'] as double,
+      json['width'] as double,
+      json['gardenGround'] as bool,
       json['publicVisibility'] as bool,
       json['members'],
       json['modelingId'] as String,
@@ -60,6 +69,9 @@ class GardenEntity extends Equatable {
     return GardenEntity(
       snap.documentID,
       snap.data['name'],
+      snap.data['length'],
+      snap.data['width'],
+      snap.data['gardenGround'],
       snap.data['publicVisibility'],
       gardenList,
       snap.data['modelingId'],
@@ -75,6 +87,9 @@ class GardenEntity extends Equatable {
   Map<String, Object> toDocument() {
     return {
       'name': name,
+      'length': length,
+      'width': width,
+      'gardenGround': gardenGround,
       'publicVisibility': publicVisibility,
       'members': members,
       'modelingId': modelingId,
