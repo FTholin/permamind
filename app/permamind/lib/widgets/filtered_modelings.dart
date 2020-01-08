@@ -14,8 +14,19 @@ class FilteredModelings extends StatelessWidget {
   final String gardenName;
   final bool gardenVisibility;
   final List<String> gardenMembers;
+  final double gardenLength;
+  final double gardenWidth;
+  final bool gardenGround;
 
-  FilteredModelings({this.modelings, this.gardenName, this.gardenVisibility, this.gardenMembers, Key key}) : super(key: key);
+  FilteredModelings({
+    this.modelings,
+    this.gardenName,
+    this.gardenVisibility,
+    this.gardenMembers,
+    this.gardenLength,
+    this.gardenWidth,
+    this.gardenGround,
+    Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +71,12 @@ class FilteredModelings extends StatelessWidget {
                       arguments: DetailsModelingsScreenArguments(
                           modeling: modelings[index],
                           gardenName: gardenName,
+                          gardenLength: gardenLength,
+                          gardenWidth: gardenWidth,
+                          gardenGround: gardenGround,
                           publicVisibility: gardenVisibility,
                           gardenMembers: gardenMembers,
                           schedule: modelings[index].schedule
-
                       ),
                     );
 //
