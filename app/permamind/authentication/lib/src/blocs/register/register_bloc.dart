@@ -18,29 +18,31 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   @override
   Stream<RegisterState> transformEvents(
-    Stream<RegisterEvent> events,
-    Stream<RegisterState> Function(RegisterEvent event) next,
-  ) {
-    final observableStream = events as Observable<RegisterEvent>;
-    final nonDebounceStream = observableStream.where((event) {
+      Stream<RegisterEvent> events,
+      Stream<RegisterState> Function(RegisterEvent event) next,
+      ) {
+    final nonDebounceStream = events.where((event) {
       return (event is! RegisterEmailChanged && event is! RegisterPasswordChanged);
     });
-    final debounceStream = observableStream.where((event) {
+    final debounceStream = events.where((event) {
       return (event is RegisterEmailChanged || event is RegisterPasswordChanged);
     }).debounceTime(Duration(milliseconds: 300));
-    return super.transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
+    return super.transformEvents(
+      nonDebounceStream.mergeWith([debounceStream]),
+      next,
+    );
   }
 
   @override
   Stream<RegisterState> mapEventToState(
-    RegisterEvent event,
-  ) async* {
+      RegisterEvent event,
+      ) async* {
     if (event is RegisterEmailChanged) {
       yield* _mapEmailChangedToState(event.email);
     } else if (event is RegisterPasswordChanged) {
       yield* _mapPasswordChangedToState(event.password);
     } else if (event is RegisterSubmitted) {
-      yield* _mapFormSubmittedToState(event.pseudo, event.email, event.password);
+      yield* _mapFormSubmittedToState(event.email, event.password);
     }
   }
 
@@ -57,14 +59,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   Stream<RegisterState> _mapFormSubmittedToState(
-      String pseudo,
       String email,
       String password,
-  ) async* {
+      ) async* {
     yield RegisterState.loading();
     try {
       await _userRepository.signUp(
-        pseudo: pseudo,
         email: email,
         password: password,
       );
@@ -74,3 +74,4 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
 }
+

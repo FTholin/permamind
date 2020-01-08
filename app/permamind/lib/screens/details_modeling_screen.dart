@@ -489,7 +489,7 @@ Widget _buildModelingImage(BuildContext context, String modelisationName) {
   return Flexible(
     flex: 3,
     child: Image.asset(
-      'assets/modelisations/${modelisationName}.png',
+      'assets/modelings/$modelisationName.png',
       fit: BoxFit.cover,
     ),
   );

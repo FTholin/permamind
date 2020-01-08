@@ -35,7 +35,7 @@ class EnumeratedGardens extends StatelessWidget {
                           MaterialPageRoute(builder: (_) {
 
                             return BlocProvider(
-                                builder: (context) => SchedulerBloc(gardensBloc: gardensBloc, gardenId: gardens[index].id),
+                                create: (context) => SchedulerBloc(gardensBloc: gardensBloc, gardenId: gardens[index].id),
                                 child: DetailsGardenScreen(garden: gardens[index]),
                             );
 

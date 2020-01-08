@@ -33,6 +33,9 @@ class FilteredModelings extends StatelessWidget {
                   (MediaQuery.of(context).size.height / 3) ),
 
               itemBuilder: (BuildContext context, int index) {
+
+                print('assets/modelings/${modelings[index].name}.png-');
+
                 return InkResponse(
                   enableFeedback: true,
                   child: Card(
@@ -41,10 +44,7 @@ class FilteredModelings extends StatelessWidget {
                       children: <Widget>[
                         Flexible(
                           flex: 3,
-                          child: Image.asset(
-                            'assets/modelisations/${modelings[index].name}.png',
-                            fit: BoxFit.cover,
-                          ),
+                        child: Image.asset('assets/modelings/${modelings[index].name}.png')
                         ),
                         Text("${modelings[index].name}"),
                       ],

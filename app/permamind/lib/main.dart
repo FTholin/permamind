@@ -26,18 +26,18 @@ void main() {
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<AuthenticationBloc>(
-        builder: (context) {
+        create: (context) {
           return authenticationBloc..add(AppStarted());
         },
       ),
       BlocProvider<GardensBloc>(
-        builder: (context) {
+        create: (context) {
           return GardensBloc(authenticationBloc, firebaseRepository)
             ..add(GardensInit());
         },
       ),
       BlocProvider<ThemeBloc>(
-        builder: (context) => ThemeBloc(),
+        create: (context) => ThemeBloc(),
       ),
     ],
     child: App(
@@ -75,14 +75,14 @@ class App extends StatelessWidget {
                       return MultiBlocProvider(
                         providers: [
                           BlocProvider<TabBloc>(
-                            builder: (context) => TabBloc(),
+                            create: (context) => TabBloc(),
                           ),
 //                          BlocProvider<StatsBloc>(
 //                            builder: (context) =>
 //                                StatsBloc(gardensBloc: gardensBloc),
 //                          ),
                           BlocProvider<TutorialsBloc>(
-                            builder: (context) =>
+                            create: (context) =>
                             TutorialsBloc(tutosRepository: firebaseRepository)
                               ..add(LoadTutos()),
                           ),
@@ -131,7 +131,7 @@ class App extends StatelessWidget {
               },
               '/discoverModelings': (context) {
                 return BlocProvider<ModelingsBloc>(
-                  builder: (context) =>
+                  create: (context) =>
                   ModelingsBloc(dataRepository: firebaseRepository)
                     ..add(FetchModelings()),
                   child: DiscoverModelingsScreen(),
