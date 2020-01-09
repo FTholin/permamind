@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/screens/screens.dart';
 import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
@@ -22,26 +23,44 @@ class DetailsGardenScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gardensBloc = BlocProvider.of<GardensBloc>(context);
-
-    final schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
-
-    final localizations = ArchSampleLocalizations.of(context);
+//    final gardensBloc = BlocProvider.of<GardensBloc>(context);
+//
+//    final schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
+//
+//    final localizations = ArchSampleLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("${garden.name}"),
         actions: <Widget>[
+          // TODO Faire bouton page parametres
+
           IconButton(
-            tooltip: localizations.deleteGarden,
+//            tooltip: localizations.deleteGarden,
             // TODO ArchSampleKeys
 //                key: ArchSampleKeys.deleteGardenButton,
-            icon: Icon(Icons.delete),
+            icon: Icon(Icons.settings),
             onPressed: () {
-              schedulerBloc.close();
-              gardensBloc.add(DeleteGarden(garden));
-              Navigator.pop(context, garden);
+
+              Navigator.pushNamed(context, ArchSampleRoutes.settingsGarden);
+              // TODO Passer par un pushName avec un argument ??
+//              schedulerBloc.close();
+//              gardensBloc.add(DeleteGarden(garden));
+//              Navigator.pop(context, garden);
             },
           ),
+
+
+//          IconButton(
+//            tooltip: localizations.deleteGarden,
+//            // TODO ArchSampleKeys
+////                key: ArchSampleKeys.deleteGardenButton,
+//            icon: Icon(Icons.delete),
+//            onPressed: () {
+//              schedulerBloc.close();
+//              gardensBloc.add(DeleteGarden(garden));
+//              Navigator.pop(context, garden);
+//            },
+//          ),
         ],
       ),
       body: Column(

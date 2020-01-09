@@ -6,4 +6,8 @@ class ArchSampleRoutes {
   static final detailsModeling = "/detailsModeling";
   static final tutorialActivities = "/tutorialActivities";
   static final settings = "/settings";
+
+  // TODO To improve efficiency : see https://api.flutter.dev/flutter/widgets/Navigator/pushNamed.html
+  static final settingsGarden = "/settingsGarden";
+//  static final
 }
