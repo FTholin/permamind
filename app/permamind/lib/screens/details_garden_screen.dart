@@ -41,7 +41,12 @@ class DetailsGardenScreen extends StatelessWidget {
             icon: Icon(Icons.settings),
             onPressed: () {
 
-              Navigator.pushNamed(context, ArchSampleRoutes.settingsGarden);
+//              Navigator.pushNamed(context, ArchSampleRoutes.settingsGarden);
+
+              Navigator.of(context).pushNamed(
+                ArchSampleRoutes.settingsGarden,
+                arguments: SettingsGardenScreenArguments(garden.id),
+              );
               // TODO Passer par un pushName avec un argument ??
 //              schedulerBloc.close();
 //              gardensBloc.add(DeleteGarden(garden));
