@@ -26,9 +26,12 @@ class DetailsGardenScreen extends StatelessWidget {
 
     return BlocBuilder<GardensBloc, GardensState>(
     builder: (context, state) {
+      final currentGarden = (state as GardensLoaded)
+          .gardens.firstWhere((garden) => garden.id == garden.id,
+          orElse: () => null);
       return Scaffold(
         appBar: AppBar(
-          title: Text("${garden.name}"),
+          title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
           actions: <Widget>[
             // TODO Faire bouton page parametres
 
@@ -54,51 +57,18 @@ class DetailsGardenScreen extends StatelessWidget {
                     BlocProvider.of<SchedulerBloc>(context).close();
                     Navigator.pop(context, garden);
                   }
-
                 }
-
               },
             ),
-
-//          onPressed: () async {
-//            final removedGarden = await Navigator.of(context).push(
-//                MaterialPageRoute(
-//
-//                    builder: (_) {
-//
-//                      return BlocProvider(
-//                        create: (context) => SchedulerBloc(gardensBloc: gardensBloc, gardenId: gardens[index].id),
-//                        child: DetailsGardenScreen(garden: gardens[index]),
-//                      );
-//
-//                    })
-//            );
-//            if (removedGarden != null) {
-//              Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
-//                key: ArchSampleKeys.snackbar,
-//                garden: gardens[index],
-//                onUndo: () => gardensBloc.add(AddGarden(gardens[index])),
-//                localizations: localizations,
-//              ));
-//            }
-//          },
-
-//          IconButton(
-//            tooltip: localizations.deleteGarden,
-//            // TODO ArchSampleKeys
-////                key: ArchSampleKeys.deleteGardenButton,
-//            icon: Icon(Icons.delete),
-//            onPressed: () {
-//              schedulerBloc.close();
-//              gardensBloc.add(DeleteGarden(garden));
-//              Navigator.pop(context, garden);
-//            },
-//          ),
           ],
         ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
+            Container(
+              color: Colors.yellow,
+              height: 300,
+            ),
             BlocBuilder<SchedulerBloc, SchedulerState>(
                 condition: (previousState, currentState) =>
                 currentState.runtimeType != previousState.runtimeType,

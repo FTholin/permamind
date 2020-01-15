@@ -38,7 +38,6 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
           .gardens.firstWhere((garden) => garden.id == widget.id,
           orElse: () => null);
 
-
       return Scaffold(
         appBar: AppBar(
           title: const Text('Garden settings'),
@@ -60,7 +59,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                         controller: _newGardenNameController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-//                          hintText: "${garden.name}",
+                          hintText: garden != null ? "${garden.name}" : "",
                           errorText: _newGardenNameValidate ? 'Value Can\'t Be Empty' : null,
                         ),
                         onChanged: (value) {
