@@ -23,37 +23,65 @@ class DetailsGardenScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    final gardensBloc = BlocProvider.of<GardensBloc>(context);
-//
-//    final schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
-//
-//    final localizations = ArchSampleLocalizations.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("${garden.name}"),
-        actions: <Widget>[
-          // TODO Faire bouton page parametres
 
-          IconButton(
+    return BlocBuilder<GardensBloc, GardensState>(
+    builder: (context, state) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("${garden.name}"),
+          actions: <Widget>[
+            // TODO Faire bouton page parametres
+
+            IconButton(
 //            tooltip: localizations.deleteGarden,
-            // TODO ArchSampleKeys
+              // TODO ArchSampleKeys
 //                key: ArchSampleKeys.deleteGardenButton,
-            icon: Icon(Icons.settings),
-            onPressed: () {
+              icon: Icon(Icons.settings),
+              onPressed: () async {
 
-//              Navigator.pushNamed(context, ArchSampleRoutes.settingsGarden);
+                final removedGarden = await Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (_) {
+                          return SettingsGardenScreen(id: garden.id);
+                        })
+                );
 
-              Navigator.of(context).pushNamed(
-                ArchSampleRoutes.settingsGarden,
-                arguments: SettingsGardenScreenArguments(garden.id),
-              );
-              // TODO Passer par un pushName avec un argument ??
-//              schedulerBloc.close();
-//              gardensBloc.add(DeleteGarden(garden));
-//              Navigator.pop(context, garden);
-            },
-          ),
+                if (removedGarden != null) {
 
+                  if (removedGarden != false) {
+                    BlocProvider.of<GardensBloc>(context).add(
+                        DeleteGarden(garden));
+                    BlocProvider.of<SchedulerBloc>(context).close();
+                    Navigator.pop(context, garden);
+                  }
+
+                }
+
+              },
+            ),
+
+//          onPressed: () async {
+//            final removedGarden = await Navigator.of(context).push(
+//                MaterialPageRoute(
+//
+//                    builder: (_) {
+//
+//                      return BlocProvider(
+//                        create: (context) => SchedulerBloc(gardensBloc: gardensBloc, gardenId: gardens[index].id),
+//                        child: DetailsGardenScreen(garden: gardens[index]),
+//                      );
+//
+//                    })
+//            );
+//            if (removedGarden != null) {
+//              Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
+//                key: ArchSampleKeys.snackbar,
+//                garden: gardens[index],
+//                onUndo: () => gardensBloc.add(AddGarden(gardens[index])),
+//                localizations: localizations,
+//              ));
+//            }
+//          },
 
 //          IconButton(
 //            tooltip: localizations.deleteGarden,
@@ -66,23 +94,23 @@ class DetailsGardenScreen extends StatelessWidget {
 //              Navigator.pop(context, garden);
 //            },
 //          ),
-        ],
-      ),
-      body: Column(
+          ],
+        ),
+        body: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-          BlocBuilder<SchedulerBloc, SchedulerState>(
-            condition: (previousState, currentState) =>
-            currentState.runtimeType != previousState.runtimeType,
-            builder: (context, state) {
-              print("reconstruction du calendrier");
-              if (state is SchedulerLoaded) {
-                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-              } else if (state is DayActivitiesLoaded ) {
-                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-              } else {return Container();}
-            }
-          ),
+            BlocBuilder<SchedulerBloc, SchedulerState>(
+                condition: (previousState, currentState) =>
+                currentState.runtimeType != previousState.runtimeType,
+                builder: (context, state) {
+                  print("reconstruction du calendrier");
+                  if (state is SchedulerLoaded) {
+                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+                  } else if (state is DayActivitiesLoaded ) {
+                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+                  } else {return Container();}
+                }
+            ),
             const SizedBox(height: 8.0),
 //          _buildButtons(),
             const SizedBox(height: 8.0),
@@ -120,7 +148,8 @@ class DetailsGardenScreen extends StatelessWidget {
 //          Expanded(child: _buildEventList()),
           ],
         ),
-    );
+      );
+    });
   }
 
   Widget _buildEventList(List<PlanningDay> schedule, int dayIndex) {

@@ -8,10 +8,12 @@ import 'package:permamind/blocs/blocs.dart';
 
 class SettingsGardenScreen extends StatefulWidget {
   final bool isEditing;
+  final String id;
 
   SettingsGardenScreen(
       {Key key,
-        @required this.isEditing})
+        @required this.isEditing,
+        @required this.id})
       : super(key: key ?? ArchSampleKeys.addTodoScreen);
 
 
@@ -22,7 +24,6 @@ class SettingsGardenScreen extends StatefulWidget {
 
 class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
-  GardensBloc gardensBloc;
 
   final TextEditingController _newGardenNameController = TextEditingController();
 
@@ -30,12 +31,11 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
   Widget build(BuildContext context) {
 
-    final SettingsGardenScreenArguments args = ModalRoute.of(context).settings.arguments;
 
     return BlocBuilder<GardensBloc, GardensState>(
     builder: (context, state) {
       final garden = (state as GardensLoaded)
-          .gardens.firstWhere((garden) => garden.id == args.id,
+          .gardens.firstWhere((garden) => garden.id == widget.id,
           orElse: () => null);
 
 
@@ -60,7 +60,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                         controller: _newGardenNameController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: "${garden.name}",
+//                          hintText: "${garden.name}",
                           errorText: _newGardenNameValidate ? 'Value Can\'t Be Empty' : null,
                         ),
                         onChanged: (value) {
@@ -122,16 +122,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                               onPressed: () {
-                                BlocProvider.of<GardensBloc>(context).add(DeleteGarden(garden));
-//                                Navi
-//
-//                           gator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
-
-                                BlocProvider.of<SchedulerBloc>(context).close();
-                                gardensBloc.add(DeleteGarden(garden));
-//                                Navigator.pop(context, ArchSampleRoutes.home);
-//                                Navigator.pop(context, garden);
-
+                                Navigator.pop(context, garden);
                               },
                               child: Text(
                                 "Delete a Garden",
