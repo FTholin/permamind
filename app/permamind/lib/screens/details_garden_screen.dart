@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/screens.dart';
+import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
@@ -118,6 +119,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //          Expanded(child: _buildEventList()),
           ],
         ),
+        floatingActionButton: ActivitySpeedDial(visible: true),
       );
     });
   }
