@@ -8,3 +8,5 @@ export 'add_edit_garden_screen.dart';
 export 'details_garden_screen.dart';
 export 'enumerated_activities_screen.dart';
 export 'settings_screen.dart';
+export 'settings_garden_screen.dart';
+export 'add_edit_activity_screen.dart';

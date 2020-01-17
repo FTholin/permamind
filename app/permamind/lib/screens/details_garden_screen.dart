@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/screens/screens.dart';
+import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
@@ -20,45 +22,83 @@ class DetailsGardenScreen extends StatelessWidget {
   }
 
 
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => SettingsGardenScreen(id: garden.id),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
-    final schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
+    return BlocBuilder<GardensBloc, GardensState>(
+    builder: (context, state) {
+      final currentGarden = (state as GardensLoaded)
+          .gardens.firstWhere((garden) => garden.id == garden.id,
+          orElse: () => null);
+      return Scaffold(
+        appBar: AppBar(
+          title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+          actions: <Widget>[
 
-    final localizations = ArchSampleLocalizations.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("${garden.name}"),
-        actions: <Widget>[
-          IconButton(
-            tooltip: localizations.deleteGarden,
-            // TODO ArchSampleKeys
+            IconButton(
+//            tooltip: localizations.deleteGarden,
+              // TODO ArchSampleKeys
 //                key: ArchSampleKeys.deleteGardenButton,
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              schedulerBloc.close();
-              gardensBloc.add(DeleteGarden(garden));
-              Navigator.pop(context, garden);
-            },
-          ),
-        ],
-      ),
-      body: Column(
+              icon: Icon(Icons.settings),
+              onPressed: () async {
+
+                final removedGarden = await Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (_) {
+                          return SettingsGardenScreen(id: garden.id);
+                        })
+                );
+
+                if (removedGarden != null) {
+
+                  if (removedGarden != false) {
+                    BlocProvider.of<GardensBloc>(context).add(
+                        DeleteGarden(garden));
+                    BlocProvider.of<SchedulerBloc>(context).close();
+                    Navigator.pop(context, garden);
+                  }
+                }
+              },
+            ),
+          ],
+        ),
+        body: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-          BlocBuilder<SchedulerBloc, SchedulerState>(
-            condition: (previousState, currentState) =>
-            currentState.runtimeType != previousState.runtimeType,
-            builder: (context, state) {
-              print("reconstruction du calendrier");
-              if (state is SchedulerLoaded) {
-                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-              } else if (state is DayActivitiesLoaded ) {
-                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-              } else {return Container();}
-            }
-          ),
+            Container(
+              color: Colors.yellow,
+              height: 300,
+            ),
+            BlocBuilder<SchedulerBloc, SchedulerState>(
+                condition: (previousState, currentState) =>
+                currentState.runtimeType != previousState.runtimeType,
+                builder: (context, state) {
+                  print("reconstruction du calendrier");
+                  if (state is SchedulerLoaded) {
+                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+                  } else if (state is DayActivitiesLoaded ) {
+                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+                  } else {return Container();}
+                }
+            ),
             const SizedBox(height: 8.0),
 //          _buildButtons(),
             const SizedBox(height: 8.0),
@@ -96,7 +136,9 @@ class DetailsGardenScreen extends StatelessWidget {
 //          Expanded(child: _buildEventList()),
           ],
         ),
-    );
+        floatingActionButton: ActivitySpeedDial(visible: true),
+      );
+    });
   }
 
   Widget _buildEventList(List<PlanningDay> schedule, int dayIndex) {

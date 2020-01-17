@@ -166,6 +166,12 @@ class App extends StatelessWidget {
               },
               '/settings': (context) {
                 return SettingsScreen();
+              },
+              '/settingsGarden': (context) {
+                return SettingsGardenScreen();
+              },
+              '/addActivity': (context) {
+                return AddEditActivityScreen();
               }
             },
           );

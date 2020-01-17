@@ -108,7 +108,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            "Garden's dimensions",
+                            "Garden's dimensions (meters)",
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
@@ -362,7 +362,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            "Garden's dimensions",
+                            "Garden's dimensions (meters)",
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
@@ -380,7 +380,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                                         errorText: _gardenLengthValidate ? 'Length Can\'t Be Empty' : null,
                                       ),
                                     onChanged: (value) {
-                                        print(_gardenLengthController.text.isEmpty);
                                       _gardenLengthController.text.isEmpty
                                           ? _gardenLengthValidate = true
                                           : _gardenLengthValidate = false;
