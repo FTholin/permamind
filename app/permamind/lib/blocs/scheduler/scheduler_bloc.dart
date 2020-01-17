@@ -13,39 +13,39 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
   SchedulerBloc({@required this.gardensBloc, @required this.gardenId}) {
     gardensSubscription = gardensBloc.listen((state) {
       if (state is GardensLoaded) {
-        add(UpdateScheduler(
-            state.gardens.singleWhere(
-                    (garden) => garden.id == gardenId).schedule
-        ));
+//        add(UpdateScheduler(
+//            state.gardens.singleWhere(
+//                    (garden) => garden.id == gardenId).schedule
+//        ));
       }
     });
   }
 
   @override
   SchedulerState get initialState {
-    return gardensBloc.state is GardensLoaded
-        ? SchedulerLoaded(
-      (gardensBloc.state as GardensLoaded).gardens.singleWhere(
-              (garden) => garden.id == gardenId).schedule,
-    )
-        : SchedulerLoading();
+//    return gardensBloc.state is GardensLoaded
+//        ? SchedulerLoaded(
+//      (gardensBloc.state as GardensLoaded).gardens.singleWhere(
+//              (garden) => garden.id == gardenId).schedule,
+//    )
+//        : SchedulerLoading();
   }
 
   @override
   Stream<SchedulerState> mapEventToState(SchedulerEvent event) async* {
-    if (event is UpdateScheduler) {
-      yield* _mapScheduleUpdatedToState(event);
-    } else if (event is SelectDayActivities) {
-      yield* _mapSelectDayActivitiesToState(event);
-    }
+//    if (event is UpdateScheduler) {
+//      yield* _mapScheduleUpdatedToState(event);
+//    } else if (event is SelectDayActivities) {
+//      yield* _mapSelectDayActivitiesToState(event);
+//    }
 //    else if (event is UpdateGardenActivities) {
 //      yield* _mapUpdateGardenActivitiesToState(event);
 //    }
   }
 
-  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
-   yield DayActivitiesLoaded(event.schedule, event.dayIndex);
-  }
+//  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
+//   yield DayActivitiesLoaded(event.schedule, event.dayIndex);
+//  }
 
 //  Stream<SchedulerState> _mapUpdateGardenActivitiesToState(UpdateGardenActivities event) async* {
 //    print("_mapUpdateGardenActivitiesToState");
@@ -53,11 +53,11 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
 //    yield DayActivitiesLoaded(event.garden.schedule, 3);
 //  }
 
-  Stream<SchedulerState> _mapScheduleUpdatedToState(
-      UpdateScheduler event,
-      ) async* {
-    yield SchedulerLoaded(event.schedule);
-  }
+//  Stream<SchedulerState> _mapScheduleUpdatedToState(
+//      UpdateScheduler event,
+//      ) async* {
+//    yield SchedulerLoaded(event.schedule);
+//  }
 
   @override
   Future<void> close() {

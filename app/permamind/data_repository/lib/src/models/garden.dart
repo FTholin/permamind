@@ -13,7 +13,7 @@ class Garden extends Equatable {
   final double width;
   final bool gardenGround;
   final List<String> members;
-  List<PlanningDay> schedule = new List<PlanningDay>();
+//  List<PlanningDay> schedule = new List<PlanningDay>();
   final DateTime creationDate;
 
   Garden(
@@ -24,7 +24,7 @@ class Garden extends Equatable {
       this.publicVisibility,
       this.members,
       this.modelingId,
-      this.schedule,
+//      this.schedule,
       this.modelingName,
       this.creationDate,{String id})
       :  this.id = id;
@@ -38,7 +38,7 @@ class Garden extends Equatable {
       publicVisibility ?? this.publicVisibility,
       members ?? this.members,
       modelingId ?? this.modelingId,
-      schedule ?? this.schedule,
+//      schedule ?? this.schedule,
       modelingName ?? this.modelingName,
       creationDate ?? this.creationDate,
       id: id ?? this.id,
@@ -76,7 +76,7 @@ class Garden extends Equatable {
         members,
         modelingId,
         modelingName,
-        schedule,
+//        schedule,
         creationDate
     );
   }
@@ -91,7 +91,7 @@ class Garden extends Equatable {
       entity.publicVisibility,
       entity.members,
       entity.modelingId,
-      entity.schedule,
+//      entity.schedule,
       entity.modelingName,
       entity.creationDate,
       id: entity.id,

@@ -93,9 +93,13 @@ class DetailsGardenScreen extends StatelessWidget {
                 builder: (context, state) {
                   print("reconstruction du calendrier");
                   if (state is SchedulerLoaded) {
-                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+                    return SchedulerCalendar(
+//                        schedule: state.schedule,
+                        referenceDate: garden.creationDate);
                   } else if (state is DayActivitiesLoaded ) {
-                    return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
+                    return SchedulerCalendar(
+//                        schedule: state.schedule,
+                        referenceDate: garden.creationDate);
                   } else {return Container();}
                 }
             ),
@@ -105,27 +109,31 @@ class DetailsGardenScreen extends StatelessWidget {
             BlocBuilder<SchedulerBloc, SchedulerState>(
                 builder: (context, state) {
                   if (state is DayActivitiesLoaded) {
-                    _currentDay = state.dayIndex;
-                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
-                      return Expanded(
-                        child: Container(child: _buildEventList(state.schedule, state.dayIndex)),
-                      );
-                    } else {
-                      return Expanded(
-                        child: Container(),
-                      );
-                    }
+//                    _currentDay = state.dayIndex;
+//                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
+//                      return Expanded(
+//                        child: Container(child: _buildEventList(
+////                            state.schedule,
+//                            state.dayIndex)),
+//                      );
+//                    } else {
+//                      return Expanded(
+//                        child: Container(),
+//                      );
+//                    }
                   } else if (state is SchedulerLoaded) {
-                    print(_currentDay);
-                    if(_currentDay >= 0 && _currentDay < state.schedule.length) {
-                      return Expanded(
-                        child: Container(child: _buildEventList(state.schedule, _currentDay)),
-                      );
-                    } else {
-                      return Expanded(
-                        child: Container(),
-                      );
-                    }
+//                    print(_currentDay);
+//                    if(_currentDay >= 0 && _currentDay < state.schedule.length) {
+//                      return Expanded(
+//                        child: Container(child: _buildEventList(
+////                            state.schedule,
+//                            _currentDay)),
+//                      );
+//                    } else {
+//                      return Expanded(
+//                        child: Container(),
+//                      );
+//                    }
                   } else {
                     return Expanded(
                       child: Container(),
@@ -141,23 +149,25 @@ class DetailsGardenScreen extends StatelessWidget {
     });
   }
 
-  Widget _buildEventList(List<PlanningDay> schedule, int dayIndex) {
+  Widget _buildEventList(
+//      List<PlanningDay> schedule,
+      int dayIndex) {
     // Changer ici mettre  un index au lieu d'une activité
     //schedule[dayIndex].dayActivities
     List<Container> items = List<Container>();
 
-    for (int activityIndex = 0; activityIndex < schedule[dayIndex].dayActivities.length; activityIndex++) {
-      items.add(
-          Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.8),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        margin:
-        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: ScheduleListItem(garden: garden, schedule: schedule, dayIndex: dayIndex, activityIndex: activityIndex),
-      ));
-    }
+//    for (int activityIndex = 0; activityIndex < schedule[dayIndex].dayActivities.length; activityIndex++) {
+//      items.add(
+//          Container(
+//        decoration: BoxDecoration(
+//          border: Border.all(width: 0.8),
+//          borderRadius: BorderRadius.circular(12.0),
+//        ),
+//        margin:
+//        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+//        child: ScheduleListItem(garden: garden, schedule: schedule, dayIndex: dayIndex, activityIndex: activityIndex),
+//      ));
+//    }
 
     return ListView(
       children: items

@@ -11,30 +11,38 @@ abstract class SchedulerState extends Equatable {
 class SchedulerLoading extends SchedulerState {}
 
 class SchedulerLoaded extends SchedulerState {
-  final List<PlanningDay> schedule;
+//  final List<PlanningDay> schedule;
 
-  SchedulerLoaded(this.schedule);
+  SchedulerLoaded(
+//      this.schedule
+      );
 
   @override
-  List<Object> get props => [schedule];
+  List<Object> get props => [
+//    schedule
+  ];
 
   @override
   String toString() {
-    return 'SchedulerLoaded { filteredTodos: $schedule }';
+//    return 'SchedulerLoaded { filteredTodos: $schedule }';
   }
 }
 
 class DayActivitiesLoaded extends SchedulerState {
-  final List<PlanningDay> schedule;
+//  final List<PlanningDay> schedule;
   final int dayIndex;
 
-  DayActivitiesLoaded(this.schedule, this.dayIndex);
+  DayActivitiesLoaded(
+//      this.schedule,
+      this.dayIndex);
 
   @override
-  List<Object> get props => [schedule, dayIndex];
+  List<Object> get props => [
+//    schedule,
+    dayIndex];
 
   @override
   String toString() {
-    return 'DayActivitiesLoaded { filteredTodos: $schedule }';
+//    return 'DayActivitiesLoaded { filteredTodos: $schedule }';
   }
 }

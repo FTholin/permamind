@@ -12,7 +12,7 @@ class GardenEntity extends Equatable {
   final double width;
   final bool gardenGround;
   final List<String> members;
-  List<PlanningDay> schedule = new List<PlanningDay>();
+//  List<PlanningDay> schedule = new List<PlanningDay>();
   final DateTime creationDate;
 
   GardenEntity(this.id,
@@ -24,7 +24,7 @@ class GardenEntity extends Equatable {
       this.members,
       this.modelingId,
       this.modelingName,
-      this.schedule,
+//      this.schedule,
       this.creationDate);
 
   Map<String, Object> toJson() {
@@ -34,9 +34,9 @@ class GardenEntity extends Equatable {
       'publicVisibility': publicVisibility,
       'members': members,
       'modelingName': modelingName,
-      'schedule': schedule.map((item) {
-        return item.toJson();
-      }).toList(),
+//      'schedule': schedule.map((item) {
+//        return item.toJson();
+//      }).toList(),
       'creationDate': creationDate
     };
   }
@@ -57,7 +57,7 @@ class GardenEntity extends Equatable {
       json['members'],
       json['modelingId'] as String,
       json['modelingName'] as String,
-      json['schedule'] as List<PlanningDay>,
+//      json['schedule'] as List<PlanningDay>,
       json['creationDate']
     );
   }
@@ -76,9 +76,9 @@ class GardenEntity extends Equatable {
       gardenList,
       snap.data['modelingId'],
       snap.data['modelingName'],
-      snap.data['schedule'].map<PlanningDay>((item) {
-        return PlanningDay.fromMap(item);
-      }).toList(),
+//      snap.data['schedule'].map<PlanningDay>((item) {
+//        return PlanningDay.fromMap(item);
+//      }).toList(),
         DateTime.fromMillisecondsSinceEpoch(
             snap.data["creationDate"].millisecondsSinceEpoch)
     );
@@ -94,9 +94,9 @@ class GardenEntity extends Equatable {
       'members': members,
       'modelingId': modelingId,
       'modelingName': modelingName,
-      'schedule': schedule.map((item) {
-        return item.toJson();
-      }).toList(),
+//      'schedule': schedule.map((item) {
+//        return item.toJson();
+//      }).toList(),
       'creationDate': creationDate
     };
   }

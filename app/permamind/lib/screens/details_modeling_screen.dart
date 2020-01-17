@@ -15,7 +15,8 @@ typedef SaveGardenCallback = Function(String gardenName,
     double gardenLength,
     double gardenWidth,
     bool gardenGround,
-    List<PlanningDay> schedule);
+//    List<PlanningDay> schedule
+    );
 
 class DetailsModelingScreen extends StatelessWidget {
 
@@ -442,7 +443,8 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                        );
 //                      }));
 //                gardensBloc.d
-                onSaveGarden(args.gardenName,
+                onSaveGarden(
+                    args.gardenName,
                     args.publicVisibility,
                     args.gardenMembers,
                     args.modeling.id,
@@ -450,7 +452,8 @@ class DetailsModelingScreen extends StatelessWidget {
                     args.gardenLength,
                     args.gardenWidth,
                     args.gardenGround,
-                    args.schedule);
+//                    args.schedule
+                );
 
                 Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
@@ -517,7 +520,7 @@ class DetailsModelingsScreenArguments {
   final String gardenName;
   final bool publicVisibility;
   final List<String> gardenMembers;
-  final List<PlanningDay> schedule;
+//  final List<PlanningDay> schedule;
   final double gardenLength;
   final double gardenWidth;
   final bool gardenGround;
@@ -532,7 +535,7 @@ class DetailsModelingsScreenArguments {
     @required this.gardenGround,
     @required this.publicVisibility,
     @required this.gardenMembers,
-    @required this.schedule
+//    @required this.schedule
 //    @required this.onSaveGarden,
   });
 }

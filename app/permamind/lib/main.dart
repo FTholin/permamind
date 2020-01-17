@@ -145,7 +145,9 @@ class App extends StatelessWidget {
                       return DetailsModelingScreen(
                           onSaveGarden: (gardenName, publicVisibility,
                               gardenMembers, modelisationId, modelingName, gardenLength,
-                              gardenWidth, gardenGround, activities) {
+                              gardenWidth, gardenGround,
+//                              activities
+                              ) {
                             List<String> allGardenMembers = new List.from(
                                 [state.userId])
                               ..addAll(gardenMembers);
@@ -153,7 +155,8 @@ class App extends StatelessWidget {
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
                                   publicVisibility, allGardenMembers,
-                                  modelisationId, activities,
+                                  modelisationId,
+//                                  activities,
                                   modelingName, DateTime.now())
                               ),
                             );
