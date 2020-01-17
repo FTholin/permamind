@@ -380,7 +380,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                                         errorText: _gardenLengthValidate ? 'Length Can\'t Be Empty' : null,
                                       ),
                                     onChanged: (value) {
-                                        print(_gardenLengthController.text.isEmpty);
                                       _gardenLengthController.text.isEmpty
                                           ? _gardenLengthValidate = true
                                           : _gardenLengthValidate = false;

@@ -21,6 +21,9 @@ import 'package:intl/intl.dart';
   class _AddEditActivityScreenState extends State<AddEditActivityScreen> {
 //    static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+    final TextEditingController _activityNameController = TextEditingController();
+    bool _activityNameValidate = false;
+
 
     DateTime selectedDate = DateTime.now();
 
@@ -54,7 +57,17 @@ import 'package:intl/intl.dart';
   //                key: ArchSampleKeys.deleteGardenButton,
               icon: Icon(Icons.check),
               onPressed: () async {
-
+                if (_activityNameController.text.isNotEmpty) {
+                  // TODO Faire l'ajout de l'activité dans la base
+                  print("Activité rempli dans la base");
+                  Navigator.pop(context, false);
+                } else {
+                  setState(() {
+                    _activityNameController.text.isEmpty
+                        ? _activityNameValidate = true
+                        : _activityNameValidate = false;
+                  });
+                }
               },
             ),
           ],
@@ -71,15 +84,17 @@ import 'package:intl/intl.dart';
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: TextFormField(
-                            controller: null,
+                            controller: _activityNameController,
                             decoration: InputDecoration(
                               hintText: "Title",
+                              errorText: _activityNameValidate ? 'Activity Name can\'t be empty' : null,
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
-                              setState(() {
-
-                              });
+                              _activityNameController.text.isEmpty
+                                  ? _activityNameValidate = true
+                                  : _activityNameValidate = false;
+                              setState(() {});
                             },
                           )
                         ),
