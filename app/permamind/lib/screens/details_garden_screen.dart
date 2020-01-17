@@ -22,6 +22,24 @@ class DetailsGardenScreen extends StatelessWidget {
   }
 
 
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => SettingsGardenScreen(id: garden.id),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -34,7 +52,6 @@ class DetailsGardenScreen extends StatelessWidget {
         appBar: AppBar(
           title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
           actions: <Widget>[
-            // TODO Faire bouton page parametres
 
             IconButton(
 //            tooltip: localizations.deleteGarden,

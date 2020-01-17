@@ -86,10 +86,18 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                                    );
 
 
-                                  // TODO Apporter toutes les modif ici
                                   BlocProvider.of<GardensBloc>(context).add(
                                     UpdateGarden(
-                                      garden.copyWith(name: _newGardenNameController.text),
+                                      garden.copyWith(
+                                        name: _newGardenNameController.text,
+                                        length: garden.length,
+                                        width: garden.width,
+                                        gardenGround: garden.gardenGround,
+                                        id: garden.id,
+                                        publicVisibility: garden.publicVisibility,
+                                        modelingId: garden.modelingId,
+                                        members: garden.members
+                                      ),
                                     ),
                                   );
 
