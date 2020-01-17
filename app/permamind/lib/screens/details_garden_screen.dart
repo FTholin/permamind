@@ -22,23 +22,24 @@ class DetailsGardenScreen extends StatelessWidget {
   }
 
 
-  Route _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => SettingsGardenScreen(id: garden.id),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        var begin = Offset(0.0, 1.0);
-        var end = Offset.zero;
-        var curve = Curves.ease;
-
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
-      },
-    );
-  }
+  // TODO Bottom Up slide animation
+//  Route _createRoute() {
+//    return PageRouteBuilder(
+//      pageBuilder: (context, animation, secondaryAnimation) => SettingsGardenScreen(id: garden.id),
+//      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//        var begin = Offset(0.0, 1.0);
+//        var end = Offset.zero;
+//        var curve = Curves.ease;
+//
+//        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//
+//        return SlideTransition(
+//          position: animation.drive(tween),
+//          child: child,
+//        );
+//      },
+//    );
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,15 +93,15 @@ class DetailsGardenScreen extends StatelessWidget {
                 currentState.runtimeType != previousState.runtimeType,
                 builder: (context, state) {
                   print("reconstruction du calendrier");
-                  if (state is SchedulerLoaded) {
-                    return SchedulerCalendar(
-//                        schedule: state.schedule,
-                        referenceDate: garden.creationDate);
-                  } else if (state is DayActivitiesLoaded ) {
-                    return SchedulerCalendar(
-//                        schedule: state.schedule,
-                        referenceDate: garden.creationDate);
-                  } else {return Container();}
+//                  if (state is SchedulerLoaded) {
+//                    return SchedulerCalendar(
+////                        schedule: state.schedule,
+//                        referenceDate: garden.creationDate);
+//                  } else if (state is DayActivitiesLoaded ) {
+//                    return SchedulerCalendar(
+////                        schedule: state.schedule,
+//                        referenceDate: garden.creationDate);
+//                  } else {return Container();}
                 }
             ),
             const SizedBox(height: 8.0),
@@ -108,7 +109,7 @@ class DetailsGardenScreen extends StatelessWidget {
             const SizedBox(height: 8.0),
             BlocBuilder<SchedulerBloc, SchedulerState>(
                 builder: (context, state) {
-                  if (state is DayActivitiesLoaded) {
+//                  if (state is DayActivitiesLoaded) {
 //                    _currentDay = state.dayIndex;
 //                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
 //                      return Expanded(
@@ -121,7 +122,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //                        child: Container(),
 //                      );
 //                    }
-                  } else if (state is SchedulerLoaded) {
+//                  } else if (state is SchedulerLoaded) {
 //                    print(_currentDay);
 //                    if(_currentDay >= 0 && _currentDay < state.schedule.length) {
 //                      return Expanded(
@@ -134,11 +135,11 @@ class DetailsGardenScreen extends StatelessWidget {
 //                        child: Container(),
 //                      );
 //                    }
-                  } else {
+//                  } else {
                     return Expanded(
                       child: Container(),
                     );
-                  }
+//                  }
                 }
             ),
 //          Expanded(child: _buildEventList()),

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class ActivityEntity extends Equatable {

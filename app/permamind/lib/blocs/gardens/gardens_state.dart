@@ -13,7 +13,7 @@ abstract class GardensState extends Equatable {
 
 class GardensLoading extends GardensState {
   @override
-  String toString() => "TodoLoading";
+  String toString() => "GardensLoading";
 }
 
 class GardensLoaded extends GardensState {

@@ -2,8 +2,28 @@ import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SchedulerEvent extends Equatable {
-  SchedulerEvent();
+  SchedulerEvent([List props = const []]) : super(props);
 }
+
+class LoadActivities extends SchedulerEvent {
+
+  final String gardenId;
+
+  LoadActivities(this.gardenId) : super([gardenId]);
+
+  @override
+  String toString() => 'LoadActivities { gardenId: $gardenId}';
+}
+
+class AddActivity extends SchedulerEvent {
+
+}
+
+class UpdateActivity extends SchedulerEvent {
+
+}
+
+
 
 //class UpdateScheduler extends SchedulerEvent {
 ////  final List<PlanningDay> schedule;

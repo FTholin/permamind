@@ -12,13 +12,13 @@ class LoadTutos extends TutorialsEvent {
   String toString() => 'LoadTutos';
 }
 
-class LoadActivities extends TutorialsEvent {
+class LoadTutoActivities extends TutorialsEvent {
   final String tutoId;
 
-  LoadActivities(this.tutoId) : super([tutoId]);
+  LoadTutoActivities(this.tutoId) : super([tutoId]);
   
   @override
-  String toString() => 'LoadActivities { tutoId: $tutoId}';
+  String toString() => 'LoadTutoActivities { tutoId: $tutoId}';
 }
 
 class CompleteActivity extends TutorialsEvent {
@@ -30,13 +30,13 @@ class CompleteActivity extends TutorialsEvent {
   String toString() => 'CompleteActivity { activity: $activity }';
 }
 
-class ActivitiesUpdated extends TutorialsEvent {
+class TutoActivitiesUpdated extends TutorialsEvent {
   final List<TutorialActivity> activities;
 
-  ActivitiesUpdated(this.activities);
+  TutoActivitiesUpdated(this.activities);
 
   @override
-  String toString() => 'ActivitiesUpdated';
+  String toString() => 'TutoActivitiesUpdated';
 }
 
 class TutosUpdated extends TutorialsEvent {
