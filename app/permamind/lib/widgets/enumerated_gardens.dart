@@ -48,8 +48,8 @@ class EnumeratedGardens extends StatelessWidget {
                                     dataRepository:_dataRepository,
                                     gardensBloc: BlocProvider.of<GardensBloc>(context),
                                     gardenId: gardens[index].id
-                                ),
-                                child: DetailsGardenScreen(garden: gardens[index]),
+                                )..add(LoadActivities(gardens[index].id)),
+                                child: DetailsGardenScreen(id: gardens[index].id),
                             );
 
                           })

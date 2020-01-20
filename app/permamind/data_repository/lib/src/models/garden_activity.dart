@@ -51,8 +51,8 @@ class Activity extends Equatable {
     return ActivityEntity(
         id,
         title,
-        gardenId,
         complete,
+        gardenId,
         expectedDate
     );
   }

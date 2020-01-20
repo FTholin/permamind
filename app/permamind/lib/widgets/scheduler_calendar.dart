@@ -5,10 +5,10 @@ import 'package:permamind/blocs/blocs.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SchedulerCalendar extends StatefulWidget {
-//  final List<PlanningDay> schedule;
+  final List<Activity> schedule;
   DateTime referenceDate;
   SchedulerCalendar({Key key,
-//    @required this.schedule,
+    @required this.schedule,
     @required this.referenceDate}) : super(key: key);
 
   @override
@@ -19,31 +19,23 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   CalendarController _calendarController;
   Map<DateTime, List> _events;
 
-  SchedulerBloc _schedulerBloc;
+//  SchedulerBloc _schedulerBloc;
 
 
   @override
   void initState() {
     super.initState();
     _events = Map<DateTime, List>();
-    fillEvents(
-//        widget.schedule,
-        widget.referenceDate);
+    fillEvents(widget.schedule, widget.referenceDate);
     _calendarController = CalendarController();
   }
 
-  @override
-  void dispose() {
-    _calendarController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
 
-    _schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
 
-//    fillEvents(widget.schedule, widget.referenceDate);
+    fillEvents(widget.schedule, widget.referenceDate);
 //
 
     return TableCalendar(
@@ -58,18 +50,29 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
     );
   }
 
+  @override
+  void dispose() {
+    _calendarController.dispose();
+    super.dispose();
+  }
+
 
   void fillEvents(
-//      List<PlanningDay> schedule,
+      List<Activity> schedule,
       DateTime gardenCreationDate) {
     DateTime referencePoint = gardenCreationDate;
     _events.clear();
 
 
-//    for (var i = 0; i < schedule.length; i++) {
-//      _events[referencePoint.add(Duration(days: i))] =
-//          schedule[i].dayActivities.map((activity) => activity).toList();
-//    }
+    schedule.forEach( (item) {
+      if (_events[item.expectedDate] == null) {
+        _events[item.expectedDate] = [item];
+      } else {
+        _events[item.expectedDate].addAll([item]);
+      }
+    });
+
+
   }
 
   void _onDaySelected(DateTime selectedDay, List events) {

@@ -23,14 +23,17 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
       if (state is GardensLoaded) {
         print("GardensLoaded");
       }
+      // TODO A voir si c'est cohérent cette affaire !
     });
   }
 
   @override
-  SchedulerState get initialState => ActivitiesLoading();
+  SchedulerState get initialState {
+    return  ActivitiesLoading();
+  }
 
-  @override
-  Stream<SchedulerState> mapEventToState(SchedulerEvent event) async* {
+    @override
+    Stream<SchedulerState> mapEventToState(SchedulerEvent event) async* {
 //    if (event is UpdateScheduler) {
 //      yield* _mapScheduleUpdatedToState(event);
 //    } else if (event is SelectDayActivities) {
@@ -39,17 +42,22 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
 //    else if (event is UpdateGardenActivities) {
 //      yield* _mapUpdateGardenActivitiesToState(event);
 //    }
-
-    if (event is LoadActivities) {
-      yield* _mapLoadActivitiesToState();
+      if (event is LoadActivities) {
+        yield* _mapLoadActivitiesToState();
+      } else if (event is ActivitiesUpdated) {
+        yield* _mapActivitiesUpdatedToState(event);
+      }
     }
-  }
 
-  Stream<SchedulerState> _mapLoadActivitiesToState() async* {
-    _activitiesSubscription?.cancel();
-    _activitiesSubscription = dataRepository.fetchGardenActivities(gardenId).listen(
-          (activities) => add(ActivitiesUpdated(activities)),
-    );
+    Stream<SchedulerState> _mapLoadActivitiesToState() async* {
+      _activitiesSubscription?.cancel();
+      _activitiesSubscription = dataRepository.fetchGardenActivities(gardenId).listen(
+            (activities) => add(ActivitiesUpdated(activities)),
+      );
+    }
+
+  Stream<SchedulerState> _mapActivitiesUpdatedToState(ActivitiesUpdated event) async* {
+    yield ActivitiesLoaded(event.activities);
   }
 
 //  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
@@ -68,10 +76,13 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
 //    yield SchedulerLoaded(event.schedule);
 //  }
 
-  @override
-  Future<void> close() {
-    gardensSubscription.cancel();
-    _activitiesSubscription.cancel();
-    return super.close();
+    @override
+    Future<void> close() {
+      gardensSubscription.cancel();
+      _activitiesSubscription.cancel();
+      return super.close();
+    }
+
+
   }
-}
+

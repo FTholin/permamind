@@ -8,10 +8,11 @@ class ActivityEntity extends Equatable {
   final bool complete;
   final DateTime expectedDate;
 
-  ActivityEntity(this.id,
+  ActivityEntity(
+      this.id,
       this.title,
-      this.gardenId,
       this.complete,
+      this.gardenId,
       this.expectedDate);
 
   Map<String, Object> toJson() {
@@ -31,14 +32,15 @@ class ActivityEntity extends Equatable {
     return ActivityEntity(
         json['id'] as String,
         json['title'] as String,
-        json['gardenId'] as String,
         json['complete'] as bool,
+        json['gardenId'] as String,
         json['expectedDate']
     );
   }
 
   static ActivityEntity fromSnapshot(DocumentSnapshot snap) {
 
+    print(snap);
     return ActivityEntity(
         snap.documentID,
         snap.data['title'],

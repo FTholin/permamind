@@ -9,16 +9,22 @@ import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
-  final Garden garden;
+//  final Garden garden;
+
+  final String id;
 
   int _currentDay;
 
-  DetailsGardenScreen({Key key, @required this.garden})
+  DetailsGardenScreen({
+    Key key,
+    @required this.id
+//    @required this.garden
+  })
       : super(key: key ?? ArchSampleKeys.detailsGardenScreen) {
-    final DateTime date = DateTime.now();
-    final d1 = DateTime.utc(garden.creationDate.year, garden.creationDate.month, garden.creationDate.day);
-    final d2 = DateTime.utc(date.year,date.month,date.day);
-    _currentDay = d2.difference(d1).inDays;
+//    final DateTime date = DateTime.now();
+//    final d1 = DateTime.utc(garden.creationDate.year, garden.creationDate.month, garden.creationDate.day);
+//    final d2 = DateTime.utc(date.year,date.month,date.day);
+//    _currentDay = d2.difference(d1).inDays;
   }
 
 
@@ -47,7 +53,7 @@ class DetailsGardenScreen extends StatelessWidget {
     return BlocBuilder<GardensBloc, GardensState>(
     builder: (context, state) {
       final currentGarden = (state as GardensLoaded)
-          .gardens.firstWhere((garden) => garden.id == garden.id,
+          .gardens.firstWhere((garden) => garden.id == id,
           orElse: () => null);
       return Scaffold(
         appBar: AppBar(
@@ -64,7 +70,7 @@ class DetailsGardenScreen extends StatelessWidget {
                 final removedGarden = await Navigator.of(context).push(
                     MaterialPageRoute(
                         builder: (_) {
-                          return SettingsGardenScreen(id: garden.id);
+                          return SettingsGardenScreen(id: currentGarden.id);
                         })
                 );
 
@@ -72,9 +78,9 @@ class DetailsGardenScreen extends StatelessWidget {
 
                   if (removedGarden != false) {
                     BlocProvider.of<GardensBloc>(context).add(
-                        DeleteGarden(garden));
+                        DeleteGarden(currentGarden));
                     BlocProvider.of<SchedulerBloc>(context).close();
-                    Navigator.pop(context, garden);
+                    Navigator.pop(context, currentGarden);
                   }
                 }
               },
@@ -92,7 +98,16 @@ class DetailsGardenScreen extends StatelessWidget {
                 condition: (previousState, currentState) =>
                 currentState.runtimeType != previousState.runtimeType,
                 builder: (context, state) {
-                  print("reconstruction du calendrier");
+                  if (state is ActivitiesLoaded) {
+                     return SchedulerCalendar(
+                       referenceDate: currentGarden.creationDate,
+                        schedule: state.activities,
+                     )
+                    ;
+                  } else {
+                    // TODO Mettre une splashScreen
+                      return Container();
+                    }
 //                  if (state is SchedulerLoaded) {
 //                    return SchedulerCalendar(
 ////                        schedule: state.schedule,
@@ -109,6 +124,22 @@ class DetailsGardenScreen extends StatelessWidget {
             const SizedBox(height: 8.0),
             BlocBuilder<SchedulerBloc, SchedulerState>(
                 builder: (context, state) {
+                  if (state is ActivitiesLoaded) {
+
+
+                    print("Affichage ListView");
+                    _currentDay = state;
+                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
+                      return Expanded(
+                        child: Container(child: _buildEventList(
+                            state.schedule,
+                            state.dayIndex)),
+                      );
+                  } else {
+                      return Expanded(
+                        child: Container(),
+                      );
+                    }
 //                  if (state is DayActivitiesLoaded) {
 //                    _currentDay = state.dayIndex;
 //                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
@@ -151,7 +182,7 @@ class DetailsGardenScreen extends StatelessWidget {
   }
 
   Widget _buildEventList(
-//      List<PlanningDay> schedule,
+      List<Activity> schedule,
       int dayIndex) {
     // Changer ici mettre  un index au lieu d'une activité
     //schedule[dayIndex].dayActivities
