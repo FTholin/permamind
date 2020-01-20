@@ -1,3 +1,4 @@
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -8,7 +9,13 @@ import 'package:permamind/widgets/widgets.dart';
 import 'package:permamind/screens/screens.dart';
 
 class EnumeratedGardens extends StatelessWidget {
-  EnumeratedGardens({Key key}) : super(key: key);
+
+  final DataRepository _dataRepository;
+
+  EnumeratedGardens({Key key, @required DataRepository dataRepository})
+      : assert(dataRepository != null),
+        _dataRepository = dataRepository,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,7 @@ class EnumeratedGardens extends StatelessWidget {
       builder: (context, state) {
         if (state is GardensLoaded) {
           final gardens = state.gardens;
-          final gardensBloc = BlocProvider.of<GardensBloc>(context);
+//          final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
           final localizations = ArchSampleLocalizations.of(context);
 
@@ -37,7 +44,11 @@ class EnumeratedGardens extends StatelessWidget {
                               builder: (_) {
 
                             return BlocProvider(
-                                create: (context) => SchedulerBloc(gardensBloc: gardensBloc, gardenId: gardens[index].id),
+                                create: (context) => SchedulerBloc(
+                                    dataRepository:_dataRepository,
+                                    gardensBloc: BlocProvider.of<GardensBloc>(context),
+                                    gardenId: gardens[index].id
+                                ),
                                 child: DetailsGardenScreen(garden: gardens[index]),
                             );
 
@@ -47,7 +58,7 @@ class EnumeratedGardens extends StatelessWidget {
                         Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
                           key: ArchSampleKeys.snackbar,
                           garden: gardens[index],
-                          onUndo: () => gardensBloc.add(AddGarden(gardens[index])),
+                          onUndo: () => BlocProvider.of<GardensBloc>(context).add(AddGarden(gardens[index])),
                           localizations: localizations,
                         ));
                       }

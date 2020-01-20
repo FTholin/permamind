@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:meta/meta.dart';
 import 'package:permamind/blocs/blocs.dart';
 
@@ -9,27 +10,24 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
   final GardensBloc gardensBloc;
   final String gardenId;
   StreamSubscription gardensSubscription;
+  StreamSubscription _activitiesSubscription;
 
-  SchedulerBloc({@required this.gardensBloc, @required this.gardenId}) {
+  final DataRepository dataRepository;
+
+
+  SchedulerBloc({
+    @required this.dataRepository,
+    @required this.gardensBloc,
+    @required this.gardenId}) {
     gardensSubscription = gardensBloc.listen((state) {
       if (state is GardensLoaded) {
-//        add(UpdateScheduler(
-//            state.gardens.singleWhere(
-//                    (garden) => garden.id == gardenId).schedule
-//        ));
+        print("GardensLoaded");
       }
     });
   }
 
   @override
-  SchedulerState get initialState {
-//    return gardensBloc.state is GardensLoaded
-//        ? SchedulerLoaded(
-//      (gardensBloc.state as GardensLoaded).gardens.singleWhere(
-//              (garden) => garden.id == gardenId).schedule,
-//    )
-//        : SchedulerLoading();
-  }
+  SchedulerState get initialState => ActivitiesLoading();
 
   @override
   Stream<SchedulerState> mapEventToState(SchedulerEvent event) async* {
@@ -41,6 +39,17 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
 //    else if (event is UpdateGardenActivities) {
 //      yield* _mapUpdateGardenActivitiesToState(event);
 //    }
+
+    if (event is LoadActivities) {
+      yield* _mapLoadActivitiesToState();
+    }
+  }
+
+  Stream<SchedulerState> _mapLoadActivitiesToState() async* {
+    _activitiesSubscription?.cancel();
+    _activitiesSubscription = dataRepository.fetchGardenActivities(gardenId).listen(
+          (activities) => add(ActivitiesUpdated(activities)),
+    );
   }
 
 //  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
@@ -62,6 +71,7 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
   @override
   Future<void> close() {
     gardensSubscription.cancel();
+    _activitiesSubscription.cancel();
     return super.close();
   }
 }

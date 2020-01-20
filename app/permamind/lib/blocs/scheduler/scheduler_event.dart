@@ -24,6 +24,15 @@ class UpdateActivity extends SchedulerEvent {
 }
 
 
+class ActivitiesUpdated extends SchedulerEvent {
+  final List<Activity> activities;
+
+  ActivitiesUpdated(this.activities);
+
+  @override
+  List<Object> get props => [activities];
+}
+
 
 //class UpdateScheduler extends SchedulerEvent {
 ////  final List<PlanningDay> schedule;

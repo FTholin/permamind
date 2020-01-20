@@ -104,10 +104,10 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
 
   @override
-  void dispose() {
+  Future <void> close() {
     _gardensSubscription?.cancel();
     _authenticationBlocSubscription?.cancel();
-//    super.dispose();
+    return super.close();
   }
 
 //  Stream<GardensState> _mapGardensInitToState() async* {

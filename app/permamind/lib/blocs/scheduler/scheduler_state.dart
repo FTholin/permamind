@@ -2,27 +2,45 @@ import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SchedulerState extends Equatable {
-  SchedulerState([List props = const []]) : super(props);
+  SchedulerState();
+
+  @override
+  List<Object> get props => [];
 }
+
 
 class ActivitiesLoading extends SchedulerState {
   @override
   String toString() => "ActivitiesLoading";
 }
 
-class ActivitiesLoaded extends SchedulerState {
-  final List<Activity> activities;
-
-  ActivitiesLoaded([this.activities = const []]) : super([activities]);
-
-  @override
-  String toString() => "ActivitiesLoaded { activities : $activities }";
-}
+//class ActivitiesLoaded extends SchedulerState {
+//  final List<Activity> activities;
+//
+//  ActivitiesLoaded([this.activities = const []]) : super([activities]);
+//
+//  @override
+//  String toString() => "ActivitiesLoaded { activities : $activities }";
+//}
 
 class ActivitiesNotLoaded extends SchedulerState {
   @override
   String toString() => "ActivitiesNotLoaded";
 }
+
+
+class ActivitiesLoaded extends SchedulerState {
+  final List<Activity> activities;
+
+  ActivitiesLoaded([this.activities = const []]);
+
+  @override
+  List<Object> get props => [activities];
+
+  @override
+  String toString() => 'ActivitiesLoaded { activities: $activities }';
+}
+
 
 //
 //class DayActivitiesLoaded extends SchedulerState {

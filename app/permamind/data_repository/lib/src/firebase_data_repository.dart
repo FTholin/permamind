@@ -96,6 +96,7 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+  @override
   Stream<List<Activity>> fetchGardenActivities(String gardenId) {
     return activitiesCollection
         .where("gardenId",arrayContains: gardenId)

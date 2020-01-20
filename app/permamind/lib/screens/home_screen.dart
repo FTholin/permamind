@@ -1,3 +1,4 @@
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:permamind/widgets/widgets.dart';
@@ -8,9 +9,15 @@ import 'package:permamind/models/models.dart';
 
 class HomeScreen extends StatelessWidget {
 
+  final DataRepository _dataRepository;
+
+  HomeScreen({Key key, @required DataRepository dataRepository})
+      : assert(dataRepository != null),
+        _dataRepository = dataRepository,
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final tabBloc = BlocProvider.of<TabBloc>(context);
     return BlocBuilder<TabBloc, AppTab>(
       builder: (context, activeTab) {
         return Scaffold(
@@ -30,47 +37,47 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: _buildFloatActionButton(activeTab, context),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
-            onTabSelected: (tab) => tabBloc.add(UpdateTab(tab)),
+            onTabSelected: (tab) => BlocProvider.of<TabBloc>(context).add(UpdateTab(tab)),
           ),
         );
       },
     );
   }
-}
 
-Widget _buildTabPage(AppTab activeTab) {
-  switch (activeTab) {
-    case AppTab.gardens:
-      return EnumeratedGardens();
-      break;
-    case AppTab.abc:
-      return Scaffold(
-        body: Center(
-          child: Text("Plants encyclopedia..."),
-        ),
-      );
-      break;
-    case AppTab.learning:
-      return EnumeratedTutorials();
-      break;
-    case AppTab.profile:
-      return Scaffold(
-        body: Center(
-          child: Text("Profile..."),
-        ),
-      );
-      break;
+
+  Widget _buildTabPage(AppTab activeTab) {
+    switch (activeTab) {
+      case AppTab.gardens:
+        return EnumeratedGardens(dataRepository: _dataRepository);
+        break;
+      case AppTab.abc:
+        return Scaffold(
+          body: Center(
+            child: Text("Plants encyclopedia..."),
+          ),
+        );
+        break;
+      case AppTab.learning:
+        return EnumeratedTutorials();
+        break;
+      case AppTab.profile:
+        return Scaffold(
+          body: Center(
+            child: Text("Profile..."),
+          ),
+        );
+        break;
+    }
   }
-}
 
 
-Widget _buildFloatActionButton(AppTab activeTab, context) {
+  Widget _buildFloatActionButton(AppTab activeTab, context) {
 
-  if (activeTab == AppTab.gardens) {
-    return GardenSpeedDial(visible: true);
-  } else {
-    return GardenSpeedDial(visible: false);
-  }
+    if (activeTab == AppTab.gardens) {
+      return GardenSpeedDial(visible: true);
+    } else {
+      return GardenSpeedDial(visible: false);
+    }
 //  switch (activeTab) {
 //    case AppTab.gardens:
 //
@@ -95,4 +102,7 @@ Widget _buildFloatActionButton(AppTab activeTab, context) {
 //      return GardenSpeedDial(visible: false);
 //      break;
 
+  }
+
 }
+

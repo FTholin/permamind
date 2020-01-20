@@ -70,7 +70,7 @@ class App extends StatelessWidget {
                 return BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     if (state is Authenticated) {
-                      final gardensBloc = BlocProvider.of<GardensBloc>(context);
+//                      final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
                       return MultiBlocProvider(
                         providers: [
@@ -87,7 +87,7 @@ class App extends StatelessWidget {
                               ..add(LoadTutos()),
                           ),
                         ],
-                        child: HomeScreen(),
+                        child: HomeScreen(dataRepository: firebaseRepository),
                       );
                     }
                     if (state is Unauthenticated) {
