@@ -5,7 +5,7 @@ import 'package:permamind/blocs/blocs.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SchedulerCalendar extends StatefulWidget {
-  final List<Activity> schedule;
+  final Map<DateTime, List> schedule;
   DateTime referenceDate;
   SchedulerCalendar({Key key,
     @required this.schedule,
@@ -19,14 +19,12 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   CalendarController _calendarController;
   Map<DateTime, List> _events;
 
-//  SchedulerBloc _schedulerBloc;
 
 
   @override
   void initState() {
     super.initState();
-    _events = Map<DateTime, List>();
-    fillEvents(widget.schedule, widget.referenceDate);
+    _events = widget.schedule;
     _calendarController = CalendarController();
   }
 
@@ -34,9 +32,6 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   @override
   Widget build(BuildContext context) {
 
-
-    fillEvents(widget.schedule, widget.referenceDate);
-//
 
     return TableCalendar(
 //      locale: 'fr_FR',
@@ -57,30 +52,13 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   }
 
 
-  void fillEvents(
-      List<Activity> schedule,
-      DateTime gardenCreationDate) {
-    DateTime referencePoint = gardenCreationDate;
-    _events.clear();
-
-
-    schedule.forEach( (item) {
-      if (_events[item.expectedDate] == null) {
-        _events[item.expectedDate] = [item];
-      } else {
-        _events[item.expectedDate].addAll([item]);
-      }
-    });
-
-
-  }
 
   void _onDaySelected(DateTime selectedDay, List events) {
 
     final d1 = DateTime.utc(widget.referenceDate.year,widget.referenceDate.month,widget.referenceDate.day);
     final d2 = DateTime.utc(selectedDay.year,selectedDay.month,selectedDay.day);
     var diff = d2.difference(d1).inDays;
-//    _schedulerBloc.add(SelectDayActivities(diff, widget.schedule));
+//    BlocProvider.of<SchedulerBloc>(context).add(SelectDayActivities(diff, widget.schedule));
   }
 }
 

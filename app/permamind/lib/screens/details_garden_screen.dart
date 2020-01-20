@@ -101,9 +101,8 @@ class DetailsGardenScreen extends StatelessWidget {
                   if (state is ActivitiesLoaded) {
                      return SchedulerCalendar(
                        referenceDate: currentGarden.creationDate,
-                        schedule: state.activities,
-                     )
-                    ;
+                        schedule: state.schedule,
+                     );
                   } else {
                     // TODO Mettre une splashScreen
                       return Container();
@@ -126,20 +125,19 @@ class DetailsGardenScreen extends StatelessWidget {
                 builder: (context, state) {
                   if (state is ActivitiesLoaded) {
 
-
-                    print("Affichage ListView");
-                    _currentDay = state;
-                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
-                      return Expanded(
-                        child: Container(child: _buildEventList(
-                            state.schedule,
-                            state.dayIndex)),
-                      );
-                  } else {
-                      return Expanded(
-                        child: Container(),
-                      );
-                    }
+                    print("ActivitiesLoaded");
+////                    _currentDay = state;
+//                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
+//                      return Expanded(
+//                        child: Container(child: _buildEventList(
+//                            state.schedule,
+//                            state.dayIndex)),
+//                      );
+//                  } else {
+//                      return Expanded(
+//                        child: Container(),
+//                      );
+//                    }
 //                  if (state is DayActivitiesLoaded) {
 //                    _currentDay = state.dayIndex;
 //                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
@@ -170,7 +168,7 @@ class DetailsGardenScreen extends StatelessWidget {
                     return Expanded(
                       child: Container(),
                     );
-//                  }
+                  }
                 }
             ),
 //          Expanded(child: _buildEventList()),

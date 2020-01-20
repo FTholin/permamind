@@ -44,20 +44,32 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
 //    }
       if (event is LoadActivities) {
         yield* _mapLoadActivitiesToState();
-      } else if (event is ActivitiesUpdated) {
-        yield* _mapActivitiesUpdatedToState(event);
+      } else if (event is ScheduleUpdated) {
+        yield* _mapScheduleUpdatedToState(event);
       }
     }
 
     Stream<SchedulerState> _mapLoadActivitiesToState() async* {
       _activitiesSubscription?.cancel();
       _activitiesSubscription = dataRepository.fetchGardenActivities(gardenId).listen(
-            (activities) => add(ActivitiesUpdated(activities)),
+            (activities) {
+
+              final Map<DateTime, List> schedule = Map<DateTime, List>();
+
+              activities.forEach( (item) {
+                if (schedule[item.expectedDate] == null) {
+                  schedule[item.expectedDate] = [item];
+                } else {
+                  schedule[item.expectedDate].addAll([item]);
+                }
+              });
+              add(ScheduleUpdated(schedule));
+            },
       );
     }
 
-  Stream<SchedulerState> _mapActivitiesUpdatedToState(ActivitiesUpdated event) async* {
-    yield ActivitiesLoaded(event.activities);
+  Stream<SchedulerState> _mapScheduleUpdatedToState(ScheduleUpdated event) async* {
+    yield ActivitiesLoaded(event.schedule);
   }
 
 //  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
