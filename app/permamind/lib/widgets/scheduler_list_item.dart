@@ -35,12 +35,14 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
         onChanged: (bool value) {
           setState((){
             checkboxValue = value;
-//            widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].complete = checkboxValue;
-//            widget.garden.schedule = widget.schedule;
-
-              print("Mise à jour activité");
             BlocProvider.of<SchedulerBloc>(context).add(
-                UpdateActivity(widget.activity)
+                UpdateActivity(widget.activity.copyWith(
+                    id: widget.activity.id,
+                    gardenId: widget.activity.gardenId,
+                    title: widget.activity.title,
+                    complete: checkboxValue,
+                    expectedDate: widget.activity.expectedDate
+                ),)
             );
           });
         },

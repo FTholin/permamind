@@ -9,187 +9,166 @@ import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
-//  final Garden garden;
 
   final String id;
-
-//  DateTime referenceDate;
 
   DetailsGardenScreen({
     Key key,
     @required this.id
-//    @required this.garden
   })
       : super(key: key ?? ArchSampleKeys.detailsGardenScreen) {
       DateTime now = new DateTime.now();
-//      referenceDate = new DateTime(now.year, now.month, now.day);
-//    final DateTime date = DateTime.now();
-//    final d1 = DateTime.utc(garden.creationDate.year, garden.creationDate.month, garden.creationDate.day);
-//    final d2 = DateTime.utc(date.year,date.month,date.day);
-//    _currentDay = d2.difference(d1).inDays;
   }
 
 
-  // TODO Bottom Up slide animation
-//  Route _createRoute() {
-//    return PageRouteBuilder(
-//      pageBuilder: (context, animation, secondaryAnimation) => SettingsGardenScreen(id: garden.id),
-//      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//        var begin = Offset(0.0, 1.0);
-//        var end = Offset.zero;
-//        var curve = Curves.ease;
-//
-//        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-//
-//        return SlideTransition(
-//          position: animation.drive(tween),
-//          child: child,
-//        );
-//      },
-//    );
-//  }
+
 
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<GardensBloc, GardensState>(
-    builder: (context, state) {
-      final currentGarden = (state as GardensLoaded)
-          .gardens.firstWhere((garden) => garden.id == id,
-          orElse: () => null);
-      return Scaffold(
-        appBar: AppBar(
-          title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
-          actions: <Widget>[
+    return Scaffold(
+      appBar: CustomAppBar(id: id),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Container(
+            color: Colors.yellow,
+//            height: 300,
+          ),
+          BlocBuilder<SchedulerBloc, SchedulerState>(
+//              condition: (previousState, currentState) =>
+//              currentState.runtimeType != previousState.runtimeType,
+              builder: (context, state) {
 
-            IconButton(
-//            tooltip: localizations.deleteGarden,
-              // TODO ArchSampleKeys
-//                key: ArchSampleKeys.deleteGardenButton,
-              icon: Icon(Icons.settings),
-              onPressed: () async {
-
-                final removedGarden = await Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (_) {
-                          return SettingsGardenScreen(id: currentGarden.id);
-                        })
-                );
-
-                if (removedGarden != null) {
-
-                  if (removedGarden != false) {
-                    BlocProvider.of<GardensBloc>(context).add(
-                        DeleteGarden(currentGarden));
-                    BlocProvider.of<SchedulerBloc>(context).close();
-                    Navigator.pop(context, currentGarden);
-                  }
-                }
-              },
-            ),
-          ],
-        ),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Container(
-              color: Colors.yellow,
-              height: 300,
-            ),
-            BlocBuilder<SchedulerBloc, SchedulerState>(
-                condition: (previousState, currentState) =>
-                currentState.runtimeType != previousState.runtimeType,
-                builder: (context, state) {
-                  if (state is ActivitiesLoaded) {
-                     return SchedulerCalendar(
-                       referenceDate: currentGarden.creationDate,
-                        schedule: state.schedule,
-                     );
-                  } else {
-                    // TODO Mettre une splashScreen
-                      return Container();
-                    }
-//                  if (state is SchedulerLoaded) {
-//                    return SchedulerCalendar(
-////                        schedule: state.schedule,
-//                        referenceDate: garden.creationDate);
-//                  } else if (state is DayActivitiesLoaded ) {
-//                    return SchedulerCalendar(
-////                        schedule: state.schedule,
-//                        referenceDate: garden.creationDate);
-//                  } else {return Container();}
-                }
-            ),
-            const SizedBox(height: 8.0),
-//          _buildButtons(),
-            const SizedBox(height: 8.0),
-            BlocBuilder<SchedulerBloc, SchedulerState>(
-                builder: (context, state) {
-                  if (state is ActivitiesLoaded) {
-                    return Expanded(
-                        child: Container(
-                            child: _buildEventList(state.referenceDate, state.schedule)
-                        ),
-                      );
-                    print("ActivitiesLoaded");
-////                    _currentDay = state;
-//                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
-//                      return Expanded(
-//                        child: Container(child: _buildEventList(
-//                            state.schedule,
-//                            state.dayIndex)),
-//                      );
-//                  } else {
-//                      return Expanded(
-//                        child: Container(),
-//                      );
-//                    }
-//                  if (state is DayActivitiesLoaded) {
-//                    _currentDay = state.dayIndex;
-//                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
-//                      return Expanded(
-//                        child: Container(child: _buildEventList(
-////                            state.schedule,
-//                            state.dayIndex)),
-//                      );
-//                    } else {
-//                      return Expanded(
-//                        child: Container(),
-//                      );
-//                    }
-//                  } else if (state is SchedulerLoaded) {
-//                    print(_currentDay);
-//                    if(_currentDay >= 0 && _currentDay < state.schedule.length) {
-//                      return Expanded(
-//                        child: Container(child: _buildEventList(
-////                            state.schedule,
-//                            _currentDay)),
-//                      );
-//                    } else {
-//                      return Expanded(
-//                        child: Container(),
-//                      );
-//                    }
-//                  } else {
-                    return Expanded(
-                      child: Container(),
-                    );
-                  } else {
-                    print("state est = ${state}");
-                    return Expanded(
-                        child: Container(
-                        )
+                if (state is ActivitiesLoaded) {
+                  return SchedulerCalendar(
+                    referenceDate: DateTime.now(),
+                    schedule: state.schedule,
                   );
-                  }
+                } else {
+                  // TODO Mettre une splashScreen
+                  return Container();
                 }
-            ),
+              }
+          ),
+          const SizedBox(height: 8.0),
+//          _buildButtons(),
+          const SizedBox(height: 8.0),
+          BlocBuilder<SchedulerBloc, SchedulerState>(
+              builder: (context, state) {
+                if (state is ActivitiesLoaded) {
+                  return Expanded(
+                    child: Container(
+                        child: _buildEventList(state.referenceDate, state.schedule)
+                    ),
+                  );
+                } else {
+                  return Expanded(
+                      child: Container(
+                      )
+                  );
+                }
+              }
+          ),
 //          Expanded(child: _buildEventList()),
-          ],
-        ),
-        floatingActionButton: ActivitySpeedDial(visible: true),
-      );
-    });
+        ],
+      ),
+      floatingActionButton: ActivitySpeedDial(visible: true),
+    );
+
+//    return BlocBuilder<GardensBloc, GardensState>(
+//    builder: (context, state) {
+//      final currentGarden = (state as GardensLoaded)
+//          .gardens.firstWhere((garden) => garden.id == id,
+//          orElse: () => null);
+//      return Scaffold(
+//        appBar: AppBar(
+//          title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+//          actions: <Widget>[
+//
+//            IconButton(
+////            tooltip: localizations.deleteGarden,
+//              // TODO ArchSampleKeys
+////                key: ArchSampleKeys.deleteGardenButton,
+//              icon: Icon(Icons.settings),
+//              onPressed: () async {
+//
+//                final removedGarden = await Navigator.of(context).push(
+//                    MaterialPageRoute(
+//                        builder: (_) {
+//                          return SettingsGardenScreen(id: currentGarden.id);
+//                        })
+//                );
+//
+//                if (removedGarden != null) {
+//
+//                  if (removedGarden != false) {
+//                    BlocProvider.of<GardensBloc>(context).add(
+//                        DeleteGarden(currentGarden));
+//                    BlocProvider.of<SchedulerBloc>(context).close();
+//                    Navigator.pop(context, currentGarden);
+//                  }
+//                }
+//              },
+//            ),
+//          ],
+//        ),
+//        body: Column(
+//          mainAxisSize: MainAxisSize.max,
+//          children: <Widget>[
+//            Container(
+//              color: Colors.yellow,
+//              height: 300,
+//            ),
+//            BlocBuilder<SchedulerBloc, SchedulerState>(
+//                condition: (previousState, currentState) =>
+//                currentState.runtimeType != previousState.runtimeType,
+//                builder: (context, state) {
+//                  if (state is ActivitiesLoaded) {
+//                     return SchedulerCalendar(
+//                       referenceDate: currentGarden.creationDate,
+//                        schedule: state.schedule,
+//                     );
+//                  } else {
+//                    // TODO Mettre une splashScreen
+//                      return Container();
+//                    }
+//                }
+//            ),
+//            const SizedBox(height: 8.0),
+////          _buildButtons(),
+//            const SizedBox(height: 8.0),
+//            BlocBuilder<SchedulerBloc, SchedulerState>(
+//                builder: (context, state) {
+//
+//                  if (state is ActivitiesLoaded) {
+//                    return Expanded(
+//                        child: Container(
+//                            child: _buildEventList(state.referenceDate, state.schedule)
+//                        ),
+//                      );
+//                  } else {
+//                    return Expanded(
+//                        child: Container(
+//                        )
+//                  );
+//                  }
+//                }
+//            ),
+////          Expanded(child: _buildEventList()),
+//          ],
+//        ),
+//        floatingActionButton: ActivitySpeedDial(visible: true),
+//      );
+//    });
   }
+
+
+
+
+
+
+
 
   Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
 
@@ -220,6 +199,26 @@ class DetailsGardenScreen extends StatelessWidget {
 
 }
 
+
+
+// TODO Bottom Up slide animation
+//  Route _createRoute() {
+//    return PageRouteBuilder(
+//      pageBuilder: (context, animation, secondaryAnimation) => SettingsGardenScreen(id: garden.id),
+//      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//        var begin = Offset(0.0, 1.0);
+//        var end = Offset.zero;
+//        var curve = Curves.ease;
+//
+//        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//
+//        return SlideTransition(
+//          position: animation.drive(tween),
+//          child: child,
+//        );
+//      },
+//    );
+//  }
 
 
 //class Scheduler extends StatefulWidget {
@@ -544,3 +543,63 @@ class DetailsGardenScreen extends StatelessWidget {
 //  DateTime(2019, 4, 21): ['Easter Sunday'],
 //  DateTime(2019, 4, 22): ['Easter Monday'],
 //};
+
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+
+  final String id;
+
+  CustomAppBar({@required this.id, Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+
+  @override
+  final Size preferredSize; // default is 56.0
+
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar>{
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GardensBloc, GardensState>(
+        builder: (context, state) {
+          print("Rafraichissement App = $state");
+          final currentGarden = (state as GardensLoaded)
+              .gardens.firstWhere((garden) => garden.id == widget.id,
+              orElse: () => null);
+
+          return AppBar(
+            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+            actions: <Widget>[
+
+              IconButton(
+//            tooltip: localizations.deleteGarden,
+                // TODO ArchSampleKeys
+//                key: ArchSampleKeys.deleteGardenButton,
+                icon: Icon(Icons.settings),
+                onPressed: () async {
+
+                  final removedGarden = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) {
+                            return SettingsGardenScreen(id: currentGarden.id);
+                          })
+                  );
+
+                  if (removedGarden != null) {
+
+                    if (removedGarden != false) {
+                      BlocProvider.of<GardensBloc>(context).add(
+                          DeleteGarden(currentGarden));
+                      BlocProvider.of<SchedulerBloc>(context).close();
+                      Navigator.pop(context, currentGarden);
+                    }
+                  }
+                },
+              ),
+            ],
+          );
+        }
+    );
+  }
+}

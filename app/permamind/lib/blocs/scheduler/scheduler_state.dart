@@ -14,14 +14,6 @@ class ActivitiesLoading extends SchedulerState {
   String toString() => "ActivitiesLoading";
 }
 
-//class ActivitiesLoaded extends SchedulerState {
-//  final List<Activity> activities;
-//
-//  ActivitiesLoaded([this.activities = const []]) : super([activities]);
-//
-//  @override
-//  String toString() => "ActivitiesLoaded { activities : $activities }";
-//}
 
 class ActivitiesNotLoaded extends SchedulerState {
   @override

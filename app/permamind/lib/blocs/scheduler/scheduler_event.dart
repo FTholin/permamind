@@ -21,6 +21,7 @@ class AddActivity extends SchedulerEvent {
 
 class UpdateActivity extends SchedulerEvent {
   final Activity updatedActivity;
+
   UpdateActivity(this.updatedActivity) : super([updatedActivity]);
 
   @override

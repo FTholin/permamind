@@ -11,14 +11,16 @@ class ActivityEntity extends Equatable {
   ActivityEntity(
       this.id,
       this.title,
-      this.complete,
       this.gardenId,
+      this.complete,
       this.expectedDate);
 
   Map<String, Object> toJson() {
     return {
       'id': id,
       'title': title,
+      'gardenId': gardenId,
+      'complete': complete,
       'expectedDate': expectedDate
     };
   }
@@ -31,9 +33,9 @@ class ActivityEntity extends Equatable {
   static ActivityEntity fromJson(Map<String, Object> json) {
     return ActivityEntity(
         json['id'] as String,
+        json['gardenId'] as String,
         json['title'] as String,
         json['complete'] as bool,
-        json['gardenId'] as String,
         json['expectedDate']
     );
   }
@@ -44,8 +46,8 @@ class ActivityEntity extends Equatable {
     return ActivityEntity(
         snap.documentID,
         snap.data['title'],
-        snap.data['complete'],
         snap.data['gardenId'],
+        snap.data['complete'],
         DateTime.fromMillisecondsSinceEpoch(
             snap.data["expectedDate"].millisecondsSinceEpoch)
     );
@@ -53,9 +55,9 @@ class ActivityEntity extends Equatable {
 
   Map<String, Object> toDocument() {
     return {
+      'gardenId': gardenId,
       'title': title,
       'complete': complete,
-      'gardenId': gardenId,
       'expectedDate': expectedDate
     };
   }

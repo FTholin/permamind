@@ -54,10 +54,6 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
 
 
   void _onDaySelected(DateTime selectedDay, List events) {
-
-//    final d1 = DateTime.utc(widget.referenceDate.year,widget.referenceDate.month,widget.referenceDate.day);
-//    final d2 = DateTime.utc(selectedDay.year,selectedDay.month,selectedDay.day);
-//    var diff = d2.difference(d1).inDays;
     DateTime referenceDate = new DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
     BlocProvider.of<SchedulerBloc>(context).add(SelectDayActivities(referenceDate, widget.schedule));
   }
