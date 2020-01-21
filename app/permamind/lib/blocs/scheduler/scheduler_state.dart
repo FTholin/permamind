@@ -31,12 +31,13 @@ class ActivitiesNotLoaded extends SchedulerState {
 
 class ActivitiesLoaded extends SchedulerState {
 
+  final DateTime referenceDate;
   final Map<DateTime, List> schedule;
 
-  ActivitiesLoaded([this.schedule]);
+  ActivitiesLoaded([this.referenceDate, this.schedule]);
 
   @override
-  List<Object> get props => [schedule];
+  List<Object> get props => [referenceDate, schedule];
 
   @override
   String toString() => 'ActivitiesLoaded { activities: $schedule }';

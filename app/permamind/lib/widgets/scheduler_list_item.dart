@@ -8,16 +8,11 @@ import 'package:permamind/blocs/blocs.dart';
 
 class ScheduleListItem extends StatefulWidget {
 
-  final Garden garden;
-  final int dayIndex;
-  final int activityIndex;
-//  List<PlanningDay> schedule;
+  final Activity activity;
+
 
   ScheduleListItem({
-    @required this.garden,
-//    @required this.schedule,
-    @required this.dayIndex,
-    @required this.activityIndex,
+    @required this.activity,
     Key key}) : super(key: key);
 
   @override
@@ -31,11 +26,11 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
   @override
   Widget build(BuildContext context) {
 
-//    checkboxValue = widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].complete;
+    checkboxValue = widget.activity.complete;
 
     return Center(
       child: CheckboxListTile(
-//        title: Text(widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].toString()),
+        title: Text(widget.activity.title),
         value: checkboxValue,
         onChanged: (bool value) {
           setState((){
@@ -43,8 +38,9 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
 //            widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].complete = checkboxValue;
 //            widget.garden.schedule = widget.schedule;
 
-            BlocProvider.of<GardensBloc>(context).add(
-                UpdateGarden(widget.garden)
+              print("Mise à jour activité");
+            BlocProvider.of<SchedulerBloc>(context).add(
+                UpdateActivity(widget.activity)
             );
           });
         },

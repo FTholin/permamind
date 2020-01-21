@@ -13,7 +13,7 @@ class DetailsGardenScreen extends StatelessWidget {
 
   final String id;
 
-  int _currentDay;
+//  DateTime referenceDate;
 
   DetailsGardenScreen({
     Key key,
@@ -21,6 +21,8 @@ class DetailsGardenScreen extends StatelessWidget {
 //    @required this.garden
   })
       : super(key: key ?? ArchSampleKeys.detailsGardenScreen) {
+      DateTime now = new DateTime.now();
+//      referenceDate = new DateTime(now.year, now.month, now.day);
 //    final DateTime date = DateTime.now();
 //    final d1 = DateTime.utc(garden.creationDate.year, garden.creationDate.month, garden.creationDate.day);
 //    final d2 = DateTime.utc(date.year,date.month,date.day);
@@ -124,7 +126,11 @@ class DetailsGardenScreen extends StatelessWidget {
             BlocBuilder<SchedulerBloc, SchedulerState>(
                 builder: (context, state) {
                   if (state is ActivitiesLoaded) {
-
+                    return Expanded(
+                        child: Container(
+                            child: _buildEventList(state.referenceDate, state.schedule)
+                        ),
+                      );
                     print("ActivitiesLoaded");
 ////                    _currentDay = state;
 //                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
@@ -168,6 +174,12 @@ class DetailsGardenScreen extends StatelessWidget {
                     return Expanded(
                       child: Container(),
                     );
+                  } else {
+                    print("state est = ${state}");
+                    return Expanded(
+                        child: Container(
+                        )
+                  );
                   }
                 }
             ),
@@ -179,25 +191,26 @@ class DetailsGardenScreen extends StatelessWidget {
     });
   }
 
-  Widget _buildEventList(
-      List<Activity> schedule,
-      int dayIndex) {
-    // Changer ici mettre  un index au lieu d'une activité
-    //schedule[dayIndex].dayActivities
+  Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
+
     List<Container> items = List<Container>();
 
-//    for (int activityIndex = 0; activityIndex < schedule[dayIndex].dayActivities.length; activityIndex++) {
-//      items.add(
-//          Container(
-//        decoration: BoxDecoration(
-//          border: Border.all(width: 0.8),
-//          borderRadius: BorderRadius.circular(12.0),
-//        ),
-//        margin:
-//        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-//        child: ScheduleListItem(garden: garden, schedule: schedule, dayIndex: dayIndex, activityIndex: activityIndex),
-//      ));
-//    }
+
+    if (schedule[referenceDate] != null) {
+      for (var activity in schedule[referenceDate]) {
+        items.add(
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.8),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              margin:
+              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+              child: ScheduleListItem(activity: activity),
+            )
+        );
+      }
+    }
 
     return ListView(
       children: items

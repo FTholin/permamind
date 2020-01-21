@@ -13,12 +13,14 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
   StreamSubscription _activitiesSubscription;
 
   final DataRepository dataRepository;
-
+  DateTime referenceDate;
 
   SchedulerBloc({
     @required this.dataRepository,
     @required this.gardensBloc,
     @required this.gardenId}) {
+    DateTime now = new DateTime.now();
+    referenceDate = new DateTime(now.year, now.month, now.day);
     gardensSubscription = gardensBloc.listen((state) {
       if (state is GardensLoaded) {
         print("GardensLoaded");
@@ -46,6 +48,10 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
         yield* _mapLoadActivitiesToState();
       } else if (event is ScheduleUpdated) {
         yield* _mapScheduleUpdatedToState(event);
+      } else if (event is UpdateActivity) {
+        yield* _mapUpdateActivityToState(event);
+      } else if (event is SelectDayActivities) {
+        yield* _mapSelectDayActivitiesToState(event);
       }
     }
 
@@ -69,12 +75,19 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
     }
 
   Stream<SchedulerState> _mapScheduleUpdatedToState(ScheduleUpdated event) async* {
-    yield ActivitiesLoaded(event.schedule);
+    yield ActivitiesLoaded(referenceDate, event.schedule);
   }
 
-//  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
-//   yield DayActivitiesLoaded(event.schedule, event.dayIndex);
-//  }
+  Stream<SchedulerState> _mapUpdateActivityToState(UpdateActivity event) async* {
+    dataRepository.updateActivity(event.updatedActivity);
+  }
+
+
+  Stream<SchedulerState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
+    // TODO Ternary operator
+    referenceDate =  event.selectedDay;
+   yield ActivitiesLoaded(referenceDate, event.dayActivities);
+  }
 
 //  Stream<SchedulerState> _mapUpdateGardenActivitiesToState(UpdateGardenActivities event) async* {
 //    print("_mapUpdateGardenActivitiesToState");

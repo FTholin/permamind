@@ -124,4 +124,11 @@ class FirebaseDataRepository implements DataRepository {
         .document(update.id)
         .updateData(update.toEntity().toDocument());
   }
+
+  @override
+  Future<void> updateActivity(Activity update) {
+    return activitiesCollection
+        .document(update.id)
+        .updateData(update.toEntity().toDocument());
+  }
 }

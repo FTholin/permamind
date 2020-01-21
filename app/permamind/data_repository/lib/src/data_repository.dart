@@ -13,5 +13,8 @@ abstract class DataRepository {
 
   Stream<List<Activity>> fetchGardenActivities(String gardenId);
 
-    Future<void> updateGarden(Garden garden);
-}
+  Future<void> updateGarden(Garden garden);
+
+  Future<void> updateActivity(Activity update);
+
+  }
