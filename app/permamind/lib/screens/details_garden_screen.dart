@@ -16,12 +16,7 @@ class DetailsGardenScreen extends StatelessWidget {
     Key key,
     @required this.id
   })
-      : super(key: key ?? ArchSampleKeys.detailsGardenScreen) {
-      DateTime now = new DateTime.now();
-  }
-
-
-
+      : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +28,20 @@ class DetailsGardenScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             color: Colors.yellow,
-//            height: 300,
+            height: 230,
           ),
+          // TODO Peut être regroupé tous sous un meme BlocBuilder ??
           BlocBuilder<SchedulerBloc, SchedulerState>(
-//              condition: (previousState, currentState) =>
-//              currentState.runtimeType != previousState.runtimeType,
+              condition: (previousState, currentState) =>
+              currentState.runtimeType != previousState.runtimeType,
               builder: (context, state) {
+
+                print("\n\n------------");
+
+                print("Calendrier Mis à jour");
+                print(state);
+
+                print("-----------\n\n");
 
                 if (state is ActivitiesLoaded) {
                   return SchedulerCalendar(
@@ -56,6 +59,12 @@ class DetailsGardenScreen extends StatelessWidget {
           const SizedBox(height: 8.0),
           BlocBuilder<SchedulerBloc, SchedulerState>(
               builder: (context, state) {
+                print("\n\n------------");
+
+                print("Liste Mise à jour");
+                print(state);
+
+                print("-----------\n\n");
                 if (state is ActivitiesLoaded) {
                   return Expanded(
                     child: Container(
@@ -73,8 +82,11 @@ class DetailsGardenScreen extends StatelessWidget {
 //          Expanded(child: _buildEventList()),
         ],
       ),
-      floatingActionButton: ActivitySpeedDial(visible: true),
+      floatingActionButton: ActivitySpeedDial(
+          visible: true
+      ),
     );
+
 
 //    return BlocBuilder<GardensBloc, GardensState>(
 //    builder: (context, state) {
@@ -164,12 +176,6 @@ class DetailsGardenScreen extends StatelessWidget {
   }
 
 
-
-
-
-
-
-
   Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
 
     List<Container> items = List<Container>();
@@ -199,6 +205,66 @@ class DetailsGardenScreen extends StatelessWidget {
 
 }
 
+
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+
+  final String id;
+
+  CustomAppBar({@required this.id, Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+
+  @override
+  final Size preferredSize; // default is 56.0
+
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar>{
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GardensBloc, GardensState>(
+        builder: (context, state) {
+          print("Rafraichissement App = $state");
+          final currentGarden = (state as GardensLoaded)
+              .gardens.firstWhere((garden) => garden.id == widget.id,
+              orElse: () => null);
+
+          return AppBar(
+            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+            actions: <Widget>[
+
+              IconButton(
+//            tooltip: localizations.deleteGarden,
+                // TODO ArchSampleKeys
+//                key: ArchSampleKeys.deleteGardenButton,
+                icon: Icon(Icons.settings),
+                onPressed: () async {
+
+                  final removedGarden = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) {
+                            return SettingsGardenScreen(id: currentGarden.id);
+                          })
+                  );
+
+                  if (removedGarden != null) {
+
+                    if (removedGarden != false) {
+                      BlocProvider.of<GardensBloc>(context).add(
+                          DeleteGarden(currentGarden));
+                      BlocProvider.of<SchedulerBloc>(context).close();
+                      Navigator.pop(context, currentGarden);
+                    }
+                  }
+                },
+              ),
+            ],
+          );
+        }
+    );
+  }
+}
 
 
 // TODO Bottom Up slide animation
@@ -543,63 +609,3 @@ class DetailsGardenScreen extends StatelessWidget {
 //  DateTime(2019, 4, 21): ['Easter Sunday'],
 //  DateTime(2019, 4, 22): ['Easter Monday'],
 //};
-
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-
-  final String id;
-
-  CustomAppBar({@required this.id, Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
-
-  @override
-  final Size preferredSize; // default is 56.0
-
-  @override
-  _CustomAppBarState createState() => _CustomAppBarState();
-}
-
-class _CustomAppBarState extends State<CustomAppBar>{
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<GardensBloc, GardensState>(
-        builder: (context, state) {
-          print("Rafraichissement App = $state");
-          final currentGarden = (state as GardensLoaded)
-              .gardens.firstWhere((garden) => garden.id == widget.id,
-              orElse: () => null);
-
-          return AppBar(
-            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
-            actions: <Widget>[
-
-              IconButton(
-//            tooltip: localizations.deleteGarden,
-                // TODO ArchSampleKeys
-//                key: ArchSampleKeys.deleteGardenButton,
-                icon: Icon(Icons.settings),
-                onPressed: () async {
-
-                  final removedGarden = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (_) {
-                            return SettingsGardenScreen(id: currentGarden.id);
-                          })
-                  );
-
-                  if (removedGarden != null) {
-
-                    if (removedGarden != false) {
-                      BlocProvider.of<GardensBloc>(context).add(
-                          DeleteGarden(currentGarden));
-                      BlocProvider.of<SchedulerBloc>(context).close();
-                      Navigator.pop(context, currentGarden);
-                    }
-                  }
-                },
-              ),
-            ],
-          );
-        }
-    );
-  }
-}

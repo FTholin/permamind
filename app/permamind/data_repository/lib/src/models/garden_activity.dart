@@ -17,14 +17,14 @@ class Activity extends Equatable {
 
   Activity copyWith({
     String id,
-    String gardenId,
     String title,
+    String gardenId,
     bool complete,
     DateTime expectedDate
   }) {
     return Activity(
-      gardenId ?? this.gardenId,
       title ?? this.title,
+      gardenId ?? this.gardenId,
       complete ?? this.complete,
       expectedDate ?? this.expectedDate,
       id: id ?? this.id
@@ -50,8 +50,8 @@ class Activity extends Equatable {
   ActivityEntity toEntity() {
     return ActivityEntity(
         id,
-        gardenId,
         title,
+        gardenId,
         complete,
         expectedDate
     );

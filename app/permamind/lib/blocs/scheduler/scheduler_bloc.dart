@@ -27,6 +27,7 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
         add(LoadActivities(gardenId));
       }
     });
+
   }
 
   @override
@@ -38,6 +39,8 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
     Stream<SchedulerState> mapEventToState(SchedulerEvent event) async* {
       if (event is LoadActivities) {
         yield* _mapLoadActivitiesToState();
+      } else if (event is AddActivity) {
+        yield* _mapAddActivityToState(event);
       } else if (event is ScheduleUpdated) {
         yield* _mapScheduleUpdatedToState(event);
       } else if (event is UpdateActivity) {
@@ -73,6 +76,10 @@ class SchedulerBloc extends Bloc<SchedulerEvent, SchedulerState> {
   Stream<SchedulerState> _mapUpdateActivityToState(UpdateActivity event) async* {
     dataRepository.updateActivity(event.updatedActivity);
     yield ActivitiesLoading();
+  }
+
+  Stream<SchedulerState> _mapAddActivityToState(AddActivity event) async* {
+    dataRepository.addNewActivity(event.newActivity);
   }
 
 

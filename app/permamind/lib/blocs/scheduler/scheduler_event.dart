@@ -16,7 +16,12 @@ class LoadActivities extends SchedulerEvent {
 }
 
 class AddActivity extends SchedulerEvent {
+  final Activity newActivity;
 
+  AddActivity(this.newActivity) : super([AddActivity]);
+
+  @override
+  String toString() => 'UpdateActivity { newActivity: $newActivity }';
 }
 
 class UpdateActivity extends SchedulerEvent {

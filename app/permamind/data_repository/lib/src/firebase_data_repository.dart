@@ -34,6 +34,12 @@ class FirebaseDataRepository implements DataRepository {
 
 
   @override
+  Future<void> addNewActivity(Activity activity) {
+    return activitiesCollection.add(activity.toEntity().toDocument());
+  }
+
+
+  @override
   Future<void> deleteGarden(Garden garden) async {
     return gardensCollection.document(garden.id).delete();
   }

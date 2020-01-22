@@ -1,6 +1,9 @@
-  import 'package:flutter/material.dart';
+import 'package:data_repository/data_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-  import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:permamind/blocs/blocs.dart';
 
   typedef OnSaveCallback = Function(String task, String note);
 
@@ -58,8 +61,21 @@ import 'package:intl/intl.dart';
               icon: Icon(Icons.check),
               onPressed: () async {
                 if (_activityNameController.text.isNotEmpty) {
-                  // TODO Faire l'ajout de l'activité dans la base
-                  print("Activité rempli dans la base");
+
+
+
+                  DateTime referenceDate  = new DateTime(selectedDate.year, selectedDate.month, selectedDate.day);
+
+                  BlocProvider.of<SchedulerBloc>(context).add(
+                    AddActivity(
+                      Activity(
+                        _activityNameController.text,
+                        BlocProvider.of<SchedulerBloc>(context).gardenId,
+                        false,
+                        referenceDate
+                      )
+                    )
+                  );
                   Navigator.pop(context, false);
                 } else {
                   setState(() {

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/screens/screens.dart';
 
 class ActivitySpeedDial extends StatefulWidget {
   final bool visible;
@@ -42,7 +45,31 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
             semanticLabel: 'Add Activity',
           ),
           backgroundColor: Colors.green,
-          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.addActivity),
+          onTap: () async {
+
+            final addedActivity = await Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (_) {
+
+                      return BlocProvider.value(
+                        value: BlocProvider.of<SchedulerBloc>(context),
+                        child: AddEditActivityScreen(),
+                      );
+
+                    })
+            );
+
+//
+//            if (addedActivity != null) {
+//
+//              if (addedActivity != false) {
+//                BlocProvider.of<GardensBloc>(context).add(
+//                    DeleteGarden(currentGarden));
+//                BlocProvider.of<SchedulerBloc>(context).close();
+//                Navigator.pop(context, currentGarden);
+//              }
+//            }
+          },
           label: 'Activity',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,

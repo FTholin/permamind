@@ -175,7 +175,13 @@ class App extends StatelessWidget {
               },
               '/addActivity': (context) {
                 return AddEditActivityScreen();
-              }
+              },
+//              '/' : (context) {
+//                BlocProvider(
+//                  create: (BuildContext context) => SchedulerBloc(),
+//                  child: ChildA(),
+//                );
+//              }
             },
           );
         }
