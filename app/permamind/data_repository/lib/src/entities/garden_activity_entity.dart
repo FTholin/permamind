@@ -42,7 +42,6 @@ class ActivityEntity extends Equatable {
 
   static ActivityEntity fromSnapshot(DocumentSnapshot snap) {
 
-    print(snap);
     return ActivityEntity(
         snap.documentID,
         snap.data['title'],

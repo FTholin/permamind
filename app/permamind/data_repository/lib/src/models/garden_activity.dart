@@ -44,7 +44,8 @@ class Activity extends Equatable {
               runtimeType == other.runtimeType &&
               id == other.id &&
               title == other.title &&
-              gardenId == other.gardenId;
+              gardenId == other.gardenId &&
+              complete == other.complete;
 
 
   ActivityEntity toEntity() {

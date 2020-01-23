@@ -30,41 +30,26 @@ class DetailsGardenScreen extends StatelessWidget {
             color: Colors.yellow,
             height: 230,
           ),
-          // TODO Peut être regroupé tous sous un meme BlocBuilder ??
-          BlocBuilder<SchedulerBloc, SchedulerState>(
-              condition: (previousState, currentState) =>
-              currentState.runtimeType != previousState.runtimeType,
+          BlocBuilder<ActivitiesBloc, ActivitiesState>(
               builder: (context, state) {
-
-                print("\n\n------------");
-
-                print("Calendrier Mis à jour");
-                print(state);
-
-                print("-----------\n\n");
-
                 if (state is ActivitiesLoaded) {
                   return SchedulerCalendar(
                     referenceDate: DateTime.now(),
                     schedule: state.schedule,
                   );
                 } else {
-                  // TODO Mettre une splashScreen
-                  return Container();
+                  return Expanded(
+                      child: Container(
+                      )
+                  );
                 }
               }
           ),
           const SizedBox(height: 8.0),
 //          _buildButtons(),
           const SizedBox(height: 8.0),
-          BlocBuilder<SchedulerBloc, SchedulerState>(
+          BlocBuilder<ActivitiesBloc, ActivitiesState>(
               builder: (context, state) {
-                print("\n\n------------");
-
-                print("Liste Mise à jour");
-                print(state);
-
-                print("-----------\n\n");
                 if (state is ActivitiesLoaded) {
                   return Expanded(
                     child: Container(
@@ -117,7 +102,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //                  if (removedGarden != false) {
 //                    BlocProvider.of<GardensBloc>(context).add(
 //                        DeleteGarden(currentGarden));
-//                    BlocProvider.of<SchedulerBloc>(context).close();
+//                    BlocProvider.of<ActivitiesBloc>(context).close();
 //                    Navigator.pop(context, currentGarden);
 //                  }
 //                }
@@ -132,7 +117,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //              color: Colors.yellow,
 //              height: 300,
 //            ),
-//            BlocBuilder<SchedulerBloc, SchedulerState>(
+//            BlocBuilder<ActivitiesBloc, ActivitiesState>(
 //                condition: (previousState, currentState) =>
 //                currentState.runtimeType != previousState.runtimeType,
 //                builder: (context, state) {
@@ -150,7 +135,7 @@ class DetailsGardenScreen extends StatelessWidget {
 //            const SizedBox(height: 8.0),
 ////          _buildButtons(),
 //            const SizedBox(height: 8.0),
-//            BlocBuilder<SchedulerBloc, SchedulerState>(
+//            BlocBuilder<ActivitiesBloc, ActivitiesState>(
 //                builder: (context, state) {
 //
 //                  if (state is ActivitiesLoaded) {
@@ -225,7 +210,6 @@ class _CustomAppBarState extends State<CustomAppBar>{
   Widget build(BuildContext context) {
     return BlocBuilder<GardensBloc, GardensState>(
         builder: (context, state) {
-          print("Rafraichissement App = $state");
           final currentGarden = (state as GardensLoaded)
               .gardens.firstWhere((garden) => garden.id == widget.id,
               orElse: () => null);
@@ -253,7 +237,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
                     if (removedGarden != false) {
                       BlocProvider.of<GardensBloc>(context).add(
                           DeleteGarden(currentGarden));
-                      BlocProvider.of<SchedulerBloc>(context).close();
+                      BlocProvider.of<ActivitiesBloc>(context).close();
                       Navigator.pop(context, currentGarden);
                     }
                   }
@@ -293,10 +277,10 @@ class _CustomAppBarState extends State<CustomAppBar>{
 //  final String gardenId;
 //
 //  @override
-//  _SchedulerState createState() => _SchedulerState();
+//  _ActivitiesState createState() => _ActivitiesState();
 //}
 //
-//class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
+//class _ActivitiesState extends State<Scheduler> with TickerProviderStateMixin {
 //  Map<DateTime, List> _events;
 //  List _selectedEvents;
 //  AnimationController _animationController;

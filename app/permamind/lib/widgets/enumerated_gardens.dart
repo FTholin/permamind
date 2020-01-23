@@ -24,7 +24,6 @@ class EnumeratedGardens extends StatelessWidget {
       builder: (context, state) {
         if (state is GardensLoaded) {
           final gardens = state.gardens;
-//          final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
           final localizations = ArchSampleLocalizations.of(context);
 
@@ -44,11 +43,11 @@ class EnumeratedGardens extends StatelessWidget {
                               builder: (_) {
 
                             return BlocProvider(
-                                create: (context) => SchedulerBloc(
+                                create: (context) => ActivitiesBloc(
                                     dataRepository:_dataRepository,
                                     gardensBloc: BlocProvider.of<GardensBloc>(context),
                                     gardenId: gardens[index].id
-                                )..add(LoadActivities(gardens[index].id)),
+                                )..add(LoadActivities()),
                                 child: DetailsGardenScreen(id: gardens[index].id),
                             );
 

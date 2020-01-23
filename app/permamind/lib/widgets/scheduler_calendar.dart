@@ -24,7 +24,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   @override
   void initState() {
     super.initState();
-    _events = widget.schedule;
+//    _events = widget.schedule;
     _calendarController = CalendarController();
   }
 
@@ -32,6 +32,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   @override
   Widget build(BuildContext context) {
 
+    _events = widget.schedule;
 
     return TableCalendar(
 //      locale: 'fr_FR',
@@ -55,7 +56,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
 
   void _onDaySelected(DateTime selectedDay, List events) {
     DateTime referenceDate = new DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
-    BlocProvider.of<SchedulerBloc>(context).add(SelectDayActivities(referenceDate, widget.schedule));
+    BlocProvider.of<ActivitiesBloc>(context).add(SelectDayActivities(referenceDate, widget.schedule));
   }
 }
 

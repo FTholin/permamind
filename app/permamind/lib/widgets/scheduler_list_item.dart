@@ -35,7 +35,7 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
         onChanged: (bool value) {
           setState((){
             checkboxValue = value;
-            BlocProvider.of<SchedulerBloc>(context).add(
+            BlocProvider.of<ActivitiesBloc>(context).add(
                 UpdateActivity(widget.activity.copyWith(
                     id: widget.activity.id,
                     gardenId: widget.activity.gardenId,

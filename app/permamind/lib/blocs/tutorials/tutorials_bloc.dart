@@ -10,6 +10,7 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
   final FirebaseDataRepository tutosRepository;
 
   TutorialsBloc({@required this.tutosRepository});
+
   StreamSubscription _tutosSubscription;
   StreamSubscription _activitiesSubscription;
 

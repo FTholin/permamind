@@ -9,11 +9,10 @@ import 'package:permamind/models/models.dart';
 
 class HomeScreen extends StatelessWidget {
 
-  final DataRepository _dataRepository;
+  final DataRepository dataRepository;
 
-  HomeScreen({Key key, @required DataRepository dataRepository})
+  HomeScreen({Key key, this.dataRepository})
       : assert(dataRepository != null),
-        _dataRepository = dataRepository,
         super(key: key);
 
   @override
@@ -48,7 +47,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildTabPage(AppTab activeTab) {
     switch (activeTab) {
       case AppTab.gardens:
-        return EnumeratedGardens(dataRepository: _dataRepository);
+        return EnumeratedGardens(dataRepository: dataRepository);
         break;
       case AppTab.abc:
         return Scaffold(

@@ -52,7 +52,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
                     builder: (_) {
 
                       return BlocProvider.value(
-                        value: BlocProvider.of<SchedulerBloc>(context),
+                        value: BlocProvider.of<ActivitiesBloc>(context),
                         child: AddEditActivityScreen(),
                       );
 
@@ -65,7 +65,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
 //              if (addedActivity != false) {
 //                BlocProvider.of<GardensBloc>(context).add(
 //                    DeleteGarden(currentGarden));
-//                BlocProvider.of<SchedulerBloc>(context).close();
+//                BlocProvider.of<ActivitiesBloc>(context).close();
 //                Navigator.pop(context, currentGarden);
 //              }
 //            }

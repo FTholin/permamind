@@ -66,11 +66,11 @@ import 'package:permamind/blocs/blocs.dart';
 
                   DateTime referenceDate  = new DateTime(selectedDate.year, selectedDate.month, selectedDate.day);
 
-                  BlocProvider.of<SchedulerBloc>(context).add(
+                  BlocProvider.of<ActivitiesBloc>(context).add(
                     AddActivity(
                       Activity(
                         _activityNameController.text,
-                        BlocProvider.of<SchedulerBloc>(context).gardenId,
+                        BlocProvider.of<ActivitiesBloc>(context).gardenId,
                         false,
                         referenceDate
                       )

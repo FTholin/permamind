@@ -1,27 +1,27 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class SchedulerState extends Equatable {
-  SchedulerState();
+abstract class ActivitiesState extends Equatable {
+  ActivitiesState();
 
   @override
   List<Object> get props => [];
 }
 
 
-class ActivitiesLoading extends SchedulerState {
+class ActivitiesLoading extends ActivitiesState {
   @override
   String toString() => "ActivitiesLoading";
 }
 
 
-class ActivitiesNotLoaded extends SchedulerState {
+class ActivitiesNotLoaded extends ActivitiesState {
   @override
   String toString() => "ActivitiesNotLoaded";
 }
 
 
-class ActivitiesLoaded extends SchedulerState {
+class ActivitiesLoaded extends ActivitiesState {
 
   final DateTime referenceDate;
   final Map<DateTime, List> schedule;
@@ -36,8 +36,9 @@ class ActivitiesLoaded extends SchedulerState {
 }
 
 
+
 //
-//class DayActivitiesLoaded extends SchedulerState {
+//class DayActivitiesLoaded extends ActivitiesState {
 ////  final List<PlanningDay> schedule;
 //  final int dayIndex;
 //
