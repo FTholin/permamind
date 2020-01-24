@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
-import 'package:permamind/widgets/widgets.dart';
 
 class AddEditGardenScreen extends StatefulWidget {
   final bool isEditing;
@@ -70,20 +68,16 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
   bool get isEditing => widget.isEditing;
 
   final List<String> lengths = <String>[
-    "100",
-    "200",
-    "300"
+    "80", "100", "200", "300"
   ];
 
   final List<String> widths = <String>[
-    "100",
-    "200",
-    "300"
+    "60", "80", "100"
   ];
 
   _AddEditGardenScreenState() {
-    gardenLengthValue = lengths.first;
-    gardenWidthValue = widths.first;
+    gardenLengthValue = lengths[2];
+    gardenWidthValue = widths[1];
   }
 
   @override
@@ -134,7 +128,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            "Garden's dimensions (centimeter)",
+                            "Garden's dimensions l x L (centimeter)",
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
@@ -359,7 +353,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            "Garden's dimensions (centimeter)",
+                              "Garden's dimensions l x L (centimeter)",
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
