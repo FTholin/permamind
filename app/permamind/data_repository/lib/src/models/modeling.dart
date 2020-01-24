@@ -10,14 +10,14 @@ class Modeling {
   final int waterRequirement;
   final int yield;
 
-//  List<PlanningDay> schedule = new List<PlanningDay>();
+  List<ModelingSchedule> schedule = new List<ModelingSchedule>();
   final List<String> composition;
 
   Modeling(this.name, this.productionDuration,
       this.difficultyLevel, this.sunlightRequirement,
       this.waterRequirement,
       this.yield,
-//      this.schedule,
+      this.schedule,
       this.composition, {String id})
       : this.id = id;
 
@@ -33,7 +33,7 @@ class Modeling {
       sunlightRequirement ?? this.sunlightRequirement,
       waterRequirement ?? this.waterRequirement,
       yield ?? this.yield,
-//      schedule ?? this.schedule,
+      schedule ?? this.schedule,
       composition ?? this.composition,
       id: id ?? this.id
     );
@@ -68,7 +68,7 @@ class Modeling {
     return ModelingEntity(id, name, productionDuration,
         difficultyLevel, sunlightRequirement,
         waterRequirement, yield,
-//        schedule,
+        schedule,
         composition);
   }
 
@@ -80,7 +80,7 @@ class Modeling {
       entity.sunlightRequirement,
       entity.waterRequirement,
       entity.yield,
-//      entity.schedule,
+      entity.schedule,
       entity.composition,
       id: entity.id,
     );

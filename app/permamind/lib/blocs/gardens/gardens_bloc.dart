@@ -65,7 +65,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   Stream<GardensState> _mapAddGardensToState(AddGarden event) async* {
     // TODO Ajouter activités ici
 
-//    final activities = await _userRepository.getUserId();
+//    final activities = await _dataRepository.getUserId();
 
     _dataRepository.addNewGarden(event.garden);
   }

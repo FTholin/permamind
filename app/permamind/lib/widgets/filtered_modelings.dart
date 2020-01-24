@@ -66,7 +66,7 @@ class FilteredModelings extends StatelessWidget {
 
                       // TODO retrieve all form infos and transfer them
 
-                    final todo = await Navigator.pushNamed(context,
+                    await Navigator.pushNamed(context,
                       ArchSampleRoutes.detailsModeling,
                       arguments: DetailsModelingsScreenArguments(
                           modeling: modelings[index],
