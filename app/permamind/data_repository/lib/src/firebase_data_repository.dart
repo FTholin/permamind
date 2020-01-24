@@ -28,8 +28,9 @@ class FirebaseDataRepository implements DataRepository {
 
 
   @override
-  Future<void> addNewGarden(Garden garden) {
-    return gardensCollection.add(garden.toEntity().toDocument());
+  Future<String> addNewGarden(Garden garden) async {
+    DocumentReference docRef = await gardensCollection.add(garden.toEntity().toDocument());
+    return docRef.documentID;
   }
 
 
@@ -58,6 +59,26 @@ class FirebaseDataRepository implements DataRepository {
 //    return StreamGroup.merge([stream2,stream1]);
 //
 //  }
+
+  @override
+  Future<void> addGardenActivities(List<Activity> schedule) async {
+
+    var batch = Firestore.instance.batch();
+
+
+      for (int i = 0; i < schedule.length; i++) {
+        DocumentReference docRef = await activitiesCollection.add(
+            schedule[i].toEntity().toDocument());
+        batch.setData(docRef, {
+          "title": schedule[i].title,
+          "gardenId": schedule[i].gardenId,
+          "complete": schedule[i].complete,
+          "expectedDate": schedule[i].expectedDate,
+        });
+      }
+    batch.commit();
+
+}
 
   Stream<List<Garden>> gardens(String userId) {
     return gardensCollection

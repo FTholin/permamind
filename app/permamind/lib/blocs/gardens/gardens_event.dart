@@ -25,7 +25,10 @@ class LoadGardens extends GardensEvent {
 class AddGarden extends GardensEvent {
   final Garden garden;
 
-  AddGarden(this.garden) : super([garden]);
+  final bool gardenCreation;
+  final List<ModelingSchedule> schedule;
+
+  AddGarden(this.garden, this.gardenCreation, this.schedule) : super([garden, gardenCreation, schedule]);
 
   @override
   String toString() => 'AddGarden { garden: $garden }';
@@ -67,3 +70,15 @@ class GardensUpdated extends GardensEvent {
   @override
   String toString() => 'GardensUpdated';
 }
+
+//
+//class AddGardenActivities extends GardensEvent {
+//
+//  final List<ModelingSchedule> schedule;
+//  final String gardenId;
+//
+//  AddGardenActivities(this.gardenId, this.schedule);
+//
+//  @override
+//  String toString() => 'GardensUpdated';
+//}

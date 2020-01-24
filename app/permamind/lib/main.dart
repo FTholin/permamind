@@ -146,23 +146,25 @@ class App extends StatelessWidget {
                           onSaveGarden: (gardenName, publicVisibility,
                               gardenMembers, modelisationId, modelingName, gardenLength,
                               gardenWidth, gardenGround,
-                              activities
+                              schedule
                               ) {
                             List<String> allGardenMembers = new List.from(
                                 [state.userId])
                               ..addAll(gardenMembers);
 
-                            // TODO Add Activities
-                            gardensBloc.add();
                             gardensBloc.add(
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
                                   publicVisibility, allGardenMembers,
                                   modelisationId,
-//                                  activities,
-                                  modelingName, DateTime.now())
+                                  modelingName, DateTime.now()), true, schedule
                               ),
                             );
+
+//                            // TODO Add Activities
+//                            gardensBloc.add(
+//                                AddGardenActivities("",activities)
+//                            );
                           }
                       );
                     }

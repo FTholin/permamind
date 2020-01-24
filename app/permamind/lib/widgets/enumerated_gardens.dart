@@ -57,7 +57,8 @@ class EnumeratedGardens extends StatelessWidget {
                         Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
                           key: ArchSampleKeys.snackbar,
                           garden: gardens[index],
-                          onUndo: () => BlocProvider.of<GardensBloc>(context).add(AddGarden(gardens[index])),
+                          // TODO Revoir processus de tampo pour les jardins
+//                          onUndo: () => BlocProvider.of<GardensBloc>(context).add(AddGarden(gardens[index])),
                           localizations: localizations,
                         ));
                       }

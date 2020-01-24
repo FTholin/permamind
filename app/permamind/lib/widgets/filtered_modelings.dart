@@ -76,7 +76,7 @@ class FilteredModelings extends StatelessWidget {
                           gardenGround: gardenGround,
                           publicVisibility: gardenVisibility,
                           gardenMembers: gardenMembers,
-//                          schedule: modelings[index].schedule
+                          schedule: modelings[index].schedule
                       ),
                     );
 //

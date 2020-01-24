@@ -31,7 +31,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     if (event is LoadGardens) {
       yield* _mapLoadGardensToState(event);
     } else if (event is AddGarden) {
-      yield* _mapAddGardensToState(event);
+      yield* _mapAddGardenToState(event);
     } else if (event is UpdateGarden) {
       yield* _mapUpdateGardensToState(event);
     } else if (event is DeleteGarden) {
@@ -62,13 +62,39 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   }
 
-  Stream<GardensState> _mapAddGardensToState(AddGarden event) async* {
-    // TODO Ajouter activités ici
+  Stream<GardensState> _mapAddGardenToState(AddGarden event) async* {
 
-//    final activities = await _dataRepository.getUserId();
+    final gardenId = await _dataRepository.addNewGarden(event.garden);
 
-    _dataRepository.addNewGarden(event.garden);
+    if (event.gardenCreation) {
+
+      DateTime referenceDate = DateTime.now();
+
+      List<Activity> activities = List<Activity>();
+
+      for (int i = 0; i < event.schedule.length; i++) {
+
+        print(event.schedule[i].dayActivities);
+
+        for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
+          DateTime expectedDate = referenceDate.add(Duration(days: i));
+          activities.add(
+              Activity( event.schedule[i].dayActivities[j].name, gardenId, false, expectedDate)
+          );
+        }
+
+      }
+
+      if (activities.isNotEmpty) {
+        _dataRepository.addGardenActivities(activities);
+      }
+
+    } else {
+      // TODO Fetch garden Activities with id and recopy content (temp process)
+    }
+
   }
+
 
   Stream<GardensState> _mapUpdateGardensToState(UpdateGarden event) async* {
     _dataRepository.updateGarden(event.updatedGarden);
