@@ -94,7 +94,6 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 
   @override
   Future<void> close() {
-    gardensSubscription.cancel();
     _activitiesSubscription.cancel();
     return super.close();
   }

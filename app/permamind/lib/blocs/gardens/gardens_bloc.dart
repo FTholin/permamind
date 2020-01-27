@@ -36,10 +36,9 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapUpdateGardensToState(event);
     } else if (event is DeleteGarden) {
       yield* _mapDeleteGardensToState(event);
-    } else if (event is ToggleAll) {
-//      yield* _mapToggleAllToState();
-    }
-    else if (event is ClearCompleted) {
+    } else if (event is CopyGarden) {
+      yield* _mapCopyGardenToState(event);
+    } else if (event is ClearCompleted) {
       yield* _mapClearCompletedToState();
     } else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
@@ -66,8 +65,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
     final gardenId = await _dataRepository.addNewGarden(event.garden);
 
-    if (event.gardenCreation) {
-
       DateTime referenceDate = DateTime.now();
 
       List<Activity> activities = List<Activity>();
@@ -87,13 +84,12 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       if (activities.isNotEmpty) {
         _dataRepository.addGardenActivities(activities);
       }
-
-    } else {
-      // TODO Fetch garden Activities with id and recopy content (temp process)
-    }
-
   }
 
+
+  Stream<GardensState> _mapCopyGardenToState(CopyGarden event) async* {
+    _dataRepository.addNewGarden(event.garden);
+  }
 
   Stream<GardensState> _mapUpdateGardensToState(UpdateGarden event) async* {
     _dataRepository.updateGarden(event.updatedGarden);

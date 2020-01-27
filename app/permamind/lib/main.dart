@@ -157,7 +157,7 @@ class App extends StatelessWidget {
                                   gardenWidth, gardenGround,
                                   publicVisibility, allGardenMembers,
                                   modelisationId,
-                                  modelingName, DateTime.now()), true, schedule
+                                  modelingName, DateTime.now()), schedule
                               ),
                             );
 

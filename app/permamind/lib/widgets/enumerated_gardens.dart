@@ -37,7 +37,7 @@ class EnumeratedGardens extends StatelessWidget {
                     enableFeedback: true,
                     child: GardenItem(name: gardens[index].name, modelingName: gardens[index].modelingName, membersCount: gardens[index].members.length.toString(), index: index),
                     onTap: () async {
-                      final removedTodo = await Navigator.of(context).push(
+                      final removedGarden = await Navigator.of(context).push(
                           MaterialPageRoute(
 
                               builder: (_) {
@@ -53,12 +53,13 @@ class EnumeratedGardens extends StatelessWidget {
 
                           })
                       );
-                      if (removedTodo != null) {
+                      if (removedGarden != null) {
                         Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
                           key: ArchSampleKeys.snackbar,
                           garden: gardens[index],
                           // TODO Revoir processus de tampo pour les jardins
-//                          onUndo: () => BlocProvider.of<GardensBloc>(context).add(AddGarden(gardens[index])),
+                          onUndo: () => BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden)),
+//                            onUndo: () => print("Reconstruit le jardin"),
                           localizations: localizations,
                         ));
                       }
