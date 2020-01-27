@@ -25,33 +25,33 @@ class TabSelector extends StatelessWidget {
            return BottomNavigationBar(
              type: BottomNavigationBarType.fixed,
              items: AppTab.values.map((tab) {
-              Image picture;
+               Image picture;
               Text text;
               switch (tab) {
                 case AppTab.gardens:
                   picture = Image.asset(
                     "assets/bar_buttons_icons/garden.png",
-                    height: 40,
+                    semanticLabel: 'profile icon bottom nav bar',
+                    height: 35,
                     width: 37,
-                    semanticLabel: 'garden icon bottom nav bar',
                   );
                   text = Text("Gardens");
                   break;
                 case AppTab.abc:
                   picture = Image.asset(
-                      "assets/bar_buttons_icons/abc.png",
-                      height: 40,
-                      width: 37,
-                      semanticLabel: 'plants abcédaire bottom nav bar'
+                    "assets/bar_buttons_icons/abc.png",
+                    semanticLabel: 'profile icon bottom nav bar',
+                    height: 35,
+                    width: 37,
                   );
                   text = Text("ABC");
                   break;
                 case AppTab.learning:
                   picture = Image.asset(
-                      "assets/bar_buttons_icons/knowledge.png",
-                      height: 40,
-                      width: 37,
-                      semanticLabel: 'Learning icon bottom nav bar'
+                    "assets/bar_buttons_icons/knowledge.png",
+                    semanticLabel: 'profile icon bottom nav bar',
+                    height: 35,
+                    width: 37,
                   );
                   text = Text("Tutorials");
                   break;
@@ -59,7 +59,7 @@ class TabSelector extends StatelessWidget {
                   picture = Image.asset(
                     "assets/bar_buttons_icons/profil.png",
                     semanticLabel: 'profile icon bottom nav bar',
-                    height: 40,
+                    height: 35,
                     width: 37,
                   );
                   text = Text("Profile");
