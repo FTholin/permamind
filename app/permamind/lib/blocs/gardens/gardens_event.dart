@@ -61,6 +61,16 @@ class DeleteGarden extends GardensEvent {
   String toString() => 'DeleteGarden { garden: $garden }';
 }
 
+class LeaveGarden extends GardensEvent {
+  final Garden garden;
+  final String userId;
+
+  LeaveGarden(this.garden, this.userId) : super([garden, userId]);
+
+  @override
+  String toString() => 'LeaveGarden { garden: $garden }';
+}
+
 class ClearCompleted extends GardensEvent {
   @override
   String toString() => 'ClearCompleted';

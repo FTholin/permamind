@@ -45,6 +45,7 @@ class FirebaseDataRepository implements DataRepository {
     return gardensCollection.document(garden.id).delete();
   }
 
+
 //  ///private method to zip QuerySnapshot streams
 //  Stream<QuerySnapshot> _combineStreams(String userId) {
 //

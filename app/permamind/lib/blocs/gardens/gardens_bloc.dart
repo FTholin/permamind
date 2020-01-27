@@ -42,10 +42,9 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapClearCompletedToState();
     } else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
+    } else if (event is LeaveGarden) {
+      yield* _mapLeaveGardensToState(event);
     }
-//    } else if (event is GardensInit) {
-//      yield* _mapGardensInitToState();
-//    }
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
@@ -93,6 +92,37 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   Stream<GardensState> _mapUpdateGardensToState(UpdateGarden event) async* {
     _dataRepository.updateGarden(event.updatedGarden);
+  }
+
+  Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
+    // TODO Tester Ici si processus quitter jardin voir git
+    if (event.garden.members.length == 1) {
+      _dataRepository.deleteGarden(event.garden);
+    } else  {
+      if (event.userId == event.garden.admin) {
+
+        // Si je suis admin pour l'instant on prend un autre membre au hasard
+        // Plus tard on demandera à l'user de le choisir dans une liste
+
+        event.garden.members.remove(event.userId);
+        Garden modifiedGarden = event.garden.copyWith(
+            name: event.garden.name,
+            length: event.garden.length,
+            width: event.garden.width,
+            gardenGround: event.garden.gardenGround,
+            id: event.garden.id,
+            publicVisibility: event.garden.publicVisibility,
+            modelingId: event.garden.modelingId,
+            admin: event.garden.members.first,
+            members: event.garden.members
+        );
+        _dataRepository.updateGarden(modifiedGarden);
+
+      } else {
+        event.garden.members.remove(event.userId);
+        _dataRepository.updateGarden(event.garden);
+      }
+    }
   }
 
   Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {

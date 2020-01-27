@@ -10,11 +10,13 @@ import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
 
-  final String id;
+  final String gardenId;
+  final String userId;
 
   DetailsGardenScreen({
     Key key,
-    @required this.id
+    @required this.gardenId,
+    @required this.userId,
   })
       : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
 
@@ -22,7 +24,7 @@ class DetailsGardenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: CustomAppBar(id: id),
+      appBar: CustomAppBar(gardenId: gardenId, userId: userId),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -193,9 +195,13 @@ class DetailsGardenScreen extends StatelessWidget {
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
-  final String id;
+  final String gardenId;
+  final String userId;
 
-  CustomAppBar({@required this.id, Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+  CustomAppBar({
+    @required this.gardenId,
+    @required this.userId,
+    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
 
   @override
   final Size preferredSize; // default is 56.0
@@ -211,7 +217,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
     return BlocBuilder<GardensBloc, GardensState>(
         builder: (context, state) {
           final currentGarden = (state as GardensLoaded)
-              .gardens.firstWhere((garden) => garden.id == widget.id,
+              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
               orElse: () => null);
 
           return AppBar(
@@ -234,10 +240,17 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                   if (removedGarden != null) {
 
-                    if (removedGarden != false) {
+                    if (removedGarden == Garden) {
                       BlocProvider.of<GardensBloc>(context).add(
                           DeleteGarden(currentGarden));
                       BlocProvider.of<ActivitiesBloc>(context).close();
+                      Navigator.pop(context, currentGarden);
+                    } else if (removedGarden == "Leave") {
+
+                      BlocProvider.of<ActivitiesBloc>(context).close();
+                      BlocProvider.of<GardensBloc>(context).add(
+                          LeaveGarden(currentGarden, widget.userId)
+                      );
                       Navigator.pop(context, currentGarden);
                     }
                   }

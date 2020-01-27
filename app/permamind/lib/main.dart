@@ -70,24 +70,19 @@ class App extends StatelessWidget {
                 return BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     if (state is Authenticated) {
-//                      final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
                       return MultiBlocProvider(
                         providers: [
                           BlocProvider<TabBloc>(
                             create: (context) => TabBloc(),
                           ),
-//                          BlocProvider<StatsBloc>(
-//                            builder: (context) =>
-//                                StatsBloc(gardensBloc: gardensBloc),
-//                          ),
                           BlocProvider<TutorialsBloc>(
                             create: (context) =>
                             TutorialsBloc(tutosRepository: firebaseRepository)
                               ..add(LoadTutos()),
                           ),
                         ],
-                        child: HomeScreen(dataRepository: firebaseRepository),
+                        child: HomeScreen(dataRepository: firebaseRepository, userId: state.userId),
                       );
                     }
                     if (state is Unauthenticated) {
@@ -144,7 +139,7 @@ class App extends StatelessWidget {
                       final gardensBloc = BlocProvider.of<GardensBloc>(context);
                       return DetailsModelingScreen(
                           onSaveGarden: (gardenName, publicVisibility,
-                              gardenMembers, modelisationId, modelingName, gardenLength,
+                              gardenMembers, modelingId, modelingName, gardenLength,
                               gardenWidth, gardenGround,
                               schedule
                               ) {
@@ -155,9 +150,13 @@ class App extends StatelessWidget {
                             gardensBloc.add(
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
-                                  publicVisibility, allGardenMembers,
-                                  modelisationId,
-                                  modelingName, DateTime.now()), schedule
+                                  publicVisibility,
+                                  state.userId,
+                                  allGardenMembers,
+                                  modelingId,
+                                  modelingName,
+                                  DateTime.now()),
+                                  schedule
                               ),
                             );
 
