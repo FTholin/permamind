@@ -31,9 +31,6 @@ class FilteredModelings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final todosBloc = BlocProvider.of<GardensBloc>(context);
-    final localizations = ArchSampleLocalizations.of(context);
-
     return GridView.builder(
               key: ArchSampleKeys.todoList,
               itemCount: modelings.length,
