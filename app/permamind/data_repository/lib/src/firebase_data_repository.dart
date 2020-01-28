@@ -81,6 +81,34 @@ class FirebaseDataRepository implements DataRepository {
 
 }
 
+  @override
+  Future<void> deleteGardenActivities(String gardenId) async {
+
+//    var batch = Firestore.instance.batch();
+//
+//    activitiesCollection.where('gardenId', isEqualTo: '3bTuYyKuDis3QQWisbFB')
+//    .snapshots().map((snapshot){
+//
+//      snapshot.documents.map((doc) => batch.delete(doc.reference));
+//
+//    });
+//
+//    batch.commit();
+
+
+    var res = activitiesCollection.where('gardenId', isEqualTo: gardenId)
+        .snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
+          .toList();
+    });
+
+
+    print(res);
+
+  }
+
+
   Stream<List<Garden>> gardens(String userId) {
     return gardensCollection
         .where("members",arrayContains: userId)

@@ -240,18 +240,32 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                   if (removedGarden != null) {
 
-                    if (removedGarden == Garden) {
+                    Map returnData = Map();
+
+                    if (removedGarden['action'] == "Delete") {
+
+                      returnData['action'] = "Delete";
+                      returnData['garden'] = currentGarden;
+                      returnData['activities'] =  removedGarden['activities'];
+
                       BlocProvider.of<GardensBloc>(context).add(
                           DeleteGarden(currentGarden));
-                      BlocProvider.of<ActivitiesBloc>(context).close();
-                      Navigator.pop(context, currentGarden);
-                    } else if (removedGarden == "Leave") {
 
                       BlocProvider.of<ActivitiesBloc>(context).close();
+
+                      Navigator.pop(context, returnData);
+
+                    } else  {
+
+                      returnData['action'] = "Leave";
+                      returnData['garden'] = currentGarden;
+
                       BlocProvider.of<GardensBloc>(context).add(
                           LeaveGarden(currentGarden, widget.userId)
                       );
-                      Navigator.pop(context, currentGarden);
+                      BlocProvider.of<ActivitiesBloc>(context).close();
+
+                      Navigator.pop(context, returnData);
                     }
                   }
                 },

@@ -58,14 +58,36 @@ class EnumeratedGardens extends StatelessWidget {
                           })
                       );
                       if (removedGarden != null) {
-                        Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
-                          key: ArchSampleKeys.snackbar,
-                          garden: gardens[index],
-                          // TODO Revoir processus de tampo pour les jardins
-                          onUndo: () => BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden)),
-//                            onUndo: () => print("Reconstruit le jardin"),
-                          localizations: localizations,
-                        ));
+
+                        if (removedGarden['action'] == 'Delete') {
+                          final snackBar = SnackBar(
+                            content: Text('Delete ${removedGarden['garden'].name}'),
+                            action: SnackBarAction(
+                              label: 'Undo',
+                              onPressed: () {
+                                BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden['garden']));
+                                BlocProvider.of<GardensBloc>(context).add(CopyActivities(removedGarden['activities']));
+                              },
+                            ),
+                          );
+
+                          Scaffold.of(context).showSnackBar(snackBar);
+
+                        } else {
+
+                          final snackBar = SnackBar(
+                            content: Text('Leave ${removedGarden['garden'].name}'),
+                            action: SnackBarAction(
+                              label: 'Undo',
+                              onPressed: () {
+                                BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden['garden']));
+                              },
+                            ),
+                          );
+
+                          Scaffold.of(context).showSnackBar(snackBar);
+                        }
+
                       }
                     },
                   );

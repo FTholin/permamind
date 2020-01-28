@@ -129,7 +129,8 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                               onPressed: () {
-                                Navigator.pop(context, 'Leave');
+                                Map returnData = {'action': 'Leave', 'garden': garden};
+                                Navigator.pop(context, returnData);
                               },
                               child: Text(
                                 "Leave a Garden",
@@ -147,7 +148,9 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                               onPressed: () {
-                                Navigator.pop(context, garden);
+
+                                Map returnData = {'action': 'Delete', 'garden': garden};
+                                Navigator.pop(context, returnData);
                               },
                               child: Text(
                                 "Delete a Garden",
