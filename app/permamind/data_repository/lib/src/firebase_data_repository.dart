@@ -84,27 +84,11 @@ class FirebaseDataRepository implements DataRepository {
   @override
   Future<void> deleteGardenActivities(String gardenId) async {
 
-//    var batch = Firestore.instance.batch();
-//
-//    activitiesCollection.where('gardenId', isEqualTo: '3bTuYyKuDis3QQWisbFB')
-//    .snapshots().map((snapshot){
-//
-//      snapshot.documents.map((doc) => batch.delete(doc.reference));
-//
-//    });
-//
-//    batch.commit();
-
-
-    var res = activitiesCollection.where('gardenId', isEqualTo: gardenId)
-        .snapshots().map((snapshot) {
-      return snapshot.documents
-          .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
-          .toList();
+    activitiesCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
     });
-
-
-    print(res);
 
   }
 
@@ -164,7 +148,6 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
-//  .document("Film").collection("firstFilm").getDocuments();
 
 
   Future<QuerySnapshot> searchByName(String value) {

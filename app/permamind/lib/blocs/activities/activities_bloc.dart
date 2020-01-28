@@ -46,6 +46,8 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
         yield* _mapUpdateActivityToState(event);
       } else if (event is AddActivity) {
         yield* _mapAddActivityToState(event);
+      } else if (event is DeleteActivities) {
+        yield* _mapDeleteActivitiesToState(event);
       } else {
         print("ERROR MapEventToState event: $event");
       }
@@ -80,6 +82,10 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   Stream<ActivitiesState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
     referenceDate =  event.selectedDay;
     yield ActivitiesLoaded(referenceDate, event.dayActivities);
+  }
+
+  Stream<ActivitiesState> _mapDeleteActivitiesToState(DeleteActivities event) async* {
+    dataRepository.deleteGardenActivities(event.gardenId);
   }
 
 

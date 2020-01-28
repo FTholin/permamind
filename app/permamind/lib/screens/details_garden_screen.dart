@@ -224,52 +224,69 @@ class _CustomAppBarState extends State<CustomAppBar>{
             title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
             actions: <Widget>[
 
-              IconButton(
+              BlocBuilder<ActivitiesBloc, ActivitiesState>(
+              builder: (context, state) {
+                if (state is ActivitiesLoaded) {
+                  return IconButton(
 //            tooltip: localizations.deleteGarden,
-                // TODO ArchSampleKeys
+                    // TODO ArchSampleKeys
 //                key: ArchSampleKeys.deleteGardenButton,
-                icon: Icon(Icons.settings),
-                onPressed: () async {
+                    icon: Icon(Icons.settings),
+                    onPressed: () async {
 
-                  final removedGarden = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (_) {
-                            return SettingsGardenScreen(id: currentGarden.id);
-                          })
-                  );
-
-                  if (removedGarden != null) {
-
-                    Map returnData = Map();
-
-                    if (removedGarden['action'] == "Delete") {
-
-                      returnData['action'] = "Delete";
-                      returnData['garden'] = currentGarden;
-                      returnData['activities'] =  removedGarden['activities'];
-
-                      BlocProvider.of<GardensBloc>(context).add(
-                          DeleteGarden(currentGarden));
-
-                      BlocProvider.of<ActivitiesBloc>(context).close();
-
-                      Navigator.pop(context, returnData);
-
-                    } else  {
-
-                      returnData['action'] = "Leave";
-                      returnData['garden'] = currentGarden;
-
-                      BlocProvider.of<GardensBloc>(context).add(
-                          LeaveGarden(currentGarden, widget.userId)
+                      final removedGarden = await Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (_) {
+                                return SettingsGardenScreen(id: currentGarden.id);
+                              })
                       );
-                      BlocProvider.of<ActivitiesBloc>(context).close();
 
-                      Navigator.pop(context, returnData);
-                    }
-                  }
-                },
-              ),
+                      if (removedGarden != null) {
+
+                        Map returnData = Map();
+
+                        if (removedGarden['action'] == "Delete") {
+
+                          List<Activity> activities = List<Activity>();
+                          state.schedule.entries.forEach((e) {
+                            e.value.forEach((item){
+                              activities.add(item);
+                            });
+                          });
+
+                          returnData['action'] = "Delete";
+                          returnData['garden'] = currentGarden;
+                          returnData['activities'] = activities;
+
+                          BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
+
+                          BlocProvider.of<GardensBloc>(context).add(
+                              DeleteGarden(currentGarden));
+
+                          BlocProvider.of<ActivitiesBloc>(context).close();
+
+                          Navigator.pop(context, returnData);
+
+                        } else  {
+
+                          returnData['action'] = "Leave";
+                          returnData['garden'] = currentGarden;
+
+                          BlocProvider.of<GardensBloc>(context).add(
+                              LeaveGarden(currentGarden, widget.userId)
+                          );
+                          BlocProvider.of<ActivitiesBloc>(context).close();
+
+                          Navigator.pop(context, returnData);
+                        }
+                      }
+                    },
+                  );
+                } else {
+                  return Container();
+                }
+              })
+
             ],
           );
         }
