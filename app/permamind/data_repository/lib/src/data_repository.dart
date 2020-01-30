@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_repository/data_repository.dart';
 
 abstract class DataRepository {
+
   Future<String> addNewGarden(Garden garden);
 
   Future<void> addNewActivity(Activity activity);
@@ -22,5 +24,7 @@ abstract class DataRepository {
   Future<void> updateGarden(Garden garden);
 
   Future<void> updateActivity(Activity update);
+
+  Future<QuerySnapshot> searchByName(String value);
 
   }

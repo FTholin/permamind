@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/arch_bricks/keys.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/models/models.dart';
 
 
 class SettingsGardenScreen extends StatefulWidget {
@@ -31,6 +33,9 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
   Widget build(BuildContext context) {
 
+    List<String> _gardenMembers = [];
+
+    var queryResProfile = [];
 
     return BlocBuilder<GardensBloc, GardensState>(
     builder: (context, state) {
@@ -70,6 +75,73 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                         },
                       ),
                       Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          "Add few friends 😃",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      ChipsInput(
+                        keyboardAppearance: Brightness.dark,
+                        textCapitalization: TextCapitalization.words,
+                        enabled: true,
+                        maxChips: 15,
+                        textStyle: TextStyle(
+                            height: 1.5, fontFamily: "Roboto", fontSize: 16),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search),
+                          // hintText: formControl.hint,
+                          // enabled: false,
+                          // errorText: field.errorText,
+                        ),
+                        findSuggestions: (String query) async {
+                          queryResProfile = [];
+                          if (query.length != 0) {
+                            _gardenMembers = [];
+                            var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchByName(query);
+
+                            for (int i = 0; i < queryRes.documents.length; ++i) {
+                              var data = queryRes.documents[i].data;
+                              queryResProfile.add(MemberProfile(
+                                  data["id"],
+                                  data["pseudo"],
+                                  data["email"],
+                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+                            }
+                          }
+                          return queryResProfile;
+                        },
+                        onChanged: (data) {
+
+                          _gardenMembers.clear();
+                          data.forEach((elem){
+                            _gardenMembers.add(elem.id);
+                          });
+                        },
+                        chipBuilder: (context, state, profile) {
+                          return InputChip(
+                            key: ObjectKey(profile),
+                            label: Text(profile.pseudo),
+                            avatar: CircleAvatar(
+                              backgroundImage: NetworkImage(profile.imageUrl),
+                            ),
+                            onDeleted: () => state.deleteChip(profile),
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          );
+                        },
+                        suggestionBuilder: (context, state, profile) {
+                          return ListTile(
+                            key: ObjectKey(profile),
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(profile.imageUrl),
+                            ),
+                            title: Text(profile.pseudo),
+                            subtitle: Text(profile.email),
+                            onTap: () => state.selectSuggestion(profile),
+                          );
+                        },
+                      ),
+                      Padding(
                           padding: EdgeInsets.symmetric(vertical: 20),
                           child: ButtonTheme(
                             minWidth: 200.0,
@@ -77,41 +149,42 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                                 onPressed: () {
-                                  if (_newGardenNameController.text.isNotEmpty) {
-//                                    Navigator.pushNamed(
-//                                      context,
-//                                      ArchSampleRoutes.discoverModelings,
-//                                      arguments: ModelingsScreenArguments(
-//                                          '${_gardenNameController.text}', _gardenVisibility, _gardenMembers, double.parse(_gardenLengthController.text), double.parse(_gardenWidthController.text), _gardenGround),
-//                                    );
 
+                                if (_gardenMembers.isNotEmpty || _newGardenNameController.text.isNotEmpty) {
+
+                                  List<String> newMembers = new List<String>.from(garden.members);
+
+                                  if (_gardenMembers.isNotEmpty) {
+
+                                    for (final item in _gardenMembers) {
+                                      if (newMembers.contains(item) == false) {
+                                        newMembers.add(item);
+                                      }
+                                    }
+                                  }
+
+                                  if (_newGardenNameController.text.isEmpty) {
+                                    _newGardenNameController.text = garden.name;
+                                  }
 
                                   BlocProvider.of<GardensBloc>(context).add(
                                     UpdateGarden(
                                       garden.copyWith(
-                                        name: _newGardenNameController.text,
-                                        length: garden.length,
-                                        width: garden.width,
-                                        gardenGround: garden.gardenGround,
-                                        id: garden.id,
-                                        publicVisibility: garden.publicVisibility,
-                                        modelingId: garden.modelingId,
-                                        members: garden.members
+                                          name: _newGardenNameController.text,
+                                          length: garden.length,
+                                          width: garden.width,
+                                          gardenGround: garden.gardenGround,
+                                          id: garden.id,
+                                          publicVisibility: garden.publicVisibility,
+                                          modelingId: garden.modelingId,
+                                          members: newMembers
                                       ),
                                     ),
                                   );
+                                }
 
                                   Navigator.pop(context, false);
 
-                                  } else {
-                                    setState(() {
-
-                                      _newGardenNameController.text.isEmpty
-                                          ? _newGardenNameValidate = true
-                                          : _newGardenNameValidate = false;
-
-                                    });
-                                  }
                                 },
                                 child: Text(
                                   "Confirm changes",

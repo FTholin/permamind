@@ -180,6 +180,9 @@ class App extends StatelessWidget {
               '/addActivity': (context) {
                 return AddEditActivityScreen();
               },
+              "/joinGarden": (context) {
+                 return JoinGardenScreen();
+              },
 //              '/' : (context) {
 //                BlocProvider(
 //                  create: (BuildContext context) => SchedulerBloc(),

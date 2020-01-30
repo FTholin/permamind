@@ -41,7 +41,7 @@ class GardenSpeedDialState extends State<GardenSpeedDial>
         SpeedDialChild(
           child: Image.asset("assets/utils_icons/group.png"),
           backgroundColor: Colors.green,
-          onTap: null,
+          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.joinGarden),
           label: 'Join a garden',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
           labelBackgroundColor: Colors.green,

@@ -237,12 +237,17 @@ class _CustomAppBarState extends State<CustomAppBar>{
                       final removedGarden = await Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (_) {
-                                return SettingsGardenScreen(id: currentGarden.id);
+
+                                return BlocProvider.value(
+                                  value: BlocProvider.of<ActivitiesBloc>(
+                                      context),
+                                  child: SettingsGardenScreen(id: currentGarden.id),
+                                );
                               })
                       );
 
 
-                      if (removedGarden != null) {
+                      if (removedGarden != null && removedGarden != false) {
 
                         Map returnData = Map();
 

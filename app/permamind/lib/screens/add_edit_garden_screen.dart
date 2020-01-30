@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/models/models.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 
@@ -240,7 +241,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 
                               for (int i = 0; i < queryRes.documents.length; ++i) {
                                 var data = queryRes.documents[i].data;
-                                queryResProfile.add(AppProfile(
+                                queryResProfile.add(MemberProfile(
                                     data["id"],
                                     data["pseudo"],
                                     data["email"],
@@ -500,7 +501,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 
                               for (int i = 0; i < queryRes.documents.length; ++i) {
                                 var data = queryRes.documents[i].data;
-                                queryResProfile.add(AppProfile(
+                                queryResProfile.add(MemberProfile(
                                     data["id"],
                                     data["pseudo"],
                                     data["email"],
@@ -585,27 +586,3 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
   }
 }
 
-class AppProfile {
-  final String id;
-  final String pseudo;
-  final String email;
-  final String imageUrl;
-
-  const AppProfile(this.id, this.pseudo, this.email, this.imageUrl);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is AppProfile &&
-          runtimeType == other.runtimeType &&
-          pseudo == other.pseudo &&
-          id == other.id;
-
-  @override
-  int get hashCode => pseudo.hashCode;
-
-  @override
-  String toString() {
-    return pseudo;
-  }
-}
