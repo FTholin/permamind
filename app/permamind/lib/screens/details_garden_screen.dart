@@ -241,22 +241,27 @@ class _CustomAppBarState extends State<CustomAppBar>{
                               })
                       );
 
+
                       if (removedGarden != null) {
 
                         Map returnData = Map();
 
+                        List<Activity> activities = List<Activity>();
+                        state.schedule.entries.forEach((e) {
+                          e.value.forEach((item){
+                            activities.add(item);
+                          });
+                        });
+
+
+                        returnData['activities'] = activities;
+
+
                         if (removedGarden['action'] == "Delete") {
 
-                          List<Activity> activities = List<Activity>();
-                          state.schedule.entries.forEach((e) {
-                            e.value.forEach((item){
-                              activities.add(item);
-                            });
-                          });
+                          returnData['garden'] = currentGarden;
 
                           returnData['action'] = "Delete";
-                          returnData['garden'] = currentGarden;
-                          returnData['activities'] = activities;
 
                           BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
 
@@ -269,12 +274,34 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                         } else  {
 
-                          returnData['action'] = "Leave";
-                          returnData['garden'] = currentGarden;
+                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.userId) {
+                            BlocProvider.of<GardensBloc>(context).add(
+                                DeleteGarden(currentGarden));
+                            BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
+                            returnData['action'] = "Delete";
+                          } else {
 
-                          BlocProvider.of<GardensBloc>(context).add(
-                              LeaveGarden(currentGarden, widget.userId)
-                          );
+                            returnData['action'] = "Leave";
+
+                            List<String> members = new List<String>.from(currentGarden.members);
+
+                            Garden copy = currentGarden.copyWith(name: currentGarden.name,
+                                length: currentGarden.length,
+                                width: currentGarden.width,
+                                gardenGround: currentGarden.gardenGround,
+                                id: currentGarden.id,
+                                publicVisibility: currentGarden.publicVisibility,
+                                modelingId: currentGarden.modelingId,
+                                admin: currentGarden.admin,
+                                members: members);
+
+                            BlocProvider.of<GardensBloc>(context).add(
+                                LeaveGarden(currentGarden, widget.userId)
+                            );
+
+                            returnData['garden'] = copy;
+                          }
+
                           BlocProvider.of<ActivitiesBloc>(context).close();
 
                           Navigator.pop(context, returnData);

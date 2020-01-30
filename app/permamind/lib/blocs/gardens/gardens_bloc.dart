@@ -36,8 +36,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapUpdateGardensToState(event);
     } else if (event is DeleteGarden) {
       yield* _mapDeleteGardensToState(event);
-    } else if (event is CopyGarden) {
-      yield* _mapCopyGardenToState(event);
     } else if (event is ClearCompleted) {
       yield* _mapClearCompletedToState();
     } else if (event is GardensUpdated) {
@@ -89,10 +87,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
 
-  Stream<GardensState> _mapCopyGardenToState(CopyGarden event) async* {
-    _dataRepository.addNewGarden(event.garden);
-  }
-
   Stream<GardensState> _mapCopyActivitiesToState(CopyActivities schedule) async* {
     _dataRepository.addGardenActivities(schedule.activities);
   }
@@ -102,16 +96,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
-    if (event.garden.members.length == 1) {
-      _dataRepository.deleteGarden(event.garden);
-    } else  {
-      if (event.userId == event.garden.admin) {
-        _dataRepository.deleteGarden(event.garden);
-      } else {
-        event.garden.members.remove(event.userId);
-        _dataRepository.updateGarden(event.garden);
-      }
-    }
+    event.garden.members.remove(event.userId);
+    _dataRepository.updateGarden(event.garden);
   }
 
   Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {

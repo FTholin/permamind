@@ -80,7 +80,7 @@ class EnumeratedGardens extends StatelessWidget {
                             action: SnackBarAction(
                               label: 'Undo',
                               onPressed: () {
-                                BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden['garden']));
+                                BlocProvider.of<GardensBloc>(context).add(UpdateGarden(removedGarden['garden']));
                               },
                             ),
                           );
