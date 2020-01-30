@@ -87,7 +87,10 @@ class DiscoverModelingsScreen extends StatelessWidget {
                     modelings: modelings,
                     gardenName: args.gardenName,
                     gardenVisibility: args.gardenVisibility,
-                    gardenMembers: args.gardenMembers
+                    gardenMembers: args.gardenMembers,
+                    gardenLength: args.gardenLength,
+                    gardenWidth: args.gardenWidth,
+                    gardenGround: args.gardenGround
                   );
                 } else {
                   // TODO ArchSampleKeys
@@ -124,6 +127,9 @@ class DiscoverModelingsScreen extends StatelessWidget {
                     gardenName: args.gardenName,
                     gardenVisibility: args.gardenVisibility,
                     gardenMembers: args.gardenMembers,
+                    gardenLength: args.gardenLength,
+                    gardenWidth: args.gardenWidth,
+                    gardenGround: args.gardenGround
                   );
 //                  return FilteredModelings(
 //                      modelings: modelings,
@@ -147,5 +153,9 @@ class ModelingsScreenArguments {
   final String gardenName;
   final bool gardenVisibility;
   final List<String> gardenMembers;
-  ModelingsScreenArguments(this.gardenName, this.gardenVisibility, this.gardenMembers);
+  final double gardenLength;
+  final double gardenWidth;
+  final bool gardenGround;
+
+  ModelingsScreenArguments(this.gardenName, this.gardenVisibility, this.gardenMembers, this.gardenLength, this.gardenWidth, this.gardenGround);
 }

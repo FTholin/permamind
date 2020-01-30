@@ -1,12 +1,4 @@
-// Flutter code sample for
 
-// ![CheckboxListTile sample](https://flutter.github.io/assets-for-api-docs/assets/material/checkbox_list_tile.png)
-//
-// This widget shows a checkbox that, when checked, slows down all animations
-// (including the animation of the checkbox itself getting checked!).
-//
-// This sample requires that you also import 'package:flutter/scheduler.dart',
-// so that you can reference [timeDilation].
 
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
@@ -16,16 +8,11 @@ import 'package:permamind/blocs/blocs.dart';
 
 class ScheduleListItem extends StatefulWidget {
 
-  final Garden garden;
-  final int dayIndex;
-  final int activityIndex;
-  List<PlanningDay> schedule;
+  final Activity activity;
+
 
   ScheduleListItem({
-    @required this.garden,
-    @required this.schedule,
-    @required this.dayIndex,
-    @required this.activityIndex,
+    @required this.activity,
     Key key}) : super(key: key);
 
   @override
@@ -39,20 +26,23 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
   @override
   Widget build(BuildContext context) {
 
-    checkboxValue = widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].complete;
+    checkboxValue = widget.activity.complete;
 
     return Center(
       child: CheckboxListTile(
-        title: Text(widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].toString()),
+        title: Text(widget.activity.title),
         value: checkboxValue,
         onChanged: (bool value) {
           setState((){
             checkboxValue = value;
-            widget.schedule[widget.dayIndex].dayActivities[widget.activityIndex].complete = checkboxValue;
-            widget.garden.schedule = widget.schedule;
-
-            BlocProvider.of<GardensBloc>(context).add(
-                UpdateGarden(widget.garden)
+            BlocProvider.of<ActivitiesBloc>(context).add(
+                UpdateActivity(widget.activity.copyWith(
+                    id: widget.activity.id,
+                    gardenId: widget.activity.gardenId,
+                    title: widget.activity.title,
+                    complete: checkboxValue,
+                    expectedDate: widget.activity.expectedDate
+                ),)
             );
           });
         },

@@ -7,7 +7,16 @@ import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 
 
-typedef SaveGardenCallback = Function(String gardenName, bool publicVisibility, List<String> gardenMembers, String gardenModelisationId, String modelisationName, List<PlanningDay> schedule);
+typedef SaveGardenCallback = Function(String gardenName,
+    bool publicVisibility,
+    List<String> gardenMembers,
+    String gardenModelisationId,
+    String modelisationName,
+    double gardenLength,
+    double gardenWidth,
+    bool gardenGround,
+    List<ModelingSchedule> schedule
+    );
 
 class DetailsModelingScreen extends StatelessWidget {
 
@@ -17,7 +26,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gardensBloc = BlocProvider.of<GardensBloc>(context);
+//    final gardensBloc = BlocProvider.of<GardensBloc>(context);
     final localizations = ArchSampleLocalizations.of(context);
 
     final DetailsModelingsScreenArguments args =
@@ -434,7 +443,18 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                        );
 //                      }));
 //                gardensBloc.d
-                onSaveGarden(args.gardenName, args.publicVisibility, args.gardenMembers, args.modeling.id, args.modeling.composition.join("-"), args.schedule);
+                onSaveGarden(
+                    args.gardenName,
+                    args.publicVisibility,
+                    args.gardenMembers,
+                    args.modeling.id,
+                    args.modeling.composition.join("-"),
+                    args.gardenLength,
+                    args.gardenWidth,
+                    args.gardenGround,
+                    args.schedule
+                );
+
                 Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
               }),
@@ -500,13 +520,19 @@ class DetailsModelingsScreenArguments {
   final String gardenName;
   final bool publicVisibility;
   final List<String> gardenMembers;
-  final List<PlanningDay> schedule;
+  final List<ModelingSchedule> schedule;
+  final double gardenLength;
+  final double gardenWidth;
+  final bool gardenGround;
 
 //  final SaveGardenCallback onSaveGarden;
 
   DetailsModelingsScreenArguments({Key key,
     @required this.modeling,
     @required this.gardenName,
+    @required this.gardenLength,
+    @required this.gardenWidth,
+    @required this.gardenGround,
     @required this.publicVisibility,
     @required this.gardenMembers,
     @required this.schedule

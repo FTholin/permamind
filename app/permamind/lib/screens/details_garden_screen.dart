@@ -4,117 +4,184 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/screens/screens.dart';
+import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
-  final Garden garden;
 
-  int _currentDay;
+  final String gardenId;
+  final String userId;
 
-  DetailsGardenScreen({Key key, @required this.garden})
-      : super(key: key ?? ArchSampleKeys.detailsGardenScreen) {
-    final DateTime date = DateTime.now();
-    final d1 = DateTime.utc(garden.creationDate.year, garden.creationDate.month, garden.creationDate.day);
-    final d2 = DateTime.utc(date.year,date.month,date.day);
-    _currentDay = d2.difference(d1).inDays;
-  }
-
+  DetailsGardenScreen({
+    Key key,
+    @required this.gardenId,
+    @required this.userId,
+  })
+      : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
 
   @override
   Widget build(BuildContext context) {
-    final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
-    final schedulerBloc = BlocProvider.of<SchedulerBloc>(context);
-
-    final localizations = ArchSampleLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("${garden.name}"),
-        actions: <Widget>[
-          IconButton(
-            tooltip: localizations.deleteGarden,
-            // TODO ArchSampleKeys
-//                key: ArchSampleKeys.deleteGardenButton,
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              schedulerBloc.close();
-              gardensBloc.add(DeleteGarden(garden));
-              Navigator.pop(context, garden);
-            },
+      appBar: CustomAppBar(gardenId: gardenId, userId: userId),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Container(
+            color: Colors.yellow,
+            height: 230,
           ),
+          BlocBuilder<ActivitiesBloc, ActivitiesState>(
+              builder: (context, state) {
+                if (state is ActivitiesLoaded) {
+                  return SchedulerCalendar(
+                    referenceDate: DateTime.now(),
+                    schedule: state.schedule,
+                  );
+                } else {
+                  return Expanded(
+                      child: Container(
+                      )
+                  );
+                }
+              }
+          ),
+          const SizedBox(height: 8.0),
+//          _buildButtons(),
+          const SizedBox(height: 8.0),
+          BlocBuilder<ActivitiesBloc, ActivitiesState>(
+              builder: (context, state) {
+                if (state is ActivitiesLoaded) {
+                  return Expanded(
+                    child: Container(
+                        child: _buildEventList(state.referenceDate, state.schedule)
+                    ),
+                  );
+                } else {
+                  return Expanded(
+                      child: Container(
+                      )
+                  );
+                }
+              }
+          ),
+//          Expanded(child: _buildEventList()),
         ],
       ),
-      body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-          BlocBuilder<SchedulerBloc, SchedulerState>(
-            condition: (previousState, currentState) =>
-            currentState.runtimeType != previousState.runtimeType,
-            builder: (context, state) {
-              print("reconstruction du calendrier");
-              if (state is SchedulerLoaded) {
-                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-              } else if (state is DayActivitiesLoaded ) {
-                return SchedulerCalendar(schedule: state.schedule, referenceDate: garden.creationDate);
-              } else {return Container();}
-            }
-          ),
-            const SizedBox(height: 8.0),
-//          _buildButtons(),
-            const SizedBox(height: 8.0),
-            BlocBuilder<SchedulerBloc, SchedulerState>(
-                builder: (context, state) {
-                  if (state is DayActivitiesLoaded) {
-                    _currentDay = state.dayIndex;
-                    if(state.dayIndex >= 0 && state.dayIndex < state.schedule.length) {
-                      return Expanded(
-                        child: Container(child: _buildEventList(state.schedule, state.dayIndex)),
-                      );
-                    } else {
-                      return Expanded(
-                        child: Container(),
-                      );
-                    }
-                  } else if (state is SchedulerLoaded) {
-                    print(_currentDay);
-                    if(_currentDay >= 0 && _currentDay < state.schedule.length) {
-                      return Expanded(
-                        child: Container(child: _buildEventList(state.schedule, _currentDay)),
-                      );
-                    } else {
-                      return Expanded(
-                        child: Container(),
-                      );
-                    }
-                  } else {
-                    return Expanded(
-                      child: Container(),
-                    );
-                  }
-                }
-            ),
-//          Expanded(child: _buildEventList()),
-          ],
-        ),
+      floatingActionButton: ActivitySpeedDial(
+          visible: true
+      ),
     );
+
+
+//    return BlocBuilder<GardensBloc, GardensState>(
+//    builder: (context, state) {
+//      final currentGarden = (state as GardensLoaded)
+//          .gardens.firstWhere((garden) => garden.id == id,
+//          orElse: () => null);
+//      return Scaffold(
+//        appBar: AppBar(
+//          title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+//          actions: <Widget>[
+//
+//            IconButton(
+////            tooltip: localizations.deleteGarden,
+//              // TODO ArchSampleKeys
+////                key: ArchSampleKeys.deleteGardenButton,
+//              icon: Icon(Icons.settings),
+//              onPressed: () async {
+//
+//                final removedGarden = await Navigator.of(context).push(
+//                    MaterialPageRoute(
+//                        builder: (_) {
+//                          return SettingsGardenScreen(id: currentGarden.id);
+//                        })
+//                );
+//
+//                if (removedGarden != null) {
+//
+//                  if (removedGarden != false) {
+//                    BlocProvider.of<GardensBloc>(context).add(
+//                        DeleteGarden(currentGarden));
+//                    BlocProvider.of<ActivitiesBloc>(context).close();
+//                    Navigator.pop(context, currentGarden);
+//                  }
+//                }
+//              },
+//            ),
+//          ],
+//        ),
+//        body: Column(
+//          mainAxisSize: MainAxisSize.max,
+//          children: <Widget>[
+//            Container(
+//              color: Colors.yellow,
+//              height: 300,
+//            ),
+//            BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                condition: (previousState, currentState) =>
+//                currentState.runtimeType != previousState.runtimeType,
+//                builder: (context, state) {
+//                  if (state is ActivitiesLoaded) {
+//                     return SchedulerCalendar(
+//                       referenceDate: currentGarden.creationDate,
+//                        schedule: state.schedule,
+//                     );
+//                  } else {
+//                    // TODO Mettre une splashScreen
+//                      return Container();
+//                    }
+//                }
+//            ),
+//            const SizedBox(height: 8.0),
+////          _buildButtons(),
+//            const SizedBox(height: 8.0),
+//            BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                builder: (context, state) {
+//
+//                  if (state is ActivitiesLoaded) {
+//                    return Expanded(
+//                        child: Container(
+//                            child: _buildEventList(state.referenceDate, state.schedule)
+//                        ),
+//                      );
+//                  } else {
+//                    return Expanded(
+//                        child: Container(
+//                        )
+//                  );
+//                  }
+//                }
+//            ),
+////          Expanded(child: _buildEventList()),
+//          ],
+//        ),
+//        floatingActionButton: ActivitySpeedDial(visible: true),
+//      );
+//    });
   }
 
-  Widget _buildEventList(List<PlanningDay> schedule, int dayIndex) {
-    // Changer ici mettre  un index au lieu d'une activité
-    //schedule[dayIndex].dayActivities
+
+  Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
+
     List<Container> items = List<Container>();
 
-    for (int activityIndex = 0; activityIndex < schedule[dayIndex].dayActivities.length; activityIndex++) {
-      items.add(
-          Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.8),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        margin:
-        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: ScheduleListItem(garden: garden, schedule: schedule, dayIndex: dayIndex, activityIndex: activityIndex),
-      ));
+
+    if (schedule[referenceDate] != null) {
+      for (var activity in schedule[referenceDate]) {
+        items.add(
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.8),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              margin:
+              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+              child: ScheduleListItem(activity: activity),
+            )
+        );
+      }
     }
 
     return ListView(
@@ -126,6 +193,154 @@ class DetailsGardenScreen extends StatelessWidget {
 }
 
 
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+
+  final String gardenId;
+  final String userId;
+
+  CustomAppBar({
+    @required this.gardenId,
+    @required this.userId,
+    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+
+  @override
+  final Size preferredSize; // default is 56.0
+
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar>{
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GardensBloc, GardensState>(
+        builder: (context, state) {
+          final currentGarden = (state as GardensLoaded)
+              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
+              orElse: () => null);
+
+          return AppBar(
+            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+            actions: <Widget>[
+
+              BlocBuilder<ActivitiesBloc, ActivitiesState>(
+              builder: (context, state) {
+                if (state is ActivitiesLoaded) {
+                  return IconButton(
+//            tooltip: localizations.deleteGarden,
+                    // TODO ArchSampleKeys
+//                key: ArchSampleKeys.deleteGardenButton,
+                    icon: Icon(Icons.settings),
+                    onPressed: () async {
+
+                      final removedGarden = await Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (_) {
+                                return SettingsGardenScreen(id: currentGarden.id);
+                              })
+                      );
+
+
+                      if (removedGarden != null) {
+
+                        Map returnData = Map();
+
+                        List<Activity> activities = List<Activity>();
+                        state.schedule.entries.forEach((e) {
+                          e.value.forEach((item){
+                            activities.add(item);
+                          });
+                        });
+
+
+                        returnData['activities'] = activities;
+
+
+                        if (removedGarden['action'] == "Delete") {
+
+                          returnData['garden'] = currentGarden;
+
+                          returnData['action'] = "Delete";
+
+                          BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
+
+                          BlocProvider.of<GardensBloc>(context).add(
+                              DeleteGarden(currentGarden));
+
+                          BlocProvider.of<ActivitiesBloc>(context).close();
+
+                          Navigator.pop(context, returnData);
+
+                        } else  {
+
+                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.userId) {
+                            BlocProvider.of<GardensBloc>(context).add(
+                                DeleteGarden(currentGarden));
+                            BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
+                            returnData['action'] = "Delete";
+                          } else {
+
+                            returnData['action'] = "Leave";
+
+                            List<String> members = new List<String>.from(currentGarden.members);
+
+                            Garden copy = currentGarden.copyWith(name: currentGarden.name,
+                                length: currentGarden.length,
+                                width: currentGarden.width,
+                                gardenGround: currentGarden.gardenGround,
+                                id: currentGarden.id,
+                                publicVisibility: currentGarden.publicVisibility,
+                                modelingId: currentGarden.modelingId,
+                                admin: currentGarden.admin,
+                                members: members);
+
+                            BlocProvider.of<GardensBloc>(context).add(
+                                LeaveGarden(currentGarden, widget.userId)
+                            );
+
+                            returnData['garden'] = copy;
+                          }
+
+                          BlocProvider.of<ActivitiesBloc>(context).close();
+
+                          Navigator.pop(context, returnData);
+                        }
+                      }
+                    },
+                  );
+                } else {
+                  return Container();
+                }
+              })
+
+            ],
+          );
+        }
+    );
+  }
+}
+
+
+// TODO Bottom Up slide animation
+//  Route _createRoute() {
+//    return PageRouteBuilder(
+//      pageBuilder: (context, animation, secondaryAnimation) => SettingsGardenScreen(id: garden.id),
+//      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//        var begin = Offset(0.0, 1.0);
+//        var end = Offset.zero;
+//        var curve = Curves.ease;
+//
+//        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//
+//        return SlideTransition(
+//          position: animation.drive(tween),
+//          child: child,
+//        );
+//      },
+//    );
+//  }
+
 
 //class Scheduler extends StatefulWidget {
 //  Scheduler({Key key, this.gardenId}) : super(key: key);
@@ -133,10 +348,10 @@ class DetailsGardenScreen extends StatelessWidget {
 //  final String gardenId;
 //
 //  @override
-//  _SchedulerState createState() => _SchedulerState();
+//  _ActivitiesState createState() => _ActivitiesState();
 //}
 //
-//class _SchedulerState extends State<Scheduler> with TickerProviderStateMixin {
+//class _ActivitiesState extends State<Scheduler> with TickerProviderStateMixin {
 //  Map<DateTime, List> _events;
 //  List _selectedEvents;
 //  AnimationController _animationController;
