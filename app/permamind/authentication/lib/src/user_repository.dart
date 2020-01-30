@@ -37,12 +37,12 @@ class UserRepository {
 
   Future<void> signUp({String pseudo, String email, String password}) async {
 
-    FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
+    AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
 
-    User newUser = User(user.uid, pseudo, email, [], [], pseudo.substring(0, 1).toUpperCase());
+    User newUser = User(result.user.uid, pseudo, email, [], [], pseudo.substring(0, 1).toUpperCase());
     await addNewUser(newUser);
   }
 
@@ -63,7 +63,7 @@ class UserRepository {
   }
 
 
-  @override
+
   Future<void> addNewUser(User user) {
     return userCollection.add(user.toEntity().toDocument());
   }
