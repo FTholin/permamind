@@ -11,8 +11,8 @@ class GardenEntity extends Equatable {
   final double length;
   final double width;
   final bool gardenGround;
+  final String admin;
   final List<String> members;
-  List<PlanningDay> schedule = new List<PlanningDay>();
   final DateTime creationDate;
 
   GardenEntity(this.id,
@@ -21,10 +21,10 @@ class GardenEntity extends Equatable {
       this.width,
       this.gardenGround,
       this.publicVisibility,
+      this.admin,
       this.members,
       this.modelingId,
       this.modelingName,
-      this.schedule,
       this.creationDate);
 
   Map<String, Object> toJson() {
@@ -32,11 +32,9 @@ class GardenEntity extends Equatable {
       'id': id,
       'name': name,
       'publicVisibility': publicVisibility,
+      'admin': admin,
       'members': members,
       'modelingName': modelingName,
-      'schedule': schedule.map((item) {
-        return item.toJson();
-      }).toList(),
       'creationDate': creationDate
     };
   }
@@ -54,17 +52,17 @@ class GardenEntity extends Equatable {
       json['width'] as double,
       json['gardenGround'] as bool,
       json['publicVisibility'] as bool,
+      json['admin'] as String,
       json['members'],
       json['modelingId'] as String,
       json['modelingName'] as String,
-      json['schedule'] as List<PlanningDay>,
       json['creationDate']
     );
   }
 
   static GardenEntity fromSnapshot(DocumentSnapshot snap) {
 
-    List<String> gardenList = new List<String>.from(snap.data['members']);
+    List<String> gardenMembers = new List<String>.from(snap.data['members']);
 
     return GardenEntity(
       snap.documentID,
@@ -73,12 +71,10 @@ class GardenEntity extends Equatable {
       snap.data['width'],
       snap.data['gardenGround'],
       snap.data['publicVisibility'],
-      gardenList,
+      snap.data['admin'],
+      gardenMembers,
       snap.data['modelingId'],
       snap.data['modelingName'],
-      snap.data['schedule'].map<PlanningDay>((item) {
-        return PlanningDay.fromMap(item);
-      }).toList(),
         DateTime.fromMillisecondsSinceEpoch(
             snap.data["creationDate"].millisecondsSinceEpoch)
     );
@@ -91,12 +87,10 @@ class GardenEntity extends Equatable {
       'width': width,
       'gardenGround': gardenGround,
       'publicVisibility': publicVisibility,
+      'admin': admin,
       'members': members,
       'modelingId': modelingId,
       'modelingName': modelingName,
-      'schedule': schedule.map((item) {
-        return item.toJson();
-      }).toList(),
       'creationDate': creationDate
     };
   }

@@ -31,22 +31,21 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     if (event is LoadGardens) {
       yield* _mapLoadGardensToState(event);
     } else if (event is AddGarden) {
-      yield* _mapAddGardensToState(event);
+      yield* _mapAddGardenToState(event);
     } else if (event is UpdateGarden) {
       yield* _mapUpdateGardensToState(event);
     } else if (event is DeleteGarden) {
       yield* _mapDeleteGardensToState(event);
-    } else if (event is ToggleAll) {
-//      yield* _mapToggleAllToState();
-    }
-    else if (event is ClearCompleted) {
+    } else if (event is ClearCompleted) {
       yield* _mapClearCompletedToState();
     } else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
+    } else if (event is LeaveGarden) {
+      yield* _mapLeaveGardensToState(event);
+    } else if (event is CopyActivities) {
+      yield* _mapCopyActivitiesToState(event);
+
     }
-//    } else if (event is GardensInit) {
-//      yield* _mapGardensInitToState();
-//    }
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
@@ -62,12 +61,43 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   }
 
-  Stream<GardensState> _mapAddGardensToState(AddGarden event) async* {
-    _dataRepository.addNewGarden(event.garden);
+  Stream<GardensState> _mapAddGardenToState(AddGarden event) async* {
+
+    final gardenId = await _dataRepository.addNewGarden(event.garden);
+
+      DateTime referenceDate = DateTime.now();
+
+      List<Activity> activities = List<Activity>();
+
+      for (int i = 0; i < event.schedule.length; i++) {
+
+        for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
+          DateTime expectedDate = referenceDate.add(Duration(days: i));
+          expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day);
+          activities.add(
+              Activity( event.schedule[i].dayActivities[j].name, gardenId, false, expectedDate)
+          );
+        }
+
+      }
+
+      if (activities.isNotEmpty) {
+        _dataRepository.addGardenActivities(activities);
+      }
+  }
+
+
+  Stream<GardensState> _mapCopyActivitiesToState(CopyActivities schedule) async* {
+    _dataRepository.addGardenActivities(schedule.activities);
   }
 
   Stream<GardensState> _mapUpdateGardensToState(UpdateGarden event) async* {
     _dataRepository.updateGarden(event.updatedGarden);
+  }
+
+  Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
+    event.garden.members.remove(event.userId);
+    _dataRepository.updateGarden(event.garden);
   }
 
   Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {
@@ -104,10 +134,10 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
 
   @override
-  void dispose() {
+  Future <void> close() {
     _gardensSubscription?.cancel();
     _authenticationBlocSubscription?.cancel();
-//    super.dispose();
+    return super.close();
   }
 
 //  Stream<GardensState> _mapGardensInitToState() async* {

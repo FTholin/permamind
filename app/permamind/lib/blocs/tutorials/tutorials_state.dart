@@ -19,7 +19,7 @@ class TutosLoaded extends TutorialsState {
   TutosLoaded([this.tutorials = const []]) : super([tutorials]);
 
   @override
-  String toString() => 'TutosLoaded { activities: $tutorials }';
+  String toString() => 'TutosLoaded { tutoActivities: $tutorials }';
 }
 
 class TutosNotLoaded extends TutorialsState {
@@ -27,22 +27,22 @@ class TutosNotLoaded extends TutorialsState {
   String toString() => 'TodosNotLoaded';
 }
 
-class ActivitiesLoading extends TutorialsState {
+class TutoActivitiesLoading extends TutorialsState {
   @override
-  String toString() => 'ActivitiesLoading';
+  String toString() => 'TutotutoActivitiesLoading';
 }
 
-class ActivitiesLoaded extends TutorialsState {
-  final List<TutorialActivity> activities;
+class TutoActivitiesLoaded extends TutorialsState {
+  final List<TutorialActivity> tutoActivities;
 
-  ActivitiesLoaded([this.activities = const []]) : super([activities]);
+  TutoActivitiesLoaded([this.tutoActivities = const []]) : super([tutoActivities]);
 
   @override
-  String toString() => 'ActivitiesLoaded { activities: $activities }';
+  String toString() => 'TutotutoActivitiesLoaded { tutoActivities: $tutoActivities }';
 }
 
 
-class ActivitiesNotLoaded extends TutorialsState {
+class TutoActivitiesNotLoaded extends TutorialsState {
   @override
-  String toString() => 'ActivitiesNotLoaded';
+  String toString() => 'tutoActivitiesNotLoaded';
 }

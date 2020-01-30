@@ -70,24 +70,19 @@ class App extends StatelessWidget {
                 return BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     if (state is Authenticated) {
-                      final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
                       return MultiBlocProvider(
                         providers: [
                           BlocProvider<TabBloc>(
                             create: (context) => TabBloc(),
                           ),
-//                          BlocProvider<StatsBloc>(
-//                            builder: (context) =>
-//                                StatsBloc(gardensBloc: gardensBloc),
-//                          ),
                           BlocProvider<TutorialsBloc>(
                             create: (context) =>
                             TutorialsBloc(tutosRepository: firebaseRepository)
                               ..add(LoadTutos()),
                           ),
                         ],
-                        child: HomeScreen(),
+                        child: HomeScreen(dataRepository: firebaseRepository, userId: state.userId),
                       );
                     }
                     if (state is Unauthenticated) {
@@ -144,19 +139,31 @@ class App extends StatelessWidget {
                       final gardensBloc = BlocProvider.of<GardensBloc>(context);
                       return DetailsModelingScreen(
                           onSaveGarden: (gardenName, publicVisibility,
-                              gardenMembers, modelisationId, modelingName, gardenLength,
-                              gardenWidth, gardenGround, activities) {
+                              gardenMembers, modelingId, modelingName, gardenLength,
+                              gardenWidth, gardenGround,
+                              schedule
+                              ) {
                             List<String> allGardenMembers = new List.from(
                                 [state.userId])
                               ..addAll(gardenMembers);
+
                             gardensBloc.add(
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
-                                  publicVisibility, allGardenMembers,
-                                  modelisationId, activities,
-                                  modelingName, DateTime.now())
+                                  publicVisibility,
+                                  state.userId,
+                                  allGardenMembers,
+                                  modelingId,
+                                  modelingName,
+                                  DateTime.now()),
+                                  schedule
                               ),
                             );
+
+//                            // TODO Add Activities
+//                            gardensBloc.add(
+//                                AddGardenActivities("",activities)
+//                            );
                           }
                       );
                     }
@@ -172,7 +179,13 @@ class App extends StatelessWidget {
               },
               '/addActivity': (context) {
                 return AddEditActivityScreen();
-              }
+              },
+//              '/' : (context) {
+//                BlocProvider(
+//                  create: (BuildContext context) => SchedulerBloc(),
+//                  child: ChildA(),
+//                );
+//              }
             },
           );
         }

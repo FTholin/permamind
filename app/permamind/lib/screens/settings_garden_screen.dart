@@ -123,13 +123,33 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                       Padding(
                           padding: EdgeInsets.symmetric(vertical: 20),
                           child: ButtonTheme(
+                            buttonColor: Colors.pinkAccent,
+                            minWidth: 200.0,
+                            height: 50.0,
+//                            buttonColor: state.theme.accentColor,
+                            child: RaisedButton(
+                              onPressed: () {
+                                Map returnData = {'action': 'Leave', 'garden': garden};
+                                Navigator.pop(context, returnData);
+                              },
+                              child: Text(
+                                "Leave a Garden",
+                                style: TextStyle(fontSize: 22),
+                              ),
+                            ),
+                          )
+                      ),
+                      Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: ButtonTheme(
                             buttonColor: Colors.red,
                             minWidth: 200.0,
                             height: 50.0,
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                               onPressed: () {
-                                Navigator.pop(context, garden);
+                                Map returnData = {'action': 'Delete', 'garden': garden};
+                                Navigator.pop(context, returnData);
                               },
                               child: Text(
                                 "Delete a Garden",

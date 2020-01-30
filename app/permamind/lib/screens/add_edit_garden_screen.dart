@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +51,13 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 
   final String _bacParagraph = "A garden is an ambiguous place.";
 
+
+  String gardenLengthValue;
+
+  String gardenWidthValue;
+
   bool _gardenNameValidate = false;
+
   bool _gardenLengthValidate = false;
   bool _gardenWidthValidate = false;
 
@@ -62,11 +67,26 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 
   bool get isEditing => widget.isEditing;
 
+  final List<String> lengths = <String>[
+    "80", "100", "200", "300"
+  ];
+
+  final List<String> widths = <String>[
+    "60", "80", "100"
+  ];
+
+  _AddEditGardenScreenState() {
+    gardenLengthValue = lengths[2];
+    gardenWidthValue = widths[1];
+  }
 
   @override
   Widget build(BuildContext context) {
-    final localizations = ArchSampleLocalizations.of(context);
-    final textTheme = Theme.of(context).textTheme;
+
+
+//    final localizations = ArchSampleLocalizations.of(context);
+//    final textTheme = Theme.of(context).textTheme;
+
 
     List<String> _gardenMembers = [];
 
@@ -108,7 +128,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            "Garden's dimensions (meters)",
+                            "Garden's dimensions l x L (centimeter)",
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
@@ -116,44 +136,22 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                           children: <Widget>[
                             Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(bottom: 10, right: 20),
-                                  child: TextFormField(
-                                    controller: _gardenLengthController,
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: "Garden's length",
-                                      errorText: _gardenLengthValidate ? 'Length Can\'t Be Empty' : null,
-                                    ),
-                                    onChanged: (value) {
-                                      print(_gardenLengthController.text.isEmpty);
-                                      _gardenLengthController.text.isEmpty
-                                          ? _gardenLengthValidate = true
-                                          : _gardenLengthValidate = false;
-                                      setState(() {});
-                                    },
-                                  ),
-                                )
-                            ),
-                            Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(bottom: 10, left: 20),
-
-                                  child: TextFormField(
-                                    controller: _gardenWidthController,
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: "Garden's width",
-                                      errorText: _gardenWidthValidate ? 'Width Can\'t Be Empty' : null,
-                                    ),
-                                    onChanged: (value) {
-                                      _gardenWidthController.text.isEmpty
-                                          ? _gardenWidthValidate = true
-                                          : _gardenWidthValidate = false;
-                                      setState(() {});
-                                    },
-                                  ),
+                                  padding: EdgeInsets.only(bottom: 10),
+//                                  child: TextFormField(
+//                                    controller: _gardenLengthController,
+//                                    keyboardType: TextInputType.number,
+//                                    decoration: InputDecoration(
+//                                      border: OutlineInputBorder(),
+//                                      hintText: "Garden's length",
+//                                      errorText: _gardenLengthValidate ? 'Length Can\'t Be Empty' : null,
+//                                    ),
+//                                    onChanged: (value) {
+//                                      _gardenLengthController.text.isEmpty
+//                                          ? _gardenLengthValidate = true
+//                                          : _gardenLengthValidate = false;
+//                                      setState(() {});
+//                                    },
+//                                  ),
                                 )
                             ),
                           ],
@@ -304,13 +302,6 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                                             ? _gardenNameValidate = true
                                             : _gardenNameValidate = false;
 
-                                        _gardenLengthController.text.isEmpty
-                                            ? _gardenLengthValidate = true
-                                            : _gardenLengthValidate = false;
-
-                                        _gardenWidthController.text.isEmpty
-                                            ? _gardenWidthValidate = true
-                                            : _gardenWidthValidate = false;
                                       });
                                     }
                                   },
@@ -362,7 +353,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
-                            "Garden's dimensions (meters)",
+                              "Garden's dimensions l x L (centimeter)",
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
@@ -370,43 +361,57 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                           children: <Widget>[
                             Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(bottom: 10, right: 20),
-                                  child: TextFormField(
-                                      controller: _gardenLengthController,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: "Garden's length",
-                                        errorText: _gardenLengthValidate ? 'Length Can\'t Be Empty' : null,
-                                      ),
-                                    onChanged: (value) {
-                                      _gardenLengthController.text.isEmpty
-                                          ? _gardenLengthValidate = true
-                                          : _gardenLengthValidate = false;
-                                      setState(() {});
-                                    },
-                                  ),
+                                  padding: EdgeInsets.only(bottom: 10, right: 10),
+                                    child: DropdownButton<String>(
+//                                      hint:  Text("Select length"),
+                                      value:  gardenLengthValue,
+                                      onChanged: (String value) {
+                                        setState(() {
+                                          gardenLengthValue = value;
+                                        });
+                                      },
+                                      items: lengths.map((String value) {
+                                        return  DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Row(
+                                            children: <Widget>[
+                                              SizedBox(width: 10,),
+                                              Text(
+                                                value,
+                                                style:  TextStyle(color: Colors.black),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
                                 )
                             ),
                             Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(bottom: 10, left: 20),
-
-                                  child: TextFormField(
-                                      controller: _gardenWidthController,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: "Garden's width",
-                                        errorText: _gardenWidthValidate ? 'Width Can\'t Be Empty' : null,
-                                      ),
-                                    onChanged: (value) {
-                                      _gardenWidthController.text.isEmpty
-                                          ? _gardenWidthValidate = true
-                                          : _gardenWidthValidate = false;
-                                      setState(() {});
+                                  padding: EdgeInsets.only(bottom: 10),
+                                  child: DropdownButton<String>(
+                                      value:  gardenWidthValue,
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        gardenWidthValue = value;
+                                      });
                                     },
-                                  ),
+                                    items: widths.map((String value) {
+                                      return  DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Row(
+                                          children: <Widget>[
+                                            SizedBox(width: 10,),
+                                            Text(
+                                              value,
+                                              style:  TextStyle(color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }).toList(),
+                                  )
                                 )
                             ),
                           ],
@@ -548,22 +553,13 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                                       context,
                                       ArchSampleRoutes.discoverModelings,
                                       arguments: ModelingsScreenArguments(
-                                          '${_gardenNameController.text}', _gardenVisibility, _gardenMembers, double.parse(_gardenLengthController.text), double.parse(_gardenWidthController.text), _gardenGround),
+                                          '${_gardenNameController.text}', _gardenVisibility, _gardenMembers, double.parse(gardenLengthValue), double.parse(gardenWidthValue), _gardenGround),
                                     );
                                   } else {
                                     setState(() {
-
                                       _gardenNameController.text.isEmpty
                                           ? _gardenNameValidate = true
                                           : _gardenNameValidate = false;
-
-                                      _gardenLengthController.text.isEmpty
-                                          ? _gardenLengthValidate = true
-                                          : _gardenLengthValidate = false;
-
-                                      _gardenWidthController.text.isEmpty
-                                          ? _gardenWidthValidate = true
-                                          : _gardenWidthValidate = false;
                                     });
                                   }
                                 },

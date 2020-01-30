@@ -31,9 +31,6 @@ class FilteredModelings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final todosBloc = BlocProvider.of<GardensBloc>(context);
-    final localizations = ArchSampleLocalizations.of(context);
-
     return GridView.builder(
               key: ArchSampleKeys.todoList,
               itemCount: modelings.length,
@@ -66,7 +63,7 @@ class FilteredModelings extends StatelessWidget {
 
                       // TODO retrieve all form infos and transfer them
 
-                    final todo = await Navigator.pushNamed(context,
+                    await Navigator.pushNamed(context,
                       ArchSampleRoutes.detailsModeling,
                       arguments: DetailsModelingsScreenArguments(
                           modeling: modelings[index],

@@ -18,7 +18,7 @@ class EnumeratedActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final tutorialsBloc = BlocProvider.of<TutorialsBloc>(context);
 
-    tutorialsBloc.add(LoadActivities(tutorialId));
+    tutorialsBloc.add(LoadTutoActivities(tutorialId));
 
     return BlocBuilder<TutorialsBloc, TutorialsState>(
       builder: (context, state) {
@@ -26,8 +26,8 @@ class EnumeratedActivitiesScreen extends StatelessWidget {
           return Container(
             child: Text("ActivitiesLoading"),
           );
-        } else if (state is ActivitiesLoaded) {
-          final activities = state.activities;
+        } else if (state is TutoActivitiesLoaded) {
+          final activities = state.tutoActivities;
           return Scaffold(
               appBar: AppBar(
                   title: Text("${tutorialName}"),

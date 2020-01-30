@@ -12,8 +12,8 @@ class Garden extends Equatable {
   final double length;
   final double width;
   final bool gardenGround;
+  final String admin;
   final List<String> members;
-  List<PlanningDay> schedule = new List<PlanningDay>();
   final DateTime creationDate;
 
   Garden(
@@ -22,23 +22,23 @@ class Garden extends Equatable {
       this.width,
       this.gardenGround,
       this.publicVisibility,
+      this.admin,
       this.members,
       this.modelingId,
-      this.schedule,
       this.modelingName,
       this.creationDate,{String id})
       :  this.id = id;
 
-  Garden copyWith({String name, double length, double width, bool gardenGround, String id, bool publicVisibility, String modelingId, List<String> members}) {
+  Garden copyWith({String name, double length, double width, bool gardenGround, String id, bool publicVisibility, String modelingId, String admin, List<String> members}) {
     return Garden(
       name ?? this.name,
       length ?? this.length,
       width ?? this.width,
       gardenGround ?? this.gardenGround,
       publicVisibility ?? this.publicVisibility,
+      admin ?? this.admin,
       members ?? this.members,
       modelingId ?? this.modelingId,
-      schedule ?? this.schedule,
       modelingName ?? this.modelingName,
       creationDate ?? this.creationDate,
       id: id ?? this.id,
@@ -57,6 +57,7 @@ class Garden extends Equatable {
               id == other.id &&
               name == other.name &&
               publicVisibility == other.publicVisibility &&
+              admin == other.admin &&
               members == other.members;
 
 
@@ -73,10 +74,10 @@ class Garden extends Equatable {
         width,
         gardenGround,
         publicVisibility,
+        admin,
         members,
         modelingId,
         modelingName,
-        schedule,
         creationDate
     );
   }
@@ -89,9 +90,9 @@ class Garden extends Equatable {
       entity.width,
       entity.gardenGround,
       entity.publicVisibility,
+      entity.admin,
       entity.members,
       entity.modelingId,
-      entity.schedule,
       entity.modelingName,
       entity.creationDate,
       id: entity.id,
