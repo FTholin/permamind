@@ -45,6 +45,10 @@ class FirebaseDataRepository implements DataRepository {
     return gardensCollection.document(garden.id).delete();
   }
 
+  @override
+  Future<void> copyGarden(Garden garden) async {
+    return gardensCollection.document(garden.id).setData(garden.toEntity().toDocument());
+  }
 
 //  ///private method to zip QuerySnapshot streams
 //  Stream<QuerySnapshot> _combineStreams(String userId) {

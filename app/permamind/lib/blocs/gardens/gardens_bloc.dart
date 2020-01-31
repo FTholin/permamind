@@ -44,7 +44,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapLeaveGardensToState(event);
     } else if (event is CopyActivities) {
       yield* _mapCopyActivitiesToState(event);
-
+    } else if (event is CopyGarden) {
+      yield* _mapCopyGardenToState(event);
     }
   }
 
@@ -98,6 +99,10 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
     event.garden.members.remove(event.userId);
     _dataRepository.updateGarden(event.garden);
+  }
+
+  Stream<GardensState> _mapCopyGardenToState(CopyGarden event) async* {
+    _dataRepository.copyGarden(event.garden);
   }
 
   Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {

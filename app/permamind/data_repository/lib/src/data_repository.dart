@@ -9,6 +9,8 @@ abstract class DataRepository {
 
   Future<void> addNewActivity(Activity activity);
 
+  Future<void> copyGarden(Garden garden);
+
   Future<void> addGardenActivities(List<Activity> schedule);
 
   Future<void> deleteGarden(Garden garden);

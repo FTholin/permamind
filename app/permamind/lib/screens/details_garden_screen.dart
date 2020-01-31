@@ -264,6 +264,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                         if (removedGarden['action'] == "Delete") {
 
+
                           returnData['garden'] = currentGarden;
 
                           returnData['action'] = "Delete";
@@ -280,6 +281,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
                         } else  {
 
                           if (currentGarden.members.length == 1 || currentGarden.admin == widget.userId) {
+                            returnData['garden'] = currentGarden;
                             BlocProvider.of<GardensBloc>(context).add(
                                 DeleteGarden(currentGarden));
                             BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
