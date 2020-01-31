@@ -29,4 +29,7 @@ abstract class DataRepository {
 
   Future<QuerySnapshot> searchByName(String value);
 
+  Future<QuerySnapshot> searchById(String value);
+
+
   }

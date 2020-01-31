@@ -11,11 +11,16 @@ import 'package:permamind/models/models.dart';
 class SettingsGardenScreen extends StatefulWidget {
   final bool isEditing;
   final String id;
+  final List<String> membersData;
+  final List<MemberProfile> initialMember;
 
   SettingsGardenScreen(
       {Key key,
         @required this.isEditing,
-        @required this.id})
+        @required this.id,
+        @required this.membersData,
+        @required this.initialMember
+      })
       : super(key: key ?? ArchSampleKeys.addTodoScreen);
 
 
@@ -33,7 +38,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
   Widget build(BuildContext context) {
 
-    List<String> _gardenMembers = [];
+    List<String> _gardenMembers = widget.membersData;
 
     var queryResProfile = [];
 
@@ -77,7 +82,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Text(
-                          "Add few friends 😃",
+                          "Garden friends 😃",
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
@@ -94,6 +99,8 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           // enabled: false,
                           // errorText: field.errorText,
                         ),
+                        // TODO Changer ici
+                        initialValue: widget.initialMember,
                         findSuggestions: (String query) async {
                           queryResProfile = [];
                           if (query.length != 0) {

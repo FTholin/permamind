@@ -12,7 +12,7 @@ class GardenEntity extends Equatable {
   final double width;
   final bool gardenGround;
   final String admin;
-  final List<String> members;
+  final List<GardenMember> members;
   final DateTime creationDate;
 
   GardenEntity(this.id,
@@ -53,7 +53,7 @@ class GardenEntity extends Equatable {
       json['gardenGround'] as bool,
       json['publicVisibility'] as bool,
       json['admin'] as String,
-      json['members'],
+      json['members'] as List<GardenMember>,
       json['modelingId'] as String,
       json['modelingName'] as String,
       json['creationDate']
@@ -61,8 +61,6 @@ class GardenEntity extends Equatable {
   }
 
   static GardenEntity fromSnapshot(DocumentSnapshot snap) {
-
-    List<String> gardenMembers = new List<String>.from(snap.data['members']);
 
     return GardenEntity(
       snap.documentID,
@@ -72,7 +70,9 @@ class GardenEntity extends Equatable {
       snap.data['gardenGround'],
       snap.data['publicVisibility'],
       snap.data['admin'],
-      gardenMembers,
+      snap.data['members'].map<GardenMember>((item) {
+        return GardenMember.fromMap(item);
+      }).toList(),
       snap.data['modelingId'],
       snap.data['modelingName'],
         DateTime.fromMillisecondsSinceEpoch(

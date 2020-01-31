@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/models/member_profile.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
@@ -234,6 +235,13 @@ class _CustomAppBarState extends State<CustomAppBar>{
                     icon: Icon(Icons.settings),
                     onPressed: () async {
 
+//                      List<String> membersData = List<String>();
+//                      List<MemberProfile> initialMember = List<MemberProfile>();
+
+
+
+//                      await searchGardenFriend(currentGarden.members, membersData, initialMember);
+
                       final removedGarden = await Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (_) {
@@ -241,7 +249,10 @@ class _CustomAppBarState extends State<CustomAppBar>{
                                 return BlocProvider.value(
                                   value: BlocProvider.of<ActivitiesBloc>(
                                       context),
-                                  child: SettingsGardenScreen(id: currentGarden.id),
+                                  child: SettingsGardenScreen(id: currentGarden.id,
+                                      membersData: membersData,
+                                      initialMember: initialMember
+                                  ),
                                 );
                               })
                       );
@@ -326,7 +337,27 @@ class _CustomAppBarState extends State<CustomAppBar>{
         }
     );
   }
+
+  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
+    // Fill Chips Input
+    gardenMembers.forEach((memberId)  {
+      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
+      if (memberId != widget.userId) {
+        membersData.add(memberId);
+
+        final data = queryRes.documents[0].data;
+
+        initialMember.add(MemberProfile(
+            data["id"],
+            data["pseudo"],
+            data["email"],
+            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+      }
+    });
+  }
 }
+
+
 
 
 // TODO Bottom Up slide animation

@@ -1,6 +1,5 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import '../entities/entities.dart';
 
 class Garden extends Equatable {
@@ -13,7 +12,7 @@ class Garden extends Equatable {
   final double width;
   final bool gardenGround;
   final String admin;
-  final List<String> members;
+  final List<GardenMember> members;
   final DateTime creationDate;
 
   Garden(

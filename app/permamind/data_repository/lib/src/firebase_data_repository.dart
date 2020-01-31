@@ -50,21 +50,6 @@ class FirebaseDataRepository implements DataRepository {
     return gardensCollection.document(garden.id).setData(garden.toEntity().toDocument());
   }
 
-//  ///private method to zip QuerySnapshot streams
-//  Stream<QuerySnapshot> _combineStreams(String userId) {
-//
-//    var stream1 = gardensCollection
-//        .where("gardenMembers", arrayContains: userId)
-//        .snapshots();
-//
-//    var stream2 = gardensCollection
-//        .where("gardenOwners", arrayContains: userId)
-//        .snapshots();
-//
-//    return StreamGroup.merge([stream2,stream1]);
-//
-//  }
-
   @override
   Future<void> addGardenActivities(List<Activity> schedule) async {
 
@@ -159,6 +144,13 @@ class FirebaseDataRepository implements DataRepository {
     .where('searchKey',
     isEqualTo: value.substring(0, 1).toUpperCase())
     .getDocuments();
+  }
+
+  Future<QuerySnapshot> searchById(String value) {
+    return usersCollection
+        .where('id',
+        isEqualTo: value)
+        .getDocuments();
   }
 
   @override
