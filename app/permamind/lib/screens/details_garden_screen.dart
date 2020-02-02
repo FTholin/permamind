@@ -1,4 +1,3 @@
-import 'package:circular_check_box/circular_check_box.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -235,12 +234,17 @@ class _CustomAppBarState extends State<CustomAppBar>{
                     icon: Icon(Icons.settings),
                     onPressed: () async {
 
-//                      List<String> membersData = List<String>();
-//                      List<MemberProfile> initialMember = List<MemberProfile>();
+                      List<MemberProfile> initialMember = List<MemberProfile>();
 
+                      for (final member in currentGarden.members) {
+                        if (member.id != widget.userId) {
+                          initialMember.add(MemberProfile(
+                            member.id,
+                            member.pseudo
+                          ));
+                        }
+                      }
 
-
-//                      await searchGardenFriend(currentGarden.members, membersData, initialMember);
 
                       final removedGarden = await Navigator.of(context).push(
                           MaterialPageRoute(
@@ -249,9 +253,11 @@ class _CustomAppBarState extends State<CustomAppBar>{
                                 return BlocProvider.value(
                                   value: BlocProvider.of<ActivitiesBloc>(
                                       context),
-                                  child: SettingsGardenScreen(id: currentGarden.id,
-                                      membersData: membersData,
-                                      initialMember: initialMember
+                                  child: SettingsGardenScreen(
+                                      id: currentGarden.id,
+                                      membersData: currentGarden.members,
+                                      initialMember: initialMember,
+                                      userId: widget.userId
                                   ),
                                 );
                               })
@@ -301,7 +307,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                             returnData['action'] = "Leave";
 
-                            List<String> members = new List<String>.from(currentGarden.members);
+                            List<GardenMember> members = new List<GardenMember>.from(currentGarden.members);
 
                             Garden copy = currentGarden.copyWith(name: currentGarden.name,
                                 length: currentGarden.length,
@@ -338,23 +344,23 @@ class _CustomAppBarState extends State<CustomAppBar>{
     );
   }
 
-  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
-    // Fill Chips Input
-    gardenMembers.forEach((memberId)  {
-      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
-      if (memberId != widget.userId) {
-        membersData.add(memberId);
-
-        final data = queryRes.documents[0].data;
-
-        initialMember.add(MemberProfile(
-            data["id"],
-            data["pseudo"],
-            data["email"],
-            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
-      }
-    });
-  }
+//  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
+//    // Fill Chips Input
+//    gardenMembers.forEach((memberId)  {
+//      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
+//      if (memberId != widget.userId) {
+//        membersData.add(memberId);
+//
+//        final data = queryRes.documents[0].data;
+//
+//        initialMember.add(MemberProfile(
+//            data["id"],
+//            data["pseudo"],
+//            data["email"],
+//            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+//      }
+//    });
+//  }
 }
 
 

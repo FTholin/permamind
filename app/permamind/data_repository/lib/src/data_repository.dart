@@ -17,7 +17,7 @@ abstract class DataRepository {
 
   Future<void> deleteGardenActivities(String gardenId);
 
-  Stream<List<Garden>> gardens(String userId);
+  Stream<List<Garden>> gardens(String userId, String userPseudo);
 
   Stream<List<Modeling>> fetchModelings();
 

@@ -1,10 +1,12 @@
 class MemberProfile {
   final String id;
   final String pseudo;
-  final String email;
-  final String imageUrl;
+//  final String email;
+//  final String imageUrl;
 
-  const MemberProfile(this.id, this.pseudo, this.email, this.imageUrl);
+  const MemberProfile(this.id, this.pseudo,
+//      this.email, this.imageUrl
+      );
 
   @override
   bool operator ==(Object other) =>

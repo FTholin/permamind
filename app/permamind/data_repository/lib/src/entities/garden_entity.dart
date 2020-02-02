@@ -33,7 +33,9 @@ class GardenEntity extends Equatable {
       'name': name,
       'publicVisibility': publicVisibility,
       'admin': admin,
-      'members': members,
+      'members': members.map((item) {
+        return item.toJson();
+      }).toList(),
       'modelingName': modelingName,
       'creationDate': creationDate
     };
@@ -88,7 +90,9 @@ class GardenEntity extends Equatable {
       'gardenGround': gardenGround,
       'publicVisibility': publicVisibility,
       'admin': admin,
-      'members': members,
+      'members': members.map((item) {
+        return item.toJson();
+      }).toList(),
       'modelingId': modelingId,
       'modelingName': modelingName,
       'creationDate': creationDate

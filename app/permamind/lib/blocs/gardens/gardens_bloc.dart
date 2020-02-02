@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:authentication/authentication.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:data_repository/data_repository.dart';
 
@@ -13,11 +12,11 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   final AuthenticationBloc _authenticationBloc;
   StreamSubscription _authenticationBlocSubscription;
 
-  GardensBloc(this._authenticationBloc, this._dataRepository) {
+  GardensBloc(this._authenticationBloc, this._dataRepository)  {
     _authenticationBlocSubscription = _authenticationBloc.listen((state) {
       // React to state changes here.
       // Dispatch events here to trigger changes in MyBloc.
-      if (state is Authenticated) {
+      if (state is Authenticated)  {
         add(LoadGardens(state.userId));
       }
     });
@@ -50,9 +49,9 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
-
+    final pseudo = (await _dataRepository.searchById(event.userId)).documents.first.data['pseudo'];
     _gardensSubscription?.cancel();
-    _gardensSubscription = _dataRepository.gardens(event.userId).listen(
+    _gardensSubscription = _dataRepository.gardens(event.userId, pseudo).listen(
           (gardens) {
         add(
           GardensUpdated(gardens),

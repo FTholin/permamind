@@ -62,8 +62,6 @@ class UserRepository {
     return (await _firebaseAuth.currentUser()).uid;
   }
 
-
-
   Future<void> addNewUser(User user) {
     return userCollection.add(user.toEntity().toDocument());
   }

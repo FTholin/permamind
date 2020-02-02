@@ -1,4 +1,6 @@
 
+import 'package:data_repository/data_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
@@ -8,15 +10,19 @@ import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
 
 
+
+// TODO Need to check Input entry
 class SettingsGardenScreen extends StatefulWidget {
   final bool isEditing;
   final String id;
-  final List<String> membersData;
+  final String userId;
+  final List<GardenMember> membersData;
   final List<MemberProfile> initialMember;
 
   SettingsGardenScreen(
       {Key key,
         @required this.isEditing,
+        @required this.userId,
         @required this.id,
         @required this.membersData,
         @required this.initialMember
@@ -38,9 +44,9 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
   Widget build(BuildContext context) {
 
-    List<String> _gardenMembers = widget.membersData;
+    List<GardenMember> _gardenMembers =  List<GardenMember>.from(widget.membersData);
 
-    var queryResProfile = [];
+    List<MemberProfile> queryResProfile = List<MemberProfile>();
 
     return BlocBuilder<GardensBloc, GardensState>(
     builder: (context, state) {
@@ -86,6 +92,8 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
+
+
                       ChipsInput(
                         keyboardAppearance: Brightness.dark,
                         textCapitalization: TextCapitalization.words,
@@ -112,26 +120,26 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                               queryResProfile.add(MemberProfile(
                                   data["id"],
                                   data["pseudo"],
-                                  data["email"],
-                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+//                                  data["email"],
+//                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+                              ));
                             }
                           }
                           return queryResProfile;
                         },
                         onChanged: (data) {
-
                           _gardenMembers.clear();
                           data.forEach((elem){
-                            _gardenMembers.add(elem.id);
+                            _gardenMembers.add(GardenMember(id: elem.id, pseudo: elem.pseudo));
                           });
                         },
                         chipBuilder: (context, state, profile) {
                           return InputChip(
                             key: ObjectKey(profile),
                             label: Text(profile.pseudo),
-                            avatar: CircleAvatar(
-                              backgroundImage: NetworkImage(profile.imageUrl),
-                            ),
+//                            avatar: CircleAvatar(
+//                              backgroundImage: NetworkImage(profile.imageUrl),
+//                            ),
                             onDeleted: () => state.deleteChip(profile),
                             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           );
@@ -139,15 +147,24 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                         suggestionBuilder: (context, state, profile) {
                           return ListTile(
                             key: ObjectKey(profile),
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(profile.imageUrl),
-                            ),
+//                            leading: CircleAvatar(
+//                              backgroundImage: NetworkImage(profile.imageUrl),
+//                            ),
                             title: Text(profile.pseudo),
-                            subtitle: Text(profile.email),
+//                            subtitle: Text(profile.email),
                             onTap: () => state.selectSuggestion(profile),
                           );
                         },
                       ),
+
+
+
+
+
+
+
+
+
                       Padding(
                           padding: EdgeInsets.symmetric(vertical: 20),
                           child: ButtonTheme(
@@ -157,38 +174,69 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                             child: RaisedButton(
                                 onPressed: () {
 
-                                if (_gardenMembers.isNotEmpty || _newGardenNameController.text.isNotEmpty) {
+                                  if (_newGardenNameController.text.isNotEmpty || listEquals(_gardenMembers, widget.membersData) == false ) {
 
-                                  List<String> newMembers = new List<String>.from(garden.members);
+                                    if (_newGardenNameController.text.isEmpty) {
+                                      _newGardenNameController.text = garden.name;
+                                    }
 
-                                  if (_gardenMembers.isNotEmpty) {
-
-                                    for (final item in _gardenMembers) {
-                                      if (newMembers.contains(item) == false) {
-                                        newMembers.add(item);
+                                    // Rajoute mon identifiant sinon plus persone dans la liste des jardins !
+                                    for (final member in widget.membersData) {
+                                      if (member.id == widget.userId) {
+                                        _gardenMembers.add(member);
                                       }
                                     }
-                                  }
+//                                    final GardenMember myself = widget.membersData.where((myself) => myself.id == widget.userId) as GardenMember;
 
-                                  if (_newGardenNameController.text.isEmpty) {
-                                    _newGardenNameController.text = garden.name;
-                                  }
+//                                    _gardenMembers.add(myself);
+//                                  List<GardenMember> newMembers = new List<GardenMember>();
+//
+//                                  if (_gardenMembers.isNotEmpty) {
+//
+//                                    for (final item in _gardenMembers) {
+//                                      if (newMembers.contains(item.id) == false) {
+////                                        newMembers.add(item);
+//                                      }
+//                                    }
+//                                  } else {
+//
+//                                  }
 
-                                  BlocProvider.of<GardensBloc>(context).add(
-                                    UpdateGarden(
-                                      garden.copyWith(
-                                          name: _newGardenNameController.text,
-                                          length: garden.length,
-                                          width: garden.width,
-                                          gardenGround: garden.gardenGround,
-                                          id: garden.id,
-                                          publicVisibility: garden.publicVisibility,
-                                          modelingId: garden.modelingId,
-                                          members: newMembers
+                                    BlocProvider.of<GardensBloc>(context).add(
+                                      UpdateGarden(
+                                        garden.copyWith(
+                                            name: _newGardenNameController.text,
+                                            length: garden.length,
+                                            width: garden.width,
+                                            gardenGround: garden.gardenGround,
+                                            id: garden.id,
+                                            publicVisibility: garden.publicVisibility,
+                                            modelingId: garden.modelingId,
+                                            members: _gardenMembers
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }
+                                    );
+                                  }
+
+//                                if (_gardenMembers.isNotEmpty || _newGardenNameController.text.isNotEmpty) {
+//
+//                                  List<String> newMembers = new List<String>.from(garden.members);
+//
+//                                  if (_gardenMembers.isNotEmpty) {
+//
+//                                    for (final item in _gardenMembers) {
+//                                      if (newMembers.contains(item.id) == false) {
+////                                        newMembers.add(item);
+//                                      }
+//                                    }
+//                                  }
+//
+//                                  if (_newGardenNameController.text.isEmpty) {
+//                                    _newGardenNameController.text = garden.name;
+//                                  }
+//
+
+//                                }
 
                                   Navigator.pop(context, false);
 

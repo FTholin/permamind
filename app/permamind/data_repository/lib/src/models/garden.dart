@@ -28,7 +28,10 @@ class Garden extends Equatable {
       this.creationDate,{String id})
       :  this.id = id;
 
-  Garden copyWith({String name, double length, double width, bool gardenGround, String id, bool publicVisibility, String modelingId, String admin, List<String> members}) {
+  Garden copyWith({String name, double length,
+    double width, bool gardenGround, String id,
+    bool publicVisibility, String modelingId,
+    String admin, List<GardenMember> members}) {
     return Garden(
       name ?? this.name,
       length ?? this.length,

@@ -137,22 +137,24 @@ class App extends StatelessWidget {
                   builder: (context, state) {
                     if (state is Authenticated) {
                       final gardensBloc = BlocProvider.of<GardensBloc>(context);
+
                       return DetailsModelingScreen(
                           onSaveGarden: (gardenName, publicVisibility,
                               gardenMembers, modelingId, modelingName, gardenLength,
                               gardenWidth, gardenGround,
                               schedule
-                              ) {
-                            List<String> allGardenMembers = new List.from(
-                                [state.userId])
-                              ..addAll(gardenMembers);
+                              )  async {
 
-                            gardensBloc.add(
+                            final currentUser = (await firebaseRepository.searchById(state.userId)).documents.first.data;
+
+                            gardenMembers.add(GardenMember(id: currentUser['id'], pseudo: currentUser['pseudo']));
+
+                            BlocProvider.of<GardensBloc>(context).add(
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
                                   publicVisibility,
                                   state.userId,
-                                  allGardenMembers,
+                                  gardenMembers,
                                   modelingId,
                                   modelingName,
                                   DateTime.now()),

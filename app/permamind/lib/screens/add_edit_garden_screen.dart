@@ -89,7 +89,7 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 //    final textTheme = Theme.of(context).textTheme;
 
 
-    List<String> _gardenMembers = [];
+    List<GardenMember> _gardenMembers = [];
 
     var queryResProfile = [];
 
@@ -239,14 +239,14 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                               var queryRes =
                               await widget.dataProvider.searchByName(query);
 
-                              for (int i = 0; i < queryRes.documents.length; ++i) {
-                                var data = queryRes.documents[i].data;
-                                queryResProfile.add(MemberProfile(
-                                    data["id"],
-                                    data["pseudo"],
-                                    data["email"],
-                                    'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
-                              }
+//                              for (int i = 0; i < queryRes.documents.length; ++i) {
+//                                var data = queryRes.documents[i].data;
+//                                queryResProfile.add(MemberProfile(
+//                                    data["id"],
+//                                    data["pseudo"],
+//                                    data["email"],
+//                                    'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+//                              }
                             }
                             return queryResProfile;
                           },
@@ -254,16 +254,16 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 
                             _gardenMembers.clear();
                             data.forEach((elem){
-                              _gardenMembers.add(elem.id);
+                              _gardenMembers.add(GardenMember(id: elem.id, pseudo: elem.pseudo));
                             });
                           },
                           chipBuilder: (context, state, profile) {
                             return InputChip(
                               key: ObjectKey(profile),
                               label: Text(profile.pseudo),
-                              avatar: CircleAvatar(
-                                backgroundImage: NetworkImage(profile.imageUrl),
-                              ),
+//                              avatar: CircleAvatar(
+//                                backgroundImage: NetworkImage(profile.imageUrl),
+//                              ),
                               onDeleted: () => state.deleteChip(profile),
                               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             );
@@ -271,9 +271,9 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                           suggestionBuilder: (context, state, profile) {
                             return ListTile(
                               key: ObjectKey(profile),
-                              leading: CircleAvatar(
-                                backgroundImage: NetworkImage(profile.imageUrl),
-                              ),
+//                              leading: CircleAvatar(
+//                                backgroundImage: NetworkImage(profile.imageUrl),
+//                              ),
                               title: Text(profile.pseudo),
                               subtitle: Text(profile.email),
                               onTap: () => state.selectSuggestion(profile),
@@ -504,8 +504,9 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                                 queryResProfile.add(MemberProfile(
                                     data["id"],
                                     data["pseudo"],
-                                    data["email"],
-                                    'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+//                                    data["email"],
+//                                    'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+                                ));
                               }
                             }
                             return queryResProfile;
@@ -514,16 +515,16 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
 
                             _gardenMembers.clear();
                             data.forEach((elem){
-                              _gardenMembers.add(elem.id);
+                              _gardenMembers.add(GardenMember(id: elem.id, pseudo: elem.pseudo));
                             });
                           },
                           chipBuilder: (context, state, profile) {
                             return InputChip(
                               key: ObjectKey(profile),
                               label: Text(profile.pseudo),
-                              avatar: CircleAvatar(
-                                backgroundImage: NetworkImage(profile.imageUrl),
-                              ),
+//                              avatar: CircleAvatar(
+//                                backgroundImage: NetworkImage(profile.imageUrl),
+//                              ),
                               onDeleted: () => state.deleteChip(profile),
                               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             );
@@ -531,11 +532,11 @@ class _AddEditGardenScreenState extends State<AddEditGardenScreen> {
                           suggestionBuilder: (context, state, profile) {
                             return ListTile(
                               key: ObjectKey(profile),
-                              leading: CircleAvatar(
-                                backgroundImage: NetworkImage(profile.imageUrl),
-                              ),
+//                              leading: CircleAvatar(
+//                                backgroundImage: NetworkImage(profile.imageUrl),
+//                              ),
                               title: Text(profile.pseudo),
-                              subtitle: Text(profile.email),
+//                              subtitle: Text(profile.email),
                               onTap: () => state.selectSuggestion(profile),
                             );
                           },
