@@ -17,7 +17,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       // React to state changes here.
       // Dispatch events here to trigger changes in MyBloc.
       if (state is Authenticated)  {
-        add(LoadGardens(state.userId));
+        add(LoadGardens(state.userAuthenticated.id));
       }
     });
   }

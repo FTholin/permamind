@@ -9,7 +9,7 @@ class UserRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
 
-  final userCollection = Firestore.instance.collection('users');
+  final usersCollection = Firestore.instance.collection('users');
 
 
   UserRepository({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
@@ -42,7 +42,7 @@ class UserRepository {
       password: password,
     );
 
-    User newUser = User(result.user.uid, pseudo, email, [], [], pseudo.substring(0, 1).toUpperCase());
+    User newUser = User(result.user.uid, pseudo, email, pseudo.substring(0, 1).toUpperCase());
     await addNewUser(newUser);
   }
 
@@ -58,11 +58,21 @@ class UserRepository {
     return currentUser != null;
   }
 
-  Future<String> getUserId() async {
-    return (await _firebaseAuth.currentUser()).uid;
+  Future<User> getUserFromId() async {
+
+    final userData = (await searchById((await _firebaseAuth.currentUser()).uid)).documents.first.data;
+
+    return User(userData['id'],userData['pseudo'], userData['email'], userData['searchKey']);
+  }
+
+  Future<QuerySnapshot> searchById(String value) {
+    return usersCollection
+        .where('id',
+        isEqualTo: value)
+        .getDocuments();
   }
 
   Future<void> addNewUser(User user) {
-    return userCollection.add(user.toEntity().toDocument());
+    return usersCollection.add(user.toEntity().toDocument());
   }
 }

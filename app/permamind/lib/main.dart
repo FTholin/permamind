@@ -82,7 +82,7 @@ class App extends StatelessWidget {
                               ..add(LoadTutos()),
                           ),
                         ],
-                        child: HomeScreen(dataRepository: firebaseRepository, userId: state.userId),
+                        child: HomeScreen(dataRepository: firebaseRepository, userId: state.userAuthenticated.id),
                       );
                     }
                     if (state is Unauthenticated) {
@@ -136,24 +136,21 @@ class App extends StatelessWidget {
                 return BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     if (state is Authenticated) {
-                      final gardensBloc = BlocProvider.of<GardensBloc>(context);
 
                       return DetailsModelingScreen(
                           onSaveGarden: (gardenName, publicVisibility,
                               gardenMembers, modelingId, modelingName, gardenLength,
                               gardenWidth, gardenGround,
                               schedule
-                              )  async {
+                              ) {
 
-                            final currentUser = (await firebaseRepository.searchById(state.userId)).documents.first.data;
-
-                            gardenMembers.add(GardenMember(id: currentUser['id'], pseudo: currentUser['pseudo']));
+                            gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
 
                             BlocProvider.of<GardensBloc>(context).add(
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
                                   publicVisibility,
-                                  state.userId,
+                                  state.userAuthenticated.id,
                                   gardenMembers,
                                   modelingId,
                                   modelingName,
@@ -161,11 +158,6 @@ class App extends StatelessWidget {
                                   schedule
                               ),
                             );
-
-//                            // TODO Add Activities
-//                            gardensBloc.add(
-//                                AddGardenActivities("",activities)
-//                            );
                           }
                       );
                     }
