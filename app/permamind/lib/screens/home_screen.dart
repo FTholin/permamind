@@ -11,11 +11,11 @@ import 'package:permamind/models/models.dart';
 class HomeScreen extends StatelessWidget {
 
   final DataRepository dataRepository;
-  final String userId;
+  final User user;
 
-  HomeScreen({Key key, this.dataRepository, this.userId})
+  HomeScreen({Key key, this.dataRepository, this.user})
       : assert(dataRepository != null),
-        assert(userId != null),
+        assert(user != null),
         super(key: key);
 
   @override
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildTabPage(AppTab activeTab) {
     switch (activeTab) {
       case AppTab.gardens:
-        return EnumeratedGardens(dataRepository: dataRepository, userId: userId);
+        return EnumeratedGardens(dataRepository: dataRepository, user: user);
         break;
       case AppTab.abc:
         return Scaffold(
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
       case AppTab.profile:
         return Scaffold(
           body: Center(
-            child: Text("userId = $userId"),
+            child: Text("Coucou ${user.pseudo} !"),
           ),
         );
         break;

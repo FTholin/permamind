@@ -1,4 +1,5 @@
 
+import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +15,17 @@ import 'package:permamind/models/models.dart';
 // TODO Need to check Input entry
 class SettingsGardenScreen extends StatefulWidget {
   final bool isEditing;
-  final String id;
-  final String userId;
-  final List<GardenMember> membersData;
+  final String gardenId;
+  final User user;
+  final List<GardenMember> initialMembersData;
   final List<MemberProfile> initialMember;
 
   SettingsGardenScreen(
       {Key key,
         @required this.isEditing,
-        @required this.userId,
-        @required this.id,
-        @required this.membersData,
+        @required this.user,
+        @required this.gardenId,
+        @required this.initialMembersData,
         @required this.initialMember
       })
       : super(key: key ?? ArchSampleKeys.addTodoScreen);
@@ -44,14 +45,14 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
   Widget build(BuildContext context) {
 
-    List<GardenMember> _gardenMembers =  List<GardenMember>.from(widget.membersData);
+    List<GardenMember> _gardenMembers =  List<GardenMember>.from(widget.initialMembersData);
 
     List<MemberProfile> queryResProfile = List<MemberProfile>();
 
     return BlocBuilder<GardensBloc, GardensState>(
     builder: (context, state) {
       final garden = (state as GardensLoaded)
-          .gardens.firstWhere((garden) => garden.id == widget.id,
+          .gardens.firstWhere((garden) => garden.id == widget.gardenId,
           orElse: () => null);
 
       return Scaffold(
@@ -113,24 +114,27 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           queryResProfile = [];
                           if (query.length != 0) {
                             _gardenMembers = [];
-                            var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchByName(query);
 
+                            var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchByName(query);
                             for (int i = 0; i < queryRes.documents.length; ++i) {
                               var data = queryRes.documents[i].data;
                               queryResProfile.add(MemberProfile(
-                                  data["id"],
-                                  data["pseudo"],
+                                data["id"],
+                                data["pseudo"],
 //                                  data["email"],
 //                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
                               ));
                             }
+
                           }
                           return queryResProfile;
                         },
                         onChanged: (data) {
                           _gardenMembers.clear();
                           data.forEach((elem){
-                            _gardenMembers.add(GardenMember(id: elem.id, pseudo: elem.pseudo));
+                            if (elem.pseudo != widget.user.pseudo) {
+                              _gardenMembers.add(GardenMember(id: elem.id, pseudo: elem.pseudo));
+                            }
                           });
                         },
                         chipBuilder: (context, state, profile) {
@@ -157,14 +161,6 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                         },
                       ),
 
-
-
-
-
-
-
-
-
                       Padding(
                           padding: EdgeInsets.symmetric(vertical: 20),
                           child: ButtonTheme(
@@ -174,33 +170,13 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                             child: RaisedButton(
                                 onPressed: () {
 
-                                  if (_newGardenNameController.text.isNotEmpty || listEquals(_gardenMembers, widget.membersData) == false ) {
+                                  if (_newGardenNameController.text.isNotEmpty || listEquals(_gardenMembers, widget.initialMembersData) == false ) {
 
                                     if (_newGardenNameController.text.isEmpty) {
                                       _newGardenNameController.text = garden.name;
                                     }
 
-                                    // Rajoute mon identifiant sinon plus persone dans la liste des jardins !
-                                    for (final member in widget.membersData) {
-                                      if (member.id == widget.userId) {
-                                        _gardenMembers.add(member);
-                                      }
-                                    }
-//                                    final GardenMember myself = widget.membersData.where((myself) => myself.id == widget.userId) as GardenMember;
-
-//                                    _gardenMembers.add(myself);
-//                                  List<GardenMember> newMembers = new List<GardenMember>();
-//
-//                                  if (_gardenMembers.isNotEmpty) {
-//
-//                                    for (final item in _gardenMembers) {
-//                                      if (newMembers.contains(item.id) == false) {
-////                                        newMembers.add(item);
-//                                      }
-//                                    }
-//                                  } else {
-//
-//                                  }
+                                    _gardenMembers.add(GardenMember(id: widget.user.id, pseudo: widget.user.pseudo));
 
                                     BlocProvider.of<GardensBloc>(context).add(
                                       UpdateGarden(
@@ -217,26 +193,6 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                       ),
                                     );
                                   }
-
-//                                if (_gardenMembers.isNotEmpty || _newGardenNameController.text.isNotEmpty) {
-//
-//                                  List<String> newMembers = new List<String>.from(garden.members);
-//
-//                                  if (_gardenMembers.isNotEmpty) {
-//
-//                                    for (final item in _gardenMembers) {
-//                                      if (newMembers.contains(item.id) == false) {
-////                                        newMembers.add(item);
-//                                      }
-//                                    }
-//                                  }
-//
-//                                  if (_newGardenNameController.text.isEmpty) {
-//                                    _newGardenNameController.text = garden.name;
-//                                  }
-//
-
-//                                }
 
                                   Navigator.pop(context, false);
 

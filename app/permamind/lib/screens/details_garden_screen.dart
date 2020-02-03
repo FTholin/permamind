@@ -1,3 +1,4 @@
+import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,12 +12,12 @@ import 'package:permamind/widgets/widgets.dart';
 class DetailsGardenScreen extends StatelessWidget {
 
   final String gardenId;
-  final String userId;
+  final User user;
 
   DetailsGardenScreen({
     Key key,
     @required this.gardenId,
-    @required this.userId,
+    @required this.user,
   })
       : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
 
@@ -24,7 +25,7 @@ class DetailsGardenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: CustomAppBar(gardenId: gardenId, userId: userId),
+      appBar: CustomAppBar(gardenId: gardenId, user: user),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -196,11 +197,11 @@ class DetailsGardenScreen extends StatelessWidget {
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final String gardenId;
-  final String userId;
+  final User user;
 
   CustomAppBar({
     @required this.gardenId,
-    @required this.userId,
+    @required this.user,
     Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
 
   @override
@@ -237,7 +238,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
                       List<MemberProfile> initialMember = List<MemberProfile>();
 
                       for (final member in currentGarden.members) {
-                        if (member.id != widget.userId) {
+                        if (member.id != widget.user.id) {
                           initialMember.add(MemberProfile(
                             member.id,
                             member.pseudo
@@ -254,10 +255,10 @@ class _CustomAppBarState extends State<CustomAppBar>{
                                   value: BlocProvider.of<ActivitiesBloc>(
                                       context),
                                   child: SettingsGardenScreen(
-                                      id: currentGarden.id,
-                                      membersData: currentGarden.members,
+                                      gardenId: currentGarden.id,
+                                      initialMembersData: currentGarden.members,
                                       initialMember: initialMember,
-                                      userId: widget.userId
+                                      user: widget.user
                                   ),
                                 );
                               })
@@ -297,7 +298,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                         } else  {
 
-                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.userId) {
+                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.user.id) {
                             returnData['garden'] = currentGarden;
                             BlocProvider.of<GardensBloc>(context).add(
                                 DeleteGarden(currentGarden));
@@ -320,7 +321,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
                                 members: members);
 
                             BlocProvider.of<GardensBloc>(context).add(
-                                LeaveGarden(currentGarden, widget.userId)
+                                LeaveGarden(currentGarden, widget.user.id)
                             );
 
                             returnData['garden'] = copy;

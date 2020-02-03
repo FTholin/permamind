@@ -82,7 +82,7 @@ class App extends StatelessWidget {
                               ..add(LoadTutos()),
                           ),
                         ],
-                        child: HomeScreen(dataRepository: firebaseRepository, userId: state.userAuthenticated.id),
+                        child: HomeScreen(dataRepository: firebaseRepository, user: state.userAuthenticated),
                       );
                     }
                     if (state is Unauthenticated) {
