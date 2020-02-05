@@ -13,7 +13,7 @@ class FilteredModelings extends StatelessWidget {
   final List<Modeling> modelings;
   final String gardenName;
   final bool gardenVisibility;
-  final List<String> gardenMembers;
+  final List<GardenMember> gardenMembers;
   final double gardenLength;
   final double gardenWidth;
   final bool gardenGround;

@@ -1,3 +1,4 @@
+import 'package:authentication/authentication.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -12,12 +13,12 @@ class Uninitialized extends AuthenticationState {
 }
 
 class Authenticated extends AuthenticationState {
-  final String userId;
+  final User userAuthenticated;
 
-  Authenticated(this.userId) : super([userId]);
+  Authenticated(this.userAuthenticated) : super([userAuthenticated]);
 
   @override
-  String toString() => 'Authenticated { displayName: $userId }';
+  String toString() => 'Authenticated { displayName: $userAuthenticated }';
 }
 
 class Unauthenticated extends AuthenticationState {

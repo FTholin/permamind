@@ -9,7 +9,7 @@ import 'package:data_repository/data_repository.dart';
 
 typedef SaveGardenCallback = Function(String gardenName,
     bool publicVisibility,
-    List<String> gardenMembers,
+    List<GardenMember> gardenMembers,
     String gardenModelisationId,
     String modelisationName,
     double gardenLength,
@@ -429,6 +429,7 @@ class DetailsModelingScreen extends StatelessWidget {
               onPressed: args.modeling == null
                   ? null
                   : () async {
+
 //                      Navigator.of(context)
 //                          .push(MaterialPageRoute(builder: (context) {
 ////                        return AddEditScreen(
@@ -519,7 +520,7 @@ class DetailsModelingsScreenArguments {
   final Modeling modeling;
   final String gardenName;
   final bool publicVisibility;
-  final List<String> gardenMembers;
+  final List<GardenMember> gardenMembers;
   final List<ModelingSchedule> schedule;
   final double gardenLength;
   final double gardenWidth;

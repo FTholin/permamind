@@ -10,3 +10,4 @@ export 'enumerated_activities_screen.dart';
 export 'settings_screen.dart';
 export 'settings_garden_screen.dart';
 export 'add_edit_activity_screen.dart';
+export 'join_garden_screen.dart';

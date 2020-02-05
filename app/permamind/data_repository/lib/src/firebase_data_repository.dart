@@ -45,21 +45,10 @@ class FirebaseDataRepository implements DataRepository {
     return gardensCollection.document(garden.id).delete();
   }
 
-
-//  ///private method to zip QuerySnapshot streams
-//  Stream<QuerySnapshot> _combineStreams(String userId) {
-//
-//    var stream1 = gardensCollection
-//        .where("gardenMembers", arrayContains: userId)
-//        .snapshots();
-//
-//    var stream2 = gardensCollection
-//        .where("gardenOwners", arrayContains: userId)
-//        .snapshots();
-//
-//    return StreamGroup.merge([stream2,stream1]);
-//
-//  }
+  @override
+  Future<void> copyGarden(Garden garden) async {
+    return gardensCollection.document(garden.id).setData(garden.toEntity().toDocument());
+  }
 
   @override
   Future<void> addGardenActivities(List<Activity> schedule) async {
@@ -93,9 +82,9 @@ class FirebaseDataRepository implements DataRepository {
   }
 
 
-  Stream<List<Garden>> gardens(String userId) {
+  Stream<List<Garden>> gardens(String userId, String userPseudo) {
     return gardensCollection
-        .where("members",arrayContains: userId)
+        .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Garden.fromEntity(GardenEntity.fromSnapshot(doc)))
@@ -155,6 +144,13 @@ class FirebaseDataRepository implements DataRepository {
     .where('searchKey',
     isEqualTo: value.substring(0, 1).toUpperCase())
     .getDocuments();
+  }
+
+  Future<QuerySnapshot> searchById(String value) {
+    return usersCollection
+        .where('id',
+        isEqualTo: value)
+        .getDocuments();
   }
 
   @override

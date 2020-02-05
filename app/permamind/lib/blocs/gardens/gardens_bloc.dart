@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:authentication/authentication.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:data_repository/data_repository.dart';
 
@@ -13,12 +12,12 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   final AuthenticationBloc _authenticationBloc;
   StreamSubscription _authenticationBlocSubscription;
 
-  GardensBloc(this._authenticationBloc, this._dataRepository) {
+  GardensBloc(this._authenticationBloc, this._dataRepository)  {
     _authenticationBlocSubscription = _authenticationBloc.listen((state) {
       // React to state changes here.
       // Dispatch events here to trigger changes in MyBloc.
-      if (state is Authenticated) {
-        add(LoadGardens(state.userId));
+      if (state is Authenticated)  {
+        add(LoadGardens(state.userAuthenticated.id));
       }
     });
   }
@@ -44,14 +43,15 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapLeaveGardensToState(event);
     } else if (event is CopyActivities) {
       yield* _mapCopyActivitiesToState(event);
-
+    } else if (event is CopyGarden) {
+      yield* _mapCopyGardenToState(event);
     }
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
-
+    final pseudo = (await _dataRepository.searchById(event.userId)).documents.first.data['pseudo'];
     _gardensSubscription?.cancel();
-    _gardensSubscription = _dataRepository.gardens(event.userId).listen(
+    _gardensSubscription = _dataRepository.gardens(event.userId, pseudo).listen(
           (gardens) {
         add(
           GardensUpdated(gardens),
@@ -98,6 +98,10 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
     event.garden.members.remove(event.userId);
     _dataRepository.updateGarden(event.garden);
+  }
+
+  Stream<GardensState> _mapCopyGardenToState(CopyGarden event) async* {
+    _dataRepository.copyGarden(event.garden);
   }
 
   Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {

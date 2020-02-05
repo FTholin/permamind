@@ -6,12 +6,9 @@ class UserEntity extends Equatable {
   final String pseudo;
   final String nationality;
   final String email;
-  final List<String> gardensAssociated;
-  final List<String> activitiesAssignated;
   final String searchKey;
 
-  UserEntity(this.id, this.pseudo, this.email, this.gardensAssociated,
-      this.activitiesAssignated, this.nationality, this.searchKey);
+  UserEntity(this.id, this.pseudo, this.email, this.nationality, this.searchKey);
 
   Map<String, Object> toJson() {
     return {
@@ -19,15 +16,13 @@ class UserEntity extends Equatable {
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,
-      'gardensAssociated': gardensAssociated,
-      'activitiesAssignated': activitiesAssignated,
       'searchKey': searchKey
     };
   }
 
   @override
   String toString() {
-    return 'UserEntity { id: $id, pseudo: $pseudo, email: $email, gardens: $gardensAssociated, activities: $activitiesAssignated, nationality: $nationality, searchKey: $searchKey }';
+    return 'UserEntity { id: $id, pseudo: $pseudo, email: $email, nationality: $nationality, searchKey: $searchKey }';
   }
 
   static UserEntity fromJson(Map<String, Object> json) {
@@ -35,8 +30,6 @@ class UserEntity extends Equatable {
       json['id'] as String,
       json['pseudo'] as String,
       json['email'] as String,
-      json['gardensAssociated'] as List<String>,
-      json['activitiesAssignated'] as List<String>,
       json['nationality'] as String,
       json['searchKey'] as String
     );
@@ -47,8 +40,6 @@ class UserEntity extends Equatable {
       snap.documentID,
       snap.data['pseudo'],
       snap.data['email'],
-      snap.data['gardensAssociated'],
-      snap.data['activitiesAssignated'],
       snap.data['nationality'],
       snap.data['searchKey']
     );
@@ -59,8 +50,6 @@ class UserEntity extends Equatable {
       'id': id,
       'pseudo': pseudo,
       'email': email,
-      'gardensAssociated': gardensAssociated,
-      'activitiesAssignated': activitiesAssignated,
       'nationality': nationality,
       'searchKey': searchKey
     };

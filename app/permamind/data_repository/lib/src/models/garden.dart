@@ -1,6 +1,5 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import '../entities/entities.dart';
 
 class Garden extends Equatable {
@@ -13,7 +12,7 @@ class Garden extends Equatable {
   final double width;
   final bool gardenGround;
   final String admin;
-  final List<String> members;
+  final List<GardenMember> members;
   final DateTime creationDate;
 
   Garden(
@@ -29,7 +28,10 @@ class Garden extends Equatable {
       this.creationDate,{String id})
       :  this.id = id;
 
-  Garden copyWith({String name, double length, double width, bool gardenGround, String id, bool publicVisibility, String modelingId, String admin, List<String> members}) {
+  Garden copyWith({String name, double length,
+    double width, bool gardenGround, String id,
+    bool publicVisibility, String modelingId,
+    String admin, List<GardenMember> members}) {
     return Garden(
       name ?? this.name,
       length ?? this.length,

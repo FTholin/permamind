@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:authentication/authentication.dart';
-import 'package:authentication/src/blocs/blocs.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -33,8 +32,7 @@ class AuthenticationBloc
     try {
       final isSignedIn = await _userRepository.isSignedIn();
       if (isSignedIn) {
-        final name = await _userRepository.getUserId();
-        yield Authenticated(name);
+        yield Authenticated(await _userRepository.getUserFromId());
       } else {
         yield Unauthenticated();
       }
@@ -44,7 +42,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapLoggedInToState() async* {
-    yield Authenticated(await _userRepository.getUserId());
+    yield Authenticated(await _userRepository.getUserFromId());
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {

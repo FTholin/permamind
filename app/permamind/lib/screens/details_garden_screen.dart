@@ -1,9 +1,10 @@
-import 'package:circular_check_box/circular_check_box.dart';
+import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/models/member_profile.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
@@ -11,12 +12,12 @@ import 'package:permamind/widgets/widgets.dart';
 class DetailsGardenScreen extends StatelessWidget {
 
   final String gardenId;
-  final String userId;
+  final User user;
 
   DetailsGardenScreen({
     Key key,
     @required this.gardenId,
-    @required this.userId,
+    @required this.user,
   })
       : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
 
@@ -24,7 +25,7 @@ class DetailsGardenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: CustomAppBar(gardenId: gardenId, userId: userId),
+      appBar: CustomAppBar(gardenId: gardenId, user: user),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -196,11 +197,11 @@ class DetailsGardenScreen extends StatelessWidget {
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final String gardenId;
-  final String userId;
+  final User user;
 
   CustomAppBar({
     @required this.gardenId,
-    @required this.userId,
+    @required this.user,
     Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
 
   @override
@@ -234,15 +235,37 @@ class _CustomAppBarState extends State<CustomAppBar>{
                     icon: Icon(Icons.settings),
                     onPressed: () async {
 
+                      List<MemberProfile> initialMember = List<MemberProfile>();
+
+                      for (final member in currentGarden.members) {
+                        if (member.id != widget.user.id) {
+                          initialMember.add(MemberProfile(
+                            member.id,
+                            member.pseudo
+                          ));
+                        }
+                      }
+
+
                       final removedGarden = await Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (_) {
-                                return SettingsGardenScreen(id: currentGarden.id);
+
+                                return BlocProvider.value(
+                                  value: BlocProvider.of<ActivitiesBloc>(
+                                      context),
+                                  child: SettingsGardenScreen(
+                                      gardenId: currentGarden.id,
+                                      initialMembersData: currentGarden.members,
+                                      initialMember: initialMember,
+                                      user: widget.user
+                                  ),
+                                );
                               })
                       );
 
 
-                      if (removedGarden != null) {
+                      if (removedGarden != null && removedGarden != false) {
 
                         Map returnData = Map();
 
@@ -259,6 +282,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                         if (removedGarden['action'] == "Delete") {
 
+
                           returnData['garden'] = currentGarden;
 
                           returnData['action'] = "Delete";
@@ -274,7 +298,8 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                         } else  {
 
-                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.userId) {
+                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.user.id) {
+                            returnData['garden'] = currentGarden;
                             BlocProvider.of<GardensBloc>(context).add(
                                 DeleteGarden(currentGarden));
                             BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
@@ -283,7 +308,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
 
                             returnData['action'] = "Leave";
 
-                            List<String> members = new List<String>.from(currentGarden.members);
+                            List<GardenMember> members = new List<GardenMember>.from(currentGarden.members);
 
                             Garden copy = currentGarden.copyWith(name: currentGarden.name,
                                 length: currentGarden.length,
@@ -296,7 +321,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
                                 members: members);
 
                             BlocProvider.of<GardensBloc>(context).add(
-                                LeaveGarden(currentGarden, widget.userId)
+                                LeaveGarden(currentGarden, widget.user.id)
                             );
 
                             returnData['garden'] = copy;
@@ -319,7 +344,27 @@ class _CustomAppBarState extends State<CustomAppBar>{
         }
     );
   }
+
+//  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
+//    // Fill Chips Input
+//    gardenMembers.forEach((memberId)  {
+//      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
+//      if (memberId != widget.userId) {
+//        membersData.add(memberId);
+//
+//        final data = queryRes.documents[0].data;
+//
+//        initialMember.add(MemberProfile(
+//            data["id"],
+//            data["pseudo"],
+//            data["email"],
+//            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+//      }
+//    });
+//  }
 }
+
+
 
 
 // TODO Bottom Up slide animation

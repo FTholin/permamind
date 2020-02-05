@@ -12,12 +12,12 @@ import 'package:permamind/screens/screens.dart';
 class EnumeratedGardens extends StatelessWidget {
 
   final DataRepository _dataRepository;
-  final String _userId;
+  final User _user;
 
-  EnumeratedGardens({Key key, @required DataRepository dataRepository, @required String userId})
+  EnumeratedGardens({Key key, @required DataRepository dataRepository, @required User user})
       : assert(dataRepository != null),
-        assert(userId != null),
-        _userId = userId,
+        assert(user != null),
+        _user = user,
         _dataRepository = dataRepository,
         super(key: key);
 
@@ -52,7 +52,7 @@ class EnumeratedGardens extends StatelessWidget {
                                     gardensBloc: BlocProvider.of<GardensBloc>(context),
                                     gardenId: gardens[index].id
                                 )..add(LoadActivities()),
-                                child: DetailsGardenScreen(gardenId: gardens[index].id, userId: _userId),
+                                child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user),
                             );
 
                           })

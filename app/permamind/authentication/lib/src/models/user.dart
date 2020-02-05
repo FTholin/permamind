@@ -7,16 +7,12 @@ class User {
   final String pseudo;
   final String nationality;
   final String email;
-  List<String> gardensAssociated;
-  List<String> activitiesAssignated;
   final String searchKey;
 
   User(
     this.id,
     this.pseudo,
     this.email,
-    this.gardensAssociated,
-    this.activitiesAssignated,
     this.searchKey, {
     String nationality = 'French',
   }) : this.nationality = nationality ?? 'French';
@@ -35,8 +31,6 @@ class User {
       id ?? this.id,
       pseudo ?? this.pseudo,
       email ?? this.email,
-      gardensAssociated ?? this.gardensAssociated,
-      activitiesAssignated ?? this.activitiesAssignated,
       searchKey ?? this.searchKey,
       nationality: nationality ?? this.nationality,
     );
@@ -54,18 +48,15 @@ class User {
           id == other.id &&
           pseudo == other.pseudo &&
           email == other.email &&
-          gardensAssociated == other.gardensAssociated &&
-          activitiesAssignated == other.activitiesAssignated &&
           nationality == other.nationality && searchKey == other.searchKey;
 
   @override
   String toString() {
-    return 'User { id: $id , pseudo: $pseudo, email: $email, gardensAssociated: $gardensAssociated, activitiesAssignated: $activitiesAssignated,  nationality: $nationality, searchKey: $searchKey }';
+    return 'User { id: $id , pseudo: $pseudo, email: $email, nationality: $nationality, searchKey: $searchKey }';
   }
 
   UserEntity toEntity() {
-    return UserEntity(id, pseudo, email, gardensAssociated,
-        activitiesAssignated, nationality, searchKey);
+    return UserEntity(id, pseudo, email, nationality, searchKey);
   }
 
   static User fromEntity(UserEntity entity) {
@@ -73,8 +64,6 @@ class User {
       entity.id,
       entity.pseudo,
       entity.email,
-      entity.gardensAssociated,
-      entity.activitiesAssignated,
       entity.searchKey,
       nationality: entity.nationality ?? 'French',
     );
