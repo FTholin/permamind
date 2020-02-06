@@ -52,10 +52,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     final pseudo = (await _dataRepository.searchById(event.userId)).documents.first.data['pseudo'];
     _gardensSubscription?.cancel();
     _gardensSubscription = _dataRepository.gardens(event.userId, pseudo).listen(
-          (gardens) {
-        add(
-          GardensUpdated(gardens),
-        );
+          (gardens) async {
+            add(GardensUpdated(gardens));
       },
     );
 
@@ -73,7 +71,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
         for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
           DateTime expectedDate = referenceDate.add(Duration(days: i));
-          expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day,1,0);
+          expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
           activities.add(
               Activity( event.schedule[i].dayActivities[j].name, gardenId, false, expectedDate)
           );

@@ -20,7 +20,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     @required this.gardensBloc,
     @required this.gardenId}) {
     DateTime now = new DateTime.now();
-    referenceDate = new DateTime(now.year, now.month, now.day);
+    referenceDate = new DateTime(now.year, now.month, now.day, 1);
 //
 //    gardensSubscription = gardensBloc.listen((state) {
 //      if (state is GardensLoaded) {
