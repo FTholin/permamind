@@ -73,7 +73,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
         for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
           DateTime expectedDate = referenceDate.add(Duration(days: i));
-          expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day);
+          expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day,1,0);
           activities.add(
               Activity( event.schedule[i].dayActivities[j].name, gardenId, false, expectedDate)
           );

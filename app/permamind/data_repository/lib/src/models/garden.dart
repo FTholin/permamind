@@ -14,6 +14,7 @@ class Garden extends Equatable {
   final String admin;
   final List<GardenMember> members;
   final DateTime creationDate;
+  final int dayActivitiesCount;
 
   Garden(
       this.name,
@@ -25,7 +26,9 @@ class Garden extends Equatable {
       this.members,
       this.modelingId,
       this.modelingName,
-      this.creationDate,{String id})
+      this.creationDate,
+      this.dayActivitiesCount,
+      {String id})
       :  this.id = id;
 
   Garden copyWith({String name, double length,
@@ -43,6 +46,7 @@ class Garden extends Equatable {
       modelingId ?? this.modelingId,
       modelingName ?? this.modelingName,
       creationDate ?? this.creationDate,
+      dayActivitiesCount ?? this.dayActivitiesCount,
       id: id ?? this.id,
     );
   }
@@ -60,7 +64,8 @@ class Garden extends Equatable {
               name == other.name &&
               publicVisibility == other.publicVisibility &&
               admin == other.admin &&
-              members == other.members;
+              members == other.members &&
+              dayActivitiesCount == other.dayActivitiesCount;
 
 
   @override
@@ -80,7 +85,8 @@ class Garden extends Equatable {
         members,
         modelingId,
         modelingName,
-        creationDate
+        creationDate,
+        dayActivitiesCount
     );
   }
 
@@ -97,6 +103,7 @@ class Garden extends Equatable {
       entity.modelingId,
       entity.modelingName,
       entity.creationDate,
+      entity.dayActivitiesCount,
       id: entity.id,
     );
   }
