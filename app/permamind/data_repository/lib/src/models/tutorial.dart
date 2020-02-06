@@ -7,23 +7,35 @@ import 'package:equatable/equatable.dart';
 class Tutorial extends Equatable {
   
   final String id;
-  final String heading;
+  final String tutorialHeading;
+  final String activityHeading;
+  final int tutorialClassificationOrder;
+  final int activityClassificationOrder;
+  final String activityContent;
 
-
-  Tutorial(this.heading, {String id})
+  Tutorial(this.tutorialHeading,
+      this.activityHeading,
+      this.tutorialClassificationOrder,
+      this.activityClassificationOrder,
+      this.activityContent,
+      {String id})
       : this.id = id;
 
-  Tutorial copyWith({String id, String heading,
+  Tutorial copyWith({String id, String tutorialHeading,
   }) {
     return Tutorial(
-        heading ?? this.heading,
+        tutorialHeading ?? this.tutorialHeading,
+        activityHeading ?? this.activityHeading,
+        tutorialClassificationOrder ?? this.tutorialClassificationOrder,
+        activityClassificationOrder ?? this.activityClassificationOrder,
+        activityContent ?? this.activityContent,
         id: id ?? this.id
     );
   }
 
   @override
   int get hashCode =>
-      id.hashCode ^ heading.hashCode;
+      id.hashCode ^ tutorialHeading.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -31,20 +43,25 @@ class Tutorial extends Equatable {
           other is Tutorial &&
               runtimeType == other.runtimeType &&
               id == other.id &&
-              heading == other.heading;
+              tutorialHeading == other.tutorialHeading &&
+              activityHeading == other.activityHeading;
 
   @override
   String toString() {
-    return 'Tutorial { id: $id, heading: $heading}';
+    return 'Tutorial { id: $id, tutorialHeading: $tutorialHeading}';
   }
 
 //  TutorialEntity toEntity() {
-//    return TutorialEntity(id, heading, activities);
+//    return TutorialEntity(id, tutorialHeading, activities);
 //  }
 
   static Tutorial fromEntity(TutorialEntity entity) {
     return Tutorial(
-      entity.heading,
+      entity.tutorialHeading,
+      entity.activityHeading,
+      entity.tutorialClassificationOrder,
+      entity.activityClassificationOrder,
+      entity.activityContent,
       id: entity.id,
     );
   }
