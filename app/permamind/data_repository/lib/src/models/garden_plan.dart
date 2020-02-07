@@ -71,19 +71,25 @@ class GardenPlan extends Equatable {
 class VeggieRow extends Equatable {
 
   final String name;
-  final double positionRow;
-  final double spaceRow;
+  final double xPosition;
+  final double yPosition;
+  final double length;
+  final double space;
 
   VeggieRow.fromMap(Map<dynamic, dynamic> data)
       : name = data['name'],
-        positionRow = data['positionRow'],
-        spaceRow = data['spaceRow'];
+        xPosition = data['xPosition'] as double,
+        yPosition = data['yPosition'] as double,
+        length = data['length'] as double,
+        space = data['space'] as double;
 
   Map<String, Object> toJson() {
     return {
       'name': name,
-      'positionRow': positionRow,
-      'spaceRow': spaceRow
+      'xPosition': xPosition,
+      'yPosition': yPosition,
+      'length': length,
+      'space': space
     };
   }
 

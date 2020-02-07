@@ -23,6 +23,8 @@ abstract class DataRepository {
 
   Stream<List<Activity>> fetchGardenActivities(String gardenId);
 
+  Stream<List<GardenPlan>> loadGardenPlans(String gardenId);
+
   Future<void> updateGarden(Garden garden);
 
   Future<void> updateActivity(Activity update);
@@ -31,7 +33,6 @@ abstract class DataRepository {
 
   Future<QuerySnapshot> searchById(String value);
 
-  Stream<GardenPlan> loadPlan(String gardenId);
 
 
 

@@ -96,11 +96,16 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
-  Future<GardenPlan> loadPlan(String gardenId) {
-    return plansCollection
-        .where("gardenId", isEqualTo: gardenId).getDocuments().
-  }
 
+  Stream<List<GardenPlan>> loadGardenPlans(String gardenId) {
+    return plansCollection
+        .where("gardenId", isEqualTo: gardenId)
+        .snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => GardenPlan.fromEntity(GardenPlanEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
 
   @override
   Stream<List<Modeling>> fetchModelings() {
