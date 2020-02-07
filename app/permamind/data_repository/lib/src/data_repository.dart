@@ -31,5 +31,8 @@ abstract class DataRepository {
 
   Future<QuerySnapshot> searchById(String value);
 
+  Stream<GardenPlan> loadPlan(String gardenId);
+
+
 
   }

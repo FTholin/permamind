@@ -26,6 +26,8 @@ class FirebaseDataRepository implements DataRepository {
 
   final activitiesCollection = Firestore.instance.collection('activities');
 
+  final plansCollection = Firestore.instance.collection('plans');
+
 
   @override
   Future<String> addNewGarden(Garden garden) async {
@@ -94,6 +96,11 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+  Future<GardenPlan> loadPlan(String gardenId) {
+    return plansCollection
+        .where("gardenId", isEqualTo: gardenId).getDocuments().
+  }
+
 
   @override
   Stream<List<Modeling>> fetchModelings() {
@@ -131,7 +138,7 @@ class FirebaseDataRepository implements DataRepository {
   Stream<List<Activity>> fetchGardenActivities(String gardenId) {
 
     return activitiesCollection
-        .where("gardenId",isEqualTo: gardenId)
+        .where("gardenId", isEqualTo: gardenId)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Activity.fromEntity(ActivityEntity.fromSnapshot(doc)))

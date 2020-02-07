@@ -52,7 +52,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     final pseudo = (await _dataRepository.searchById(event.userId)).documents.first.data['pseudo'];
     _gardensSubscription?.cancel();
     _gardensSubscription = _dataRepository.gardens(event.userId, pseudo).listen(
-          (gardens) async {
+          (gardens)  {
+//            var plans = _dataRepository.loadPlans(gardenId);
             add(GardensUpdated(gardens));
       },
     );

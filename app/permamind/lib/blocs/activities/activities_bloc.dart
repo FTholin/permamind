@@ -105,5 +105,5 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   }
 
 
-  }
+}
 
