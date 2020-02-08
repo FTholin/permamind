@@ -35,7 +35,7 @@ class DetailsGardenScreen extends StatelessWidget {
                 if (state is PlanLoaded) {
                   print(state.plan.positioning);
                   return CustomPaint(
-                    painter: PlanPainter(),
+                    painter: PlanPainter(state.plan.positioning),
                     child: Container(height: 300),
                   );
                 } else {

@@ -9,16 +9,24 @@ class Modeling {
   final int sunlightRequirement;
   final int waterRequirement;
   final int yield;
-
   List<ModelingSchedule> schedule = new List<ModelingSchedule>();
   final List<String> composition;
+  final List<int> culturePeriod;
+  final List<int> sowingPeriod;
+  final List<int> harvestPeriod;
 
-  Modeling(this.name, this.productionDuration,
+  Modeling(
+      this.name,
+      this.productionDuration,
       this.difficultyLevel, this.sunlightRequirement,
       this.waterRequirement,
       this.yield,
       this.schedule,
-      this.composition, {String id})
+      this.composition,
+      this.culturePeriod,
+      this.sowingPeriod,
+      this.harvestPeriod,
+      {String id})
       : this.id = id;
 
   Modeling copyWith({String id, String name,
@@ -35,6 +43,9 @@ class Modeling {
       yield ?? this.yield,
       schedule ?? this.schedule,
       composition ?? this.composition,
+      culturePeriod ?? this.culturePeriod,
+      sowingPeriod ?? this.sowingPeriod,
+      harvestPeriod ?? this.harvestPeriod,
       id: id ?? this.id
     );
   }
@@ -57,7 +68,10 @@ class Modeling {
               waterRequirement == other.waterRequirement &&
               yield == other.yield &&
               productionDuration == other.productionDuration &&
-              difficultyLevel == other.difficultyLevel;
+              difficultyLevel == other.difficultyLevel &&
+              culturePeriod == other.culturePeriod &&
+              sowingPeriod == other.sowingPeriod &&
+              harvestPeriod == other.harvestPeriod;
 
   @override
   String toString() {
@@ -65,11 +79,16 @@ class Modeling {
   }
 
   ModelingEntity toEntity() {
-    return ModelingEntity(id, name, productionDuration,
+    return ModelingEntity(
+        id, name, productionDuration,
         difficultyLevel, sunlightRequirement,
         waterRequirement, yield,
         schedule,
-        composition);
+        composition,
+        culturePeriod,
+        sowingPeriod,
+        harvestPeriod
+    );
   }
 
   static Modeling fromEntity(ModelingEntity entity) {
@@ -82,6 +101,9 @@ class Modeling {
       entity.yield,
       entity.schedule,
       entity.composition,
+      entity.culturePeriod,
+      entity.sowingPeriod,
+      entity.harvestPeriod,
       id: entity.id,
     );
   }

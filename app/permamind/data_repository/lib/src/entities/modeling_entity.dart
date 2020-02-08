@@ -12,13 +12,20 @@ class ModelingEntity extends Equatable {
   final int yield;
   List<ModelingSchedule> schedule = new List<ModelingSchedule>();
   final List<String> composition;
+  final List<int> culturePeriod;
+  final List<int> sowingPeriod;
+  final List<int> harvestPeriod;
 
   ModelingEntity(this.id, this.name,
       this.productionDuration, this.difficultyLevel,
       this.sunlightRequirement,
       this.waterRequirement, this.yield,
       this.schedule,
-      this.composition);
+      this.composition,
+      this.culturePeriod,
+      this.sowingPeriod,
+      this.harvestPeriod
+      );
 
   Map<String, Object> toJson() {
     return {
@@ -52,7 +59,10 @@ class ModelingEntity extends Equatable {
       json['waterRequirement'] as int,
       json['yield'] as int,
       json['schedule'],
-      json['composition']
+      json['composition'],
+      json['culturePeriod'],
+      json['sowingPeriod'],
+      json['harvestPeriod']
     );
   }
 
@@ -72,6 +82,9 @@ class ModelingEntity extends Equatable {
           return ModelingSchedule.fromMap(item);
         }).toList(),
       compositionList,
+      new List<int>.from(snap.data['culturePeriod']),
+      new List<int>.from(snap.data['sowingPeriod']),
+      new List<int>.from(snap.data['harvestPeriod']),
     );
   }
 
@@ -83,7 +96,10 @@ class ModelingEntity extends Equatable {
       'difficultyLevel': difficultyLevel,
       'sunlightRequirement': sunlightRequirement,
       'waterRequirement': waterRequirement,
-      'yield': yield
+      'yield': yield,
+      'culturePeriod': culturePeriod,
+      'sowingPeriod': sowingPeriod,
+      'harvestPeriod': harvestPeriod
     };
   }
 }
