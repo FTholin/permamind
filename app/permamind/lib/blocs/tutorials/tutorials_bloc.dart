@@ -23,9 +23,11 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
   Stream<TutorialsState> mapEventToState(TutorialsEvent event) async* {
     if (event is LoadTutos) {
       yield* _mapLoadTutosToState();
-    } else if (event is LoadTutoActivities) {
-      yield* _mapLoadTutoActivitiesToState(event);
-    } else if (event is CompleteActivity) {
+    }
+//    else if (event is LoadTutoActivities) {
+//      yield* _mapLoadTutoActivitiesToState(event);
+//    }
+    else if (event is CompleteActivity) {
       yield* _mapCompleteActivityToState(event);
     } else if (event is TutosUpdated) {
       yield* _mapTutosUpdateToState(event);
@@ -46,16 +48,16 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
     );
   }
 
-  Stream<TutorialsState> _mapLoadTutoActivitiesToState(LoadTutoActivities event) async* {
-    _activitiesSubscription?.cancel();
-    _activitiesSubscription = tutosRepository.fetchTutoActivities(event.tutoId).listen(
-          (activities) {
-        add(
-          TutoActivitiesUpdated(activities),
-        );
-      },
-    );
-  }
+//  Stream<TutorialsState> _mapLoadTutoActivitiesToState(LoadTutoActivities event) async* {
+//    _activitiesSubscription?.cancel();
+//    _activitiesSubscription = tutosRepository.fetchTutoActivities(event.tutoId).listen(
+//          (activities) {
+//        add(
+//          TutoActivitiesUpdated(activities),
+//        );
+//      },
+//    );
+//  }
 
   // TODO COnnect activities
 //  Stream<TutorialsState> _mapLoadTutoActivitiesToState() async* {

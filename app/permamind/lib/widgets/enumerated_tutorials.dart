@@ -1,4 +1,5 @@
 import 'package:circular_check_box/circular_check_box.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -9,9 +10,54 @@ import 'package:permamind/screens/screens.dart';
 
 
 
+//class EnumeratedTutorials extends StatelessWidget {
+//  EnumeratedTutorials({Key key}) : super(key: key);
+//
 
-class EnumeratedTutorials extends StatelessWidget {
-  EnumeratedTutorials({Key key}) : super(key: key);
+class EnumeratedTutorials extends StatefulWidget {
+  @override
+  _StepperState createState() => _StepperState();
+}
+
+class _StepperState extends State<EnumeratedTutorials> {
+  var _index = 0;
+
+
+  Widget _builderStep(List<Tutorial> tutos) {
+
+    List<Step> steps = List<Step>();
+
+
+    for (final tutorial in tutos) {
+      // C'est un titre de tutoriel
+      if (tutorial.activityClassificationOrder == 0) {
+        steps.add(Step(
+          title: Text("${tutorial.tutorialHeading}"),
+          state: StepState.editing,
+          content: Text("This is our first example."),
+        ),);
+      }
+    }
+
+
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      child: Stepper(
+        steps: steps,
+        currentStep: _index,
+        onStepTapped: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        controlsBuilder: (BuildContext context,
+            {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
+            Container(),
+      ),
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +70,15 @@ class EnumeratedTutorials extends StatelessWidget {
           );
         } else if (state is TutosLoaded) {
           final tutorials = state.tutorials;
+
+          return  SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _builderStep(tutorials),
+                SizedBox(height: 600)
+              ],
+            ),
+          );
 
         } else {
           return Container();

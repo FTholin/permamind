@@ -26,6 +26,8 @@ class FirebaseDataRepository implements DataRepository {
 
   final activitiesCollection = Firestore.instance.collection('activities');
 
+  final testCollection = Firestore.instance.collection('tests');
+
 
   @override
   Future<String> addNewGarden(Garden garden) async {
@@ -105,8 +107,9 @@ class FirebaseDataRepository implements DataRepository {
 
 
   Stream<List<Tutorial>> loadTutorials() {
-    return tutorialsCollection
-        .orderBy('classificationOrder', descending: false)
+    return testCollection
+        .orderBy('tutorialClassificationOrder', descending: false)
+        .orderBy('activityClassificationOrder', descending: false)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Tutorial.fromEntity(TutorialEntity.fromSnapshot(doc)))
@@ -114,16 +117,16 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
-  Stream<List<TutorialActivity>> fetchTutoActivities(String tutoId) {
-    return tutorialsCollection
-        .document(tutoId).collection("activities")
-        .orderBy('classificationOrder', descending: false)
-        .snapshots().map((snapshot) {
-      return snapshot.documents
-          .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
-          .toList();
-    });
-  }
+//  Stream<List<TutorialActivity>> fetchTutoActivities(String tutoId) {
+//    return tutorialsCollection
+//        .document(tutoId).collection("activities")
+//        .orderBy('classificationOrder', descending: false)
+//        .snapshots().map((snapshot) {
+//      return snapshot.documents
+//          .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
+//          .toList();
+//    });
+//  }
 
   @override
   Stream<List<Activity>> fetchGardenActivities(String gardenId) {
