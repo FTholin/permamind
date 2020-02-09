@@ -49,7 +49,7 @@ class DetailsModelingScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Container(
-                  color: Colors.red,height: mediaHeight * 230 / 896,
+                  height: mediaHeight * 230 / 896,
                   child: Center(
                     child: Image.asset(
                       'assets/modelings/${args.modeling.name}.png',
@@ -57,25 +57,109 @@ class DetailsModelingScreen extends StatelessWidget {
                     )
                   )),
               ),
+
+
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 5),
                 child: Container(
-                    color: Colors.green,
                     height: mediaHeight * 65 / 896,
-                    child: _buildModelingSchedule(
-                      mediaHeight,
-                      mediaWidth,
-                      args.modeling.culturePeriod,
-                      args.modeling.sowingPeriod,
-                      args.modeling.harvestPeriod
-                    )
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        child: _buildModelingSchedule(
+                            mediaHeight,
+                            mediaWidth,
+                            args.modeling.culturePeriod,
+                            args.modeling.sowingPeriod,
+                            args.modeling.harvestPeriod
+                        ),
+                    ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green, width: 3),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                  ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 90),
-                child:Container(
-                  color: Colors.purpleAccent,
+                child: Container(
                   height: mediaHeight * 70 / 896,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Expanded(
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Center(
+                                        child: Container(
+                                          height: mediaHeight * 27 / 896,
+                                          width:  mediaWidth * 27 / 414,
+                                          padding: EdgeInsets.all(12),
+                                          decoration: new BoxDecoration(
+                                            color: Colors.yellow,
+                                            borderRadius: BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      flex: 2,
+                                      child: Center(
+                                        child: Text(
+                                            "sowing period",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14)
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Center(
+                                        child: Container(
+                                          height: mediaHeight * 27 / 896,
+                                          width:  mediaWidth * 27 / 414,
+                                          padding: EdgeInsets.all(12),
+                                          decoration: new BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      flex: 2,
+                                      child: Center(
+                                        child: Text(
+                                            "harvest period",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14)
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green, width: 3),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                  ),
                 ),
               ),
               Padding(
@@ -236,7 +320,7 @@ class DetailsModelingScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         //TODO Changer la localisation et le tooltip
           key: ArchSampleKeys.editTodoFab,
-          child: Icon(Icons.local_florist),
+          child: Icon(Icons.check, color: Colors.white,),
           onPressed: args.modeling == null
               ? null
               : () async {
