@@ -7,12 +7,12 @@ import 'package:permamind/blocs/blocs.dart';
 
 
 class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
-  final FirebaseDataRepository tutosRepository;
+  final FirebaseDataRepository dataRepository;
 
-  TutorialsBloc({@required this.tutosRepository});
+  TutorialsBloc({@required this.dataRepository});
 
   StreamSubscription _tutosSubscription;
-  StreamSubscription _activitiesSubscription;
+//  StreamSubscription _activitiesSubscription;
 
 
 
@@ -39,10 +39,20 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
 
   Stream<TutorialsState> _mapLoadTutosToState() async* {
     _tutosSubscription?.cancel();
-    _tutosSubscription = tutosRepository.loadTutorials().listen(
-          (tutos) {
-        add(
-          TutosUpdated(tutos),
+    _tutosSubscription = dataRepository.loadTutorials().listen(
+          (tutorials) {
+            final Map<int, List<Tutorial>> mapTutorials = Map<int, List<Tutorial>>();
+
+            tutorials.forEach( (item) {
+
+              if (mapTutorials[item.tutorialClassificationOrder] == null) {
+                mapTutorials[item.tutorialClassificationOrder] = [item];
+              } else {
+                mapTutorials[item.tutorialClassificationOrder].addAll([item]);
+              }
+            });
+
+            add(TutosUpdated(mapTutorials),
         );
       },
     );
@@ -50,7 +60,7 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
 
 //  Stream<TutorialsState> _mapLoadTutoActivitiesToState(LoadTutoActivities event) async* {
 //    _activitiesSubscription?.cancel();
-//    _activitiesSubscription = tutosRepository.fetchTutoActivities(event.tutoId).listen(
+//    _activitiesSubscription = dataRepository.fetchTutoActivities(event.tutoId).listen(
 //          (activities) {
 //        add(
 //          TutoActivitiesUpdated(activities),
@@ -61,7 +71,7 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
 
   // TODO COnnect activities
 //  Stream<TutorialsState> _mapLoadTutoActivitiesToState() async* {
-//    _tutosSubscription = tutosRepository.loadTutorials();
+//    _tutosSubscription = dataRepository.loadTutorials();
 //  }
 
   Stream<TutorialsState> _mapCompleteActivityToState(
@@ -77,13 +87,13 @@ class TutorialsBloc extends Bloc<TutorialsEvent, TutorialsState> {
 
 
   Stream<TutorialsState> _mapTutosUpdateToState(TutosUpdated event) async* {
-    yield TutosLoaded(event.tutos);
+    yield TutosLoaded(event.tutorials);
   }
 
   @override
   void dispose() {
     _tutosSubscription?.cancel();
-    _activitiesSubscription?.cancel();
+//    _activitiesSubscription?.cancel();
 //    super.dispose();
   }
 }

@@ -20,25 +20,68 @@ class EnumeratedTutorials extends StatefulWidget {
 }
 
 class _StepperState extends State<EnumeratedTutorials> {
+
   var _index = 0;
 
-
-  Widget _builderStep(List<Tutorial> tutos) {
+  Widget _builderStep(Map<int, List<Tutorial>> tutorials) {
 
     List<Step> steps = List<Step>();
 
+    tutorials.forEach((k,v) {
 
-    for (final tutorial in tutos) {
-      // C'est un titre de tutoriel
-      if (tutorial.activityClassificationOrder == 0) {
-        steps.add(Step(
-          title: Text("${tutorial.tutorialHeading}"),
-          state: StepState.editing,
-          content: Text("This is our first example."),
-        ),);
+      final tutorialHeading = v.first;
+
+      List<Card> activitiesItem = List<Card>();
+
+      for (int i = 1; i < v.length; i++) {
+
+        activitiesItem.add(
+            Card(
+                child: ExpansionTile(
+                  leading: Checkbox(
+                    value: false, // TODO A changer en vérifiant avec l'user
+                    onChanged: (val) {
+                      setState(() {
+                      });
+                    },
+                  ),
+                  key: PageStorageKey<Tutorial>(v[i]),
+                  title: Text(v[i].activityHeading),
+                  children: <Widget>[
+                    Text(v[i].activityContent)
+                  ],
+                ))
+        );
+
       }
-    }
 
+      steps.add(
+        Step(
+          title: Text("${tutorialHeading.tutorialHeading}"),
+          state: StepState.editing,
+          isActive: _index == k,
+          content: Column(
+            children: activitiesItem
+          )
+        ),
+      );
+
+    });
+
+
+//    for (final tutorial in tutos) {
+//      // C'est un titre de tutoriel
+//      if (tutorial.activityClassificationOrder == 0) {
+//        steps.add(
+//          Step(
+//          title: Text("${tutorial.tutorialHeading}"),
+//          state: StepState.editing,
+//          ),
+//        );
+//      } else {
+//        // C'est un sous titre
+////        steps[tutorial.tutorialClassificationOrder].content =
+//      }
 
     return Container(
       margin: EdgeInsets.only(top: 10),

@@ -78,7 +78,7 @@ class App extends StatelessWidget {
                           ),
                           BlocProvider<TutorialsBloc>(
                             create: (context) =>
-                            TutorialsBloc(tutosRepository: firebaseRepository)
+                            TutorialsBloc(dataRepository: firebaseRepository)
                               ..add(LoadTutos()),
                           ),
                         ],
