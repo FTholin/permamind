@@ -32,6 +32,8 @@ dependencies:
   flutter_speed_dial: ^1.2.4
   bubble_bottom_bar: ^1.2.0
 
+  carousel_slider: ^1.4.1
+
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^4.0.2
 

@@ -177,6 +177,9 @@ class App extends StatelessWidget {
               "/joinGarden": (context) {
                  return JoinGardenScreen();
               },
+              '/tutorialActivities': (context) {
+                return TutorialActivitiesScreen();
+              }
 //              '/' : (context) {
 //                BlocProvider(
 //                  create: (BuildContext context) => SchedulerBloc(),

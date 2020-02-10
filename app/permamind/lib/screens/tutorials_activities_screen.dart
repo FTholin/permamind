@@ -1,10 +1,7 @@
-import 'package:circular_check_box/circular_check_box.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/models/models.dart';
+
 
 //class EnumeratedActivitiesScreen extends StatelessWidget {
 //  final String tutorialId;
@@ -150,3 +147,77 @@ import 'package:permamind/models/models.dart';
 //    );
 //  }
 //}
+
+
+class TutorialActivitiesScreen extends StatefulWidget {
+
+  final String tutorialHeading;
+
+  final List<Tutorial> tutorialActivities;
+
+  TutorialActivitiesScreen(
+      {
+        @required this.tutorialHeading,
+        @required this.tutorialActivities,
+        Key key
+      })
+      : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
+
+  @override
+  _StepperState createState() => _StepperState();
+}
+
+class _StepperState extends State<TutorialActivitiesScreen> {
+
+  var _index = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.tutorialHeading),
+        ),
+        body:  Container(
+          margin: EdgeInsets.only(top: 10),
+          child: _builderStep(widget.tutorialActivities)
+        )
+    );
+  }
+
+
+  Widget _builderStep(List<Tutorial> tutorials) {
+
+    List<Step> steps = List<Step>();
+
+    for (int i = 1; i < tutorials.length; i++) {
+
+      steps.add(
+        Step(
+            title: Text("${tutorials[i].activityHeading}"),
+            state: StepState.editing,
+            isActive: _index == i,
+            content: Text('${tutorials[i].activityContent}')
+        ),
+      );
+    }
+
+
+
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      child: Stepper(
+        steps: steps,
+        currentStep: _index,
+        onStepTapped: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        controlsBuilder: (BuildContext context,
+            {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
+            Container(),
+      ),
+    );
+  }
+
+}
