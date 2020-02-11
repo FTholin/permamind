@@ -10,8 +10,16 @@ class TutorialEntity extends Equatable {
   final int tutorialClassificationOrder;
   final int activityClassificationOrder;
   final List<TutorialActivity> tutorialActivities;
+  final String background;
 
-  TutorialEntity(this.id, this.tutorialHeading, this.activityHeading, this.tutorialClassificationOrder, this.activityClassificationOrder, this.tutorialActivities);
+  TutorialEntity(
+      this.id,
+      this.tutorialHeading,
+      this.activityHeading,
+      this.tutorialClassificationOrder,
+      this.activityClassificationOrder,
+      this.tutorialActivities,
+      this.background);
 
   Map<String, Object> toJson() {
     return {
@@ -36,7 +44,8 @@ class TutorialEntity extends Equatable {
       json['activityHeading'] as String,
       json['tutorialClassificationOrder'] as int,
       json['activityClassificationOrder'] as int,
-      json['tutorialActivities'] as List<TutorialActivity>
+      json['tutorialActivities'] as List<TutorialActivity>,
+      json['background'] as String
     );
   }
 
@@ -48,9 +57,11 @@ class TutorialEntity extends Equatable {
       snap.data['activityHeading'],
       snap.data['tutorialClassificationOrder'],
       snap.data['activityClassificationOrder'],
-      snap.data['tutorialActivities'].map<TutorialActivity>((item) {
+
+        snap.data['tutorialActivities'].map<TutorialActivity>((item) {
         return TutorialActivity.fromMap(item);
       }).toList(),
+      snap.data['background']
     );
   }
 
@@ -61,7 +72,8 @@ class TutorialEntity extends Equatable {
       'activityHeading': activityHeading,
       'tutorialClassificationOrder': tutorialClassificationOrder,
       'activityClassificationOrder': activityClassificationOrder,
-      'tutorialActivities': tutorialActivities
+      'tutorialActivities': tutorialActivities,
+      'background': background
     };
   }
 }

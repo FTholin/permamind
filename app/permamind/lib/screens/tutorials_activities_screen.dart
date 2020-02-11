@@ -156,13 +156,12 @@ class TutorialActivitiesScreen extends StatefulWidget {
 
   final List<Tutorial> tutorialActivities;
 
-  TutorialActivitiesScreen(
-      {
+  TutorialActivitiesScreen({
         @required this.tutorialHeading,
         @required this.tutorialActivities,
-        Key key
-      })
-      : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
+        Key key}) {
+    tutorialActivities.sort((a, b) => (a.activityClassificationOrder).compareTo(b.activityClassificationOrder));
+  }
 
   @override
   _StepperState createState() => _StepperState();
@@ -201,22 +200,27 @@ class _StepperState extends State<TutorialActivitiesScreen> {
       );
     }
 
-
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      child: Stepper(
-        steps: steps,
-        currentStep: _index,
-        onStepTapped: (index) {
-          setState(() {
-            _index = index;
-          });
-        },
-        controlsBuilder: (BuildContext context,
-            {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
-            Container(),
-      ),
-    );
+    if (steps.isEmpty) {
+      return Center(
+        child: Text("Under construction ..."),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.only(top: 10),
+        child: Stepper(
+          steps: steps,
+          currentStep: _index,
+          onStepTapped: (index) {
+            setState(() {
+              _index = index;
+            });
+          },
+          controlsBuilder: (BuildContext context,
+              {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
+              Container(),
+        ),
+      );
+    }
   }
 
 }
@@ -230,7 +234,6 @@ class CarouselWithIndicator extends StatefulWidget {
   CarouselWithIndicator(this.activities) {
     for (final activity in this.activities) {
       content.add(
-
           Container(
             margin: EdgeInsets.all(5.0),
             child: ClipRRect(

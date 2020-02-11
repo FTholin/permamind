@@ -108,7 +108,6 @@ class FirebaseDataRepository implements DataRepository {
   Stream<List<Tutorial>> loadTutorials() {
     return tutorialsCollection
         .orderBy('tutorialClassificationOrder', descending: false)
-        .orderBy('activityClassificationOrder', descending: false)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Tutorial.fromEntity(TutorialEntity.fromSnapshot(doc)))

@@ -75,6 +75,7 @@ flutter:
     - assets/bar_buttons_icons/
     - assets/utils_icons/
     - assets/gardens/
+    - assets/tutorials/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -138,7 +138,7 @@ class _StepperState extends State<EnumeratedTutorials> {
 
                   return InkResponse(
                     enableFeedback: true,
-                    child: TutorialItem(name: tutorials[index][0].tutorialHeading),
+                    child: TutorialItem(name: tutorials[index][0].tutorialHeading, background: tutorials[index][0].background),
                     onTap: () async {
                       await Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                         return TutorialActivitiesScreen(
@@ -152,8 +152,6 @@ class _StepperState extends State<EnumeratedTutorials> {
                 }),
               )
           );
-
-
 
 //          return ListView.builder(
 //            itemCount: tutorials.length,

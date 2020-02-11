@@ -1,10 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class TutorialItem extends StatelessWidget {
   final String name;
-  final int index;
+  final String background;
 
-  TutorialItem({@required this.name, @required this.index});
+  TutorialItem({@required this.name, @required this.background});
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +20,63 @@ class TutorialItem extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: Stack(children: <Widget>[
+//          Image.asset(
+//            'assets/tutorials/creer-sol.png',
+//            fit: BoxFit.fitWidth,
+//          ),
+
+//          Container(
+//            height: 200,
+//            width: double.maxFinite,
+//            decoration: BoxDecoration(
+//              image: DecorationImage(
+//                image: ExactAssetImage("your_chocolage_image"),
+//                fit: BoxFit.cover,
+//              ),
+//            ),
+//            child: ClipRRect( // make sure we apply clip it properly
+//              child: BackdropFilter(
+//                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+//                child: Container(
+//                  alignment: Alignment.center,
+//                  color: Colors.grey.withOpacity(0.1),
+//                  child: Text(
+//                    "CHOCOLATE",
+//                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+//                  ),
+//                ),
+//              ),
+//            ),
+//          )
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: Image.asset(
+              'assets/tutorials/$background.jpg',
+              fit: BoxFit.cover,
+              width: 190,
+            ),
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+            child: Container(
+              color: Colors.black.withOpacity(0.22),
+            ),
+          ),
           Padding(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                '$name',
-                style: TextStyle(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                    color: Colors.white),
-                textAlign: TextAlign.justify,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-              ),
-              )
-        ]
-        )
-    );
+            padding: EdgeInsets.all(10),
+            child: Text(
+              '$name',
+              style: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                  color: Colors.white),
+//                textAlign: TextAlign.justify,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+            ),
+          ),
+        ]));
 //    return Container(
 //      color: Colors.red,
 //      height: MediaQuery.of(context).size.height / 8,

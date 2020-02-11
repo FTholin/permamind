@@ -12,12 +12,14 @@ class Tutorial extends Equatable {
   final int tutorialClassificationOrder;
   final int activityClassificationOrder;
   final List<TutorialActivity> tutorialActivities;
+  final String background;
 
   Tutorial(this.tutorialHeading,
       this.activityHeading,
       this.tutorialClassificationOrder,
       this.activityClassificationOrder,
       this.tutorialActivities,
+      this.background,
       {String id})
       : this.id = id;
 
@@ -29,6 +31,7 @@ class Tutorial extends Equatable {
         tutorialClassificationOrder ?? this.tutorialClassificationOrder,
         activityClassificationOrder ?? this.activityClassificationOrder,
         tutorialActivities ?? this.tutorialActivities,
+        background ?? this.background,
         id: id ?? this.id
     );
   }
@@ -62,6 +65,7 @@ class Tutorial extends Equatable {
       entity.tutorialClassificationOrder,
       entity.activityClassificationOrder,
       entity.tutorialActivities,
+      entity.background,
       id: entity.id,
     );
   }
@@ -69,8 +73,10 @@ class Tutorial extends Equatable {
 
 class TutorialActivity {
   final String name;
-  final bool content;
+  final String content;
   final String type;
+
+  TutorialActivity(this.name, this.content, this.type);
 
   TutorialActivity.fromMap(Map<dynamic, dynamic> data)
       : name = data['name'],
