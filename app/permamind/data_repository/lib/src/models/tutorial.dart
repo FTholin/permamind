@@ -11,13 +11,13 @@ class Tutorial extends Equatable {
   final String activityHeading;
   final int tutorialClassificationOrder;
   final int activityClassificationOrder;
-  final String activityContent;
+  final List<TutorialActivity> tutorialActivities;
 
   Tutorial(this.tutorialHeading,
       this.activityHeading,
       this.tutorialClassificationOrder,
       this.activityClassificationOrder,
-      this.activityContent,
+      this.tutorialActivities,
       {String id})
       : this.id = id;
 
@@ -28,7 +28,7 @@ class Tutorial extends Equatable {
         activityHeading ?? this.activityHeading,
         tutorialClassificationOrder ?? this.tutorialClassificationOrder,
         activityClassificationOrder ?? this.activityClassificationOrder,
-        activityContent ?? this.activityContent,
+        tutorialActivities ?? this.tutorialActivities,
         id: id ?? this.id
     );
   }
@@ -61,9 +61,32 @@ class Tutorial extends Equatable {
       entity.activityHeading,
       entity.tutorialClassificationOrder,
       entity.activityClassificationOrder,
-      entity.activityContent,
+      entity.tutorialActivities,
       id: entity.id,
     );
   }
 }
 
+class TutorialActivity {
+  final String name;
+  final bool content;
+  final String type;
+
+  TutorialActivity.fromMap(Map<dynamic, dynamic> data)
+      : name = data['name'],
+        content = data['content'],
+        type = data['type'];
+
+  Map<String, Object> toJson() {
+    return {
+      'name': name,
+      'content': content,
+      'type': type
+    };
+  }
+
+  @override
+  String toString() {
+    return name;
+  }
+}

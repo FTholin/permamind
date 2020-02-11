@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_repository/data_repository.dart';
-import 'package:data_repository/src/entities/entities.dart';
 import 'package:equatable/equatable.dart';
 
 class TutorialEntity extends Equatable {
@@ -10,9 +9,9 @@ class TutorialEntity extends Equatable {
   final String activityHeading;
   final int tutorialClassificationOrder;
   final int activityClassificationOrder;
-  final String activityContent;
+  final List<TutorialActivity> tutorialActivities;
 
-  TutorialEntity(this.id, this.tutorialHeading, this.activityHeading, this.tutorialClassificationOrder, this.activityClassificationOrder, this.activityContent);
+  TutorialEntity(this.id, this.tutorialHeading, this.activityHeading, this.tutorialClassificationOrder, this.activityClassificationOrder, this.tutorialActivities);
 
   Map<String, Object> toJson() {
     return {
@@ -21,7 +20,7 @@ class TutorialEntity extends Equatable {
       'activityHeading': activityHeading,
       'tutorialClassificationOrder': tutorialClassificationOrder,
       'activityClassificationOrder': activityClassificationOrder,
-      'activityContent': activityContent
+      'tutorialActivities': tutorialActivities
     };
   }
 
@@ -37,18 +36,21 @@ class TutorialEntity extends Equatable {
       json['activityHeading'] as String,
       json['tutorialClassificationOrder'] as int,
       json['activityClassificationOrder'] as int,
-      json['activityContent'] as String
+      json['tutorialActivities'] as List<TutorialActivity>
     );
   }
 
   static TutorialEntity fromSnapshot(DocumentSnapshot snap) {
+
     return TutorialEntity(
       snap.documentID,
       snap.data['tutorialHeading'],
       snap.data['activityHeading'],
       snap.data['tutorialClassificationOrder'],
       snap.data['activityClassificationOrder'],
-      snap.data['activityContent']
+      snap.data['tutorialActivities'].map<TutorialActivity>((item) {
+        return TutorialActivity.fromMap(item);
+      }).toList(),
     );
   }
 
@@ -59,7 +61,7 @@ class TutorialEntity extends Equatable {
       'activityHeading': activityHeading,
       'tutorialClassificationOrder': tutorialClassificationOrder,
       'activityClassificationOrder': activityClassificationOrder,
-      'activityContent': activityContent
+      'tutorialActivities': tutorialActivities
     };
   }
 }
