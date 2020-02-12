@@ -78,7 +78,7 @@ class App extends StatelessWidget {
                           ),
                           BlocProvider<TutorialsBloc>(
                             create: (context) =>
-                            TutorialsBloc(tutosRepository: firebaseRepository)
+                            TutorialsBloc(dataRepository: firebaseRepository)
                               ..add(LoadTutos()),
                           ),
                         ],
@@ -177,6 +177,9 @@ class App extends StatelessWidget {
               "/joinGarden": (context) {
                  return JoinGardenScreen();
               },
+              '/tutorialActivities': (context) {
+                return TutorialActivitiesScreen();
+              }
 //              '/' : (context) {
 //                BlocProvider(
 //                  create: (BuildContext context) => SchedulerBloc(),

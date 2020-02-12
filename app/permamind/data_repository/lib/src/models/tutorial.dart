@@ -7,23 +7,38 @@ import 'package:equatable/equatable.dart';
 class Tutorial extends Equatable {
   
   final String id;
-  final String heading;
+  final String tutorialHeading;
+  final String activityHeading;
+  final int tutorialClassificationOrder;
+  final int activityClassificationOrder;
+  final List<TutorialActivity> tutorialActivities;
+  final String background;
 
-
-  Tutorial(this.heading, {String id})
+  Tutorial(this.tutorialHeading,
+      this.activityHeading,
+      this.tutorialClassificationOrder,
+      this.activityClassificationOrder,
+      this.tutorialActivities,
+      this.background,
+      {String id})
       : this.id = id;
 
-  Tutorial copyWith({String id, String heading,
+  Tutorial copyWith({String id, String tutorialHeading,
   }) {
     return Tutorial(
-        heading ?? this.heading,
+        tutorialHeading ?? this.tutorialHeading,
+        activityHeading ?? this.activityHeading,
+        tutorialClassificationOrder ?? this.tutorialClassificationOrder,
+        activityClassificationOrder ?? this.activityClassificationOrder,
+        tutorialActivities ?? this.tutorialActivities,
+        background ?? this.background,
         id: id ?? this.id
     );
   }
 
   @override
   int get hashCode =>
-      id.hashCode ^ heading.hashCode;
+      id.hashCode ^ tutorialHeading.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -31,22 +46,53 @@ class Tutorial extends Equatable {
           other is Tutorial &&
               runtimeType == other.runtimeType &&
               id == other.id &&
-              heading == other.heading;
+              tutorialHeading == other.tutorialHeading &&
+              activityHeading == other.activityHeading;
 
   @override
   String toString() {
-    return 'Tutorial { id: $id, heading: $heading}';
+    return 'Tutorial { id: $id, tutorialHeading: $tutorialHeading}';
   }
 
 //  TutorialEntity toEntity() {
-//    return TutorialEntity(id, heading, activities);
+//    return TutorialEntity(id, tutorialHeading, activities);
 //  }
 
   static Tutorial fromEntity(TutorialEntity entity) {
     return Tutorial(
-      entity.heading,
+      entity.tutorialHeading,
+      entity.activityHeading,
+      entity.tutorialClassificationOrder,
+      entity.activityClassificationOrder,
+      entity.tutorialActivities,
+      entity.background,
       id: entity.id,
     );
   }
 }
 
+class TutorialActivity {
+  final String name;
+  final String content;
+  final String type;
+
+  TutorialActivity(this.name, this.content, this.type);
+
+  TutorialActivity.fromMap(Map<dynamic, dynamic> data)
+      : name = data['name'],
+        content = data['content'],
+        type = data['type'];
+
+  Map<String, Object> toJson() {
+    return {
+      'name': name,
+      'content': content,
+      'type': type
+    };
+  }
+
+  @override
+  String toString() {
+    return name;
+  }
+}

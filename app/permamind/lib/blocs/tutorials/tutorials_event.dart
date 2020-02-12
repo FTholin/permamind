@@ -40,9 +40,10 @@ class TutoActivitiesUpdated extends TutorialsEvent {
 }
 
 class TutosUpdated extends TutorialsEvent {
-  final List<Tutorial> tutos;
 
-  TutosUpdated(this.tutos);
+  final Map<int, List> tutorials;
+
+  TutosUpdated(this.tutorials);
 
   @override
   String toString() => 'TutosUpdated';
