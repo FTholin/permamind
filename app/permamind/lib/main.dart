@@ -146,6 +146,8 @@ class App extends StatelessWidget {
 
                             gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
 
+                            // Todo requete récupérer nb activité jour et intégrer dans jardin
+
                             BlocProvider.of<GardensBloc>(context).add(
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
@@ -154,7 +156,7 @@ class App extends StatelessWidget {
                                   gardenMembers,
                                   modelingId,
                                   modelingName,
-                                  DateTime.now()),
+                                  DateTime.now(), 0),
                                   schedule
                               ),
                             );

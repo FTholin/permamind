@@ -1,15 +1,19 @@
 class ModelingActivity {
+
   String name;
   bool complete;
+  String category;
 
   ModelingActivity.fromMap(Map<dynamic, dynamic> data)
       : name = data['name'],
-        complete = data['complete'];
+        complete = data['complete'],
+        category = data['category'];
 
   Map<String, Object> toJson() {
     return {
       'name': name,
       'complete': complete,
+      'category': category
     };
   }
 

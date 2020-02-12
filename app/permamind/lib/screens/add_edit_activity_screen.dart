@@ -64,7 +64,7 @@ import 'package:permamind/blocs/blocs.dart';
 
 
 
-                  DateTime referenceDate  = new DateTime(selectedDate.year, selectedDate.month, selectedDate.day);
+                  DateTime referenceDate  = new DateTime(selectedDate.year, selectedDate.month, selectedDate.day, 1);
 
                   BlocProvider.of<ActivitiesBloc>(context).add(
                     AddActivity(
@@ -72,7 +72,9 @@ import 'package:permamind/blocs/blocs.dart';
                         _activityNameController.text,
                         BlocProvider.of<ActivitiesBloc>(context).gardenId,
                         false,
-                        referenceDate
+                        referenceDate,
+                        '',
+                        ''
                       )
                     )
                   );

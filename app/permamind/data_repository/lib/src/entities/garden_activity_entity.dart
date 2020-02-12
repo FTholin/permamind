@@ -7,13 +7,19 @@ class ActivityEntity extends Equatable {
   final String gardenId;
   final bool complete;
   final DateTime expectedDate;
+  final String category;
+  final String completeActivityUserId;
+
 
   ActivityEntity(
       this.id,
       this.title,
       this.gardenId,
       this.complete,
-      this.expectedDate);
+      this.expectedDate,
+      this.category,
+      this.completeActivityUserId
+      );
 
   Map<String, Object> toJson() {
     return {
@@ -21,7 +27,9 @@ class ActivityEntity extends Equatable {
       'title': title,
       'gardenId': gardenId,
       'complete': complete,
-      'expectedDate': expectedDate
+      'expectedDate': expectedDate,
+      'category': category,
+      'completeActivityUserId': completeActivityUserId
     };
   }
 
@@ -36,7 +44,9 @@ class ActivityEntity extends Equatable {
         json['gardenId'] as String,
         json['title'] as String,
         json['complete'] as bool,
-        json['expectedDate']
+        json['expectedDate'],
+        json['category'] as String,
+        json['completeActivityUserId']
     );
   }
 
@@ -48,7 +58,9 @@ class ActivityEntity extends Equatable {
         snap.data['gardenId'],
         snap.data['complete'],
         DateTime.fromMillisecondsSinceEpoch(
-            snap.data["expectedDate"].millisecondsSinceEpoch)
+            snap.data["expectedDate"].millisecondsSinceEpoch),
+        snap.data['category'],
+        snap.data['completeActivityUserId']
     );
   }
 
@@ -57,7 +69,9 @@ class ActivityEntity extends Equatable {
       'gardenId': gardenId,
       'title': title,
       'complete': complete,
-      'expectedDate': expectedDate
+      'expectedDate': expectedDate,
+      'category': category,
+      'completeActivityUserId': completeActivityUserId
     };
   }
 }

@@ -5,8 +5,15 @@ class GardenItem extends StatelessWidget {
   final String modelingName;
   final String membersCount;
   final int index;
+  final int dayActivitiesCount;
 
-  GardenItem({@required this.name, @required this.modelingName, @required this.membersCount, @required this.index});
+  GardenItem({
+    @required this.name,
+    @required this.modelingName,
+    @required this.membersCount,
+    @required this.index,
+    this.dayActivitiesCount
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +93,7 @@ class GardenItem extends StatelessWidget {
                 ),
               child: Center(
                 child: Text(
-                  '1',
+                  '$dayActivitiesCount',
                   style: TextStyle(fontSize: 20,color: Colors.white),
                 )
               ),

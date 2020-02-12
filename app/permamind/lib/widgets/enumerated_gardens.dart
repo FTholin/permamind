@@ -39,20 +39,40 @@ class EnumeratedGardens extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return InkResponse(
                     enableFeedback: true,
-                    child: GardenItem(name: gardens[index].name, modelingName: gardens[index].modelingName, membersCount: gardens[index].members.length.toString(), index: index),
+                    child: GardenItem(name: gardens[index].name, modelingName: gardens[index].modelingName, membersCount: gardens[index].members.length.toString(), index: index, dayActivitiesCount: gardens[index].dayActivitiesCount),
                     onTap: () async {
                       final removedGarden = await Navigator.of(context).push(
                           MaterialPageRoute(
 
                               builder: (_) {
 
-                            return BlocProvider(
-                                create: (context) => ActivitiesBloc(
-                                    dataRepository:_dataRepository,
-                                    gardensBloc: BlocProvider.of<GardensBloc>(context),
-                                    gardenId: gardens[index].id
-                                )..add(LoadActivities()),
-                                child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user),
+//                            return BlocProvider(
+//                                create: (context) => ActivitiesBloc(
+//                                    dataRepository:_dataRepository,
+//                                    gardensBloc: BlocProvider.of<GardensBloc>(context),
+//                                    gardenId: gardens[index].id
+//                                )..add(LoadActivities()),
+//                                child:
+//                            );
+
+                            return MultiBlocProvider(
+                              providers: [
+                                BlocProvider<ActivitiesBloc>(
+                                  create: (context) => ActivitiesBloc(
+                                      dataRepository:_dataRepository,
+                                      gardensBloc: BlocProvider.of<GardensBloc>(context),
+                                      gardenId: gardens[index].id
+                                  )..add(LoadActivities()),
+                                ),
+                                BlocProvider<PlanBloc>(
+                                  create: (BuildContext context) => PlanBloc(
+                                      dataRepository: _dataRepository,
+                                      activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
+                                      gardenId: gardens[index].id
+                                  )..add(LoadPlan()),
+                                )
+                              ],
+                              child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user),
                             );
 
                           })

@@ -26,6 +26,8 @@ class FirebaseDataRepository implements DataRepository {
 
   final activitiesCollection = Firestore.instance.collection('activities');
 
+  final plansCollection = Firestore.instance.collection('plans');
+
 
 
   @override
@@ -61,10 +63,12 @@ class FirebaseDataRepository implements DataRepository {
         DocumentReference docRef = await activitiesCollection.add(
             schedule[i].toEntity().toDocument());
         batch.setData(docRef, {
-          "title": schedule[i].title,
-          "gardenId": schedule[i].gardenId,
-          "complete": schedule[i].complete,
-          "expectedDate": schedule[i].expectedDate,
+          'title': schedule[i].title,
+          'gardenId': schedule[i].gardenId,
+          'complete': schedule[i].complete,
+          'expectedDate': schedule[i].expectedDate,
+          'category': schedule[i].category,
+          'completeActivityUserId': schedule[i].completeActivityUserId
         });
       }
     batch.commit();
@@ -93,6 +97,16 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+
+  Stream<List<GardenPlan>> loadGardenPlans(String gardenId) {
+    return plansCollection
+        .where("gardenId", isEqualTo: gardenId)
+        .snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => GardenPlan.fromEntity(GardenPlanEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
 
   @override
   Stream<List<Modeling>> fetchModelings() {
@@ -130,7 +144,7 @@ class FirebaseDataRepository implements DataRepository {
   Stream<List<Activity>> fetchGardenActivities(String gardenId) {
 
     return activitiesCollection
-        .where("gardenId",isEqualTo: gardenId)
+        .where("gardenId", isEqualTo: gardenId)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Activity.fromEntity(ActivityEntity.fromSnapshot(doc)))

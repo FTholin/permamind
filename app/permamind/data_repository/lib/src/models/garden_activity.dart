@@ -2,17 +2,23 @@ import 'package:data_repository/src/entities/entities.dart';
 import 'package:equatable/equatable.dart';
 
 class Activity extends Equatable {
+
   final String id;
   final String gardenId;
   final String title;
   final bool complete;
   final DateTime expectedDate;
+  final String category;
+  final String completeActivityUserId;
 
   Activity(
       this.title,
       this.gardenId,
       this.complete,
-      this.expectedDate, {String id})
+      this.expectedDate,
+      this.category,
+      this.completeActivityUserId,
+      {String id})
       : this.id = id;
 
   Activity copyWith({
@@ -20,14 +26,18 @@ class Activity extends Equatable {
     String title,
     String gardenId,
     bool complete,
-    DateTime expectedDate
+    DateTime expectedDate,
+    String category,
+    String completeActivityUserId
   }) {
     return Activity(
       title ?? this.title,
       gardenId ?? this.gardenId,
       complete ?? this.complete,
       expectedDate ?? this.expectedDate,
-      id: id ?? this.id
+      category ?? this.category,
+      completeActivityUserId ?? this.completeActivityUserId,
+      id: id ?? this.id,
     );
   }
 
@@ -45,7 +55,9 @@ class Activity extends Equatable {
               id == other.id &&
               title == other.title &&
               gardenId == other.gardenId &&
-              complete == other.complete;
+              complete == other.complete &&
+              category == other.category &&
+              expectedDate == other.expectedDate;
 
 
   ActivityEntity toEntity() {
@@ -54,7 +66,9 @@ class Activity extends Equatable {
         title,
         gardenId,
         complete,
-        expectedDate
+        expectedDate,
+        category,
+        completeActivityUserId
     );
   }
 
@@ -65,6 +79,8 @@ class Activity extends Equatable {
       entity.gardenId,
       entity.complete,
       entity.expectedDate,
+      entity.category,
+      entity.completeActivityUserId,
       id: entity.id,
     );
   }

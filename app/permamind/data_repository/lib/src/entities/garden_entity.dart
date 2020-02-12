@@ -14,8 +14,10 @@ class GardenEntity extends Equatable {
   final String admin;
   final List<GardenMember> members;
   final DateTime creationDate;
+  final int dayActivitiesCount;
 
-  GardenEntity(this.id,
+  GardenEntity(
+      this.id,
       this.name,
       this.length,
       this.width,
@@ -25,7 +27,9 @@ class GardenEntity extends Equatable {
       this.members,
       this.modelingId,
       this.modelingName,
-      this.creationDate);
+      this.creationDate,
+      this.dayActivitiesCount
+      );
 
   Map<String, Object> toJson() {
     return {
@@ -37,7 +41,8 @@ class GardenEntity extends Equatable {
         return item.toJson();
       }).toList(),
       'modelingName': modelingName,
-      'creationDate': creationDate
+      'creationDate': creationDate,
+      'dayActivitiesCount': dayActivitiesCount
     };
   }
 
@@ -58,7 +63,8 @@ class GardenEntity extends Equatable {
       json['members'] as List<GardenMember>,
       json['modelingId'] as String,
       json['modelingName'] as String,
-      json['creationDate']
+      json['creationDate'],
+      json['dayActivitiesCount']
     );
   }
 
@@ -78,7 +84,8 @@ class GardenEntity extends Equatable {
       snap.data['modelingId'],
       snap.data['modelingName'],
         DateTime.fromMillisecondsSinceEpoch(
-            snap.data["creationDate"].millisecondsSinceEpoch)
+            snap.data["creationDate"].millisecondsSinceEpoch),
+      snap.data['dayActivitiesCount']
     );
   }
 
@@ -95,7 +102,8 @@ class GardenEntity extends Equatable {
       }).toList(),
       'modelingId': modelingId,
       'modelingName': modelingName,
-      'creationDate': creationDate
+      'creationDate': creationDate,
+      'dayActivitiesCount': dayActivitiesCount
     };
   }
 }

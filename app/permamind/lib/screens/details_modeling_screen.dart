@@ -26,409 +26,304 @@ class DetailsModelingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    final gardensBloc = BlocProvider.of<GardensBloc>(context);
-    final localizations = ArchSampleLocalizations.of(context);
 
     final DetailsModelingsScreenArguments args =
         ModalRoute.of(context).settings.arguments;
 
-        return Scaffold(
-          appBar: AppBar(
-           title: Text('${args.modeling.composition.join("-")}'),
-          ),
-          body: Container(
-            child: Column(
-//              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                _buildModelingImage(context, args.modeling.name),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                      color: Colors.indigoAccent,
-                      margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                      width: MediaQuery.of(context).size.width,
-                      child: Text('Planning',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20))),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                      color: Colors.yellow,
-                      margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('J',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('F',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('M',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('A',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('M',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('J',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('J',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('A',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('S',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('O',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('N',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Container(
-                                color: Colors.red,
-                                child: Text('D',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 20))),
-                          ),
-                        ],
-                      )),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                      color: Colors.indigoAccent,
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      width: MediaQuery.of(context).size.width,
-                      child: Text('Features',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20))),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-//                      color: Colors.yellow,
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        children: <Widget>[
-                          Flexible(
-                            child: Container(
-                              color: Colors.tealAccent,
-                              child: Column(
-//                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                        color: Colors.lightBlueAccent,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Text('Production duration',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 18))),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                        color: Colors.lightBlueAccent,
-                                        width: MediaQuery.of(context).size.width,
-                                        padding: EdgeInsets.only(top: 10),
 
-                                        child: Text('${args.modeling.productionDuration} months',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 16))),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              color: Colors.tealAccent,
-                              child: Column(
-//                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Flexible(
-                                    flex: 2,
-                                    child: Container(
-                                        color: Colors.lightBlueAccent,
-                                        width: MediaQuery.of(context).size.width,
-                                        child: Text('Difficulty Level',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 18))),
-                                  ),
-                                  _buildModelingNotation(context, args.modeling.difficultyLevel),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
+    final mediaWidth =  MediaQuery.of(context).size.width;
+    final mediaHeight =  MediaQuery.of(context).size.height;
+
+    print("width = $mediaWidth");
+    print("height = $mediaHeight");
+
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${args.modeling.composition.join('-')}'),
+      ),
+        body: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  height: mediaHeight * 230 / 896,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/modelings/${args.modeling.name}.png',
+                      fit: BoxFit.cover,
+                    )
+                  )),
+              ),
+
+
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: Container(
+                    height: mediaHeight * 65 / 896,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        child: _buildModelingSchedule(
+                            mediaHeight,
+                            mediaWidth,
+                            args.modeling.culturePeriod,
+                            args.modeling.sowingPeriod,
+                            args.modeling.harvestPeriod
+                        ),
+                    ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green, width: 3),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                  ),
                 ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        children: <Widget>[
-                          Flexible(
-                            child: Container(
-                              color: Colors.tealAccent,
-                              child: Column(
-//                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                        color: Colors.lightBlueAccent,
-                                        width: MediaQuery.of(context).size.width,
-                                        child: Text('Sunlight requirements',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 18))),
-                                  ),
-                                  _buildModelingNotation(context, args.modeling.sunlightRequirement),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              color: Colors.tealAccent,
-                              child: Column(
-                                children: <Widget>[
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                        color: Colors.lightBlueAccent,
-                                        width:
-                                        MediaQuery.of(context).size.width,
-                                        child: Text('Water requiremements',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 18))),
-                                  ),
-                                  _buildModelingNotation(context, args.modeling.waterRequirement),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-//                      color: Colors.yellow,
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        children: <Widget>[
-                          Flexible(
-                            child: Container(
-                              color: Colors.tealAccent,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                        color: Colors.lightBlueAccent,
-                                        width:
-                                        MediaQuery.of(context).size.width,
-                                        child: Text('Yield',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 18))),
-                                  ),
-                                  _buildModelingNotation(context, args.modeling.yield),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              color: Colors.tealAccent,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                        color: Colors.lightBlueAccent,
-                                        width:
-                                        MediaQuery.of(context).size.width,
-                                        child: Text('Composition',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 18))),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Row(
-                                      children: <Widget>[
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.local_florist ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 90),
+                child: Container(
+                  height: mediaHeight * 70 / 896,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Expanded(
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Center(
+                                        child: Container(
+                                          height: mediaHeight * 27 / 896,
+                                          width:  mediaWidth * 27 / 414,
+                                          padding: EdgeInsets.all(12),
+                                          decoration: new BoxDecoration(
+                                            color: Colors.yellow,
+                                            borderRadius: BorderRadius.circular(15),
                                           ),
                                         ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.local_florist ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Flexible(
-                                          flex: 2,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.local_florist ,
-                                                color: Colors.black,
-                                                size: MediaQuery.of(context).size.width / 9,
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
+                                      ),
                                     ),
-                                  )
-                                ],
+                                    Flexible(
+                                      flex: 2,
+                                      child: Center(
+                                        child: Text(
+                                            "sowing period",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14)
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
                               ),
+                              Expanded(
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: Center(
+                                        child: Container(
+                                          height: mediaHeight * 27 / 896,
+                                          width:  mediaWidth * 27 / 414,
+                                          padding: EdgeInsets.all(12),
+                                          decoration: new BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      flex: 2,
+                                      child: Center(
+                                        child: Text(
+                                            "harvest period",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14)
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.green, width: 3),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                    color: Colors.green,
+                  height: mediaHeight * 70 / 896,
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                    child: Center(
+                                      child: Text(
+                                          "Difficulty",
+                                          style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 19)
+                                      ),
+                                    ),
+                                ),
+                                Expanded(
+                                  child: _buildModelingNotation(context, args.modeling.difficultyLevel),
+                                )
+                              ],
                             ),
                           ),
-                        ],
-                      )),
+                        ),
+                        VerticalDivider(),
+                        Expanded(
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Center(
+                                    child: Text(
+                                        "Yield",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 19)
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: _buildModelingNotation(context, args.modeling.difficultyLevel),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  color: Colors.green,
+                  height: mediaHeight * 70 / 896,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                      "Sun",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 19)
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: _buildModelingNotation(context, args.modeling.sunlightRequirement),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      VerticalDivider(),
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                      "Water",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 19)
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: _buildModelingNotation(context, args.modeling.waterRequirement),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 90),
+                child: Container(
+                  color: Colors.green,
+                  height: mediaHeight * 70 / 896,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            children: <Widget>[
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                      "Duration",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 19)
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                      "${args.modeling.productionDuration} months",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14)
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-          floatingActionButton: FloatingActionButton(
-            //TODO Changer la localisation et le tooltip
-              key: ArchSampleKeys.editTodoFab,
-              tooltip: localizations.editTodo,
-              child: Icon(Icons.local_florist),
-              onPressed: args.modeling == null
-                  ? null
-                  : () async {
+        ),
+      floatingActionButton: FloatingActionButton(
+        //TODO Changer la localisation et le tooltip
+          key: ArchSampleKeys.editTodoFab,
+          child: Icon(Icons.check, color: Colors.white,),
+          onPressed: args.modeling == null
+              ? null
+              : () async {
 
 //                      Navigator.of(context)
 //                          .push(MaterialPageRoute(builder: (context) {
@@ -444,76 +339,123 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                        );
 //                      }));
 //                gardensBloc.d
-                onSaveGarden(
-                    args.gardenName,
-                    args.publicVisibility,
-                    args.gardenMembers,
-                    args.modeling.id,
-                    args.modeling.composition.join("-"),
-                    args.gardenLength,
-                    args.gardenWidth,
-                    args.gardenGround,
-                    args.schedule
-                );
+            onSaveGarden(
+                args.gardenName,
+                args.publicVisibility,
+                args.gardenMembers,
+                args.modeling.id,
+                args.modeling.composition.join("-"),
+                args.gardenLength,
+                args.gardenWidth,
+                args.gardenGround,
+                args.schedule
+            );
 
-                Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
+            Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
-              }),
-        );
+          }),
+
+    );
+
   }
+
+  Widget _buildModelingSchedule(
+      double mediaHeight,
+      double mediaWidth,
+      List<int> culturePeriod,
+      List<int> sowingPeriod,
+      List<int> harvestPeriod) {
+
+    // TODO Faire plus propre dans un fichier central pour l'internationalisation
+    List<String> months = ["J","F","M","A","M","J","J","A","S","O","N","D"];
+
+    List<Widget> monthsBoxList = List<Widget>();
+    for (int i = 0; i < months.length; i++) {
+      Color monthColor;
+
+      if (sowingPeriod.contains(i)) {
+        monthColor = Colors.yellow;
+      } else if (harvestPeriod.contains(i)) {
+        monthColor = Colors.red;
+      } else if (culturePeriod.contains(i)) {
+        monthColor = Colors.blue;
+      } else {
+        monthColor = Colors.black;
+      }
+
+      monthsBoxList.add(
+        Expanded(
+          child: Container(
+            color: culturePeriod.contains(i) ? Colors.green : Colors.black,
+            child: Center(
+              child: Container(
+                height: mediaHeight * 30 / 896,
+                width:  mediaWidth * 30 / 414,
+//                padding: EdgeInsets.all(12),
+                decoration: new BoxDecoration(
+                  color: monthColor,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                    child: Text(
+                      '${months[i]}',
+                      style: TextStyle(fontSize: mediaHeight * 20 / 896, color: Colors.white),
+                    )
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return Row(
+      children: monthsBoxList
+    );
+  }
+
 }
 
-Widget _buildModelingNotation(BuildContext context, int difficulty) {
-  Row notationsRowItems = Row(
-    children: <Widget>[
-    ],
-  );
+Widget _buildModelingNotation(BuildContext context,
+    int difficulty) {
+
+  List<Widget> notationsRowItems = List<Widget>();
 
   for(var i = 1; i <= 3; i++) {
     if (i <= difficulty) {
-      notationsRowItems.children.add( Flexible(
-        flex: 2,
-        child: Row(
-          children: <Widget>[
-            Icon(
-              Icons.star ,
-              color: Colors.black,
-              size: MediaQuery.of(context).size.width / 9,
-            )
-          ],
-        ),
-      ),
+      notationsRowItems.add(
+          Expanded(
+              child:  Icon(
+                Icons.star ,
+                color: Colors.black,
+                size: MediaQuery.of(context).size.width / 14,
+              )
+          )
     );
     } else {
-      notationsRowItems.children.add( Flexible(
-        flex: 2,
-        child: Row(
-          children: <Widget>[
-            Icon(
-              Icons.star_border ,
-              color: Colors.black,
-              size: MediaQuery.of(context).size.width / 9,
-            )
-          ],
-        ),
-      ),
+      notationsRowItems.add(
+          Expanded(
+              child: Icon(
+                Icons.star_border ,
+                color: Colors.black,
+                size: MediaQuery.of(context).size.width / 14,
+              )
+          )
       );
     }
   }
-  return Flexible(
-      child: notationsRowItems
+
+  return Row(
+      children: notationsRowItems
   );
+
 }
 
-Widget _buildModelingImage(BuildContext context, String modelisationName) {
-
-  return Flexible(
-    flex: 3,
-    child: Image.asset(
-      'assets/modelings/$modelisationName.png',
+Widget _buildModelingImage(BuildContext context, String modelingName) {
+  return Image.asset(
+      'assets/modelings/$modelingName.png',
       fit: BoxFit.cover,
-    ),
-  );
+    );
 }
 
 class DetailsModelingsScreenArguments {
