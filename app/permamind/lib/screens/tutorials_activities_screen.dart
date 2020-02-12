@@ -1,153 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
-
-
-//class EnumeratedActivitiesScreen extends StatelessWidget {
-//  final String tutorialId;
-//  final String tutorialName;
-//
-//  EnumeratedActivitiesScreen(
-//      {@required this.tutorialName, @required this.tutorialId, Key key})
-//      : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
-//
-//  @override
-//  Widget build(BuildContext context) {
-////    final tutorialsBloc = BlocProvider.of<TutorialsBloc>(context);
-//
-////    tutorialsBloc.add(LoadTutoActivities(tutorialId));
-//
-//    return BlocBuilder<TutorialsBloc, TutorialsState>(
-//      builder: (context, state) {
-//        if (state is ActivitiesLoading) {
-//          return Container(
-//            child: Text("ActivitiesLoading"),
-//          );
-//        } else if (state is TutoActivitiesLoaded) {
-//          final activities = state.tutoActivities;
-//          return Scaffold(
-//              appBar: AppBar(
-//                  title: Text("${tutorialName}"),
-//                  leading: IconButton(
-//                      icon: Icon(Icons.arrow_back_ios),
-//                      onPressed: () {
-////                        tutorialsBloc.add(LoadTutos());
-//                        Navigator.pop(context, false);
-//                      })),
-//              body: ActivitiesPanel(activities));
-//        } else {
-//          return Scaffold(
-//              appBar: AppBar(
-//                  title: Text("${tutorialName}"),
-//                  leading: IconButton(
-//                      icon: Icon(Icons.arrow_back_ios),
-//                      onPressed: () {
-//                        tutorialsBloc.add(LoadTutos());
-//                        Navigator.pop(context, false);
-//                      })),
-//              );
-//        }
-//      },
-//    );
-//  }
-//}
-//
-//class ActivitiesPanel extends StatefulWidget {
-//  List<Item> _data = new List<Item>();
-//
-//  ActivitiesPanel(List<TutorialActivity> activities) {
-//    generateItems(activities);
-//  }
-//
-//  @override
-//  _ActivitiesPanelState createState() => _ActivitiesPanelState();
-//
-//  void generateItems(List<TutorialActivity> activities) {
-//    for (var item in activities) {
-//      _data.add(new Item(
-//        id: item.id,
-//        headerValue: '${item.heading}',
-//        expandedValue: '${item.content}'
-//      ));
-//    }
-//  }
-//}
-//
-//class _ActivitiesPanelState extends State<ActivitiesPanel> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return SingleChildScrollView(
-//      child: Container(
-//        child: _buildPanel(),
-//      ),
-//    );
-//  }
-//
-//
-//  Widget _buildPanel() {
-//    return ExpansionPanelList.radio(
-//      expansionCallback: (int index, bool isExpanded) {
-//        setState(() {
-//          widget._data[index].isExpanded = !isExpanded;
-//        });
-//      },
-//      children: widget._data.map<ExpansionPanelRadio>((Item item) {
-//        return ExpansionPanelRadio(
-//          value: item.id,
-//          headerBuilder: (BuildContext context, bool isExpanded) {
-//            return ListTile(
-//                title: Text(item.headerValue),
-//                leading: CircularCheckBox(
-//                    value: item.isChecked,
-//                    materialTapTargetSize: MaterialTapTargetSize.padded,
-//                    onChanged: null));
-//          },
-//          body: Card(
-//            child: Column(
-//              mainAxisSize: MainAxisSize.min,
-//              children: <Widget>[
-//                Text(
-//                  '${item.expandedValue}',
-//                  textAlign: TextAlign.center,
-//                  style: TextStyle(
-//                    fontFamily: 'Georgia',
-//                    fontSize: 18,
-//                  ),
-//                ),
-//                Row(
-//                  mainAxisSize: MainAxisSize.min,
-//                  children: [
-//                    Icon(Icons.star, color: Colors.green[500]),
-//                    Icon(Icons.star, color: Colors.green[500]),
-//                    Icon(Icons.star, color: Colors.green[500]),
-//                    Icon(Icons.star, color: Colors.black),
-//                    Icon(Icons.star, color: Colors.black),
-//                  ],
-//                ),
-//                Container(
-//                  padding: EdgeInsets.all(10),
-//                  child: Row(
-//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                    children: [
-//                      Column(
-//                        children: [
-//                          Icon(Icons.timer, color: Colors.green[500]),
-//                          Text('Duration:'),
-//                          Text('25 min'),
-//                        ],
-//                      ),
-//                    ],
-//                  ),
-//                ),
-//              ],
-//            ),
-//          ),
-//        );
-//      }).toList(),
-//    );
-//  }
-//}
 
 
 class TutorialActivitiesScreen extends StatefulWidget {
@@ -164,10 +17,10 @@ class TutorialActivitiesScreen extends StatefulWidget {
   }
 
   @override
-  _StepperState createState() => _StepperState();
+  TutorialActivities createState() => TutorialActivities();
 }
 
-class _StepperState extends State<TutorialActivitiesScreen> {
+class TutorialActivities extends State<TutorialActivitiesScreen> {
 
   var _index = 0;
 
@@ -194,7 +47,7 @@ class _StepperState extends State<TutorialActivitiesScreen> {
         Step(
             title: Text("${tutorials[i].activityHeading}"),
             state: StepState.editing,
-            isActive: true,
+            isActive: i - 1 == _index,
             content: CarouselWithIndicator(tutorials[i].tutorialActivities)
         ),
       );
@@ -239,19 +92,20 @@ class CarouselWithIndicator extends StatefulWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
               child: Container(
-                color: Colors.red,
+                color: const Color(0xFF01534F),
                 child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text("${activity.content}"),
+                  padding: EdgeInsets.all(12),
+                  child: Center(
+                    child: Text(
+                      "${activity.content}",
+                      style: TextStyle(fontSize: 17, color: Colors.white),
+                    ),
+                  ),
                 )
               ),
             ),
           )
       );
-
-
-
-
     }
   }
 
@@ -276,6 +130,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
             _current = index;
           });
         },
+
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -295,6 +150,13 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
           },
         ),
       ),
+//      RaisedButton(
+//        padding: const EdgeInsets.all(8.0),
+//        textColor: Colors.white,
+//        color: Colors.blue,
+//        onPressed: () => print("Boutton pressé"),
+//        child: new Text("Continuer"),
+//      ),
     ]);
   }
 

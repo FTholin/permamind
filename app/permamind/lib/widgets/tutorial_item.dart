@@ -20,34 +20,6 @@ class TutorialItem extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: Stack(children: <Widget>[
-//          Image.asset(
-//            'assets/tutorials/creer-sol.png',
-//            fit: BoxFit.fitWidth,
-//          ),
-
-//          Container(
-//            height: 200,
-//            width: double.maxFinite,
-//            decoration: BoxDecoration(
-//              image: DecorationImage(
-//                image: ExactAssetImage("your_chocolage_image"),
-//                fit: BoxFit.cover,
-//              ),
-//            ),
-//            child: ClipRRect( // make sure we apply clip it properly
-//              child: BackdropFilter(
-//                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-//                child: Container(
-//                  alignment: Alignment.center,
-//                  color: Colors.grey.withOpacity(0.1),
-//                  child: Text(
-//                    "CHOCOLATE",
-//                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-//                  ),
-//                ),
-//              ),
-//            ),
-//          )
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
             child: Image.asset(
