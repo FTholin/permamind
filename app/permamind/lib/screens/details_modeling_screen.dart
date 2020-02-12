@@ -34,9 +34,6 @@ class DetailsModelingScreen extends StatelessWidget {
     final mediaWidth =  MediaQuery.of(context).size.width;
     final mediaHeight =  MediaQuery.of(context).size.height;
 
-    print("width = $mediaWidth");
-    print("height = $mediaHeight");
-
 
     return Scaffold(
       appBar: AppBar(
