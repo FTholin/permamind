@@ -32,6 +32,8 @@ dependencies:
   flutter_speed_dial: ^1.2.4
   bubble_bottom_bar: ^1.2.0
 
+  carousel_slider: ^1.4.1
+
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^4.0.2
 
@@ -73,6 +75,7 @@ flutter:
     - assets/bar_buttons_icons/
     - assets/utils_icons/
     - assets/gardens/
+    - assets/tutorials/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

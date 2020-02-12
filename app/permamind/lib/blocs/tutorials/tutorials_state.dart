@@ -14,9 +14,9 @@ class TutosLoading extends TutorialsState {
 }
 
 class TutosLoaded extends TutorialsState {
-  final List<Tutorial> tutorials;
+  final Map<int, List<Tutorial>> tutorials;
 
-  TutosLoaded([this.tutorials = const []]) : super([tutorials]);
+  TutosLoaded([this.tutorials]) : super([tutorials]);
 
   @override
   String toString() => 'TutosLoaded { tutoActivities: $tutorials }';
@@ -33,12 +33,12 @@ class TutoActivitiesLoading extends TutorialsState {
 }
 
 class TutoActivitiesLoaded extends TutorialsState {
-  final List<TutorialActivity> tutoActivities;
+  final Map<int, List<Tutorial>> tutorials;
 
-  TutoActivitiesLoaded([this.tutoActivities = const []]) : super([tutoActivities]);
+  TutoActivitiesLoaded([this.tutorials]) : super([tutorials]);
 
   @override
-  String toString() => 'TutotutoActivitiesLoaded { tutoActivities: $tutoActivities }';
+  String toString() => 'TutoActivitiesLoaded { tutoActivities: $tutorials }';
 }
 
 

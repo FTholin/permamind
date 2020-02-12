@@ -11,4 +11,4 @@ export 'speed_dial_garden.dart';
 export 'garden_item.dart';
 export 'scheduler_calendar.dart';
 export 'scheduler_list_item.dart';
-export 'garden_plan_painter.dart';
+export 'tutorial_item.dart';
