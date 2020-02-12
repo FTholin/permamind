@@ -33,10 +33,10 @@ class DetailsGardenScreen extends StatelessWidget {
           BlocBuilder<PlanBloc, PlanState>(
               builder: (context, state) {
                 if (state is PlanLoaded) {
-                  print(state.plan.positioning);
-                  return CustomPaint(
-                    painter: PlanPainter(state.plan.positioning),
-                    child: Container(height: 300),
+                  return Container(
+                    color: Colors.yellow,
+                    height: 230,
+                    child: Center(child: Text("Plan Loading")),
                   );
                 } else {
                   return Container(
