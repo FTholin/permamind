@@ -141,11 +141,25 @@ class App extends StatelessWidget {
                           onSaveGarden: (gardenName, publicVisibility,
                               gardenMembers, modelingId, modelingName, gardenLength,
                               gardenWidth, gardenGround,
-                              schedule
+                              schedule, designs
                               ) {
 
                             gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
 
+                            // Ajouter designs dans la base ici
+
+                            BlocProvider.of<GardensBloc>(context).add(
+                              AddGardenPlan(GardenPlan(gardenName, gardenLength,
+                                  gardenWidth, gardenGround,
+                                  publicVisibility,
+                                  state.userAuthenticated.id,
+                                  gardenMembers,
+                                  modelingId,
+                                  modelingName,
+                                  DateTime.now(), 0),
+                                  schedule
+                              ),
+                            );
                             // Todo requete récupérer nb activité jour et intégrer dans jardin
 
                             BlocProvider.of<GardensBloc>(context).add(

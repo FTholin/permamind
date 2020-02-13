@@ -4,12 +4,12 @@ import 'package:equatable/equatable.dart';
 class GardenPlan extends Equatable {
   final String id;
   final String gardenId;
-  final int versionNumber;
+  final int version;
   final List<VeggieRow> positioning;
 
   GardenPlan(
       this.gardenId,
-      this.versionNumber,
+      this.version,
       this.positioning,
       {String id})
       : this.id = id;
@@ -17,11 +17,11 @@ class GardenPlan extends Equatable {
   GardenPlan copyWith({
     String id,
     String gardenId,
-    int versionNumber,
+    int startDayIndex,
   }) {
     return GardenPlan(
         gardenId ?? this.gardenId,
-        versionNumber ?? this.versionNumber,
+        startDayIndex ?? this.version,
         positioning ?? this.positioning,
         id: id ?? this.id
     );
@@ -30,7 +30,7 @@ class GardenPlan extends Equatable {
 
   @override
   int get hashCode =>
-      id.hashCode ^ versionNumber.hashCode ^ gardenId.hashCode;
+      id.hashCode ^ version.hashCode ^ gardenId.hashCode;
 
 
   @override
@@ -40,13 +40,13 @@ class GardenPlan extends Equatable {
               runtimeType == other.runtimeType &&
               id == other.id &&
               gardenId == other.gardenId &&
-              versionNumber == other.versionNumber;
+              version == other.version;
 
   GardenPlanEntity toEntity() {
     return GardenPlanEntity(
         id,
         gardenId,
-        versionNumber,
+        version,
         positioning
     );
   }
@@ -63,7 +63,7 @@ class GardenPlan extends Equatable {
 
   @override
   String toString() {
-    return "GardenPlan {gardenId: $gardenId, versionNumber: $versionNumber}";
+    return "GardenPlan {gardenId: $gardenId}";
   }
 }
 
@@ -78,10 +78,10 @@ class VeggieRow extends Equatable {
 
   VeggieRow.fromMap(Map<dynamic, dynamic> data)
       : name = data['name'],
-        xPosition = data['xPosition'] as double,
-        yPosition = data['yPosition'] as double,
-        length = data['length'] as double,
-        space = data['space'] as double;
+        xPosition = data['xPosition'].toDouble(),
+        yPosition = data['yPosition'].toDouble(),
+        length = data['length'].toDouble(),
+        space = data['space'].toDouble();
 
   Map<String, Object> toJson() {
     return {
@@ -99,3 +99,28 @@ class VeggieRow extends Equatable {
   }
 
 }
+
+
+class Design extends Equatable {
+
+  final int startDayIndex;
+  final int endDayIndex;
+  final List<VeggieRow> positioning;
+
+  Design.fromMap(Map<dynamic, dynamic> data)
+      : startDayIndex = data['startDayIndex'],
+        endDayIndex = data['endDayIndex'],
+        positioning = data['positioning'].map<VeggieRow>((item) {
+          return VeggieRow.fromMap(item);
+        }).toList();
+
+
+  Map<String, Object> toJson() {
+    return {
+      'startDayIndex': startDayIndex,
+      'endDayIndex': endDayIndex,
+      'positioning': positioning
+    };
+  }
+
+  }

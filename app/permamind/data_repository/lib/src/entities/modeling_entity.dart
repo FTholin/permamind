@@ -15,6 +15,8 @@ class ModelingEntity extends Equatable {
   final List<int> culturePeriod;
   final List<int> sowingPeriod;
   final List<int> harvestPeriod;
+  List<Design> designs = new List<Design>();
+
 
   ModelingEntity(this.id, this.name,
       this.productionDuration, this.difficultyLevel,
@@ -24,7 +26,8 @@ class ModelingEntity extends Equatable {
       this.composition,
       this.culturePeriod,
       this.sowingPeriod,
-      this.harvestPeriod
+      this.harvestPeriod,
+      this.designs
       );
 
   Map<String, Object> toJson() {
@@ -35,7 +38,8 @@ class ModelingEntity extends Equatable {
       'difficultyLevel': difficultyLevel,
       'sunlightRequirement': sunlightRequirement,
       'waterRequirement': waterRequirement,
-      'yield': yield
+      'yield': yield,
+      'designs': designs
     };
   }
 
@@ -62,14 +66,14 @@ class ModelingEntity extends Equatable {
       json['composition'],
       json['culturePeriod'],
       json['sowingPeriod'],
-      json['harvestPeriod']
+      json['harvestPeriod'],
+      json['designs']
     );
   }
 
   static ModelingEntity fromSnapshot(DocumentSnapshot snap) {
 
     List<String> compositionList = new List<String>.from(snap.data['composition']);
-
     return ModelingEntity(
       snap.documentID,
       snap.data['name'],
@@ -85,6 +89,9 @@ class ModelingEntity extends Equatable {
       new List<int>.from(snap.data['culturePeriod']),
       new List<int>.from(snap.data['sowingPeriod']),
       new List<int>.from(snap.data['harvestPeriod']),
+      snap.data['designs'].map<Design>((item) {
+        return Design.fromMap(item);
+      }).toList(),
     );
   }
 

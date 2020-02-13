@@ -1,5 +1,6 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:data_repository/src/entities/entities.dart';
+import 'package:intl/intl.dart';
 
 class Modeling {
   final String id;
@@ -15,10 +16,15 @@ class Modeling {
   final List<int> sowingPeriod;
   final List<int> harvestPeriod;
 
+
+  List<Design> designs = new List<Design>();
+
+
   Modeling(
       this.name,
       this.productionDuration,
-      this.difficultyLevel, this.sunlightRequirement,
+      this.difficultyLevel,
+      this.sunlightRequirement,
       this.waterRequirement,
       this.yield,
       this.schedule,
@@ -26,6 +32,7 @@ class Modeling {
       this.culturePeriod,
       this.sowingPeriod,
       this.harvestPeriod,
+      this.designs,
       {String id})
       : this.id = id;
 
@@ -46,6 +53,7 @@ class Modeling {
       culturePeriod ?? this.culturePeriod,
       sowingPeriod ?? this.sowingPeriod,
       harvestPeriod ?? this.harvestPeriod,
+      designs ?? this.designs,
       id: id ?? this.id
     );
   }
@@ -71,7 +79,8 @@ class Modeling {
               difficultyLevel == other.difficultyLevel &&
               culturePeriod == other.culturePeriod &&
               sowingPeriod == other.sowingPeriod &&
-              harvestPeriod == other.harvestPeriod;
+              harvestPeriod == other.harvestPeriod &&
+              designs == other.designs;
 
   @override
   String toString() {
@@ -87,7 +96,8 @@ class Modeling {
         composition,
         culturePeriod,
         sowingPeriod,
-        harvestPeriod
+        harvestPeriod,
+        designs
     );
   }
 
@@ -104,7 +114,10 @@ class Modeling {
       entity.culturePeriod,
       entity.sowingPeriod,
       entity.harvestPeriod,
+      entity.designs,
       id: entity.id,
     );
   }
 }
+
+

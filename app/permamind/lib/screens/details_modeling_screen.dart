@@ -15,7 +15,8 @@ typedef SaveGardenCallback = Function(String gardenName,
     double gardenLength,
     double gardenWidth,
     bool gardenGround,
-    List<ModelingSchedule> schedule
+    List<ModelingSchedule> schedule,
+    List<Design> designs
     );
 
 class DetailsModelingScreen extends StatelessWidget {
@@ -394,7 +395,8 @@ class DetailsModelingScreen extends StatelessWidget {
                 args.gardenLength,
                 args.gardenWidth,
                 args.gardenGround,
-                args.schedule
+                args.schedule,
+                args.designs
             );
 
             Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
@@ -530,6 +532,7 @@ class DetailsModelingsScreenArguments {
   final double gardenLength;
   final double gardenWidth;
   final bool gardenGround;
+  final List<Design> designs;
 
 //  final SaveGardenCallback onSaveGarden;
 
@@ -541,7 +544,8 @@ class DetailsModelingsScreenArguments {
     @required this.gardenGround,
     @required this.publicVisibility,
     @required this.gardenMembers,
-    @required this.schedule
+    @required this.schedule,
+    @required this.designs
 //    @required this.onSaveGarden,
   });
 }
