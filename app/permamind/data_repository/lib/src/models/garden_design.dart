@@ -4,25 +4,21 @@ import 'package:equatable/equatable.dart';
 class GardenDesign extends Equatable {
   final String id;
   final String gardenId;
-  final int version;
-  final List<VeggieRow> positioning;
+  final List<Design> designs;
 
   GardenDesign(
       this.gardenId,
-      this.version,
-      this.positioning,
+      this.designs,
       {String id})
       : this.id = id;
 
   GardenDesign copyWith({
     String id,
     String gardenId,
-    int startDayIndex,
   }) {
     return GardenDesign(
         gardenId ?? this.gardenId,
-        startDayIndex ?? this.version,
-        positioning ?? this.positioning,
+        designs ?? this.designs,
         id: id ?? this.id
     );
   }
@@ -30,7 +26,7 @@ class GardenDesign extends Equatable {
 
   @override
   int get hashCode =>
-      id.hashCode ^ version.hashCode ^ gardenId.hashCode;
+      id.hashCode  ^ gardenId.hashCode ^ designs.hashCode;
 
 
   @override
@@ -40,14 +36,13 @@ class GardenDesign extends Equatable {
               runtimeType == other.runtimeType &&
               id == other.id &&
               gardenId == other.gardenId &&
-              version == other.version;
+              designs == other.designs;
 
   GardenDesignEntity toEntity() {
     return GardenDesignEntity(
         id,
         gardenId,
-        version,
-        positioning
+        designs
     );
   }
 
@@ -55,8 +50,7 @@ class GardenDesign extends Equatable {
 
     return GardenDesign(
       entity.gardenId,
-      entity.versionNumber,
-      entity.positioning,
+      entity.designs,
       id: entity.id,
     );
   }
@@ -119,7 +113,9 @@ class Design extends Equatable {
     return {
       'startDayIndex': startDayIndex,
       'endDayIndex': endDayIndex,
-      'positioning': positioning
+      'positioning': positioning.map((item) {
+        return item.toJson();
+      }).toList(),
     };
   }
 

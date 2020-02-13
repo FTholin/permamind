@@ -6,22 +6,19 @@ class GardenDesignEntity extends Equatable {
 
   final String id;
   final String gardenId;
-  final int versionNumber;
-  final List<VeggieRow> positioning;
+  final List<Design> designs;
 
   GardenDesignEntity(
       this.id,
       this.gardenId,
-      this.versionNumber,
-      this.positioning
+      this.designs
       );
 
   Map<String, Object> toJson() {
     return {
       'id': id,
       'gardenId': gardenId,
-      'versionNumber': versionNumber,
-      'positioning': positioning.map((item) {
+      'designs': designs.map((item) {
         return item.toJson();
       }).toList(),
     };
@@ -29,15 +26,14 @@ class GardenDesignEntity extends Equatable {
 
   @override
   String toString() {
-    return 'GardenDesignEntity { id: $id, gardenId: $gardenId, versionNumber: $versionNumber, positioning: $positioning }';
+    return 'GardenDesignEntity { id: $id, gardenId: $gardenId }';
   }
 
   static GardenDesignEntity fromJson(Map<String, Object> json) {
     return GardenDesignEntity(
         json['id'] as String,
         json['gardenId'] as String,
-        json['versionNumber'] as int,
-        json['positioning'] as List<VeggieRow>,
+        json['positioning'] as List<Design>,
     );
   }
 
@@ -46,9 +42,8 @@ class GardenDesignEntity extends Equatable {
     return GardenDesignEntity(
         snap.documentID,
         snap.data['gardenId'],
-        snap.data['versionNumber'],
-        snap.data['positioning'].map<VeggieRow>((item) {
-          return VeggieRow.fromMap(item);
+        snap.data['designs'].map<Design>((item) {
+          return Design.fromMap(item);
         }).toList(),
     );
   }
@@ -56,8 +51,7 @@ class GardenDesignEntity extends Equatable {
   Map<String, Object> toDocument() {
     return {
       'gardenId': gardenId,
-      'versionNumber': versionNumber,
-      'positioning': positioning.map((item) {
+      'designs': designs.map((item) {
         return item.toJson();
       }).toList(),
     };

@@ -12,4 +12,4 @@ export 'garden_item.dart';
 export 'scheduler_calendar.dart';
 export 'scheduler_list_item.dart';
 export 'tutorial_item.dart';
-export 'veggies_plan_chart.dart';
+export 'veggies_design_chart.dart';

@@ -12,12 +12,12 @@ class DesignLoading extends DesignState {}
 
 class DesignLoaded extends DesignState {
 
-  final GardenDesign plan;
+  final GardenDesign design;
 
-  DesignLoaded(this.plan);
+  DesignLoaded(this.design);
 
   @override
-  List<Object> get props => [plan];
+  List<Object> get props => [design];
 
   @override
   String toString() {

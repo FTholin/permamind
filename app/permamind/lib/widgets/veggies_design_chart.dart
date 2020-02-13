@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:permamind/models/models.dart';
 
-class VeggiesPlanChart extends StatelessWidget {
+class VeggiesDesignChart extends StatelessWidget {
   
   final List<VeggieRow> veggies;
 
@@ -14,7 +14,7 @@ class VeggiesPlanChart extends StatelessWidget {
 
   final bool animate;
 
-  VeggiesPlanChart(this.parcelWidth, this.parcelLength, this.veggies,
+  VeggiesDesignChart(this.parcelWidth, this.parcelLength, this.veggies,
       {this.animate = false}) {
     this.veggiesList = _createSampleData(this.veggies);
   }
@@ -35,12 +35,11 @@ class VeggiesPlanChart extends StatelessWidget {
       ),
       // Custom yAxis
       domainAxis: charts.NumericAxisSpec(
-        // 主轴的配置
-        viewport: new charts.NumericExtents(0.0, 100.0),
+        viewport: new charts.NumericExtents(0.0, 40.0),
         tickProviderSpec: new charts.BasicNumericTickProviderSpec(
           zeroBound: true,
           dataIsInWholeNumbers: false,
-          desiredTickCount: 12,
+          desiredTickCount: 21,
         ),
       ),
 
