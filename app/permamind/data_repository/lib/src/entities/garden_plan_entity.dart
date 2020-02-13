@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
-class GardenPlanEntity extends Equatable {
+class GardenDesignEntity extends Equatable {
 
   final String id;
   final String gardenId;
   final int versionNumber;
   final List<VeggieRow> positioning;
 
-  GardenPlanEntity(
+  GardenDesignEntity(
       this.id,
       this.gardenId,
       this.versionNumber,
@@ -29,11 +29,11 @@ class GardenPlanEntity extends Equatable {
 
   @override
   String toString() {
-    return 'GardenPlanEntity { id: $id, gardenId: $gardenId, versionNumber: $versionNumber, positioning: $positioning }';
+    return 'GardenDesignEntity { id: $id, gardenId: $gardenId, versionNumber: $versionNumber, positioning: $positioning }';
   }
 
-  static GardenPlanEntity fromJson(Map<String, Object> json) {
-    return GardenPlanEntity(
+  static GardenDesignEntity fromJson(Map<String, Object> json) {
+    return GardenDesignEntity(
         json['id'] as String,
         json['gardenId'] as String,
         json['versionNumber'] as int,
@@ -41,9 +41,9 @@ class GardenPlanEntity extends Equatable {
     );
   }
 
-  static GardenPlanEntity fromSnapshot(DocumentSnapshot snap) {
+  static GardenDesignEntity fromSnapshot(DocumentSnapshot snap) {
 
-    return GardenPlanEntity(
+    return GardenDesignEntity(
         snap.documentID,
         snap.data['gardenId'],
         snap.data['versionNumber'],

@@ -45,6 +45,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapCopyActivitiesToState(event);
     } else if (event is CopyGarden) {
       yield* _mapCopyGardenToState(event);
+    } else if (event is AddGardenDesigns) {
+      yield* _mapAddGardenDesigns(event);
     }
   }
 
@@ -85,9 +87,14 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       }
   }
 
-
   Stream<GardensState> _mapCopyActivitiesToState(CopyActivities schedule) async* {
     _dataRepository.addGardenActivities(schedule.activities);
+  }
+
+  Stream<GardensState> _mapAddGardenDesigns(AddGardenDesigns designs) async* {
+
+    // TODO Garden Designs
+//    _dataRepository.addGardenActivities(schedule.activities);
   }
 
   Stream<GardensState> _mapUpdateGardensToState(UpdateGarden event) async* {

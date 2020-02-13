@@ -142,26 +142,13 @@ class App extends StatelessWidget {
                               gardenMembers, modelingId, modelingName, gardenLength,
                               gardenWidth, gardenGround,
                               schedule, designs
-                              ) {
+                              ) async {
 
                             gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
 
                             // Ajouter designs dans la base ici
 
-                            BlocProvider.of<GardensBloc>(context).add(
-                              AddGardenPlan(GardenPlan(gardenName, gardenLength,
-                                  gardenWidth, gardenGround,
-                                  publicVisibility,
-                                  state.userAuthenticated.id,
-                                  gardenMembers,
-                                  modelingId,
-                                  modelingName,
-                                  DateTime.now(), 0),
-                                  schedule
-                              ),
-                            );
                             // Todo requete récupérer nb activité jour et intégrer dans jardin
-
                             BlocProvider.of<GardensBloc>(context).add(
                               AddGarden(Garden(gardenName, gardenLength,
                                   gardenWidth, gardenGround,
@@ -174,6 +161,11 @@ class App extends StatelessWidget {
                                   schedule
                               ),
                             );
+
+                            String gardenId = await firebaseRepository.
+                            // Récupérer l'id du document  le plus récent de la base avec ce nom
+                            BlocProvider.of<GardensBloc>(context).add(AddGardenDesigns(designs));
+
                           }
                       );
                     }

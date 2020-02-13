@@ -1,25 +1,25 @@
 import 'package:data_repository/src/entities/entities.dart';
 import 'package:equatable/equatable.dart';
 
-class GardenPlan extends Equatable {
+class GardenDesign extends Equatable {
   final String id;
   final String gardenId;
   final int version;
   final List<VeggieRow> positioning;
 
-  GardenPlan(
+  GardenDesign(
       this.gardenId,
       this.version,
       this.positioning,
       {String id})
       : this.id = id;
 
-  GardenPlan copyWith({
+  GardenDesign copyWith({
     String id,
     String gardenId,
     int startDayIndex,
   }) {
-    return GardenPlan(
+    return GardenDesign(
         gardenId ?? this.gardenId,
         startDayIndex ?? this.version,
         positioning ?? this.positioning,
@@ -36,14 +36,14 @@ class GardenPlan extends Equatable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is GardenPlan &&
+          other is GardenDesign &&
               runtimeType == other.runtimeType &&
               id == other.id &&
               gardenId == other.gardenId &&
               version == other.version;
 
-  GardenPlanEntity toEntity() {
-    return GardenPlanEntity(
+  GardenDesignEntity toEntity() {
+    return GardenDesignEntity(
         id,
         gardenId,
         version,
@@ -51,9 +51,9 @@ class GardenPlan extends Equatable {
     );
   }
 
-  static GardenPlan fromEntity(GardenPlanEntity entity) {
+  static GardenDesign fromEntity(GardenDesignEntity entity) {
 
-    return GardenPlan(
+    return GardenDesign(
       entity.gardenId,
       entity.versionNumber,
       entity.positioning,
@@ -63,7 +63,7 @@ class GardenPlan extends Equatable {
 
   @override
   String toString() {
-    return "GardenPlan {gardenId: $gardenId}";
+    return "GardenDesign {gardenId: $gardenId}";
   }
 }
 

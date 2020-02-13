@@ -31,9 +31,9 @@ class DetailsGardenScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
 
-          BlocBuilder<PlanBloc, PlanState>(
+          BlocBuilder<DesignBloc, DesignState>(
               builder: (context, state) {
-                if (state is PlanLoaded) {
+                if (state is DesignLoaded) {
                   return Container(
                     height: 230,
                     child: Center(

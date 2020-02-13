@@ -98,12 +98,12 @@ class FirebaseDataRepository implements DataRepository {
   }
 
 
-  Stream<List<GardenPlan>> loadGardenPlans(String gardenId) {
+  Stream<List<GardenDesign>> loadGardenDesigns(String gardenId) {
     return plansCollection
         .where("gardenId", isEqualTo: gardenId)
         .snapshots().map((snapshot) {
       return snapshot.documents
-          .map((doc) => GardenPlan.fromEntity(GardenPlanEntity.fromSnapshot(doc)))
+          .map((doc) => GardenDesign.fromEntity(GardenDesignEntity.fromSnapshot(doc)))
           .toList();
     });
   }
