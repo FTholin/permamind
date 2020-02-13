@@ -12,7 +12,7 @@ class DesignLoading extends DesignState {}
 
 class DesignLoaded extends DesignState {
 
-  final GardenDesign design;
+  final List<GardenDesign> design;
 
   DesignLoaded(this.design);
 

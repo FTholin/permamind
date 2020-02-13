@@ -23,11 +23,11 @@ class LoadDesign extends DesignEvent {}
 
 class DesignUpdated extends DesignEvent {
 
-  final GardenDesign plan;
+  final List<GardenDesign> designs;
 
-  DesignUpdated(this.plan);
+  DesignUpdated(this.designs);
 
   @override
-  List<Object> get props => [plan];
+  List<Object> get props => [designs];
 }
 

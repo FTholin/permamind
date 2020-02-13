@@ -193,7 +193,6 @@ class DetailsGardenScreen extends StatelessWidget {
 
     List<Container> items = List<Container>();
 
-
     if (schedule[referenceDate] != null) {
       for (var activity in schedule[referenceDate]) {
         items.add(

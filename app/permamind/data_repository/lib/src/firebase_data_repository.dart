@@ -96,7 +96,18 @@ class FirebaseDataRepository implements DataRepository {
 
   }
 
+  @override
+  Future<void> deleteGardenDesign(String gardenId) async {
 
+    designsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
+
+  }
+
+  @override
   Stream<List<Garden>> gardens(String userId, String userPseudo) {
     return gardensCollection
         .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
@@ -107,8 +118,8 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
-
-  Stream<List<GardenDesign>> loadGardenDesigns(String gardenId) {
+  @override
+  Stream<List<GardenDesign>> loadGardenDesign(String gardenId) {
     return designsCollection
         .where("gardenId", isEqualTo: gardenId)
         .snapshots().map((snapshot) {

@@ -109,6 +109,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {
+    _dataRepository.deleteGardenDesign(event.garden.id);
     _dataRepository.deleteGarden(event.garden);
   }
 
