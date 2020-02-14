@@ -51,7 +51,6 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       } else {
         print("ERROR MapEventToState event: $event");
       }
-//
 
     }
 

@@ -9,6 +9,8 @@ abstract class DataRepository {
 
   Future<void> addNewActivity(Activity activity);
 
+  Future<void> addNewGardenDesign(GardenDesign design);
+
   Future<void> copyGarden(Garden garden);
 
   Future<void> addGardenActivities(List<Activity> schedule);
@@ -17,13 +19,17 @@ abstract class DataRepository {
 
   Future<void> deleteGardenActivities(String gardenId);
 
+  Future<void> deleteGardenDesign(String gardenId);
+
+  Future<String> fetchIdGardenCreated(String gardenName);
+
   Stream<List<Garden>> gardens(String userId, String userPseudo);
 
   Stream<List<Modeling>> fetchModelings();
 
   Stream<List<Activity>> fetchGardenActivities(String gardenId);
 
-  Stream<List<GardenPlan>> loadGardenPlans(String gardenId);
+  Stream<List<GardenDesign>> loadGardenDesign(String gardenId);
 
   Future<void> updateGarden(Garden garden);
 
@@ -33,7 +39,4 @@ abstract class DataRepository {
 
   Future<QuerySnapshot> searchById(String value);
 
-
-
-
-  }
+}

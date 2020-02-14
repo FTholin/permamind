@@ -55,7 +55,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
 
 
   void _onDaySelected(DateTime selectedDay, List events) {
-    DateTime referenceDate = new DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
+    DateTime referenceDate = new DateTime(selectedDay.year, selectedDay.month, selectedDay.day, 1);
     BlocProvider.of<ActivitiesBloc>(context).add(SelectDayActivities(referenceDate, widget.schedule));
   }
 }

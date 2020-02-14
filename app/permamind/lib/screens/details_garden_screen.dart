@@ -9,6 +9,7 @@ import 'package:permamind/screens/screens.dart';
 import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
 
+
 class DetailsGardenScreen extends StatelessWidget {
 
   final String gardenId;
@@ -30,19 +31,28 @@ class DetailsGardenScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
 
-          BlocBuilder<PlanBloc, PlanState>(
+          BlocBuilder<DesignBloc, DesignState>(
               builder: (context, state) {
-                if (state is PlanLoaded) {
-                  return Container(
-                    color: Colors.yellow,
-                    height: 230,
-                    child: Center(child: Text("Plan Loading")),
-                  );
+                if (state is DesignLoaded) {
+                  if (state.designGarden.designs.isEmpty) {
+                    return Container(
+                      height: 230,
+                      child: Center(
+                          child: VeggiesDesignChart(80.0, 100.0, [])
+                      ),
+                    );
+                  } else {
+                    return Container(
+                      height: 230,
+                      child: Center(
+                          child: VeggiesDesignChart(80.0, 100.0, state.designGarden.designs.first.positioning)
+                      ),
+                    );
+                  }
                 } else {
                   return Container(
-                    color: Colors.blue,
                     height: 230,
-                    child: Center(child: Text("Plan Loading")),
+                    child: LoadingIndicator(),
                   );
                 }
               }
@@ -182,7 +192,6 @@ class DetailsGardenScreen extends StatelessWidget {
   Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
 
     List<Container> items = List<Container>();
-
 
     if (schedule[referenceDate] != null) {
       for (var activity in schedule[referenceDate]) {
@@ -724,3 +733,7 @@ class _CustomAppBarState extends State<CustomAppBar>{
 //  DateTime(2019, 4, 21): ['Easter Sunday'],
 //  DateTime(2019, 4, 22): ['Easter Monday'],
 //};
+
+
+
+

@@ -5,4 +5,4 @@ export 'modelings/modelings.dart';
 export 'tutorials/tutorials.dart';
 export 'dynamic_theming/dynamic_theming.dart';
 export 'activities/activities.dart';
-export 'plan/plan.dart';
+export 'design/design.dart';

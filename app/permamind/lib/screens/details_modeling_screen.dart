@@ -15,7 +15,8 @@ typedef SaveGardenCallback = Function(String gardenName,
     double gardenLength,
     double gardenWidth,
     bool gardenGround,
-    List<ModelingSchedule> schedule
+    List<ModelingSchedule> schedule,
+    List<Design> designs
     );
 
 class DetailsModelingScreen extends StatelessWidget {
@@ -34,13 +35,10 @@ class DetailsModelingScreen extends StatelessWidget {
     final mediaWidth =  MediaQuery.of(context).size.width;
     final mediaHeight =  MediaQuery.of(context).size.height;
 
-    print("width = $mediaWidth");
-    print("height = $mediaHeight");
-
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${args.modeling.composition.join('-')}'),
+        title: Text('${args.gardenName}'),
       ),
         body: Padding(
           padding: EdgeInsets.all(20.0),
@@ -57,8 +55,28 @@ class DetailsModelingScreen extends StatelessWidget {
                     )
                   )),
               ),
-
-
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                child: Container(
+                  height: mediaHeight * 50 / 896,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    child: Center(
+                      child: Text(
+                          "${args.modeling.composition.join(" - ")}",
+                          style: TextStyle(
+                              color: const Color(0xFF01534F),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 19)
+                      ),
+                    )
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF01534F), width: 2),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 5),
                 child: Container(
@@ -74,13 +92,14 @@ class DetailsModelingScreen extends StatelessWidget {
                         ),
                     ),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green, width: 3),
+                    border: Border.all(color: const Color(0xFF01534F), width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(18)),
                   ),
                 ),
               ),
+
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 90),
+                padding: EdgeInsets.symmetric(vertical: 10),
                 child: Container(
                   height: mediaHeight * 70 / 896,
                   child: Row(
@@ -109,9 +128,9 @@ class DetailsModelingScreen extends StatelessWidget {
                                       flex: 2,
                                       child: Center(
                                         child: Text(
-                                            "sowing period",
+                                            "Sowing period",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: const Color(0xFF01534F),
                                                 fontSize: 14)
                                         ),
                                       ),
@@ -140,9 +159,9 @@ class DetailsModelingScreen extends StatelessWidget {
                                       flex: 2,
                                       child: Center(
                                         child: Text(
-                                            "harvest period",
+                                            "Harvest period",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: const Color(0xFF01534F),
                                                 fontSize: 14)
                                         ),
                                       ),
@@ -154,18 +173,79 @@ class DetailsModelingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Container(height: mediaHeight * 40 / 896, child: VerticalDivider(color: const Color(0xFF01534F))),
+                      Expanded(
+                        child: Container(
+                          height: mediaHeight * 70 / 896,
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Center(
+                                          child: Text(
+                                              "Duration",
+                                              style: TextStyle(
+                                                  color: const Color(0xFF01534F),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 19)
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Center(
+                                          child: Text(
+                                              "${args.modeling.productionDuration} months",
+                                              style: TextStyle(
+                                                  color: const Color(0xFF01534F),
+                                                  fontSize: 14)
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green, width: 3),
+                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
                     borderRadius: BorderRadius.all(Radius.circular(18)),
                   ),
                 ),
               ),
+
+
+
+
+
+
+//              Padding(
+//                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 90),
+//                child: Container(
+//                  height: mediaHeight * 70 / 896,
+//                  child: Row(
+//                    children: <Widget>[
+//                      Expanded(
+//
+//                      ),
+//                    ],
+//                  ),
+//                  decoration: BoxDecoration(
+//                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
+//                    borderRadius: BorderRadius.all(Radius.circular(18)),
+//                  ),
+//                ),
+//              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Container(
-                    color: Colors.green,
                   height: mediaHeight * 70 / 896,
                     child: Row(
                       children: <Widget>[
@@ -178,8 +258,8 @@ class DetailsModelingScreen extends StatelessWidget {
                                       child: Text(
                                           "Difficulty",
                                           style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
+                                                color: const Color(0xFF01534F),
+                                                fontWeight: FontWeight.bold,
                                                 fontSize: 19)
                                       ),
                                     ),
@@ -191,7 +271,7 @@ class DetailsModelingScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        VerticalDivider(),
+                        Container(height: mediaHeight * 40 / 896, child: VerticalDivider(color: const Color(0xFF01534F))),
                         Expanded(
                           child: Container(
                             child: Column(
@@ -201,8 +281,8 @@ class DetailsModelingScreen extends StatelessWidget {
                                     child: Text(
                                         "Yield",
                                         style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.normal,
+                                            color: const Color(0xFF01534F),
+                                            fontWeight: FontWeight.bold,
                                             fontSize: 19)
                                     ),
                                   ),
@@ -216,12 +296,15 @@ class DetailsModelingScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                  ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Container(
-                  color: Colors.green,
                   height: mediaHeight * 70 / 896,
                   child: Row(
                     children: <Widget>[
@@ -234,8 +317,8 @@ class DetailsModelingScreen extends StatelessWidget {
                                   child: Text(
                                       "Sun",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.normal,
+                                          color: const Color(0xFF01534F),
+                                          fontWeight: FontWeight.bold,
                                           fontSize: 19)
                                   ),
                                 ),
@@ -247,7 +330,7 @@ class DetailsModelingScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      VerticalDivider(),
+                      Container(height: mediaHeight * 40 / 896, child: VerticalDivider(color: const Color(0xFF01534F))),
                       Expanded(
                         child: Container(
                           child: Column(
@@ -257,8 +340,8 @@ class DetailsModelingScreen extends StatelessWidget {
                                   child: Text(
                                       "Water",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.normal,
+                                          color: const Color(0xFF01534F),
+                                          fontWeight: FontWeight.bold,
                                           fontSize: 19)
                                   ),
                                 ),
@@ -272,45 +355,9 @@ class DetailsModelingScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 90),
-                child: Container(
-                  color: Colors.green,
-                  height: mediaHeight * 70 / 896,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          child: Column(
-                            children: <Widget>[
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                      "Duration",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 19)
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                      "${args.modeling.productionDuration} months",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14)
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
                   ),
                 ),
               ),
@@ -348,7 +395,8 @@ class DetailsModelingScreen extends StatelessWidget {
                 args.gardenLength,
                 args.gardenWidth,
                 args.gardenGround,
-                args.schedule
+                args.schedule,
+                args.designs
             );
 
             Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
@@ -371,35 +419,52 @@ class DetailsModelingScreen extends StatelessWidget {
 
     List<Widget> monthsBoxList = List<Widget>();
     for (int i = 0; i < months.length; i++) {
-      Color monthColor;
+      BoxDecoration monthSpot;
+      Color textMonthColor;
 
       if (sowingPeriod.contains(i)) {
-        monthColor = Colors.yellow;
+        monthSpot = new BoxDecoration(
+          color: Colors.amber,
+          borderRadius: BorderRadius.circular(15),
+        );
+
+        textMonthColor = Colors.white;
       } else if (harvestPeriod.contains(i)) {
-        monthColor = Colors.red;
+        monthSpot = new BoxDecoration(
+          color: Colors.deepOrangeAccent,
+          borderRadius: BorderRadius.circular(15),
+        );
+        textMonthColor = Colors.white;
+
       } else if (culturePeriod.contains(i)) {
-        monthColor = Colors.blue;
+        monthSpot = new BoxDecoration(
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(15),
+        );
+        textMonthColor = Colors.white;
+
       } else {
-        monthColor = Colors.black;
+        monthSpot = new BoxDecoration(
+          border: Border.all(color: const Color(0xFF01534F)),
+          borderRadius: BorderRadius.circular(15),
+        );
+        textMonthColor = const Color(0xFF01534F);
       }
 
       monthsBoxList.add(
         Expanded(
           child: Container(
-            color: culturePeriod.contains(i) ? Colors.green : Colors.black,
+            color: culturePeriod.contains(i) ? const Color(0xFF01534F) : Colors.white,
             child: Center(
               child: Container(
                 height: mediaHeight * 30 / 896,
                 width:  mediaWidth * 30 / 414,
 //                padding: EdgeInsets.all(12),
-                decoration: new BoxDecoration(
-                  color: monthColor,
-                  borderRadius: BorderRadius.circular(15),
-                ),
+                decoration: monthSpot,
                 child: Center(
                     child: Text(
                       '${months[i]}',
-                      style: TextStyle(fontSize: mediaHeight * 20 / 896, color: Colors.white),
+                      style: TextStyle(fontSize: mediaHeight * 20 / 896, color: textMonthColor),
                     )
                 ),
               ),
@@ -427,7 +492,7 @@ Widget _buildModelingNotation(BuildContext context,
           Expanded(
               child:  Icon(
                 Icons.star ,
-                color: Colors.black,
+                color: const Color(0xFF01534F),
                 size: MediaQuery.of(context).size.width / 14,
               )
           )
@@ -437,7 +502,7 @@ Widget _buildModelingNotation(BuildContext context,
           Expanded(
               child: Icon(
                 Icons.star_border ,
-                color: Colors.black,
+                color: const Color(0xFF01534F),
                 size: MediaQuery.of(context).size.width / 14,
               )
           )
@@ -467,6 +532,7 @@ class DetailsModelingsScreenArguments {
   final double gardenLength;
   final double gardenWidth;
   final bool gardenGround;
+  final List<Design> designs;
 
 //  final SaveGardenCallback onSaveGarden;
 
@@ -478,7 +544,8 @@ class DetailsModelingsScreenArguments {
     @required this.gardenGround,
     @required this.publicVisibility,
     @required this.gardenMembers,
-    @required this.schedule
+    @required this.schedule,
+    @required this.designs
 //    @required this.onSaveGarden,
   });
 }

@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
       case AppTab.profile:
         return Scaffold(
           body: Center(
-            child: Text("Coucou ${user.pseudo} !"),
+            child: Text("👋 ${user.pseudo} !"),
           ),
         );
         break;

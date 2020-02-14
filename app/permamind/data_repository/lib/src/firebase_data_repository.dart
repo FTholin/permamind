@@ -26,9 +26,7 @@ class FirebaseDataRepository implements DataRepository {
 
   final activitiesCollection = Firestore.instance.collection('activities');
 
-  final plansCollection = Firestore.instance.collection('plans');
-
-
+  final designsCollection = Firestore.instance.collection('designs');
 
   @override
   Future<String> addNewGarden(Garden garden) async {
@@ -36,6 +34,11 @@ class FirebaseDataRepository implements DataRepository {
     return docRef.documentID;
   }
 
+
+  @override
+  Future<void> addNewGardenDesign(GardenDesign design) async {
+    return designsCollection.add(design.toEntity().toDocument());
+  }
 
   @override
   Future<void> addNewActivity(Activity activity) {
@@ -51,6 +54,13 @@ class FirebaseDataRepository implements DataRepository {
   @override
   Future<void> copyGarden(Garden garden) async {
     return gardensCollection.document(garden.id).setData(garden.toEntity().toDocument());
+  }
+
+  @override
+  Future<String> fetchIdGardenCreated(String gardenName) async {
+    return  gardensCollection.where("name",isEqualTo: gardenName).getDocuments().then((snapshot) {
+      return snapshot.documents.first.documentID;
+    });
   }
 
   @override
@@ -86,7 +96,18 @@ class FirebaseDataRepository implements DataRepository {
 
   }
 
+  @override
+  Future<void> deleteGardenDesign(String gardenId) async {
 
+    designsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
+
+  }
+
+  @override
   Stream<List<Garden>> gardens(String userId, String userPseudo) {
     return gardensCollection
         .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
@@ -97,13 +118,13 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
-
-  Stream<List<GardenPlan>> loadGardenPlans(String gardenId) {
-    return plansCollection
+  @override
+  Stream<List<GardenDesign>> loadGardenDesign(String gardenId) {
+    return designsCollection
         .where("gardenId", isEqualTo: gardenId)
         .snapshots().map((snapshot) {
       return snapshot.documents
-          .map((doc) => GardenPlan.fromEntity(GardenPlanEntity.fromSnapshot(doc)))
+          .map((doc) => GardenDesign.fromEntity(GardenDesignEntity.fromSnapshot(doc)))
           .toList();
     });
   }

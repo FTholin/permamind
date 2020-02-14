@@ -46,7 +46,6 @@ class TutorialActivities extends State<TutorialActivitiesScreen> {
       steps.add(
         Step(
             title: Text("${tutorials[i].activityHeading}"),
-            state: StepState.editing,
             isActive: i - 1 == _index,
             content: CarouselWithIndicator(tutorials[i].tutorialActivities)
         ),

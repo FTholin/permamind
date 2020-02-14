@@ -141,12 +141,10 @@ class App extends StatelessWidget {
                           onSaveGarden: (gardenName, publicVisibility,
                               gardenMembers, modelingId, modelingName, gardenLength,
                               gardenWidth, gardenGround,
-                              schedule
-                              ) {
+                              schedule, designs
+                              ) async {
 
                             gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
-
-                            // Todo requete récupérer nb activité jour et intégrer dans jardin
 
                             BlocProvider.of<GardensBloc>(context).add(
                               AddGarden(Garden(gardenName, gardenLength,
@@ -160,6 +158,9 @@ class App extends StatelessWidget {
                                   schedule
                               ),
                             );
+
+                            BlocProvider.of<GardensBloc>(context).add(AddGardenDesign(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
+
                           }
                       );
                     }
