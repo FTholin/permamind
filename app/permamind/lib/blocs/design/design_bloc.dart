@@ -47,13 +47,15 @@ class DesignBloc extends Bloc<DesignEvent, DesignState> {
     _planSubscription?.cancel();
     _planSubscription = dataRepository.loadGardenDesign(gardenId).listen(
           (gardenDesign) {
-        add(DesignUpdated(gardenDesign));
+            if (gardenDesign.isNotEmpty) {
+              add(DesignUpdated(gardenDesign.first));
+            }
       },
     );
   }
 
   Stream<DesignState> _mapDesignUpdatedToState(DesignUpdated event) async* {
-    yield DesignLoaded(event.designs);
+    yield DesignLoaded(event.gardenDesign);
   }
 
 

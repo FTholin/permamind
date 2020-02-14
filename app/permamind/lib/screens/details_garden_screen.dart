@@ -34,7 +34,7 @@ class DetailsGardenScreen extends StatelessWidget {
           BlocBuilder<DesignBloc, DesignState>(
               builder: (context, state) {
                 if (state is DesignLoaded) {
-                  if (state.design.designs.isEmpty) {
+                  if (state.designGarden.designs.isEmpty) {
                     return Container(
                       height: 230,
                       child: Center(
@@ -45,7 +45,7 @@ class DetailsGardenScreen extends StatelessWidget {
                     return Container(
                       height: 230,
                       child: Center(
-                          child: VeggiesDesignChart(80.0, 100.0, state.design.designs.first.positioning)
+                          child: VeggiesDesignChart(80.0, 100.0, state.designGarden.designs.first.positioning)
                       ),
                     );
                   }
