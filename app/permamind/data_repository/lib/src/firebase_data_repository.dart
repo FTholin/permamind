@@ -31,14 +31,20 @@ class FirebaseDataRepository implements DataRepository {
   final designsCollection = Firestore.instance.collection('designs');
 
   @override
-  Future<String> addNewGarden(Garden garden) async {
-//    return vegetableGardensCollection.add(garden.toEntity().toDocument());
-e
-    vegetableGardensCollection.doc("LA").set({
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA"
-    });
+  Future<void> addNewGarden(Garden garden) async {
+
+    final res = garden.members.map((item) => item.toJson());
+
+    // TODO bricoler member
+    return vegetableGardensCollection.document(garden.id).setData({
+        'id': garden.id,
+        'name': garden.name,
+        'publicVisibility': garden.publicVisibility,
+        'admin': garden.admin,
+        'members': [{'id': 'gd3Q3CYOwTPFNnZ9Z57yzmVGqAo1', 'pseudo': 'FLow'}],
+        'creationDate': garden.creationDate,
+        'dayActivitiesCount': garden.dayActivitiesCount
+      });
   }
 
 

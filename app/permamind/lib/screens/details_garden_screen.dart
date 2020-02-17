@@ -25,20 +25,46 @@ class DetailsGardenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+//    return BlocBuilder<GardensBloc, GardensState>(
+//      builder: (context, state) {
+//        if (state is Garde) {
+//
+//          final currentGarden = (state as GardensLoaded)
+//              .gardens.firstWhere((garden) => garden.id == gardenId,
+//              orElse: () => null);
+//
+//          print('-------');
+//          print(currentGarden);
+//          print('--------');
+//
+//
+//          return Scaffold(
+//            appBar: AppBar(
+//              title: Text("${currentGarden.name}"),
+//              actions: <Widget>[
+//
+//              ],
+//            ),
+//            body: EnumeratedParcels(),
+//            floatingActionButton: ParcelSpeedDial(
+//                visible: true
+//            ),
+//          );
+//        } else {
+//          return Scaffold(
+//            body: CircularProgressIndicator()
+//          );
+//        }
+//      }
+//    );
+
+//    return Scaffold(
 //      appBar: CustomAppBar(gardenId: gardenId, user: user),
-      appBar: AppBar(
-          title: Text("Test jardin"),
-          leading:  IconButton(
-          icon: new Icon(Icons.keyboard_arrow_left),
-          onPressed: () => Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false),
-        ),
-      ),
-      body: EnumeratedParcels(),
-      floatingActionButton: ParcelSpeedDial(
-          visible: true
-      ),
-    );
+//      body: EnumeratedParcels(),
+//      floatingActionButton: ParcelSpeedDial(
+//          visible: true
+//      ),
+//    );
 
 
 //    return BlocBuilder<GardensBloc, GardensState>(
@@ -129,68 +155,71 @@ class DetailsGardenScreen extends StatelessWidget {
   }
 
 
-  Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
-
-    List<Container> items = List<Container>();
-
-    if (schedule[referenceDate] != null) {
-      for (var activity in schedule[referenceDate]) {
-        items.add(
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.8),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              margin:
-              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-              child: ScheduleListItem(activity: activity),
-            )
-        );
-      }
-    }
-
-    return ListView(
-      children: items
-    );
-
-  }
+//  Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
+//
+//    List<Container> items = List<Container>();
+//
+//    if (schedule[referenceDate] != null) {
+//      for (var activity in schedule[referenceDate]) {
+//        items.add(
+//            Container(
+//              decoration: BoxDecoration(
+//                border: Border.all(width: 0.8),
+//                borderRadius: BorderRadius.circular(12.0),
+//              ),
+//              margin:
+//              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+//              child: ScheduleListItem(activity: activity),
+//            )
+//        );
+//      }
+//    }
+//
+//    return ListView(
+//      children: items
+//    );
+//
+//  }
 
 }
 
 
-// TODO Custom Bar à reconnecter quand besoin
-//
-//class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-//
-//  final String gardenId;
-//  final User user;
-//
-//  CustomAppBar({
-//    @required this.gardenId,
-//    @required this.user,
-//    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
-//
-//  @override
-//  final Size preferredSize; // default is 56.0
-//
-//  @override
-//  _CustomAppBarState createState() => _CustomAppBarState();
-//}
-//
-//class _CustomAppBarState extends State<CustomAppBar>{
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return BlocBuilder<GardensBloc, GardensState>(
-//        builder: (context, state) {
-//          final currentGarden = (state as GardensLoaded)
-//              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
-//              orElse: () => null);
-//
-//          return AppBar(
-//            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
-//            actions: <Widget>[
-//
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+
+  final String gardenId;
+  final User user;
+
+  CustomAppBar({
+    @required this.gardenId,
+    @required this.user,
+    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+
+  @override
+  final Size preferredSize; // default is 56.0
+
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar>{
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GardensBloc, GardensState>(
+        builder: (context, state) {
+          final currentGarden = (state as GardensLoaded)
+              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
+              orElse: () => null);
+
+          return AppBar(
+            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+            leading:  IconButton(
+              icon: new Icon(Icons.keyboard_arrow_left),
+              onPressed: () => Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false),
+            ),
+            actions: <Widget>[
+
+
 //              BlocBuilder<ActivitiesBloc, ActivitiesState>(
 //              builder: (context, state) {
 //                if (state is ActivitiesLoaded) {
@@ -300,31 +329,34 @@ class DetailsGardenScreen extends StatelessWidget {
 //                  return Container();
 //                }
 //              })
+
+            ],
+          );
+        }
+    );
+  }
+
+
+
+
+//  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
+//    // Fill Chips Input
+//    gardenMembers.forEach((memberId)  {
+//      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
+//      if (memberId != widget.userId) {
+//        membersData.add(memberId);
 //
-//            ],
-//          );
-//        }
-//    );
+//        final data = queryRes.documents[0].data;
+//
+//        initialMember.add(MemberProfile(
+//            data["id"],
+//            data["pseudo"],
+//            data["email"],
+//            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+//      }
+//    });
 //  }
-//
-////  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
-////    // Fill Chips Input
-////    gardenMembers.forEach((memberId)  {
-////      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
-////      if (memberId != widget.userId) {
-////        membersData.add(memberId);
-////
-////        final data = queryRes.documents[0].data;
-////
-////        initialMember.add(MemberProfile(
-////            data["id"],
-////            data["pseudo"],
-////            data["email"],
-////            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
-////      }
-////    });
-////  }
-//}
+}
 
 
 

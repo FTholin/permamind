@@ -180,7 +180,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               padding: EdgeInsets.only(top: 10, bottom: 30),
               child: Column(
                 children: <Widget>[
-                  RaisedButton(onPressed: () {
+                  RaisedButton(onPressed: () async {
 
                     // TODO Connecter cette liste à la liste d'ajout des members
                     List<GardenMember> members = List<GardenMember>();
@@ -194,15 +194,14 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
 
 
                     // AJout du bloc dans la base
-                    BlocProvider.of<GardensBloc>(context).add(
+                  await BlocProvider.of<GardensBloc>(context).add(
                       AddGarden(
                         Garden("Jardin test", false,  widget._user.id, members, DateTime.now(), 0)
                       ));
 
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) {
-                          return DetailsGardenScreen(gardenId: garden.id, user: widget._user
-                      );
+                          return DetailsGardenScreen(gardenId: garden.id, user: widget._user);
                     }));
 
                   }, child: const Text('Finaliser jardin')),
