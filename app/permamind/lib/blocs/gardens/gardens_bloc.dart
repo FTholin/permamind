@@ -12,11 +12,11 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   final AuthenticationBloc _authenticationBloc;
   StreamSubscription _authenticationBlocSubscription;
 
-  GardensBloc(this._authenticationBloc, this._dataRepository)  {
+  GardensBloc(this._authenticationBloc, this._dataRepository) {
     _authenticationBlocSubscription = _authenticationBloc.listen((state) {
       // React to state changes here.
       // Dispatch events here to trigger changes in MyBloc.
-      if (state is Authenticated)  {
+      if (state is Authenticated) {
         add(LoadGardens(state.userAuthenticated.id));
       }
     });
@@ -51,48 +51,31 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
-    final pseudo = (await _dataRepository.searchById(event.userId)).documents.first.data['pseudo'];
+    final pseudo = (await _dataRepository.searchById(event.userId)).documents
+        .first.data['pseudo'];
     _gardensSubscription?.cancel();
     _gardensSubscription = _dataRepository.gardens(event.userId, pseudo).listen(
-          (gardens)  {
+          (gardens) {
 //            var plans = _dataRepository.loadPlans(gardenId);
-            add(GardensUpdated(gardens));
+        add(GardensUpdated(gardens));
       },
     );
-
   }
 
   Stream<GardensState> _mapAddGardenToState(AddGarden event) async* {
-
-    final gardenId = await _dataRepository.addNewGarden(event.garden);
-
-      DateTime referenceDate = DateTime.now();
-
-      List<Activity> activities = List<Activity>();
-
-      for (int i = 0; i < event.schedule.length; i++) {
-
-        for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
-          DateTime expectedDate = referenceDate.add(Duration(days: i));
-          expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
-          activities.add(
-              Activity( event.schedule[i].dayActivities[j].name, gardenId, false, expectedDate, event.schedule[i].dayActivities[j].category, '')
-          );
-        }
-
-      }
-
-      if (activities.isNotEmpty) {
-        _dataRepository.addGardenActivities(activities);
-      }
+    _dataRepository.addNewGarden(event.garden);
   }
 
-  Stream<GardensState> _mapCopyActivitiesToState(CopyActivities schedule) async* {
+
+  Stream<GardensState> _mapCopyActivitiesToState(
+      CopyActivities schedule) async* {
     _dataRepository.addGardenActivities(schedule.activities);
   }
 
-  Stream<GardensState> _mapAddGardenDesign(AddGardenDesign gardenDesign) async* {
-    _dataRepository.addNewGardenDesign(GardenDesign(gardenDesign.gardenId, gardenDesign.designs));
+  Stream<GardensState> _mapAddGardenDesign(
+      AddGardenDesign gardenDesign) async* {
+    _dataRepository.addNewGardenDesign(
+        GardenDesign(gardenDesign.gardenId, gardenDesign.designs));
   }
 
   Stream<GardensState> _mapUpdateGardensToState(UpdateGarden event) async* {
@@ -148,18 +131,4 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _authenticationBlocSubscription?.cancel();
     return super.close();
   }
-
-//  Stream<GardensState> _mapGardensInitToState() async* {
-//    try {
-//      final isSignedIn = await _userRepository.isSignedIn();
-//      if (isSignedIn) {
-//        final name = await _userRepository.getUserId();
-//        yield Authenticated(name);
-//      } else {
-//        yield Unauthenticated();
-//      }
-//    } catch (_) {
-//      yield Unauthenticated();
-//    }
-//  }
 }

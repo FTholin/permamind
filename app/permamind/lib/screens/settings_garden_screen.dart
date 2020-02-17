@@ -182,12 +182,8 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                       UpdateGarden(
                                         garden.copyWith(
                                             name: _newGardenNameController.text,
-                                            length: garden.length,
-                                            width: garden.width,
-                                            gardenGround: garden.gardenGround,
                                             id: garden.id,
                                             publicVisibility: garden.publicVisibility,
-                                            modelingId: garden.modelingId,
                                             members: _gardenMembers
                                         ),
                                       ),

@@ -1,16 +1,12 @@
 import 'package:data_repository/data_repository.dart';
+import 'package:data_repository/src/entities/entities.dart';
 import 'package:equatable/equatable.dart';
-import '../entities/entities.dart';
+import 'package:uuid/uuid.dart';
 
 class Garden extends Equatable {
   final String id;
   final String name;
   final bool publicVisibility;
-  final String modelingId;
-  final String modelingName;
-  final double length;
-  final double width;
-  final bool gardenGround;
   final String admin;
   final List<GardenMember> members;
   final DateTime creationDate;
@@ -18,38 +14,27 @@ class Garden extends Equatable {
 
   Garden(
       this.name,
-      this.length,
-      this.width,
-      this.gardenGround,
       this.publicVisibility,
       this.admin,
       this.members,
-      this.modelingId,
-      this.modelingName,
       this.creationDate,
       this.dayActivitiesCount,
       {String id})
-      :  this.id = id;
+      :  this.id = Uuid().v4();
 
-  Garden copyWith({String name, double length,
-    double width, bool gardenGround, String id,
-    bool publicVisibility, String modelingId,
-    String admin, List<GardenMember> members}) {
+  Garden copyWith({String name, String id, bool publicVisibility, String admin, List<GardenMember> members, DateTime creationDate, int dayActivitiesCount}) {
     return Garden(
       name ?? this.name,
-      length ?? this.length,
-      width ?? this.width,
-      gardenGround ?? this.gardenGround,
       publicVisibility ?? this.publicVisibility,
       admin ?? this.admin,
       members ?? this.members,
-      modelingId ?? this.modelingId,
-      modelingName ?? this.modelingName,
       creationDate ?? this.creationDate,
       dayActivitiesCount ?? this.dayActivitiesCount,
       id: id ?? this.id,
     );
   }
+
+
 
   @override
   int get hashCode =>
@@ -64,9 +49,7 @@ class Garden extends Equatable {
               name == other.name &&
               publicVisibility == other.publicVisibility &&
               admin == other.admin &&
-              members == other.members &&
-              dayActivitiesCount == other.dayActivitiesCount;
-
+              members == other.members;
 
   @override
   String toString() {
@@ -77,14 +60,9 @@ class Garden extends Equatable {
     return GardenEntity(
         id,
         name,
-        length,
-        width,
-        gardenGround,
         publicVisibility,
         admin,
         members,
-        modelingId,
-        modelingName,
         creationDate,
         dayActivitiesCount
     );
@@ -94,14 +72,9 @@ class Garden extends Equatable {
 
     return Garden(
       entity.name,
-      entity.length,
-      entity.width,
-      entity.gardenGround,
       entity.publicVisibility,
       entity.admin,
       entity.members,
-      entity.modelingId,
-      entity.modelingName,
       entity.creationDate,
       entity.dayActivitiesCount,
       id: entity.id,

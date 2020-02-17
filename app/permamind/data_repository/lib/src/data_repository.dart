@@ -5,7 +5,7 @@ import 'package:data_repository/data_repository.dart';
 
 abstract class DataRepository {
 
-  Future<String> addNewGarden(Garden garden);
+  Future<void> addNewGarden(Garden garden);
 
   Future<void> addNewActivity(Activity activity);
 

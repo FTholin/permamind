@@ -104,25 +104,20 @@ class App extends StatelessWidget {
 //          );
 //        },
               '/addGarden': (context) {
-                final gardensBloc = BlocProvider.of<GardensBloc>(context);
-//            return MultiBlocProvider(
-//              providers: [
-//                BlocProvider<ModelingsBloc>(
-//                  builder: (context) =>
-//                  ModelingsBloc(gardensRepository: firebaseRepository)..dispatch(FetchModelings()),
-//                ),
-//            ],
-//            child: DiscoverModelingsScreen(),
-//            );
-                return AddEditGardenScreen(
-                  dataProvider: firebaseRepository,
-//              onSave: (task, note) {
-//                gardensBloc.dispatch(
-//                  AddTodo(Todo(task, note: note)),
-//                );
-//              },
-                  isEditing: false,
+
+                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    if (state is Authenticated) {
+                      return AddGardenScreen(user: state.userAuthenticated);
+                    }
+                    else if (state is Unauthenticated) {
+                      return LoginScreen(userRepository: userRepository);
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
                 );
+
               },
               '/discoverModelings': (context) {
                 return BlocProvider<ModelingsBloc>(
@@ -145,19 +140,19 @@ class App extends StatelessWidget {
                               ) async {
 
                             gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
-
-                            BlocProvider.of<GardensBloc>(context).add(
-                              AddGarden(Garden(gardenName, gardenLength,
-                                  gardenWidth, gardenGround,
-                                  publicVisibility,
-                                  state.userAuthenticated.id,
-                                  gardenMembers,
-                                  modelingId,
-                                  modelingName,
-                                  DateTime.now(), 0),
-                                  schedule
-                              ),
-                            );
+//
+//                            BlocProvider.of<GardensBloc>(context).add(
+//                              AddGarden(Garden(gardenName, gardenLength,
+//                                  gardenWidth, gardenGround,
+//                                  publicVisibility,
+//                                  state.userAuthenticated.id,
+//                                  gardenMembers,
+//                                  modelingId,
+//                                  modelingName,
+//                                  DateTime.now(), 0),
+//                                  schedule
+//                              ),
+//                            );
 
                             BlocProvider.of<GardensBloc>(context).add(AddGardenDesign(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
 

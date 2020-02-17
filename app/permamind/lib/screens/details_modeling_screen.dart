@@ -386,20 +386,23 @@ class DetailsModelingScreen extends StatelessWidget {
 ////                        );
 //                      }));
 //                gardensBloc.d
-            onSaveGarden(
-                args.gardenName,
-                args.publicVisibility,
-                args.gardenMembers,
-                args.modeling.id,
-                args.modeling.composition.join("-"),
-                args.gardenLength,
-                args.gardenWidth,
-                args.gardenGround,
-                args.schedule,
-                args.designs
-            );
+              // TODO Greffer contenu de cette fonction ailleurs
+//            onSaveGarden(
+//                args.gardenName,
+//                args.publicVisibility,
+//                args.gardenMembers,
+//                args.modeling.id,
+//                args.modeling.composition.join("-"),
+//                args.gardenLength,
+//                args.gardenWidth,
+//                args.gardenGround,
+//                args.schedule,
+//                args.designs
+//            );
 
-            Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
+
+
+//            Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes., (_) => false);
 
           }),
 

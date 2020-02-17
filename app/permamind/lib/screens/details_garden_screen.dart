@@ -26,7 +26,14 @@ class DetailsGardenScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: CustomAppBar(gardenId: gardenId, user: user),
+//      appBar: CustomAppBar(gardenId: gardenId, user: user),
+      appBar: AppBar(
+          title: Text("Test jardin"),
+          leading:  IconButton(
+          icon: new Icon(Icons.keyboard_arrow_left),
+          onPressed: () => Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false),
+        ),
+      ),
       body: EnumeratedParcels(),
       floatingActionButton: ParcelSpeedDial(
           visible: true
@@ -151,175 +158,177 @@ class DetailsGardenScreen extends StatelessWidget {
 }
 
 
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-
-  final String gardenId;
-  final User user;
-
-  CustomAppBar({
-    @required this.gardenId,
-    @required this.user,
-    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
-
-  @override
-  final Size preferredSize; // default is 56.0
-
-  @override
-  _CustomAppBarState createState() => _CustomAppBarState();
-}
-
-class _CustomAppBarState extends State<CustomAppBar>{
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<GardensBloc, GardensState>(
-        builder: (context, state) {
-          final currentGarden = (state as GardensLoaded)
-              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
-              orElse: () => null);
-
-          return AppBar(
-            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
-            actions: <Widget>[
-
-              BlocBuilder<ActivitiesBloc, ActivitiesState>(
-              builder: (context, state) {
-                if (state is ActivitiesLoaded) {
-                  return IconButton(
-//            tooltip: localizations.deleteGarden,
-                    // TODO ArchSampleKeys
-//                key: ArchSampleKeys.deleteGardenButton,
-                    icon: Icon(Icons.settings),
-                    onPressed: () async {
-
-                      List<MemberProfile> initialMember = List<MemberProfile>();
-
-                      for (final member in currentGarden.members) {
-                        if (member.id != widget.user.id) {
-                          initialMember.add(MemberProfile(
-                            member.id,
-                            member.pseudo
-                          ));
-                        }
-                      }
-
-
-                      final removedGarden = await Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (_) {
-
-                                return BlocProvider.value(
-                                  value: BlocProvider.of<ActivitiesBloc>(
-                                      context),
-                                  child: SettingsGardenScreen(
-                                      gardenId: currentGarden.id,
-                                      initialMembersData: currentGarden.members,
-                                      initialMember: initialMember,
-                                      user: widget.user
-                                  ),
-                                );
-                              })
-                      );
-
-
-                      if (removedGarden != null && removedGarden != false) {
-
-                        Map returnData = Map();
-
-                        List<Activity> activities = List<Activity>();
-                        state.schedule.entries.forEach((e) {
-                          e.value.forEach((item){
-                            activities.add(item);
-                          });
-                        });
-
-
-                        returnData['activities'] = activities;
-
-
-                        if (removedGarden['action'] == "Delete") {
-
-
-                          returnData['garden'] = currentGarden;
-
-                          returnData['action'] = "Delete";
-
-                          BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
-
-                          BlocProvider.of<GardensBloc>(context).add(
-                              DeleteGarden(currentGarden));
-
-                          BlocProvider.of<ActivitiesBloc>(context).close();
-
-                          Navigator.pop(context, returnData);
-
-                        } else  {
-
-                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.user.id) {
-                            returnData['garden'] = currentGarden;
-                            BlocProvider.of<GardensBloc>(context).add(
-                                DeleteGarden(currentGarden));
-                            BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
-                            returnData['action'] = "Delete";
-                          } else {
-
-                            returnData['action'] = "Leave";
-
-                            List<GardenMember> members = new List<GardenMember>.from(currentGarden.members);
-
-                            Garden copy = currentGarden.copyWith(name: currentGarden.name,
-                                length: currentGarden.length,
-                                width: currentGarden.width,
-                                gardenGround: currentGarden.gardenGround,
-                                id: currentGarden.id,
-                                publicVisibility: currentGarden.publicVisibility,
-                                modelingId: currentGarden.modelingId,
-                                admin: currentGarden.admin,
-                                members: members);
-
-                            BlocProvider.of<GardensBloc>(context).add(
-                                LeaveGarden(currentGarden, widget.user.id)
-                            );
-
-                            returnData['garden'] = copy;
-                          }
-
-                          BlocProvider.of<ActivitiesBloc>(context).close();
-
-                          Navigator.pop(context, returnData);
-                        }
-                      }
-                    },
-                  );
-                } else {
-                  return Container();
-                }
-              })
-
-            ],
-          );
-        }
-    );
-  }
-
-//  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
-//    // Fill Chips Input
-//    gardenMembers.forEach((memberId)  {
-//      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
-//      if (memberId != widget.userId) {
-//        membersData.add(memberId);
+// TODO Custom Bar à reconnecter quand besoin
 //
-//        final data = queryRes.documents[0].data;
+//class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 //
-//        initialMember.add(MemberProfile(
-//            data["id"],
-//            data["pseudo"],
-//            data["email"],
-//            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
-//      }
-//    });
+//  final String gardenId;
+//  final User user;
+//
+//  CustomAppBar({
+//    @required this.gardenId,
+//    @required this.user,
+//    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+//
+//  @override
+//  final Size preferredSize; // default is 56.0
+//
+//  @override
+//  _CustomAppBarState createState() => _CustomAppBarState();
+//}
+//
+//class _CustomAppBarState extends State<CustomAppBar>{
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return BlocBuilder<GardensBloc, GardensState>(
+//        builder: (context, state) {
+//          final currentGarden = (state as GardensLoaded)
+//              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
+//              orElse: () => null);
+//
+//          return AppBar(
+//            title: currentGarden != null ? Text("${currentGarden.name}") : Text(""),
+//            actions: <Widget>[
+//
+//              BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//              builder: (context, state) {
+//                if (state is ActivitiesLoaded) {
+//                  return IconButton(
+////            tooltip: localizations.deleteGarden,
+//                    // TODO ArchSampleKeys
+////                key: ArchSampleKeys.deleteGardenButton,
+//                    icon: Icon(Icons.settings),
+//                    onPressed: () async {
+//
+//                      List<MemberProfile> initialMember = List<MemberProfile>();
+//
+//                      for (final member in currentGarden.members) {
+//                        if (member.id != widget.user.id) {
+//                          initialMember.add(MemberProfile(
+//                            member.id,
+//                            member.pseudo
+//                          ));
+//                        }
+//                      }
+//
+//
+//                      final removedGarden = await Navigator.of(context).push(
+//                          MaterialPageRoute(
+//                              builder: (_) {
+//
+//                                return BlocProvider.value(
+//                                  value: BlocProvider.of<ActivitiesBloc>(
+//                                      context),
+//                                  child: SettingsGardenScreen(
+//                                      gardenId: currentGarden.id,
+//                                      initialMembersData: currentGarden.members,
+//                                      initialMember: initialMember,
+//                                      user: widget.user
+//                                  ),
+//                                );
+//                              })
+//                      );
+//
+//
+//                      if (removedGarden != null && removedGarden != false) {
+//
+//                        Map returnData = Map();
+//
+//                        List<Activity> activities = List<Activity>();
+//                        state.schedule.entries.forEach((e) {
+//                          e.value.forEach((item){
+//                            activities.add(item);
+//                          });
+//                        });
+//
+//
+//                        returnData['activities'] = activities;
+//
+//
+//                        if (removedGarden['action'] == "Delete") {
+//
+//
+//                          returnData['garden'] = currentGarden;
+//
+//                          returnData['action'] = "Delete";
+//
+//                          BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
+//
+//                          BlocProvider.of<GardensBloc>(context).add(
+//                              DeleteGarden(currentGarden));
+//
+//                          BlocProvider.of<ActivitiesBloc>(context).close();
+//
+//                          Navigator.pop(context, returnData);
+//
+//                        } else  {
+//
+//                          if (currentGarden.members.length == 1 || currentGarden.admin == widget.user.id) {
+//                            returnData['garden'] = currentGarden;
+//                            BlocProvider.of<GardensBloc>(context).add(
+//                                DeleteGarden(currentGarden));
+//                            BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
+//                            returnData['action'] = "Delete";
+//                          } else {
+//
+//                            returnData['action'] = "Leave";
+//
+//                            List<GardenMember> members = new List<GardenMember>.from(currentGarden.members);
+//
+//                            Garden copy = currentGarden.copyWith(name: currentGarden.name,
+//                                id: currentGarden.id,
+//                                publicVisibility: currentGarden.publicVisibility,
+//                                admin: currentGarden.admin,
+//                                members: members);
+//
+//                            BlocProvider.of<GardensBloc>(context).add(
+//                                LeaveGarden(currentGarden, widget.user.id)
+//                            );
+//
+//                            returnData['garden'] = copy;
+//                          }
+//
+//                          BlocProvider.of<ActivitiesBloc>(context).close();
+//
+//                          Navigator.pop(context, returnData);
+//                        }
+//                      }
+//                    },
+//                  );
+//                } else {
+//                  return Container();
+//                }
+//              })
+//
+//            ],
+//          );
+//        }
+//    );
 //  }
-}
+//
+////  Future<void> searchGardenFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
+////    // Fill Chips Input
+////    gardenMembers.forEach((memberId)  {
+////      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
+////      if (memberId != widget.userId) {
+////        membersData.add(memberId);
+////
+////        final data = queryRes.documents[0].data;
+////
+////        initialMember.add(MemberProfile(
+////            data["id"],
+////            data["pseudo"],
+////            data["email"],
+////            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+////      }
+////    });
+////  }
+//}
+
+
+
+
 
 
 

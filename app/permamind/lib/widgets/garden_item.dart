@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 
 class GardenItem extends StatelessWidget {
   final String name;
-  final String modelingName;
   final String membersCount;
   final int index;
   final int dayActivitiesCount;
 
   GardenItem({
     @required this.name,
-    @required this.modelingName,
     @required this.membersCount,
     @required this.index,
     this.dayActivitiesCount
@@ -38,18 +36,6 @@ class GardenItem extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          '${modelingName}',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 12,
-                            color: Color(0xFF4FB06E)
-                          ),
-                        ),
-                      ],
-                    ),
                     Row(
                       children: <Widget>[
                         Text(
