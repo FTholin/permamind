@@ -168,6 +168,9 @@ class App extends StatelessWidget {
                   },
                 );
               },
+              '/addParcel' : (context) {
+                return AddParcelScreen();
+              },
               '/settings': (context) {
                 return SettingsScreen();
               },

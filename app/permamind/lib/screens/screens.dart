@@ -11,3 +11,4 @@ export 'settings_garden_screen.dart';
 export 'add_edit_activity_screen.dart';
 export 'join_garden_screen.dart';
 export 'tutorials_activities_screen.dart';
+export 'add_parcel_screen.dart';

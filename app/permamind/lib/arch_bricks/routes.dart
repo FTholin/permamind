@@ -8,6 +8,7 @@ class ArchSampleRoutes {
   static final settings = "/settings";
   static final addActivity = "/addActivity";
   static final joinGarden = "/joinGarden";
+  static final addParcel = "/addParcel";
 
   // TODO To improve efficiency : see https://api.flutter.dev/flutter/widgets/Navigator/pushNamed.html
   static final settingsGarden = "/settingsGarden";
