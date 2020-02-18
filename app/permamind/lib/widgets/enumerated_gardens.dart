@@ -23,11 +23,10 @@ class EnumeratedGardens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
+    return BlocBuilder<GardensBloc, GardensState>(
+        builder: (context, state) {
       if (state is GardensLoaded) {
         final gardens = state.gardens;
-
-        final localizations = ArchSampleLocalizations.of(context);
 
         return Padding(
             padding: EdgeInsets.all(10.0),
@@ -51,7 +50,7 @@ class EnumeratedGardens extends StatelessWidget {
                             gardensBloc: BlocProvider.of<GardensBloc>(context),
                             dataRepository: _dataRepository)
                           ..add(LoadParcels(gardens[index].id)),
-                        child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user),);
+                        child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user, dataRepository: _dataRepository,),);
 
 
                     }));

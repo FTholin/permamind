@@ -15,8 +15,7 @@ class EnumeratedParcels extends StatelessWidget {
   final User _user;
 
   EnumeratedParcels({Key key, @required DataRepository dataRepository, @required User user})
-      :
-        assert(dataRepository != null),
+      : assert(dataRepository != null),
         assert(user != null),
         _user = user,
         _dataRepository = dataRepository,
@@ -40,65 +39,60 @@ class EnumeratedParcels extends StatelessWidget {
                       enableFeedback: true,
                       child: ParcelItem(name: parcels[index].name, modelingName: parcels[index].modelingName, membersCount: parcels[index].members.length.toString(), index: index, dayActivitiesCount: parcels[index].dayActivitiesCount),
                       onTap: () async {
-                        final removedParcel = await Navigator.of(context).push(
+                        final removedGarden = await Navigator.of(context).push(
                             MaterialPageRoute(
 
                                 builder: (_) {
-
                                   return MultiBlocProvider(
                                     providers: [
-                                      BlocProvider<ActivitiesBloc>(
+                                      BlocProvider.value(
+                                          value: BlocProvider.of<ParcelsBloc>(context)),
+                                      BlocProvider(
                                         create: (context) => ActivitiesBloc(
                                             dataRepository: _dataRepository,
                                             parcelsBloc: BlocProvider.of<ParcelsBloc>(context),
                                             parcelId: parcels[index].id
                                         )..add(LoadActivities()),
-                                      ),
-//                                      BlocProvider<DesignBloc>(
-//                                        create: (BuildContext context) => DesignBloc(
-//                                            dataRepository: _dataRepository,
-//                                            activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
-//                                            parcelId: parcels[index].id
-//                                        )..add(LoadDesign()),
-//                                      )
+                                      )
                                     ],
                                     child: DetailsParcelScreen(parcelId: parcels[index].id, user: _user),
                                   );
 
+
                                 })
                         );
-                        if (removedParcel != null) {
-
-                          if (removedParcel['action'] == 'Delete') {
-                            final snackBar = SnackBar(
-                              content: Text('Delete ${removedParcel['parcel'].name}'),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  BlocProvider.of<ParcelsBloc>(context).add(ParcelCopied(removedParcel['parcel']));
-                                  BlocProvider.of<ParcelsBloc>(context).add(ActivitiesCopied(removedParcel['activities']));
-                                },
-                              ),
-                            );
-
-                            Scaffold.of(context).showSnackBar(snackBar);
-
-                          } else {
-
-                            final snackBar = SnackBar(
-                              content: Text('Leave ${removedParcel['parcel'].name}'),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(removedParcel['parcel']));
-                                },
-                              ),
-                            );
-
-                            Scaffold.of(context).showSnackBar(snackBar);
-                          }
-
-                        }
+//                        if (removedGarden != null) {
+//
+//                          if (removedGarden['action'] == 'Delete') {
+//                            final snackBar = SnackBar(
+//                              content: Text('Delete ${removedGarden['garden'].name}'),
+//                              action: SnackBarAction(
+//                                label: 'Undo',
+//                                onPressed: () {
+//                                  BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden['garden']));
+//                                  BlocProvider.of<GardensBloc>(context).add(CopyActivities(removedGarden['activities']));
+//                                },
+//                              ),
+//                            );
+//
+//                            Scaffold.of(context).showSnackBar(snackBar);
+//
+//                          } else {
+//
+//                            final snackBar = SnackBar(
+//                              content: Text('Leave ${removedGarden['garden'].name}'),
+//                              action: SnackBarAction(
+//                                label: 'Undo',
+//                                onPressed: () {
+//                                  BlocProvider.of<GardensBloc>(context).add(UpdateGarden(removedGarden['garden']));
+//                                },
+//                              ),
+//                            );
+//
+//                            Scaffold.of(context).showSnackBar(snackBar);
+//                          }
+//
+//                        }
                       },
                     );
                   },

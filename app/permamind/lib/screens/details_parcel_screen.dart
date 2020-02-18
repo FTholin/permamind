@@ -25,11 +25,66 @@ class DetailsParcelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return Scaffold(
-      appBar: CustomAppBar(parcelId: parcelId, user: user),
+//      appBar: ParcelAppBar(parcelId: parcelId, user: user),
+      appBar: AppBar(),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+
+            // TODO Mettre le Plan de la parcelle
+            Container(
+              height: 230,
+              color: Colors.amber,
+            ),
+            BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                builder: (context, state) {
+                  if (state is ActivitiesLoaded) {
+                    return SchedulerCalendar(
+                      referenceDate: DateTime.now(),
+                      schedule: state.schedule,
+                    );
+                  } else {
+                    return Expanded(
+                        child: Container(
+                        )
+                    );
+                  }
+                }
+            ),
+            const SizedBox(height: 8.0),
+//          _buildButtons(),
+            const SizedBox(height: 8.0),
+            BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                builder: (context, state) {
+                  if (state is ActivitiesLoaded) {
+                    return Expanded(
+                      child: Container(
+                          child: _buildEventList(state.referenceDate, state.schedule)
+                      ),
+                    );
+                  } else {
+                    return Expanded(
+                        child: Container(
+                          child: Text("$state"),
+                        )
+                    );
+                  }
+                }
+            ),
+//          Expanded(child: _buildEventList()),
+          ]),
+      floatingActionButton: ActivitySpeedDial(
+          visible: true
+      ),
+    );
+
+//    return Scaffold(
+//      appBar: ParcelAppBar(parcelId: parcelId, user: user),
+//      body: Column(
+//        mainAxisSize: MainAxisSize.max,
+//        children: <Widget>[
 
 //          BlocBuilder<DesignBloc, DesignState>(
 ////              builder: (context, state) {
@@ -59,51 +114,13 @@ class DetailsParcelScreen extends StatelessWidget {
 ////          ),
 
 
-        Container(
-        height: 230,
-        child: LoadingIndicator(),
-      ),
-          BlocBuilder<ActivitiesBloc, ActivitiesState>(
-              builder: (context, state) {
-                if (state is ActivitiesLoaded) {
-                  return SchedulerCalendar(
-                    referenceDate: DateTime.now(),
-                    schedule: state.schedule,
-                  );
-                } else {
-                  return Expanded(
-                      child: Container(
-                      )
-                  );
-                }
-              }
-          ),
-          const SizedBox(height: 8.0),
-//          _buildButtons(),
-          const SizedBox(height: 8.0),
-          BlocBuilder<ActivitiesBloc, ActivitiesState>(
-              builder: (context, state) {
-                if (state is ActivitiesLoaded) {
-                  return Expanded(
-                    child: Container(
-                        child: _buildEventList(state.referenceDate, state.schedule)
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                      child: Container(
-                      )
-                  );
-                }
-              }
-          ),
-//          Expanded(child: _buildEventList()),
-        ],
-      ),
-      floatingActionButton: ActivitySpeedDial(
-          visible: true
-      ),
-    );
+//
+//        ],
+//      ),
+//      floatingActionButton: ActivitySpeedDial(
+//          visible: true
+//      ),
+//    );
 
 
 //    return BlocBuilder<ParcelsBloc, ParcelsState>(
@@ -223,12 +240,12 @@ class DetailsParcelScreen extends StatelessWidget {
 }
 
 
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+class ParcelAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final String parcelId;
   final User user;
 
-  CustomAppBar({
+  ParcelAppBar({
     @required this.parcelId,
     @required this.user,
     Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
@@ -237,10 +254,10 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Size preferredSize; // default is 56.0
 
   @override
-  _CustomAppBarState createState() => _CustomAppBarState();
+  _ParcelAppBarState createState() => _ParcelAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar>{
+class _ParcelAppBarState extends State<ParcelAppBar>{
 
   @override
   Widget build(BuildContext context) {

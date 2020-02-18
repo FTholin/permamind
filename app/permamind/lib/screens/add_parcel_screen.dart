@@ -2,6 +2,7 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 
 typedef AddParcelCallback = Function(String task, String note);
@@ -211,8 +212,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         ));
 
 
-                    // TODO Revenir au jardin
-//                    Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
+                    Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
                   }, child: const Text('Finaliser parcelle')),
 
