@@ -37,9 +37,10 @@ class Parcel extends Equatable {
       :  this.id = id;
 
   Parcel copyWith({String name, String gardenId, double length,
-    double width, bool gardenGround, String id,
-    bool publicVisibility, String currentModelingId,
-    String admin, List<GardenMember> members}) {
+    double width, bool gardenGround, bool publicVisibility, String admin,
+    List<GardenMember> members, String currentModelingId, String currentModelingName,
+    DateTime creationDate, int dayActivitiesCount, List<String> modelingsMonitoring,
+      String id}) {
     return Parcel(
       name ?? this.name,
       gardenId ?? this.gardenId,

@@ -59,7 +59,7 @@ class EnumeratedParcels extends StatelessWidget {
                                           )..add(LoadActivities()),
                                         )
                                       ],
-                                      child: DetailsParcelScreen(parcelId: parcels[index].id, user: _user),
+                                      child: DetailsParcelScreen(dataRepository: _dataRepository, parcel: parcels[index], user: _user, ),
                                     );
 
 

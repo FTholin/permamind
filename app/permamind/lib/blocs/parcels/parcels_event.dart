@@ -15,16 +15,16 @@ class LoadParcels extends ParcelsEvent {
   String toString() => 'LoadParcels { gardenId: $gardenId }';
 }
 
-class ParcelsAdded extends ParcelsEvent {
+class ParcelAdded extends ParcelsEvent {
   final Parcel parcel;
 
-  ParcelsAdded(this.parcel);
+  ParcelAdded(this.parcel);
 
   @override
   List<Object> get props => [parcel];
 
   @override
-  String toString() => 'ParcelsAdded { parcel: $parcel }';
+  String toString() => 'ParcelAdded { parcel: $parcel }';
 }
 
 
@@ -81,6 +81,17 @@ class ActivitiesCopied extends ParcelsEvent {
 
   @override
   String toString() => 'ActivitiesCopied { activities: $activities }';
+}
+
+
+class ModelingAdded extends ParcelsEvent {
+  final List<ModelingSchedule> schedule;
+  final String gardenId;
+
+  ModelingAdded(this.gardenId, this.schedule);
+
+  @override
+  String toString() => 'ModelingAdded { activities: $schedule, gardenId: $gardenId}';
 }
 
 class ParcelsUpdated extends ParcelsEvent {

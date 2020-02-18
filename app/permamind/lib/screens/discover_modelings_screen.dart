@@ -8,17 +8,18 @@ import 'package:permamind/widgets/widgets.dart';
 //typedef OnSaveCallback = Function(String task, String note);
 
 class DiscoverModelingsScreen extends StatelessWidget {
+  final Parcel parcel;
+
+  DiscoverModelingsScreen({
+    Key key,
+    @required this.parcel,
+  })  : assert(parcel != null),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final gardenBloc = BlocProvider.of<GardensBloc>(context);
-    final localizations = ArchSampleLocalizations.of(context);
-
-    final ModelingsScreenArguments args =
-        ModalRoute.of(context).settings.arguments;
-
     return Scaffold(
-      appBar: AppBar(
-          title: Text("${args.gardenName}")),
+      appBar: AppBar(title: Text("${parcel.name}")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -29,9 +30,8 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Text(
                     '${FlutterBlocLocalizations.of(context).modelingsName}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 32))),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 32))),
           ),
           Flexible(
             flex: 2,
@@ -69,8 +69,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 child: Text(
                     '${FlutterBlocLocalizations.of(context).tendencyHeader}',
                     style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20))),
+                        fontWeight: FontWeight.normal, fontSize: 20))),
           ),
           Flexible(
             flex: 9,
@@ -83,15 +82,12 @@ class DiscoverModelingsScreen extends StatelessWidget {
                   return LoadingIndicator(key: ArchSampleKeys.todosLoading);
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
-                  return FilteredModelings(
-                    modelings: modelings,
-                    gardenName: args.gardenName,
-                    gardenVisibility: args.gardenVisibility,
-                    gardenMembers: args.gardenMembers,
-                    gardenLength: args.gardenLength,
-                    gardenWidth: args.gardenWidth,
-                    gardenGround: args.gardenGround
-                  );
+                  return BlocProvider.value(
+                      value: BlocProvider.of<ParcelsBloc>(context),
+                      child: FilteredModelings(
+                        parcel: parcel,
+                        modelings: modelings,
+                      ));
                 } else {
                   // TODO ArchSampleKeys
                   return Container(
@@ -108,8 +104,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 child: Text(
                     '${FlutterBlocLocalizations.of(context).browseAllModelings}',
                     style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20))),
+                        fontWeight: FontWeight.normal, fontSize: 20))),
           ),
           Flexible(
             flex: 9,
@@ -118,27 +113,20 @@ class DiscoverModelingsScreen extends StatelessWidget {
               child: BlocBuilder<ModelingsBloc, ModelingsState>(
                   builder: (context, state) {
                 if (state is ModelingsLoading) {
-                  // TODO ArchSampleKeys
                   return LoadingIndicator(key: ArchSampleKeys.todosLoading);
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
-                  return FilteredModelings(
-                    modelings: modelings,
-                    gardenName: args.gardenName,
-                    gardenVisibility: args.gardenVisibility,
-                    gardenMembers: args.gardenMembers,
-                    gardenLength: args.gardenLength,
-                    gardenWidth: args.gardenWidth,
-                    gardenGround: args.gardenGround
-                  );
-//                  return FilteredModelings(
-//                      modelings: modelings,
-//                      gardenName: ${args.gardenName},
-//                      publicVisibility: ${args.gardenVisibility});
+                  return BlocProvider.value(
+                      value: BlocProvider.of<ParcelsBloc>(context),
+                      child: FilteredModelings(
+                        parcel: parcel,
+                        modelings: modelings,
+                      ));
+//
                 } else {
                   return Container(
-                    // TODO ArchSampleKeys
-                  key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                      // TODO ArchSampleKeys
+                      key: FlutterTodosKeys.filteredTodosEmptyContainer);
                 }
               }),
             ),
@@ -149,13 +137,13 @@ class DiscoverModelingsScreen extends StatelessWidget {
   }
 }
 
-class ModelingsScreenArguments {
-  final String gardenName;
-  final bool gardenVisibility;
-  final List<GardenMember> gardenMembers;
-  final double gardenLength;
-  final double gardenWidth;
-  final bool gardenGround;
-
-  ModelingsScreenArguments(this.gardenName, this.gardenVisibility, this.gardenMembers, this.gardenLength, this.gardenWidth, this.gardenGround);
-}
+//class ModelingsScreenArguments {
+//  final String gardenName;
+//  final bool gardenVisibility;
+//  final List<GardenMember> gardenMembers;
+//  final double gardenLength;
+//  final double gardenWidth;
+//  final bool gardenGround;
+//
+//  ModelingsScreenArguments(this.gardenName, this.gardenVisibility, this.gardenMembers, this.gardenLength, this.gardenWidth, this.gardenGround);
+//}

@@ -22,8 +22,8 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapLoadParcelsToState(event);
     } else if (event is ParcelsUpdated) {
       yield* _mapParcelsUpdatedToState(event);
-    } else if (event is ParcelsAdded) {
-      yield* _mapParcelsAddedToState(event);
+    } else if (event is ParcelAdded) {
+      yield* _mapParcelAddedToState(event);
     } else if (event is ParcelDeleted) {
       yield* _mapParcelDeletedToState(event);
     } else if (event is ParcelCopied) {
@@ -32,6 +32,10 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapParcelLeavedToState(event);
     } else if (event is ActivitiesCopied) {
       yield* _mapActivitiesCopiedToState(event);
+    } else if (event is ModelingAdded) {
+      yield* _mapModelingAddedToState(event);
+    } else if (event is ParcelUpdated) {
+      yield* _mapParcelUpdatedToState(event);
     }
   }
 
@@ -49,8 +53,12 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
     yield ParcelsLoaded(event.parcels);
   }
 
-  Stream<ParcelsState> _mapParcelsAddedToState(ParcelsAdded event) async* {
+  Stream<ParcelsState> _mapParcelAddedToState(ParcelAdded event) async* {
     dataRepository.addNewParcel(event.parcel);
+  }
+
+  Stream<ParcelsState> _mapParcelUpdatedToState(ParcelUpdated event) async* {
+    dataRepository.updateParcel(event.parcelUpdated);
   }
 
   Stream<ParcelsState> _mapParcelDeletedToState(ParcelDeleted event) async* {
@@ -70,6 +78,32 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       ActivitiesCopied schedule) async* {
     dataRepository.addParcelActivities(schedule.activities);
   }
+
+
+  Stream<ParcelsState> _mapModelingAddedToState(ModelingAdded event) async* {
+
+
+    DateTime referenceDate = DateTime.now();
+
+    List<Activity> activities = List<Activity>();
+
+    for (int i = 0; i < event.schedule.length; i++) {
+
+      for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
+        DateTime expectedDate = referenceDate.add(Duration(days: i));
+        expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
+        activities.add(
+            Activity( event.schedule[i].dayActivities[j].name, event.gardenId, false, expectedDate, event.schedule[i].dayActivities[j].category, '')
+        );
+      }
+
+    }
+
+    if (activities.isNotEmpty) {
+      dataRepository.addParcelActivities(activities);
+    }
+  }
+
 
   @override
   Future<void> close() {

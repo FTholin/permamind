@@ -4,29 +4,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/widgets/widgets.dart';
 import 'package:permamind/screens/screens.dart';
-import 'package:permamind/arch_bricks/flutter_todos_keys.dart';
 import 'package:data_repository/data_repository.dart';
 
 class FilteredModelings extends StatelessWidget {
   final List<Modeling> modelings;
-  final String gardenName;
-  final bool gardenVisibility;
-  final List<GardenMember> gardenMembers;
-  final double gardenLength;
-  final double gardenWidth;
-  final bool gardenGround;
+  final Parcel parcel;
 
   FilteredModelings({
+    this.parcel,
     this.modelings,
-    this.gardenName,
-    this.gardenVisibility,
-    this.gardenMembers,
-    this.gardenLength,
-    this.gardenWidth,
-    this.gardenGround,
-    Key key}) : super(key: key);
+    Key key}) : assert(parcel != null), assert(modelings != null), super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,34 +51,22 @@ class FilteredModelings extends StatelessWidget {
 
                       // TODO retrieve all form infos and transfer them
 
-                    await Navigator.pushNamed(context,
-                      ArchSampleRoutes.detailsModeling,
-                      arguments: DetailsModelingsScreenArguments(
-                          modeling: modelings[index],
-                          gardenName: gardenName,
-                          gardenLength: gardenLength,
-                          gardenWidth: gardenWidth,
-                          gardenGround: gardenGround,
-                          publicVisibility: gardenVisibility,
-                          gardenMembers: gardenMembers,
-                          schedule: modelings[index].schedule,
-                          designs: modelings[index].designs
-                      ),
+                    await Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) {
+                          return BlocProvider.value(
+                              value: BlocProvider.of<ParcelsBloc>(context),
+                              child: DetailsModelingScreen(
+                                  parcel: parcel,
+                                  modeling: modelings[index],
+                                  schedule: modelings[index].schedule,
+                                  designs: modelings[index].designs
+                              )
+                          );
+
+                        })
                     );
-//
-//                    final removedTodo = await Navigator.of(context).push(
-//                        MaterialPageRoute(builder: (_) {
-//                          return DetailsModelingScreen(modeling: modelings[index], gardenName: 'jardin des espérides', publicVisibility: false);
-//                        })
-//                    );
-//                    if (removedTodo != null) {
-//                      Scaffold.of(context).showSnackBar(DeleteGardenSnackBar(
-//                        key: ArchSampleKeys.snackbar,
-//                        todo: modelings[index],
-//                        onUndo: () => todosBloc.dispatch(AddTodo(todos[index])),
-//                        localizations: localizations,
-//                      ));
-//                    }
+
+                    Navigator.pop(context);
                   },
                 );
               },

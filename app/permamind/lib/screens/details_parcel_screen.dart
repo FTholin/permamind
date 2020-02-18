@@ -12,12 +12,14 @@ import 'package:permamind/widgets/widgets.dart';
 
 class DetailsParcelScreen extends StatelessWidget {
 
-  final String parcelId;
+  final DataRepository dataRepository;
+  final Parcel parcel;
   final User user;
 
   DetailsParcelScreen({
     Key key,
-    @required this.parcelId,
+    @required this.dataRepository,
+    @required this.parcel,
     @required this.user,
   })
       : super(key: key);
@@ -25,22 +27,48 @@ class DetailsParcelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-//    return Scaffold(
-//      appBar: ParcelAppBar(parcelId: parcelId, user: user),
-//
-//    );
     return BlocBuilder<ParcelsBloc, ParcelsState>(
       builder: (context, state) {
         if (state is ParcelsLoaded) {
 
-          final parcel = state.parcels.firstWhere((parcel) => parcel.id == parcelId,
+          final currentParcel = state.parcels.firstWhere((item) => item.id == parcel.id,
               orElse: () => null);
 
-          if (parcel.currentModelingId == '' && parcel.currentModelingName == '') {
+          if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
             return Scaffold(
               appBar: AppBar(),
               body: Center(
-                child: Text("Aucune association de plantes prévu dans ce bac.\n On en rajoute une ?"),
+                child: Column(
+                  children: <Widget>[
+                    Text("Aucune association de plantes prévu dans cette parcelle .\n On en rajoute une ?"),
+                    RaisedButton(
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) {
+
+                                  return MultiBlocProvider(
+                                    providers: [
+                                      BlocProvider.value(
+                                          value: BlocProvider.of<ParcelsBloc>(context),
+                                      ),
+                                      BlocProvider<ModelingsBloc>(
+                                        create: (context) =>
+                                        ModelingsBloc(dataRepository: dataRepository)
+                                          ..add(FetchModelings()),
+                                      )
+                                    ],
+                                    child: DiscoverModelingsScreen(parcel: parcel),
+                                  );
+
+                                })
+                        );
+
+                      },
+                      child: Text("Ajouter une nouvelle association"),
+                    )
+                  ],
+                ),
               ),
             );
           } else {

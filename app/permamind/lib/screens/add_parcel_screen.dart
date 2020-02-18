@@ -187,7 +187,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                     final Parcel parcel = Parcel(_parcelName.text, widget.garden.id, 10.0, 10.0, false, false, '${widget.userId}', widget.garden.members, '', '', DateTime.now(), 0, []);
 
                     BlocProvider.of<ParcelsBloc>(context).add(
-                        ParcelsAdded(
+                        ParcelAdded(
                             parcel
                         ));
 

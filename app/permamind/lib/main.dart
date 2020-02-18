@@ -119,50 +119,50 @@ class App extends StatelessWidget {
                 );
 
               },
-              '/discoverModelings': (context) {
-                return BlocProvider<ModelingsBloc>(
-                  create: (context) =>
-                  ModelingsBloc(dataRepository: firebaseRepository)
-                    ..add(FetchModelings()),
-                  child: DiscoverModelingsScreen(),
-                );
-              },
-              '/detailsModeling': (context) {
-                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                  builder: (context, state) {
-                    if (state is Authenticated) {
+//              '/discoverModelings': (context) {
+//                return BlocProvider<ModelingsBloc>(
+//                  create: (context) =>
+//                  ModelingsBloc(dataRepository: firebaseRepository)
+//                    ..add(FetchModelings()),
+//                  child: DiscoverModelingsScreen(),
+//                );
+//              },
+//              '/detailsModeling': (context) {
+//                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//                  builder: (context, state) {
+//                    if (state is Authenticated) {
 
-                      return DetailsModelingScreen(
-                          onSaveGarden: (gardenName, publicVisibility,
-                              gardenMembers, modelingId, modelingName, gardenLength,
-                              gardenWidth, gardenGround,
-                              schedule, designs
-                              ) async {
-
-                            gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
+//                      return DetailsModelingScreen(
+//                          onSaveGarden: (gardenName, publicVisibility,
+//                              gardenMembers, modelingId, modelingName, gardenLength,
+//                              gardenWidth, gardenGround,
+//                              schedule, designs
+//                              ) async {
 //
-//                            BlocProvider.of<GardensBloc>(context).add(
-//                              AddGarden(Garden(gardenName, gardenLength,
-//                                  gardenWidth, gardenGround,
-//                                  publicVisibility,
-//                                  state.userAuthenticated.id,
-//                                  gardenMembers,
-//                                  modelingId,
-//                                  modelingName,
-//                                  DateTime.now(), 0),
-//                                  schedule
-//                              ),
-//                            );
-
-                            BlocProvider.of<GardensBloc>(context).add(AddGardenDesign(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
-
-                          }
-                      );
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  },
-                );
-              },
+//                            gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
+////
+////                            BlocProvider.of<GardensBloc>(context).add(
+////                              AddGarden(Garden(gardenName, gardenLength,
+////                                  gardenWidth, gardenGround,
+////                                  publicVisibility,
+////                                  state.userAuthenticated.id,
+////                                  gardenMembers,
+////                                  modelingId,
+////                                  modelingName,
+////                                  DateTime.now(), 0),
+////                                  schedule
+////                              ),
+////                            );
+//
+//                            BlocProvider.of<GardensBloc>(context).add(AddGardenDesign(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
+//
+//                          }
+//                      );
+//                    }
+//                    return Center(child: CircularProgressIndicator());
+//                  },
+//                );
+//              },
               '/addParcel' : (context) {
                 return AddParcelScreen();
               },
