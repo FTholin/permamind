@@ -24,6 +24,14 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapParcelsUpdatedToState(event);
     } else if (event is ParcelsAdded) {
       yield* _mapParcelsAddedToState(event);
+    } else if (event is ParcelDeleted) {
+      yield* _mapParcelDeletedToState(event);
+    } else if (event is ParcelCopied) {
+      yield* _mapParcelCopiedToState(event);
+    } else if (event is ParcelLeaved) {
+      yield* _mapParcelLeavedToState(event);
+    } else if (event is ActivitiesCopied) {
+      yield* _mapActivitiesCopiedToState(event);
     }
   }
 
@@ -45,6 +53,23 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
     dataRepository.addNewParcel(event.parcel);
   }
 
+  Stream<ParcelsState> _mapParcelDeletedToState(ParcelDeleted event) async* {
+    dataRepository.deleteParcel(event.deletedParcel);
+  }
+
+  Stream<ParcelsState> _mapParcelCopiedToState(ParcelCopied event) async* {
+    dataRepository.copyParcel(event.copiedParcel);
+  }
+
+  Stream<ParcelsState> _mapParcelLeavedToState(ParcelLeaved event) async* {
+    event.leavedParcel.members.remove(event.userId);
+    dataRepository.updateParcel(event.leavedParcel);
+  }
+
+  Stream<ParcelsState> _mapActivitiesCopiedToState(
+      ActivitiesCopied schedule) async* {
+    dataRepository.addParcelActivities(schedule.activities);
+  }
 
   @override
   Future<void> close() {

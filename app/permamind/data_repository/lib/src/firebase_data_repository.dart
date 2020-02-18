@@ -32,6 +32,8 @@ class FirebaseDataRepository implements DataRepository {
 
   final parcelsCollection = Firestore.instance.collection('parcels');
 
+  final activitiesBisCollection = Firestore.instance.collection('activities_bis');
+
 
   @override
   Future<void> addNewGarden(Garden garden) async {
@@ -90,6 +92,18 @@ class FirebaseDataRepository implements DataRepository {
     return gardensCollection.document(garden.id).setData(garden.toEntity().toDocument());
   }
 
+
+
+  @override
+  Future<void> deleteParcel(Parcel parcel) async {
+    return parcelsCollection.document(parcel.id).delete();
+  }
+
+  @override
+  Future<void> copyParcel(Parcel parcel) async {
+    return parcelsCollection.document(parcel.id).setData(parcel.toEntity().toDocument());
+  }
+
   @override
   Future<String> fetchIdGardenCreated(String gardenName) async {
     return  gardensCollection.where("name",isEqualTo: gardenName).getDocuments().then((snapshot) {
@@ -98,17 +112,17 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   @override
-  Future<void> addGardenActivities(List<Activity> schedule) async {
+  Future<void> addParcelActivities(List<Activity> schedule) async {
 
     var batch = Firestore.instance.batch();
 
 
       for (int i = 0; i < schedule.length; i++) {
-        DocumentReference docRef = await activitiesCollection.add(
+        DocumentReference docRef = await activitiesBisCollection.add(
             schedule[i].toEntity().toDocument());
         batch.setData(docRef, {
           'title': schedule[i].title,
-          'gardenId': schedule[i].gardenId,
+          'gardenId': schedule[i].parcelId,
           'complete': schedule[i].complete,
           'expectedDate': schedule[i].expectedDate,
           'category': schedule[i].category,
@@ -120,9 +134,9 @@ class FirebaseDataRepository implements DataRepository {
 }
 
   @override
-  Future<void> deleteGardenActivities(String gardenId) async {
+  Future<void> deleteGardenActivities(String parcelId) async {
 
-    activitiesCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+    activitiesBisCollection.where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
         doc.reference.delete();
       }
@@ -196,10 +210,9 @@ class FirebaseDataRepository implements DataRepository {
 //  }
 
   @override
-  Stream<List<Activity>> fetchGardenActivities(String gardenId) {
-
-    return activitiesCollection
-        .where("gardenId", isEqualTo: gardenId)
+  Stream<List<Activity>> loadParcelActivities(String parcelId) {
+    return activitiesBisCollection
+        .where("parcelId", isEqualTo: parcelId)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Activity.fromEntity(ActivityEntity.fromSnapshot(doc)))
@@ -232,7 +245,15 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> updateActivity(Activity update) {
-    return activitiesCollection
+    return activitiesBisCollection
+        .document(update.id)
+        .updateData(update.toEntity().toDocument());
+  }
+
+
+  @override
+  Future<void> updateParcel(Parcel update) {
+    return parcelsCollection
         .document(update.id)
         .updateData(update.toEntity().toDocument());
   }

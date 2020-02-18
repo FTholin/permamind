@@ -45,35 +45,15 @@ class EnumeratedGardens extends StatelessWidget {
                   onTap: () async {
                     final removedGarden = await Navigator.of(context)
                         .push(MaterialPageRoute(builder: (_) {
-//                            return BlocProvider(
-//                                create: (context) => ActivitiesBloc(
-//                                    dataRepository:_dataRepository,
-//                                    gardensBloc: BlocProvider.of<GardensBloc>(context),
-//                                    gardenId: gardens[index].id
-//                                )..add(LoadActivities()),
-//                                child:
-//                            );
 
-                      return MultiBlocProvider(
-                        providers: [
-                          BlocProvider<ActivitiesBloc>(
-                            create: (context) => ActivitiesBloc(
-                                dataRepository: _dataRepository,
-                                gardensBloc:
-                                    BlocProvider.of<GardensBloc>(context),
-                                gardenId: gardens[index].id)
-                              ..add(LoadActivities()),
-                          ),
-                          BlocProvider<ParcelsBloc>(
-                              create: (context) => ParcelsBloc(
-                                  gardensBloc:
-                                      BlocProvider.of<GardensBloc>(context),
-                                  dataRepository: _dataRepository)
-                                ..add(LoadParcels(gardens[index].id))),
-                        ],
-                        child: DetailsGardenScreen(
-                            gardenId: gardens[index].id, user: _user),
-                      );
+                      return BlocProvider<ParcelsBloc>(
+                        create: (context) => ParcelsBloc(
+                            gardensBloc: BlocProvider.of<GardensBloc>(context),
+                            dataRepository: _dataRepository)
+                          ..add(LoadParcels(gardens[index].id)),
+                        child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user),);
+
+
                     }));
                     if (removedGarden != null) {
                       if (removedGarden['action'] == 'Delete') {

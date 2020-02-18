@@ -11,22 +11,27 @@ import 'package:permamind/widgets/widgets.dart';
 
 class DetailsGardenScreen extends StatelessWidget {
 
+  final DataRepository dataRepository;
+
   final String gardenId;
   final User user;
 
   DetailsGardenScreen({
     Key key,
+    @required this.dataRepository,
     @required this.gardenId,
     @required this.user,
   })
-      : super(key: key ?? ArchSampleKeys.detailsGardenScreen);
+      : assert(dataRepository != null),
+        assert(user != null),
+        super(key: key ?? ArchSampleKeys.detailsGardenScreen);
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: CustomAppBar(gardenId: gardenId, user: user),
-      body: EnumeratedParcels(),
+      appBar: GardenAppBar(gardenId: gardenId, user: user),
+      body: EnumeratedParcels(dataRepository: dataRepository, user: user),
       floatingActionButton: ParcelSpeedDial(
           visible: true
       ),
@@ -76,7 +81,7 @@ class DetailsGardenScreen extends StatelessWidget {
 
 
 //    return Scaffold(
-//      appBar: CustomAppBar(gardenId: gardenId, user: user),
+//      appBar: GardenAppBar(gardenId: gardenId, user: user),
 //      body: EnumeratedParcels(),
 //      floatingActionButton: ParcelSpeedDial(
 //          visible: true
@@ -201,12 +206,12 @@ class DetailsGardenScreen extends StatelessWidget {
 }
 
 
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+class GardenAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final String gardenId;
   final User user;
 
-  CustomAppBar({
+  GardenAppBar({
     @required this.gardenId,
     @required this.user,
     Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
@@ -215,10 +220,10 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Size preferredSize; // default is 56.0
 
   @override
-  _CustomAppBarState createState() => _CustomAppBarState();
+  _GardenAppBarState createState() => _GardenAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar>{
+class _GardenAppBarState extends State<GardenAppBar>{
 
 
   // Ajouter à garden à nouvel évènement pour intercepter 

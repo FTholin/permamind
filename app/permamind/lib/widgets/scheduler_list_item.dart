@@ -40,7 +40,7 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
                 UpdateActivity(
                     widget.activity.copyWith(
                     id: widget.activity.id,
-                    gardenId: widget.activity.gardenId,
+                    parcelId: widget.activity.parcelId,
                     title: widget.activity.title,
                     complete: checkboxValue,
                     expectedDate: widget.activity.expectedDate,

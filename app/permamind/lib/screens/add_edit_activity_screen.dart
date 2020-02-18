@@ -70,7 +70,7 @@ import 'package:permamind/blocs/blocs.dart';
                     AddActivity(
                       Activity(
                         _activityNameController.text,
-                        BlocProvider.of<ActivitiesBloc>(context).gardenId,
+                        BlocProvider.of<ActivitiesBloc>(context).parcelId,
                         false,
                         referenceDate,
                         '',

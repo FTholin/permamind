@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class Activity extends Equatable {
 
   final String id;
-  final String gardenId;
+  final String parcelId;
   final String title;
   final bool complete;
   final DateTime expectedDate;
@@ -13,7 +13,7 @@ class Activity extends Equatable {
 
   Activity(
       this.title,
-      this.gardenId,
+      this.parcelId,
       this.complete,
       this.expectedDate,
       this.category,
@@ -24,7 +24,7 @@ class Activity extends Equatable {
   Activity copyWith({
     String id,
     String title,
-    String gardenId,
+    String parcelId,
     bool complete,
     DateTime expectedDate,
     String category,
@@ -32,7 +32,7 @@ class Activity extends Equatable {
   }) {
     return Activity(
       title ?? this.title,
-      gardenId ?? this.gardenId,
+      parcelId ?? this.parcelId,
       complete ?? this.complete,
       expectedDate ?? this.expectedDate,
       category ?? this.category,
@@ -44,7 +44,7 @@ class Activity extends Equatable {
 
   @override
   int get hashCode =>
-      id.hashCode ^ title.hashCode ^ gardenId.hashCode;
+      id.hashCode ^ title.hashCode ^ parcelId.hashCode;
 
 
   @override
@@ -54,7 +54,7 @@ class Activity extends Equatable {
               runtimeType == other.runtimeType &&
               id == other.id &&
               title == other.title &&
-              gardenId == other.gardenId &&
+              parcelId == other.parcelId &&
               complete == other.complete &&
               category == other.category &&
               expectedDate == other.expectedDate;
@@ -64,7 +64,7 @@ class Activity extends Equatable {
     return ActivityEntity(
         id,
         title,
-        gardenId,
+        parcelId,
         complete,
         expectedDate,
         category,
@@ -76,7 +76,7 @@ class Activity extends Equatable {
 
     return Activity(
       entity.title,
-      entity.gardenId,
+      entity.parcelId,
       entity.complete,
       entity.expectedDate,
       entity.category,
@@ -87,7 +87,7 @@ class Activity extends Equatable {
 
   @override
   String toString() {
-    return "Activity {gardenId: $gardenId, title: $title, complete: $complete}";
+    return "Activity {parcelId: $parcelId, title: $title, complete: $complete}";
   }
 }
 

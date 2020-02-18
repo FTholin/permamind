@@ -69,7 +69,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   Stream<GardensState> _mapCopyActivitiesToState(
       CopyActivities schedule) async* {
-    _dataRepository.addGardenActivities(schedule.activities);
+    _dataRepository.addParcelActivities(schedule.activities);
   }
 
   Stream<GardensState> _mapAddGardenDesign(
