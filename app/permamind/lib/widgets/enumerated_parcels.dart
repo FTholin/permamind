@@ -28,39 +28,43 @@ class EnumeratedParcels extends StatelessWidget {
         builder: (context, state) {
           if (state is ParcelsLoaded) {
             final parcels = state.parcels;
+            if (parcels.isEmpty) {
+              return Center(
+                child: Text("Aucune parcelle pour le moment.\n N'hésites pas à en ajouter ! "),
+              );
+            } else {
+              return Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: ListView.builder(
+                    key: ArchSampleKeys.todoList,
+                    itemCount: parcels.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkResponse(
+                        enableFeedback: true,
+                        child: ParcelItem(name: parcels[index].name, modelingName: parcels[index].modelingName, membersCount: parcels[index].members.length.toString(), index: index, dayActivitiesCount: parcels[index].dayActivitiesCount),
+                        onTap: () async {
+                          final removedGarden = await Navigator.of(context).push(
+                              MaterialPageRoute(
 
-            return Padding(
-                padding: EdgeInsets.all(10.0),
-                child: ListView.builder(
-                  key: ArchSampleKeys.todoList,
-                  itemCount: parcels.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkResponse(
-                      enableFeedback: true,
-                      child: ParcelItem(name: parcels[index].name, modelingName: parcels[index].modelingName, membersCount: parcels[index].members.length.toString(), index: index, dayActivitiesCount: parcels[index].dayActivitiesCount),
-                      onTap: () async {
-                        final removedGarden = await Navigator.of(context).push(
-                            MaterialPageRoute(
-
-                                builder: (_) {
-                                  return MultiBlocProvider(
-                                    providers: [
-                                      BlocProvider.value(
-                                          value: BlocProvider.of<ParcelsBloc>(context)),
-                                      BlocProvider(
-                                        create: (context) => ActivitiesBloc(
-                                            dataRepository: _dataRepository,
-                                            parcelsBloc: BlocProvider.of<ParcelsBloc>(context),
-                                            parcelId: parcels[index].id
-                                        )..add(LoadActivities()),
-                                      )
-                                    ],
-                                    child: DetailsParcelScreen(parcelId: parcels[index].id, user: _user),
-                                  );
+                                  builder: (_) {
+                                    return MultiBlocProvider(
+                                      providers: [
+                                        BlocProvider.value(
+                                            value: BlocProvider.of<ParcelsBloc>(context)),
+                                        BlocProvider(
+                                          create: (context) => ActivitiesBloc(
+                                              dataRepository: _dataRepository,
+                                              parcelsBloc: BlocProvider.of<ParcelsBloc>(context),
+                                              parcelId: parcels[index].id
+                                          )..add(LoadActivities()),
+                                        )
+                                      ],
+                                      child: DetailsParcelScreen(parcelId: parcels[index].id, user: _user),
+                                    );
 
 
-                                })
-                        );
+                                  })
+                          );
 //                        if (removedGarden != null) {
 //
 //                          if (removedGarden['action'] == 'Delete') {
@@ -93,11 +97,13 @@ class EnumeratedParcels extends StatelessWidget {
 //                          }
 //
 //                        }
-                      },
-                    );
-                  },
-                )
-            );
+                        },
+                      );
+                    },
+                  )
+              );
+            }
+
           } else {
             return Container();
           }

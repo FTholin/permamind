@@ -6,13 +6,12 @@ import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/screens.dart';
 
-
 class AddGardenScreen extends StatefulWidget {
-
   final User _user;
   final DataRepository _dataRepository;
 
-  AddGardenScreen({Key key,@required User user, @required DataRepository dataRepository})
+  AddGardenScreen(
+      {Key key, @required User user, @required DataRepository dataRepository})
       : assert(user != null),
         assert(dataRepository != null),
         _user = user,
@@ -24,12 +23,12 @@ class AddGardenScreen extends StatefulWidget {
 }
 
 class _AddGardenScreenState extends State<AddGardenScreen> {
+  TextEditingController _gardenName = TextEditingController();
 
 //  final TextEditingController _activityNameController = TextEditingController();
 
   int _currentStep = 0;
   int _radioValue1 = 1;
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +40,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
         onStepTapped: (int step) => setState(() => _currentStep = step),
         controlsBuilder: _createEventControlBuilder,
         onStepContinue:
-        _currentStep < 3 ? () => setState(() => _currentStep += 1) : null,
+            _currentStep < 3 ? () => setState(() => _currentStep += 1) : null,
         onStepCancel:
-        _currentStep > 0 ? () => setState(() => _currentStep -= 1) : null,
+            _currentStep > 0 ? () => setState(() => _currentStep -= 1) : null,
         steps: <Step>[
           new Step(
             title: new Text(''),
@@ -67,6 +66,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: TextField(
+                        controller: _gardenName,
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
                           hintText: 'Nom potager',
@@ -124,8 +124,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               ),
             ),
             isActive: _currentStep >= 0,
-            state:
-            _currentStep >= 1 ? StepState.complete : StepState.disabled,
+            state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
           ),
           new Step(
             title: new Text(''),
@@ -155,7 +154,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                           '(optionnel)',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w300),
                         ),
                       ),
                       Container()
@@ -174,8 +174,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               ),
             ),
             isActive: _currentStep >= 0,
-            state:
-            _currentStep >= 2 ? StepState.complete : StepState.disabled,
+            state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
           ),
           new Step(
             title: new Text(''),
@@ -183,36 +182,29 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               padding: EdgeInsets.only(top: 10, bottom: 30),
               child: Column(
                 children: <Widget>[
-                  RaisedButton(onPressed: () async {
+                  RaisedButton(
+                      onPressed: () async {
 
-                    // TODO Connecter cette liste à la liste d'ajout des members
-                    List<GardenMember> members = List<GardenMember>();
+                        List<GardenMember> members = List<GardenMember>();
 
-                  members.add(GardenMember(id: widget._user.id, pseudo: widget._user.pseudo));
+                        members.add(GardenMember(
+                            id: widget._user.id, pseudo: widget._user.pseudo));
 
-                    final Garden garden = Garden("Jardin test", false,  widget._user.id, members, DateTime.now(), 0);
+                        final Garden garden = Garden("${_gardenName.text}", false,
+                            widget._user.id, members, DateTime.now(), 0);
 
-//                    BlocProvider.of<GardensBloc>(context).add(AddGardenDesign(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
+                        BlocProvider.of<GardensBloc>(context)
+                            .add(AddGarden(garden));
 
-
-
-                    // AJout du bloc dans la base
-                   BlocProvider.of<GardensBloc>(context).add(
-                       AddGarden(
-                        Garden("Jardin test", false,  widget._user.id, members, DateTime.now(), 0)
-                      ));
-
-
-                    Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
-
-                  }, child: const Text('Finaliser jardin')),
-
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, ArchSampleRoutes.home, (_) => false);
+                      },
+                      child: const Text('Finaliser jardin')),
                 ],
               ),
             ),
             isActive: _currentStep >= 0,
-            state:
-            _currentStep >= 3 ? StepState.complete : StepState.disabled,
+            state: _currentStep >= 3 ? StepState.complete : StepState.disabled,
           ),
         ],
       ),
