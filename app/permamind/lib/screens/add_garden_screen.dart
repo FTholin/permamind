@@ -10,10 +10,13 @@ import 'package:permamind/screens/screens.dart';
 class AddGardenScreen extends StatefulWidget {
 
   final User _user;
+  final DataRepository _dataRepository;
 
-  AddGardenScreen({Key key,@required User user})
+  AddGardenScreen({Key key,@required User user, @required DataRepository dataRepository})
       : assert(user != null),
+        assert(dataRepository != null),
         _user = user,
+        _dataRepository = dataRepository,
         super(key: key);
 
   @override
@@ -194,15 +197,13 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
 
 
                     // AJout du bloc dans la base
-                  await BlocProvider.of<GardensBloc>(context).add(
-                      AddGarden(
+                   BlocProvider.of<GardensBloc>(context).add(
+                       AddGarden(
                         Garden("Jardin test", false,  widget._user.id, members, DateTime.now(), 0)
                       ));
 
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) {
-                          return DetailsGardenScreen(gardenId: garden.id, user: widget._user);
-                    }));
+
+                    Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
                   }, child: const Text('Finaliser jardin')),
 

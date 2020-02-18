@@ -108,7 +108,7 @@ class App extends StatelessWidget {
                 return BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
                     if (state is Authenticated) {
-                      return AddGardenScreen(user: state.userAuthenticated);
+                      return AddGardenScreen(user: state.userAuthenticated, dataRepository: firebaseRepository);
                     }
                     else if (state is Unauthenticated) {
                       return LoginScreen(userRepository: userRepository);

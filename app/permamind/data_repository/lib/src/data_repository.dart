@@ -9,6 +9,8 @@ abstract class DataRepository {
 
   Future<void> addNewActivity(Activity activity);
 
+  Stream<List<Parcel>> loadParcels(String gardenId);
+
   Future<void> addNewGardenDesign(GardenDesign design);
 
   Future<void> copyGarden(Garden garden);

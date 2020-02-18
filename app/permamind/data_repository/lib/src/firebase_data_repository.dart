@@ -30,21 +30,25 @@ class FirebaseDataRepository implements DataRepository {
 
   final designsCollection = Firestore.instance.collection('designs');
 
+  final parcelsCollection = Firestore.instance.collection('parcels');
+
+
   @override
   Future<void> addNewGarden(Garden garden) async {
 
-    final res = garden.members.map((item) => item.toJson());
 
-    // TODO bricoler member
-    return vegetableGardensCollection.document(garden.id).setData({
-        'id': garden.id,
-        'name': garden.name,
-        'publicVisibility': garden.publicVisibility,
-        'admin': garden.admin,
-        'members': [{'id': 'gd3Q3CYOwTPFNnZ9Z57yzmVGqAo1', 'pseudo': 'FLow'}],
-        'creationDate': garden.creationDate,
-        'dayActivitiesCount': garden.dayActivitiesCount
-      });
+//    return vegetableGardensCollection.document(garden.id).setData({
+//        'id': garden.id,
+//        'name': garden.name,
+//        'publicVisibility': garden.publicVisibility,
+//        'admin': garden.admin,
+//        'members': [{'id': 'gd3Q3CYOwTPFNnZ9Z57yzmVGqAo1', 'pseudo': 'FLow'}],
+//        'creationDate': garden.creationDate,
+//        'dayActivitiesCount': garden.dayActivitiesCount
+//      });
+
+    return vegetableGardensCollection.add(garden.toEntity().toDocument());
+
   }
 
 
@@ -61,8 +65,20 @@ class FirebaseDataRepository implements DataRepository {
 
 
   @override
+  Stream<List<Parcel>> loadParcels(String gardenId) {
+    return parcelsCollection
+        .where("gardenId", isEqualTo: gardenId)
+        .snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => Parcel.fromEntity(ParcelEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
+
+
+  @override
   Future<void> deleteGarden(Garden garden) async {
-    return gardensCollection.document(garden.id).delete();
+    return vegetableGardensCollection.document(garden.id).delete();
   }
 
   @override
@@ -205,7 +221,7 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> updateGarden(Garden update) {
-    return gardensCollection
+    return vegetableGardensCollection
         .document(update.id)
         .updateData(update.toEntity().toDocument());
   }
