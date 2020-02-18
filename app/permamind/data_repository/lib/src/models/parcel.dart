@@ -1,19 +1,21 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:data_repository/src/entities/entities.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 
 class Parcel extends Equatable {
   final String id;
   final String name;
   final String gardenId;
   final bool publicVisibility;
-  final String modelingId;
-  final String modelingName;
+  final String currentModelingId;
+  final String currentModelingName;
   final double length;
   final double width;
   final bool gardenGround;
   final String admin;
   final List<GardenMember> members;
+  final List<String> modelingsMonitoring;
   final DateTime creationDate;
   final int dayActivitiesCount;
 
@@ -26,16 +28,17 @@ class Parcel extends Equatable {
       this.publicVisibility,
       this.admin,
       this.members,
-      this.modelingId,
-      this.modelingName,
+      this.currentModelingId,
+      this.currentModelingName,
       this.creationDate,
       this.dayActivitiesCount,
+      this.modelingsMonitoring,
       {String id})
       :  this.id = id;
 
   Parcel copyWith({String name, String gardenId, double length,
     double width, bool gardenGround, String id,
-    bool publicVisibility, String modelingId,
+    bool publicVisibility, String currentModelingId,
     String admin, List<GardenMember> members}) {
     return Parcel(
       name ?? this.name,
@@ -46,10 +49,11 @@ class Parcel extends Equatable {
       publicVisibility ?? this.publicVisibility,
       admin ?? this.admin,
       members ?? this.members,
-      modelingId ?? this.modelingId,
-      modelingName ?? this.modelingName,
+      currentModelingId ?? this.currentModelingId,
+      currentModelingName ?? this.currentModelingName,
       creationDate ?? this.creationDate,
       dayActivitiesCount ?? this.dayActivitiesCount,
+      modelingsMonitoring ?? this.modelingsMonitoring,
       id: id ?? this.id,
     );
   }
@@ -88,10 +92,11 @@ class Parcel extends Equatable {
         publicVisibility,
         admin,
         members,
-        modelingId,
-        modelingName,
+        currentModelingId,
+        currentModelingName,
         creationDate,
-        dayActivitiesCount
+        dayActivitiesCount,
+        modelingsMonitoring
     );
   }
 
@@ -106,10 +111,11 @@ class Parcel extends Equatable {
       entity.publicVisibility,
       entity.admin,
       entity.members,
-      entity.modelingId,
-      entity.modelingName,
+      entity.currentModelingId,
+      entity.currentModelingName,
       entity.creationDate,
       entity.dayActivitiesCount,
+      entity.modelingsMonitoring,
       id: entity.id,
     );
   }

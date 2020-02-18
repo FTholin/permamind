@@ -7,8 +7,8 @@ class ParcelEntity extends Equatable {
   final String name;
   final String gardenId;
   final bool publicVisibility;
-  final String modelingId;
-  final String modelingName;
+  final String currentModelingId;
+  final String currentModelingName;
   final double length;
   final double width;
   final bool gardenGround;
@@ -16,6 +16,8 @@ class ParcelEntity extends Equatable {
   final List<GardenMember> members;
   final DateTime creationDate;
   final int dayActivitiesCount;
+  final List<String> modelingsMonitoring;
+
 
   ParcelEntity(
       this.id,
@@ -27,11 +29,11 @@ class ParcelEntity extends Equatable {
       this.publicVisibility,
       this.admin,
       this.members,
-      this.modelingId,
-      this.modelingName,
+      this.currentModelingId,
+      this.currentModelingName,
       this.creationDate,
-      this.dayActivitiesCount
-      );
+      this.dayActivitiesCount,
+      this.modelingsMonitoring);
 
   Map<String, Object> toJson() {
     return {
@@ -43,9 +45,10 @@ class ParcelEntity extends Equatable {
       'members': members.map((item) {
         return item.toJson();
       }).toList(),
-      'modelingName': modelingName,
+      'currentModelingName': currentModelingName,
       'creationDate': creationDate,
-      'dayActivitiesCount': dayActivitiesCount
+      'dayActivitiesCount': dayActivitiesCount,
+      'modelingsMonitoring': modelingsMonitoring
     };
   }
 
@@ -65,10 +68,11 @@ class ParcelEntity extends Equatable {
         json['publicVisibility'] as bool,
         json['admin'] as String,
         json['members'] as List<GardenMember>,
-        json['modelingId'] as String,
-        json['modelingName'] as String,
+        json['currentModelingId'] as String,
+        json['currentModelingName'] as String,
         json['creationDate'],
-        json['dayActivitiesCount']
+        json['dayActivitiesCount'],
+        json['modelingsMonitoring']
     );
   }
 
@@ -86,11 +90,12 @@ class ParcelEntity extends Equatable {
         snap.data['members'].map<GardenMember>((item) {
           return GardenMember.fromMap(item);
         }).toList(),
-        snap.data['modelingId'],
-        snap.data['modelingName'],
+        snap.data['currentModelingId'],
+        snap.data['currentModelingName'],
         DateTime.fromMillisecondsSinceEpoch(
             snap.data["creationDate"].millisecondsSinceEpoch),
-        snap.data['dayActivitiesCount']
+        snap.data['dayActivitiesCount'],
+        new List<String>.from(snap.data['modelingsMonitoring']),
     );
   }
 
@@ -106,10 +111,11 @@ class ParcelEntity extends Equatable {
       'members': members.map((item) {
         return item.toJson();
       }).toList(),
-      'modelingId': modelingId,
-      'modelingName': modelingName,
+      'currentModelingId': currentModelingId,
+      'currentModelingName': currentModelingName,
       'creationDate': creationDate,
-      'dayActivitiesCount': dayActivitiesCount
+      'dayActivitiesCount': dayActivitiesCount,
+      'modelingsMonitoring': modelingsMonitoring
     };
   }
 }

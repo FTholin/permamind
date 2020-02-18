@@ -1,3 +1,4 @@
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -8,8 +9,11 @@ import 'package:permamind/screens/add_parcel_screen.dart';
 
 class ParcelSpeedDial extends StatefulWidget {
   final bool visible;
+  final Garden garden;
 
-  ParcelSpeedDial({this.visible});
+  final String userId;
+
+  ParcelSpeedDial({this.garden, this.userId, this.visible}): assert(garden != null);
 
   @override
   ParcelSpeedDialState createState() => ParcelSpeedDialState();
@@ -50,7 +54,7 @@ class ParcelSpeedDialState extends State<ParcelSpeedDial>
             Navigator.of(context).push(MaterialPageRoute(builder: (_) {
               return BlocProvider.value(
                 value: BlocProvider.of<ParcelsBloc>(context),
-                child: AddParcelScreen(),
+                child: AddParcelScreen(garden: widget.garden, userId: widget.userId),
               );
             }));
           },

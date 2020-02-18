@@ -41,7 +41,7 @@ class EnumeratedParcels extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return InkResponse(
                         enableFeedback: true,
-                        child: ParcelItem(name: parcels[index].name, modelingName: parcels[index].modelingName, membersCount: parcels[index].members.length.toString(), index: index, dayActivitiesCount: parcels[index].dayActivitiesCount),
+                        child: ParcelItem(name: parcels[index].name, modelingName: parcels[index].currentModelingName, membersCount: parcels[index].members.length.toString(), index: index, dayActivitiesCount: parcels[index].dayActivitiesCount),
                         onTap: () async {
                           final removedGarden = await Navigator.of(context).push(
                               MaterialPageRoute(

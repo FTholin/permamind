@@ -25,60 +25,87 @@ class DetailsParcelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-    return Scaffold(
+//    return Scaffold(
 //      appBar: ParcelAppBar(parcelId: parcelId, user: user),
-      appBar: AppBar(),
-      body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
+//
+//    );
+    return BlocBuilder<ParcelsBloc, ParcelsState>(
+      builder: (context, state) {
+        if (state is ParcelsLoaded) {
 
-            // TODO Mettre le Plan de la parcelle
-            Container(
-              height: 230,
-              color: Colors.amber,
-            ),
-            BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                builder: (context, state) {
-                  if (state is ActivitiesLoaded) {
-                    return SchedulerCalendar(
-                      referenceDate: DateTime.now(),
-                      schedule: state.schedule,
-                    );
-                  } else {
-                    return Expanded(
-                        child: Container(
-                        )
-                    );
-                  }
-                }
-            ),
-            const SizedBox(height: 8.0),
+          final parcel = state.parcels.firstWhere((parcel) => parcel.id == parcelId,
+              orElse: () => null);
+
+          if (parcel.currentModelingId == '' && parcel.currentModelingName == '') {
+            return Scaffold(
+              appBar: AppBar(),
+              body: Center(
+                child: Text("Aucune association de plantes prévu dans ce bac.\n On en rajoute une ?"),
+              ),
+            );
+          } else {
+            return Scaffold(
+//      appBar: ParcelAppBar(parcelId: parcelId, user: user),
+              appBar: AppBar(),
+              body: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+
+                    // TODO Mettre le Plan de la parcelle
+                    Container(
+                      height: 230,
+                      color: Colors.amber,
+                    ),
+                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                        builder: (context, state) {
+                          if (state is ActivitiesLoaded) {
+                            return SchedulerCalendar(
+                              referenceDate: DateTime.now(),
+                              schedule: state.schedule,
+                            );
+                          } else {
+                            return Expanded(
+                                child: Container(
+                                )
+                            );
+                          }
+                        }
+                    ),
+                    const SizedBox(height: 8.0),
 //          _buildButtons(),
-            const SizedBox(height: 8.0),
-            BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                builder: (context, state) {
-                  if (state is ActivitiesLoaded) {
-                    return Expanded(
-                      child: Container(
-                          child: _buildEventList(state.referenceDate, state.schedule)
-                      ),
-                    );
-                  } else {
-                    return Expanded(
-                        child: Container(
-                          child: Text("$state"),
-                        )
-                    );
-                  }
-                }
-            ),
+                    const SizedBox(height: 8.0),
+                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                        builder: (context, state) {
+                          if (state is ActivitiesLoaded) {
+                            return Expanded(
+                              child: Container(
+                                  child: _buildEventList(state.referenceDate, state.schedule)
+                              ),
+                            );
+                          } else {
+                            return Expanded(
+                                child: Container(
+                                  child: Text("$state"),
+                                )
+                            );
+                          }
+                        }
+                    ),
 //          Expanded(child: _buildEventList()),
-          ]),
-      floatingActionButton: ActivitySpeedDial(
-          visible: true
-      ),
+                  ]),
+              floatingActionButton: ActivitySpeedDial(
+                  visible: true
+              ),
+            );
+          }
+
+        } else {
+          return Container();
+        }
+      }
     );
+
+
 
 //    return Scaffold(
 //      appBar: ParcelAppBar(parcelId: parcelId, user: user),
@@ -356,13 +383,14 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
 
                                 List<GardenMember> members = new List<GardenMember>.from(currentParcel.members);
 
+                                // TODO Refaire la copie
                                 Parcel copy = currentParcel.copyWith(name: currentParcel.name,
                                     length: currentParcel.length,
                                     width: currentParcel.width,
                                     gardenGround: currentParcel.gardenGround,
                                     id: currentParcel.id,
                                     publicVisibility: currentParcel.publicVisibility,
-                                    modelingId: currentParcel.modelingId,
+                                    currentModelingId: currentParcel.currentModelingId,
                                     admin: currentParcel.admin,
                                     members: members);
 

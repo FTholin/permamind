@@ -9,22 +9,14 @@ typedef AddParcelCallback = Function(String task, String note);
 
 class AddParcelScreen extends StatefulWidget {
 
-  // TODO Récupérer le jardin
-
-
-  // TODO Récupérer id jardin
-  // TODO Récupérer visibilité du jardin
-  // TODO Admin
-  //
-
-  final bool isEditing;
-  final AddParcelCallback onSave;
+  final Garden garden;
+  final String userId;
 
   AddParcelScreen({
     Key key,
-    @required this.onSave,
-    @required this.isEditing,
-  }) : super(key: key);
+    @required this.garden,
+    @required this.userId,
+  }) : assert(garden != null), super(key: key);
 
   @override
   _AddParcelScreenState createState() => _AddParcelScreenState();
@@ -32,12 +24,10 @@ class AddParcelScreen extends StatefulWidget {
 
 class _AddParcelScreenState extends State<AddParcelScreen> {
 
-//  final TextEditingController _activityNameController = TextEditingController();
+  final TextEditingController _parcelName = TextEditingController();
 
   int _currentStep = 0;
   int _radioValue1 = 1;
-
-  bool get isEditing => widget.isEditing;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +65,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: TextField(
+                        controller: _parcelName,
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
                           hintText: 'Nom parcelle',
@@ -193,25 +184,14 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                 children: <Widget>[
                   RaisedButton(onPressed: () async {
 
-//                    // TODO Connecter cette liste à la liste d'ajout des members
-//                    List<GardenMember> members = List<GardenMember>();
-//
-//                    members.add(GardenMember(id: widget._user.id, pseudo: widget._user.pseudo));
-//
+                    final Parcel parcel = Parcel(_parcelName.text, widget.garden.id, 10.0, 10.0, false, false, '${widget.userId}', widget.garden.members, '', '', DateTime.now(), 0, []);
 
-
-//                    Parcel(name, gardenId, length, width, gardenGround, publicVisibility, admin, members, modelingId, modelingName, creationDate, dayActivitiesCount)
-
-                    final Parcel parcel = Parcel("Marianne", "DvQpc8QPP6B4qBFwgEtV", 10.0, 10.0, false, false, 'gd3Q3CYOwTPFNnZ9Z57yzmVGqAo1', [], '', 'Carotte', DateTime.now(), 0);
-
-
-                    // AJout du bloc dans la base
                     BlocProvider.of<ParcelsBloc>(context).add(
                         ParcelsAdded(
                             parcel
                         ));
 
-
+                    // TODO Navigation à refaire pour que l'on reste dans le jardin
                     Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
                   }, child: const Text('Finaliser parcelle')),

@@ -28,16 +28,30 @@ class DetailsGardenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return BlocProvider.value(
-        value: BlocProvider.of<ParcelsBloc>(context),
-        child: Scaffold(
-          appBar: GardenAppBar(gardenId: gardenId, user: user),
-          body: EnumeratedParcels(dataRepository: dataRepository, user: user),
-          floatingActionButton: ParcelSpeedDial(
-              visible: true
-          ),
-        )
-    );
+    return BlocBuilder<GardensBloc, GardensState>(
+    builder: (context, state) {
+      if (state is GardensLoaded) {
+
+        final garden = state.gardens.firstWhere((garden) => garden.id == gardenId,
+            orElse: () => null);
+
+        return BlocProvider.value(
+            value: BlocProvider.of<ParcelsBloc>(context),
+            child: Scaffold(
+              appBar: GardenAppBar(gardenId: gardenId, user: user),
+              body: EnumeratedParcels(dataRepository: dataRepository, user: user),
+              floatingActionButton: ParcelSpeedDial(
+                garden: garden,
+                userId: user.id,
+                visible: true,
+              ),
+            )
+        );
+      } else {
+        return Container();
+      }
+    });
+
   }
 }
 
