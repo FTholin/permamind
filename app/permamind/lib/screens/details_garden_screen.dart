@@ -104,7 +104,7 @@ class _GardenAppBarState extends State<GardenAppBar> {
                           }
 
 
-                          final removedGarden = await Navigator.of(context)
+                          final alteredGarden = await Navigator.of(context)
                               .push(
                               MaterialPageRoute(
                                   builder: (_) {
@@ -123,7 +123,7 @@ class _GardenAppBarState extends State<GardenAppBar> {
                           );
 
 
-                          if (removedGarden != null && removedGarden != false) {
+                          if (alteredGarden != null && alteredGarden != false) {
                             Map returnData = Map();
 
 //                        List<Activity> activities = List<Activity>();
@@ -137,7 +137,7 @@ class _GardenAppBarState extends State<GardenAppBar> {
 //                        returnData['activities'] = activities;
 
 
-                            if (removedGarden['action'] == "Delete") {
+                            if (alteredGarden['action'] == "Delete") {
                               returnData['garden'] = currentGarden;
 
                               returnData['action'] = "Delete";
@@ -165,6 +165,7 @@ class _GardenAppBarState extends State<GardenAppBar> {
                                 List<GardenMember> members = new List<
                                     GardenMember>.from(currentGarden.members);
 
+                                // TODO Corriger bug rajout utilisateur dans la base
                                 Garden copy = currentGarden.copyWith(
                                     name: currentGarden.name,
                                     id: currentGarden.id,

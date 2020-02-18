@@ -12,7 +12,6 @@ import 'package:permamind/models/models.dart';
 
 
 
-// TODO Need to check Input entry
 class SettingsGardenScreen extends StatefulWidget {
   final bool isEditing;
   final String gardenId;
@@ -43,11 +42,22 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
   bool _newGardenNameValidate = false;
 
+  List<GardenMember> _gardenMembers =  List<GardenMember>();
+
+  List<MemberProfile> queryResProfile = List<MemberProfile>();
+
+  @override
+  void initState() {
+
+    for (final member in widget.initialMembersData) {
+      if (member.id != widget.user.id && member.pseudo != widget.user.pseudo)
+        _gardenMembers.add(member);
+    }
+
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
-
-    List<GardenMember> _gardenMembers =  List<GardenMember>.from(widget.initialMembersData);
-
-    List<MemberProfile> queryResProfile = List<MemberProfile>();
 
     return BlocBuilder<GardensBloc, GardensState>(
     builder: (context, state) {
@@ -115,7 +125,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           if (query.length != 0) {
                             _gardenMembers = [];
 
-                            var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchByName(query);
+                            var queryRes = await BlocProvider.of<ParcelsBloc>(context).dataRepository.searchByName(query);
                             for (int i = 0; i < queryRes.documents.length; ++i) {
                               var data = queryRes.documents[i].data;
                               queryResProfile.add(MemberProfile(
