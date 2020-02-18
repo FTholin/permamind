@@ -1,9 +1,21 @@
 
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permamind/blocs/blocs.dart';
 
 typedef AddParcelCallback = Function(String task, String note);
 
 class AddParcelScreen extends StatefulWidget {
+
+  // TODO Récupérer le jardin
+
+
+  // TODO Récupérer id jardin
+  // TODO Récupérer visibilité du jardin
+  // TODO Admin
+  //
+
   final bool isEditing;
   final AddParcelCallback onSave;
 
@@ -174,7 +186,39 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
           ),
           new Step(
             title: new Text(''),
-            content: new Text('This is the third step.'),
+            content: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 30),
+              child: Column(
+                children: <Widget>[
+                  RaisedButton(onPressed: () async {
+
+//                    // TODO Connecter cette liste à la liste d'ajout des members
+//                    List<GardenMember> members = List<GardenMember>();
+//
+//                    members.add(GardenMember(id: widget._user.id, pseudo: widget._user.pseudo));
+//
+
+
+//                    Parcel(name, gardenId, length, width, gardenGround, publicVisibility, admin, members, modelingId, modelingName, creationDate, dayActivitiesCount)
+
+                    final Parcel parcel = Parcel("Marianne", "DvQpc8QPP6B4qBFwgEtV", 10.0, 10.0, false, false, 'gd3Q3CYOwTPFNnZ9Z57yzmVGqAo1', [], '', 'Carotte', DateTime.now(), 0);
+
+
+                    // AJout du bloc dans la base
+                    BlocProvider.of<ParcelsBloc>(context).add(
+                        ParcelsAdded(
+                            parcel
+                        ));
+
+
+                    // TODO Revenir au jardin
+//                    Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
+
+                  }, child: const Text('Finaliser parcelle')),
+
+                ],
+              ),
+            ),
             isActive: _currentStep >= 0,
             state:
             _currentStep >= 3 ? StepState.complete : StepState.disabled,
@@ -183,6 +227,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
       ),
     );
   }
+
 }
 
 Widget _createEventControlBuilder(BuildContext context,

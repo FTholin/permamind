@@ -32,46 +32,46 @@ class DetailsGardenScreen extends StatelessWidget {
       ),
     );
 
-//    return BlocBuilder<ParcelsBloc, ParcelsState>(
-//      builder: (context, state) {
-//        if (state is ParcelsLoaded) {
-//          return BlocBuilder<GardensBloc, GardensState>(
-//              builder: (context, state) {
-//                if (state is GardensLoaded) {
-//
-//                  final currentGarden = (state as GardensLoaded)
-//                      .gardens.firstWhere((garden) => garden.id == gardenId,
-//                      orElse: () => null);
-//
-//                  print('-------');
-//                  print(currentGarden);
-//                  print('--------');
-//
-//
-//                  return Scaffold(
-//                    appBar: AppBar(
-//                      title: Text("${currentGarden.name}"),
-//                      actions: <Widget>[
-//
-//                      ],
-//                    ),
-//                    body: EnumeratedParcels(),
-//                    floatingActionButton: ParcelSpeedDial(
-//                        visible: true
-//                    ),
-//                  );
-//                } else {
-//                  return Scaffold(
-//                      body: CircularProgressIndicator()
-//                  );
-//                }
-//              }
-//          );
-//        } else {
-//          return CircularProgressIndicator();
-//        }
-//      }
-//    );
+    return BlocBuilder<ParcelsBloc, ParcelsState>(
+      builder: (context, state) {
+        if (state is ParcelsLoaded) {
+          return BlocBuilder<GardensBloc, GardensState>(
+              builder: (context, state) {
+                if (state is GardensLoaded) {
+
+                  final currentGarden = (state as GardensLoaded)
+                      .gardens.firstWhere((garden) => garden.id == gardenId,
+                      orElse: () => null);
+
+                  print('-------');
+                  print(currentGarden);
+                  print('--------');
+
+
+                  return Scaffold(
+                    appBar: AppBar(
+                      title: Text("${currentGarden.name}"),
+                      actions: <Widget>[
+
+                      ],
+                    ),
+                    body: EnumeratedParcels(),
+                    floatingActionButton: ParcelSpeedDial(
+                        visible: true
+                    ),
+                  );
+                } else {
+                  return Scaffold(
+                      body: CircularProgressIndicator()
+                  );
+                }
+              }
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      }
+    );
 
 
 

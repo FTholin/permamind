@@ -27,27 +27,21 @@ class EnumeratedParcels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      child: Center(child: Text("Parcel bloc building ..."),),
-    );
+    return BlocBuilder<ParcelsBloc, ParcelsState>(
+        builder: (context, state) {
+          if (state is ParcelsLoaded) {
+            final gardens = state.parcels;
 
-//    return BlocBuilder<ParcelsBloc, ParcelsState>(
-//        builder: (context, state) {
-//          if (state is ParcelsLoaded) {
-//            final gardens = state.gardens;
-//
-//            final localizations = ArchSampleLocalizations.of(context);
-//
-//            return Padding(
-//                padding: EdgeInsets.all(10.0),
-//                child: ListView.builder(
-//                  key: ArchSampleKeys.todoList,
-//                  itemCount: gardens.length,
-//                  itemBuilder: (BuildContext context, int index) {
-//                    return InkResponse(
-//                      enableFeedback: true,
-//                      child: ParcelItem(name: gardens[index].name, modelingName: gardens[index].modelingName, membersCount: gardens[index].members.length.toString(), index: index, dayActivitiesCount: gardens[index].dayActivitiesCount),
-//                      onTap: () async {
+            return Padding(
+                padding: EdgeInsets.all(10.0),
+                child: ListView.builder(
+                  key: ArchSampleKeys.todoList,
+                  itemCount: gardens.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkResponse(
+                      enableFeedback: true,
+                      child: ParcelItem(name: gardens[index].name, modelingName: gardens[index].modelingName, membersCount: gardens[index].members.length.toString(), index: index, dayActivitiesCount: gardens[index].dayActivitiesCount),
+                      onTap: () async {
 //                        final removedParcel = await Navigator.of(context).push(
 //                            MaterialPageRoute(
 //
@@ -116,15 +110,15 @@ class EnumeratedParcels extends StatelessWidget {
 //                          }
 //
 //                        }
-//                      },
-//                    );
-//                  },
-//                )
-//            );
-//          } else {
-//            return Container();
-//          }
-//        }
-//    );
+                      },
+                    );
+                  },
+                )
+            );
+          } else {
+            return Container();
+          }
+        }
+    );
   }
 }

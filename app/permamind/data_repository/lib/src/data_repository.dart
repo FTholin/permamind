@@ -13,6 +13,8 @@ abstract class DataRepository {
 
   Future<void> addNewGardenDesign(GardenDesign design);
 
+  Future<void> addNewParcel(Parcel parcel);
+
   Future<void> copyGarden(Garden garden);
 
   Future<void> addGardenActivities(List<Activity> schedule);

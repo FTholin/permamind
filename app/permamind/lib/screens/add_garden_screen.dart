@@ -34,7 +34,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: new Text('Créer une parcelle de culture')),
+      appBar: new AppBar(title: new Text('Créer un potager')),
       body: new Stepper(
         type: StepperType.horizontal,
         currentStep: _currentStep,
@@ -56,7 +56,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              'Quel est le nom de votre parcelle ?',
+                              'Quel est le nom de votre potager ?',
 //                    textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 19),
@@ -69,7 +69,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                       child: TextField(
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
-                          hintText: 'Nom parcelle',
+                          hintText: 'Nom potager',
                         ),
                       ),
                     )

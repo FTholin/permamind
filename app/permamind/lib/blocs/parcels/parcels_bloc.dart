@@ -22,6 +22,8 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapLoadParcelsToState(event);
     } else if (event is ParcelsUpdated) {
       yield* _mapParcelsUpdatedToState(event);
+    } else if (event is ParcelsAdded) {
+      yield* _mapParcelsAddedToState(event);
     }
   }
 
@@ -37,6 +39,10 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
 
   Stream<ParcelsState> _mapParcelsUpdatedToState(ParcelsUpdated event) async* {
     yield ParcelsLoaded(event.parcels);
+  }
+
+  Stream<ParcelsState> _mapParcelsAddedToState(ParcelsAdded event) async* {
+    dataRepository.addNewParcel(event.parcel);
   }
 
 

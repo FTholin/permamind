@@ -63,6 +63,10 @@ class FirebaseDataRepository implements DataRepository {
     return activitiesCollection.add(activity.toEntity().toDocument());
   }
 
+  @override
+  Future<void> addNewParcel(Parcel parcel) {
+    return parcelsCollection.add(parcel.toEntity().toDocument());
+  }
 
   @override
   Stream<List<Parcel>> loadParcels(String gardenId) {

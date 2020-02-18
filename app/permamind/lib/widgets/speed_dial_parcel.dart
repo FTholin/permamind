@@ -4,6 +4,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/screens/add_parcel_screen.dart';
 
 class ParcelSpeedDial extends StatefulWidget {
   final bool visible;
@@ -39,9 +40,20 @@ class ParcelSpeedDialState extends State<ParcelSpeedDial>
       curve: Curves.bounceIn,
       children: [
         SpeedDialChild(
-          child: Icon(Icons.photo_size_select_actual, color: Colors.white, size: 30.0,),
+          child: Icon(
+            Icons.photo_size_select_actual,
+            color: Colors.white,
+            size: 30.0,
+          ),
           backgroundColor: Colors.green,
-          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.addParcel),
+          onTap: () async {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return BlocProvider.value(
+                value: BlocProvider.of<ParcelsBloc>(context),
+                child: AddParcelScreen(),
+              );
+            }));
+          },
           label: 'Create a parcel',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
           labelBackgroundColor: Colors.green,
