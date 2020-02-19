@@ -112,6 +112,7 @@ class FirebaseDataRepository implements DataRepository {
             schedule[i].toEntity().toDocument());
         batch.setData(docRef, {
           'title': schedule[i].title,
+          'gardenId': schedule[i].gardenId,
           'parcelId': schedule[i].parcelId,
           'complete': schedule[i].complete,
           'expectedDate': schedule[i].expectedDate,

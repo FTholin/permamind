@@ -39,7 +39,7 @@ class DetailsGardenScreen extends StatelessWidget {
             value: BlocProvider.of<ParcelsBloc>(context),
             child: Scaffold(
               appBar: GardenAppBar(gardenId: gardenId, user: user),
-              body: EnumeratedParcels(dataRepository: dataRepository, user: user),
+              body: EnumeratedParcels(gardenId: gardenId, dataRepository: dataRepository, user: user),
               floatingActionButton: ParcelSpeedDial(
                 garden: garden,
                 userId: user.id,

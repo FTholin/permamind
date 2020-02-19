@@ -9,11 +9,14 @@ import 'package:permamind/widgets/widgets.dart';
 
 class DiscoverModelingsScreen extends StatelessWidget {
   final Parcel parcel;
+  final String gardenId;
 
   DiscoverModelingsScreen({
     Key key,
     @required this.parcel,
+    @required this.gardenId,
   })  : assert(parcel != null),
+        assert(gardenId != null),
         super(key: key);
 
   @override
@@ -85,6 +88,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                   return BlocProvider.value(
                       value: BlocProvider.of<ParcelsBloc>(context),
                       child: FilteredModelings(
+                        gardenId: gardenId,
                         parcel: parcel,
                         modelings: modelings,
                       ));
@@ -119,6 +123,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                   return BlocProvider.value(
                       value: BlocProvider.of<ParcelsBloc>(context),
                       child: FilteredModelings(
+                        gardenId: gardenId,
                         parcel: parcel,
                         modelings: modelings,
                       ));

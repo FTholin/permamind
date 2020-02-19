@@ -10,11 +10,13 @@ import 'package:data_repository/data_repository.dart';
 class FilteredModelings extends StatelessWidget {
   final List<Modeling> modelings;
   final Parcel parcel;
+  final String gardenId;
 
   FilteredModelings({
     this.parcel,
     this.modelings,
-    Key key}) : assert(parcel != null), assert(modelings != null), super(key: key);
+    this.gardenId,
+    Key key}) : assert(parcel != null), assert(gardenId != null), assert(modelings != null), super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class FilteredModelings extends StatelessWidget {
                           return BlocProvider.value(
                               value: BlocProvider.of<ParcelsBloc>(context),
                               child: DetailsModelingScreen(
+                                  gardenId: gardenId,
                                   parcel: parcel,
                                   modeling: modelings[index],
                                   schedule: modelings[index].schedule,

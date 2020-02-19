@@ -11,10 +11,11 @@ import 'package:permamind/screens/screens.dart';
 
 class EnumeratedParcels extends StatelessWidget {
 
+  final String gardenId;
   final DataRepository _dataRepository;
   final User _user;
 
-  EnumeratedParcels({Key key, @required DataRepository dataRepository, @required User user})
+  EnumeratedParcels({Key key, @required this.gardenId, @required DataRepository dataRepository, @required User user})
       : assert(dataRepository != null),
         assert(user != null),
         _user = user,
@@ -66,7 +67,7 @@ class EnumeratedParcels extends StatelessWidget {
                                           )..add(LoadDesign()),
                                         ),
                                       ],
-                                      child: DetailsParcelScreen(dataRepository: _dataRepository, parcel: parcels[index], user: _user),
+                                      child: DetailsParcelScreen(gardenId: gardenId, dataRepository: _dataRepository, parcel: parcels[index], user: _user),
                                     );
 
 

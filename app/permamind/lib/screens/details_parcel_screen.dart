@@ -15,12 +15,14 @@ class DetailsParcelScreen extends StatelessWidget {
   final DataRepository dataRepository;
   final Parcel parcel;
   final User user;
+  final String gardenId;
 
   DetailsParcelScreen({
     Key key,
     @required this.dataRepository,
     @required this.parcel,
     @required this.user,
+    @required this.gardenId,
   })
       : super(key: key);
 
@@ -58,7 +60,7 @@ class DetailsParcelScreen extends StatelessWidget {
                                           ..add(FetchModelings()),
                                       )
                                     ],
-                                    child: DiscoverModelingsScreen(parcel: parcel),
+                                    child: DiscoverModelingsScreen(gardenId: gardenId,parcel: parcel),
                                   );
 
                                 })
@@ -142,6 +144,7 @@ class DetailsParcelScreen extends StatelessWidget {
 //          Expanded(child: _buildEventList()),
                   ]),
               floatingActionButton: ActivitySpeedDial(
+                  gardenId: gardenId,
                   visible: true
               ),
             );

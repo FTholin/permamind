@@ -11,17 +11,17 @@ class DetailsModelingScreen extends StatelessWidget {
   final Parcel parcel;
   final Modeling modeling;
   final List<ModelingSchedule> schedule;
-
+  final String gardenId;
   final List<Design> designs;
 
   DetailsModelingScreen({
     Key key,
+    @required this.gardenId,
     @required this.parcel,
     @required this.modeling,
     @required this.schedule,
     @required this.designs
-//    @required this.onSaveGarden,
-  });
+  }): assert(parcel != null), assert(modeling != null), assert(schedule != null), assert(designs != null), assert(gardenId != null);
 
   @override
   Widget build(BuildContext context) {
@@ -349,7 +349,7 @@ class DetailsModelingScreen extends StatelessWidget {
                   modelingsMonitoring: [modeling.id], id: parcel.id);
 
               BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(alteredParcel));
-              BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(parcel.id, schedule));
+              BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
               BlocProvider.of<ParcelsBloc>(context).add(DesignParcelAdded(parcel.id, designs));
 
               Navigator.pop(context);

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 class Activity extends Equatable {
 
   final String id;
+  final String gardenId;
   final String parcelId;
   final String title;
   final bool complete;
@@ -13,6 +14,7 @@ class Activity extends Equatable {
 
   Activity(
       this.title,
+      this.gardenId,
       this.parcelId,
       this.complete,
       this.expectedDate,
@@ -24,6 +26,7 @@ class Activity extends Equatable {
   Activity copyWith({
     String id,
     String title,
+    String gardenId,
     String parcelId,
     bool complete,
     DateTime expectedDate,
@@ -32,6 +35,7 @@ class Activity extends Equatable {
   }) {
     return Activity(
       title ?? this.title,
+      gardenId ?? this.gardenId,
       parcelId ?? this.parcelId,
       complete ?? this.complete,
       expectedDate ?? this.expectedDate,
@@ -44,7 +48,7 @@ class Activity extends Equatable {
 
   @override
   int get hashCode =>
-      id.hashCode ^ title.hashCode ^ parcelId.hashCode;
+      id.hashCode ^ gardenId.hashCode ^ complete.hashCode ^ expectedDate.hashCode ^ title.hashCode ^ parcelId.hashCode;
 
 
   @override
@@ -54,6 +58,7 @@ class Activity extends Equatable {
               runtimeType == other.runtimeType &&
               id == other.id &&
               title == other.title &&
+              gardenId == other.gardenId &&
               parcelId == other.parcelId &&
               complete == other.complete &&
               category == other.category &&
@@ -64,6 +69,7 @@ class Activity extends Equatable {
     return ActivityEntity(
         id,
         title,
+        gardenId,
         parcelId,
         complete,
         expectedDate,
@@ -76,6 +82,7 @@ class Activity extends Equatable {
 
     return Activity(
       entity.title,
+      entity.gardenId,
       entity.parcelId,
       entity.complete,
       entity.expectedDate,

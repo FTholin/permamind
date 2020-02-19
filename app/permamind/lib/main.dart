@@ -172,9 +172,6 @@ class App extends StatelessWidget {
               '/settingsGarden': (context) {
                 return SettingsGardenScreen();
               },
-              '/addActivity': (context) {
-                return AddEditActivityScreen();
-              },
               "/joinGarden": (context) {
                  return JoinGardenScreen();
               },

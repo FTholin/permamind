@@ -7,8 +7,8 @@ import 'package:permamind/screens/screens.dart';
 
 class ActivitySpeedDial extends StatefulWidget {
   final bool visible;
-
-  ActivitySpeedDial({this.visible});
+  final String gardenId;
+  ActivitySpeedDial({this.visible, this.gardenId});
 
   @override
   ActivitySpeedDialState createState() => ActivitySpeedDialState();
@@ -53,7 +53,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
 
                       return BlocProvider.value(
                         value: BlocProvider.of<ActivitiesBloc>(context),
-                        child: AddEditActivityScreen(),
+                        child: AddActivityScreen(gardenId: widget.gardenId),
                       );
 
                     })
