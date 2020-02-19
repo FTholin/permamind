@@ -38,7 +38,7 @@ class DetailsParcelScreen extends StatelessWidget {
 
           if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
             return Scaffold(
-              appBar: AppBar(),
+              appBar: ParcelAppBar(parcelId: parcel.id, user: user),
               body: Center(
                 child: Column(
                   children: <Widget>[
@@ -75,7 +75,7 @@ class DetailsParcelScreen extends StatelessWidget {
             );
           } else {
             return Scaffold(
-              appBar: ParcelAppBar(parcelId: parcel.id   , user: user),
+              appBar: ParcelAppBar(parcelId: parcel.id , user: user),
               body: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
@@ -218,16 +218,16 @@ class DetailsParcelScreen extends StatelessWidget {
 //              icon: Icon(Icons.settings),
 //              onPressed: () async {
 //
-//                final removedParcel = await Navigator.of(context).push(
+//                final alteredParcel = await Navigator.of(context).push(
 //                    MaterialPageRoute(
 //                        builder: (_) {
 //                          return SettingsParcelScreen(id: currentParcel.id);
 //                        })
 //                );
 //
-//                if (removedParcel != null) {
+//                if (alteredParcel != null) {
 //
-//                  if (removedParcel != false) {
+//                  if (alteredParcel != false) {
 //                    BlocProvider.of<ParcelsBloc>(context).add(
 //                        ParcelDeleted(currentParcel));
 //                    BlocProvider.of<ActivitiesBloc>(context).close();
@@ -371,12 +371,12 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
                           }
 
 
-                          final removedParcel = await Navigator.of(context).push(
+                          final alteredParcel = await Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (_) {
 
                                     return BlocProvider.value(
-                                      value: BlocProvider.of<ActivitiesBloc>(
+                                      value: BlocProvider.of<ParcelsBloc>(
                                           context),
                                       child: SettingsParcelScreen(
                                           parcelId: currentParcel.id,
@@ -388,75 +388,14 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
                                   })
                           );
 
+                          if (alteredParcel == false) {
+                            Navigator.pop(context);
+                            BlocProvider.of<ParcelsBloc>(context).add(
+                                ParcelDeleted(
+                                  currentParcel,
+                                ));
+                          }
 
-//                          if (removedParcel != null && removedParcel != false) {
-//
-//                            Map returnData = Map();
-//
-//                            List<Activity> activities = List<Activity>();
-//                            state.schedule.entries.forEach((e) {
-//                              e.value.forEach((item){
-//                                activities.add(item);
-//                              });
-//                            });
-//
-//
-//                            returnData['activities'] = activities;
-//
-//
-//                            if (removedParcel['action'] == "Delete") {
-//
-//
-//                              returnData['garden'] = currentParcel;
-//
-//                              returnData['action'] = "Delete";
-//
-//                              BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentParcel.id));
-//
-//                              BlocProvider.of<ParcelsBloc>(context).add(
-//                                  ParcelDeleted(currentParcel));
-//
-//                              BlocProvider.of<ActivitiesBloc>(context).close();
-//
-//                              Navigator.pop(context, returnData);
-//
-//                            } else  {
-//
-//                              if (currentParcel.members.length == 1 || currentParcel.admin == widget.user.id) {
-//                                returnData['garden'] = currentParcel;
-//                                BlocProvider.of<ParcelsBloc>(context).add(
-//                                    ParcelDeleted(currentParcel));
-//                                BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentParcel.id));
-//                                returnData['action'] = "Delete";
-//                              } else {
-//
-//                                returnData['action'] = "Leave";
-//
-//                                List<GardenMember> members = new List<GardenMember>.from(currentParcel.members);
-//
-//                                // TODO Refaire la copie
-//                                Parcel copy = currentParcel.copyWith(name: currentParcel.name,
-//                                    length: currentParcel.length,
-//                                    width: currentParcel.width,
-//                                    parcelGround: currentParcel.parcelGround,
-//                                    id: currentParcel.id,
-//                                    publicVisibility: currentParcel.publicVisibility,
-//                                    currentModelingId: currentParcel.currentModelingId,
-//                                    admin: currentParcel.admin,
-//                                    members: members);
-//
-//                                BlocProvider.of<ParcelsBloc>(context).add(
-//                                    ParcelLeaved(currentParcel, widget.user.id)
-//                                );
-//
-//                                returnData['garden'] = copy;
-//                              }
-//
-//                              BlocProvider.of<ActivitiesBloc>(context).close();
-//
-//                              Navigator.pop(context, returnData);
-//                            }
-//                          }
                         },
                       );
                     } else {

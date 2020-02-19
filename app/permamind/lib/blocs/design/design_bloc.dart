@@ -9,14 +9,14 @@ class DesignBloc extends Bloc<DesignEvent, DesignState> {
 
   final String parcelId;
   final ActivitiesBloc activitiesBloc;
-  StreamSubscription _planSubscription;
+  StreamSubscription _designSubscription;
   final DataRepository dataRepository;
 
 
   DesignBloc({@required this.dataRepository,
             @required this.activitiesBloc,
             @required this.parcelId}) {
-//    _planSubscription = activitiesBloc.listen((state) {
+//    _designSubscription = activitiesBloc.listen((state) {
 //      if (state is ActivitiesLoaded) {
 //        add(UpdateDesign(state));
 //      }
@@ -44,8 +44,8 @@ class DesignBloc extends Bloc<DesignEvent, DesignState> {
   }
 
   Stream<DesignState> _mapLoadDesignToState() async* {
-    _planSubscription?.cancel();
-    _planSubscription = dataRepository.loadDesignParcel(parcelId).listen(
+    _designSubscription?.cancel();
+    _designSubscription = dataRepository.loadDesignParcel(parcelId).listen(
           (gardenDesign) {
             if (gardenDesign.isNotEmpty) {
               add(DesignUpdated(gardenDesign.first));
@@ -62,7 +62,7 @@ class DesignBloc extends Bloc<DesignEvent, DesignState> {
 
   @override
   Future<void> close() {
-    _planSubscription.cancel();
+    _designSubscription.cancel();
     return super.close();
   }
 }

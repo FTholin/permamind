@@ -74,10 +74,6 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteGarden(Garden garden) async {
-
-    // Delete all designs
-    // Delete all activities
-    // Delete all parcels
     return vegetableGardensCollection.document(garden.id).delete();
   }
 
@@ -169,7 +165,7 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   @override
-  Future<void> deleteDesignParcel(String gardenId) async {
+  Future<void> deleteDesignsParcel(String gardenId) async {
 
     designsCollection.where("parcelId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
@@ -191,9 +187,9 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   @override
-  Stream<List<DesignParcel>> loadDesignParcel(String gardenId) {
+  Stream<List<DesignParcel>> loadDesignParcel(String parcelId) {
     return designsCollection
-        .where("gardenId", isEqualTo: gardenId)
+        .where("parcelId", isEqualTo: parcelId)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => DesignParcel.fromEntity(DesignParcelEntity.fromSnapshot(doc)))

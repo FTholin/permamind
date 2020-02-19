@@ -29,7 +29,7 @@ abstract class DataRepository {
 
   Future<void> deleteActivitiesFromGarden(String gardenId);
 
-  Future<void> deleteDesignParcel(String gardenId);
+  Future<void> deleteDesignsParcel(String gardenId);
 
   Future<void> deleteGardenParcels(String gardenId);
 

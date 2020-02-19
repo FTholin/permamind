@@ -11,7 +11,6 @@ import 'package:permamind/models/models.dart';
 
 
 
-// TODO Need to check Input entry
 class SettingsParcelScreen extends StatefulWidget {
   final bool isEditing;
   final String parcelId;
@@ -38,20 +37,31 @@ class SettingsParcelScreen extends StatefulWidget {
 class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
 
 
-  final TextEditingController _newGardenNameController = TextEditingController();
+  final TextEditingController _newParcelNameController = TextEditingController();
 
-  bool _newGardenNameValidate = false;
+  bool _newParcelNameValidate = false;
+
+  List<GardenMember> _gardenMembers =  List<GardenMember>();
+
+  List<MemberProfile> queryResProfile = List<MemberProfile>();
+
+  @override
+  void initState() {
+
+    for (final member in widget.initialMembersData) {
+      if (member.id != widget.user.id && member.pseudo != widget.user.pseudo)
+        _gardenMembers.add(member);
+    }
+
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
 
-    List<GardenMember> _gardenMembers =  List<GardenMember>.from(widget.initialMembersData);
-
-    List<MemberProfile> queryResProfile = List<MemberProfile>();
-
-    return BlocBuilder<GardensBloc, GardensState>(
+    return BlocBuilder<ParcelsBloc, ParcelsState>(
         builder: (context, state) {
-          final garden = (state as GardensLoaded)
-              .gardens.firstWhere((garden) => garden.id == widget.parcelId,
+          final parcel = (state as ParcelsLoaded)
+              .parcels.firstWhere((garden) => garden.id == widget.parcelId,
               orElse: () => null);
 
           return Scaffold(
@@ -67,28 +77,28 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "Garden's name",
+                              "Parcel's name",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
                           TextFormField(
-                            controller: _newGardenNameController,
+                            controller: _newParcelNameController,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              hintText: garden != null ? "${garden.name}" : "",
-                              errorText: _newGardenNameValidate ? 'Value Can\'t Be Empty' : null,
+                              hintText: parcel != null ? "${parcel.name}" : "",
+                              errorText: _newParcelNameValidate ? 'Value Can\'t Be Empty' : null,
                             ),
                             onChanged: (value) {
-                              _newGardenNameController.text.isEmpty
-                                  ? _newGardenNameValidate = true
-                                  : _newGardenNameValidate = false;
+                              _newParcelNameController.text.isEmpty
+                                  ? _newParcelNameValidate = true
+                                  : _newParcelNameValidate = false;
                               setState(() {});
                             },
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "Garden friends 😃",
+                              "Parcel friends 😃",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
@@ -114,7 +124,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                               if (query.length != 0) {
                                 _gardenMembers = [];
 
-                                var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchByName(query);
+                                var queryRes = await BlocProvider.of<ParcelsBloc>(context).dataRepository.searchByName(query);
                                 for (int i = 0; i < queryRes.documents.length; ++i) {
                                   var data = queryRes.documents[i].data;
                                   queryResProfile.add(MemberProfile(
@@ -169,28 +179,27 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                 child: RaisedButton(
                                   onPressed: () {
 
-                                    if (_newGardenNameController.text.isNotEmpty || listEquals(_gardenMembers, widget.initialMembersData) == false ) {
+                                    if (_newParcelNameController.text.isNotEmpty || listEquals(_gardenMembers, widget.initialMembersData) == false ) {
 
-                                      if (_newGardenNameController.text.isEmpty) {
-                                        _newGardenNameController.text = garden.name;
+                                      if (_newParcelNameController.text.isEmpty) {
+                                        _newParcelNameController.text = parcel.name;
                                       }
 
                                       _gardenMembers.add(GardenMember(id: widget.user.id, pseudo: widget.user.pseudo));
 
-                                      BlocProvider.of<GardensBloc>(context).add(
-                                        UpdateGarden(
-                                          garden.copyWith(
-                                              name: _newGardenNameController.text,
-                                              id: garden.id,
-                                              publicVisibility: garden.publicVisibility,
-                                              members: _gardenMembers
-                                          ),
-                                        ),
-                                      );
+//                                      BlocProvider.of<ParcelsBloc>(context).add(
+//                                        UpdateParcel(
+//                                          parcel.copyWith(
+//                                              name: _newParcelNameController.text,
+//                                              id: parcel.id,
+//                                              publicVisibility: parcel.publicVisibility,
+//                                              members: _gardenMembers
+//                                          ),
+//                                        ),
+//                                      );
                                     }
 
-                                    Navigator.pop(context, false);
-
+                                    Navigator.pop(context, true);
                                   },
                                   child: Text(
                                     "Confirm changes",
@@ -208,11 +217,15 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
 //                            buttonColor: state.theme.accentColor,
                                 child: RaisedButton(
                                   onPressed: () {
-                                    Map returnData = {'action': 'Leave', 'garden': garden};
-                                    Navigator.pop(context, returnData);
+//                                    BlocProvider.of<ParcelsBloc>(context).add(
+//                                        LeaveParcel(
+//                                            garden,
+//                                            widget.user.id
+//                                        ));
+                                    Navigator.pop(context, false);
                                   },
                                   child: Text(
-                                    "Leave a Garden",
+                                    "Leave a Parcel",
                                     style: TextStyle(fontSize: 22),
                                   ),
                                 ),
@@ -227,11 +240,10 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
 //                            buttonColor: state.theme.accentColor,
                                 child: RaisedButton(
                                   onPressed: () {
-                                    Map returnData = {'action': 'Delete', 'garden': garden};
-                                    Navigator.pop(context, returnData);
+                                    Navigator.pop(context, false);
                                   },
                                   child: Text(
-                                    "Delete a Garden",
+                                    "Delete a Parcel",
                                     style: TextStyle(fontSize: 22),
                                   ),
                                 ),
@@ -246,43 +258,6 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
         }
 
     );
-//    return Scaffold(
-//      appBar: AppBar(
-//        title: const Text('Garden settings'),
-//      ),
-//      body: Center(
-//          child: Padding(
-//            padding: EdgeInsets.only(left: 20, right: 20, top:10.0),
-//            child: Form(
-//              child: ListView(
-//                children: <Widget>[
-//                  Padding(
-//                    padding: EdgeInsets.symmetric(vertical: 10),
-//                    child: Text(
-//                      "Garden's name",
-//                      style: TextStyle(fontSize: 20),
-//                    ),
-//                  ),
-//                  TextFormField(
-//                    controller: null,
-//                    decoration: InputDecoration(
-//                      border: OutlineInputBorder(),
-//                      hintText: "Enter a Garden's name",
-////                      errorText: _gardenNameValidate ? 'Value Can\'t Be Empty' : null,
-//                    ),
-//                    onChanged: (value) {
-////                      _gardenNameController.text.isEmpty
-////                          ? _gardenNameValidate = true
-////                          : _gardenNameValidate = false;
-////                      setState(() {});
-//                    },
-//                  ),
-//                ],
-//              ),
-//            )
-//          )
-//      ),
-//    );
   }
 }
 

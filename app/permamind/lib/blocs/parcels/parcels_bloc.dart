@@ -70,6 +70,8 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
   }
 
   Stream<ParcelsState> _mapParcelDeletedToState(ParcelDeleted event) async* {
+    dataRepository.deleteDesignsParcel(event.deletedParcel.id);
+    dataRepository.deleteActivitiesFromParcel(event.deletedParcel.id);
     dataRepository.deleteParcel(event.deletedParcel);
   }
 
