@@ -350,7 +350,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
               BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(alteredParcel));
               BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
-              BlocProvider.of<ParcelsBloc>(context).add(DesignParcelAdded(parcel.id, designs));
+              BlocProvider.of<ParcelsBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
 
               Navigator.pop(context);
 

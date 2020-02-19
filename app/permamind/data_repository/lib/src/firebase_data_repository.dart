@@ -74,6 +74,10 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteGarden(Garden garden) async {
+
+    // Delete all designs
+    // Delete all activities
+    // Delete all parcels
     return vegetableGardensCollection.document(garden.id).delete();
   }
 
@@ -124,32 +128,50 @@ class FirebaseDataRepository implements DataRepository {
 
 }
 
-//  @override
-//  Future<void> deleteGardenActivities(String parcelId) async {
-//
-//    activitiesBisCollection.where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
-//      for (DocumentSnapshot doc in snapshot.documents) {
-//        doc.reference.delete();
-//      }
-//    });
-//
-//  }
+  @override
+  Future<void> deleteGardenParcels(String gardenId) async {
+
+    parcelsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
+  }
 
   @override
-  Future<void> deleteParcelActivities(String parcelId) async {
+  Future<void> deleteActivitiesFromParcel(String parcelId) async {
 
     activitiesBisCollection.where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
         doc.reference.delete();
       }
     });
+  }
 
+  @override
+  Future<void> deleteActivitiesFromGarden(String gardenId) async {
+
+    activitiesBisCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
+  }
+
+  @override
+  Future<void> deleteDesignsFromGarden(String gardenId) async {
+
+    designsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
   }
 
   @override
   Future<void> deleteDesignParcel(String gardenId) async {
 
-    designsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+    designsCollection.where("parcelId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
         doc.reference.delete();
       }

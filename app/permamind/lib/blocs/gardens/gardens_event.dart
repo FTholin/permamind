@@ -61,13 +61,13 @@ class UpdateGarden extends GardensEvent {
   String toString() => 'UpdateGarden { updatedGarden: $updatedGarden }';
 }
 
-class DeleteGarden extends GardensEvent {
+class GardenDeleted extends GardensEvent {
   final Garden garden;
 
-  DeleteGarden(this.garden) : super([garden]);
+  GardenDeleted(this.garden) : super([garden]);
 
   @override
-  String toString() => 'DeleteGarden { garden: $garden }';
+  String toString() => 'GardenDeleted { garden: $garden }';
 }
 
 class LeaveGarden extends GardensEvent {

@@ -53,13 +53,13 @@ class AddActivity extends ActivitiesEvent {
   String toString() => 'UpdateActivity { newActivity: $newActivity }';
 }
 
-class DeleteActivities extends ActivitiesEvent {
-  final String gardenId;
+class ActivitiesDeletedFromParcel extends ActivitiesEvent {
+  final String parcelId;
 
-  DeleteActivities(this.gardenId) : super([gardenId]);
+  ActivitiesDeletedFromParcel(this.parcelId) : super([parcelId]);
 
   @override
-  String toString() => 'DeleteActivities { gardenId: $gardenId }';
+  String toString() => 'ActivitiesDeletedFromParcel { gardenId: $parcelId }';
 }
 
 //class LoadActivities extends ActivitiesEvent {

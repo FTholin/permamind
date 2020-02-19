@@ -5,11 +5,13 @@ import 'package:equatable/equatable.dart';
 class DesignParcelEntity extends Equatable {
 
   final String id;
+  final String gardenId;
   final String parcelId;
   final List<Design> designs;
 
   DesignParcelEntity(
       this.id,
+      this.gardenId,
       this.parcelId,
       this.designs
       );
@@ -17,6 +19,7 @@ class DesignParcelEntity extends Equatable {
   Map<String, Object> toJson() {
     return {
       'id': id,
+      'gardenId': gardenId,
       'parcelId': parcelId,
       'designs': designs.map((item) {
         return item.toJson();
@@ -32,6 +35,7 @@ class DesignParcelEntity extends Equatable {
   static DesignParcelEntity fromJson(Map<String, Object> json) {
     return DesignParcelEntity(
         json['id'] as String,
+        json['gardenId'] as String,
         json['parcelId'] as String,
         json['positioning'] as List<Design>,
     );
@@ -41,6 +45,7 @@ class DesignParcelEntity extends Equatable {
 
     return DesignParcelEntity(
         snap.documentID,
+        snap.data['gardenId'],
         snap.data['parcelId'],
         snap.data['designs'].map<Design>((item) {
           return Design.fromMap(item);
@@ -50,6 +55,7 @@ class DesignParcelEntity extends Equatable {
 
   Map<String, Object> toDocument() {
     return {
+      'gardenId': gardenId,
       'parcelId': parcelId,
       'designs': designs.map((item) {
         return item.toJson();

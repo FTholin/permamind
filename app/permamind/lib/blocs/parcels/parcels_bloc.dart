@@ -58,7 +58,7 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
 
   Stream<ParcelsState> _mapDesignParcelAdded(DesignParcelAdded designParcel) async* {
     dataRepository.addNewDesignParcel(
-        DesignParcel(designParcel.parcelId, designParcel.designs));
+        DesignParcel(designParcel.gardenId, designParcel.parcelId, designParcel.designs));
   }
 
   Stream<ParcelsState> _mapParcelAddedToState(ParcelAdded event) async* {

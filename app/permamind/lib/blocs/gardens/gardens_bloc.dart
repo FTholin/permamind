@@ -33,8 +33,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapAddGardenToState(event);
     } else if (event is UpdateGarden) {
       yield* _mapUpdateGardensToState(event);
-    } else if (event is DeleteGarden) {
-      yield* _mapDeleteGardensToState(event);
+    } else if (event is GardenDeleted) {
+      yield* _mapGardenDeletedToState(event);
     } else if (event is ClearCompleted) {
       yield* _mapClearCompletedToState();
     } else if (event is GardensUpdated) {
@@ -84,12 +84,10 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _dataRepository.copyGarden(event.garden);
   }
 
-  Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {
-//    _dataRepository.deleteDesignParcel(event.garden.id);
-
-    // TODO Récupérer les parcelles
-    // TODO Récupérer les designs
-    // TODO Récupérer les activités
+  Stream<GardensState> _mapGardenDeletedToState(GardenDeleted event) async* {
+    _dataRepository.deleteDesignsFromGarden(event.garden.id);
+    _dataRepository.deleteActivitiesFromGarden(event.garden.id);
+    _dataRepository.deleteGardenParcels(event.garden.id);
     _dataRepository.deleteGarden(event.garden);
   }
 

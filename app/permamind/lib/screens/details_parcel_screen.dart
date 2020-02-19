@@ -389,74 +389,74 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
                           );
 
 
-                          if (removedParcel != null && removedParcel != false) {
-
-                            Map returnData = Map();
-
-                            List<Activity> activities = List<Activity>();
-                            state.schedule.entries.forEach((e) {
-                              e.value.forEach((item){
-                                activities.add(item);
-                              });
-                            });
-
-
-                            returnData['activities'] = activities;
-
-
-                            if (removedParcel['action'] == "Delete") {
-
-
-                              returnData['garden'] = currentParcel;
-
-                              returnData['action'] = "Delete";
-
-                              BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentParcel.id));
-
-                              BlocProvider.of<ParcelsBloc>(context).add(
-                                  ParcelDeleted(currentParcel));
-
-                              BlocProvider.of<ActivitiesBloc>(context).close();
-
-                              Navigator.pop(context, returnData);
-
-                            } else  {
-
-                              if (currentParcel.members.length == 1 || currentParcel.admin == widget.user.id) {
-                                returnData['garden'] = currentParcel;
-                                BlocProvider.of<ParcelsBloc>(context).add(
-                                    ParcelDeleted(currentParcel));
-                                BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentParcel.id));
-                                returnData['action'] = "Delete";
-                              } else {
-
-                                returnData['action'] = "Leave";
-
-                                List<GardenMember> members = new List<GardenMember>.from(currentParcel.members);
-
-                                // TODO Refaire la copie
-                                Parcel copy = currentParcel.copyWith(name: currentParcel.name,
-                                    length: currentParcel.length,
-                                    width: currentParcel.width,
-                                    parcelGround: currentParcel.parcelGround,
-                                    id: currentParcel.id,
-                                    publicVisibility: currentParcel.publicVisibility,
-                                    currentModelingId: currentParcel.currentModelingId,
-                                    admin: currentParcel.admin,
-                                    members: members);
-
-                                BlocProvider.of<ParcelsBloc>(context).add(
-                                    ParcelLeaved(currentParcel, widget.user.id)
-                                );
-
-                                returnData['garden'] = copy;
-                              }
-
-                              BlocProvider.of<ActivitiesBloc>(context).close();
-
-                              Navigator.pop(context, returnData);
-                            }
-                          }
+//                          if (removedParcel != null && removedParcel != false) {
+//
+//                            Map returnData = Map();
+//
+//                            List<Activity> activities = List<Activity>();
+//                            state.schedule.entries.forEach((e) {
+//                              e.value.forEach((item){
+//                                activities.add(item);
+//                              });
+//                            });
+//
+//
+//                            returnData['activities'] = activities;
+//
+//
+//                            if (removedParcel['action'] == "Delete") {
+//
+//
+//                              returnData['garden'] = currentParcel;
+//
+//                              returnData['action'] = "Delete";
+//
+//                              BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentParcel.id));
+//
+//                              BlocProvider.of<ParcelsBloc>(context).add(
+//                                  ParcelDeleted(currentParcel));
+//
+//                              BlocProvider.of<ActivitiesBloc>(context).close();
+//
+//                              Navigator.pop(context, returnData);
+//
+//                            } else  {
+//
+//                              if (currentParcel.members.length == 1 || currentParcel.admin == widget.user.id) {
+//                                returnData['garden'] = currentParcel;
+//                                BlocProvider.of<ParcelsBloc>(context).add(
+//                                    ParcelDeleted(currentParcel));
+//                                BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentParcel.id));
+//                                returnData['action'] = "Delete";
+//                              } else {
+//
+//                                returnData['action'] = "Leave";
+//
+//                                List<GardenMember> members = new List<GardenMember>.from(currentParcel.members);
+//
+//                                // TODO Refaire la copie
+//                                Parcel copy = currentParcel.copyWith(name: currentParcel.name,
+//                                    length: currentParcel.length,
+//                                    width: currentParcel.width,
+//                                    parcelGround: currentParcel.parcelGround,
+//                                    id: currentParcel.id,
+//                                    publicVisibility: currentParcel.publicVisibility,
+//                                    currentModelingId: currentParcel.currentModelingId,
+//                                    admin: currentParcel.admin,
+//                                    members: members);
+//
+//                                BlocProvider.of<ParcelsBloc>(context).add(
+//                                    ParcelLeaved(currentParcel, widget.user.id)
+//                                );
+//
+//                                returnData['garden'] = copy;
+//                              }
+//
+//                              BlocProvider.of<ActivitiesBloc>(context).close();
+//
+//                              Navigator.pop(context, returnData);
+//                            }
+//                          }
                         },
                       );
                     } else {

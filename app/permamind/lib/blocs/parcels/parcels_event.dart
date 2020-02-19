@@ -29,10 +29,12 @@ class ParcelAdded extends ParcelsEvent {
 
 
 class DesignParcelAdded extends ParcelsEvent {
+
+  final String gardenId;
   final List<Design> designs;
   final String parcelId;
 
-  DesignParcelAdded(this.parcelId, this.designs);
+  DesignParcelAdded(this.gardenId, this.parcelId, this.designs);
 
   @override
   String toString() => 'DesignParcelAdded { designs: $designs }';

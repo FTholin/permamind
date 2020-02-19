@@ -1,4 +1,3 @@
-export 'details_screen.dart';
 export 'home_screen.dart';
 export 'home_screen.dart';
 export 'discover_modelings_screen.dart';

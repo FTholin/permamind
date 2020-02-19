@@ -241,7 +241,6 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                               onPressed: () {
-                                // TODO Delete garden
                                 Navigator.pop(context, false);
                               },
                               child: Text(

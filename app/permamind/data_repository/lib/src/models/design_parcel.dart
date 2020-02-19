@@ -4,9 +4,11 @@ import 'package:equatable/equatable.dart';
 class DesignParcel extends Equatable {
   final String id;
   final String parcelId;
+  final String gardenId;
   final List<Design> designs;
 
   DesignParcel(
+      this.gardenId,
       this.parcelId,
       this.designs,
       {String id})
@@ -14,10 +16,12 @@ class DesignParcel extends Equatable {
 
   DesignParcel copyWith({
     String id,
+    String gardenId,
     String parcelId,
     List<Design> designs
   }) {
     return DesignParcel(
+        gardenId ?? this.gardenId,
         parcelId ?? this.parcelId,
         designs ?? this.designs,
         id: id ?? this.id
@@ -27,7 +31,7 @@ class DesignParcel extends Equatable {
 
   @override
   int get hashCode =>
-      id.hashCode  ^ parcelId.hashCode ^ designs.hashCode;
+      id.hashCode  ^ gardenId.hashCode ^ parcelId.hashCode ^ designs.hashCode;
 
 
   @override
@@ -36,12 +40,14 @@ class DesignParcel extends Equatable {
           other is DesignParcel &&
               runtimeType == other.runtimeType &&
               id == other.id &&
+              gardenId == other.gardenId &&
               parcelId == other.parcelId &&
               designs == other.designs;
 
   DesignParcelEntity toEntity() {
     return DesignParcelEntity(
         id,
+        gardenId,
         parcelId,
         designs
     );
@@ -50,6 +56,7 @@ class DesignParcel extends Equatable {
   static DesignParcel fromEntity(DesignParcelEntity entity) {
 
     return DesignParcel(
+      entity.gardenId,
       entity.parcelId,
       entity.designs,
       id: entity.id,

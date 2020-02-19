@@ -64,7 +64,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
 //
 //              if (addedActivity != false) {
 //                BlocProvider.of<GardensBloc>(context).add(
-//                    DeleteGarden(currentGarden));
+//                    GardenDeleted(currentGarden));
 //                BlocProvider.of<ActivitiesBloc>(context).close();
 //                Navigator.pop(context, currentGarden);
 //              }

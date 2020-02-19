@@ -13,7 +13,7 @@ class ParcelSpeedDial extends StatefulWidget {
 
   final String userId;
 
-  ParcelSpeedDial({this.garden, this.userId, this.visible}): assert(garden != null);
+  ParcelSpeedDial({this.garden, this.userId, this.visible});
 
   @override
   ParcelSpeedDialState createState() => ParcelSpeedDialState();

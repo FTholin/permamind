@@ -25,9 +25,15 @@ abstract class DataRepository {
 
   Future<void> copyParcel(Parcel parcel);
 
-  Future<void> deleteParcelActivities(String gardenId);
+  Future<void> deleteActivitiesFromParcel(String parcelId);
+
+  Future<void> deleteActivitiesFromGarden(String gardenId);
 
   Future<void> deleteDesignParcel(String gardenId);
+
+  Future<void> deleteGardenParcels(String gardenId);
+
+  Future<void> deleteDesignsFromGarden(String gardenId);
 
   Future<String> fetchIdGardenCreated(String gardenName);
 

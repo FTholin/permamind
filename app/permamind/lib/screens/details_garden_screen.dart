@@ -134,6 +134,10 @@ class _GardenAppBarState extends State<GardenAppBar> {
                           );
 
                           if (alteredGarden == false) {
+                            BlocProvider.of<GardensBloc>(context).add(
+                                GardenDeleted(
+                                  currentGarden,
+                                ));
                             Navigator.pop(context);
                           }
                         },
