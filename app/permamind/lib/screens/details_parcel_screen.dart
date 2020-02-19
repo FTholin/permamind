@@ -36,118 +36,122 @@ class DetailsParcelScreen extends StatelessWidget {
           final currentParcel = state.parcels.firstWhere((item) => item.id == parcel.id,
               orElse: () => null);
 
-          if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
-            return Scaffold(
-              appBar: ParcelAppBar(parcelId: parcel.id, user: user),
-              body: Center(
-                child: Column(
-                  children: <Widget>[
-                    Text("Aucune association de plantes prévu dans cette parcelle .\n On en rajoute une ?"),
-                    RaisedButton(
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (_) {
+          if (currentParcel != null) {
+            if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
+              return Scaffold(
+                appBar: ParcelAppBar(parcelId: parcel.id, user: user),
+                body: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Aucune association de plantes prévu dans cette parcelle .\n On en rajoute une ?"),
+                      RaisedButton(
+                        onPressed: () async {
+                          await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) {
 
-                                  return MultiBlocProvider(
-                                    providers: [
-                                      BlocProvider.value(
+                                    return MultiBlocProvider(
+                                      providers: [
+                                        BlocProvider.value(
                                           value: BlocProvider.of<ParcelsBloc>(context),
-                                      ),
-                                      BlocProvider<ModelingsBloc>(
-                                        create: (context) =>
-                                        ModelingsBloc(dataRepository: dataRepository)
-                                          ..add(FetchModelings()),
-                                      )
-                                    ],
-                                    child: DiscoverModelingsScreen(gardenId: gardenId,parcel: parcel),
-                                  );
+                                        ),
+                                        BlocProvider<ModelingsBloc>(
+                                          create: (context) =>
+                                          ModelingsBloc(dataRepository: dataRepository)
+                                            ..add(FetchModelings()),
+                                        )
+                                      ],
+                                      child: DiscoverModelingsScreen(gardenId: gardenId,parcel: parcel),
+                                    );
 
-                                })
-                        );
+                                  })
+                          );
 
-                      },
-                      child: Text("Ajouter une nouvelle association"),
-                    )
-                  ],
+                        },
+                        child: Text("Ajouter une nouvelle association"),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          } else {
-            return Scaffold(
-              appBar: ParcelAppBar(parcelId: parcel.id , user: user),
-              body: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
+              );
+            } else {
+              return Scaffold(
+                appBar: ParcelAppBar(parcelId: parcel.id , user: user),
+                body: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
 
-                    BlocBuilder<DesignBloc, DesignState>(
-                        builder: (context, state) {
-                          if (state is DesignLoaded) {
-                            if (state.designParcel.designs.isEmpty) {
-                              return Container(
-                                height: 230,
-                                child: Center(
-                                    child: VeggiesDesignChart(80.0, 100.0, [])
-                                ),
-                              );
+                      BlocBuilder<DesignBloc, DesignState>(
+                          builder: (context, state) {
+                            if (state is DesignLoaded) {
+                              if (state.designParcel.designs.isEmpty) {
+                                return Container(
+                                  height: 230,
+                                  child: Center(
+                                      child: VeggiesDesignChart(80.0, 100.0, [])
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  height: 230,
+                                  child: Center(
+                                      child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
+                                  ),
+                                );
+                              }
                             } else {
                               return Container(
                                 height: 230,
-                                child: Center(
-                                    child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
-                                ),
+                                child: LoadingIndicator(),
                               );
                             }
-                          } else {
-                            return Container(
-                              height: 230,
-                              child: LoadingIndicator(),
-                            );
                           }
-                        }
-                    ),
-                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                        builder: (context, state) {
-                          if (state is ActivitiesLoaded) {
-                            return SchedulerCalendar(
-                              referenceDate: DateTime.now(),
-                              schedule: state.schedule,
-                            );
-                          } else {
-                            return Expanded(
-                                child: Container(
-                                )
-                            );
+                      ),
+                      BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                          builder: (context, state) {
+                            if (state is ActivitiesLoaded) {
+                              return SchedulerCalendar(
+                                referenceDate: DateTime.now(),
+                                schedule: state.schedule,
+                              );
+                            } else {
+                              return Expanded(
+                                  child: Container(
+                                  )
+                              );
+                            }
                           }
-                        }
-                    ),
-                    const SizedBox(height: 8.0),
+                      ),
+                      const SizedBox(height: 8.0),
 //          _buildButtons(),
-                    const SizedBox(height: 8.0),
-                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                        builder: (context, state) {
-                          if (state is ActivitiesLoaded) {
-                            return Expanded(
-                              child: Container(
-                                  child: _buildEventList(state.referenceDate, state.schedule)
-                              ),
-                            );
-                          } else {
-                            return Expanded(
+                      const SizedBox(height: 8.0),
+                      BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                          builder: (context, state) {
+                            if (state is ActivitiesLoaded) {
+                              return Expanded(
                                 child: Container(
-                                  child: Text("$state"),
-                                )
-                            );
+                                    child: _buildEventList(state.referenceDate, state.schedule)
+                                ),
+                              );
+                            } else {
+                              return Expanded(
+                                  child: Container(
+                                    child: Text("$state"),
+                                  )
+                              );
+                            }
                           }
-                        }
-                    ),
+                      ),
 //          Expanded(child: _buildEventList()),
-                  ]),
-              floatingActionButton: ActivitySpeedDial(
-                  gardenId: gardenId,
-                  visible: true
-              ),
-            );
+                    ]),
+                floatingActionButton: ActivitySpeedDial(
+                    gardenId: gardenId,
+                    visible: true
+                ),
+              );
+            }
+          } else {
+            return Container();
           }
 
         } else {
@@ -345,66 +349,71 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
               .parcels.firstWhere((parcel) => parcel.id == widget.parcelId,
               orElse: () => null);
 
-          return AppBar(
-            title: currentParcel != null ? Text("${currentParcel.name}") : Text(""),
-            actions: <Widget>[
+          if (currentParcel != null) {
+            return AppBar(
+              title: currentParcel != null ? Text("${currentParcel.name}") : Text(""),
+              actions: <Widget>[
 
-              BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                  builder: (context, state) {
-                    if (state is ActivitiesLoaded) {
-                      return IconButton(
+                BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                    builder: (context, state) {
+                      if (state is ActivitiesLoaded) {
+                        return IconButton(
 //            tooltip: localizations.deleteParcel,
-                        // TODO ArchSampleKeys
+                          // TODO ArchSampleKeys
 //                key: ArchSampleKeys.deleteParcelButton,
-                        icon: Icon(Icons.settings),
-                        onPressed: () async {
+                          icon: Icon(Icons.settings),
+                          onPressed: () async {
 
-                          List<MemberProfile> initialMember = List<MemberProfile>();
+                            List<MemberProfile> initialMember = List<MemberProfile>();
 
-                          for (final member in currentParcel.members) {
-                            if (member.id != widget.user.id) {
-                              initialMember.add(MemberProfile(
-                                  member.id,
-                                  member.pseudo
-                              ));
-                            }
-                          }
-
-
-                          final alteredParcel = await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) {
-
-                                    return BlocProvider.value(
-                                      value: BlocProvider.of<ParcelsBloc>(
-                                          context),
-                                      child: SettingsParcelScreen(
-                                          parcelId: currentParcel.id,
-                                          initialMembersData: currentParcel.members,
-                                          initialMember: initialMember,
-                                          user: widget.user
-                                      ),
-                                    );
-                                  })
-                          );
-
-                          if (alteredParcel == false) {
-                            Navigator.pop(context);
-                            BlocProvider.of<ParcelsBloc>(context).add(
-                                ParcelDeleted(
-                                  currentParcel,
+                            for (final member in currentParcel.members) {
+                              if (member.id != widget.user.id) {
+                                initialMember.add(MemberProfile(
+                                    member.id,
+                                    member.pseudo
                                 ));
-                          }
+                              }
+                            }
 
-                        },
-                      );
-                    } else {
-                      return Container();
-                    }
-                  })
 
-            ],
-          );
+                            final alteredParcel = await Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (_) {
+
+                                      return BlocProvider.value(
+                                        value: BlocProvider.of<ParcelsBloc>(
+                                            context),
+                                        child: SettingsParcelScreen(
+                                            parcelId: currentParcel.id,
+                                            initialMembersData: currentParcel.members,
+                                            initialMember: initialMember,
+                                            user: widget.user
+                                        ),
+                                      );
+                                    })
+                            );
+
+                            if (alteredParcel == false) {
+                              Navigator.pop(context);
+                              BlocProvider.of<ParcelsBloc>(context).add(
+                                  ParcelDeleted(
+                                    currentParcel,
+                                  ));
+                            }
+
+                          },
+                        );
+                      } else {
+                        return Container();
+                      }
+                    })
+
+              ],
+            );
+
+          } else {
+            return Container();
+          }
         }
     );
   }
