@@ -39,16 +39,6 @@ class FirebaseDataRepository implements DataRepository {
   Future<void> addNewGarden(Garden garden) async {
 
 
-//    return vegetableGardensCollection.document(garden.id).setData({
-//        'id': garden.id,
-//        'name': garden.name,
-//        'publicVisibility': garden.publicVisibility,
-//        'admin': garden.admin,
-//        'members': [{'id': 'gd3Q3CYOwTPFNnZ9Z57yzmVGqAo1', 'pseudo': 'FLow'}],
-//        'creationDate': garden.creationDate,
-//        'dayActivitiesCount': garden.dayActivitiesCount
-//      });
-
     return vegetableGardensCollection.add(garden.toEntity().toDocument());
 
   }
@@ -133,8 +123,19 @@ class FirebaseDataRepository implements DataRepository {
 
 }
 
+//  @override
+//  Future<void> deleteGardenActivities(String parcelId) async {
+//
+//    activitiesBisCollection.where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
+//      for (DocumentSnapshot doc in snapshot.documents) {
+//        doc.reference.delete();
+//      }
+//    });
+//
+//  }
+
   @override
-  Future<void> deleteGardenActivities(String parcelId) async {
+  Future<void> deleteParcelActivities(String parcelId) async {
 
     activitiesBisCollection.where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {

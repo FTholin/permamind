@@ -76,7 +76,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
-    event.garden.members.remove(event.userId);
+    event.garden.members.removeWhere((item) => item.id == event.userId);
     _dataRepository.updateGarden(event.garden);
   }
 
@@ -86,6 +86,10 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {
 //    _dataRepository.deleteDesignParcel(event.garden.id);
+
+    // TODO Récupérer les parcelles
+    // TODO Récupérer les designs
+    // TODO Récupérer les activités
     _dataRepository.deleteGarden(event.garden);
   }
 

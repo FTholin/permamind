@@ -200,8 +200,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                     );
                                   }
 
-                                  Navigator.pop(context, false);
-
+                                  Navigator.pop(context, true);
                                 },
                                 child: Text(
                                   "Confirm changes",
@@ -219,8 +218,12 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                               onPressed: () {
-                                Map returnData = {'action': 'Leave', 'garden': garden};
-                                Navigator.pop(context, returnData);
+                                BlocProvider.of<GardensBloc>(context).add(
+                                    LeaveGarden(
+                                      garden,
+                                      widget.user.id
+                                ));
+                                Navigator.pop(context, false);
                               },
                               child: Text(
                                 "Leave a Garden",
@@ -238,8 +241,8 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                            buttonColor: state.theme.accentColor,
                             child: RaisedButton(
                               onPressed: () {
-                                Map returnData = {'action': 'Delete', 'garden': garden};
-                                Navigator.pop(context, returnData);
+                                // TODO Delete garden
+                                Navigator.pop(context, false);
                               },
                               child: Text(
                                 "Delete a Garden",
@@ -257,43 +260,6 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
     }
 
     );
-//    return Scaffold(
-//      appBar: AppBar(
-//        title: const Text('Garden settings'),
-//      ),
-//      body: Center(
-//          child: Padding(
-//            padding: EdgeInsets.only(left: 20, right: 20, top:10.0),
-//            child: Form(
-//              child: ListView(
-//                children: <Widget>[
-//                  Padding(
-//                    padding: EdgeInsets.symmetric(vertical: 10),
-//                    child: Text(
-//                      "Garden's name",
-//                      style: TextStyle(fontSize: 20),
-//                    ),
-//                  ),
-//                  TextFormField(
-//                    controller: null,
-//                    decoration: InputDecoration(
-//                      border: OutlineInputBorder(),
-//                      hintText: "Enter a Garden's name",
-////                      errorText: _gardenNameValidate ? 'Value Can\'t Be Empty' : null,
-//                    ),
-//                    onChanged: (value) {
-////                      _gardenNameController.text.isEmpty
-////                          ? _gardenNameValidate = true
-////                          : _gardenNameValidate = false;
-////                      setState(() {});
-//                    },
-//                  ),
-//                ],
-//              ),
-//            )
-//          )
-//      ),
-//    );
   }
 }
 

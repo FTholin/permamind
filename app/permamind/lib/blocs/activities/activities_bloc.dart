@@ -84,7 +84,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   }
 
   Stream<ActivitiesState> _mapDeleteActivitiesToState(DeleteActivities event) async* {
-    dataRepository.deleteGardenActivities(event.gardenId);
+    dataRepository.deleteParcelActivities(event.gardenId);
   }
 
 

@@ -99,7 +99,7 @@ class _GardenAppBarState extends State<GardenAppBar> {
                   builder: (context, state) {
                     if (state is ParcelsLoaded) {
                       return IconButton(
-                        // TODO ArchSampleKeys
+
                         icon: Icon(Icons.settings),
                         onPressed: () async {
                           List<MemberProfile> initialMember = List<
@@ -133,69 +133,8 @@ class _GardenAppBarState extends State<GardenAppBar> {
                                   })
                           );
 
-
-                          if (alteredGarden != null && alteredGarden != false) {
-                            Map returnData = Map();
-
-//                        List<Activity> activities = List<Activity>();
-//                        state.schedule.entries.forEach((e) {
-//                          e.value.forEach((item){
-//                            activities.add(item);
-//                          });
-//                        });
-
-
-//                        returnData['activities'] = activities;
-
-
-                            if (alteredGarden['action'] == "Delete") {
-                              returnData['garden'] = currentGarden;
-
-                              returnData['action'] = "Delete";
-
-//                          BlocProvider.of<ActivitiesBloc>(context).add(DeleteActivities(currentGarden.id));
-
-                              BlocProvider.of<GardensBloc>(context).add(
-                                  DeleteGarden(currentGarden));
-
-//                          BlocProvider.of<ActivitiesBloc>(context).close();
-
-                              Navigator.pop(context, returnData);
-                            } else {
-                              if (currentGarden.members.length == 1 ||
-                                  currentGarden.admin == widget.user.id) {
-                                returnData['garden'] = currentGarden;
-                                BlocProvider.of<GardensBloc>(context).add(
-                                    DeleteGarden(currentGarden));
-                                BlocProvider.of<ActivitiesBloc>(context).add(
-                                    DeleteActivities(currentGarden.id));
-                                returnData['action'] = "Delete";
-                              } else {
-                                returnData['action'] = "Leave";
-
-                                List<GardenMember> members = new List<
-                                    GardenMember>.from(currentGarden.members);
-
-                                // TODO Corriger bug rajout utilisateur dans la base
-                                Garden copy = currentGarden.copyWith(
-                                    name: currentGarden.name,
-                                    id: currentGarden.id,
-                                    publicVisibility: currentGarden
-                                        .publicVisibility,
-                                    admin: currentGarden.admin,
-                                    members: members);
-
-                                BlocProvider.of<GardensBloc>(context).add(
-                                    LeaveGarden(currentGarden, widget.user.id)
-                                );
-
-                                returnData['garden'] = copy;
-                              }
-
-                              BlocProvider.of<ActivitiesBloc>(context).close();
-
-                              Navigator.pop(context, returnData);
-                            }
+                          if (alteredGarden == false) {
+                            Navigator.pop(context);
                           }
                         },
                       );
