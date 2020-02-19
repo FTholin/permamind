@@ -154,7 +154,7 @@ class App extends StatelessWidget {
 ////                              ),
 ////                            );
 //
-//                            BlocProvider.of<GardensBloc>(context).add(AddGardenDesign(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
+//                            BlocProvider.of<GardensBloc>(context).add(AddDesignParcel(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
 //
 //                          }
 //                      );

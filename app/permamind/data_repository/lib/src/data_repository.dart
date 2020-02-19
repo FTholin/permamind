@@ -11,7 +11,7 @@ abstract class DataRepository {
 
   Stream<List<Parcel>> loadParcels(String gardenId);
 
-  Future<void> addNewGardenDesign(GardenDesign design);
+  Future<void> addNewDesignParcel(DesignParcel design);
 
   Future<void> addNewParcel(Parcel parcel);
 
@@ -27,7 +27,7 @@ abstract class DataRepository {
 
   Future<void> deleteGardenActivities(String gardenId);
 
-  Future<void> deleteGardenDesign(String gardenId);
+  Future<void> deleteDesignParcel(String gardenId);
 
   Future<String> fetchIdGardenCreated(String gardenName);
 
@@ -37,7 +37,7 @@ abstract class DataRepository {
 
   Stream<List<Activity>> loadParcelActivities(String parcelId);
 
-  Stream<List<GardenDesign>> loadGardenDesign(String gardenId);
+  Stream<List<DesignParcel>> loadDesignParcel(String gardenId);
 
   Future<void> updateGarden(Garden garden);
 

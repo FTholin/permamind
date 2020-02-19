@@ -32,15 +32,6 @@ class AddGarden extends GardensEvent {
 }
 
 
-class AddGardenDesign extends GardensEvent {
-  final List<Design> designs;
-  final String gardenId;
-
-  AddGardenDesign(this.gardenId, this.designs) : super([gardenId, designs]);
-
-  @override
-  String toString() => 'AddGardenDesign { designs: $designs }';
-}
 
 class CopyGarden extends GardensEvent {
   final Garden garden;

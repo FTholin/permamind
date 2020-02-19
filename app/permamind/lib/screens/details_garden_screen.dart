@@ -91,8 +91,7 @@ class _GardenAppBarState extends State<GardenAppBar> {
             leading: IconButton(
               icon: new Icon(Icons.keyboard_arrow_left),
               onPressed: () =>
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, ArchSampleRoutes.home, (_) => false),
+                  Navigator.pop(context)
             ),
             actions: <Widget>[
 
@@ -100,9 +99,7 @@ class _GardenAppBarState extends State<GardenAppBar> {
                   builder: (context, state) {
                     if (state is ParcelsLoaded) {
                       return IconButton(
-//            tooltip: localizations.deleteGarden,
                         // TODO ArchSampleKeys
-//                key: ArchSampleKeys.deleteGardenButton,
                         icon: Icon(Icons.settings),
                         onPressed: () async {
                           List<MemberProfile> initialMember = List<

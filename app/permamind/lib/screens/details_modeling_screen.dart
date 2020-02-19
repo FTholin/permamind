@@ -343,19 +343,16 @@ class DetailsModelingScreen extends StatelessWidget {
               : () async {
 
               Parcel alteredParcel = parcel.copyWith(
-                  name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, gardenGround: parcel.gardenGround,
+                  name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
                   publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-                  currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount: schedule[0].dayActivities.length,
+                  currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
                   modelingsMonitoring: [modeling.id], id: parcel.id);
 
               BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(alteredParcel));
               BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(parcel.id, schedule));
-
-
+              BlocProvider.of<ParcelsBloc>(context).add(DesignParcelAdded(parcel.id, designs));
 
               Navigator.pop(context);
-
-//            Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes., (_) => false);
 
           }),
 

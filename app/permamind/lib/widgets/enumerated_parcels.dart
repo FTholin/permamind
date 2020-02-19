@@ -43,7 +43,7 @@ class EnumeratedParcels extends StatelessWidget {
                         enableFeedback: true,
                         child: ParcelItem(name: parcels[index].name, modelingName: parcels[index].currentModelingName, membersCount: parcels[index].members.length.toString(), index: index, dayActivitiesCount: parcels[index].dayActivitiesCount),
                         onTap: () async {
-                          final removedGarden = await Navigator.of(context).push(
+                          final alteredParcel = await Navigator.of(context).push(
                               MaterialPageRoute(
 
                                   builder: (_) {
@@ -57,24 +57,31 @@ class EnumeratedParcels extends StatelessWidget {
                                               parcelsBloc: BlocProvider.of<ParcelsBloc>(context),
                                               parcelId: parcels[index].id
                                           )..add(LoadActivities()),
-                                        )
+                                        ),
+                                        BlocProvider(
+                                          create: (context) => DesignBloc(
+                                              dataRepository: _dataRepository,
+                                              activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
+                                              parcelId: parcels[index].id
+                                          )..add(LoadDesign()),
+                                        ),
                                       ],
-                                      child: DetailsParcelScreen(dataRepository: _dataRepository, parcel: parcels[index], user: _user, ),
+                                      child: DetailsParcelScreen(dataRepository: _dataRepository, parcel: parcels[index], user: _user),
                                     );
 
 
                                   })
                           );
-//                        if (removedGarden != null) {
+//                        if (alteredParcel != null) {
 //
-//                          if (removedGarden['action'] == 'Delete') {
+//                          if (alteredParcel['action'] == 'Delete') {
 //                            final snackBar = SnackBar(
-//                              content: Text('Delete ${removedGarden['garden'].name}'),
+//                              content: Text('Delete ${alteredParcel['garden'].name}'),
 //                              action: SnackBarAction(
 //                                label: 'Undo',
 //                                onPressed: () {
-//                                  BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden['garden']));
-//                                  BlocProvider.of<GardensBloc>(context).add(CopyActivities(removedGarden['activities']));
+//                                  BlocProvider.of<GardensBloc>(context).add(CopyGarden(alteredParcel['garden']));
+//                                  BlocProvider.of<GardensBloc>(context).add(CopyActivities(alteredParcel['activities']));
 //                                },
 //                              ),
 //                            );
@@ -84,11 +91,11 @@ class EnumeratedParcels extends StatelessWidget {
 //                          } else {
 //
 //                            final snackBar = SnackBar(
-//                              content: Text('Leave ${removedGarden['garden'].name}'),
+//                              content: Text('Leave ${alteredParcel['garden'].name}'),
 //                              action: SnackBarAction(
 //                                label: 'Undo',
 //                                onPressed: () {
-//                                  BlocProvider.of<GardensBloc>(context).add(UpdateGarden(removedGarden['garden']));
+//                                  BlocProvider.of<GardensBloc>(context).add(UpdateGarden(alteredParcel['garden']));
 //                                },
 //                              ),
 //                            );

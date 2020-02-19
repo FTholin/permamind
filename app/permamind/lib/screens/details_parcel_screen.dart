@@ -73,16 +73,36 @@ class DetailsParcelScreen extends StatelessWidget {
             );
           } else {
             return Scaffold(
-//      appBar: ParcelAppBar(parcelId: parcelId, user: user),
-              appBar: AppBar(),
+              appBar: ParcelAppBar(parcelId: parcel.id   , user: user),
               body: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
 
-                    // TODO Mettre le Plan de la parcelle
-                    Container(
-                      height: 230,
-                      color: Colors.amber,
+                    BlocBuilder<DesignBloc, DesignState>(
+                        builder: (context, state) {
+                          if (state is DesignLoaded) {
+                            if (state.designParcel.designs.isEmpty) {
+                              return Container(
+                                height: 230,
+                                child: Center(
+                                    child: VeggiesDesignChart(80.0, 100.0, [])
+                                ),
+                              );
+                            } else {
+                              return Container(
+                                height: 230,
+                                child: Center(
+                                    child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
+                                ),
+                              );
+                            }
+                          } else {
+                            return Container(
+                              height: 230,
+                              child: LoadingIndicator(),
+                            );
+                          }
+                        }
                     ),
                     BlocBuilder<ActivitiesBloc, ActivitiesState>(
                         builder: (context, state) {
@@ -142,31 +162,31 @@ class DetailsParcelScreen extends StatelessWidget {
 //        children: <Widget>[
 
 //          BlocBuilder<DesignBloc, DesignState>(
-////              builder: (context, state) {
-////                if (state is DesignLoaded) {
-////                  if (state.designParcel.designs.isEmpty) {
-////                    return Container(
-////                      height: 230,
-////                      child: Center(
-////                          child: VeggiesDesignChart(80.0, 100.0, [])
-////                      ),
-////                    );
-////                  } else {
-////                    return Container(
-////                      height: 230,
-////                      child: Center(
-////                          child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
-////                      ),
-////                    );
-////                  }
-////                } else {
-////                  return Container(
-////                    height: 230,
-////                    child: LoadingIndicator(),
-////                  );
-////                }
-////              }
-////          ),
+//              builder: (context, state) {
+//                if (state is DesignLoaded) {
+//                  if (state.designParcel.designs.isEmpty) {
+//                    return Container(
+//                      height: 230,
+//                      child: Center(
+//                          child: VeggiesDesignChart(80.0, 100.0, [])
+//                      ),
+//                    );
+//                  } else {
+//                    return Container(
+//                      height: 230,
+//                      child: Center(
+//                          child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
+//                      ),
+//                    );
+//                  }
+//                } else {
+//                  return Container(
+//                    height: 230,
+//                    child: LoadingIndicator(),
+//                  );
+//                }
+//              }
+//          ),
 
 
 //
@@ -415,7 +435,7 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
                                 Parcel copy = currentParcel.copyWith(name: currentParcel.name,
                                     length: currentParcel.length,
                                     width: currentParcel.width,
-                                    gardenGround: currentParcel.gardenGround,
+                                    parcelGround: currentParcel.parcelGround,
                                     id: currentParcel.id,
                                     publicVisibility: currentParcel.publicVisibility,
                                     currentModelingId: currentParcel.currentModelingId,

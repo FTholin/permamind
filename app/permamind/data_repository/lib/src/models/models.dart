@@ -5,5 +5,5 @@ export 'tutorial.dart';
 export 'parcel_activity.dart';
 export 'modeling_activities.dart';
 export 'garden_member.dart';
-export 'garden_design.dart';
+export 'design_parcel.dart';
 export 'parcel.dart';

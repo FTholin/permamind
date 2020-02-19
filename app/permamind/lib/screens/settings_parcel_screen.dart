@@ -56,7 +56,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Garden settings'),
+              title: const Text('Parcel settings'),
             ),
             body: Center(
                 child: Padding(

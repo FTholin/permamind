@@ -36,6 +36,9 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapModelingAddedToState(event);
     } else if (event is ParcelUpdated) {
       yield* _mapParcelUpdatedToState(event);
+    } else if (event is DesignParcelAdded) {
+      yield* _mapDesignParcelAdded(event);
+
     }
   }
 
@@ -51,6 +54,11 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
 
   Stream<ParcelsState> _mapParcelsUpdatedToState(ParcelsUpdated event) async* {
     yield ParcelsLoaded(event.parcels);
+  }
+
+  Stream<ParcelsState> _mapDesignParcelAdded(DesignParcelAdded designParcel) async* {
+    dataRepository.addNewDesignParcel(
+        DesignParcel(designParcel.parcelId, designParcel.designs));
   }
 
   Stream<ParcelsState> _mapParcelAddedToState(ParcelAdded event) async* {
@@ -81,7 +89,6 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
 
 
   Stream<ParcelsState> _mapModelingAddedToState(ModelingAdded event) async* {
-
 
     DateTime referenceDate = DateTime.now();
 

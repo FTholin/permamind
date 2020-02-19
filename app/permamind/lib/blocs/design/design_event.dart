@@ -7,7 +7,7 @@ abstract class DesignEvent extends Equatable {
 
 class UpdateDesign extends DesignEvent {
 
-  final GardenDesign design;
+  final DesignParcel design;
 
   UpdateDesign(this.design);
 
@@ -23,7 +23,7 @@ class LoadDesign extends DesignEvent {}
 
 class DesignUpdated extends DesignEvent {
 
-  final GardenDesign gardenDesign;
+  final DesignParcel gardenDesign;
 
   DesignUpdated(this.gardenDesign);
 

@@ -56,13 +56,13 @@ class FirebaseDataRepository implements DataRepository {
 
 
   @override
-  Future<void> addNewGardenDesign(GardenDesign design) async {
+  Future<void> addNewDesignParcel(DesignParcel design) async {
     return designsCollection.add(design.toEntity().toDocument());
   }
 
   @override
   Future<void> addNewActivity(Activity activity) {
-    return activitiesCollection.add(activity.toEntity().toDocument());
+    return activitiesBisCollection.add(activity.toEntity().toDocument());
   }
 
   @override
@@ -122,7 +122,7 @@ class FirebaseDataRepository implements DataRepository {
             schedule[i].toEntity().toDocument());
         batch.setData(docRef, {
           'title': schedule[i].title,
-          'gardenId': schedule[i].parcelId,
+          'parcelId': schedule[i].parcelId,
           'complete': schedule[i].complete,
           'expectedDate': schedule[i].expectedDate,
           'category': schedule[i].category,
@@ -145,7 +145,7 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   @override
-  Future<void> deleteGardenDesign(String gardenId) async {
+  Future<void> deleteDesignParcel(String gardenId) async {
 
     designsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
@@ -167,12 +167,12 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   @override
-  Stream<List<GardenDesign>> loadGardenDesign(String gardenId) {
+  Stream<List<DesignParcel>> loadDesignParcel(String gardenId) {
     return designsCollection
         .where("gardenId", isEqualTo: gardenId)
         .snapshots().map((snapshot) {
       return snapshot.documents
-          .map((doc) => GardenDesign.fromEntity(GardenDesignEntity.fromSnapshot(doc)))
+          .map((doc) => DesignParcel.fromEntity(DesignParcelEntity.fromSnapshot(doc)))
           .toList();
     });
   }

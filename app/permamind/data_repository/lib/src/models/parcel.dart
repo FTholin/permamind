@@ -12,7 +12,7 @@ class Parcel extends Equatable {
   final String currentModelingName;
   final double length;
   final double width;
-  final bool gardenGround;
+  final bool parcelGround;
   final String admin;
   final List<GardenMember> members;
   final List<String> modelingsMonitoring;
@@ -24,7 +24,7 @@ class Parcel extends Equatable {
       this.gardenId,
       this.length,
       this.width,
-      this.gardenGround,
+      this.parcelGround,
       this.publicVisibility,
       this.admin,
       this.members,
@@ -37,7 +37,7 @@ class Parcel extends Equatable {
       :  this.id = id;
 
   Parcel copyWith({String name, String gardenId, double length,
-    double width, bool gardenGround, bool publicVisibility, String admin,
+    double width, bool parcelGround, bool publicVisibility, String admin,
     List<GardenMember> members, String currentModelingId, String currentModelingName,
     DateTime creationDate, int dayActivitiesCount, List<String> modelingsMonitoring,
       String id}) {
@@ -46,7 +46,7 @@ class Parcel extends Equatable {
       gardenId ?? this.gardenId,
       length ?? this.length,
       width ?? this.width,
-      gardenGround ?? this.gardenGround,
+      parcelGround ?? this.parcelGround,
       publicVisibility ?? this.publicVisibility,
       admin ?? this.admin,
       members ?? this.members,
@@ -79,7 +79,7 @@ class Parcel extends Equatable {
 
   @override
   String toString() {
-    return 'Parcel { id: $id, name: $name, publicVisibility: $publicVisibility, members: $members }';
+    return 'Parcel { id: $id, name: $name, gardenId: $gardenId }';
   }
 
   ParcelEntity toEntity() {
@@ -89,7 +89,7 @@ class Parcel extends Equatable {
         gardenId,
         length,
         width,
-        gardenGround,
+        parcelGround,
         publicVisibility,
         admin,
         members,
@@ -108,7 +108,7 @@ class Parcel extends Equatable {
       entity.gardenId,
       entity.length,
       entity.width,
-      entity.gardenGround,
+      entity.parcelGround,
       entity.publicVisibility,
       entity.admin,
       entity.members,

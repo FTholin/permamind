@@ -42,7 +42,7 @@ class EnumeratedGardens extends StatelessWidget {
                       index: index,
                       dayActivitiesCount: gardens[index].dayActivitiesCount),
                   onTap: () async {
-                    final removedGarden = await Navigator.of(context)
+                    final alteredGarden = await Navigator.of(context)
                         .push(MaterialPageRoute(builder: (_) {
 
                       return BlocProvider<ParcelsBloc>(
@@ -54,18 +54,18 @@ class EnumeratedGardens extends StatelessWidget {
 
 
                     }));
-                    if (removedGarden != null) {
-                      if (removedGarden['action'] == 'Delete') {
+                    if (alteredGarden != null) {
+                      if (alteredGarden['action'] == 'Delete') {
                         final snackBar = SnackBar(
                           content:
-                              Text('Delete ${removedGarden['garden'].name}'),
+                              Text('Delete ${alteredGarden['garden'].name}'),
                           action: SnackBarAction(
                             label: 'Undo',
                             onPressed: () {
                               BlocProvider.of<GardensBloc>(context)
-                                  .add(CopyGarden(removedGarden['garden']));
+                                  .add(CopyGarden(alteredGarden['garden']));
                               BlocProvider.of<GardensBloc>(context).add(
-                                  CopyActivities(removedGarden['activities']));
+                                  CopyActivities(alteredGarden['activities']));
                             },
                           ),
                         );
@@ -74,12 +74,12 @@ class EnumeratedGardens extends StatelessWidget {
                       } else {
                         final snackBar = SnackBar(
                           content:
-                              Text('Leave ${removedGarden['garden'].name}'),
+                              Text('Leave ${alteredGarden['garden'].name}'),
                           action: SnackBarAction(
                             label: 'Undo',
                             onPressed: () {
                               BlocProvider.of<GardensBloc>(context)
-                                  .add(UpdateGarden(removedGarden['garden']));
+                                  .add(UpdateGarden(alteredGarden['garden']));
                             },
                           ),
                         );
