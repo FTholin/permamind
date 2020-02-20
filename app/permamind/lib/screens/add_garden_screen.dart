@@ -50,7 +50,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
         onStepContinue:
             _currentStep < 2 ? () => setState(() => _currentStep += 1) : null,
         onStepCancel:
-            _currentStep > 0 ? () => setState(() => _currentStep -= 1) : null,
+            _currentStep > -1 ? () => setState(() => _currentStep -= 1) : null,
         steps: <Step>[
           new Step(
             title: new Text(''),
@@ -296,7 +296,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(onPressed: () {
+              Navigator.pop(context);
+            }, child: const Text('BACK')),
             RaisedButton(
                 onPressed: () {
                   if (_gardenName.text.isNotEmpty) {

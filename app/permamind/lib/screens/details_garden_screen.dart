@@ -41,8 +41,9 @@ class DetailsGardenScreen extends StatelessWidget {
               appBar: GardenAppBar(gardenId: gardenId, user: user),
               body: EnumeratedParcels(gardenId: gardenId, dataRepository: dataRepository, user: user),
               floatingActionButton: ParcelSpeedDial(
+                dataRepository: dataRepository,
                 garden: garden,
-                userId: user.id,
+                user: user,
                 visible: true,
               ),
             )

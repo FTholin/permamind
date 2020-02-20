@@ -345,7 +345,7 @@ class DetailsModelingScreen extends StatelessWidget {
               Parcel alteredParcel = parcel.copyWith(
                   name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
                   publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-                  currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+                  currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
                   modelingsMonitoring: [modeling.id], id: parcel.id);
 
               BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(alteredParcel));

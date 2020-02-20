@@ -40,10 +40,11 @@ class DetailsParcelScreen extends StatelessWidget {
             if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
               return Scaffold(
                 appBar: ParcelAppBar(parcelId: currentParcel.id, user: user),
-                body: Center(
-                  child: Column(
+                  body: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text("Aucune association de plantes prévu dans cette parcelle .\n On en rajoute une ?"),
+                      Padding(padding: EdgeInsets.all(20),child:Text("Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?")),
                       RaisedButton(
                         onPressed: () async {
                           await Navigator.of(context).push(
@@ -71,8 +72,8 @@ class DetailsParcelScreen extends StatelessWidget {
                         child: Text("Ajouter une nouvelle association"),
                       )
                     ],
-                  ),
-                ),
+                  )
+
               );
             } else {
               return Scaffold(

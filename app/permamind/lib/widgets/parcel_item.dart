@@ -40,6 +40,7 @@ class ParcelItem extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
+
                         Text(
                           '${modelingName}',
                           style: TextStyle(
