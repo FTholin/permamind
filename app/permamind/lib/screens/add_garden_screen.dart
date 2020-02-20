@@ -32,13 +32,14 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   int _currentStep = 0;
   bool _publicVisibility = false;
 
-  List<GardenMember> _gardenMembers =  List<GardenMember>();
+  bool _gardenNameValidate = false;
+
+  List<GardenMember> _gardenMembers = List<GardenMember>();
 
   List<MemberProfile> queryResProfile = List<MemberProfile>();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: new AppBar(title: new Text('Créer un potager')),
       body: new Stepper(
@@ -47,7 +48,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
         onStepTapped: (int step) => setState(() => _currentStep = step),
         controlsBuilder: _createEventControlBuilder,
         onStepContinue:
-            _currentStep < 3 ? () => setState(() => _currentStep += 1) : null,
+            _currentStep < 2 ? () => setState(() => _currentStep += 1) : null,
         onStepCancel:
             _currentStep > 0 ? () => setState(() => _currentStep -= 1) : null,
         steps: <Step>[
@@ -77,7 +78,16 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
                           hintText: 'Nom potager',
+                          errorText: _gardenNameValidate
+                              ? 'Value Can\'t Be Empty'
+                              : null,
                         ),
+                        onChanged: (value) {
+                          _gardenName.text.isEmpty
+                              ? _gardenNameValidate = true
+                              : _gardenNameValidate = false;
+                          setState(() {});
+                        },
                       ),
                     )
                   ],
@@ -103,7 +113,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         value: true,
                         groupValue: _publicVisibility,
                         onChanged: (bool value) {
-                          setState(() { _publicVisibility = value;
+                          setState(() {
+                            _publicVisibility = value;
                           });
                         },
                       ),
@@ -121,7 +132,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         value: false,
                         groupValue: _publicVisibility,
                         onChanged: (bool value) {
-                          setState(() { _publicVisibility = value; });
+                          setState(() {
+                            _publicVisibility = value;
+                          });
                         },
                       ),
                       Text(
@@ -193,7 +206,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         if (query.length != 0) {
                           _gardenMembers = [];
 
-                          var queryRes = await  widget._dataRepository.searchByName(query);
+                          var queryRes =
+                              await widget._dataRepository.searchByName(query);
                           for (int i = 0; i < queryRes.documents.length; ++i) {
                             var data = queryRes.documents[i].data;
                             queryResProfile.add(MemberProfile(
@@ -203,15 +217,15 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
 //                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
                             ));
                           }
-
                         }
                         return queryResProfile;
                       },
                       onChanged: (data) {
                         _gardenMembers.clear();
-                        data.forEach((elem){
+                        data.forEach((elem) {
                           if (elem.pseudo != widget._user.pseudo) {
-                            _gardenMembers.add(GardenMember(id: elem.id, pseudo: elem.pseudo));
+                            _gardenMembers.add(
+                                GardenMember(id: elem.id, pseudo: elem.pseudo));
                           }
                         });
                       },
@@ -223,7 +237,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
 //                              backgroundImage: NetworkImage(profile.imageUrl),
 //                            ),
                           onDeleted: () => state.deleteChip(profile),
-                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
                         );
                       },
                       suggestionBuilder: (context, state, profile) {
@@ -245,47 +260,65 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
             isActive: _currentStep >= 0,
             state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
           ),
-          new Step(
-            title: new Text(''),
-            content: Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 30),
-              child: Column(
-                children: <Widget>[
-                  RaisedButton(
-                      onPressed: () async {
-
-
-                        _gardenMembers.add(GardenMember(
-                            id: widget._user.id, pseudo: widget._user.pseudo));
-
-                        final Garden garden = Garden("${_gardenName.text}", _publicVisibility,
-                            widget._user.id, _gardenMembers, DateTime.now(), 0);
-
-                        BlocProvider.of<GardensBloc>(context)
-                            .add(AddGarden(garden));
-
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, ArchSampleRoutes.home, (_) => false);
-                      },
-                      child: const Text('Finaliser jardin')),
-                ],
-              ),
-            ),
-            isActive: _currentStep >= 0,
-            state: _currentStep >= 3 ? StepState.complete : StepState.disabled,
-          ),
         ],
       ),
     );
   }
-}
 
-Widget _createEventControlBuilder(BuildContext context,
-    {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
-        RaisedButton(onPressed: onStepContinue, child: const Text('CONTINUE'))
-      ]);
+  Widget _createEventControlBuilder(BuildContext context,
+      {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+    if (_currentStep == 2) {
+      return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(
+                onPressed: () {
+                  _gardenMembers.add(GardenMember(
+                      id: widget._user.id, pseudo: widget._user.pseudo));
+
+                  final Garden garden = Garden(
+                      "${_gardenName.text}",
+                      _publicVisibility,
+                      widget._user.id,
+                      _gardenMembers,
+                      DateTime.now(),
+                      0);
+
+                  BlocProvider.of<GardensBloc>(context).add(AddGarden(garden));
+
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, ArchSampleRoutes.home, (_) => false);
+                },
+                child: const Text('FINALIZE')),
+          ]);
+    } else if (_currentStep == 0) {
+      return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(
+                onPressed: () {
+                  if (_gardenName.text.isNotEmpty) {
+                    onStepContinue();
+                  } else {
+                    setState(() {
+                      _gardenName.text.isEmpty
+                          ? _gardenNameValidate = true
+                          : _gardenNameValidate = false;
+                    });
+                  }
+                },
+                child: const Text('CONTINUE')),
+          ]);
+    } else {
+      return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(
+                onPressed: onStepContinue, child: const Text('CONTINUE')),
+          ]);
+    }
+  }
 }
