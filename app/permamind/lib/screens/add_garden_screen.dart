@@ -2,8 +2,10 @@ import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/models/models.dart';
 import 'package:permamind/screens/screens.dart';
 
 class AddGardenScreen extends StatefulWidget {
@@ -28,10 +30,15 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
 //  final TextEditingController _activityNameController = TextEditingController();
 
   int _currentStep = 0;
-  int _radioValue1 = 1;
+  bool _publicVisibility = false;
+
+  List<GardenMember> _gardenMembers =  List<GardenMember>();
+
+  List<MemberProfile> queryResProfile = List<MemberProfile>();
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: new AppBar(title: new Text('Créer un potager')),
       body: new Stepper(
@@ -93,9 +100,12 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                   Row(
                     children: <Widget>[
                       Radio(
-                        value: 0,
-                        groupValue: _radioValue1,
-                        onChanged: null,
+                        value: true,
+                        groupValue: _publicVisibility,
+                        onChanged: (bool value) {
+                          setState(() { _publicVisibility = value;
+                          });
+                        },
                       ),
                       Text(
                         'Oui',
@@ -108,9 +118,11 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                   Row(
                     children: <Widget>[
                       Radio(
-                        value: 1,
-                        groupValue: _radioValue1,
-                        onChanged: null,
+                        value: false,
+                        groupValue: _publicVisibility,
+                        onChanged: (bool value) {
+                          setState(() { _publicVisibility = value; });
+                        },
                       ),
                       Text(
                         'Non',
@@ -163,11 +175,68 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.all(10),
-                    child: TextField(
+                    child: ChipsInput(
+                      keyboardAppearance: Brightness.dark,
+                      textCapitalization: TextCapitalization.words,
+                      enabled: true,
+                      maxChips: 15,
+                      textStyle: TextStyle(
+                          height: 1.5, fontFamily: "Roboto", fontSize: 16),
                       decoration: InputDecoration(
-//                        border: InputBorder.none,
-                        hintText: 'Jardiniers',
+                        prefixIcon: Icon(Icons.search),
+                        // hintText: formControl.hint,
+                        // enabled: false,
+                        // errorText: field.errorText,
                       ),
+                      findSuggestions: (String query) async {
+                        queryResProfile = [];
+                        if (query.length != 0) {
+                          _gardenMembers = [];
+
+                          var queryRes = await  widget._dataRepository.searchByName(query);
+                          for (int i = 0; i < queryRes.documents.length; ++i) {
+                            var data = queryRes.documents[i].data;
+                            queryResProfile.add(MemberProfile(
+                              data["id"],
+                              data["pseudo"],
+//                                  data["email"],
+//                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+                            ));
+                          }
+
+                        }
+                        return queryResProfile;
+                      },
+                      onChanged: (data) {
+                        _gardenMembers.clear();
+                        data.forEach((elem){
+                          if (elem.pseudo != widget._user.pseudo) {
+                            _gardenMembers.add(GardenMember(id: elem.id, pseudo: elem.pseudo));
+                          }
+                        });
+                      },
+                      chipBuilder: (context, state, profile) {
+                        return InputChip(
+                          key: ObjectKey(profile),
+                          label: Text(profile.pseudo),
+//                            avatar: CircleAvatar(
+//                              backgroundImage: NetworkImage(profile.imageUrl),
+//                            ),
+                          onDeleted: () => state.deleteChip(profile),
+                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        );
+                      },
+                      suggestionBuilder: (context, state, profile) {
+                        return ListTile(
+                          key: ObjectKey(profile),
+//                            leading: CircleAvatar(
+//                              backgroundImage: NetworkImage(profile.imageUrl),
+//                            ),
+                          title: Text(profile.pseudo),
+//                            subtitle: Text(profile.email),
+                          onTap: () => state.selectSuggestion(profile),
+                        );
+                      },
                     ),
                   )
                 ],
@@ -185,13 +254,12 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                   RaisedButton(
                       onPressed: () async {
 
-                        List<GardenMember> members = List<GardenMember>();
 
-                        members.add(GardenMember(
+                        _gardenMembers.add(GardenMember(
                             id: widget._user.id, pseudo: widget._user.pseudo));
 
-                        final Garden garden = Garden("${_gardenName.text}", false,
-                            widget._user.id, members, DateTime.now(), 0);
+                        final Garden garden = Garden("${_gardenName.text}", _publicVisibility,
+                            widget._user.id, _gardenMembers, DateTime.now(), 0);
 
                         BlocProvider.of<GardensBloc>(context)
                             .add(AddGarden(garden));

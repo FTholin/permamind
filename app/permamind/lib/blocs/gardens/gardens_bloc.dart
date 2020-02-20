@@ -35,8 +35,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapUpdateGardensToState(event);
     } else if (event is GardenDeleted) {
       yield* _mapGardenDeletedToState(event);
-    } else if (event is ClearCompleted) {
-      yield* _mapClearCompletedToState();
     } else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
     } else if (event is LeaveGarden) {
@@ -91,29 +89,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _dataRepository.deleteGarden(event.garden);
   }
 
-//  Stream<GardensState> _mapToggleAllToState() async* {
-//    final state = state;
-////    if (state is GardensLoaded) {
-////      final allComplete = state.gardens.every((todo) => todo.complete);
-////      final List<Garden> updatedGardens = state.gardens
-////          .map((todo) => todo.copyWith(complete: !allComplete))
-////          .toList();
-////      updatedGardens.forEach((updatedGardens) {
-////        _dataRepository.updateGardens(updatedGardens);
-////      });
-////    }
-//  }
-
-  Stream<GardensState> _mapClearCompletedToState() async* {
-//    final state = currentState;
-//    if (state is GardensLoaded) {
-//      final List<Garden> completedGardens =
-//      state.gardens.where((todo) => todo.complete).toList();
-//      completedGardens.forEach((completedGardens) {
-//        _dataRepository.deleteGardens(completedGardens);
-//      });
-//    }
-  }
 
   Stream<GardensState> _mapGardensUpdateToState(GardensUpdated event) async* {
     yield GardensLoaded(event.gardens);

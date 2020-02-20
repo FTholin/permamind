@@ -312,86 +312,86 @@
 //                                  ),
 //                                  textColor: state.theme.canvasColor
 //                              ),
-//                            )
-//                        ),
-//                      ],
-//                    ),
-//                  ),
-//                )
-//
-//            );
-//          } else {
-//            return Scaffold(
-//                appBar: AppBar(
-//                  title: Text("Create your garden"),
-//                ),
-//                body: Padding(
-//                  padding: EdgeInsets.only(left: 20, right: 20, top:10.0),
-//                  child: Form(
-//                    child: ListView(
-//                      children: <Widget>[
-//                        Padding(
-//                          padding: EdgeInsets.symmetric(vertical: 10),
-//                          child: Text(
-//                            "Garden's name",
-//                            style: TextStyle(fontSize: 20),
-//                          ),
-//                        ),
-//                        TextFormField(
-//                          controller: _gardenNameController,
-//                          decoration: InputDecoration(
-//                            border: OutlineInputBorder(),
-//                            hintText: "Enter a Garden's name",
-//                            errorText: _gardenNameValidate ? 'Value Can\'t Be Empty' : null,
-//                          ),
-//                          onChanged: (value) {
-//                            _gardenNameController.text.isEmpty
-//                                ? _gardenNameValidate = true
-//                                : _gardenNameValidate = false;
-//                            setState(() {});
-//                          },
-//                        ),
-//                        Padding(
-//                          padding: EdgeInsets.symmetric(vertical: 10),
-//                          child: Text(
-//                              "Garden's dimensions l x L (centimeter)",
-//                            style: TextStyle(fontSize: 20),
-//                          ),
-//                        ),
-//                        Row(
-//                          children: <Widget>[
-//                            Expanded(
-//                                child: Padding(
-//                                  padding: EdgeInsets.only(bottom: 10, right: 10),
-//                                    child: DropdownButton<String>(
-////                                      hint:  Text("Select length"),
-//                                      value:  gardenLengthValue,
-//                                      onChanged: (String value) {
-//                                        setState(() {
-//                                          gardenLengthValue = value;
-//                                        });
-//                                      },
-//                                      items: lengths.map((String value) {
-//                                        return  DropdownMenuItem<String>(
-//                                          value: value,
-//                                          child: Row(
-//                                            children: <Widget>[
-//                                              SizedBox(width: 10,),
-//                                              Text(
-//                                                value,
-//                                                style:  TextStyle(color: Colors.black),
-//                                              ),
-//                                            ],
-//                                          ),
-//                                        );
-//                                      }).toList(),
-//                                    ),
-//                                )
-//                            ),
-//                            Expanded(
-//                                child: Padding(
-//                                  padding: EdgeInsets.only(bottom: 10),
-//                                  child: DropdownButton<String>(
+////                            )
+////                        ),
+////                      ],
+////                    ),
+////                  ),
+////                )
+////
+////            );
+////          } else {
+////            return Scaffold(
+////                appBar: AppBar(
+////                  title: Text("Create your garden"),
+////                ),
+////                body: Padding(
+////                  padding: EdgeInsets.only(left: 20, right: 20, top:10.0),
+////                  child: Form(
+////                    child: ListView(
+////                      children: <Widget>[
+////                        Padding(
+////                          padding: EdgeInsets.symmetric(vertical: 10),
+////                          child: Text(
+////                            "Garden's name",
+////                            style: TextStyle(fontSize: 20),
+////                          ),
+////                        ),
+////                        TextFormField(
+////                          controller: _gardenNameController,
+////                          decoration: InputDecoration(
+////                            border: OutlineInputBorder(),
+////                            hintText: "Enter a Garden's name",
+////                            errorText: _gardenNameValidate ? 'Value Can\'t Be Empty' : null,
+////                          ),
+////                          onChanged: (value) {
+////                            _gardenNameController.text.isEmpty
+////                                ? _gardenNameValidate = true
+////                                : _gardenNameValidate = false;
+////                            setState(() {});
+////                          },
+////                        ),
+////                        Padding(
+////                          padding: EdgeInsets.symmetric(vertical: 10),
+////                          child: Text(
+////                              "Garden's dimensions l x L (centimeter)",
+////                            style: TextStyle(fontSize: 20),
+////                          ),
+////                        ),
+////                        Row(
+////                          children: <Widget>[
+////                            Expanded(
+////                                child: Padding(
+////                                  padding: EdgeInsets.only(bottom: 10, right: 10),
+////                                    child: DropdownButton<String>(
+//////                                      hint:  Text("Select length"),
+////                                      value:  gardenLengthValue,
+////                                      onChanged: (String value) {
+////                                        setState(() {
+////                                          gardenLengthValue = value;
+////                                        });
+////                                      },
+////                                      items: lengths.map((String value) {
+////                                        return  DropdownMenuItem<String>(
+////                                          value: value,
+////                                          child: Row(
+////                                            children: <Widget>[
+////                                              SizedBox(width: 10,),
+////                                              Text(
+////                                                value,
+////                                                style:  TextStyle(color: Colors.black),
+////                                              ),
+////                                            ],
+////                                          ),
+////                                        );
+////                                      }).toList(),
+////                                    ),
+////                                )
+////                            ),
+////                            Expanded(
+////                                child: Padding(
+////                                  padding: EdgeInsets.only(bottom: 10),
+////                                  child: DropdownButton<String>(
 //                                      value:  gardenWidthValue,
 //                                    onChanged: (String value) {
 //                                      setState(() {
