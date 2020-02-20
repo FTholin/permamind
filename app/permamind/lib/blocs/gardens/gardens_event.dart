@@ -15,8 +15,9 @@ class GardensInit extends GardensEvent {
 class LoadGardens extends GardensEvent {
 
   final String userId;
+  final String userPseudo;
 
-  LoadGardens(this.userId) : super([userId]);
+  LoadGardens(this.userId, this.userPseudo) : super([userId, userPseudo]);
 
   @override
   String toString() => 'LoadGardens { userId: $userId}';

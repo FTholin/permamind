@@ -39,7 +39,7 @@ class DetailsParcelScreen extends StatelessWidget {
           if (currentParcel != null) {
             if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
               return Scaffold(
-                appBar: ParcelAppBar(parcelId: parcel.id, user: user),
+                appBar: ParcelAppBar(parcelId: currentParcel.id, user: user),
                 body: Center(
                   child: Column(
                     children: <Widget>[
@@ -375,7 +375,6 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
                               }
                             }
 
-
                             final alteredParcel = await Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (_) {
@@ -394,13 +393,20 @@ class _ParcelAppBarState extends State<ParcelAppBar>{
                             );
 
                             if (alteredParcel == false) {
-                              Navigator.pop(context);
                               BlocProvider.of<ParcelsBloc>(context).add(
                                   ParcelDeleted(
                                     currentParcel,
                                   ));
-                            }
+                              Navigator.pop(context);
+                            } else if (alteredParcel == true) {
 
+                              BlocProvider.of<ParcelsBloc>(context).add(
+                                  ParcelLeaved(
+                                      currentParcel,
+                                      widget.user.id
+                                  ));
+                              Navigator.pop(context);
+                            }
                           },
                         );
                       } else {

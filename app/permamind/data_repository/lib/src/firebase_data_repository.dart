@@ -37,12 +37,8 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> addNewGarden(Garden garden) async {
-
-
     return vegetableGardensCollection.add(garden.toEntity().toDocument());
-
   }
-
 
 
   @override
@@ -61,9 +57,10 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   @override
-  Stream<List<Parcel>> loadParcels(String gardenId) {
+  Stream<List<Parcel>> loadParcels(String gardenId, String userId, String userPseudo) {
     return parcelsCollection
         .where("gardenId", isEqualTo: gardenId)
+        .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Parcel.fromEntity(ParcelEntity.fromSnapshot(doc)))
@@ -276,5 +273,35 @@ class FirebaseDataRepository implements DataRepository {
     return parcelsCollection
         .document(update.id)
         .updateData(update.toEntity().toDocument());
+  }
+
+
+  @override
+  Future<void> updateParcelsFromGarden(String gardenId, String userId) {
+
+    return parcelsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+
+        var newMembers = doc.data['members'];
+        newMembers.removeWhere((member) => member['id'] == userId);
+
+        doc.reference.setData({
+          'name': doc.data['name'],
+          'gardenId': doc.data['gardenId'],
+          'length': doc.data['length'],
+          'width': doc.data['width'],
+          'parcelGround': doc.data['parcelGround'],
+          'publicVisibility': doc.data['publicVisibility'],
+          'admin': doc.data['admin'],
+          'members': newMembers,
+          'currentModelingId': doc.data['currentModelingId'],
+          'currentModelingName': doc.data['currentModelingName'],
+          'creationDate': doc.data['creationDate'],
+          'dayActivitiesCount': doc.data['dayActivitiesCount'],
+          'modelingsMonitoring': doc.data['modelingsMonitoring']
+        });
+      }
+    });
+
   }
 }

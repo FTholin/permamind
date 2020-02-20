@@ -7,12 +7,15 @@ abstract class ParcelsEvent extends Equatable {
 
 
 class LoadParcels extends ParcelsEvent {
-  final String gardenId;
 
-  LoadParcels(this.gardenId);
+  final String gardenId;
+  final String userPseudo;
+  final String userId;
+
+  LoadParcels(this.gardenId, this.userPseudo, this.userId);
 
   @override
-  String toString() => 'LoadParcels { gardenId: $gardenId }';
+  String toString() => 'LoadParcels { gardenId: $gardenId, userPseudo: $userPseudo }';
 }
 
 class ParcelAdded extends ParcelsEvent {

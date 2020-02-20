@@ -9,7 +9,7 @@ abstract class DataRepository {
 
   Future<void> addNewActivity(Activity activity);
 
-  Stream<List<Parcel>> loadParcels(String gardenId);
+  Stream<List<Parcel>> loadParcels(String gardenId, String userId, String userPseudo);
 
   Future<void> addNewDesignParcel(DesignParcel design);
 
@@ -54,5 +54,8 @@ abstract class DataRepository {
   Future<QuerySnapshot> searchById(String value);
 
   Future<void> updateParcel(Parcel update);
+
+  Future<void> updateParcelsFromGarden(String gardenId, String userId);
+
 
   }

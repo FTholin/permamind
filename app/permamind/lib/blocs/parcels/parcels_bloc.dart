@@ -43,9 +43,8 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
   }
 
   Stream<ParcelsState> _mapLoadParcelsToState(LoadParcels event) async* {
-
     gardenSubscription?.cancel();
-    gardenSubscription = dataRepository.loadParcels(event.gardenId).listen(
+    gardenSubscription = dataRepository.loadParcels(event.gardenId, event.userId, event.userPseudo).listen(
           (parcels) {
         add(ParcelsUpdated(parcels));
       },
@@ -80,7 +79,8 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
   }
 
   Stream<ParcelsState> _mapParcelLeavedToState(ParcelLeaved event) async* {
-    event.leavedParcel.members.remove(event.userId);
+
+    event.leavedParcel.members.removeWhere((item) => item.id == event.userId);
     dataRepository.updateParcel(event.leavedParcel);
   }
 

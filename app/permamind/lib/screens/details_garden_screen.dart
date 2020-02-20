@@ -139,6 +139,14 @@ class _GardenAppBarState extends State<GardenAppBar> {
                                   currentGarden,
                                 ));
                             Navigator.pop(context);
+                          } else if (alteredGarden == true) {
+
+                            BlocProvider.of<GardensBloc>(context).add(
+                                LeaveGarden(
+                                    currentGarden,
+                                    widget.user.id
+                                ));
+                            Navigator.pop(context);
                           }
                         },
                       );

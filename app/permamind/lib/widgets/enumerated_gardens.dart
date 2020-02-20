@@ -49,7 +49,7 @@ class EnumeratedGardens extends StatelessWidget {
                         create: (context) => ParcelsBloc(
                             gardensBloc: BlocProvider.of<GardensBloc>(context),
                             dataRepository: _dataRepository)
-                          ..add(LoadParcels(gardens[index].id)),
+                          ..add(LoadParcels(gardens[index].id, _user.pseudo, _user.id)),
                         child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user, dataRepository: _dataRepository,),);
 
 

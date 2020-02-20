@@ -17,7 +17,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       // React to state changes here.
       // Dispatch events here to trigger changes in MyBloc.
       if (state is Authenticated) {
-        add(LoadGardens(state.userAuthenticated.id));
+        add(LoadGardens(state.userAuthenticated.id, state.userAuthenticated.pseudo));
       }
     });
   }
@@ -49,12 +49,9 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
-    final pseudo = (await _dataRepository.searchById(event.userId)).documents
-        .first.data['pseudo'];
     _gardensSubscription?.cancel();
-    _gardensSubscription = _dataRepository.gardens(event.userId, pseudo).listen(
+    _gardensSubscription = _dataRepository.gardens(event.userId, event.userPseudo).listen(
           (gardens) {
-//            var plans = _dataRepository.loadPlans(gardenId);
         add(GardensUpdated(gardens));
       },
     );
@@ -76,6 +73,9 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
+
+
+    _dataRepository.updateParcelsFromGarden(event.garden.id, event.userId);
     event.garden.members.removeWhere((item) => item.id == event.userId);
     _dataRepository.updateGarden(event.garden);
   }
