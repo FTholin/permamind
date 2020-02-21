@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class GardenItem extends StatelessWidget {
+class ParcelItem extends StatelessWidget {
   final String name;
+  final String modelingName;
   final String membersCount;
   final int index;
   final int dayActivitiesCount;
 
-  GardenItem({
+  ParcelItem({
     @required this.name,
+    @required this.modelingName,
     @required this.membersCount,
     @required this.index,
     this.dayActivitiesCount
@@ -33,9 +35,22 @@ class GardenItem extends StatelessWidget {
                 color: Color(0xFFF9F9F9).withOpacity(0.86),
               ),
               child: Padding(
-                  padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
+                    Row(
+                      children: <Widget>[
+
+                        Text(
+                          '${modelingName}',
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 12,
+                              color: Color(0xFF4FB06E)
+                          ),
+                        ),
+                      ],
+                    ),
                     Row(
                       children: <Widget>[
                         Text(
@@ -72,16 +87,16 @@ class GardenItem extends StatelessWidget {
             height: 30,
             width: 30,
             child: Container(
-                padding: EdgeInsets.all(2),
-                decoration: new BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(15),
-                ),
+              padding: EdgeInsets.all(2),
+              decoration: new BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Center(
-                child: Text(
-                  '$dayActivitiesCount',
-                  style: TextStyle(fontSize: 20,color: Colors.white),
-                )
+                  child: Text(
+                    '$dayActivitiesCount',
+                    style: TextStyle(fontSize: 20,color: Colors.white),
+                  )
               ),
             ),
           ),

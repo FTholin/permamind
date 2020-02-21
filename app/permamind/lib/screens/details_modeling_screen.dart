@@ -6,31 +6,25 @@ import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 
-
-typedef SaveGardenCallback = Function(String gardenName,
-    bool publicVisibility,
-    List<GardenMember> gardenMembers,
-    String gardenModelisationId,
-    String modelisationName,
-    double gardenLength,
-    double gardenWidth,
-    bool gardenGround,
-    List<ModelingSchedule> schedule,
-    List<Design> designs
-    );
-
 class DetailsModelingScreen extends StatelessWidget {
 
-  final SaveGardenCallback onSaveGarden;
+  final Parcel parcel;
+  final Modeling modeling;
+  final List<ModelingSchedule> schedule;
+  final String gardenId;
+  final List<Design> designs;
 
-  DetailsModelingScreen({@required this.onSaveGarden});
+  DetailsModelingScreen({
+    Key key,
+    @required this.gardenId,
+    @required this.parcel,
+    @required this.modeling,
+    @required this.schedule,
+    @required this.designs
+  }): assert(parcel != null), assert(modeling != null), assert(schedule != null), assert(designs != null), assert(gardenId != null);
 
   @override
   Widget build(BuildContext context) {
-
-    final DetailsModelingsScreenArguments args =
-        ModalRoute.of(context).settings.arguments;
-
 
     final mediaWidth =  MediaQuery.of(context).size.width;
     final mediaHeight =  MediaQuery.of(context).size.height;
@@ -38,7 +32,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${args.gardenName}'),
+        title: Text('${parcel.name}'),
       ),
         body: Padding(
           padding: EdgeInsets.all(20.0),
@@ -50,7 +44,7 @@ class DetailsModelingScreen extends StatelessWidget {
                   height: mediaHeight * 230 / 896,
                   child: Center(
                     child: Image.asset(
-                      'assets/modelings/${args.modeling.name}.png',
+                      'assets/modelings/${modeling.name}.png',
                       fit: BoxFit.cover,
                     )
                   )),
@@ -63,7 +57,7 @@ class DetailsModelingScreen extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     child: Center(
                       child: Text(
-                          "${args.modeling.composition.join(" - ")}",
+                          "${modeling.composition.join(" - ")}",
                           style: TextStyle(
                               color: const Color(0xFF01534F),
                               fontWeight: FontWeight.bold,
@@ -86,9 +80,9 @@ class DetailsModelingScreen extends StatelessWidget {
                         child: _buildModelingSchedule(
                             mediaHeight,
                             mediaWidth,
-                            args.modeling.culturePeriod,
-                            args.modeling.sowingPeriod,
-                            args.modeling.harvestPeriod
+                            modeling.culturePeriod,
+                            modeling.sowingPeriod,
+                            modeling.harvestPeriod
                         ),
                     ),
                   decoration: BoxDecoration(
@@ -197,7 +191,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                       Expanded(
                                         child: Center(
                                           child: Text(
-                                              "${args.modeling.productionDuration} months",
+                                              "${modeling.productionDuration} months",
                                               style: TextStyle(
                                                   color: const Color(0xFF01534F),
                                                   fontSize: 14)
@@ -221,28 +215,6 @@ class DetailsModelingScreen extends StatelessWidget {
                 ),
               ),
 
-
-
-
-
-
-//              Padding(
-//                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 90),
-//                child: Container(
-//                  height: mediaHeight * 70 / 896,
-//                  child: Row(
-//                    children: <Widget>[
-//                      Expanded(
-//
-//                      ),
-//                    ],
-//                  ),
-//                  decoration: BoxDecoration(
-//                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
-//                    borderRadius: BorderRadius.all(Radius.circular(18)),
-//                  ),
-//                ),
-//              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Container(
@@ -265,7 +237,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                     ),
                                 ),
                                 Expanded(
-                                  child: _buildModelingNotation(context, args.modeling.difficultyLevel),
+                                  child: _buildModelingNotation(context, modeling.difficultyLevel),
                                 )
                               ],
                             ),
@@ -288,7 +260,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Expanded(
-                                  child: _buildModelingNotation(context, args.modeling.difficultyLevel),
+                                  child: _buildModelingNotation(context, modeling.difficultyLevel),
                                 )
                               ],
                             ),
@@ -324,7 +296,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                child: _buildModelingNotation(context, args.modeling.sunlightRequirement),
+                                child: _buildModelingNotation(context, modeling.sunlightRequirement),
                               )
                             ],
                           ),
@@ -347,7 +319,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                child: _buildModelingNotation(context, args.modeling.waterRequirement),
+                                child: _buildModelingNotation(context, modeling.waterRequirement),
                               )
                             ],
                           ),
@@ -365,41 +337,22 @@ class DetailsModelingScreen extends StatelessWidget {
           ),
         ),
       floatingActionButton: FloatingActionButton(
-        //TODO Changer la localisation et le tooltip
-          key: ArchSampleKeys.editTodoFab,
           child: Icon(Icons.check, color: Colors.white,),
-          onPressed: args.modeling == null
+          onPressed: modeling == null
               ? null
               : () async {
 
-//                      Navigator.of(context)
-//                          .push(MaterialPageRoute(builder: (context) {
-////                        return AddEditScreen(
-////                          key: ArchSampleKeys.editGardenScreen,
-////                          onSave: (task, note) {
-////                            gardensBloc.dispatch(UpdateGarden(
-////                              modeling.copyWith(modelingId: modeling.modelingId, note: note),
-////                            ));
-////                          },
-////                          isEditing: true,
-////                          garden: modeling,
-////                        );
-//                      }));
-//                gardensBloc.d
-            onSaveGarden(
-                args.gardenName,
-                args.publicVisibility,
-                args.gardenMembers,
-                args.modeling.id,
-                args.modeling.composition.join("-"),
-                args.gardenLength,
-                args.gardenWidth,
-                args.gardenGround,
-                args.schedule,
-                args.designs
-            );
+              Parcel alteredParcel = parcel.copyWith(
+                  name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
+                  publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
+                  currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+                  modelingsMonitoring: [modeling.id], id: parcel.id);
 
-            Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
+              BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(alteredParcel));
+              BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
+              BlocProvider.of<ParcelsBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
+
+              Navigator.pop(context);
 
           }),
 
@@ -523,30 +476,5 @@ Widget _buildModelingImage(BuildContext context, String modelingName) {
     );
 }
 
-class DetailsModelingsScreenArguments {
-  final Modeling modeling;
-  final String gardenName;
-  final bool publicVisibility;
-  final List<GardenMember> gardenMembers;
-  final List<ModelingSchedule> schedule;
-  final double gardenLength;
-  final double gardenWidth;
-  final bool gardenGround;
-  final List<Design> designs;
 
-//  final SaveGardenCallback onSaveGarden;
-
-  DetailsModelingsScreenArguments({Key key,
-    @required this.modeling,
-    @required this.gardenName,
-    @required this.gardenLength,
-    @required this.gardenWidth,
-    @required this.gardenGround,
-    @required this.publicVisibility,
-    @required this.gardenMembers,
-    @required this.schedule,
-    @required this.designs
-//    @required this.onSaveGarden,
-  });
-}
 

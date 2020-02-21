@@ -10,11 +10,11 @@ import 'package:permamind/widgets/widgets.dart';
 import 'package:permamind/screens/screens.dart';
 
 class EnumeratedGardens extends StatelessWidget {
-
   final DataRepository _dataRepository;
   final User _user;
 
-  EnumeratedGardens({Key key, @required DataRepository dataRepository, @required User user})
+  EnumeratedGardens(
+      {Key key, @required DataRepository dataRepository, @required User user})
       : assert(dataRepository != null),
         assert(user != null),
         _user = user,
@@ -23,101 +23,77 @@ class EnumeratedGardens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<GardensBloc, GardensState>(
-      builder: (context, state) {
-        if (state is GardensLoaded) {
-          final gardens = state.gardens;
+        builder: (context, state) {
+      if (state is GardensLoaded) {
+        final gardens = state.gardens;
 
-          final localizations = ArchSampleLocalizations.of(context);
+        return Padding(
+            padding: EdgeInsets.all(10.0),
+            child: ListView.builder(
+              key: ArchSampleKeys.todoList,
+              itemCount: gardens.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkResponse(
+                  enableFeedback: true,
+                  child: GardenItem(
+                      name: gardens[index].name,
+                      membersCount: gardens[index].members.length.toString(),
+                      index: index,
+                      dayActivitiesCount: gardens[index].dayActivitiesCount),
+                  onTap: () async {
+                    final alteredGarden = await Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) {
 
-          return Padding(
-              padding: EdgeInsets.all(10.0),
-              child: ListView.builder(
-                key: ArchSampleKeys.todoList,
-                itemCount: gardens.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return InkResponse(
-                    enableFeedback: true,
-                    child: GardenItem(name: gardens[index].name, modelingName: gardens[index].modelingName, membersCount: gardens[index].members.length.toString(), index: index, dayActivitiesCount: gardens[index].dayActivitiesCount),
-                    onTap: () async {
-                      final removedGarden = await Navigator.of(context).push(
-                          MaterialPageRoute(
+                      return BlocProvider<ParcelsBloc>(
+                        create: (context) => ParcelsBloc(
+                            gardensBloc: BlocProvider.of<GardensBloc>(context),
+                            dataRepository: _dataRepository)
+                          ..add(LoadParcels(gardens[index].id, _user.pseudo, _user.id)),
+                        child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user, dataRepository: _dataRepository,),);
 
-                              builder: (_) {
 
-//                            return BlocProvider(
-//                                create: (context) => ActivitiesBloc(
-//                                    dataRepository:_dataRepository,
-//                                    gardensBloc: BlocProvider.of<GardensBloc>(context),
-//                                    gardenId: gardens[index].id
-//                                )..add(LoadActivities()),
-//                                child:
-//                            );
+                    }));
+                    if (alteredGarden != null) {
+                      if (alteredGarden['action'] == 'Delete') {
+                        final snackBar = SnackBar(
+                          content:
+                              Text('Delete ${alteredGarden['garden'].name}'),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              BlocProvider.of<GardensBloc>(context)
+                                  .add(CopyGarden(alteredGarden['garden']));
+                              BlocProvider.of<GardensBloc>(context).add(
+                                  CopyActivities(alteredGarden['activities']));
+                            },
+                          ),
+                        );
 
-                            return MultiBlocProvider(
-                              providers: [
-                                BlocProvider<ActivitiesBloc>(
-                                  create: (context) => ActivitiesBloc(
-                                      dataRepository:_dataRepository,
-                                      gardensBloc: BlocProvider.of<GardensBloc>(context),
-                                      gardenId: gardens[index].id
-                                  )..add(LoadActivities()),
-                                ),
-                                BlocProvider<DesignBloc>(
-                                  create: (BuildContext context) => DesignBloc(
-                                      dataRepository: _dataRepository,
-                                      activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
-                                      gardenId: gardens[index].id
-                                  )..add(LoadDesign()),
-                                )
-                              ],
-                              child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user),
-                            );
+                        Scaffold.of(context).showSnackBar(snackBar);
+                      } else {
+                        final snackBar = SnackBar(
+                          content:
+                              Text('Leave ${alteredGarden['garden'].name}'),
+                          action: SnackBarAction(
+                            label: 'Undo',
+                            onPressed: () {
+                              BlocProvider.of<GardensBloc>(context)
+                                  .add(UpdateGarden(alteredGarden['garden']));
+                            },
+                          ),
+                        );
 
-                          })
-                      );
-                      if (removedGarden != null) {
-
-                        if (removedGarden['action'] == 'Delete') {
-                          final snackBar = SnackBar(
-                            content: Text('Delete ${removedGarden['garden'].name}'),
-                            action: SnackBarAction(
-                              label: 'Undo',
-                              onPressed: () {
-                                BlocProvider.of<GardensBloc>(context).add(CopyGarden(removedGarden['garden']));
-                                BlocProvider.of<GardensBloc>(context).add(CopyActivities(removedGarden['activities']));
-                              },
-                            ),
-                          );
-
-                          Scaffold.of(context).showSnackBar(snackBar);
-
-                        } else {
-
-                          final snackBar = SnackBar(
-                            content: Text('Leave ${removedGarden['garden'].name}'),
-                            action: SnackBarAction(
-                              label: 'Undo',
-                              onPressed: () {
-                                BlocProvider.of<GardensBloc>(context).add(UpdateGarden(removedGarden['garden']));
-                              },
-                            ),
-                          );
-
-                          Scaffold.of(context).showSnackBar(snackBar);
-                        }
-
+                        Scaffold.of(context).showSnackBar(snackBar);
                       }
-                    },
-                  );
-                },
-              )
-          );
-        } else {
-          return Container();
-        }
+                    }
+                  },
+                );
+              },
+            ));
+      } else {
+        return Container();
       }
-    );
+    });
   }
 }

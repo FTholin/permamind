@@ -12,12 +12,12 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   final AuthenticationBloc _authenticationBloc;
   StreamSubscription _authenticationBlocSubscription;
 
-  GardensBloc(this._authenticationBloc, this._dataRepository)  {
+  GardensBloc(this._authenticationBloc, this._dataRepository) {
     _authenticationBlocSubscription = _authenticationBloc.listen((state) {
       // React to state changes here.
       // Dispatch events here to trigger changes in MyBloc.
-      if (state is Authenticated)  {
-        add(LoadGardens(state.userAuthenticated.id));
+      if (state is Authenticated) {
+        add(LoadGardens(state.userAuthenticated.id, state.userAuthenticated.pseudo));
       }
     });
   }
@@ -33,10 +33,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapAddGardenToState(event);
     } else if (event is UpdateGarden) {
       yield* _mapUpdateGardensToState(event);
-    } else if (event is DeleteGarden) {
-      yield* _mapDeleteGardensToState(event);
-    } else if (event is ClearCompleted) {
-      yield* _mapClearCompletedToState();
+    } else if (event is GardenDeleted) {
+      yield* _mapGardenDeletedToState(event);
     } else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
     } else if (event is LeaveGarden) {
@@ -45,62 +43,38 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapCopyActivitiesToState(event);
     } else if (event is CopyGarden) {
       yield* _mapCopyGardenToState(event);
-    } else if (event is AddGardenDesign) {
-      yield* _mapAddGardenDesign(event);
     }
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
-    final pseudo = (await _dataRepository.searchById(event.userId)).documents.first.data['pseudo'];
     _gardensSubscription?.cancel();
-    _gardensSubscription = _dataRepository.gardens(event.userId, pseudo).listen(
-          (gardens)  {
-//            var plans = _dataRepository.loadPlans(gardenId);
-            add(GardensUpdated(gardens));
+    _gardensSubscription = _dataRepository.gardens(event.userId, event.userPseudo).listen(
+          (gardens) {
+        add(GardensUpdated(gardens));
       },
     );
-
   }
 
   Stream<GardensState> _mapAddGardenToState(AddGarden event) async* {
-
-    final gardenId = await _dataRepository.addNewGarden(event.garden);
-
-      DateTime referenceDate = DateTime.now();
-
-      List<Activity> activities = List<Activity>();
-
-      for (int i = 0; i < event.schedule.length; i++) {
-
-        for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
-          DateTime expectedDate = referenceDate.add(Duration(days: i));
-          expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
-          activities.add(
-              Activity( event.schedule[i].dayActivities[j].name, gardenId, false, expectedDate, event.schedule[i].dayActivities[j].category, '')
-          );
-        }
-
-      }
-
-      if (activities.isNotEmpty) {
-        _dataRepository.addGardenActivities(activities);
-      }
+    _dataRepository.addNewGarden(event.garden);
   }
 
-  Stream<GardensState> _mapCopyActivitiesToState(CopyActivities schedule) async* {
-    _dataRepository.addGardenActivities(schedule.activities);
+
+  Stream<GardensState> _mapCopyActivitiesToState(
+      CopyActivities schedule) async* {
+    _dataRepository.addParcelActivities(schedule.activities);
   }
 
-  Stream<GardensState> _mapAddGardenDesign(AddGardenDesign gardenDesign) async* {
-    _dataRepository.addNewGardenDesign(GardenDesign(gardenDesign.gardenId, gardenDesign.designs));
-  }
 
   Stream<GardensState> _mapUpdateGardensToState(UpdateGarden event) async* {
     _dataRepository.updateGarden(event.updatedGarden);
   }
 
   Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
-    event.garden.members.remove(event.userId);
+
+
+    _dataRepository.updateParcelsFromGarden(event.garden.id, event.userId);
+    event.garden.members.removeWhere((item) => item.id == event.userId);
     _dataRepository.updateGarden(event.garden);
   }
 
@@ -108,34 +82,13 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _dataRepository.copyGarden(event.garden);
   }
 
-  Stream<GardensState> _mapDeleteGardensToState(DeleteGarden event) async* {
-    _dataRepository.deleteGardenDesign(event.garden.id);
+  Stream<GardensState> _mapGardenDeletedToState(GardenDeleted event) async* {
+    _dataRepository.deleteDesignsFromGarden(event.garden.id);
+    _dataRepository.deleteActivitiesFromGarden(event.garden.id);
+    _dataRepository.deleteGardenParcels(event.garden.id);
     _dataRepository.deleteGarden(event.garden);
   }
 
-//  Stream<GardensState> _mapToggleAllToState() async* {
-//    final state = state;
-////    if (state is GardensLoaded) {
-////      final allComplete = state.gardens.every((todo) => todo.complete);
-////      final List<Garden> updatedGardens = state.gardens
-////          .map((todo) => todo.copyWith(complete: !allComplete))
-////          .toList();
-////      updatedGardens.forEach((updatedGardens) {
-////        _dataRepository.updateGardens(updatedGardens);
-////      });
-////    }
-//  }
-
-  Stream<GardensState> _mapClearCompletedToState() async* {
-//    final state = currentState;
-//    if (state is GardensLoaded) {
-//      final List<Garden> completedGardens =
-//      state.gardens.where((todo) => todo.complete).toList();
-//      completedGardens.forEach((completedGardens) {
-//        _dataRepository.deleteGardens(completedGardens);
-//      });
-//    }
-  }
 
   Stream<GardensState> _mapGardensUpdateToState(GardensUpdated event) async* {
     yield GardensLoaded(event.gardens);
@@ -148,18 +101,4 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _authenticationBlocSubscription?.cancel();
     return super.close();
   }
-
-//  Stream<GardensState> _mapGardensInitToState() async* {
-//    try {
-//      final isSignedIn = await _userRepository.isSignedIn();
-//      if (isSignedIn) {
-//        final name = await _userRepository.getUserId();
-//        yield Authenticated(name);
-//      } else {
-//        yield Unauthenticated();
-//      }
-//    } catch (_) {
-//      yield Unauthenticated();
-//    }
-//  }
 }

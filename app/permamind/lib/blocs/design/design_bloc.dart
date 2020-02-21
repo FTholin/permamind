@@ -7,16 +7,16 @@ import 'package:permamind/blocs/blocs.dart';
 
 class DesignBloc extends Bloc<DesignEvent, DesignState> {
 
-  final String gardenId;
+  final String parcelId;
   final ActivitiesBloc activitiesBloc;
-  StreamSubscription _planSubscription;
+  StreamSubscription _designSubscription;
   final DataRepository dataRepository;
 
 
   DesignBloc({@required this.dataRepository,
             @required this.activitiesBloc,
-            @required this.gardenId}) {
-//    _planSubscription = activitiesBloc.listen((state) {
+            @required this.parcelId}) {
+//    _designSubscription = activitiesBloc.listen((state) {
 //      if (state is ActivitiesLoaded) {
 //        add(UpdateDesign(state));
 //      }
@@ -44,8 +44,8 @@ class DesignBloc extends Bloc<DesignEvent, DesignState> {
   }
 
   Stream<DesignState> _mapLoadDesignToState() async* {
-    _planSubscription?.cancel();
-    _planSubscription = dataRepository.loadGardenDesign(gardenId).listen(
+    _designSubscription?.cancel();
+    _designSubscription = dataRepository.loadDesignParcel(parcelId).listen(
           (gardenDesign) {
             if (gardenDesign.isNotEmpty) {
               add(DesignUpdated(gardenDesign.first));
@@ -62,7 +62,7 @@ class DesignBloc extends Bloc<DesignEvent, DesignState> {
 
   @override
   Future<void> close() {
-    _planSubscription.cancel();
+    _designSubscription.cancel();
     return super.close();
   }
 }

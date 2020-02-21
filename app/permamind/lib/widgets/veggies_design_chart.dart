@@ -35,11 +35,11 @@ class VeggiesDesignChart extends StatelessWidget {
       ),
       // Custom yAxis
       domainAxis: charts.NumericAxisSpec(
-        viewport: new charts.NumericExtents(0.0, 90.0),
+        viewport: new charts.NumericExtents(0.0, 100.0),
         tickProviderSpec: new charts.BasicNumericTickProviderSpec(
           zeroBound: true,
           dataIsInWholeNumbers: false,
-          desiredTickCount: 10,
+          desiredTickCount: 11,
         ),
       ),
 

@@ -5,24 +5,20 @@ import 'package:intl/intl.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 
-  typedef OnSaveCallback = Function(String task, String note);
 
-  class AddEditActivityScreen extends StatefulWidget {
-    final bool isEditing;
-    final OnSaveCallback onSave;
+  class AddActivityScreen extends StatefulWidget {
+    final String gardenId;
 
-    AddEditActivityScreen({
+    AddActivityScreen({
       Key key,
-      @required this.onSave,
-      @required this.isEditing,
-    }) : super(key: key ?? ArchSampleKeys.addTodoScreen);
+      @required this.gardenId,
+    }) : assert(gardenId != null), super(key: key ?? ArchSampleKeys.addTodoScreen);
 
     @override
-    _AddEditActivityScreenState createState() => _AddEditActivityScreenState();
+    _AddActivityScreenState createState() => _AddActivityScreenState();
   }
 
-  class _AddEditActivityScreenState extends State<AddEditActivityScreen> {
-//    static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  class _AddActivityScreenState extends State<AddActivityScreen> {
 
     final TextEditingController _activityNameController = TextEditingController();
     bool _activityNameValidate = false;
@@ -42,7 +38,6 @@ import 'package:permamind/blocs/blocs.dart';
         });
     }
 
-    bool get isEditing => widget.isEditing;
 
     @override
     Widget build(BuildContext context) {
@@ -63,14 +58,14 @@ import 'package:permamind/blocs/blocs.dart';
                 if (_activityNameController.text.isNotEmpty) {
 
 
-
                   DateTime referenceDate  = new DateTime(selectedDate.year, selectedDate.month, selectedDate.day, 1);
 
                   BlocProvider.of<ActivitiesBloc>(context).add(
                     AddActivity(
                       Activity(
                         _activityNameController.text,
-                        BlocProvider.of<ActivitiesBloc>(context).gardenId,
+                        widget.gardenId,
+                        BlocProvider.of<ActivitiesBloc>(context).parcelId,
                         false,
                         referenceDate,
                         '',

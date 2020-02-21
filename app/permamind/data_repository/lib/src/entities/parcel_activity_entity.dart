@@ -5,6 +5,7 @@ class ActivityEntity extends Equatable {
   final String id;
   final String title;
   final String gardenId;
+  final String parcelId;
   final bool complete;
   final DateTime expectedDate;
   final String category;
@@ -15,6 +16,7 @@ class ActivityEntity extends Equatable {
       this.id,
       this.title,
       this.gardenId,
+      this.parcelId,
       this.complete,
       this.expectedDate,
       this.category,
@@ -26,6 +28,7 @@ class ActivityEntity extends Equatable {
       'id': id,
       'title': title,
       'gardenId': gardenId,
+      'parcelId': parcelId,
       'complete': complete,
       'expectedDate': expectedDate,
       'category': category,
@@ -42,6 +45,7 @@ class ActivityEntity extends Equatable {
     return ActivityEntity(
         json['id'] as String,
         json['gardenId'] as String,
+        json['parcelId'] as String,
         json['title'] as String,
         json['complete'] as bool,
         json['expectedDate'],
@@ -56,6 +60,7 @@ class ActivityEntity extends Equatable {
         snap.documentID,
         snap.data['title'],
         snap.data['gardenId'],
+        snap.data['parcelId'],
         snap.data['complete'],
         DateTime.fromMillisecondsSinceEpoch(
             snap.data["expectedDate"].millisecondsSinceEpoch),
@@ -67,6 +72,7 @@ class ActivityEntity extends Equatable {
   Map<String, Object> toDocument() {
     return {
       'gardenId': gardenId,
+      'parcelId': parcelId,
       'title': title,
       'complete': complete,
       'expectedDate': expectedDate,

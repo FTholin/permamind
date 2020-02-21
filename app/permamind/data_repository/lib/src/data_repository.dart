@@ -5,21 +5,35 @@ import 'package:data_repository/data_repository.dart';
 
 abstract class DataRepository {
 
-  Future<String> addNewGarden(Garden garden);
+  Future<void> addNewGarden(Garden garden);
 
   Future<void> addNewActivity(Activity activity);
 
-  Future<void> addNewGardenDesign(GardenDesign design);
+  Stream<List<Parcel>> loadParcels(String gardenId, String userId, String userPseudo);
+
+  Future<void> addNewDesignParcel(DesignParcel design);
+
+  Future<void> addNewParcel(Parcel parcel);
 
   Future<void> copyGarden(Garden garden);
 
-  Future<void> addGardenActivities(List<Activity> schedule);
+  Future<void> addParcelActivities(List<Activity> schedule);
 
   Future<void> deleteGarden(Garden garden);
 
-  Future<void> deleteGardenActivities(String gardenId);
+  Future<void> deleteParcel(Parcel parcel);
 
-  Future<void> deleteGardenDesign(String gardenId);
+  Future<void> copyParcel(Parcel parcel);
+
+  Future<void> deleteActivitiesFromParcel(String parcelId);
+
+  Future<void> deleteActivitiesFromGarden(String gardenId);
+
+  Future<void> deleteDesignsParcel(String gardenId);
+
+  Future<void> deleteGardenParcels(String gardenId);
+
+  Future<void> deleteDesignsFromGarden(String gardenId);
 
   Future<String> fetchIdGardenCreated(String gardenName);
 
@@ -27,9 +41,9 @@ abstract class DataRepository {
 
   Stream<List<Modeling>> fetchModelings();
 
-  Stream<List<Activity>> fetchGardenActivities(String gardenId);
+  Stream<List<Activity>> loadParcelActivities(String parcelId);
 
-  Stream<List<GardenDesign>> loadGardenDesign(String gardenId);
+  Stream<List<DesignParcel>> loadDesignParcel(String gardenId);
 
   Future<void> updateGarden(Garden garden);
 
@@ -39,4 +53,9 @@ abstract class DataRepository {
 
   Future<QuerySnapshot> searchById(String value);
 
-}
+  Future<void> updateParcel(Parcel update);
+
+  Future<void> updateParcelsFromGarden(String gardenId, String userId);
+
+
+  }

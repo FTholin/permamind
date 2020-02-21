@@ -6,3 +6,4 @@ export 'tutorials/tutorials.dart';
 export 'dynamic_theming/dynamic_theming.dart';
 export 'activities/activities.dart';
 export 'design/design.dart';
+export 'parcels/parcels.dart';

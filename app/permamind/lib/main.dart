@@ -103,79 +103,71 @@ class App extends StatelessWidget {
 //            isEditing: false,
 //          );
 //        },
-              '/addGarden': (context) {
-                final gardensBloc = BlocProvider.of<GardensBloc>(context);
-//            return MultiBlocProvider(
-//              providers: [
-//                BlocProvider<ModelingsBloc>(
-//                  builder: (context) =>
-//                  ModelingsBloc(gardensRepository: firebaseRepository)..dispatch(FetchModelings()),
-//                ),
-//            ],
-//            child: DiscoverModelingsScreen(),
-//            );
-                return AddEditGardenScreen(
-                  dataProvider: firebaseRepository,
-//              onSave: (task, note) {
-//                gardensBloc.dispatch(
-//                  AddTodo(Todo(task, note: note)),
+//              '/addGarden': (context) {
+//
+//                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//                  builder: (context, state) {
+//                    if (state is Authenticated) {
+//                      return AddGardenScreen(user: state.userAuthenticated, dataRepository: firebaseRepository);
+//                    }
+//                    else if (state is Unauthenticated) {
+//                      return LoginScreen(userRepository: userRepository);
+//                    } else {
+//                      return Center(child: CircularProgressIndicator());
+//                    }
+//                  },
+//                );
+//
+//              },
+//              '/discoverModelings': (context) {
+//                return BlocProvider<ModelingsBloc>(
+//                  create: (context) =>
+//                  ModelingsBloc(dataRepository: firebaseRepository)
+//                    ..add(FetchModelings()),
+//                  child: DiscoverModelingsScreen(),
 //                );
 //              },
-                  isEditing: false,
-                );
-              },
-              '/discoverModelings': (context) {
-                return BlocProvider<ModelingsBloc>(
-                  create: (context) =>
-                  ModelingsBloc(dataRepository: firebaseRepository)
-                    ..add(FetchModelings()),
-                  child: DiscoverModelingsScreen(),
-                );
-              },
-              '/detailsModeling': (context) {
-                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                  builder: (context, state) {
-                    if (state is Authenticated) {
+//              '/detailsModeling': (context) {
+//                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//                  builder: (context, state) {
+//                    if (state is Authenticated) {
 
-                      return DetailsModelingScreen(
-                          onSaveGarden: (gardenName, publicVisibility,
-                              gardenMembers, modelingId, modelingName, gardenLength,
-                              gardenWidth, gardenGround,
-                              schedule, designs
-                              ) async {
-
-                            gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
-
-                            BlocProvider.of<GardensBloc>(context).add(
-                              AddGarden(Garden(gardenName, gardenLength,
-                                  gardenWidth, gardenGround,
-                                  publicVisibility,
-                                  state.userAuthenticated.id,
-                                  gardenMembers,
-                                  modelingId,
-                                  modelingName,
-                                  DateTime.now(), 0),
-                                  schedule
-                              ),
-                            );
-
-                            BlocProvider.of<GardensBloc>(context).add(AddGardenDesign(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
-
-                          }
-                      );
-                    }
-                    return Center(child: CircularProgressIndicator());
-                  },
-                );
-              },
+//                      return DetailsModelingScreen(
+//                          onSaveGarden: (gardenName, publicVisibility,
+//                              gardenMembers, modelingId, modelingName, gardenLength,
+//                              gardenWidth, gardenGround,
+//                              schedule, designs
+//                              ) async {
+//
+//                            gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
+////
+////                            BlocProvider.of<GardensBloc>(context).add(
+////                              AddGarden(Garden(gardenName, gardenLength,
+////                                  gardenWidth, gardenGround,
+////                                  publicVisibility,
+////                                  state.userAuthenticated.id,
+////                                  gardenMembers,
+////                                  modelingId,
+////                                  modelingName,
+////                                  DateTime.now(), 0),
+////                                  schedule
+////                              ),
+////                            );
+//
+//                            BlocProvider.of<GardensBloc>(context).add(AddDesignParcel(await firebaseRepository.fetchIdGardenCreated(gardenName), designs));
+//
+//                          }
+//                      );
+//                    }
+//                    return Center(child: CircularProgressIndicator());
+//                  },
+//                );
+//              },
               '/settings': (context) {
                 return SettingsScreen();
               },
               '/settingsGarden': (context) {
                 return SettingsGardenScreen();
-              },
-              '/addActivity': (context) {
-                return AddEditActivityScreen();
               },
               "/joinGarden": (context) {
                  return JoinGardenScreen();

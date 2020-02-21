@@ -1,23 +1,28 @@
 import 'package:data_repository/src/entities/entities.dart';
 import 'package:equatable/equatable.dart';
 
-class GardenDesign extends Equatable {
+class DesignParcel extends Equatable {
   final String id;
+  final String parcelId;
   final String gardenId;
   final List<Design> designs;
 
-  GardenDesign(
+  DesignParcel(
       this.gardenId,
+      this.parcelId,
       this.designs,
       {String id})
       : this.id = id;
 
-  GardenDesign copyWith({
+  DesignParcel copyWith({
     String id,
     String gardenId,
+    String parcelId,
+    List<Design> designs
   }) {
-    return GardenDesign(
+    return DesignParcel(
         gardenId ?? this.gardenId,
+        parcelId ?? this.parcelId,
         designs ?? this.designs,
         id: id ?? this.id
     );
@@ -26,30 +31,33 @@ class GardenDesign extends Equatable {
 
   @override
   int get hashCode =>
-      id.hashCode  ^ gardenId.hashCode ^ designs.hashCode;
+      id.hashCode  ^ gardenId.hashCode ^ parcelId.hashCode ^ designs.hashCode;
 
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is GardenDesign &&
+          other is DesignParcel &&
               runtimeType == other.runtimeType &&
               id == other.id &&
               gardenId == other.gardenId &&
+              parcelId == other.parcelId &&
               designs == other.designs;
 
-  GardenDesignEntity toEntity() {
-    return GardenDesignEntity(
+  DesignParcelEntity toEntity() {
+    return DesignParcelEntity(
         id,
         gardenId,
+        parcelId,
         designs
     );
   }
 
-  static GardenDesign fromEntity(GardenDesignEntity entity) {
+  static DesignParcel fromEntity(DesignParcelEntity entity) {
 
-    return GardenDesign(
+    return DesignParcel(
       entity.gardenId,
+      entity.parcelId,
       entity.designs,
       id: entity.id,
     );
@@ -57,7 +65,7 @@ class GardenDesign extends Equatable {
 
   @override
   String toString() {
-    return "GardenDesign {gardenId: $gardenId}";
+    return "DesignParcel {parcelId: $parcelId}";
   }
 }
 

@@ -26,6 +26,10 @@ dependencies:
   authentication:
     path: ../authentication
 
+
+  logger: ^0.8.3
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

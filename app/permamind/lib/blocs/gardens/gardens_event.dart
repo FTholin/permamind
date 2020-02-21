@@ -15,8 +15,9 @@ class GardensInit extends GardensEvent {
 class LoadGardens extends GardensEvent {
 
   final String userId;
+  final String userPseudo;
 
-  LoadGardens(this.userId) : super([userId]);
+  LoadGardens(this.userId, this.userPseudo) : super([userId, userPseudo]);
 
   @override
   String toString() => 'LoadGardens { userId: $userId}';
@@ -25,23 +26,13 @@ class LoadGardens extends GardensEvent {
 class AddGarden extends GardensEvent {
   final Garden garden;
 
-  final List<ModelingSchedule> schedule;
-
-  AddGarden(this.garden, this.schedule) : super([garden, schedule]);
+  AddGarden(this.garden) : super([garden]);
 
   @override
   String toString() => 'AddGarden { garden: $garden }';
 }
 
-class AddGardenDesign extends GardensEvent {
-  final List<Design> designs;
-  final String gardenId;
 
-  AddGardenDesign(this.gardenId, this.designs) : super([gardenId, designs]);
-
-  @override
-  String toString() => 'AddGardenDesign { designs: $designs }';
-}
 
 class CopyGarden extends GardensEvent {
   final Garden garden;
@@ -71,13 +62,13 @@ class UpdateGarden extends GardensEvent {
   String toString() => 'UpdateGarden { updatedGarden: $updatedGarden }';
 }
 
-class DeleteGarden extends GardensEvent {
+class GardenDeleted extends GardensEvent {
   final Garden garden;
 
-  DeleteGarden(this.garden) : super([garden]);
+  GardenDeleted(this.garden) : super([garden]);
 
   @override
-  String toString() => 'DeleteGarden { garden: $garden }';
+  String toString() => 'GardenDeleted { garden: $garden }';
 }
 
 class LeaveGarden extends GardensEvent {
