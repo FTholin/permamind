@@ -103,22 +103,22 @@ class App extends StatelessWidget {
 //            isEditing: false,
 //          );
 //        },
-              '/addGarden': (context) {
-
-                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                  builder: (context, state) {
-                    if (state is Authenticated) {
-                      return AddGardenScreen(user: state.userAuthenticated, dataRepository: firebaseRepository);
-                    }
-                    else if (state is Unauthenticated) {
-                      return LoginScreen(userRepository: userRepository);
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  },
-                );
-
-              },
+//              '/addGarden': (context) {
+//
+//                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//                  builder: (context, state) {
+//                    if (state is Authenticated) {
+//                      return AddGardenScreen(user: state.userAuthenticated, dataRepository: firebaseRepository);
+//                    }
+//                    else if (state is Unauthenticated) {
+//                      return LoginScreen(userRepository: userRepository);
+//                    } else {
+//                      return Center(child: CircularProgressIndicator());
+//                    }
+//                  },
+//                );
+//
+//              },
 //              '/discoverModelings': (context) {
 //                return BlocProvider<ModelingsBloc>(
 //                  create: (context) =>

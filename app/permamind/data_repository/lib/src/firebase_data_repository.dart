@@ -7,58 +7,43 @@ import 'package:authentication/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_repository/data_repository.dart';
 import 'entities/entities.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:logger/logger.dart';
 
 
 class FirebaseDataRepository implements DataRepository {
 
-  final todoCollection = Firestore.instance.collection('todos');
-  
-  final gardensCollection = Firestore.instance.collection('gardens');
-
-  final vegetableGardensCollection = Firestore.instance.collection('vegetableGardens');
-
-  final modelingsCollection = Firestore.instance.collection('modelings');
-
-  final plantsCollection = Firestore.instance.collection('vegetables');
-
-  final usersCollection = Firestore.instance.collection('users');
-
-  final tutorialsCollection = Firestore.instance.collection('tutorials');
-
-  final activitiesCollection = Firestore.instance.collection('activities');
-
-  final designsCollection = Firestore.instance.collection('designs');
-
-  final parcelsCollection = Firestore.instance.collection('parcels');
-
-  final activitiesBisCollection = Firestore.instance.collection('activities_bis');
-
+  var logger = Logger();
 
   @override
   Future<void> addNewGarden(Garden garden) async {
-    return vegetableGardensCollection.add(garden.toEntity().toDocument());
+    logger.i("WRITE::addNewGarden");
+    return Firestore.instance.collection('gardens').add(garden.toEntity().toDocument());
   }
 
 
   @override
   Future<void> addNewDesignParcel(DesignParcel design) async {
-    return designsCollection.add(design.toEntity().toDocument());
+    logger.i("WRITE::addNewDesignParcel");
+    return Firestore.instance.collection('designs').add(design.toEntity().toDocument());
   }
 
   @override
   Future<void> addNewActivity(Activity activity) {
-    return activitiesBisCollection.add(activity.toEntity().toDocument());
+    logger.i("WRITE::addNewActivity");
+    return Firestore.instance.collection('activities').add(activity.toEntity().toDocument());
   }
 
   @override
   Future<void> addNewParcel(Parcel parcel) {
-    return parcelsCollection.add(parcel.toEntity().toDocument());
+    logger.i("WRITE::addNewParcel");
+    return Firestore.instance.collection('parcels').add(parcel.toEntity().toDocument());
   }
 
   @override
   Stream<List<Parcel>> loadParcels(String gardenId, String userId, String userPseudo) {
-    return parcelsCollection
+
+    logger.i("READ::loadParcels");
+    return Firestore.instance.collection('parcels')
         .where("gardenId", isEqualTo: gardenId)
         .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
         .snapshots().map((snapshot) {
@@ -71,29 +56,34 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteGarden(Garden garden) async {
-    return vegetableGardensCollection.document(garden.id).delete();
+    logger.i("DELETE::deleteGarden");
+    return Firestore.instance.collection('gardens').document(garden.id).delete();
   }
 
   @override
   Future<void> copyGarden(Garden garden) async {
-    return gardensCollection.document(garden.id).setData(garden.toEntity().toDocument());
+    logger.i("WRITE::copyGarden");
+    return Firestore.instance.collection('gardens').document(garden.id).setData(garden.toEntity().toDocument());
   }
 
 
 
   @override
   Future<void> deleteParcel(Parcel parcel) async {
-    return parcelsCollection.document(parcel.id).delete();
+    logger.i("DELETE::deleteParcel");
+    return Firestore.instance.collection('parcels').document(parcel.id).delete();
   }
 
   @override
   Future<void> copyParcel(Parcel parcel) async {
-    return parcelsCollection.document(parcel.id).setData(parcel.toEntity().toDocument());
+    logger.i("WRITE::copyParcel");
+    return Firestore.instance.collection('parcels').document(parcel.id).setData(parcel.toEntity().toDocument());
   }
 
   @override
   Future<String> fetchIdGardenCreated(String gardenName) async {
-    return  gardensCollection.where("name",isEqualTo: gardenName).getDocuments().then((snapshot) {
+    logger.i("READ::fetchIdGardenCreated");
+    return  Firestore.instance.collection('gardens').where("name",isEqualTo: gardenName).getDocuments().then((snapshot) {
       return snapshot.documents.first.documentID;
     });
   }
@@ -105,7 +95,7 @@ class FirebaseDataRepository implements DataRepository {
 
 
       for (int i = 0; i < schedule.length; i++) {
-        DocumentReference docRef = await activitiesBisCollection.add(
+        DocumentReference docRef = await Firestore.instance.collection('activities').add(
             schedule[i].toEntity().toDocument());
         batch.setData(docRef, {
           'title': schedule[i].title,
@@ -116,6 +106,7 @@ class FirebaseDataRepository implements DataRepository {
           'category': schedule[i].category,
           'completeActivityUserId': schedule[i].completeActivityUserId
         });
+        logger.i("WRITE::addParcelActivities");
       }
     batch.commit();
 
@@ -123,9 +114,11 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteGardenParcels(String gardenId) async {
+    logger.i("READ::deleteGardenParcels");
 
-    parcelsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+    Firestore.instance.collection('parcels').where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
+        logger.i("DELETE::deleteGardenParcels");
         doc.reference.delete();
       }
     });
@@ -133,9 +126,11 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteActivitiesFromParcel(String parcelId) async {
+    logger.i("READ::deleteActivitiesFromParcel");
 
-    activitiesBisCollection.where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
+    Firestore.instance.collection('activities').where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
+        logger.i("DELETE::deleteActivitiesFromParcel");
         doc.reference.delete();
       }
     });
@@ -143,9 +138,12 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteActivitiesFromGarden(String gardenId) async {
+    logger.i("READ::deleteActivitiesFromGarden");
 
-    activitiesBisCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+    Firestore.instance.collection('activities').where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
+        logger.i("DELETE::deleteActivitiesFromGarden");
+
         doc.reference.delete();
       }
     });
@@ -153,9 +151,11 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteDesignsFromGarden(String gardenId) async {
+    logger.i("READ::deleteDesignsFromGarden");
 
-    designsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+    Firestore.instance.collection('designs').where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
+        logger.i("DELETE::deleteDesignsFromGarden");
         doc.reference.delete();
       }
     });
@@ -163,9 +163,10 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteDesignsParcel(String gardenId) async {
-
-    designsCollection.where("parcelId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+    logger.i("READ::deleteDesignsParcel");
+    Firestore.instance.collection('designs').where("parcelId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
+        logger.i("DELETE::deleteDesignsParcel");
         doc.reference.delete();
       }
     });
@@ -174,7 +175,8 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Stream<List<Garden>> gardens(String userId, String userPseudo) {
-    return vegetableGardensCollection
+    logger.i("READ::gardens");
+    return Firestore.instance.collection('gardens')
         .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
         .snapshots().map((snapshot) {
       return snapshot.documents
@@ -185,7 +187,8 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Stream<List<DesignParcel>> loadDesignParcel(String parcelId) {
-    return designsCollection
+    logger.i("READ::loadDesignParcel");
+    return Firestore.instance.collection('designs')
         .where("parcelId", isEqualTo: parcelId)
         .snapshots().map((snapshot) {
       return snapshot.documents
@@ -196,7 +199,9 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Stream<List<Modeling>> fetchModelings() {
-    return modelingsCollection
+    logger.i("READ::fetchModelings");
+
+    return Firestore.instance.collection('modelings')
     .snapshots().map((snapshot) {
       return snapshot.documents
         .map((doc) => Modeling.fromEntity(ModelingEntity.fromSnapshot(doc)))
@@ -206,7 +211,9 @@ class FirebaseDataRepository implements DataRepository {
 
 
   Stream<List<Tutorial>> loadTutorials() {
-    return tutorialsCollection
+    logger.i("READ::loadTutorials");
+
+    return Firestore.instance.collection('tutorials')
         .orderBy('tutorialClassificationOrder', descending: false)
         .snapshots().map((snapshot) {
       return snapshot.documents
@@ -215,20 +222,11 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
-//  Stream<List<TutorialActivity>> fetchTutoActivities(String tutoId) {
-//    return tutorialsCollection
-//        .document(tutoId).collection("activities")
-//        .orderBy('classificationOrder', descending: false)
-//        .snapshots().map((snapshot) {
-//      return snapshot.documents
-//          .map((doc) => TutorialActivity.fromEntity(TutorialActivityEntity.fromSnapshot(doc)))
-//          .toList();
-//    });
-//  }
 
   @override
   Stream<List<Activity>> loadParcelActivities(String parcelId) {
-    return activitiesBisCollection
+    logger.i("READ::loadParcelActivities");
+    return Firestore.instance.collection('activities')
         .where("parcelId", isEqualTo: parcelId)
         .snapshots().map((snapshot) {
       return snapshot.documents
@@ -240,14 +238,17 @@ class FirebaseDataRepository implements DataRepository {
 
 
   Future<QuerySnapshot> searchByName(String value) {
-    return usersCollection
+    logger.i("READ::searchByName");
+
+    return Firestore.instance.collection('users')
     .where('searchKey',
     isEqualTo: value.substring(0, 1).toUpperCase())
     .getDocuments();
   }
 
   Future<QuerySnapshot> searchById(String value) {
-    return usersCollection
+    logger.i("READ::searchById");
+    return Firestore.instance.collection('users')
         .where('id',
         isEqualTo: value)
         .getDocuments();
@@ -255,14 +256,17 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> updateGarden(Garden update) {
-    return vegetableGardensCollection
+    logger.i("WRITE::updateGarden");
+
+    return Firestore.instance.collection('gardens')
         .document(update.id)
         .updateData(update.toEntity().toDocument());
   }
 
   @override
   Future<void> updateActivity(Activity update) {
-    return activitiesBisCollection
+    logger.i("WRITE::updateActivity");
+    return Firestore.instance.collection('activities')
         .document(update.id)
         .updateData(update.toEntity().toDocument());
   }
@@ -270,7 +274,8 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> updateParcel(Parcel update) {
-    return parcelsCollection
+    logger.i("WRITE::updateParcel");
+    return Firestore.instance.collection('parcels')
         .document(update.id)
         .updateData(update.toEntity().toDocument());
   }
@@ -278,9 +283,11 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> updateParcelsFromGarden(String gardenId, String userId) {
+    logger.i("READ::updateParcelsFromGarden");
 
-    return parcelsCollection.where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
+    return Firestore.instance.collection('parcels').where("gardenId",isEqualTo: gardenId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
+        logger.i("WRITE::updateParcelsFromGarden");
 
         var newMembers = doc.data['members'];
         newMembers.removeWhere((member) => member['id'] == userId);
