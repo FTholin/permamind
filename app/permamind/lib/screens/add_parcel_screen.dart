@@ -3,6 +3,7 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/member_profile.dart';
@@ -76,7 +77,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 
 
     return Scaffold(
-      appBar: new AppBar(title: new Text('Créer une parcelle')),
+      appBar: new AppBar(title: new Text('${DemoLocalizations.of(context).addParcelTitle}')),
       body: new Stepper(
         type: StepperType.horizontal,
         currentStep: _currentStep,
@@ -98,7 +99,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              'Quel est le nom de votre parcelle ?',
+                              '${DemoLocalizations.of(context).addParcelNameTitle}',
 //                    textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 19),
@@ -112,9 +113,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         controller: _parcelName,
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
-                          hintText: 'Nom parcelle',
+                          hintText: '${DemoLocalizations.of(context).addParcelNameHint}',
                           errorText: _parcelNameValidate
-                              ? 'Value Can\'t Be Empty'
+                              ? '${DemoLocalizations.of(context).addParcelNameError}'
                               : null,
                         ),
                         onChanged: (value) {
@@ -141,7 +142,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            'Utilisez vous un bac de culture ?',
+                            '${DemoLocalizations.of(context).addParcelGardenGroundTitle}',
                             style: TextStyle(fontSize: 19),
                           )),
                       Container()
@@ -159,7 +160,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         },
                       ),
                       Text(
-                        'Oui',
+                        '${DemoLocalizations.of(context).yesChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -178,7 +179,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         },
                       ),
                       Text(
-                        'Non',
+                        '${DemoLocalizations.of(context).noChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -200,7 +201,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                   Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
-                        'Quelles sont les dimensions de la parcelle ?',
+                        '${DemoLocalizations.of(context).addParcelDimensionTitle}',
                         maxLines: 3,
                         textAlign: TextAlign.left,
                         style: TextStyle(fontSize: 19),
@@ -210,7 +211,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '(centimètres)',
+                          '${DemoLocalizations.of(context).addParcelScaleLabel}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -302,7 +303,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          'Les jardiniers présents',
+                          '${DemoLocalizations.of(context).settingsGardenFriendsTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 19),
@@ -316,7 +317,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '(optionnel)',
+                          '${DemoLocalizations.of(context).optionalTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -412,7 +413,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(onPressed: onStepCancel, child: Text('${DemoLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
 
@@ -428,7 +429,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                   Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
 
                 },
-                child: const Text('FINALIZE')),
+                child: Text('${DemoLocalizations.of(context).finalizeButton}')),
           ]);
     } else if (_currentStep == 0) {
       return Row(
@@ -436,7 +437,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
           children: <Widget>[
             RaisedButton(onPressed: () {
               Navigator.pop(context);
-            }, child: const Text('BACK')),
+            }, child:  Text('${DemoLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
                   if (_parcelName.text.isNotEmpty) {
@@ -449,15 +450,15 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                     });
                   }
                 },
-                child: const Text('CONTINUE')),
+                child:  Text('${DemoLocalizations.of(context).continueButton}')),
           ]);
     } else {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(onPressed: onStepCancel, child:  Text('${DemoLocalizations.of(context).backButton}')),
             RaisedButton(
-                onPressed: onStepContinue, child: const Text('CONTINUE')),
+                onPressed: onStepContinue, child:  Text('${DemoLocalizations.of(context).continueButton}')),
           ]);
     }
   }

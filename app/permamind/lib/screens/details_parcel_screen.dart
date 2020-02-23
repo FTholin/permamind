@@ -2,6 +2,7 @@ import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/member_profile.dart';
@@ -44,7 +45,7 @@ class DetailsParcelScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.all(20),child:Text("Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?")),
+                      Padding(padding: EdgeInsets.all(20),child:Text("${DemoLocalizations.of(context).detailsParcelAssociationEmpty}")),
                       RaisedButton(
                         onPressed: () async {
                           await Navigator.of(context).push(
@@ -69,7 +70,7 @@ class DetailsParcelScreen extends StatelessWidget {
                           );
 
                         },
-                        child: Text("Ajouter une nouvelle association"),
+                        child: Text("${DemoLocalizations.of(context).detailsParcelAddAssociationMessage}"),
                       )
                     ],
                   )

@@ -1,11 +1,9 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/widgets/widgets.dart';
-
-//typedef OnSaveCallback = Function(String task, String note);
 
 class DiscoverModelingsScreen extends StatelessWidget {
   final Parcel parcel;
@@ -32,7 +30,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                    '${FlutterBlocLocalizations.of(context).modelingsName}',
+                    '${DemoLocalizations.of(context).discoverModelingsTitle}',
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 32))),
           ),
@@ -70,7 +68,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                    '${FlutterBlocLocalizations.of(context).tendencyHeader}',
+                    '${DemoLocalizations.of(context).discoverModelingsTendencyTitle}',
                     style: TextStyle(
                         fontWeight: FontWeight.normal, fontSize: 20))),
           ),
@@ -81,8 +79,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
               child: BlocBuilder<ModelingsBloc, ModelingsState>(
                   builder: (context, state) {
                 if (state is ModelingsLoading) {
-                  // TODO ArchSampleKeys
-                  return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+                  return LoadingIndicator();
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
                   return BlocProvider.value(
@@ -93,9 +90,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                         modelings: modelings,
                       ));
                 } else {
-                  // TODO ArchSampleKeys
-                  return Container(
-                      key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                  return Container();
                 }
               }),
             ),
@@ -106,7 +101,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                    '${FlutterBlocLocalizations.of(context).browseAllModelings}',
+                    '${DemoLocalizations.of(context).discoverModelingsBrowseTitle}',
                     style: TextStyle(
                         fontWeight: FontWeight.normal, fontSize: 20))),
           ),
@@ -117,7 +112,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
               child: BlocBuilder<ModelingsBloc, ModelingsState>(
                   builder: (context, state) {
                 if (state is ModelingsLoading) {
-                  return LoadingIndicator(key: ArchSampleKeys.todosLoading);
+                  return LoadingIndicator();
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
                   return BlocProvider.value(
@@ -129,9 +124,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                       ));
 //
                 } else {
-                  return Container(
-                      // TODO ArchSampleKeys
-                      key: FlutterTodosKeys.filteredTodosEmptyContainer);
+                  return Container();
                 }
               }),
             ),

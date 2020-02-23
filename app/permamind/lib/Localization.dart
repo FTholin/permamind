@@ -41,27 +41,38 @@ class DemoLocalizations {
       'tab_bar_garden': "Gardens",
       'tab_bar_tutos': "Tutorials",
       'tab_bar_profile': "Profile",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': "",
-      '': ""
+      'speed_dial_add_activity': "Add Activity",
+      'speed_dial_create_garden': "Create a garden",
+      'speed_dial_join_garden': "Join a garden",
+      'speed_dial_create_parcel': "Create a parcel",
+      'details_parcel_none_association_message': 'No combination of plants is planned in this parcel. Shall we add one ?',
+      'details_parcel_add_association_message': "Add a new plant's association",
+      'discover_modelings_modeling_tile': "Associations",
+      'discover_modelings_tendency_tile': "Tendency",
+      'discover_modelings_browse_title': "Browse all",
+      'details_modeling_screen_sowing_title': "Sowing period",
+      'details_modeling_screen_harvest_title': "Harvest period",
+      'details_modeling_screen_duration': "Duration",
+      'details_modeling_screen_months': "months",
+      'details_modeling_screen_difficulty': "Difficulty",
+      'details_modeling_screen_yield': "Yield",
+      'details_modeling_screen_sun': "Sunlight",
+      'details_modeling_screen_water': "Water",
+      'add_parcel_title': "Create a parcel",
+      'add_parcel_name_title': "What's garden's name ?",
+      'add_parcel_name_hint': "Parcel's name",
+      'add_parcel_name_error': "Parcel's name can't be empty",
+      'add_parcel_garden_ground_title': "Do you use a garden box ?",
+      'add_parcel_dimensions_title': "What are the dimensions of the parcel ?",
+      'add_parcel_garden_scale_label': "(centimeters)",
+      'settings_parcel_title': "Parcel's Settings",
+      'settings_parcel_delete_button': "Delete this parcel",
+      'settings_parcel_delete_title': "Delete this parcel ?",
+      'settings_parcel_delete_message': "This action will result in the permanent removal of the parcel.",
+      'settings_parcel_leave_button': "Leave parcel ",
+      'settings_parcel_leave_title': "Leave this parcel ?",
+      'settings_parcel_leave_message': "This action will result in the permanent leaving of the parcel.",
+
     },
     'fr': {
       'title': "Partie pédagogie",
@@ -93,6 +104,39 @@ class DemoLocalizations {
       'tab_bar_garden': "Potagers",
       'tab_bar_tutos': "Tutoriels",
       'tab_bar_profile': "Profil",
+      'speed_dial_add_activity': "Ajouter Activité",
+      'speed_dial_create_garden': "Créer un potager",
+      'speed_dial_join_garden': "Rejoindre un potager",
+      'speed_dial_create_parcel': "Créer une parcelle",
+      'details_parcel_none_association_message': 'Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?',
+      'details_parcel_add_association_message': "Ajouter une nouvelle association",
+      'discover_modelings_modeling_tile': "Associations",
+      'discover_modelings_tendency_tile': "Tendances",
+      'discover_modelings_browse_title': "Parcourir",
+      'details_modeling_screen_sowing_title': "Période de semis",
+      'details_modeling_screen_harvest_title': "Période de récolte",
+      'details_modeling_screen_duration': "Durée",
+      'details_modeling_screen_months': "mois",
+      'details_modeling_screen_difficulty': "Difficulté",
+      'details_modeling_screen_yield': "Rendement",
+      'details_modeling_screen_sun': "Ensoleillement",
+      'details_modeling_screen_water': "Eau",
+      'add_parcel_title': "Créer une parcelle",
+      'add_parcel_name_title': "Quel est le nom de la parcelle ?",
+      'add_parcel_name_hint': "Nom parcelle",
+      'add_parcel_name_error': "Nom de la parcelle ne peut être vide",
+      'add_parcel_garden_ground_title': "Utilisez vous un bac de culture ?",
+      'add_parcel_dimensions_title': "Quelles sont les dimensions de la parcelle ?",
+      'add_parcel_garden_scale_label': "(centimètres)",
+      'settings_parcel_title': "Paramètres de la parcelle",
+      'settings_parcel_delete_button': "Supprimer parcelle",
+      'settings_parcel_delete_title': "Supprimer cette parcelle ?",
+      'settings_parcel_delete_message': "Cette action entraîne la suppression définitive de toutes les données de cette parcelle.",
+      'settings_parcel_leave_button': "Quitter parcelle",
+      'settings_parcel_leave_title': "Quitter cette parcelle ?",
+      'settings_parcel_leave_message': "Cette action entraîne votre départ de cette parcelle.",
+
+
     },
   };
 
@@ -216,7 +260,138 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]['tab_bar_profile'];
   }
 
+  String get speedDialAddActivity {
+    return _localizedValues[locale.languageCode]['speed_dial_add_activity'];
+  }
+
+  String get speedDialCreateGarden {
+    return _localizedValues[locale.languageCode]['speed_dial_create_garden'];
+  }
+
+  String get speedDialJoinGarden {
+    return _localizedValues[locale.languageCode]['speed_dial_join_garden'];
+  }
+
+  String get speedDialCreateParcel {
+    return _localizedValues[locale.languageCode]['speed_dial_create_parcel'];
+  }
+
+  String get detailsParcelAssociationEmpty {
+    return _localizedValues[locale.languageCode]['details_parcel_none_association_message'];
+  }
+
+  String get detailsParcelAddAssociationMessage {
+    return _localizedValues[locale.languageCode]['details_parcel_add_association_message'];
+  }
+
+  String get discoverModelingsTitle {
+    return _localizedValues[locale.languageCode]['discover_modelings_modeling_tile'];
+  }
+
+  String get discoverModelingsTendencyTitle {
+    return _localizedValues[locale.languageCode]['discover_modelings_tendency_tile'];
+  }
+
+  String get discoverModelingsBrowseTitle {
+    return _localizedValues[locale.languageCode]['discover_modelings_browse_title'];
+  }
+
+  String get detailsModelingScreenSowingTitle {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_sowing_title'];
+  }
+
+  String get detailsModelingScreenHarvestTitle {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_harvest_title'];
+  }
+
+  String get detailsModelingScreenDurationTitle {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_duration'];
+  }
+
+  String get detailsModelingScreenMonthsLabel {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_months'];
+  }
+
+  String get detailsModelingScreenDifficultyTitle {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_difficulty'];
+  }
+
+  String get detailsModelingScreenYieldTitle {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_yield'];
+  }
+
+  String get detailsModelingScreenSunlightTitle {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_sun'];
+  }
+
+  String get detailsModelingScreenWaterTitle {
+    return _localizedValues[locale.languageCode]['details_modeling_screen_water'];
+  }
+
+  String get addParcelTitle {
+    return _localizedValues[locale.languageCode]['add_parcel_title'];
+  }
+
+  String get addParcelNameTitle  {
+    return _localizedValues[locale.languageCode]['add_parcel_name_title'];
+  }
+
+  String get addParcelNameHint  {
+    return _localizedValues[locale.languageCode]['add_parcel_name_hint'];
+  }
+
+  String get addParcelNameError  {
+    return _localizedValues[locale.languageCode]['add_parcel_name_error'];
+  }
+
+  String get addParcelGardenGroundTitle  {
+    return _localizedValues[locale.languageCode]['add_parcel_garden_ground_title'];
+  }
+
+  String get addParcelDimensionTitle  {
+    return _localizedValues[locale.languageCode]['add_parcel_dimensions_title'];
+  }
+
+  String get addParcelScaleLabel  {
+    return _localizedValues[locale.languageCode]['add_parcel_garden_scale_label'];
+  }
+
+  String get settingsParcelTitle  {
+    return _localizedValues[locale.languageCode]['settings_parcel_title'];
+  }
+
+  String get settingsParcelDeleteButton  {
+    return _localizedValues[locale.languageCode]['settings_parcel_delete_button'];
+  }
+
+  String get settingsParcelDeleteTitle  {
+    return _localizedValues[locale.languageCode]['settings_parcel_delete_title'];
+  }
+
+
+  String get settingsParcelDeleteMessage  {
+    return _localizedValues[locale.languageCode]['settings_parcel_delete_message'];
+  }
+
+
+  String get settingsParcelLeaveButton  {
+    return _localizedValues[locale.languageCode]['settings_parcel_leave_button'];
+  }
+
+  String get settingsParcelLeaveTitle  {
+    return _localizedValues[locale.languageCode]['settings_parcel_leave_title'];
+  }
+
+
+  String get settingsParcelLeaveMessage  {
+    return _localizedValues[locale.languageCode]['settings_parcel_leave_message'];
+  }
+
+
+
+
 }
+
 
 class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations> {
   const DemoLocalizationsDelegate();

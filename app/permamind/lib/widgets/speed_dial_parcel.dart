@@ -3,8 +3,7 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/add_parcel_screen.dart';
 
@@ -59,7 +58,7 @@ class ParcelSpeedDialState extends State<ParcelSpeedDial>
               );
             }));
           },
-          label: 'Create a parcel',
+          label: '${DemoLocalizations.of(context).speedDialCreateParcel}',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
           labelBackgroundColor: Colors.green,
         ),
