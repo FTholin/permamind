@@ -38,9 +38,9 @@ class DemoLocalizations {
       'continue_button': "CONTINUE",
       'back_button': "BACK",
       'finalize_button': 'FINALIZE',
-      '': "",
-      '': "",
-      '': "",
+      'tab_bar_garden': "Gardens",
+      'tab_bar_tutos': "Tutorials",
+      'tab_bar_profile': "Profile",
       '': "",
       '': "",
       '': "",
@@ -90,6 +90,9 @@ class DemoLocalizations {
       'continue_button': "CONTINUER",
       'back_button': "REVENIR",
       'finalize_button': 'FINALISER',
+      'tab_bar_garden': "Potagers",
+      'tab_bar_tutos': "Tutoriels",
+      'tab_bar_profile': "Profil",
     },
   };
 
@@ -201,9 +204,17 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]['finalize_button'];
   }
 
+  String get tabBarGarden {
+    return _localizedValues[locale.languageCode]['tab_bar_garden'];
+  }
 
+  String get tabBarTutorials {
+    return _localizedValues[locale.languageCode]['tab_bar_tutos'];
+  }
 
-
+  String get tabBarProfile {
+    return _localizedValues[locale.languageCode]['tab_bar_profile'];
+  }
 
 }
 

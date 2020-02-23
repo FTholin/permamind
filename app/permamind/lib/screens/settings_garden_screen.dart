@@ -102,7 +102,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "${DemoLocalizations.of(context).settingsGardenNameError}",
+                              "${DemoLocalizations.of(context).settingsGardenFriendsTitle}",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
