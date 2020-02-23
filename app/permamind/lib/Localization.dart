@@ -72,7 +72,10 @@ class DemoLocalizations {
       'settings_parcel_leave_button': "Leave parcel ",
       'settings_parcel_leave_title': "Leave this parcel ?",
       'settings_parcel_leave_message': "This action will result in the permanent leaving of the parcel.",
-
+      'extra_actions_settings_button': "Settings",
+      'extra_actions_log_out_button': "Log Out",
+      'login_title': "Login",
+      'login_form_failure_message': "Login Failure",
     },
     'fr': {
       'title': "Partie pédagogie",
@@ -135,7 +138,10 @@ class DemoLocalizations {
       'settings_parcel_leave_button': "Quitter parcelle",
       'settings_parcel_leave_title': "Quitter cette parcelle ?",
       'settings_parcel_leave_message': "Cette action entraîne votre départ de cette parcelle.",
-
+      'extra_actions_settings_button': "Paramètres",
+      'extra_actions_log_out_button': "Déconnexion",
+      'login_title': "Connexion",
+      'login_form_failure_message': "Échec de la connexion",
 
     },
   };
@@ -387,6 +393,23 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]['settings_parcel_leave_message'];
   }
 
+  String get extraActionsSettingsButton  {
+    return _localizedValues[locale.languageCode]['extra_actions_settings_button'];
+  }
+
+
+  String get extraActionsLogOutButton  {
+    return _localizedValues[locale.languageCode]['extra_actions_log_out_button'];
+  }
+
+  String get loginTitle  {
+    return _localizedValues[locale.languageCode]['login_title'];
+  }
+
+
+  String get loginFormFailureMessage  {
+    return _localizedValues[locale.languageCode]['login_form_failure_message'];
+  }
 
 
 
