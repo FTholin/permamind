@@ -386,7 +386,7 @@ SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  cloud_firestore: 3d86e0f8fe22ea61aa45e43dd2226684779a87a3
+  cloud_firestore: 11c87f1d0b4193831045a320aed50723b67f2ea3
   cloud_firestore_web: 9ec3dc7f5f98de5129339802d491c1204462bfec
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   firebase_analytics: 5afaaf8f43ae6a640f200d98f3ecff32e9873538

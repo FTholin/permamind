@@ -3,6 +3,7 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
@@ -41,7 +42,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: new Text('Créer un potager')),
+      appBar: new AppBar(title: new Text('${DemoLocalizations.of(context).addGardenTitle}')),
       body: new Stepper(
         type: StepperType.horizontal,
         currentStep: _currentStep,
@@ -63,7 +64,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              'Quel est le nom de votre potager ?',
+                              '${DemoLocalizations.of(context).addGardenTitle}',
 //                    textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 19),
@@ -77,9 +78,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         controller: _gardenName,
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
-                          hintText: 'Nom potager',
+                          hintText: '${DemoLocalizations.of(context).addGardenNameHint}',
                           errorText: _gardenNameValidate
-                              ? 'Value Can\'t Be Empty'
+                              ? '${DemoLocalizations.of(context).addGardenNameError}'
                               : null,
                         ),
                         onChanged: (value) {
@@ -102,7 +103,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    'Souhaitez vous rendre ce potager public ?',
+                    '${DemoLocalizations.of(context).addGardenVisibilityTitle}',
                     textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 19),
@@ -119,7 +120,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         },
                       ),
                       Text(
-                        'Oui',
+                        '${DemoLocalizations.of(context).yesChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -138,7 +139,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         },
                       ),
                       Text(
-                        'Non',
+                        '${DemoLocalizations.of(context).noChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -162,7 +163,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          'Ajouter quelques jardiniers ?',
+                          '${DemoLocalizations.of(context).addFewGardenersTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 19),
@@ -176,7 +177,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '(optionnel)',
+                          '${DemoLocalizations.of(context).optionalTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -271,7 +272,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(onPressed: onStepCancel, child: Text('${DemoLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
                   _gardenMembers.add(GardenMember(
@@ -290,7 +291,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                   Navigator.pushNamedAndRemoveUntil(
                       context, ArchSampleRoutes.home, (_) => false);
                 },
-                child: const Text('FINALIZE')),
+                child: Text('${DemoLocalizations.of(context).finalizeButton}')),
           ]);
     } else if (_currentStep == 0) {
       return Row(
@@ -298,7 +299,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
           children: <Widget>[
             RaisedButton(onPressed: () {
               Navigator.pop(context);
-            }, child: const Text('BACK')),
+            }, child: Text('${DemoLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
                   if (_gardenName.text.isNotEmpty) {
@@ -311,15 +312,15 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                     });
                   }
                 },
-                child: const Text('CONTINUE')),
+                child:  Text('${DemoLocalizations.of(context).continueButton}')),
           ]);
     } else {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: const Text('BACK')),
+            RaisedButton(onPressed: onStepCancel, child: Text('${DemoLocalizations.of(context).backButton}')),
             RaisedButton(
-                onPressed: onStepContinue, child: const Text('CONTINUE')),
+                onPressed: onStepContinue, child:  Text('${DemoLocalizations.of(context).continueButton}')),
           ]);
     }
   }

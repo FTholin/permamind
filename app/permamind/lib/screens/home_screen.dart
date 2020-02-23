@@ -2,6 +2,7 @@ import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/widgets/widgets.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               ExtraActions(),
             ],
           ),
-          body: _buildTabPage(activeTab),
+          body: _buildTabPage(context, activeTab),
           floatingActionButton: _buildFloatActionButton(activeTab, context),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
@@ -47,7 +48,7 @@ class HomeScreen extends StatelessWidget {
   }
 
 
-  Widget _buildTabPage(AppTab activeTab) {
+  Widget _buildTabPage(BuildContext context, AppTab activeTab) {
     switch (activeTab) {
       case AppTab.gardens:
         return EnumeratedGardens(dataRepository: dataRepository, user: user);
@@ -55,7 +56,7 @@ class HomeScreen extends StatelessWidget {
       case AppTab.abc:
         return Scaffold(
           body: Center(
-            child: Text("Plants encyclopedia..."),
+            child: Text("${DemoLocalizations.of(context).title}"),
           ),
         );
         break;
