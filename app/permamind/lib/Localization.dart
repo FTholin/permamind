@@ -50,8 +50,8 @@ class DemoLocalizations {
       'discover_modelings_modeling_tile': "Associations",
       'discover_modelings_tendency_tile': "Tendency",
       'discover_modelings_browse_title': "Browse all",
-      'details_modeling_screen_sowing_title': "Sowing period",
-      'details_modeling_screen_harvest_title': "Harvest period",
+      'details_modeling_screen_sowing_title': "Sowing",
+      'details_modeling_screen_harvest_title': "Harvest",
       'details_modeling_screen_duration': "Duration",
       'details_modeling_screen_months': "months",
       'details_modeling_screen_difficulty': "Difficulty",
@@ -76,6 +76,11 @@ class DemoLocalizations {
       'extra_actions_log_out_button': "Log Out",
       'login_title': "Login",
       'login_form_failure_message': "Login Failure",
+      'speed_dial_activity': "Activity",
+      'add_activity_title': "New Activity",
+      'add_activity_name': "Activity Name",
+      'add_activity_name_error': "Activity Name can't be empty",
+      'add_activity_day_selection': "Select activity day"
     },
     'fr': {
       'title': "Partie pédagogie",
@@ -114,10 +119,10 @@ class DemoLocalizations {
       'details_parcel_none_association_message': 'Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?',
       'details_parcel_add_association_message': "Ajouter une nouvelle association",
       'discover_modelings_modeling_tile': "Associations",
-      'discover_modelings_tendency_tile': "Tendances",
-      'discover_modelings_browse_title': "Parcourir",
-      'details_modeling_screen_sowing_title': "Période de semis",
-      'details_modeling_screen_harvest_title': "Période de récolte",
+      'discover_modelings_tendency_tile': "Associations du moment",
+      'discover_modelings_browse_title': "Autres associations",
+      'details_modeling_screen_sowing_title': "Semi",
+      'details_modeling_screen_harvest_title': "Récolte",
       'details_modeling_screen_duration': "Durée",
       'details_modeling_screen_months': "mois",
       'details_modeling_screen_difficulty': "Difficulté",
@@ -142,6 +147,11 @@ class DemoLocalizations {
       'extra_actions_log_out_button': "Déconnexion",
       'login_title': "Connexion",
       'login_form_failure_message': "Échec de la connexion",
+      'speed_dial_activity': "Activité",
+      'add_activity_title': "Nouvelle Activité",
+      'add_activity_name': "Nom Activité",
+      'add_activity_name_error': "Nom de l'activité ne peut être vide",
+      'add_activity_day_selection': "Sélectionner le jour de l'activité"
 
     },
   };
@@ -411,6 +421,26 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]['login_form_failure_message'];
   }
 
+  String get speedDialActivity  {
+    return _localizedValues[locale.languageCode]['speed_dial_activity'];
+  }
+
+
+  String get addActivityTitle  {
+    return _localizedValues[locale.languageCode]['add_activity_title'];
+  }
+
+  String get addActivityName  {
+    return _localizedValues[locale.languageCode]['add_activity_name'];
+  }
+
+  String get addActivityNameError {
+    return _localizedValues[locale.languageCode]['add_activity_name_error'];
+  }
+
+  String get addActivityDaySelection {
+    return _localizedValues[locale.languageCode]['add_activity_day_selection'];
+  }
 
 
 }

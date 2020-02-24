@@ -70,7 +70,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
 //              }
 //            }
           },
-          label: 'Activity',
+          label: '${DemoLocalizations.of(context).speedDialActivity}',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         )

@@ -32,7 +32,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 child: Text(
                     '${DemoLocalizations.of(context).discoverModelingsTitle}',
                     style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 32))),
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 20))),
           ),
           Flexible(
             flex: 2,

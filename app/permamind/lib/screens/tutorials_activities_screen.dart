@@ -54,7 +54,7 @@ class TutorialActivities extends State<TutorialActivitiesScreen> {
 
     if (steps.isEmpty) {
       return Center(
-        child: Text("Under construction ..."),
+        child: Text("En construction ..."),
       );
     } else {
       return Container(

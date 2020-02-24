@@ -39,20 +39,21 @@ class GardenSpeedDialState extends State<GardenSpeedDial>
       },
       curve: Curves.bounceIn,
       children: [
+
         SpeedDialChild(
-          child: Image.asset("assets/utils_icons/group.png"),
-          backgroundColor: Colors.green,
-          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.joinGarden),
-          label: '${DemoLocalizations.of(context).speedDialJoinGarden}',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-          labelBackgroundColor: Colors.green,
-        ),
-        SpeedDialChild(
-          child: Image.asset("assets/utils_icons/ecology.png"),
+          child: Icon(Icons.nature, color: Colors.white,),
           backgroundColor: Colors.green,
           onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.addGarden),
           label: '${DemoLocalizations.of(context).speedDialCreateGarden}',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
+          labelBackgroundColor: Colors.green,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.share, color: Colors.white,),
+          backgroundColor: Colors.green,
+//          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.joinGarden),
+          label: '${DemoLocalizations.of(context).speedDialJoinGarden}',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         ),
       ],

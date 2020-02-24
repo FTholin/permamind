@@ -45,7 +45,7 @@ class ParcelSpeedDialState extends State<ParcelSpeedDial>
       children: [
         SpeedDialChild(
           child: Icon(
-            Icons.photo_size_select_actual,
+            Icons.aspect_ratio,
             color: Colors.white,
             size: 30.0,
           ),
@@ -59,7 +59,7 @@ class ParcelSpeedDialState extends State<ParcelSpeedDial>
             }));
           },
           label: '${DemoLocalizations.of(context).speedDialCreateParcel}',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         ),
       ],
