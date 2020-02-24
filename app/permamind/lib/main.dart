@@ -73,6 +73,9 @@ class App extends StatelessWidget {
               const Locale('en', ''),
               const Locale('fr', ''),
             ],
+
+
+            initialRoute: '/',
             routes: {
               '/': (context) {
                 return BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -189,6 +192,38 @@ class App extends StatelessWidget {
 //                  child: ChildA(),
 //                );
 //              }
+            },
+            onGenerateRoute: (settings) {
+              if (settings.name == "/") {
+                return PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                      builder: (context, state) {
+                        if (state is Authenticated) {
+
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider<TabBloc>(
+                                create: (context) => TabBloc(),
+                              ),
+                              BlocProvider<TutorialsBloc>(
+                                create: (context) =>
+                                TutorialsBloc(dataRepository: firebaseRepository)
+                                  ..add(LoadTutos()),
+                              ),
+                            ],
+                            child: HomeScreen(dataRepository: firebaseRepository, user: state.userAuthenticated),
+                          );
+                        }
+                        if (state is Unauthenticated) {
+                          return LoginScreen(userRepository: userRepository);
+                        }
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    )
+                );
+              } else {
+                return MaterialPageRoute(builder: (context) => HomeScreen());
+              }
             },
           );
         }
