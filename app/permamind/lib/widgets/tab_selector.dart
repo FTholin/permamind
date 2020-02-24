@@ -1,12 +1,10 @@
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class TabSelector extends StatelessWidget {
   final AppTab activeTab;
@@ -31,16 +29,16 @@ class TabSelector extends StatelessWidget {
                 case AppTab.gardens:
                   picture = Image.asset(
                     "assets/bar_buttons_icons/garden.png",
-                    semanticLabel: 'profile icon bottom nav bar',
+                    semanticLabel: 'gardens icon bottom nav bar',
                     height: 35,
                     width: 37,
                   );
-                  text = Text("Gardens");
+                  text = Text("${DemoLocalizations.of(context).tabBarGarden}");
                   break;
                 case AppTab.abc:
                   picture = Image.asset(
                     "assets/bar_buttons_icons/abc.png",
-                    semanticLabel: 'profile icon bottom nav bar',
+                    semanticLabel: 'abc icon bottom nav bar',
                     height: 35,
                     width: 37,
                   );
@@ -49,11 +47,11 @@ class TabSelector extends StatelessWidget {
                 case AppTab.learning:
                   picture = Image.asset(
                     "assets/bar_buttons_icons/knowledge.png",
-                    semanticLabel: 'profile icon bottom nav bar',
+                    semanticLabel: 'learning icon bottom nav bar',
                     height: 35,
                     width: 37,
                   );
-                  text = Text("Tutorials");
+                  text = Text("${DemoLocalizations.of(context).tabBarTutorials}");
                   break;
                 case AppTab.profile:
                   picture = Image.asset(
@@ -62,7 +60,7 @@ class TabSelector extends StatelessWidget {
                     height: 35,
                     width: 37,
                   );
-                  text = Text("Profile");
+                  text = Text("${DemoLocalizations.of(context).tabBarProfile}");
                   break;
               }
 

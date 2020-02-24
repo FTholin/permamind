@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 
@@ -38,20 +39,21 @@ class GardenSpeedDialState extends State<GardenSpeedDial>
       },
       curve: Curves.bounceIn,
       children: [
+
         SpeedDialChild(
-          child: Image.asset("assets/utils_icons/group.png"),
+          child: Icon(Icons.nature, color: Colors.white,),
           backgroundColor: Colors.green,
-          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.joinGarden),
-          label: 'Join a garden',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.addGarden),
+          label: '${DemoLocalizations.of(context).speedDialCreateGarden}',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         ),
         SpeedDialChild(
-          child: Image.asset("assets/utils_icons/ecology.png"),
+          child: Icon(Icons.share, color: Colors.white,),
           backgroundColor: Colors.green,
-          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.addGarden),
-          label: 'Create a garden',
-          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+//          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.joinGarden),
+          label: '${DemoLocalizations.of(context).speedDialJoinGarden}',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         ),
       ],

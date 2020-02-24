@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:authentication/authentication.dart';
 import 'arch_bricks/arch_bricks.dart';
 import 'blocs/simple_bloc_delegate.dart';
+
 
 void main() {
 
@@ -62,8 +65,13 @@ class App extends StatelessWidget {
             title: FlutterBlocLocalizations().appTitle,
             theme: themeState.theme,
             localizationsDelegates: [
-              ArchSampleLocalizationsDelegate(),
-              FlutterBlocLocalizationsDelegate(),
+              const DemoLocalizationsDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('en', ''),
+              const Locale('fr', ''),
             ],
             routes: {
               '/': (context) {
@@ -103,22 +111,22 @@ class App extends StatelessWidget {
 //            isEditing: false,
 //          );
 //        },
-//              '/addGarden': (context) {
-//
-//                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-//                  builder: (context, state) {
-//                    if (state is Authenticated) {
-//                      return AddGardenScreen(user: state.userAuthenticated, dataRepository: firebaseRepository);
-//                    }
-//                    else if (state is Unauthenticated) {
-//                      return LoginScreen(userRepository: userRepository);
-//                    } else {
-//                      return Center(child: CircularProgressIndicator());
-//                    }
-//                  },
-//                );
-//
-//              },
+              '/addGarden': (context) {
+
+                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    if (state is Authenticated) {
+                      return AddGardenScreen(user: state.userAuthenticated, dataRepository: firebaseRepository);
+                    }
+                    else if (state is Unauthenticated) {
+                      return LoginScreen(userRepository: userRepository);
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                );
+
+              },
 //              '/discoverModelings': (context) {
 //                return BlocProvider<ModelingsBloc>(
 //                  create: (context) =>

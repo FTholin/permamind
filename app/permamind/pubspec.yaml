@@ -19,11 +19,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  flutter_cupertino_localizations: ^1.0.1
+
   meta: ">=1.1.0 <2.0.0"
   equatable: ^0.3.0
   flutter_bloc: ^3.1.0
   path_provider: ^1.2.0
-  intl: ^0.15.8
+
+  intl: ^0.16.0
 
   logger: ^0.8.3
 
@@ -63,6 +70,8 @@ dependencies:
   authentication:
     path: authentication
 
+
+
 dev_dependencies:
 
   flutter_launcher_icons: ^0.7.3
@@ -75,6 +84,8 @@ flutter_icons:
   image_path_android: "assets/transparent_launcher_icon.png"
   android: true
   ios: true
+
+
 
 
 # For information on the generic Dart part of this file, see the

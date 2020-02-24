@@ -1,7 +1,6 @@
 export 'extra_actions.dart';
 export 'enumerated_gardens.dart';
 export 'tab_selector.dart';
-export 'todo_item.dart';
 export 'stats.dart';
 export 'delete_garden_snack_bar.dart';
 export 'loading_indicator.dart';

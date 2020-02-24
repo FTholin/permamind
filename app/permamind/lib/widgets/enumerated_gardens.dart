@@ -54,39 +54,39 @@ class EnumeratedGardens extends StatelessWidget {
 
 
                     }));
-                    if (alteredGarden != null) {
-                      if (alteredGarden['action'] == 'Delete') {
-                        final snackBar = SnackBar(
-                          content:
-                              Text('Delete ${alteredGarden['garden'].name}'),
-                          action: SnackBarAction(
-                            label: 'Undo',
-                            onPressed: () {
-                              BlocProvider.of<GardensBloc>(context)
-                                  .add(CopyGarden(alteredGarden['garden']));
-                              BlocProvider.of<GardensBloc>(context).add(
-                                  CopyActivities(alteredGarden['activities']));
-                            },
-                          ),
-                        );
-
-                        Scaffold.of(context).showSnackBar(snackBar);
-                      } else {
-                        final snackBar = SnackBar(
-                          content:
-                              Text('Leave ${alteredGarden['garden'].name}'),
-                          action: SnackBarAction(
-                            label: 'Undo',
-                            onPressed: () {
-                              BlocProvider.of<GardensBloc>(context)
-                                  .add(UpdateGarden(alteredGarden['garden']));
-                            },
-                          ),
-                        );
-
-                        Scaffold.of(context).showSnackBar(snackBar);
-                      }
-                    }
+//                    if (alteredGarden != null) {
+//                      if (alteredGarden['action'] == 'Delete') {
+//                        final snackBar = SnackBar(
+//                          content:
+//                              Text('Delete ${alteredGarden['garden'].name}'),
+//                          action: SnackBarAction(
+//                            label: 'Undo',
+//                            onPressed: () {
+//                              BlocProvider.of<GardensBloc>(context)
+//                                  .add(CopyGarden(alteredGarden['garden']));
+//                              BlocProvider.of<GardensBloc>(context).add(
+//                                  CopyActivities(alteredGarden['activities']));
+//                            },
+//                          ),
+//                        );
+//
+//                        Scaffold.of(context).showSnackBar(snackBar);
+//                      } else {
+//                        final snackBar = SnackBar(
+//                          content:
+//                              Text('Leave ${alteredGarden['garden'].name}'),
+//                          action: SnackBarAction(
+//                            label: 'Undo',
+//                            onPressed: () {
+//                              BlocProvider.of<GardensBloc>(context)
+//                                  .add(UpdateGarden(alteredGarden['garden']));
+//                            },
+//                          ),
+//                        );
+//
+//                        Scaffold.of(context).showSnackBar(snackBar);
+//                      }
+//                    }
                   },
                 );
               },
