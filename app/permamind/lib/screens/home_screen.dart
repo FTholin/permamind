@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             actions: [
 //              FilterButton(visible: activeTab == AppTab.gardens),
               Container(),
-              ExtraActions(),
+              ExtraActions(userId: user.id),
             ],
           ),
           body: _buildTabPage(context, activeTab),

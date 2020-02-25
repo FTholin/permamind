@@ -55,7 +55,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
       return MaterialApp(
-        title: FlutterBlocLocalizations().appTitle,
+//        title: FlutterBlocLocalizations().appTitle,
         theme: themeState.theme,
         localizationsDelegates: [
           const AppLocalizationsDelegate(),
@@ -232,7 +232,9 @@ class App extends StatelessWidget {
 
           } else if (settings.name == "/settings") {
 
-            return MaterialPageRoute(builder: (context) => SettingsScreen());
+            final SettingsScreenArguments args = settings.arguments;
+
+            return MaterialPageRoute(builder: (context) => SettingsScreen(args.userId));
 
           } else if (settings.name == "/settingsGarden") {
 

@@ -7,10 +7,13 @@ import 'package:permamind/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/models/models.dart';
+import 'package:permamind/screens/screens.dart';
 
 class ExtraActions extends StatelessWidget {
+  final String userId;
+
   // TODO key
-  ExtraActions({Key key}) : super(key: ArchSampleKeys.extraActionsButton);
+  ExtraActions({this.userId, Key key}) : super(key: ArchSampleKeys.extraActionsButton);
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,15 @@ class ExtraActions extends StatelessWidget {
                   BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
                   break;
                 case ExtraAction.Settings:
+
                   Navigator.pushNamed(
                     context,
-                    ArchSampleRoutes.settings);
+                    '/settings',
+                    arguments: SettingsScreenArguments(
+                      userId
+                    ),
+                  );
+
                   break;
               }
             },

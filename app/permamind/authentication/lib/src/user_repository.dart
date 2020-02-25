@@ -9,8 +9,6 @@ class UserRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
 
-  final usersCollection = Firestore.instance.collection('users');
-
 
   UserRepository({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
@@ -66,13 +64,61 @@ class UserRepository {
   }
 
   Future<QuerySnapshot> searchById(String value) {
-    return usersCollection
+    return Firestore.instance.collection('users')
         .where('id',
         isEqualTo: value)
         .getDocuments();
   }
 
   Future<void> addNewUser(User user) {
-    return usersCollection.add(user.toEntity().toDocument());
+    return Firestore.instance.collection('users').add(user.toEntity().toDocument());
+  }
+
+
+  Future<void> deleteAccount(String userId) async {
+
+    final currentUser = await _firebaseAuth.currentUser();
+
+    Firestore.instance.collection('users').where("id",isEqualTo: currentUser.uid).getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
+
+    Firestore.instance.collection('gardens').where("admin",isEqualTo: currentUser.uid).getDocuments().then((snapshot) {
+      for (DocumentSnapshot garden in snapshot.documents) {
+
+        // Supprime tous les designs associé au jardin
+        Firestore.instance.collection('designs').where("gardenId",isEqualTo: garden.documentID).getDocuments().then((snapshot) {
+          for (DocumentSnapshot design in snapshot.documents) {
+            design.reference.delete();
+          }
+        });
+
+        // Supprime tous activités associées au jardin
+        Firestore.instance.collection('activities').where("gardenId",isEqualTo: garden.documentID).getDocuments().then((snapshot) {
+          for (DocumentSnapshot activity in snapshot.documents) {
+            activity.reference.delete();
+          }
+        });
+        // Supprime toutes les parcelles associées au jardin
+        Firestore.instance.collection('parcels').where("gardenId",isEqualTo: garden.documentID).getDocuments().then((snapshot) {
+          for (DocumentSnapshot parcel in snapshot.documents) {
+            parcel.reference.delete();
+          }
+        });
+
+        // Suppression du jardin
+        garden.reference.delete();
+      }
+    });
+
+    await currentUser.delete();
+
+    Future.wait([
+      _firebaseAuth.signOut(),
+      _googleSignIn.signOut(),
+    ]);
+
   }
 }
