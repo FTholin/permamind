@@ -227,7 +227,7 @@ class App extends StatelessWidget {
                     gardensBloc: BlocProvider.of<GardensBloc>(context),
                     dataRepository: args.dataRepository)
                   ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
-                child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository),);
+                child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
             });
 
           } else if (settings.name == "/settings") {

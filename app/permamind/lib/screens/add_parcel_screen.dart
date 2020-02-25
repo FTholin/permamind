@@ -7,6 +7,7 @@ import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/member_profile.dart';
+import 'package:permamind/screens/screens.dart';
 
 typedef AddParcelCallback = Function(String task, String note);
 
@@ -426,7 +427,16 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                           parcel
                       ));
 
-                  Navigator.pushNamedAndRemoveUntil(context, ArchSampleRoutes.home, (_) => false);
+                  Navigator.pushNamed(
+                    context,
+                    '/detailsGarden',
+                    arguments: DetailsGardenScreenArguments(
+                        widget.dataRepository,
+                        widget.garden.id,
+                        widget.user
+                    ),
+                  );
+
 
                 },
                 child: Text('${DemoLocalizations.of(context).finalizeButton}')),

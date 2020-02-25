@@ -288,8 +288,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
 
                   BlocProvider.of<GardensBloc>(context).add(AddGarden(garden));
 
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, ArchSampleRoutes.home, (_) => false);
+                  Navigator.pop(context);
+//                  Navigator.pushNamedAndRemoveUntil(
+//                      context, (_) => false);
                 },
                 child: Text('${DemoLocalizations.of(context).finalizeButton}')),
           ]);
