@@ -2,6 +2,7 @@ import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permamind/screens/home_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
 
@@ -107,8 +108,12 @@ class SettingsScreen extends StatelessWidget {
                                   FlatButton(
                                     child: Text('${AppLocalizations.of(context).buttonContinue}'),
                                     onPressed: () {
+
+                                      Navigator.of(context).pushNamedAndRemoveUntil(
+                                          '/', (Route<dynamic> route) => false
+                                      );
+
                                       BlocProvider.of<AuthenticationBloc>(context).add(DeletedAccount(userId));
-                                      Navigator.pop(context);
                                     },
                                   ),
                                 ],

@@ -53,7 +53,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapDeletedAccountToState(DeletedAccount event) async* {
+    await _userRepository.deleteAccount(event.userId);
     yield Unauthenticated();
-    _userRepository.deleteAccount(event.userId);
   }
 }

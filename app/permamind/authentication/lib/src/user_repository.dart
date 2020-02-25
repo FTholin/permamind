@@ -115,7 +115,7 @@ class UserRepository {
 
     await currentUser.delete();
 
-    Future.wait([
+    return Future.wait([
       _firebaseAuth.signOut(),
       _googleSignIn.signOut(),
     ]);
