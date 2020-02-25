@@ -1,8 +1,8 @@
+import 'package:arch/arch.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 
@@ -48,7 +48,7 @@ import 'package:permamind/blocs/blocs.dart';
             icon: new Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(null),
           ),
-          title: Text("${DemoLocalizations.of(context).addActivityTitle}"),
+          title: Text("${AppLocalizations.of(context).addActivityTitle}"),
           actions: <Widget>[
             IconButton(
   //            tooltip: localizations.deleteGarden,
@@ -100,8 +100,8 @@ import 'package:permamind/blocs/blocs.dart';
                           child: TextFormField(
                             controller: _activityNameController,
                             decoration: InputDecoration(
-                              hintText: "${DemoLocalizations.of(context).addActivityName}",
-                              errorText: _activityNameValidate ? '${DemoLocalizations.of(context).addActivityNameError}' : null,
+                              hintText: "${AppLocalizations.of(context).addActivityName}",
+                              errorText: _activityNameValidate ? '${AppLocalizations.of(context).addActivityNameError}' : null,
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
@@ -119,7 +119,7 @@ import 'package:permamind/blocs/blocs.dart';
                                 leading: Icon(
                                   Icons.access_time,
                                   size: 24.0,
-                                  semanticLabel: '${DemoLocalizations.of(context).addActivityDaySelection}',
+                                  semanticLabel: '${AppLocalizations.of(context).addActivityDaySelection}',
                                 ),
                                 title: Text('${new DateFormat.yMMMd().format(selectedDate)}'),
                                 trailing: Icon(Icons.keyboard_arrow_right),

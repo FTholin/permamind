@@ -1,10 +1,8 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/widgets/widgets.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
@@ -56,7 +54,7 @@ class HomeScreen extends StatelessWidget {
       case AppTab.abc:
         return Scaffold(
           body: Center(
-            child: Text("${DemoLocalizations.of(context).title}"),
+            child: Text("${AppLocalizations.of(context).title}"),
           ),
         );
         break;

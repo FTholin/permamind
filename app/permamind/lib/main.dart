@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:authentication/authentication.dart';
+import 'package:arch/arch.dart';
 import 'arch_bricks/arch_bricks.dart';
 import 'blocs/simple_bloc_delegate.dart';
 
@@ -58,7 +58,7 @@ class App extends StatelessWidget {
         title: FlutterBlocLocalizations().appTitle,
         theme: themeState.theme,
         localizationsDelegates: [
-          const DemoLocalizationsDelegate(),
+          const AppLocalizationsDelegate(),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],

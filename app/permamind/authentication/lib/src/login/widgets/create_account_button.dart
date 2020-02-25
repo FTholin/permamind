@@ -1,3 +1,4 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class CreateAccountButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       child: Text(
-        'Create an Account',
+        '${AppLocalizations.of(context).registrationButton}',
       ),
       onPressed: () {
         Navigator.of(context).push(

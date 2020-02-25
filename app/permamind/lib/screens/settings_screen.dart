@@ -1,5 +1,5 @@
+import 'package:arch/arch.dart';
 import 'package:flutter/material.dart';
-import 'package:permamind/Localization.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -7,7 +7,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
             title: Text(
-                "${DemoLocalizations.of(context).extraActionsSettingsButton}")),
+                "${AppLocalizations.of(context).extraActionsSettingsButton}")),
         body: Column(
           children: <Widget>[
             Expanded(
@@ -21,7 +21,7 @@ class SettingsScreen extends StatelessWidget {
                         Icons.mail,
                         size: 24.0,
                         semanticLabel:
-                            '${DemoLocalizations.of(context).addActivityDaySelection}',
+                            '${AppLocalizations.of(context).addActivityDaySelection}',
                       ),
                       title: Text('Nous contacter'),
                       onTap: () {},
@@ -34,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.language,
                           size: 24.0,
                           semanticLabel:
-                          '${DemoLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).addActivityDaySelection}',
                         ),
                         title: Text('Changer la langue'),
                         onTap: () {},
@@ -47,7 +47,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.description,
                           size: 24.0,
                           semanticLabel:
-                          '${DemoLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).addActivityDaySelection}',
                         ),
                         title: Text("Conditions d'utilisation"),
                         onTap: () {},
@@ -60,7 +60,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.favorite,
                           size: 24.0,
                           semanticLabel:
-                          '${DemoLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).addActivityDaySelection}',
                         ),
                         title: Text("Aknowledgements"),
                         onTap: () {},
@@ -73,7 +73,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.directions_run,
                           size: 24.0,
                           semanticLabel:
-                          '${DemoLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).addActivityDaySelection}',
                         ),
                         title: Text("Supprimer compte"),
                         onTap: () {},

@@ -71,7 +71,8 @@ dependencies:
   authentication:
     path: authentication
 
-
+  arch:
+    path: arch
 
 dev_dependencies:
 

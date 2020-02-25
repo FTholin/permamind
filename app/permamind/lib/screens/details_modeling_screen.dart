@@ -1,10 +1,8 @@
+import 'package:arch/arch.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/Localization.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 
 class DetailsModelingScreen extends StatelessWidget {
@@ -123,7 +121,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                       flex: 2,
                                       child: Center(
                                         child: Text(
-                                            "${DemoLocalizations.of(context).detailsModelingScreenSowingTitle}",
+                                            "${AppLocalizations.of(context).detailsModelingScreenSowingTitle}",
                                             style: TextStyle(
                                                 color: const Color(0xFF01534F),
                                                 fontSize: 14)
@@ -154,7 +152,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                       flex: 2,
                                       child: Center(
                                         child: Text(
-                                            "  ${DemoLocalizations.of(context).detailsModelingScreenHarvestTitle}",
+                                            "  ${AppLocalizations.of(context).detailsModelingScreenHarvestTitle}",
                                             style: TextStyle(
                                                 color: const Color(0xFF01534F),
                                                 fontSize: 14)
@@ -181,7 +179,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                       Expanded(
                                         child: Center(
                                           child: Text(
-                                              "${DemoLocalizations.of(context).detailsModelingScreenDurationTitle}",
+                                              "${AppLocalizations.of(context).detailsModelingScreenDurationTitle}",
                                               style: TextStyle(
                                                   color: const Color(0xFF01534F),
                                                   fontWeight: FontWeight.bold,
@@ -192,7 +190,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                       Expanded(
                                         child: Center(
                                           child: Text(
-                                              "${modeling.productionDuration} ${DemoLocalizations.of(context).detailsModelingScreenMonthsLabel}",
+                                              "${modeling.productionDuration} ${AppLocalizations.of(context).detailsModelingScreenMonthsLabel}",
                                               style: TextStyle(
                                                   color: const Color(0xFF01534F),
                                                   fontSize: 14)
@@ -229,7 +227,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                 Expanded(
                                     child: Center(
                                       child: Text(
-                                          "${DemoLocalizations.of(context).detailsModelingScreenDifficultyTitle}",
+                                          "${AppLocalizations.of(context).detailsModelingScreenDifficultyTitle}",
                                           style: TextStyle(
                                                 color: const Color(0xFF01534F),
                                                 fontWeight: FontWeight.bold,
@@ -252,7 +250,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                 Expanded(
                                   child: Center(
                                     child: Text(
-                                        "${DemoLocalizations.of(context).detailsModelingScreenYieldTitle}",
+                                        "${AppLocalizations.of(context).detailsModelingScreenYieldTitle}",
                                         style: TextStyle(
                                             color: const Color(0xFF01534F),
                                             fontWeight: FontWeight.bold,
@@ -288,7 +286,7 @@ class DetailsModelingScreen extends StatelessWidget {
                               Expanded(
                                 child: Center(
                                   child: Text(
-                                      "${DemoLocalizations.of(context).detailsModelingScreenSunlightTitle}",
+                                      "${AppLocalizations.of(context).detailsModelingScreenSunlightTitle}",
                                       style: TextStyle(
                                           color: const Color(0xFF01534F),
                                           fontWeight: FontWeight.bold,
@@ -311,7 +309,7 @@ class DetailsModelingScreen extends StatelessWidget {
                               Expanded(
                                 child: Center(
                                   child: Text(
-                                      "${DemoLocalizations.of(context).detailsModelingScreenWaterTitle}",
+                                      "${AppLocalizations.of(context).detailsModelingScreenWaterTitle}",
                                       style: TextStyle(
                                           color: const Color(0xFF01534F),
                                           fontWeight: FontWeight.bold,

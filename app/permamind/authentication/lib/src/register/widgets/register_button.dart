@@ -1,3 +1,4 @@
+import 'package:arch/arch.dart';
 import 'package:flutter/material.dart';
 
 class RegisterButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class RegisterButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.0),
       ),
       onPressed: _onPressed,
-      child: Text('Register'),
+      child: Text('${AppLocalizations.of(context).registrationButton}'),
     );
   }
 }

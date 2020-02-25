@@ -1,8 +1,8 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
@@ -42,7 +42,7 @@ class ExtraActions extends StatelessWidget {
                 value: ExtraAction.Settings,
                 child: ListTile(
                   leading: Icon(Icons.settings),
-                  title: Text('${DemoLocalizations.of(context).extraActionsSettingsButton}'),
+                  title: Text('${AppLocalizations.of(context).extraActionsSettingsButton}'),
                 ),
 
               ),
@@ -50,7 +50,7 @@ class ExtraActions extends StatelessWidget {
                 value: ExtraAction.LogOut,
                 child: ListTile(
                   leading: Icon(Icons.exit_to_app),
-                  title: Text('${DemoLocalizations.of(context).extraActionsLogOutButton}'),
+                  title: Text('${AppLocalizations.of(context).extraActionsLogOutButton}'),
                 ),
               ),
             ],

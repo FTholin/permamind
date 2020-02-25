@@ -1,10 +1,7 @@
+import 'package:arch/arch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
-import 'package:permamind/blocs/blocs.dart';
 
 class GardenSpeedDial extends StatefulWidget {
   final bool visible;
@@ -44,7 +41,7 @@ class GardenSpeedDialState extends State<GardenSpeedDial>
           child: Icon(Icons.nature, color: Colors.white,),
           backgroundColor: Colors.green,
           onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.addGarden),
-          label: '${DemoLocalizations.of(context).speedDialCreateGarden}',
+          label: '${AppLocalizations.of(context).speedDialCreateGarden}',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         ),
@@ -52,7 +49,7 @@ class GardenSpeedDialState extends State<GardenSpeedDial>
           child: Icon(Icons.share, color: Colors.white,),
           backgroundColor: Colors.green,
 //          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.joinGarden),
-          label: '${DemoLocalizations.of(context).speedDialJoinGarden}',
+          label: '${AppLocalizations.of(context).speedDialJoinGarden}',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         ),

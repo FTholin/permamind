@@ -1,7 +1,7 @@
+import 'package:arch/arch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/screens/screens.dart';
 
@@ -42,7 +42,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
           child:  Icon(
             Icons.event,
             color: Colors.white,
-            semanticLabel: '${DemoLocalizations.of(context).speedDialAddActivity}',
+            semanticLabel: '${AppLocalizations.of(context).speedDialAddActivity}',
           ),
           backgroundColor: Colors.green,
           onTap: () async {
@@ -70,7 +70,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
 //              }
 //            }
           },
-          label: '${DemoLocalizations.of(context).speedDialActivity}',
+          label: '${AppLocalizations.of(context).speedDialActivity}',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,
         )

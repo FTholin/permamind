@@ -1,10 +1,9 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
-import 'package:permamind/Localization.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/member_profile.dart';
 import 'package:permamind/screens/screens.dart';
@@ -78,7 +77,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 
 
     return Scaffold(
-      appBar: new AppBar(title: new Text('${DemoLocalizations.of(context).addParcelTitle}')),
+      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addParcelTitle}')),
       body: new Stepper(
         type: StepperType.horizontal,
         currentStep: _currentStep,
@@ -100,7 +99,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              '${DemoLocalizations.of(context).addParcelNameTitle}',
+                              '${AppLocalizations.of(context).addParcelNameTitle}',
 //                    textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 19),
@@ -114,9 +113,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         controller: _parcelName,
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
-                          hintText: '${DemoLocalizations.of(context).addParcelNameHint}',
+                          hintText: '${AppLocalizations.of(context).addParcelNameHint}',
                           errorText: _parcelNameValidate
-                              ? '${DemoLocalizations.of(context).addParcelNameError}'
+                              ? '${AppLocalizations.of(context).addParcelNameError}'
                               : null,
                         ),
                         onChanged: (value) {
@@ -143,7 +142,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            '${DemoLocalizations.of(context).addParcelGardenGroundTitle}',
+                            '${AppLocalizations.of(context).addParcelGardenGroundTitle}',
                             style: TextStyle(fontSize: 19),
                           )),
                       Container()
@@ -161,7 +160,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         },
                       ),
                       Text(
-                        '${DemoLocalizations.of(context).yesChoice}',
+                        '${AppLocalizations.of(context).yesChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -180,7 +179,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                         },
                       ),
                       Text(
-                        '${DemoLocalizations.of(context).noChoice}',
+                        '${AppLocalizations.of(context).noChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -202,7 +201,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                   Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
-                        '${DemoLocalizations.of(context).addParcelDimensionTitle}',
+                        '${AppLocalizations.of(context).addParcelDimensionTitle}',
                         maxLines: 3,
                         textAlign: TextAlign.left,
                         style: TextStyle(fontSize: 19),
@@ -212,7 +211,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '${DemoLocalizations.of(context).addParcelScaleLabel}',
+                          '${AppLocalizations.of(context).addParcelScaleLabel}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -304,7 +303,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '${DemoLocalizations.of(context).settingsGardenFriendsTitle}',
+                          '${AppLocalizations.of(context).settingsGardenFriendsTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 19),
@@ -318,7 +317,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '${DemoLocalizations.of(context).optionalTitle}',
+                          '${AppLocalizations.of(context).optionalTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -414,7 +413,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: Text('${DemoLocalizations.of(context).backButton}')),
+            RaisedButton(onPressed: onStepCancel, child: Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
 
@@ -439,7 +438,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 
 
                 },
-                child: Text('${DemoLocalizations.of(context).finalizeButton}')),
+                child: Text('${AppLocalizations.of(context).finalizeButton}')),
           ]);
     } else if (_currentStep == 0) {
       return Row(
@@ -447,7 +446,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
           children: <Widget>[
             RaisedButton(onPressed: () {
               Navigator.pop(context);
-            }, child:  Text('${DemoLocalizations.of(context).backButton}')),
+            }, child:  Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
                   if (_parcelName.text.isNotEmpty) {
@@ -460,15 +459,15 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                     });
                   }
                 },
-                child:  Text('${DemoLocalizations.of(context).continueButton}')),
+                child:  Text('${AppLocalizations.of(context).continueButton}')),
           ]);
     } else {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child:  Text('${DemoLocalizations.of(context).backButton}')),
+            RaisedButton(onPressed: onStepCancel, child:  Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
-                onPressed: onStepContinue, child:  Text('${DemoLocalizations.of(context).continueButton}')),
+                onPressed: onStepContinue, child:  Text('${AppLocalizations.of(context).continueButton}')),
           ]);
     }
   }
