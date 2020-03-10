@@ -167,3 +167,12 @@ class _GardenAppBarState extends State<GardenAppBar> {
 
 
 
+class DetailsGardenScreenArguments {
+
+  final DataRepository dataRepository;
+
+  final String gardenId;
+  final User user;
+
+  DetailsGardenScreenArguments(this.dataRepository, this.gardenId, this.user);
+}

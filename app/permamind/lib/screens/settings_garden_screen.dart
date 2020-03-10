@@ -1,11 +1,11 @@
 
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/arch_bricks/keys.dart';
 import 'package:permamind/blocs/blocs.dart';
@@ -70,7 +70,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
         if (widget.user.id == garden.admin) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('${DemoLocalizations.of(context).settingsGardenTitle}'),
+              title: Text('${AppLocalizations.of(context).settingsGardenTitle}'),
             ),
             body: Center(
                 child: Padding(
@@ -81,7 +81,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "${DemoLocalizations.of(context).settingsGardenName}",
+                              "${AppLocalizations.of(context).settingsGardenName}",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
@@ -90,7 +90,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: garden != null ? "${garden.name}" : "",
-                              errorText: _newGardenNameValidate ? '${DemoLocalizations.of(context).settingsGardenNameError}' : null,
+                              errorText: _newGardenNameValidate ? '${AppLocalizations.of(context).settingsGardenNameError}' : null,
                             ),
                             onChanged: (value) {
                               _newGardenNameController.text.isEmpty
@@ -102,7 +102,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "${DemoLocalizations.of(context).settingsGardenFriendsTitle}",
+                              "${AppLocalizations.of(context).settingsGardenFriendsTitle}",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
@@ -206,7 +206,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                     Navigator.pop(context);
                                   },
                                   child: Text(
-                                    "${DemoLocalizations.of(context).settingsConfirmChanges}",
+                                    "${AppLocalizations.of(context).settingsConfirmChanges}",
                                     style: TextStyle(fontSize: 22),
                                   ),
                                 ),
@@ -227,23 +227,23 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                       barrierDismissible: false, // user must tap button!
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text('${DemoLocalizations.of(context).settingsGardenDeleteTitle}'),
+                                          title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
                                           content: SingleChildScrollView(
                                             child: ListBody(
                                               children: <Widget>[
-                                                Text('${DemoLocalizations.of(context).settingsGardenDeleteMessage}'),
+                                                Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
                                               ],
                                             ),
                                           ),
                                           actions: <Widget>[
                                             FlatButton(
-                                              child: Text('${DemoLocalizations.of(context).buttonCancel}'),
+                                              child: Text('${AppLocalizations.of(context).buttonCancel}'),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
                                             ),
                                             FlatButton(
-                                              child: Text('${DemoLocalizations.of(context).buttonContinue}'),
+                                              child: Text('${AppLocalizations.of(context).buttonContinue}'),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                                 Navigator.pop(context, false);
@@ -256,7 +256,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
                                   },
                                   child: Text(
-                                    "${DemoLocalizations.of(context).settingsGardenDelete}",
+                                    "${AppLocalizations.of(context).settingsGardenDelete}",
                                     style: TextStyle(fontSize: 22),
                                   ),
                                 ),
@@ -272,7 +272,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
         } else {
           return Scaffold(
             appBar: AppBar(
-              title: Text('${DemoLocalizations.of(context).settingsGardenTitle}'),
+              title: Text('${AppLocalizations.of(context).settingsGardenTitle}'),
             ),
             body: Center(
                 child: Padding(
@@ -283,7 +283,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "${DemoLocalizations.of(context).settingsGardenName}",
+                              "${AppLocalizations.of(context).settingsGardenName}",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
@@ -292,7 +292,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: garden != null ? "${garden.name}" : "",
-                              errorText: _newGardenNameValidate ? '${DemoLocalizations.of(context).settingsGardenNameError}' : null,
+                              errorText: _newGardenNameValidate ? '${AppLocalizations.of(context).settingsGardenNameError}' : null,
                             ),
                             onChanged: (value) {
                               _newGardenNameController.text.isEmpty
@@ -304,7 +304,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "${DemoLocalizations.of(context).settingsGardenFriendsTitle}",
+                              "${AppLocalizations.of(context).settingsGardenFriendsTitle}",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
@@ -408,7 +408,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                     Navigator.pop(context);
                                   },
                                   child: Text(
-                                    "${DemoLocalizations.of(context).settingsConfirmChanges}",
+                                    "${AppLocalizations.of(context).settingsConfirmChanges}",
                                     style: TextStyle(fontSize: 22),
                                   ),
                                 ),
@@ -429,23 +429,23 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                       barrierDismissible: false, // user must tap button!
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text('${DemoLocalizations.of(context).settingsGardenLeaveTitle}'),
+                                          title: Text('${AppLocalizations.of(context).settingsGardenLeaveTitle}'),
                                           content: SingleChildScrollView(
                                             child: ListBody(
                                               children: <Widget>[
-                                                Text('${DemoLocalizations.of(context).settingsGardenLeaveMessage}'),
+                                                Text('${AppLocalizations.of(context).settingsGardenLeaveMessage}'),
                                               ],
                                             ),
                                           ),
                                           actions: <Widget>[
                                             FlatButton(
-                                              child: Text('${DemoLocalizations.of(context).buttonCancel}'),
+                                              child: Text('${AppLocalizations.of(context).buttonCancel}'),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
                                             ),
                                             FlatButton(
-                                              child: Text('${DemoLocalizations.of(context).buttonContinue}'),
+                                              child: Text('${AppLocalizations.of(context).buttonContinue}'),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                                 Navigator.pop(context, true);
@@ -457,7 +457,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
                                     );
                                   },
                                   child: Text(
-                                    "${DemoLocalizations.of(context).settingsGardenLeaveButton}",
+                                    "${AppLocalizations.of(context).settingsGardenLeaveButton}",
                                     style: TextStyle(fontSize: 22),
                                   ),
                                 ),

@@ -42,51 +42,15 @@ class EnumeratedGardens extends StatelessWidget {
                       index: index,
                       dayActivitiesCount: gardens[index].dayActivitiesCount),
                   onTap: () async {
-                    final alteredGarden = await Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) {
-
-                      return BlocProvider<ParcelsBloc>(
-                        create: (context) => ParcelsBloc(
-                            gardensBloc: BlocProvider.of<GardensBloc>(context),
-                            dataRepository: _dataRepository)
-                          ..add(LoadParcels(gardens[index].id, _user.pseudo, _user.id)),
-                        child: DetailsGardenScreen(gardenId: gardens[index].id, user: _user, dataRepository: _dataRepository,),);
-
-
-                    }));
-//                    if (alteredGarden != null) {
-//                      if (alteredGarden['action'] == 'Delete') {
-//                        final snackBar = SnackBar(
-//                          content:
-//                              Text('Delete ${alteredGarden['garden'].name}'),
-//                          action: SnackBarAction(
-//                            label: 'Undo',
-//                            onPressed: () {
-//                              BlocProvider.of<GardensBloc>(context)
-//                                  .add(CopyGarden(alteredGarden['garden']));
-//                              BlocProvider.of<GardensBloc>(context).add(
-//                                  CopyActivities(alteredGarden['activities']));
-//                            },
-//                          ),
-//                        );
-//
-//                        Scaffold.of(context).showSnackBar(snackBar);
-//                      } else {
-//                        final snackBar = SnackBar(
-//                          content:
-//                              Text('Leave ${alteredGarden['garden'].name}'),
-//                          action: SnackBarAction(
-//                            label: 'Undo',
-//                            onPressed: () {
-//                              BlocProvider.of<GardensBloc>(context)
-//                                  .add(UpdateGarden(alteredGarden['garden']));
-//                            },
-//                          ),
-//                        );
-//
-//                        Scaffold.of(context).showSnackBar(snackBar);
-//                      }
-//                    }
+                    Navigator.pushNamed(
+                      context,
+                      '/detailsGarden',
+                      arguments: DetailsGardenScreenArguments(
+                        _dataRepository,
+                        gardens[index].id,
+                        _user
+                      ),
+                    );
                   },
                 );
               },

@@ -1,3 +1,4 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,7 @@ class _LoginFormState extends State<LoginForm> {
               SnackBar(
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Login Failure'), Icon(Icons.error)],
+                  children: [Text('${AppLocalizations.of(context).loginFormFailureMessage}'), Icon(Icons.error)],
                 ),
                 backgroundColor: Colors.red,
               ),
@@ -62,7 +63,7 @@ class _LoginFormState extends State<LoginForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Logging In...'),
+                    Text('${AppLocalizations.of(context).loginFormLoading}'),
                     CircularProgressIndicator(),
                   ],
                 ),
@@ -88,25 +89,25 @@ class _LoginFormState extends State<LoginForm> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.email),
-                      labelText: 'Email',
+                      labelText: '${AppLocalizations.of(context).email}',
                     ),
                     autovalidate: true,
                     autocorrect: false,
                     validator: (_) {
-                      return !state.isEmailValid ? 'Invalid Email' : null;
+                      return !state.isEmailValid ? '${AppLocalizations.of(context).invalidEmail}' : null;
                     },
                   ),
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.lock),
-                      labelText: 'Password',
+                      labelText: '${AppLocalizations.of(context).password}',
                     ),
                     obscureText: true,
                     autovalidate: true,
                     autocorrect: false,
                     validator: (_) {
-                      return !state.isPasswordValid ? 'Invalid Password' : null;
+                      return !state.isPasswordValid ? '${AppLocalizations.of(context).invalidPassword}' : null;
                     },
                   ),
                   Padding(

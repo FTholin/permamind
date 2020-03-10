@@ -20,3 +20,14 @@ class LoggedOut extends AuthenticationEvent {
   @override
   String toString() => 'LoggedOut';
 }
+
+
+class DeletedAccount extends AuthenticationEvent {
+
+  final String userId;
+
+  DeletedAccount(this.userId);
+
+  @override
+  String toString() => 'DeletedAccount';
+}

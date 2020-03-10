@@ -1,7 +1,7 @@
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:arch/arch.dart';
 
 class LoginScreen extends StatelessWidget {
   final UserRepository _userRepository;
@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: Text('${AppLocalizations.of(context).loginTitle}')),
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(userRepository: _userRepository),
         child: LoginForm(userRepository: _userRepository),

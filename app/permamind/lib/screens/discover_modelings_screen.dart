@@ -1,7 +1,7 @@
+import 'package:arch/arch.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/widgets/widgets.dart';
 
@@ -30,7 +30,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                    '${DemoLocalizations.of(context).discoverModelingsTitle}',
+                    '${AppLocalizations.of(context).discoverModelingsTitle}',
                     style:
                         TextStyle(fontWeight: FontWeight.normal, fontSize: 20))),
           ),
@@ -68,7 +68,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                    '${DemoLocalizations.of(context).discoverModelingsTendencyTitle}',
+                    '${AppLocalizations.of(context).discoverModelingsTendencyTitle}',
                     style: TextStyle(
                         fontWeight: FontWeight.normal, fontSize: 20))),
           ),
@@ -101,7 +101,7 @@ class DiscoverModelingsScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                    '${DemoLocalizations.of(context).discoverModelingsBrowseTitle}',
+                    '${AppLocalizations.of(context).discoverModelingsBrowseTitle}',
                     style: TextStyle(
                         fontWeight: FontWeight.normal, fontSize: 20))),
           ),

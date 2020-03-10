@@ -1,8 +1,8 @@
+import 'package:arch/arch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
 
@@ -33,7 +33,7 @@ class TabSelector extends StatelessWidget {
                     height: 35,
                     width: 37,
                   );
-                  text = Text("${DemoLocalizations.of(context).tabBarGarden}");
+                  text = Text("${AppLocalizations.of(context).tabBarGarden}");
                   break;
                 case AppTab.abc:
                   picture = Image.asset(
@@ -51,7 +51,7 @@ class TabSelector extends StatelessWidget {
                     height: 35,
                     width: 37,
                   );
-                  text = Text("${DemoLocalizations.of(context).tabBarTutorials}");
+                  text = Text("${AppLocalizations.of(context).tabBarTutorials}");
                   break;
                 case AppTab.profile:
                   picture = Image.asset(
@@ -60,7 +60,7 @@ class TabSelector extends StatelessWidget {
                     height: 35,
                     width: 37,
                   );
-                  text = Text("${DemoLocalizations.of(context).tabBarProfile}");
+                  text = Text("${AppLocalizations.of(context).tabBarProfile}");
                   break;
               }
 

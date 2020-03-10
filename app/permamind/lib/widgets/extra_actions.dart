@@ -1,16 +1,19 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/models/models.dart';
+import 'package:permamind/screens/screens.dart';
 
 class ExtraActions extends StatelessWidget {
+  final String userId;
+
   // TODO key
-  ExtraActions({Key key}) : super(key: ArchSampleKeys.extraActionsButton);
+  ExtraActions({this.userId, Key key}) : super(key: ArchSampleKeys.extraActionsButton);
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,15 @@ class ExtraActions extends StatelessWidget {
                   BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
                   break;
                 case ExtraAction.Settings:
+
                   Navigator.pushNamed(
                     context,
-                    ArchSampleRoutes.settings);
+                    '/settings',
+                    arguments: SettingsScreenArguments(
+                      userId
+                    ),
+                  );
+
                   break;
               }
             },
@@ -42,7 +51,7 @@ class ExtraActions extends StatelessWidget {
                 value: ExtraAction.Settings,
                 child: ListTile(
                   leading: Icon(Icons.settings),
-                  title: Text('${DemoLocalizations.of(context).extraActionsSettingsButton}'),
+                  title: Text('${AppLocalizations.of(context).extraActionsSettingsButton}'),
                 ),
 
               ),
@@ -50,7 +59,7 @@ class ExtraActions extends StatelessWidget {
                 value: ExtraAction.LogOut,
                 child: ListTile(
                   leading: Icon(Icons.exit_to_app),
-                  title: Text('${DemoLocalizations.of(context).extraActionsLogOutButton}'),
+                  title: Text('${AppLocalizations.of(context).extraActionsLogOutButton}'),
                 ),
               ),
             ],

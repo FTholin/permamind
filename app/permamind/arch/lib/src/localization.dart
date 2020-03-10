@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DemoLocalizations {
-  DemoLocalizations(this.locale);
+class AppLocalizations {
+  AppLocalizations(this.locale);
 
   final Locale locale;
 
-  static DemoLocalizations of(BuildContext context) {
-    return Localizations.of<DemoLocalizations>(context, DemoLocalizations);
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   static Map<String, Map<String, String>> _localizedValues = {
@@ -76,12 +76,22 @@ class DemoLocalizations {
       'extra_actions_log_out_button': "Log Out",
       'login_title': "Login",
       'login_form_failure_message': "Login Failure",
+      'login_form_loading': "Logging In",
+      'email': 'Email',
+      'email_error': 'Invalid email addresse',
       'speed_dial_activity': "Activity",
       'add_activity_title': "New Activity",
       'add_activity_name': "Activity Name",
       'add_activity_name_error': "Activity Name can't be empty",
-      'add_activity_day_selection': "Select activity day"
-    },
+      'add_activity_day_selection': "Select activity day",
+      'password': 'Password',
+      'invalid_password': 'Invalid password',
+      'registration_title': 'Registration',
+      'registration_failure': 'Registration Failure',
+      'registration_loading': 'Registering...',
+      'registration_button': "Create an Account"
+
+},
     'fr': {
       'title': "Partie pédagogie",
       'settings_garden_title': "Paramètres du potager",
@@ -147,12 +157,20 @@ class DemoLocalizations {
       'extra_actions_log_out_button': "Déconnexion",
       'login_title': "Connexion",
       'login_form_failure_message': "Échec de la connexion",
+      'login_form_loading': "Connexion en cours",
+      'email': 'Adresse email',
+      'email_error': 'Adresse email invalide',
       'speed_dial_activity': "Activité",
       'add_activity_title': "Nouvelle Activité",
       'add_activity_name': "Nom Activité",
       'add_activity_name_error': "Nom de l'activité ne peut être vide",
-      'add_activity_day_selection': "Sélectionner le jour de l'activité"
-
+      'add_activity_day_selection': "Sélectionner le jour de l'activité",
+      'password': "Mot de passe",
+      'invalid_password': "Mot de passe invalide",
+      'registration_title': "Inscription",
+      'registration_failure': "Échec de l'inscription",
+      'registration_loading': "Inscription en cours",
+      'registration_button': "Créer un compte"
     },
   };
 
@@ -442,23 +460,60 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]['add_activity_day_selection'];
   }
 
+  String get loginFormLoading {
+    return _localizedValues[locale.languageCode]['login_form_loading'];
+  }
+
+  String get email {
+    return _localizedValues[locale.languageCode]['email'];
+  }
+
+  String get invalidEmail {
+    return _localizedValues[locale.languageCode]['email_error'];
+  }
+
+  String get password {
+    return _localizedValues[locale.languageCode]['password'];
+  }
+
+  String get invalidPassword {
+    return _localizedValues[locale.languageCode]['invalid_password'];
+  }
+
+  String get registrationTitle {
+    return _localizedValues[locale.languageCode]['registration_title'];
+  }
+
+  String get registrationFailure {
+    return _localizedValues[locale.languageCode]['registration_failure'];
+  }
+
+  String get registrationLoading {
+    return _localizedValues[locale.languageCode]['registration_loading'];
+  }
+
+  String get registrationButton {
+    return _localizedValues[locale.languageCode]['registration_button'];
+  }
+
+
 
 }
 
 
-class DemoLocalizationsDelegate extends LocalizationsDelegate<DemoLocalizations> {
-  const DemoLocalizationsDelegate();
+class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+  const AppLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => ['en', 'fr'].contains(locale.languageCode);
 
   @override
-  Future<DemoLocalizations> load(Locale locale) {
+  Future<AppLocalizations> load(Locale locale) {
     // Returning a SynchronousFuture here because an async "load" operation
-    // isn't needed to produce an instance of DemoLocalizations.
-    return SynchronousFuture<DemoLocalizations>(DemoLocalizations(locale));
+    // isn't needed to produce an instance of AppLocalizations.
+    return SynchronousFuture<AppLocalizations>(AppLocalizations(locale));
   }
 
   @override
-  bool shouldReload(DemoLocalizationsDelegate old) => false;
+  bool shouldReload(AppLocalizationsDelegate old) => false;
 }

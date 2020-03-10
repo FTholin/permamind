@@ -1,13 +1,11 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
-import 'package:permamind/Localization.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
-import 'package:permamind/screens/screens.dart';
 
 class AddGardenScreen extends StatefulWidget {
   final User _user;
@@ -42,7 +40,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: new Text('${DemoLocalizations.of(context).addGardenTitle}')),
+      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addGardenTitle}')),
       body: new Stepper(
         type: StepperType.horizontal,
         currentStep: _currentStep,
@@ -64,7 +62,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              '${DemoLocalizations.of(context).addGardenTitle}',
+                              '${AppLocalizations.of(context).addGardenTitle}',
 //                    textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 19),
@@ -78,9 +76,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         controller: _gardenName,
                         decoration: InputDecoration(
 //                        border: InputBorder.none,
-                          hintText: '${DemoLocalizations.of(context).addGardenNameHint}',
+                          hintText: '${AppLocalizations.of(context).addGardenNameHint}',
                           errorText: _gardenNameValidate
-                              ? '${DemoLocalizations.of(context).addGardenNameError}'
+                              ? '${AppLocalizations.of(context).addGardenNameError}'
                               : null,
                         ),
                         onChanged: (value) {
@@ -103,7 +101,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    '${DemoLocalizations.of(context).addGardenVisibilityTitle}',
+                    '${AppLocalizations.of(context).addGardenVisibilityTitle}',
                     textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 19),
@@ -120,7 +118,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         },
                       ),
                       Text(
-                        '${DemoLocalizations.of(context).yesChoice}',
+                        '${AppLocalizations.of(context).yesChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -139,7 +137,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         },
                       ),
                       Text(
-                        '${DemoLocalizations.of(context).noChoice}',
+                        '${AppLocalizations.of(context).noChoice}',
                         style: new TextStyle(
                           fontSize: 16.0,
                         ),
@@ -163,7 +161,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '${DemoLocalizations.of(context).addFewGardenersTitle}',
+                          '${AppLocalizations.of(context).addFewGardenersTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 19),
@@ -177,7 +175,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          '${DemoLocalizations.of(context).optionalTitle}',
+                          '${AppLocalizations.of(context).optionalTitle}',
                           textAlign: TextAlign.left,
 //                        overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -272,7 +270,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: Text('${DemoLocalizations.of(context).backButton}')),
+            RaisedButton(onPressed: onStepCancel, child: Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
                   _gardenMembers.add(GardenMember(
@@ -288,10 +286,11 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
 
                   BlocProvider.of<GardensBloc>(context).add(AddGarden(garden));
 
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, ArchSampleRoutes.home, (_) => false);
+                  Navigator.pop(context);
+//                  Navigator.pushNamedAndRemoveUntil(
+//                      context, (_) => false);
                 },
-                child: Text('${DemoLocalizations.of(context).finalizeButton}')),
+                child: Text('${AppLocalizations.of(context).finalizeButton}')),
           ]);
     } else if (_currentStep == 0) {
       return Row(
@@ -299,7 +298,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
           children: <Widget>[
             RaisedButton(onPressed: () {
               Navigator.pop(context);
-            }, child: Text('${DemoLocalizations.of(context).backButton}')),
+            }, child: Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
                 onPressed: () {
                   if (_gardenName.text.isNotEmpty) {
@@ -312,15 +311,15 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                     });
                   }
                 },
-                child:  Text('${DemoLocalizations.of(context).continueButton}')),
+                child:  Text('${AppLocalizations.of(context).continueButton}')),
           ]);
     } else {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: Text('${DemoLocalizations.of(context).backButton}')),
+            RaisedButton(onPressed: onStepCancel, child: Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
-                onPressed: onStepContinue, child:  Text('${DemoLocalizations.of(context).continueButton}')),
+                onPressed: onStepContinue, child:  Text('${AppLocalizations.of(context).continueButton}')),
           ]);
     }
   }

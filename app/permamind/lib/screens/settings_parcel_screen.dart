@@ -1,10 +1,10 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
-import 'package:permamind/Localization.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/arch_bricks/keys.dart';
 import 'package:permamind/blocs/blocs.dart';
@@ -68,7 +68,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
             if (parcel.admin == widget.user.id) {
               return Scaffold(
                 appBar: AppBar(
-                  title:  Text('${DemoLocalizations.of(context).settingsParcelTitle}'),
+                  title:  Text('${AppLocalizations.of(context).settingsParcelTitle}'),
                 ),
                 body: Center(
                     child: Padding(
@@ -79,7 +79,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
-                                  "${DemoLocalizations.of(context).addParcelNameHint}",
+                                  "${AppLocalizations.of(context).addParcelNameHint}",
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
@@ -88,7 +88,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: parcel != null ? "${parcel.name}" : "",
-                                  errorText: _newParcelNameValidate ? '${DemoLocalizations.of(context).addParcelNameError}' : null,
+                                  errorText: _newParcelNameValidate ? '${AppLocalizations.of(context).addParcelNameError}' : null,
                                 ),
                                 onChanged: (value) {
                                   _newParcelNameController.text.isEmpty
@@ -140,7 +140,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                         Navigator.pop(context);
                                       },
                                       child: Text(
-                                        "${DemoLocalizations.of(context).settingsConfirmChanges}",
+                                        "${AppLocalizations.of(context).settingsConfirmChanges}",
                                         style: TextStyle(fontSize: 22),
                                       ),
                                     ),
@@ -160,23 +160,23 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                           barrierDismissible: false, // user must tap button!
                                           builder: (BuildContext context) {
                                             return AlertDialog(
-                                              title: Text('${DemoLocalizations.of(context).settingsParcelDeleteTitle}'),
+                                              title: Text('${AppLocalizations.of(context).settingsParcelDeleteTitle}'),
                                               content: SingleChildScrollView(
                                                 child: ListBody(
                                                   children: <Widget>[
-                                                    Text('${DemoLocalizations.of(context).settingsParcelDeleteMessage}'),
+                                                    Text('${AppLocalizations.of(context).settingsParcelDeleteMessage}'),
                                                   ],
                                                 ),
                                               ),
                                               actions: <Widget>[
                                                 FlatButton(
-                                                  child: Text('${DemoLocalizations.of(context).buttonCancel}'),
+                                                  child: Text('${AppLocalizations.of(context).buttonCancel}'),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
                                                 ),
                                                 FlatButton(
-                                                  child: Text('${DemoLocalizations.of(context).continueButton}'),
+                                                  child: Text('${AppLocalizations.of(context).continueButton}'),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                     Navigator.pop(context, false);
@@ -188,7 +188,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                         );
                                       },
                                       child: Text(
-                                        "${DemoLocalizations.of(context).settingsParcelDeleteButton}",
+                                        "${AppLocalizations.of(context).settingsParcelDeleteButton}",
                                         style: TextStyle(fontSize: 22),
                                       ),
                                     ),
@@ -204,7 +204,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
             } else {
               return Scaffold(
                 appBar: AppBar(
-                  title:  Text('${DemoLocalizations.of(context).addParcelTitle}'),
+                  title:  Text('${AppLocalizations.of(context).addParcelTitle}'),
                 ),
                 body: Center(
                     child: Padding(
@@ -215,7 +215,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
-                                  "${DemoLocalizations.of(context).settingsParcelTitle}",
+                                  "${AppLocalizations.of(context).settingsParcelTitle}",
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ),
@@ -224,7 +224,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   hintText: parcel != null ? "${parcel.name}" : "",
-                                  errorText: _newParcelNameValidate ? '${DemoLocalizations.of(context).addParcelNameError}' : null,
+                                  errorText: _newParcelNameValidate ? '${AppLocalizations.of(context).addParcelNameError}' : null,
                                 ),
                                 onChanged: (value) {
                                   _newParcelNameController.text.isEmpty
@@ -275,7 +275,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                         Navigator.pop(context);
                                       },
                                       child: Text(
-                                        "${DemoLocalizations.of(context).settingsConfirmChanges}",
+                                        "${AppLocalizations.of(context).settingsConfirmChanges}",
                                         style: TextStyle(fontSize: 22),
                                       ),
                                     ),
@@ -295,23 +295,23 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
                                           barrierDismissible: false, // user must tap button!
                                           builder: (BuildContext context) {
                                             return AlertDialog(
-                                              title: Text('${DemoLocalizations.of(context).settingsParcelLeaveTitle}'),
+                                              title: Text('${AppLocalizations.of(context).settingsParcelLeaveTitle}'),
                                               content: SingleChildScrollView(
                                                 child: ListBody(
                                                   children: <Widget>[
-                                                    Text('${DemoLocalizations.of(context).settingsParcelLeaveMessage}'),
+                                                    Text('${AppLocalizations.of(context).settingsParcelLeaveMessage}'),
                                                   ],
                                                 ),
                                               ),
                                               actions: <Widget>[
                                                 FlatButton(
-                                                  child: Text('${DemoLocalizations.of(context).buttonCancel}'),
+                                                  child: Text('${AppLocalizations.of(context).buttonCancel}'),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                   },
                                                 ),
                                                 FlatButton(
-                                                  child: Text('${DemoLocalizations.of(context).continueButton}'),
+                                                  child: Text('${AppLocalizations.of(context).continueButton}'),
                                                   onPressed: () {
                                                     Navigator.of(context).pop();
                                                     Navigator.pop(context, true);
@@ -325,7 +325,7 @@ class _SettingsParcelScreenState extends State<SettingsParcelScreen> {
 
                                       },
                                       child: Text(
-                                        "${DemoLocalizations.of(context).settingsParcelLeaveButton}",
+                                        "${AppLocalizations.of(context).settingsParcelLeaveButton}",
                                         style: TextStyle(fontSize: 22),
                                       ),
                                     ),
