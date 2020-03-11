@@ -23,14 +23,14 @@ class HomeScreen extends StatelessWidget {
       builder: (context, activeTab) {
         return Scaffold(
           appBar: AppBar(
-            title:  Image.asset(
-              'assets/logo-light.png',
-              width:  MediaQuery.of(context).size.width / 2,
-              fit: BoxFit.contain,
-            ),
+            title: Text("Mes potagers"),
+//            title:  Image.asset(
+//              'assets/logo-light.png',
+//              width:  MediaQuery.of(context).size.width / 2,
+//              fit: BoxFit.contain,
+//            ),
             actions: [
 //              FilterButton(visible: activeTab == AppTab.gardens),
-              Container(),
               ExtraActions(userId: user.id),
             ],
           ),
