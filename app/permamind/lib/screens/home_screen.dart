@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           body: _buildTabPage(context, activeTab),
-          floatingActionButton: _buildFloatActionButton(activeTab, context),
+//          floatingActionButton: _buildFloatActionButton(activeTab, context),
           bottomNavigationBar: TabSelector(
             activeTab: activeTab,
             onTabSelected: (tab) => BlocProvider.of<TabBloc>(context).add(UpdateTab(tab)),
