@@ -54,22 +54,28 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
-      return MaterialApp(
+
+    return LayoutBuilder(
+        builder: (context, constraints) {
+      return OrientationBuilder(
+          builder: (context, orientation) {
+            SizeConfig().init(constraints, orientation);
+            return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+              return MaterialApp(
 //        title: FlutterBlocLocalizations().appTitle,
-        theme: themeState.theme,
-        localizationsDelegates: [
-          const AppLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          DefaultCupertinoLocalizations.delegate
-        ],
-        supportedLocales: [
-          const Locale('en', ''),
-          const Locale('fr', ''),
-        ],
-        initialRoute: '/',
+                theme: themeState.theme,
+                localizationsDelegates: [
+                  const AppLocalizationsDelegate(),
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  DefaultCupertinoLocalizations.delegate
+                ],
+                supportedLocales: [
+                  const Locale('en', ''),
+                  const Locale('fr', ''),
+                ],
+                initialRoute: '/',
 //        routes: {
 //              '/': (context) {
 //                return BlocBuilder<AuthenticationBloc, AuthenticationState>(
@@ -172,120 +178,124 @@ class App extends StatelessWidget {
 //                );
 //              }
 //        },
-        onGenerateRoute: (settings) {
-          if (settings.name == "/") {
+                onGenerateRoute: (settings) {
+                  if (settings.name == "/") {
 
-            return PageRouteBuilder(
-                pageBuilder: (_, __, ___) =>
-                    BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                      builder: (context, state) {
-                        if (state is Authenticated) {
-                          return MultiBlocProvider(
-                            providers: [
-                              BlocProvider<TabBloc>(
-                                create: (context) => TabBloc(),
-                              ),
-                              BlocProvider<TutorialsBloc>(
-                                create: (context) => TutorialsBloc(
-                                    dataRepository: firebaseRepository)
-                                  ..add(LoadTutos()),
-                              ),
-                            ],
-                            child: HomeScreen(
-                                dataRepository: firebaseRepository,
-                                user: state.userAuthenticated),
-                          );
-                        }
-                        if (state is Unauthenticated) {
-                          return LoginScreen(userRepository: userRepository);
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      },
-                    ));
+                    return PageRouteBuilder(
+                        pageBuilder: (_, __, ___) =>
+                            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                              builder: (context, state) {
+                                if (state is Authenticated) {
+                                  return MultiBlocProvider(
+                                    providers: [
+                                      BlocProvider<TabBloc>(
+                                        create: (context) => TabBloc(),
+                                      ),
+                                      BlocProvider<TutorialsBloc>(
+                                        create: (context) => TutorialsBloc(
+                                            dataRepository: firebaseRepository)
+                                          ..add(LoadTutos()),
+                                      ),
+                                    ],
+                                    child: HomeScreen(
+                                        dataRepository: firebaseRepository,
+                                        user: state.userAuthenticated),
+                                  );
+                                }
+                                if (state is Unauthenticated) {
+                                  return LoginScreen(userRepository: userRepository);
+                                }
+                                return Center(child: CircularProgressIndicator());
+                              },
+                            ));
 
-          } else if (settings.name == '/addGarden') {
+                  } else if (settings.name == '/addGarden') {
 
-            return PageRouteBuilder(
-                pageBuilder: (_, __, ___) =>
-                    BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                      builder: (context, state) {
-                        if (state is Authenticated) {
-                          return AddGardenScreen(
-                              user: state.userAuthenticated,
-                              dataRepository: firebaseRepository);
-                        } else if (state is Unauthenticated) {
-                          return LoginScreen(userRepository: userRepository);
-                        } else {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                      },
-                    ));
+                    return PageRouteBuilder(
+                        pageBuilder: (_, __, ___) =>
+                            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                              builder: (context, state) {
+                                if (state is Authenticated) {
+                                  return AddGardenScreen(
+                                      user: state.userAuthenticated,
+                                      dataRepository: firebaseRepository);
+                                } else if (state is Unauthenticated) {
+                                  return LoginScreen(userRepository: userRepository);
+                                } else {
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                              },
+                            ));
 
-          }  else if (settings.name == "/detailsGarden") {
+                  }  else if (settings.name == "/detailsGarden") {
 
-            final DetailsGardenScreenArguments args = settings.arguments;
-            return MaterialPageRoute(builder: (_) {
-              return BlocProvider<ParcelsBloc>(
-                create: (context) => ParcelsBloc(
-                    gardensBloc: BlocProvider.of<GardensBloc>(context),
-                    dataRepository: args.dataRepository)
-                  ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
-                child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
+                    final DetailsGardenScreenArguments args = settings.arguments;
+                    return MaterialPageRoute(builder: (_) {
+                      return BlocProvider<ParcelsBloc>(
+                          create: (context) => ParcelsBloc(
+                              gardensBloc: BlocProvider.of<GardensBloc>(context),
+                              dataRepository: args.dataRepository)
+                            ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
+                          child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
+                    });
+
+                  } else if (settings.name == "/settings") {
+
+                    final SettingsScreenArguments args = settings.arguments;
+
+                    return MaterialPageRoute(builder: (context) => SettingsScreen(args.userId));
+
+                  } else if (settings.name == "/settingsGarden") {
+
+                    return MaterialPageRoute(
+                        builder: (context) => SettingsGardenScreen());
+
+                  } else if (settings.name == "/joinGarden") {
+
+                    return MaterialPageRoute(builder: (context) => JoinGardenScreen());
+
+                  } else if (settings.name == "/tutorialActivities") {
+
+                    return MaterialPageRoute(
+                        builder: (context) => TutorialActivitiesScreen());
+
+                  } else {
+
+                    return PageRouteBuilder(
+                        pageBuilder: (_, __, ___) =>
+                            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                              builder: (context, state) {
+                                if (state is Authenticated) {
+                                  return MultiBlocProvider(
+                                    providers: [
+                                      BlocProvider<TabBloc>(
+                                        create: (context) => TabBloc(),
+                                      ),
+                                      BlocProvider<TutorialsBloc>(
+                                        create: (context) => TutorialsBloc(
+                                            dataRepository: firebaseRepository)
+                                          ..add(LoadTutos()),
+                                      ),
+                                    ],
+                                    child: HomeScreen(
+                                        dataRepository: firebaseRepository,
+                                        user: state.userAuthenticated),
+                                  );
+                                }
+                                if (state is Unauthenticated) {
+                                  return LoginScreen(userRepository: userRepository);
+                                }
+                                return Center(child: CircularProgressIndicator());
+                              },
+                            ));
+
+                  }
+                },
+              );
             });
 
-          } else if (settings.name == "/settings") {
-
-            final SettingsScreenArguments args = settings.arguments;
-
-            return MaterialPageRoute(builder: (context) => SettingsScreen(args.userId));
-
-          } else if (settings.name == "/settingsGarden") {
-
-            return MaterialPageRoute(
-                builder: (context) => SettingsGardenScreen());
-
-          } else if (settings.name == "/joinGarden") {
-
-            return MaterialPageRoute(builder: (context) => JoinGardenScreen());
-
-          } else if (settings.name == "/tutorialActivities") {
-
-            return MaterialPageRoute(
-                builder: (context) => TutorialActivitiesScreen());
-
-          } else {
-
-            return PageRouteBuilder(
-                pageBuilder: (_, __, ___) =>
-                    BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                      builder: (context, state) {
-                        if (state is Authenticated) {
-                          return MultiBlocProvider(
-                            providers: [
-                              BlocProvider<TabBloc>(
-                                create: (context) => TabBloc(),
-                              ),
-                              BlocProvider<TutorialsBloc>(
-                                create: (context) => TutorialsBloc(
-                                    dataRepository: firebaseRepository)
-                                  ..add(LoadTutos()),
-                              ),
-                            ],
-                            child: HomeScreen(
-                                dataRepository: firebaseRepository,
-                                user: state.userAuthenticated),
-                          );
-                        }
-                        if (state is Unauthenticated) {
-                          return LoginScreen(userRepository: userRepository);
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      },
-                    ));
-
-          }
-        },
-      );
-    });
+          });
+        }
+    );
   }
 }

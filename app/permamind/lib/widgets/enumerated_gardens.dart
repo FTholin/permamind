@@ -1,3 +1,4 @@
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
@@ -23,41 +24,50 @@ class EnumeratedGardens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GardensBloc, GardensState>(
-        builder: (context, state) {
+    return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
       if (state is GardensLoaded) {
         final gardens = state.gardens;
 
-        return Padding(
-            padding: EdgeInsets.all(10.0),
-            child: ListView.builder(
-              key: ArchSampleKeys.todoList,
-              itemCount: gardens.length,
-              itemBuilder: (BuildContext context, int index) {
-                return InkResponse(
-                  enableFeedback: true,
-                  child: GardenItem(
-                      name: gardens[index].name,
-                      membersCount: gardens[index].members.length.toString(),
-                      index: index,
-                      dayActivitiesCount: gardens[index].dayActivitiesCount),
-                  onTap: () async {
-                    Navigator.pushNamed(
-                      context,
-                      '/detailsGarden',
-                      arguments: DetailsGardenScreenArguments(
-                        _dataRepository,
-                        gardens[index].id,
-                        _user
-                      ),
-                    );
-                  },
-                );
-              },
-            ));
+        // Si aucun jardin
+        if (gardens.length == 0) {
+          return Padding(
+              padding: EdgeInsets.all(
+                1 * SizeConfig.heightMultiplier,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                          "Aucun potager pour l'instant. N'hesites pas à en ajouter !"),
+                    ),
+                  ),
+                  RaisedButton(
+                    child: Text("Ajouter un potager"),
+                    onPressed: () {},
+                  )
+                ],
+              ));
+        } else {
+          return Column(
+            children: <Widget>[
+              Expanded(
+                  child: ListView.builder(
+                    itemCount: gardens.length,
+                    itemBuilder: (context, i) {
+                      return GardenItem(
+                        name: gardens[i].name,
+                      );
+                    },
+                  )
+              ),
+            ],
+          );
+        }
       } else {
         return Container();
       }
     });
   }
 }
+

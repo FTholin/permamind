@@ -1,4 +1,6 @@
+import 'package:arch/arch.dart';
 import 'package:flutter/material.dart';
+import 'package:permamind/widgets/parcel_carrousel.dart';
 
 class GardenItem extends StatelessWidget {
   final String name;
@@ -13,80 +15,190 @@ class GardenItem extends StatelessWidget {
     this.dayActivitiesCount
   });
 
+  // TODO Internationalisation des labels !!
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 4.5,
-      margin: EdgeInsets.all(15),
-      child: Stack(
-        children: <Widget>[
-          Image.asset("assets/gardens/garden-$index.jpg",
-              width: 400, fit: BoxFit.fill),
-          Positioned(
-            bottom: 20,
-            left: 20,
-            height: 100,
-            width: 250,
-            child: Container(
-              decoration: new BoxDecoration(
-                borderRadius: BorderRadius.circular(9),
-                color: Color(0xFFF9F9F9).withOpacity(0.86),
-              ),
-              child: Padding(
-                  padding: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    Row(
+    return Padding(
+      padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
+      child: Container(
+        height: 34 * SizeConfig.heightMultiplier,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(253, 255, 242, 1),
+          border: Border.all(
+            color: Colors.black,
+            width: 0.1,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
+          child: Column(
+            children: <Widget>[
+              Container(
+                  height: 11 * SizeConfig.heightMultiplier,
+//                color: Colors.blue,
+                  child: Padding(
+                    padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
+                    child: Column(
                       children: <Widget>[
-                        Text(
-                          '$name',
-                          style: TextStyle(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                              color: Color(0xFF01534F)
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                                "$name",
+                                style: TextStyle(
+                                    color: const Color(0xFF01534F),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 2 * SizeConfig.textMultiplier
+                                )
+                            ),
+                            FlatButton(
+                              child: Text(
+                                  "Modifier",
+                                  style: TextStyle(
+                                      color: const Color(0xFF4FB06E),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 2 * SizeConfig.textMultiplier
+                                  )
+                              ),
+                              onPressed: () {},
+                            )
+                          ],
                         ),
+                        Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
+                              child: Text(
+                                  "8 tâches à réaliser aujourd'hui.",
+                                  style: TextStyle(
+                                      color: const Color(0xFF01534F),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 2.2 * SizeConfig.textMultiplier
+                                  )
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(top:8),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.perm_identity,
-                            color: Color(0xFF4FB06E),
-                          ),
-                          Text('$membersCount'),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  )
               ),
-            ),
+              ParcelCarouselWithIndicator(["1er élément", "second élément"]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
+                    child: Text(
+                        "Voir mes parcelles",
+                        style: TextStyle(
+                            color: const Color(0xFF01534F),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 2.2 * SizeConfig.textMultiplier
+                        )
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
-          Positioned(
-            bottom: 100,
-            left: 250,
-            height: 30,
-            width: 30,
-            child: Container(
-                padding: EdgeInsets.all(2),
-                decoration: new BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              child: Center(
-                child: Text(
-                  '$dayActivitiesCount',
-                  style: TextStyle(fontSize: 20,color: Colors.white),
-                )
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
+
+
+  // TODO Design potager sans parcelle
+//  @override
+//  Widget build(BuildContext context) {
+//    return Padding(
+//      padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
+//      child: Container(
+//        height: 19 * SizeConfig.heightMultiplier,
+//        decoration: BoxDecoration(
+//          color: Color.fromRGBO(253, 255, 242, 1),
+//          border: Border.all(
+//            color: Colors.black,
+//            width: 0.1,
+//          ),
+//          borderRadius: BorderRadius.circular(12),
+//        ),
+//        child: Padding(
+//          padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
+//          child: Column(
+//            children: <Widget>[
+//              Container(
+//                height: 11 * SizeConfig.heightMultiplier,
+////                color: Colors.blue,
+//                child: Padding(
+//                  padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
+//                  child: Column(
+//                    children: <Widget>[
+//                      Row(
+//                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                        children: <Widget>[
+//                          Text(
+//                              "$name",
+//                              style: TextStyle(
+//                                  color: const Color(0xFF01534F),
+//                                  fontWeight: FontWeight.normal,
+//                                  fontSize: 2 * SizeConfig.textMultiplier
+//                              )
+//                          ),
+//                          FlatButton(
+//                            child: Text(
+//                                "Modifier",
+//                                style: TextStyle(
+//                                    color: const Color(0xFF4FB06E),
+//                                    fontWeight: FontWeight.bold,
+//                                    fontSize: 2 * SizeConfig.textMultiplier
+//                                )
+//                            ),
+//                            onPressed: () {},
+//                          )
+//                        ],
+//                      ),
+//                      Row(
+//                        children: <Widget>[
+//                          Padding(
+//                            padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
+//                            child: Text(
+//                                "Vous n'avez pas créé de parcelle.",
+//                                style: TextStyle(
+//                                    color: const Color(0xFF01534F),
+//                                    fontWeight: FontWeight.bold,
+//                                    fontSize: 2.2 * SizeConfig.textMultiplier
+//                                )
+//                            ),
+//                          ),
+//                        ],
+//                      )
+//                    ],
+//                  ),
+//                )
+//              ),
+//              Container(
+//                  width: double.infinity,
+//                  height: 5.5 * SizeConfig.heightMultiplier,
+//              child: RaisedButton.icon(
+//                icon: const Icon(Icons.add, size: 20, color: Colors.white,),
+//                label: Text(
+//                  "Ajouter une parcelle",
+//                  style: TextStyle(
+//                      color: Colors.white,
+//                      fontWeight: FontWeight.bold,
+//                      fontSize: 2.2 * SizeConfig.textMultiplier
+//                  )
+//              ),
+//                onPressed: () {},
+//              ),
+//              )
+//            ],
+//          ),
+//        ),
+//      ),
+//    );
+//  }
 }
