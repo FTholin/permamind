@@ -27,6 +27,7 @@ class EnumeratedGardens extends StatelessWidget {
     return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
       if (state is GardensLoaded) {
         final gardens = state.gardens;
+        final parcels = state.gardenParcels;
 
         // Si aucun jardin
         if (gardens.length == 0) {
@@ -57,6 +58,10 @@ class EnumeratedGardens extends StatelessWidget {
                     itemBuilder: (context, i) {
                       return GardenItem(
                         name: gardens[i].name,
+                        garden: gardens[i],
+                        user: _user,
+                        index: i,
+                        dayActivitiesCount: 8,
                       );
                     },
                   )

@@ -8,6 +8,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   final DataRepository _dataRepository;
   StreamSubscription _gardensSubscription;
 
+  StreamSubscription _parcelsSubscription;
 
   final AuthenticationBloc _authenticationBloc;
   StreamSubscription _authenticationBlocSubscription;
@@ -47,10 +48,20 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
+
+    Map<String, List<Parcel>> gardensParcels =  Map<String, List<Parcel>>();
+
     _gardensSubscription?.cancel();
+
     _gardensSubscription = _dataRepository.gardens(event.userId, event.userPseudo).listen(
           (gardens) {
-        add(GardensUpdated(gardens));
+            for (final garden in gardens) {
+              _parcelsSubscription?.cancel();
+              _parcelsSubscription = _dataRepository.loadParcels(garden.id, event.userId, event.userPseudo).listen((parcels){
+                gardensParcels[garden.id] = parcels;
+              });
+            }
+        add(GardensUpdated(gardens, gardensParcels));
       },
     );
   }
@@ -91,7 +102,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
 
   Stream<GardensState> _mapGardensUpdateToState(GardensUpdated event) async* {
-    yield GardensLoaded(event.gardens);
+    yield GardensLoaded(event.gardens, event.gardenParcels);
   }
 
 

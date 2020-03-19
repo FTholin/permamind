@@ -17,12 +17,14 @@ class GardensLoading extends GardensState {
 }
 
 class GardensLoaded extends GardensState {
+
+  final Map<String, List<Parcel>> gardenParcels;
   final List<Garden> gardens;
 
-  GardensLoaded([this.gardens = const []]) : super([gardens]);
+  GardensLoaded(this.gardens, this.gardenParcels);
 
   @override
-  String toString() => "GardensLoaded { gardens : $gardens }";
+  String toString() => "GardensLoaded { gardenParcels : $gardenParcels }";
 }
 
 class GardensNotLoaded extends GardensState {

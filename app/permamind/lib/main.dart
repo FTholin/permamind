@@ -225,21 +225,56 @@ class App extends StatelessWidget {
                                   return Center(child: CircularProgressIndicator());
                                 }
                               },
-                            ));
+                            ),
+                      transitionsBuilder: (c, anim, a2, child) => SlideTransition(
+                          position: Tween<Offset>(
+                              begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
+                              .animate(anim),
+                          child: child),
+                      transitionDuration: Duration(milliseconds: 500),
+                    );
 
-                  }  else if (settings.name == "/detailsGarden") {
+                  } else if (settings.name == '/addParcel') {
 
-                    final DetailsGardenScreenArguments args = settings.arguments;
-                    return MaterialPageRoute(builder: (_) {
-                      return BlocProvider<ParcelsBloc>(
-                          create: (context) => ParcelsBloc(
-                              gardensBloc: BlocProvider.of<GardensBloc>(context),
-                              dataRepository: args.dataRepository)
-                            ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
-                          child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
-                    });
+                    final AddParcelScreenArguments args =
+                        settings.arguments;
 
-                  } else if (settings.name == "/settings") {
+                    return PageRouteBuilder(
+                      pageBuilder: (_, __, ___) =>
+                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                            builder: (context, state) {
+                              if (state is Authenticated) {
+                                return AddParcelScreen(
+                                    garden: args.garden,
+                                    user: state.userAuthenticated,
+                                );
+                              } else if (state is Unauthenticated) {
+                                return LoginScreen(userRepository: userRepository);
+                              } else {
+                                return Center(child: CircularProgressIndicator());
+                              }
+                            },
+                          ),
+                      transitionsBuilder: (c, anim, a2, child) =>
+                          FadeTransition(opacity: anim, child: child),
+                      transitionDuration: Duration(milliseconds: 800),
+                    );
+
+                  }
+//                  else if (settings.name == "/detailsGarden") {
+//
+//                    final DetailsGardenScreenArguments args = settings.arguments;
+//                    return MaterialPageRoute(builder: (_) {
+//                      return BlocProvider<ParcelsBloc>(
+//                          create: (context) => ParcelsBloc(
+//                              gardensBloc: BlocProvider.of<GardensBloc>(context),
+//                              dataRepository: args.dataRepository)
+//                            ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
+//                          child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
+//                    });
+//
+//                  }
+                  else if (settings.name == "/settings") {
 
                     final SettingsScreenArguments args = settings.arguments;
 

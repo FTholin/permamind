@@ -1,16 +1,23 @@
 import 'package:arch/arch.dart';
+import 'package:authentication/authentication.dart';
+import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/models/models.dart';
 import 'package:permamind/widgets/parcel_carrousel.dart';
 
 class GardenItem extends StatelessWidget {
   final String name;
-  final String membersCount;
+  final Garden garden;
+  final User user;
   final int index;
   final int dayActivitiesCount;
 
   GardenItem({
     @required this.name,
-    @required this.membersCount,
+    @required this.garden,
+    @required this.user,
     @required this.index,
     this.dayActivitiesCount
   });
@@ -19,94 +26,113 @@ class GardenItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
-      child: Container(
-        height: 34 * SizeConfig.heightMultiplier,
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(253, 255, 242, 1),
-          border: Border.all(
-            color: Colors.black,
-            width: 0.1,
-          ),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
-          child: Column(
-            children: <Widget>[
-              Container(
-                  height: 11 * SizeConfig.heightMultiplier,
-//                color: Colors.blue,
-                  child: Padding(
-                    padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                                "$name",
-                                style: TextStyle(
-                                    color: const Color(0xFF01534F),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 2 * SizeConfig.textMultiplier
-                                )
-                            ),
-                            FlatButton(
-                              child: Text(
-                                  "Modifier",
-                                  style: TextStyle(
-                                      color: const Color(0xFF4FB06E),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 2 * SizeConfig.textMultiplier
-                                  )
-                              ),
-                              onPressed: () {},
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
-                              child: Text(
-                                  "8 tâches à réaliser aujourd'hui.",
-                                  style: TextStyle(
-                                      color: const Color(0xFF01534F),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 2.2 * SizeConfig.textMultiplier
-                                  )
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
+
+    return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
+      if (state is GardensLoaded) {
+        
+        final parcels = state.gardenParcels[garden.id];
+
+        if (parcels != null) {
+          return Padding(
+            padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
+            child: Container(
+              height: 34 * SizeConfig.heightMultiplier,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(253, 255, 242, 1),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 0.1,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
-              ParcelCarouselWithIndicator(["1er élément", "second élément"]),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
-                    child: Text(
-                        "Voir mes parcelles",
-                        style: TextStyle(
-                            color: const Color(0xFF01534F),
-                            fontWeight: FontWeight.normal,
-                            fontSize: 2.2 * SizeConfig.textMultiplier
+              child: Padding(
+                padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        height: 11 * SizeConfig.heightMultiplier,
+//                color: Colors.blue,
+                        child: Padding(
+                          padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                      "$name",
+                                      style: TextStyle(
+                                          color: const Color(0xFF01534F),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 2 * SizeConfig.textMultiplier
+                                      )
+                                  ),
+                                  FlatButton(
+                                    child: Text(
+                                        "Modifier",
+                                        style: TextStyle(
+                                            color: const Color(0xFF4FB06E),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 2 * SizeConfig.textMultiplier
+                                        )
+                                    ),
+                                    onPressed: () {},
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
+                                    child: Text(
+                                        "$dayActivitiesCount activités à réaliser aujourd'hui.",
+                                        style: TextStyle(
+                                            color: const Color(0xFF01534F),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 2.2 * SizeConfig.textMultiplier
+                                        )
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         )
                     ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+                    // TODO Vérifier le map qui ne soit pas nul
+                    ParcelCarouselWithIndicator(parcels.map((item) => ParcelCarouselData(parcelName: item.name, modelingName: item.currentModelingName, dayActivitiesCount: item.dayActivitiesCount)).toList(), garden, user),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
+                          child: Text(
+                              "Voir mes parcelles",
+                              style: TextStyle(
+                                  color: const Color(0xFF01534F),
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 2.2 * SizeConfig.textMultiplier
+                              )
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            child: Center(
+              child: Text("parcels == null"),
+            ),
+          );
+        }
+      } else {
+        return Container();
+      }
+    });
   }
 
 

@@ -92,9 +92,11 @@ class ToggleAll extends GardensEvent {
 }
 
 class GardensUpdated extends GardensEvent {
+
+  final Map<String, List<Parcel>> gardenParcels;
   final List<Garden> gardens;
 
-  GardensUpdated(this.gardens);
+  GardensUpdated(this.gardens, this.gardenParcels);
 
   @override
   String toString() => 'GardensUpdated';
