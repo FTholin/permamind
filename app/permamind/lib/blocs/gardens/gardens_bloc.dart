@@ -46,6 +46,21 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapCopyActivitiesToState(event);
     } else if (event is CopyGarden) {
       yield* _mapCopyGardenToState(event);
+    } else if (event is ParcelDeleted) {
+      yield* _mapParcelDeletedToState(event);
+    } else if (event is ParcelCopied) {
+      yield* _mapParcelCopiedToState(event);
+    } else if (event is ParcelLeaved) {
+      yield* _mapParcelLeavedToState(event);
+    } else if (event is ActivitiesCopied) {
+      yield* _mapActivitiesCopiedToState(event);
+    } else if (event is ModelingAdded) {
+      yield* _mapModelingAddedToState(event);
+    } else if (event is ParcelUpdated) {
+      yield* _mapParcelUpdatedToState(event);
+    } else if (event is DesignParcelAdded) {
+      yield* _mapDesignParcelAdded(event);
+
     }
   }
 
@@ -110,6 +125,61 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   Stream<GardensState> _mapParcelAddedToState(ParcelAdded event) async* {
     _dataRepository.addNewParcel(event.parcel);
+  }
+
+  Stream<GardensState> _mapDesignParcelAdded(DesignParcelAdded designParcel) async* {
+    _dataRepository.addNewDesignParcel(
+        DesignParcel(designParcel.gardenId, designParcel.parcelId, designParcel.designs));
+  }
+
+
+  Stream<GardensState> _mapParcelUpdatedToState(ParcelUpdated event) async* {
+    _dataRepository.updateParcel(event.parcelUpdated);
+  }
+
+  Stream<GardensState> _mapParcelDeletedToState(ParcelDeleted event) async* {
+    _dataRepository.deleteDesignsParcel(event.deletedParcel.id);
+    _dataRepository.deleteActivitiesFromParcel(event.deletedParcel.id);
+    _dataRepository.deleteParcel(event.deletedParcel);
+  }
+
+  Stream<GardensState> _mapParcelCopiedToState(ParcelCopied event) async* {
+    _dataRepository.copyParcel(event.copiedParcel);
+  }
+
+  Stream<GardensState> _mapParcelLeavedToState(ParcelLeaved event) async* {
+
+    event.leavedParcel.members.removeWhere((item) => item.id == event.userId);
+    _dataRepository.updateParcel(event.leavedParcel);
+  }
+
+  Stream<GardensState> _mapActivitiesCopiedToState(
+      ActivitiesCopied schedule) async* {
+    _dataRepository.addParcelActivities(schedule.activities);
+  }
+
+
+  Stream<GardensState> _mapModelingAddedToState(ModelingAdded event) async* {
+
+    DateTime referenceDate = DateTime.now();
+
+    List<Activity> activities = List<Activity>();
+
+    for (int i = 0; i < event.schedule.length; i++) {
+
+      for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
+        DateTime expectedDate = referenceDate.add(Duration(days: i));
+        expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
+        activities.add(
+            Activity( event.schedule[i].dayActivities[j].name, event.gardenId, event.parcelId, false, expectedDate, event.schedule[i].dayActivities[j].category, '')
+        );
+      }
+
+    }
+
+    if (activities.isNotEmpty) {
+      _dataRepository.addParcelActivities(activities);
+    }
   }
 
   @override

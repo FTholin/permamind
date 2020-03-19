@@ -7,7 +7,7 @@ import 'package:permamind/blocs/blocs.dart';
 
 class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 
-  final ParcelsBloc parcelsBloc;
+  final GardensBloc gardensBloc;
   final String parcelId;
   StreamSubscription parcelsSubscription;
   StreamSubscription _activitiesSubscription;
@@ -17,12 +17,12 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 
   ActivitiesBloc({
     @required this.dataRepository,
-    @required this.parcelsBloc,
+    @required this.gardensBloc,
     @required this.parcelId}) {
     DateTime now = new DateTime.now();
     referenceDate = new DateTime(now.year, now.month, now.day, 1);
 //
-//    parcelsSubscription = parcelsBloc.listen((state) {
+//    parcelsSubscription = gardensBloc.listen((state) {
 //      if (state is GardensLoaded) {
 //        add(LoadActivities());
 //      }

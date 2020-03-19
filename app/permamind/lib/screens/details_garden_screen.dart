@@ -151,7 +151,6 @@ class DetailsGardenScreen extends StatelessWidget {
             );
           }
 
-
 //
 //          if (currentParcel != null) {
 //
@@ -327,126 +326,126 @@ class DetailsGardenScreen extends StatelessWidget {
 }
 
 
-class ParcelAppBar extends StatefulWidget implements PreferredSizeWidget {
-
-  final String parcelId;
-  final User user;
-
-  ParcelAppBar({
-    @required this.parcelId,
-    @required this.user,
-    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
-
-  @override
-  final Size preferredSize; // default is 56.0
-
-  @override
-  _ParcelAppBarState createState() => _ParcelAppBarState();
-}
-
-class _ParcelAppBarState extends State<ParcelAppBar>{
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ParcelsBloc, ParcelsState>(
-        builder: (context, state) {
-          final currentParcel = (state as ParcelsLoaded)
-              .parcels.firstWhere((parcel) => parcel.id == widget.parcelId,
-              orElse: () => null);
-
-          if (currentParcel != null) {
-            return AppBar(
-              title: currentParcel != null ? Text("${currentParcel.name}") : Text(""),
-              actions: <Widget>[
-
-                BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                    builder: (context, state) {
-                      if (state is ActivitiesLoaded) {
-                        return IconButton(
-//            tooltip: localizations.deleteParcel,
-                          // TODO ArchSampleKeys
-//                key: ArchSampleKeys.deleteParcelButton,
-                          icon: Icon(Icons.settings),
-                          onPressed: () async {
-
-                            List<MemberProfile> initialMember = List<MemberProfile>();
-
-                            for (final member in currentParcel.members) {
-                              if (member.id != widget.user.id) {
-                                initialMember.add(MemberProfile(
-                                    member.id,
-                                    member.pseudo
-                                ));
-                              }
-                            }
-
-                            final alteredParcel = await Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (_) {
-
-                                      return BlocProvider.value(
-                                        value: BlocProvider.of<ParcelsBloc>(
-                                            context),
-                                        child: SettingsParcelScreen(
-                                            parcelId: currentParcel.id,
-                                            initialMembersData: currentParcel.members,
-                                            initialMember: initialMember,
-                                            user: widget.user
-                                        ),
-                                      );
-                                    })
-                            );
-
-                            if (alteredParcel == false) {
-                              BlocProvider.of<ParcelsBloc>(context).add(
-                                  ParcelDeleted(
-                                    currentParcel,
-                                  ));
-                              Navigator.pop(context);
-                            } else if (alteredParcel == true) {
-
-                              BlocProvider.of<ParcelsBloc>(context).add(
-                                  ParcelLeaved(
-                                      currentParcel,
-                                      widget.user.id
-                                  ));
-                              Navigator.pop(context);
-                            }
-                          },
-                        );
-                      } else {
-                        return Container();
-                      }
-                    })
-
-              ],
-            );
-
-          } else {
-            return Container();
-          }
-        }
-    );
-  }
-
-//  Future<void> searchParcelFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
-//    // Fill Chips Input
-//    gardenMembers.forEach((memberId)  {
-//      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
-//      if (memberId != widget.userId) {
-//        membersData.add(memberId);
+//class ParcelAppBar extends StatefulWidget implements PreferredSizeWidget {
 //
-//        final data = queryRes.documents[0].data;
+//  final String parcelId;
+//  final User user;
 //
-//        initialMember.add(MemberProfile(
-//            data["id"],
-//            data["pseudo"],
-//            data["email"],
-//            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
-//      }
-//    });
+//  ParcelAppBar({
+//    @required this.parcelId,
+//    @required this.user,
+//    Key key}) : preferredSize = Size.fromHeight(kToolbarHeight), super(key: key);
+//
+//  @override
+//  final Size preferredSize; // default is 56.0
+//
+//  @override
+//  _ParcelAppBarState createState() => _ParcelAppBarState();
+//}
+
+//class _ParcelAppBarState extends State<ParcelAppBar>{
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return BlocBuilder<ParcelsBloc, ParcelsState>(
+//        builder: (context, state) {
+//          final currentParcel = (state as ParcelsLoaded)
+//              .parcels.firstWhere((parcel) => parcel.id == widget.parcelId,
+//              orElse: () => null);
+//
+//          if (currentParcel != null) {
+//            return AppBar(
+//              title: currentParcel != null ? Text("${currentParcel.name}") : Text(""),
+//              actions: <Widget>[
+//
+//                BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                    builder: (context, state) {
+//                      if (state is ActivitiesLoaded) {
+//                        return IconButton(
+////            tooltip: localizations.deleteParcel,
+//                          // TODO ArchSampleKeys
+////                key: ArchSampleKeys.deleteParcelButton,
+//                          icon: Icon(Icons.settings),
+//                          onPressed: () async {
+//
+//                            List<MemberProfile> initialMember = List<MemberProfile>();
+//
+//                            for (final member in currentParcel.members) {
+//                              if (member.id != widget.user.id) {
+//                                initialMember.add(MemberProfile(
+//                                    member.id,
+//                                    member.pseudo
+//                                ));
+//                              }
+//                            }
+//
+//                            final alteredParcel = await Navigator.of(context).push(
+//                                MaterialPageRoute(
+//                                    builder: (_) {
+//
+//                                      return BlocProvider.value(
+//                                        value: BlocProvider.of<ParcelsBloc>(
+//                                            context),
+//                                        child: SettingsParcelScreen(
+//                                            parcelId: currentParcel.id,
+//                                            initialMembersData: currentParcel.members,
+//                                            initialMember: initialMember,
+//                                            user: widget.user
+//                                        ),
+//                                      );
+//                                    })
+//                            );
+//
+//                            if (alteredParcel == false) {
+//                              BlocProvider.of<ParcelsBloc>(context).add(
+//                                  ParcelDeleted(
+//                                    currentParcel,
+//                                  ));
+//                              Navigator.pop(context);
+//                            } else if (alteredParcel == true) {
+//
+//                              BlocProvider.of<ParcelsBloc>(context).add(
+//                                  ParcelLeaved(
+//                                      currentParcel,
+//                                      widget.user.id
+//                                  ));
+//                              Navigator.pop(context);
+//                            }
+//                          },
+//                        );
+//                      } else {
+//                        return Container();
+//                      }
+//                    })
+//
+//              ],
+//            );
+//
+//          } else {
+//            return Container();
+//          }
+//        }
+//    );
 //  }
-}
+//
+////  Future<void> searchParcelFriend(List<String> gardenMembers, List<String> membersData, initialMember) async {
+////    // Fill Chips Input
+////    gardenMembers.forEach((memberId)  {
+////      var queryRes = await BlocProvider.of<ActivitiesBloc>(context).dataRepository.searchById(memberId);
+////      if (memberId != widget.userId) {
+////        membersData.add(memberId);
+////
+////        final data = queryRes.documents[0].data;
+////
+////        initialMember.add(MemberProfile(
+////            data["id"],
+////            data["pseudo"],
+////            data["email"],
+////            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'));
+////      }
+////    });
+////  }
+//}
 
 
 class DetailsGardenScreenArguments {

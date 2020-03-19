@@ -114,6 +114,99 @@ class ParcelAdded extends GardensEvent {
   String toString() => 'ParcelAdded { parcel: $parcel }';
 }
 
+class DesignParcelAdded extends GardensEvent {
+
+  final String gardenId;
+  final List<Design> designs;
+  final String parcelId;
+
+  DesignParcelAdded(this.gardenId, this.parcelId, this.designs);
+
+  @override
+  String toString() => 'DesignParcelAdded { designs: $designs }';
+}
+
+
+class ParcelDeleted extends GardensEvent {
+  final Parcel deletedParcel;
+
+  ParcelDeleted(this.deletedParcel);
+
+  @override
+  List<Object> get props => [deletedParcel];
+
+  @override
+  String toString() => 'ParcelsDeleted { deletedParcel: $deletedParcel }';
+}
+
+class ParcelLeaved extends GardensEvent {
+  final Parcel leavedParcel;
+  final String userId;
+
+  ParcelLeaved(this.leavedParcel, this.userId);
+
+  @override
+  List<Object> get props => [leavedParcel, userId];
+
+  @override
+  String toString() => 'ParcelLeaved { leavedParcel: $leavedParcel }';
+}
+
+class ParcelCopied extends GardensEvent {
+  final Parcel copiedParcel;
+
+  ParcelCopied(this.copiedParcel);
+
+  @override
+  List<Object> get props => [copiedParcel];
+
+  @override
+  String toString() => 'ParcelCopied { copiedParcel: $copiedParcel }';
+}
+
+class ParcelUpdated extends GardensEvent {
+  final Parcel parcelUpdated;
+
+  ParcelUpdated(this.parcelUpdated);
+
+  @override
+  String toString() => 'ParcelsUpdated { parcelsUpdated: $parcelUpdated }';
+}
+
+class ActivitiesCopied extends GardensEvent {
+  final List<Activity> activities;
+
+  ActivitiesCopied(this.activities);
+
+  @override
+  String toString() => 'ActivitiesCopied { activities: $activities }';
+}
+
+
+class ModelingAdded extends GardensEvent {
+  final List<ModelingSchedule> schedule;
+  final String gardenId;
+  final String parcelId;
+
+  ModelingAdded(this.gardenId, this.parcelId, this.schedule);
+
+  @override
+  String toString() => 'ModelingAdded { activities: $schedule, gardenId: $gardenId}';
+}
+
+class ParcelsUpdated extends GardensEvent {
+  final List<Parcel> parcels;
+
+  ParcelsUpdated(this.parcels);
+
+  @override
+  List<Object> get props => [parcels];
+
+  @override
+  String toString() => 'ParcelsUpdated { parcels: $parcels }';
+}
+
+
 //
 //class AddGardenActivities extends GardensEvent {
 //

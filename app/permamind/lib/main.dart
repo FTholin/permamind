@@ -279,7 +279,7 @@ class App extends StatelessWidget {
                                   BlocProvider(
                                   create: (context) => ActivitiesBloc(
                                       dataRepository: firebaseRepository,
-                                      parcelsBloc: BlocProvider.of<ParcelsBloc>(context),
+                                      gardensBloc: BlocProvider.of<GardensBloc>(context),
 //                                      parcelId: parcels[index].id
                                   )..add(LoadActivities()),
                                 ),

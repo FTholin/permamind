@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:data_repository/data_repository.dart';
+import 'package:permamind/screens/screens.dart';
 
 class DetailsModelingScreen extends StatelessWidget {
 
@@ -347,12 +348,19 @@ class DetailsModelingScreen extends StatelessWidget {
                   currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
                   modelingsMonitoring: [modeling.id], id: parcel.id);
 
-              // TODO Mettre ça dans GardensBloc
-              BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(alteredParcel));
-              BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
-              BlocProvider.of<ParcelsBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
+              BlocProvider.of<GardensBloc>(context).add(ParcelUpdated(alteredParcel));
+              BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
+              BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
 
-              Navigator.pop(context);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/detailsGarden',
+                (Route<dynamic> route) => false,
+                arguments: DetailsGardenScreenArguments(
+                    gardenId,
+                    parcel.id
+                ),
+              );
 
           }),
 
