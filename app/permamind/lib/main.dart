@@ -260,6 +260,54 @@ class App extends StatelessWidget {
                       transitionDuration: Duration(milliseconds: 800),
                     );
 
+                  } else if (settings.name == '/detailsGarden') {
+
+                    final DetailsGardenScreenArguments args =
+                        settings.arguments;
+
+                    return PageRouteBuilder(
+                      pageBuilder: (_, __, ___) =>
+                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                            builder: (context, state) {
+                              if (state is Authenticated) {
+
+                                return MultiBlocProvider(
+                                  providers: [
+                                  BlocProvider(
+                                  create: (context) => ActivitiesBloc(
+                                      dataRepository: firebaseRepository,
+                                      parcelsBloc: BlocProvider.of<ParcelsBloc>(context),
+//                                      parcelId: parcels[index].id
+                                  )..add(LoadActivities()),
+                                ),
+                                BlocProvider(
+                                  create: (context) => DesignBloc(
+                                      dataRepository: firebaseRepository,
+                                      activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
+//                                      parcelId: parcels[index].id
+                                  )..add(LoadDesign()),
+                                ),
+                                  ],
+                                  child: DetailsGardenScreen(
+                                      dataRepository: firebaseRepository,
+                                      user: state.userAuthenticated,
+                                      gardenId: args.gardenId,
+                                      parcelId: args.parcelId,
+                                  ),
+                                );
+
+                              } else if (state is Unauthenticated) {
+                                return LoginScreen(userRepository: userRepository);
+                              } else {
+                                return Center(child: CircularProgressIndicator());
+                              }
+                            },
+                          ),
+                      transitionsBuilder: (c, anim, a2, child) =>
+                          FadeTransition(opacity: anim, child: child),
+                      transitionDuration: Duration(milliseconds: 800),
+                    );
+
                   }
 //                  else if (settings.name == "/detailsGarden") {
 //
@@ -295,7 +343,6 @@ class App extends StatelessWidget {
                         builder: (context) => TutorialActivitiesScreen());
 
                   } else {
-
                     return PageRouteBuilder(
                         pageBuilder: (_, __, ___) =>
                             BlocBuilder<AuthenticationBloc, AuthenticationState>(

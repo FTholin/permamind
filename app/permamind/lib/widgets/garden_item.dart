@@ -30,105 +30,96 @@ class GardenItem extends StatelessWidget {
     return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
       if (state is GardensLoaded) {
         
-        final parcels = state.gardenParcels[garden.id];
+        final List<Parcel> parcels = state.gardenParcels[garden.id] ??  List<Parcel>();
 
-        if (parcels != null) {
-          return Padding(
-            padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
-            child: Container(
-              height: 34 * SizeConfig.heightMultiplier,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(253, 255, 242, 1),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.1,
-                ),
-                borderRadius: BorderRadius.circular(12),
+        return Padding(
+          padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
+          child: Container(
+            height: 34 * SizeConfig.heightMultiplier,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(253, 255, 242, 1),
+              border: Border.all(
+                color: Colors.black,
+                width: 0.1,
               ),
-              child: Padding(
-                padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                        height: 11 * SizeConfig.heightMultiplier,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      height: 11 * SizeConfig.heightMultiplier,
 //                color: Colors.blue,
-                        child: Padding(
-                          padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                      "$name",
+                      child: Padding(
+                        padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                    "$name",
+                                    style: TextStyle(
+                                        color: const Color(0xFF01534F),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 2 * SizeConfig.textMultiplier
+                                    )
+                                ),
+                                FlatButton(
+                                  child: Text(
+                                      "Modifier",
                                       style: TextStyle(
-                                          color: const Color(0xFF01534F),
-                                          fontWeight: FontWeight.normal,
+                                          color: const Color(0xFF4FB06E),
+                                          fontWeight: FontWeight.bold,
                                           fontSize: 2 * SizeConfig.textMultiplier
                                       )
                                   ),
-                                  FlatButton(
-                                    child: Text(
-                                        "Modifier",
-                                        style: TextStyle(
-                                            color: const Color(0xFF4FB06E),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 2 * SizeConfig.textMultiplier
-                                        )
-                                    ),
-                                    onPressed: () {},
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
-                                    child: Text(
-                                        "$dayActivitiesCount activités à réaliser aujourd'hui.",
-                                        style: TextStyle(
-                                            color: const Color(0xFF01534F),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 2.2 * SizeConfig.textMultiplier
-                                        )
-                                    ),
+                                  onPressed: () {},
+                                )
+                              ],
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
+                                  child: Text(
+                                      "$dayActivitiesCount activités à réaliser aujourd'hui.",
+                                      style: TextStyle(
+                                          color: const Color(0xFF01534F),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 2.2 * SizeConfig.textMultiplier
+                                      )
                                   ),
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                    ),
-                    // TODO Vérifier le map qui ne soit pas nul
-                    ParcelCarouselWithIndicator(parcels.map((item) => ParcelCarouselData(parcelName: item.name, modelingName: item.currentModelingName, dayActivitiesCount: item.dayActivitiesCount)).toList(), garden, user),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
-                          child: Text(
-                              "Voir mes parcelles",
-                              style: TextStyle(
-                                  color: const Color(0xFF01534F),
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 2.2 * SizeConfig.textMultiplier
-                              )
-                          ),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
-                      ],
-                    )
-                  ],
-                ),
+                      )
+                  ),
+                  ParcelCarouselWithIndicator(parcels.map((item) => ParcelCarouselData(parcelName: item.name, parcelId: item.id, modelingName: item.currentModelingName, dayActivitiesCount: item.dayActivitiesCount)).toList(), garden, user),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
+                        child: Text(
+                            "Voir mes parcelles",
+                            style: TextStyle(
+                                color: const Color(0xFF01534F),
+                                fontWeight: FontWeight.normal,
+                                fontSize: 2.2 * SizeConfig.textMultiplier
+                            )
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
-          );
-        } else {
-          return Container(
-            child: Center(
-              child: Text("parcels == null"),
-            ),
-          );
-        }
+          ),
+        );
       } else {
         return Container();
       }

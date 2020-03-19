@@ -36,6 +36,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapUpdateGardensToState(event);
     } else if (event is GardenDeleted) {
       yield* _mapGardenDeletedToState(event);
+    } else if (event is ParcelAdded) {
+      yield* _mapParcelAddedToState(event);
     } else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
     } else if (event is LeaveGarden) {
@@ -105,6 +107,10 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     yield GardensLoaded(event.gardens, event.gardenParcels);
   }
 
+
+  Stream<GardensState> _mapParcelAddedToState(ParcelAdded event) async* {
+    _dataRepository.addNewParcel(event.parcel);
+  }
 
   @override
   Future <void> close() {

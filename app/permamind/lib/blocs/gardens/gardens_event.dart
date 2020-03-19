@@ -102,6 +102,18 @@ class GardensUpdated extends GardensEvent {
   String toString() => 'GardensUpdated';
 }
 
+class ParcelAdded extends GardensEvent {
+  final Parcel parcel;
+
+  ParcelAdded(this.parcel);
+
+  @override
+  List<Object> get props => [parcel];
+
+  @override
+  String toString() => 'ParcelAdded { parcel: $parcel }';
+}
+
 //
 //class AddGardenActivities extends GardensEvent {
 //

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/parcel_carousel_data.dart';
 import 'package:permamind/screens/add_parcel_screen.dart';
+import 'package:permamind/screens/screens.dart';
 
 class ParcelCarouselWithIndicator extends StatefulWidget {
   final User user;
@@ -50,7 +51,14 @@ class _ParcelCarouselWithIndicatorState
 
     for (final parcel in widget.parcels) {
       carouselContent.add(InkWell(
-        onTap: () => print("Container pressed"),
+        onTap: () =>  Navigator.pushNamed(
+          context,
+          '/detailsGarden',
+          arguments: DetailsGardenScreenArguments(
+              widget.garden.id,
+              parcel.parcelId
+          ),
+        ),
         child: Container(
           margin: EdgeInsets.all(5.0),
           child: ClipRRect(

@@ -73,41 +73,41 @@
 //
 //                                  })
 //                          );
-////                        if (alteredParcel != null) {
-////
-////                          if (alteredParcel['action'] == 'Delete') {
-////                            final snackBar = SnackBar(
-////                              content: Text('Delete ${alteredParcel['garden'].name}'),
-////                              action: SnackBarAction(
-////                                label: 'Undo',
-////                                onPressed: () {
-////                                  BlocProvider.of<GardensBloc>(context).add(CopyGarden(alteredParcel['garden']));
-////                                  BlocProvider.of<GardensBloc>(context).add(CopyActivities(alteredParcel['activities']));
-////                                },
-////                              ),
-////                            );
-////
-////                            Scaffold.of(context).showSnackBar(snackBar);
-////
-////                          } else {
-////
-////                            final snackBar = SnackBar(
-////                              content: Text('Leave ${alteredParcel['garden'].name}'),
-////                              action: SnackBarAction(
-////                                label: 'Undo',
-////                                onPressed: () {
-////                                  BlocProvider.of<GardensBloc>(context).add(UpdateGarden(alteredParcel['garden']));
-////                                },
-////                              ),
-////                            );
-////
-////                            Scaffold.of(context).showSnackBar(snackBar);
-////                          }
-////
-////                        }
+//                        if (alteredParcel != null) {
+//
+//                          if (alteredParcel['action'] == 'Delete') {
+//                            final snackBar = SnackBar(
+//                              content: Text('Delete ${alteredParcel['garden'].name}'),
+//                              action: SnackBarAction(
+//                                label: 'Undo',
+//                                onPressed: () {
+//                                  BlocProvider.of<GardensBloc>(context).add(CopyGarden(alteredParcel['garden']));
+//                                  BlocProvider.of<GardensBloc>(context).add(CopyActivities(alteredParcel['activities']));
+//                                },
+//                              ),
+//                            );
+//
+//                            Scaffold.of(context).showSnackBar(snackBar);
+//
+//                          } else {
+//
+//                            final snackBar = SnackBar(
+//                              content: Text('Leave ${alteredParcel['garden'].name}'),
+//                              action: SnackBarAction(
+//                                label: 'Undo',
+//                                onPressed: () {
+//                                  BlocProvider.of<GardensBloc>(context).add(UpdateGarden(alteredParcel['garden']));
+//                                },
+//                              ),
+//                            );
+//
+//                            Scaffold.of(context).showSnackBar(snackBar);
+//                          }
+//
+//                        }
 //                        },
 //                      );
-//                    },
+//                     },
 //                  )
 //              );
 //            }

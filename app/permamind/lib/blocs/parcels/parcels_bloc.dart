@@ -22,9 +22,11 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapLoadParcelsToState(event);
     } else if (event is ParcelsUpdated) {
       yield* _mapParcelsUpdatedToState(event);
-    } else if (event is ParcelAdded) {
-      yield* _mapParcelAddedToState(event);
-    } else if (event is ParcelDeleted) {
+    }
+//    else if (event is ParcelAdded) {
+//      yield* _mapParcelAddedToState(event);
+//    }
+    else if (event is ParcelDeleted) {
       yield* _mapParcelDeletedToState(event);
     } else if (event is ParcelCopied) {
       yield* _mapParcelCopiedToState(event);
@@ -60,9 +62,9 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
         DesignParcel(designParcel.gardenId, designParcel.parcelId, designParcel.designs));
   }
 
-  Stream<ParcelsState> _mapParcelAddedToState(ParcelAdded event) async* {
-    dataRepository.addNewParcel(event.parcel);
-  }
+//  Stream<ParcelsState> _mapParcelAddedToState(ParcelAdded event) async* {
+//    dataRepository.addNewParcel(event.parcel);
+//  }
 
   Stream<ParcelsState> _mapParcelUpdatedToState(ParcelUpdated event) async* {
     dataRepository.updateParcel(event.parcelUpdated);

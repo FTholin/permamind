@@ -11,7 +11,6 @@ import 'package:permamind/widgets/widgets.dart';
 import 'package:permamind/screens/screens.dart';
 
 class EnumeratedGardens extends StatelessWidget {
-  final DataRepository _dataRepository;
   final User _user;
 
   EnumeratedGardens(
@@ -19,18 +18,22 @@ class EnumeratedGardens extends StatelessWidget {
       : assert(dataRepository != null),
         assert(user != null),
         _user = user,
-        _dataRepository = dataRepository,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
       if (state is GardensLoaded) {
+
+
         final gardens = state.gardens;
         final parcels = state.gardenParcels;
 
+
         // Si aucun jardin
         if (gardens.length == 0) {
+
+          // TODO Faire nouvelle page Baptiste
           return Padding(
               padding: EdgeInsets.all(
                 1 * SizeConfig.heightMultiplier,
@@ -56,6 +59,11 @@ class EnumeratedGardens extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: gardens.length,
                     itemBuilder: (context, i) {
+
+                      for (final parcel in parcels[gardens[i].id]) {
+                        print(parcel.name);
+                      }
+
                       return GardenItem(
                         name: gardens[i].name,
                         garden: gardens[i],

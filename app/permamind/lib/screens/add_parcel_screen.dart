@@ -421,10 +421,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
               ),
             ),
             // TODO Faire le size auto
-            // TODO S'assurer que cela ajoute la parcelle au jardin
             // Pas besoin de user au final ?? !
             FlatButton.icon(
-              icon: Icon(Icons.keyboard_arrow_left, size: 25,),
+              icon: Icon(Icons.keyboard_arrow_left, size: 25),
               label: Text("Retour", style: TextStyle(fontSize: 20),),
               onPressed: () => Navigator.of(context).pop(),
             )
@@ -449,23 +448,20 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                   final Parcel parcel = Parcel(_parcelName.text, widget.garden.id, double.parse(gardenLengthValue), double.parse(gardenWidthValue), _parcelGround, widget.garden.publicVisibility, '${widget.user.id}', _parcelMembers, '', '', DateTime.now(), 0, []);
 
 
-                  // TODO Ce bloc n'est peut être plus necessaire !?
-//                  BlocProvider.of<ParcelsBloc>(context).add(
-//                      ParcelAdded(
-//                          parcel
-//                      ));
-
-//                  Navigator.pushNamed(
-//                    context,
-//                    '/detailsGarden',
-//                    arguments: DetailsGardenScreenArguments(
-//                        widget.dataRepository,
-//                        widget.garden.id,
-//                        widget.user
-//                    ),
-//                  );
+                  BlocProvider.of<GardensBloc>(context).add(
+                      ParcelAdded(
+                          parcel
+                      ));
 
 
+                  Navigator.pushNamed(
+                    context,
+                    '/detailsGarden',
+                    arguments: DetailsGardenScreenArguments(
+                      widget.garden.id,
+                      parcel.id
+                    ),
+                  );
                 },
                 child: Text('${AppLocalizations.of(context).finalizeButton}')),
           ]);
