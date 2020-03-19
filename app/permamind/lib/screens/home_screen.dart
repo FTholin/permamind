@@ -23,15 +23,24 @@ class HomeScreen extends StatelessWidget {
       builder: (context, activeTab) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("Mes jardins"),
+            title: Text("${AppLocalizations.of(context).home}"),
 //            title:  Image.asset(
 //              'assets/logo-light.png',
 //              width:  MediaQuery.of(context).size.width / 2,
 //              fit: BoxFit.contain,
 //            ),
             actions: [
-//              FilterButton(visible: activeTab == AppTab.gardens),
-              ExtraActions(userId: user.id),
+              FlatButton(
+                child: Text(
+                    "Ajouter",
+                    style: TextStyle(
+                        color: Colors.white,
+//                        fontWeight: FontWeight.bold,
+                        fontSize: 1.9 * SizeConfig.textMultiplier
+                    )
+                ),
+                onPressed: () => Navigator.pushNamed(context, '/addGarden'),
+        )
             ],
           ),
           body: _buildTabPage(context, activeTab),
@@ -64,7 +73,13 @@ class HomeScreen extends StatelessWidget {
       case AppTab.profile:
         return Scaffold(
           body: Center(
-            child: Text("👋 ${user.pseudo} !"),
+//            child: Text("👋 ${user.pseudo} !"),
+            child: Column(
+              children: <Widget>[
+                Text("👋 ${user.pseudo} !"),
+                ExtraActions(userId: user.id),
+              ],
+            )
           ),
         );
         break;

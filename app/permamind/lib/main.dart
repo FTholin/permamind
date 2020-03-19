@@ -255,9 +255,12 @@ class App extends StatelessWidget {
                               }
                             },
                           ),
-                      transitionsBuilder: (c, anim, a2, child) =>
-                          FadeTransition(opacity: anim, child: child),
-                      transitionDuration: Duration(milliseconds: 800),
+                      transitionsBuilder: (c, anim, a2, child) => SlideTransition(
+                          position: Tween<Offset>(
+                              begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
+                              .animate(anim),
+                          child: child),
+                      transitionDuration: Duration(milliseconds: 500),
                     );
 
                   } else if (settings.name == '/detailsGarden') {

@@ -25,10 +25,7 @@ class EnumeratedGardens extends StatelessWidget {
     return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
       if (state is GardensLoaded) {
 
-
         final gardens = state.gardens;
-        final parcels = state.gardenParcels;
-
 
         // Si aucun jardin
         if (gardens.length == 0) {
@@ -59,10 +56,6 @@ class EnumeratedGardens extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: gardens.length,
                     itemBuilder: (context, i) {
-
-                      for (final parcel in parcels[gardens[i].id]) {
-                        print(parcel.name);
-                      }
 
                       return GardenItem(
                         name: gardens[i].name,

@@ -58,7 +58,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _gardensSubscription = _dataRepository.gardens(event.userId, event.userPseudo).listen(
           (gardens) {
             for (final garden in gardens) {
-              _parcelsSubscription?.cancel();
+//              _parcelsSubscription?.cancel();
               _parcelsSubscription = _dataRepository.loadParcels(garden.id, event.userId, event.userPseudo).listen((parcels){
                 gardensParcels[garden.id] = parcels;
               });

@@ -35,138 +35,126 @@ class DetailsGardenScreen extends StatelessWidget {
 
           final List<Parcel> parcels = state.gardenParcels[gardenId];
 
-//          final currentParcel = (state as GardensLoaded)
-//              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
-//              orElse: () => null);
+          final Parcel currentParcel = parcels.firstWhere((parcel) => parcel.id == parcelId);
 
-          final String res = parcels.firstWhere((parcel) => parcel.id == parcelId).name;
+          if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
+            return Scaffold(
+                appBar: AppBar(
+                    title: Text(currentParcel.name)
+                ),
+                body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(20),child:Text("${AppLocalizations.of(context).detailsParcelAssociationEmpty}")),
+                    RaisedButton(
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) {
 
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(res),
-            ),
-            body: Container(
-            ),
-          );
+                                  return MultiBlocProvider(
+                                    providers: [
+                                      BlocProvider<ModelingsBloc>(
+                                        create: (context) =>
+                                        ModelingsBloc(dataRepository: dataRepository)
+                                          ..add(FetchModelings()),
+                                      )
+                                    ],
+                                    child: DiscoverModelingsScreen(gardenId: gardenId, parcel: currentParcel),
+                                  );
 
-          // TODO Récupérer parcel with index given
+                                })
+                        );
+                      },
+                      child: Text("${AppLocalizations.of(context).detailsParcelAddAssociationMessage}"),
+                    )
+                  ],
+                )
+            );
+          } else {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(currentParcel.name)
+              ),
+              body: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+
+                    BlocBuilder<DesignBloc, DesignState>(
+                        builder: (context, state) {
+                          if (state is DesignLoaded) {
+                            if (state.designParcel.designs.isEmpty) {
+                              return Container(
+                                height: 230,
+                                child: Center(
+                                    child: VeggiesDesignChart(80.0, 100.0, [])
+                                ),
+                              );
+                            } else {
+                              return Container(
+                                height: 230,
+                                child: Center(
+                                    child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
+                                ),
+                              );
+                            }
+                          } else {
+                            return Container(
+                              height: 230,
+                              child: LoadingIndicator(),
+                            );
+                          }
+                        }
+                    ),
+                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                        builder: (context, state) {
+                          if (state is ActivitiesLoaded) {
+                            return SchedulerCalendar(
+                              referenceDate: DateTime.now(),
+                              schedule: state.schedule,
+                            );
+                          } else {
+                            return Expanded(
+                                child: Container(
+                                )
+                            );
+                          }
+                        }
+                    ),
+                    const SizedBox(height: 8.0),
+//          _buildButtons(),
+                    const SizedBox(height: 8.0),
+                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+                        builder: (context, state) {
+                          if (state is ActivitiesLoaded) {
+                            return Expanded(
+                              child: Container(
+                                  child: _buildEventList(state.referenceDate, state.schedule)
+                              ),
+                            );
+                          } else {
+                            return Expanded(
+                                child: Container(
+                                  child: Text("$state"),
+                                )
+                            );
+                          }
+                        }
+                    ),
+//          Expanded(child: _buildEventList()),
+                  ]),
+              floatingActionButton: ActivitySpeedDial(
+                  gardenId: gardenId,
+                  visible: true
+              ),
+            );
+          }
+
 
 //
 //          if (currentParcel != null) {
-//            if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
-//              return Scaffold(
-//                appBar: ParcelAppBar(parcelId: currentParcel.id, user: user),
-//                  body: Column(
-//                    mainAxisAlignment: MainAxisAlignment.center,
-//                    crossAxisAlignment: CrossAxisAlignment.center,
-//                    children: <Widget>[
-//                      Padding(padding: EdgeInsets.all(20),child:Text("${AppLocalizations.of(context).detailsParcelAssociationEmpty}")),
-//                      RaisedButton(
-//                        onPressed: () async {
-//                          await Navigator.of(context).push(
-//                              MaterialPageRoute(
-//                                  builder: (_) {
 //
-//                                    return MultiBlocProvider(
-//                                      providers: [
-//                                        BlocProvider.value(
-//                                          value: BlocProvider.of<ParcelsBloc>(context),
-//                                        ),
-//                                        BlocProvider<ModelingsBloc>(
-//                                          create: (context) =>
-//                                          ModelingsBloc(dataRepository: dataRepository)
-//                                            ..add(FetchModelings()),
-//                                        )
-//                                      ],
-//                                      child: DiscoverModelingsScreen(gardenId: gardenId,parcel: parcel),
-//                                    );
-//
-//                                  })
-//                          );
-//
-//                        },
-//                        child: Text("${AppLocalizations.of(context).detailsParcelAddAssociationMessage}"),
-//                      )
-//                    ],
-//                  )
-//
-//              );
-//            } else {
-//              return Scaffold(
-//                appBar: ParcelAppBar(parcelId: parcel.id , user: user),
-//                body: Column(
-//                    mainAxisSize: MainAxisSize.max,
-//                    children: <Widget>[
-//
-//                      BlocBuilder<DesignBloc, DesignState>(
-//                          builder: (context, state) {
-//                            if (state is DesignLoaded) {
-//                              if (state.designParcel.designs.isEmpty) {
-//                                return Container(
-//                                  height: 230,
-//                                  child: Center(
-//                                      child: VeggiesDesignChart(80.0, 100.0, [])
-//                                  ),
-//                                );
-//                              } else {
-//                                return Container(
-//                                  height: 230,
-//                                  child: Center(
-//                                      child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
-//                                  ),
-//                                );
-//                              }
-//                            } else {
-//                              return Container(
-//                                height: 230,
-//                                child: LoadingIndicator(),
-//                              );
-//                            }
-//                          }
-//                      ),
-//                      BlocBuilder<ActivitiesBloc, ActivitiesState>(
-//                          builder: (context, state) {
-//                            if (state is ActivitiesLoaded) {
-//                              return SchedulerCalendar(
-//                                referenceDate: DateTime.now(),
-//                                schedule: state.schedule,
-//                              );
-//                            } else {
-//                              return Expanded(
-//                                  child: Container(
-//                                  )
-//                              );
-//                            }
-//                          }
-//                      ),
-//                      const SizedBox(height: 8.0),
-////          _buildButtons(),
-//                      const SizedBox(height: 8.0),
-//                      BlocBuilder<ActivitiesBloc, ActivitiesState>(
-//                          builder: (context, state) {
-//                            if (state is ActivitiesLoaded) {
-//                              return Expanded(
-//                                child: Container(
-//                                    child: _buildEventList(state.referenceDate, state.schedule)
-//                                ),
-//                              );
-//                            } else {
-//                              return Expanded(
-//                                  child: Container(
-//                                    child: Text("$state"),
-//                                  )
-//                              );
-//                            }
-//                          }
-//                      ),
-////          Expanded(child: _buildEventList()),
-//                    ]),
-//                floatingActionButton: ActivitySpeedDial(
-//                    gardenId: gardenId,
-//                    visible: true
-//                ),
-//              );
-//            }
 //          } else {
 //            return Container();
 //          }

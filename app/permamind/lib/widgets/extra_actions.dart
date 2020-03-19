@@ -23,7 +23,7 @@ class ExtraActions extends StatelessWidget {
 
           return PopupMenuButton<ExtraAction>(
             icon: Icon(
-              Icons.more_vert,
+              Icons.settings,
               size: 24.0,
               semanticLabel: 'Settings menu',
             ),

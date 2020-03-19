@@ -347,6 +347,7 @@ class DetailsModelingScreen extends StatelessWidget {
                   currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
                   modelingsMonitoring: [modeling.id], id: parcel.id);
 
+              // TODO Mettre ça dans GardensBloc
               BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(alteredParcel));
               BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
               BlocProvider.of<ParcelsBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));

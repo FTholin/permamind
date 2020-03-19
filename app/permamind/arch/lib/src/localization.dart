@@ -12,6 +12,7 @@ class AppLocalizations {
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
+      'home': "My gardens",
       'title': 'Hello World',
       'settings_garden_title': "Garden's Settings",
       'settings_garden_name': "Garden's Name",
@@ -93,23 +94,24 @@ class AppLocalizations {
 
 },
     'fr': {
+      'home': "Mes jardins",
       'title': "Partie pédagogie",
-      'settings_garden_title': "Paramètres du potager",
-      'settings_garden_name': "Nom du potager",
-      'settings_garden_name_error': "Nom du potager ne peut être vide",
-      'settings_garden_friends_title': "Amis du potager 😃",
+      'settings_garden_title': "Paramètres du jardin",
+      'settings_garden_name': "Nom du jardin",
+      'settings_garden_name_error': "Nom du jardin ne peut être vide",
+      'settings_garden_friends_title': "Amis du jardin 😃",
       'settings_confirm_changes': "Confirmer changements",
-      'settings_garden_delete_button': "Supprimer potager",
-      'settings_garden_delete_title': "Supprimer ce potager ?",
-      'settings_garden_delete_message': "Cette action entraîne la suppression définitive de toutes les données de ce potager.",
-      'settings_garden_leave_button': "Quitter potager",
-      'settings_garden_leave_title': "Quitter ce potager ?",
-      'settings_garden_leave_message': "Cette action entraîne votre départ de ce potager et de ces parcelles.",
-      'add_garden_title': "Créer un potager",
-      'add_garden_name_title': "Quel est le nom de votre potager ?",
-      'add_garden_name_hint': "Nom potager",
-      'add_garden_name_error': "Nom du potager ne peut être vide",
-      'add_garden_visibilityTitle': "Souhaitez vous rendre ce potager public ?",
+      'settings_garden_delete_button': "Supprimer jardin",
+      'settings_garden_delete_title': "Supprimer ce jardin ?",
+      'settings_garden_delete_message': "Cette action entraîne la suppression définitive de toutes les données de ce jardin.",
+      'settings_garden_leave_button': "Quitter jardin",
+      'settings_garden_leave_title': "Quitter ce jardin ?",
+      'settings_garden_leave_message': "Cette action entraîne votre départ de ce jardin et de ces parcelles.",
+      'add_garden_title': "Créer un jardin",
+      'add_garden_name_title': "Quel est le nom de votre jardin ?",
+      'add_garden_name_hint': "Nom jardin",
+      'add_garden_name_error': "Nom du jardin ne peut être vide",
+      'add_garden_visibilityTitle': "Souhaitez vous rendre ce jardin public ?",
       'button_continue': "Continuer",
       'button_cancel': "Annuler",
       'yes_choice': 'Oui',
@@ -119,12 +121,12 @@ class AppLocalizations {
       'continue_button': "CONTINUER",
       'back_button': "REVENIR",
       'finalize_button': 'FINALISER',
-      'tab_bar_garden': "Potagers",
+      'tab_bar_garden': "Jardins",
       'tab_bar_tutos': "Tutoriels",
       'tab_bar_profile': "Profil",
       'speed_dial_add_activity': "Ajouter Activité",
-      'speed_dial_create_garden': "Créer un potager",
-      'speed_dial_join_garden': "Rejoindre un potager",
+      'speed_dial_create_garden': "Créer un jardin",
+      'speed_dial_join_garden': "Rejoindre un jardin",
       'speed_dial_create_parcel': "Créer une parcelle",
       'details_parcel_none_association_message': 'Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?',
       'details_parcel_add_association_message': "Ajouter une nouvelle association",
@@ -176,6 +178,10 @@ class AppLocalizations {
 
   String get title {
     return _localizedValues[locale.languageCode]['title'];
+  }
+
+  String get home {
+    return _localizedValues[locale.languageCode]['home'];
   }
 
   String get settingsGardenTitle {
