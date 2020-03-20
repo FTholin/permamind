@@ -8,8 +8,7 @@ import 'package:permamind/blocs/blocs.dart';
 class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 
   final GardensBloc gardensBloc;
-  final String parcelId;
-  StreamSubscription parcelsSubscription;
+  StreamSubscription gardensSubscription;
   StreamSubscription _activitiesSubscription;
 
   final DataRepository dataRepository;
@@ -18,15 +17,9 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   ActivitiesBloc({
     @required this.dataRepository,
     @required this.gardensBloc,
-    @required this.parcelId}) {
+  }) {
     DateTime now = new DateTime.now();
     referenceDate = new DateTime(now.year, now.month, now.day, 1);
-//
-//    parcelsSubscription = gardensBloc.listen((state) {
-//      if (state is GardensLoaded) {
-//        add(LoadActivities());
-//      }
-//    });
 
   }
 
@@ -37,7 +30,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     Stream<ActivitiesState> mapEventToState(ActivitiesEvent event) async* {
 
       if (event is LoadActivities) {
-        yield* _mapLoadActivitiesToState();
+        yield* _mapLoadActivitiesToState(event);
       } else if (event is ActivitiesUpdated) {
         yield* _mapActivitiesUpdateToState(event);
       }  else if (event is SelectDayActivities) {
@@ -55,9 +48,9 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     }
 
 
-  Stream<ActivitiesState> _mapLoadActivitiesToState() async* {
+  Stream<ActivitiesState> _mapLoadActivitiesToState(LoadActivities event) async* {
     _activitiesSubscription?.cancel();
-    _activitiesSubscription = dataRepository.loadParcelActivities(parcelId).listen(
+    _activitiesSubscription = dataRepository.loadParcelActivities(event.parcelId).listen(
           (activities) {
         final Map<DateTime, List> mapActivities = Map<DateTime, List>();
 
@@ -100,6 +93,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   @override
   Future<void> close() {
     _activitiesSubscription.cancel();
+    gardensSubscription.cancel();
     return super.close();
   }
 

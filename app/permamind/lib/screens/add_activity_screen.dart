@@ -66,7 +66,7 @@ import 'package:permamind/blocs/blocs.dart';
                       Activity(
                         _activityNameController.text,
                         widget.gardenId,
-                        BlocProvider.of<ActivitiesBloc>(context).parcelId,
+                        BlocProvider.of<ActivitiesBloc>(context).,
                         false,
                         referenceDate,
                         '',

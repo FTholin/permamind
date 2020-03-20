@@ -5,7 +5,14 @@ abstract class ActivitiesEvent extends Equatable {
   ActivitiesEvent([List props = const []]) : super(props);
 }
 
-class LoadActivities extends ActivitiesEvent {}
+class LoadActivities extends ActivitiesEvent {
+  final String parcelId;
+
+  LoadActivities(this.parcelId);
+
+  @override
+  List<Object> get props => [parcelId];
+}
 
 
 class ActivitiesUpdated extends ActivitiesEvent {
