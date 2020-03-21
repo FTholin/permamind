@@ -69,9 +69,9 @@ class FirebaseDataRepository implements DataRepository {
 
 
   @override
-  Future<void> deleteParcel(Parcel parcel) async {
+  Future<void> deleteParcel(String parcelId) async {
     logger.i("DELETE::deleteParcel");
-    return Firestore.instance.collection('parcels').document(parcel.id).delete();
+    return Firestore.instance.collection('parcels').document(parcelId).delete();
   }
 
   @override

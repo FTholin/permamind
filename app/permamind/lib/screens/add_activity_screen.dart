@@ -9,11 +9,13 @@ import 'package:permamind/blocs/blocs.dart';
 
   class AddActivityScreen extends StatefulWidget {
     final String gardenId;
+    final String parcelId;
 
     AddActivityScreen({
       Key key,
       @required this.gardenId,
-    }) : assert(gardenId != null), super(key: key ?? ArchSampleKeys.addTodoScreen);
+      @required this.parcelId,
+    }) : assert(gardenId != null, parcelId != null), super(key: key ?? ArchSampleKeys.addTodoScreen);
 
     @override
     _AddActivityScreenState createState() => _AddActivityScreenState();
@@ -66,7 +68,7 @@ import 'package:permamind/blocs/blocs.dart';
                       Activity(
                         _activityNameController.text,
                         widget.gardenId,
-                        BlocProvider.of<ActivitiesBloc>(context).,
+                        widget.parcelId,
                         false,
                         referenceDate,
                         '',

@@ -1,6 +1,7 @@
 import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
@@ -37,10 +38,25 @@ class DetailsGardenScreen extends StatelessWidget {
 
           final Parcel currentParcel = parcels.firstWhere((parcel) => parcel.id == parcelId);
 
+          // Si pas de modelisations dans la parcelle
           if (currentParcel.currentModelingId == '' && currentParcel.currentModelingName == '') {
             return Scaffold(
                 appBar: AppBar(
-                    title: Text(currentParcel.name)
+                    title: Text(currentParcel.name),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(
+                            "Modifier",
+                            style: TextStyle(
+                                color: Colors.white,
+//                        fontWeight: FontWeight.bold,
+                                fontSize: 1.9 * SizeConfig.textMultiplier
+                            )
+                        ),
+                        onPressed: () {
+                        },
+                      )
+                    ],
                 ),
                 body: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +91,82 @@ class DetailsGardenScreen extends StatelessWidget {
           } else {
             return Scaffold(
               appBar: AppBar(
-                title: Text(currentParcel.name)
+                title: Text(currentParcel.name),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(
+                        "Modifier",
+                        style: TextStyle(
+                            color: Colors.white,
+//                        fontWeight: FontWeight.bold,
+                            fontSize: 1.9 * SizeConfig.textMultiplier
+                        )
+                    ),
+                    onPressed: () {
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => CupertinoActionSheet(
+                            actions: <Widget>[
+                              CupertinoButton(
+                                color: Colors.green,
+                                child: Text("Ajouter des personnes"),
+                                onPressed: (){},
+                              ),
+                              Container(height: 10,),
+                              CupertinoButton(
+                                color: Colors.green,
+                                child: Text("Renommer"),
+                                onPressed: (){},
+                              ),
+                              Container(height: 10,),
+                              CupertinoButton(
+                                color: Colors.green,
+                                child: Text("Supprimer"),
+                                onPressed: (){
+                                  return showDialog<void>(
+                                    context: context,
+                                    barrierDismissible: false, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: <Widget>[
+                                              Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          FlatButton(
+                                            child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          FlatButton(
+                                            child: Text('${AppLocalizations.of(context).buttonContinue}'),
+                                            onPressed: () {
+                                              BlocProvider.of<GardensBloc>(context).add(ParcelDeleted(parcelId));
+                                              Navigator.pushNamedAndRemoveUntil(
+                                                context,
+                                                '/',
+                                                (Route<dynamic> route) => false,
+                                              );
+
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          )
+                      );
+                    },
+                  )
+                ],
               ),
               body: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -146,6 +237,7 @@ class DetailsGardenScreen extends StatelessWidget {
                   ]),
               floatingActionButton: ActivitySpeedDial(
                   gardenId: gardenId,
+                  parcelId: parcelId,
                   visible: true
               ),
             );

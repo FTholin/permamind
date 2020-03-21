@@ -226,12 +226,24 @@ class App extends StatelessWidget {
                                 }
                               },
                             ),
-                      transitionsBuilder: (c, anim, a2, child) => SlideTransition(
-                          position: Tween<Offset>(
-                              begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
-                              .animate(anim),
-                          child: child),
-                      transitionDuration: Duration(milliseconds: 500),
+                      transitionsBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child,
+                          ) =>
+                          ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 0.0,
+                              end: 1.0,
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.fastOutSlowIn,
+                              ),
+                            ),
+                            child: child,
+                          ),
                     );
 
                   } else if (settings.name == '/addParcel') {
@@ -255,12 +267,24 @@ class App extends StatelessWidget {
                               }
                             },
                           ),
-                      transitionsBuilder: (c, anim, a2, child) => SlideTransition(
-                          position: Tween<Offset>(
-                              begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
-                              .animate(anim),
-                          child: child),
-                      transitionDuration: Duration(milliseconds: 500),
+                      transitionsBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child,
+                          ) =>
+                          ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 0.0,
+                              end: 1.0,
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.fastOutSlowIn,
+                              ),
+                            ),
+                            child: child,
+                          ),
                     );
 
                   } else if (settings.name == '/detailsGarden') {

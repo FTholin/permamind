@@ -128,15 +128,15 @@ class DesignParcelAdded extends GardensEvent {
 
 
 class ParcelDeleted extends GardensEvent {
-  final Parcel deletedParcel;
+  final String parcelId;
 
-  ParcelDeleted(this.deletedParcel);
-
-  @override
-  List<Object> get props => [deletedParcel];
+  ParcelDeleted(this.parcelId);
 
   @override
-  String toString() => 'ParcelsDeleted { deletedParcel: $deletedParcel }';
+  List<Object> get props => [parcelId];
+
+  @override
+  String toString() => 'ParcelsDeleted { parcelId: $parcelId }';
 }
 
 class ParcelLeaved extends GardensEvent {

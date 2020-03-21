@@ -40,228 +40,273 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addGardenTitle}')),
-      body: new Stepper(
-        type: StepperType.horizontal,
-        currentStep: _currentStep,
-        onStepTapped: (int step) => setState(() => _currentStep = step),
-        controlsBuilder: _createEventControlBuilder,
-        onStepContinue:
-            _currentStep < 2 ? () => setState(() => _currentStep += 1) : null,
-        onStepCancel:
-            _currentStep > -1 ? () => setState(() => _currentStep -= 1) : null,
-        steps: <Step>[
-          new Step(
-            title: new Text(''),
-            content: Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 30),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Text(
-                              '${AppLocalizations.of(context).addGardenTitle}',
-//                    textAlign: TextAlign.left,
-//                        overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 19),
-                            )),
-                        Container()
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: TextField(
-                        controller: _gardenName,
-                        decoration: InputDecoration(
-//                        border: InputBorder.none,
-                          hintText: '${AppLocalizations.of(context).addGardenNameHint}',
-                          errorText: _gardenNameValidate
-                              ? '${AppLocalizations.of(context).addGardenNameError}'
-                              : null,
-                        ),
-                        onChanged: (value) {
-                          _gardenName.text.isEmpty
-                              ? _gardenNameValidate = true
-                              : _gardenNameValidate = false;
-                          setState(() {});
-                        },
-                      ),
-                    )
-                  ],
-                )),
-            isActive: _currentStep >= 0,
-            state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
-          ),
-          new Step(
-            title: new Text(''),
-            content: Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 30),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    '${AppLocalizations.of(context).addGardenVisibilityTitle}',
-                    textAlign: TextAlign.left,
-//                        overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 19),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Radio(
-                        value: true,
-                        groupValue: _publicVisibility,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _publicVisibility = value;
-                          });
-                        },
-                      ),
-                      Text(
-                        '${AppLocalizations.of(context).yesChoice}',
-                        style: new TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Radio(
-                        value: false,
-                        groupValue: _publicVisibility,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _publicVisibility = value;
-                          });
-                        },
-                      ),
-                      Text(
-                        '${AppLocalizations.of(context).noChoice}',
-                        style: new TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            isActive: _currentStep >= 0,
-            state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
-          ),
-          new Step(
-            title: new Text(''),
-            content: Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 30),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          '${AppLocalizations.of(context).addFewGardenersTitle}',
-                          textAlign: TextAlign.left,
-//                        overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 19),
-                        ),
-                      ),
-                      Container()
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          '${AppLocalizations.of(context).optionalTitle}',
-                          textAlign: TextAlign.left,
-//                        overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w300),
-                        ),
-                      ),
-                      Container()
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ChipsInput(
-                      keyboardAppearance: Brightness.dark,
-                      textCapitalization: TextCapitalization.words,
-                      enabled: true,
-                      maxChips: 15,
-                      textStyle: TextStyle(
-                          height: 1.5, fontFamily: "Roboto", fontSize: 16),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        // hintText: formControl.hint,
-                        // enabled: false,
-                        // errorText: field.errorText,
-                      ),
-                      findSuggestions: (String query) async {
-                        queryResProfile = [];
-                        if (query.length != 0) {
-                          _gardenMembers = [];
+      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addParcelTitle}')),
+      body: Padding(
+        padding: EdgeInsets.all(30.0),
+        child: Stack(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.center,
+              child: Hero(
+                tag: "hero1",
+                child: Container(
+                  height: 82 * SizeConfig.heightMultiplier,
+                  width: 100 * SizeConfig.widthMultiplier,                    child: Theme(
+                  data: ThemeData(canvasColor: Colors.white),
+                  child: Stepper(
 
-                          var queryRes =
-                              await widget._dataRepository.searchByName(query);
-                          for (int i = 0; i < queryRes.documents.length; ++i) {
-                            var data = queryRes.documents[i].data;
-                            queryResProfile.add(MemberProfile(
-                              data["id"],
-                              data["pseudo"],
-//                                  data["email"],
-//                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
-                            ));
-                          }
-                        }
-                        return queryResProfile;
-                      },
-                      onChanged: (data) {
-                        _gardenMembers.clear();
-                        data.forEach((elem) {
-                          if (elem.pseudo != widget._user.pseudo) {
-                            _gardenMembers.add(
-                                GardenMember(id: elem.id, pseudo: elem.pseudo));
-                          }
-                        });
-                      },
-                      chipBuilder: (context, state, profile) {
-                        return InputChip(
-                          key: ObjectKey(profile),
-                          label: Text(profile.pseudo),
-//                            avatar: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                          onDeleted: () => state.deleteChip(profile),
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                        );
-                      },
-                      suggestionBuilder: (context, state, profile) {
-                        return ListTile(
-                          key: ObjectKey(profile),
-//                            leading: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                          title: Text(profile.pseudo),
-//                            subtitle: Text(profile.email),
-                          onTap: () => state.selectSuggestion(profile),
-                        );
-                      },
-                    ),
-                  )
-                ],
+                    type: StepperType.horizontal,
+                    steps: [
+                      Step(
+                        title: Text("First"),
+                        content: Text("This is our first example."),
+                      ),
+                      Step(
+                        title: Text("Second"),
+                        content: Text("This is our second example."),
+                      ),
+                    ],
+                  ),
+                ),
+                ),
               ),
             ),
-            isActive: _currentStep >= 0,
-            state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
-          ),
-        ],
+            // TODO Faire le size auto
+            // Pas besoin de user au final ?? !
+            FlatButton.icon(
+              icon: Icon(Icons.keyboard_arrow_left, size: 25),
+              label: Text("Retour", style: TextStyle(fontSize: 20),),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+        ),
       ),
     );
+
+
+//    return Scaffold(
+//      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addGardenTitle}')),
+//      body: new Stepper(
+//        type: StepperType.horizontal,
+//        currentStep: _currentStep,
+//        onStepTapped: (int step) => setState(() => _currentStep = step),
+//        controlsBuilder: _createEventControlBuilder,
+//        onStepContinue:
+//            _currentStep < 2 ? () => setState(() => _currentStep += 1) : null,
+//        onStepCancel:
+//            _currentStep > -1 ? () => setState(() => _currentStep -= 1) : null,
+//        steps: <Step>[
+//          new Step(
+//            title: new Text(''),
+//            content: Padding(
+//                padding: EdgeInsets.only(top: 10, bottom: 30),
+//                child: Column(
+//                  children: <Widget>[
+//                    Row(
+//                      children: <Widget>[
+//                        Padding(
+//                            padding: EdgeInsets.only(left: 10),
+//                            child: Text(
+//                              '${AppLocalizations.of(context).addGardenTitle}',
+////                    textAlign: TextAlign.left,
+////                        overflow: TextOverflow.ellipsis,
+//                              style: TextStyle(fontSize: 19),
+//                            )),
+//                        Container()
+//                      ],
+//                    ),
+//                    Padding(
+//                      padding: EdgeInsets.all(10),
+//                      child: TextField(
+//                        controller: _gardenName,
+//                        decoration: InputDecoration(
+////                        border: InputBorder.none,
+//                          hintText: '${AppLocalizations.of(context).addGardenNameHint}',
+//                          errorText: _gardenNameValidate
+//                              ? '${AppLocalizations.of(context).addGardenNameError}'
+//                              : null,
+//                        ),
+//                        onChanged: (value) {
+//                          _gardenName.text.isEmpty
+//                              ? _gardenNameValidate = true
+//                              : _gardenNameValidate = false;
+//                          setState(() {});
+//                        },
+//                      ),
+//                    )
+//                  ],
+//                )),
+//            isActive: _currentStep >= 0,
+//            state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
+//          ),
+//          new Step(
+//            title: new Text(''),
+//            content: Padding(
+//              padding: EdgeInsets.only(top: 10, bottom: 30),
+//              child: Column(
+//                children: <Widget>[
+//                  Text(
+//                    '${AppLocalizations.of(context).addGardenVisibilityTitle}',
+//                    textAlign: TextAlign.left,
+////                        overflow: TextOverflow.ellipsis,
+//                    style: TextStyle(fontSize: 19),
+//                  ),
+//                  Row(
+//                    children: <Widget>[
+//                      Radio(
+//                        value: true,
+//                        groupValue: _publicVisibility,
+//                        onChanged: (bool value) {
+//                          setState(() {
+//                            _publicVisibility = value;
+//                          });
+//                        },
+//                      ),
+//                      Text(
+//                        '${AppLocalizations.of(context).yesChoice}',
+//                        style: new TextStyle(
+//                          fontSize: 16.0,
+//                        ),
+//                      )
+//                    ],
+//                  ),
+//                  Row(
+//                    children: <Widget>[
+//                      Radio(
+//                        value: false,
+//                        groupValue: _publicVisibility,
+//                        onChanged: (bool value) {
+//                          setState(() {
+//                            _publicVisibility = value;
+//                          });
+//                        },
+//                      ),
+//                      Text(
+//                        '${AppLocalizations.of(context).noChoice}',
+//                        style: new TextStyle(
+//                          fontSize: 16.0,
+//                        ),
+//                      )
+//                    ],
+//                  )
+//                ],
+//              ),
+//            ),
+//            isActive: _currentStep >= 0,
+//            state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
+//          ),
+//          new Step(
+//            title: new Text(''),
+//            content: Padding(
+//              padding: EdgeInsets.only(top: 10, bottom: 30),
+//              child: Column(
+//                children: <Widget>[
+//                  Row(
+//                    children: <Widget>[
+//                      Padding(
+//                        padding: EdgeInsets.only(left: 10),
+//                        child: Text(
+//                          '${AppLocalizations.of(context).addFewGardenersTitle}',
+//                          textAlign: TextAlign.left,
+////                        overflow: TextOverflow.ellipsis,
+//                          style: TextStyle(fontSize: 19),
+//                        ),
+//                      ),
+//                      Container()
+//                    ],
+//                  ),
+//                  Row(
+//                    children: <Widget>[
+//                      Padding(
+//                        padding: EdgeInsets.only(left: 10),
+//                        child: Text(
+//                          '${AppLocalizations.of(context).optionalTitle}',
+//                          textAlign: TextAlign.left,
+////                        overflow: TextOverflow.ellipsis,
+//                          style: TextStyle(
+//                              fontSize: 15, fontWeight: FontWeight.w300),
+//                        ),
+//                      ),
+//                      Container()
+//                    ],
+//                  ),
+//                  Padding(
+//                    padding: EdgeInsets.all(10),
+//                    child: ChipsInput(
+//                      keyboardAppearance: Brightness.dark,
+//                      textCapitalization: TextCapitalization.words,
+//                      enabled: true,
+//                      maxChips: 15,
+//                      textStyle: TextStyle(
+//                          height: 1.5, fontFamily: "Roboto", fontSize: 16),
+//                      decoration: InputDecoration(
+//                        prefixIcon: Icon(Icons.search),
+//                        // hintText: formControl.hint,
+//                        // enabled: false,
+//                        // errorText: field.errorText,
+//                      ),
+//                      findSuggestions: (String query) async {
+//                        queryResProfile = [];
+//                        if (query.length != 0) {
+//                          _gardenMembers = [];
+//
+//                          var queryRes =
+//                              await widget._dataRepository.searchByName(query);
+//                          for (int i = 0; i < queryRes.documents.length; ++i) {
+//                            var data = queryRes.documents[i].data;
+//                            queryResProfile.add(MemberProfile(
+//                              data["id"],
+//                              data["pseudo"],
+////                                  data["email"],
+////                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+//                            ));
+//                          }
+//                        }
+//                        return queryResProfile;
+//                      },
+//                      onChanged: (data) {
+//                        _gardenMembers.clear();
+//                        data.forEach((elem) {
+//                          if (elem.pseudo != widget._user.pseudo) {
+//                            _gardenMembers.add(
+//                                GardenMember(id: elem.id, pseudo: elem.pseudo));
+//                          }
+//                        });
+//                      },
+//                      chipBuilder: (context, state, profile) {
+//                        return InputChip(
+//                          key: ObjectKey(profile),
+//                          label: Text(profile.pseudo),
+////                            avatar: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                          onDeleted: () => state.deleteChip(profile),
+//                          materialTapTargetSize:
+//                              MaterialTapTargetSize.shrinkWrap,
+//                        );
+//                      },
+//                      suggestionBuilder: (context, state, profile) {
+//                        return ListTile(
+//                          key: ObjectKey(profile),
+////                            leading: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                          title: Text(profile.pseudo),
+////                            subtitle: Text(profile.email),
+//                          onTap: () => state.selectSuggestion(profile),
+//                        );
+//                      },
+//                    ),
+//                  )
+//                ],
+//              ),
+//            ),
+//            isActive: _currentStep >= 0,
+//            state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
+//          ),
+//        ],
+//      ),
+//    );
   }
 
   Widget _createEventControlBuilder(BuildContext context,
