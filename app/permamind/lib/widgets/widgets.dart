@@ -16,3 +16,4 @@ export 'speed_dial_parcel.dart';
 export 'parcel_item.dart';
 export 'enumerated_parcels.dart';
 export 'parcel_carrousel.dart';
+export 'add_garden_stepper.dart';

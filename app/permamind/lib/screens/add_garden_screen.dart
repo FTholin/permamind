@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
+import 'package:permamind/widgets/add_garden_stepper.dart';
 
 class AddGardenScreen extends StatefulWidget {
   final User _user;
@@ -47,37 +48,32 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
           children: <Widget>[
             Align(
               alignment: Alignment.center,
-              child: Hero(
-                tag: "hero1",
-                child: Container(
-                  height: 82 * SizeConfig.heightMultiplier,
-                  width: 100 * SizeConfig.widthMultiplier,
-                  child: Theme(
+              child: Container(
+                height: 82 * SizeConfig.heightMultiplier,
+                width: 100 * SizeConfig.widthMultiplier,
+                child: Theme(
                   data: ThemeData(canvasColor: Colors.white),
-                  child: Stepper(
-
-                    type: StepperType.horizontal,
+                  child: AddGardenStepper(
+                    type: AddGardenStepperType.horizontal,
                     steps: [
-                      Step(
-                        title: Text("First"),
+                      AddGardenStep(
+                        title: Text(""),
+                        isActive: true,
                         content: Text("This is our first example."),
                       ),
-                      Step(
-                        title: Text("Second"),
+                      AddGardenStep(
+                        title: Text(""),
+                        content: Text("This is our second example."),
+                      ),
+                      AddGardenStep(
+                        title: Text(""),
                         content: Text("This is our second example."),
                       ),
                     ],
                   ),
                 ),
-                ),
               ),
             ),
-            // TODO Faire le size auto
-            // Pas besoin de user au final ?? !
-//            FlatButton(
-//              icon: Icon(Icons.close, size: 25),
-//              onPressed: () => Navigator.of(context).pop(),
-//            )
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
