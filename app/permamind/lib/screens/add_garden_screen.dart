@@ -40,7 +40,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addParcelTitle}')),
+//      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addParcelTitle}')),
       body: Padding(
         padding: EdgeInsets.all(30.0),
         child: Stack(
@@ -51,7 +51,8 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                 tag: "hero1",
                 child: Container(
                   height: 82 * SizeConfig.heightMultiplier,
-                  width: 100 * SizeConfig.widthMultiplier,                    child: Theme(
+                  width: 100 * SizeConfig.widthMultiplier,
+                  child: Theme(
                   data: ThemeData(canvasColor: Colors.white),
                   child: Stepper(
 
@@ -73,10 +74,16 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
             ),
             // TODO Faire le size auto
             // Pas besoin de user au final ?? !
-            FlatButton.icon(
-              icon: Icon(Icons.keyboard_arrow_left, size: 25),
-              label: Text("Retour", style: TextStyle(fontSize: 20),),
+//            FlatButton(
+//              icon: Icon(Icons.close, size: 25),
+//              onPressed: () => Navigator.of(context).pop(),
+//            )
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+              icon: Icon(Icons.close, size: 7 * SizeConfig.widthMultiplier,),
               onPressed: () => Navigator.of(context).pop(),
+            ),
             )
           ],
         ),

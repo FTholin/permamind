@@ -103,6 +103,7 @@ flutter:
     - assets/utils_icons/
     - assets/gardens/
     - assets/tutorials/
+    - assets/empty_states/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

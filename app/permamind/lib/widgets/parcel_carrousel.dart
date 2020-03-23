@@ -64,7 +64,7 @@ class _ParcelCarouselWithIndicatorState
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             child: Container(
-              color: const Color(0xFF4FB06E),
+              color: Colors.green,
               child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(

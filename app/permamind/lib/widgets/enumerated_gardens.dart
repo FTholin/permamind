@@ -1,6 +1,7 @@
 import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -29,26 +30,35 @@ class EnumeratedGardens extends StatelessWidget {
 
         // Si aucun jardin
         if (gardens.length == 0) {
-
-          // TODO Faire nouvelle page Baptiste
           return Padding(
-              padding: EdgeInsets.all(
-                1 * SizeConfig.heightMultiplier,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                          "Aucun potager pour l'instant. N'hesites pas à en ajouter !"),
-                    ),
-                  ),
-                  RaisedButton(
-                    child: Text("Ajouter un potager"),
-                    onPressed: () {},
-                  )
-                ],
-              ));
+            padding: EdgeInsets.all(
+              1 * SizeConfig.heightMultiplier,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Flexible(
+                    flex: 1,
+                    child: Image.asset(
+                      'assets/empty_states/empty_garden.png',
+                      fit: BoxFit.scaleDown,
+                    )
+                ),
+                Flexible(
+                    flex: 1,
+                    child: Text(
+                        "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: const Color(0xFF01534F),
+                          fontSize: 2.5 * SizeConfig.textMultiplier,
+//                          fontWeight: FontWeight.bold,
+                        )
+                    )
+                )
+              ],
+            ),
+          );
         } else {
           return Column(
             children: <Widget>[
@@ -56,7 +66,6 @@ class EnumeratedGardens extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: gardens.length,
                     itemBuilder: (context, i) {
-
                       return GardenItem(
                         name: gardens[i].name,
                         garden: gardens[i],

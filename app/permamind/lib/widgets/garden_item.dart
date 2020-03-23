@@ -99,22 +99,22 @@ class GardenItem extends StatelessWidget {
                       )
                   ),
                   ParcelCarouselWithIndicator(parcels.map((item) => ParcelCarouselData(parcelName: item.name, parcelId: item.id, modelingName: item.currentModelingName, dayActivitiesCount: item.dayActivitiesCount)).toList(), garden, user),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
-                        child: Text(
-                            "Voir mes parcelles",
-                            style: TextStyle(
-                                color: const Color(0xFF01534F),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 2.2 * SizeConfig.textMultiplier
-                            )
-                        ),
-                      ),
-                    ],
-                  )
+//                  Row(
+//                    mainAxisAlignment: MainAxisAlignment.center,
+//                    children: <Widget>[
+//                      Padding(
+//                        padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
+//                        child: Text(
+//                            "Voir mes parcelles",
+//                            style: TextStyle(
+//                                color: const Color(0xFF01534F),
+//                                fontWeight: FontWeight.normal,
+//                                fontSize: 2.2 * SizeConfig.textMultiplier
+//                            )
+//                        ),
+//                      ),
+//                    ],
+//                  )
                 ],
               ),
             ),
