@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
-import 'package:permamind/widgets/add_garden_stepper.dart';
+import 'package:permamind/widgets/my_stepper.dart';
 
 class AddGardenScreen extends StatefulWidget {
   final User _user;
@@ -28,8 +28,6 @@ class AddGardenScreen extends StatefulWidget {
 class _AddGardenScreenState extends State<AddGardenScreen> {
   TextEditingController _gardenName = TextEditingController();
 
-//  final TextEditingController _activityNameController = TextEditingController();
-
   int _currentStep = 0;
   bool _publicVisibility = false;
 
@@ -42,7 +40,6 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addParcelTitle}')),
       body: Padding(
         padding: EdgeInsets.all(30.0),
         child: Stack(
@@ -56,9 +53,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                   data: ThemeData(canvasColor: Colors.white,
                       primaryColor: Colors.green
                   ),
-                  child: AddGardenStepper(
+                  child: MyStepper(
                     steps: [
-                      AddGardenStep(
+                      MyStep(
                         title: Text(""),
                         content: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -97,7 +94,15 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                                               borderSide: BorderSide(
                                                   color: Colors.green)),
                                           hintText:
-                                              'Donner un nom à votre jardin'),
+                                              'Donner un nom à votre jardin',
+                                        errorText: _gardenNameValidate ? 'Le nom du jardin ne peut être vide' : null,
+                                      ),
+                                      onChanged: (value) {
+                                        _gardenName.text.isEmpty
+                                            ? _gardenNameValidate = true
+                                            : _gardenNameValidate = false;
+                                        setState(() {});
+                                      },
                                     ),
                                   )
                                 ],
@@ -107,7 +112,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         ),
                         isActive: _currentStep >= 0,
                       ),
-                      AddGardenStep(
+                      MyStep(
                         title: Text(""),
                         content: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -179,7 +184,7 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         ),
                         isActive: _currentStep >= 1,
                       ),
-                      AddGardenStep(
+                      MyStep(
                         title: Text(""),
                         content: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -299,9 +304,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                         ? () => setState(() => _currentStep -= 1)
                         : null,
                     // Using a variable here for handling the currentStep
-                    currentAddGardenStep: this._currentStep,
+                    currentMyStep: this._currentStep,
                     // List the steps you would like to have
-                    type: AddGardenStepperType.horizontal,
+                    type: MyStepperType.horizontal,
                   ),
                 ),
               ),

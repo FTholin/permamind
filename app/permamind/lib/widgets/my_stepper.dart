@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 //   * alternative labeling
 //   * stepper feedback in the case of high-latency interactions
 
-/// The state of a [AddGardenStep] which is used to control the style of the circle and
+/// The state of a [MyStep] which is used to control the style of the circle and
 /// text.
 ///
 /// See also:
 ///
-///  * [AddGardenStep]
-enum AddGardenStepState {
+///  * [MyStep]
+enum MyStepState {
   /// A step that displays its index in its circle.
   indexed,
 
@@ -33,8 +33,8 @@ enum AddGardenStepState {
   error,
 }
 
-/// Defines the [AddGardenStepper]'s main axis.
-enum AddGardenStepperType {
+/// Defines the [MyStepper]'s main axis.
+enum MyStepperType {
   /// A vertical layout of the steps with their content in-between the titles.
   vertical,
 
@@ -42,7 +42,7 @@ enum AddGardenStepperType {
   horizontal,
 }
 
-const TextStyle _kAddGardenStepStyle = TextStyle(
+const TextStyle _kMyStepStyle = TextStyle(
   fontSize: 12.0,
   color: Colors.white,
 );
@@ -52,27 +52,27 @@ const Color _kCircleActiveLight = Colors.white;
 const Color _kCircleActiveDark = Colors.black87;
 const Color _kDisabledLight = Colors.black38;
 const Color _kDisabledDark = Colors.white38;
-const double _kAddGardenStepSize = 24.0;
-const double _kTriangleHeight = _kAddGardenStepSize * 0.866025; // Triangle height. sqrt(3.0) / 2.0
+const double _kMyStepSize = 24.0;
+const double _kTriangleHeight = _kMyStepSize * 0.866025; // Triangle height. sqrt(3.0) / 2.0
 
-/// A material step used in [AddGardenStepper]. The step can have a title and subtitle,
+/// A material step used in [MyStepper]. The step can have a title and subtitle,
 /// an icon within its circle, some content and a state that governs its
 /// styling.
 ///
 /// See also:
 ///
-///  * [AddGardenStepper]
+///  * [MyStepper]
 ///  * <https://material.io/archive/guidelines/components/steppers.html>
 @immutable
-class AddGardenStep {
-  /// Creates a step for a [AddGardenStepper].
+class MyStep {
+  /// Creates a step for a [MyStepper].
   ///
   /// The [title], [content], and [state] arguments must not be null.
-  const AddGardenStep({
+  const MyStep({
     @required this.title,
     this.subtitle,
     @required this.content,
-    this.state = AddGardenStepState.indexed,
+    this.state = MyStepState.indexed,
     this.isActive = false,
   }) : assert(title != null),
         assert(content != null),
@@ -94,53 +94,53 @@ class AddGardenStep {
 
   /// The state of the step which determines the styling of its components
   /// and whether steps are interactive.
-  final AddGardenStepState state;
+  final MyStepState state;
 
   /// Whether or not the step is active. The flag only influences styling.
   final bool isActive;
 }
 
 /// A material stepper widget that displays progress through a sequence of
-/// steps. AddGardenSteppers are particularly useful in the case of forms where one step
+/// steps. MySteppers are particularly useful in the case of forms where one step
 /// requires the completion of another one, or where multiple steps need to be
 /// completed in order to submit the whole form.
 ///
-/// The widget is a flexible wrapper. A parent class should pass [currentAddGardenStep]
+/// The widget is a flexible wrapper. A parent class should pass [currentMyStep]
 /// to this widget based on some logic triggered by the three callbacks that it
 /// provides.
 ///
 /// See also:
 ///
-///  * [AddGardenStep]
+///  * [MyStep]
 ///  * <https://material.io/archive/guidelines/components/steppers.html>
-class AddGardenStepper extends StatefulWidget {
+class MyStepper extends StatefulWidget {
   /// Creates a stepper from a list of steps.
   ///
   /// This widget is not meant to be rebuilt with a different list of steps
   /// unless a key is provided in order to distinguish the old stepper from the
   /// new one.
   ///
-  /// The [steps], [type], and [currentAddGardenStep] arguments must not be null.
-  const AddGardenStepper({
+  /// The [steps], [type], and [currentMyStep] arguments must not be null.
+  const MyStepper({
     Key key,
     @required this.steps,
     this.physics,
-    this.type = AddGardenStepperType.vertical,
-    this.currentAddGardenStep = 0,
-    this.onAddGardenStepTapped,
+    this.type = MyStepperType.vertical,
+    this.currentMyStep = 0,
+    this.onMyStepTapped,
     this.onStepContinue,
     this.onStepCancel,
     this.controlsBuilder,
   }) : assert(steps != null),
         assert(type != null),
-        assert(currentAddGardenStep != null),
-        assert(0 <= currentAddGardenStep && currentAddGardenStep < steps.length),
+        assert(currentMyStep != null),
+        assert(0 <= currentMyStep && currentMyStep < steps.length),
         super(key: key);
 
   /// The steps of the stepper whose titles, subtitles, icons always get shown.
   ///
   /// The length of [steps] must not change.
-  final List<AddGardenStep> steps;
+  final List<MyStep> steps;
 
   /// How the stepper's scroll view should respond to user input.
   ///
@@ -152,17 +152,17 @@ class AddGardenStepper extends StatefulWidget {
   final ScrollPhysics physics;
 
   /// The type of stepper that determines the layout. In the case of
-  /// [AddGardenStepperType.horizontal], the content of the current step is displayed
-  /// underneath as opposed to the [AddGardenStepperType.vertical] case where it is
+  /// [MyStepperType.horizontal], the content of the current step is displayed
+  /// underneath as opposed to the [MyStepperType.vertical] case where it is
   /// displayed in-between.
-  final AddGardenStepperType type;
+  final MyStepperType type;
 
   /// The index into [steps] of the current step whose content is displayed.
-  final int currentAddGardenStep;
+  final int currentMyStep;
 
   /// The callback called when a step is tapped, with its index passed as
   /// an argument.
-  final ValueChanged<int> onAddGardenStepTapped;
+  final ValueChanged<int> onMyStepTapped;
 
   /// The callback called when the 'continue' button is tapped.
   ///
@@ -178,39 +178,39 @@ class AddGardenStepper extends StatefulWidget {
   ///
   /// If null, the default controls from the current theme will be used.
   ///
-  /// This callback which takes in a context and two functions,[onAddGardenStepContinue]
-  /// and [onAddGardenStepCancel]. These can be used to control the stepper.
+  /// This callback which takes in a context and two functions,[onMyStepContinue]
+  /// and [onMyStepCancel]. These can be used to control the stepper.
   ///
   /// {@tool snippet --template=stateless_widget_scaffold}
   /// Creates a stepper control with custom buttons.
   ///
   /// ```dart
   /// Widget build(BuildContext context) {
-  ///   return AddGardenStepper(
+  ///   return MyStepper(
   ///     controlsBuilder:
-  ///       (BuildContext context, {VoidCallback onAddGardenStepContinue, VoidCallback onAddGardenStepCancel}) {
+  ///       (BuildContext context, {VoidCallback onMyStepContinue, VoidCallback onMyStepCancel}) {
   ///          return Row(
   ///            children: <Widget>[
   ///              FlatButton(
-  ///                onPressed: onAddGardenStepContinue,
+  ///                onPressed: onMyStepContinue,
   ///                child: const Text('CONTINUE'),
   ///              ),
   ///              FlatButton(
-  ///                onPressed: onAddGardenStepCancel,
+  ///                onPressed: onMyStepCancel,
   ///                child: const Text('CANCEL'),
   ///              ),
   ///            ],
   ///          );
   ///       },
-  ///     steps: const <AddGardenStep>[
-  ///       AddGardenStep(
+  ///     steps: const <MyStep>[
+  ///       MyStep(
   ///         title: Text('A'),
   ///         content: SizedBox(
   ///           width: 100.0,
   ///           height: 100.0,
   ///         ),
   ///       ),
-  ///       AddGardenStep(
+  ///       MyStep(
   ///         title: Text('B'),
   ///         content: SizedBox(
   ///           width: 100.0,
@@ -225,12 +225,12 @@ class AddGardenStepper extends StatefulWidget {
   final ControlsWidgetBuilder controlsBuilder;
 
   @override
-  _AddGardenStepperState createState() => _AddGardenStepperState();
+  _MyStepperState createState() => _MyStepperState();
 }
 
-class _AddGardenStepperState extends State<AddGardenStepper> with TickerProviderStateMixin {
+class _MyStepperState extends State<MyStepper> with TickerProviderStateMixin {
   List<GlobalKey> _keys;
-  final Map<int, AddGardenStepState> _oldStates = <int, AddGardenStepState>{};
+  final Map<int, MyStepState> _oldStates = <int, MyStepState>{};
 
   @override
   void initState() {
@@ -245,7 +245,7 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
   }
 
   @override
-  void didUpdateWidget(AddGardenStepper oldWidget) {
+  void didUpdateWidget(MyStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
     assert(widget.steps.length == oldWidget.steps.length);
 
@@ -262,7 +262,7 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
   }
 
   bool _isCurrent(int index) {
-    return widget.currentAddGardenStep == index;
+    return widget.currentMyStep == index;
   }
 
   bool _isDark() {
@@ -278,30 +278,30 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
   }
 
   Widget _buildCircleChild(int index, bool oldState) {
-    final AddGardenStepState state = oldState ? _oldStates[index] : widget.steps[index].state;
+    final MyStepState state = oldState ? _oldStates[index] : widget.steps[index].state;
     final bool isDarkActive = _isDark() && widget.steps[index].isActive;
     assert(state != null);
     switch (state) {
-      case AddGardenStepState.indexed:
-      case AddGardenStepState.disabled:
+      case MyStepState.indexed:
+      case MyStepState.disabled:
         return Text(
           '${index + 1}',
-          style: isDarkActive ? _kAddGardenStepStyle.copyWith(color: Colors.black87) : _kAddGardenStepStyle,
+          style: isDarkActive ? _kMyStepStyle.copyWith(color: Colors.black87) : _kMyStepStyle,
         );
-      case AddGardenStepState.editing:
+      case MyStepState.editing:
         return Icon(
           Icons.edit,
           color: isDarkActive ? _kCircleActiveDark : _kCircleActiveLight,
           size: 18.0,
         );
-      case AddGardenStepState.complete:
+      case MyStepState.complete:
         return Icon(
           Icons.check,
           color: isDarkActive ? _kCircleActiveDark : _kCircleActiveLight,
           size: 18.0,
         );
-      case AddGardenStepState.error:
-        return const Text('!', style: _kAddGardenStepStyle);
+      case MyStepState.error:
+        return const Text('!', style: _kMyStepStyle);
     }
     return null;
   }
@@ -318,8 +318,8 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
   Widget _buildCircle(int index, bool oldState) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
-      width: _kAddGardenStepSize,
-      height: _kAddGardenStepSize,
+      width: _kMyStepSize,
+      height: _kMyStepSize,
       child: AnimatedContainer(
         curve: Curves.fastOutSlowIn,
         duration: kThemeAnimationDuration,
@@ -328,7 +328,7 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
           shape: BoxShape.circle,
         ),
         child: Center(
-          child: _buildCircleChild(index, oldState && widget.steps[index].state == AddGardenStepState.error),
+          child: _buildCircleChild(index, oldState && widget.steps[index].state == MyStepState.error),
         ),
       ),
     );
@@ -337,11 +337,11 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
   Widget _buildTriangle(int index, bool oldState) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
-      width: _kAddGardenStepSize,
-      height: _kAddGardenStepSize,
+      width: _kMyStepSize,
+      height: _kMyStepSize,
       child: Center(
         child: SizedBox(
-          width: _kAddGardenStepSize,
+          width: _kMyStepSize,
           height: _kTriangleHeight, // Height of 24dp-long-sided equilateral triangle.
           child: CustomPaint(
             painter: _TrianglePainter(
@@ -349,7 +349,7 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
             ),
             child: Align(
               alignment: const Alignment(0.0, 0.8), // 0.8 looks better than the geometrical 0.33.
-              child: _buildCircleChild(index, oldState && widget.steps[index].state != AddGardenStepState.error),
+              child: _buildCircleChild(index, oldState && widget.steps[index].state != MyStepState.error),
             ),
           ),
         ),
@@ -365,11 +365,11 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
         firstCurve: const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
         secondCurve: const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
         sizeCurve: Curves.fastOutSlowIn,
-        crossFadeState: widget.steps[index].state == AddGardenStepState.error ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+        crossFadeState: widget.steps[index].state == MyStepState.error ? CrossFadeState.showSecond : CrossFadeState.showFirst,
         duration: kThemeAnimationDuration,
       );
     } else {
-      if (widget.steps[index].state != AddGardenStepState.error)
+      if (widget.steps[index].state != MyStepState.error)
         return _buildCircle(index, false);
       else
         return _buildTriangle(index, false);
@@ -430,15 +430,15 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
 
     assert(widget.steps[index].state != null);
     switch (widget.steps[index].state) {
-      case AddGardenStepState.indexed:
-      case AddGardenStepState.editing:
-      case AddGardenStepState.complete:
+      case MyStepState.indexed:
+      case MyStepState.editing:
+      case MyStepState.complete:
         return textTheme.body2;
-      case AddGardenStepState.disabled:
+      case MyStepState.disabled:
         return textTheme.body2.copyWith(
             color: _isDark() ? _kDisabledDark : _kDisabledLight
         );
-      case AddGardenStepState.error:
+      case MyStepState.error:
         return textTheme.body2.copyWith(
             color: _isDark() ? _kErrorDark : _kErrorLight
         );
@@ -452,15 +452,15 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
 
     assert(widget.steps[index].state != null);
     switch (widget.steps[index].state) {
-      case AddGardenStepState.indexed:
-      case AddGardenStepState.editing:
-      case AddGardenStepState.complete:
+      case MyStepState.indexed:
+      case MyStepState.editing:
+      case MyStepState.complete:
         return textTheme.caption;
-      case AddGardenStepState.disabled:
+      case MyStepState.disabled:
         return textTheme.caption.copyWith(
             color: _isDark() ? _kDisabledDark : _kDisabledLight
         );
-      case AddGardenStepState.error:
+      case MyStepState.error:
         return textTheme.caption.copyWith(
             color: _isDark() ? _kErrorDark : _kErrorLight
         );
@@ -570,7 +570,7 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
             key: _keys[i],
             children: <Widget>[
               InkWell(
-                onTap: widget.steps[i].state != AddGardenStepState.disabled ? () {
+                onTap: widget.steps[i].state != MyStepState.disabled ? () {
                   // In the vertical case we need to scroll to the newly tapped
                   // step.
                   Scrollable.ensureVisible(
@@ -579,10 +579,10 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
                     duration: kThemeAnimationDuration,
                   );
 
-                  if (widget.onAddGardenStepTapped != null)
-                    widget.onAddGardenStepTapped(i);
+                  if (widget.onMyStepTapped != null)
+                    widget.onMyStepTapped(i);
                 } : null,
-                canRequestFocus: widget.steps[i].state != AddGardenStepState.disabled,
+                canRequestFocus: widget.steps[i].state != MyStepState.disabled,
                 child: _buildVerticalHeader(i),
               ),
               _buildVerticalBody(i),
@@ -596,11 +596,11 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
     final List<Widget> children = <Widget>[
       for (int i = 0; i < widget.steps.length; i += 1) ...<Widget>[
         InkResponse(
-          onTap: widget.steps[i].state != AddGardenStepState.disabled ? () {
-            if (widget.onAddGardenStepTapped != null)
-              widget.onAddGardenStepTapped(i);
+          onTap: widget.steps[i].state != MyStepState.disabled ? () {
+            if (widget.onMyStepTapped != null)
+              widget.onMyStepTapped(i);
           } : null,
-          canRequestFocus: widget.steps[i].state != AddGardenStepState.disabled,
+          canRequestFocus: widget.steps[i].state != MyStepState.disabled,
           child: Row(
             children: <Widget>[
               Container(
@@ -640,7 +640,7 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
                 curve: Curves.fastOutSlowIn,
                 duration: kThemeAnimationDuration,
                 vsync: this,
-                child: widget.steps[widget.currentAddGardenStep].content,
+                child: widget.steps[widget.currentMyStep].content,
               ),
             ],
           ),
@@ -671,9 +671,9 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
     assert(debugCheckHasMaterial(context));
     assert(debugCheckHasMaterialLocalizations(context));
     assert(() {
-      if (context.findAncestorWidgetOfExactType<AddGardenStepper>() != null)
+      if (context.findAncestorWidgetOfExactType<MyStepper>() != null)
         throw FlutterError(
-            'AddGardenSteppers must not be nested.\n'
+            'MySteppers must not be nested.\n'
                 'The material specification advises that one should avoid embedding '
                 'steppers within steppers. '
                 'https://material.io/archive/guidelines/components/steppers.html#steppers-usage'
@@ -682,9 +682,9 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
     }());
     assert(widget.type != null);
     switch (widget.type) {
-      case AddGardenStepperType.vertical:
+      case MyStepperType.vertical:
         return _buildVertical();
-      case AddGardenStepperType.horizontal:
+      case MyStepperType.horizontal:
         return _buildHorizontal();
     }
     return null;
