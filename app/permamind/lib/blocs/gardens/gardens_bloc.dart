@@ -15,8 +15,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   GardensBloc(this._authenticationBloc, this._dataRepository) {
     _authenticationBlocSubscription = _authenticationBloc.listen((state) {
-      // React to state changes here.
-      // Dispatch events here to trigger changes in MyBloc.
       if (state is Authenticated) {
         add(LoadGardens(state.userAuthenticated.id, state.userAuthenticated.pseudo));
       }
@@ -73,7 +71,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     _gardensSubscription = _dataRepository.gardens(event.userId, event.userPseudo).listen(
           (gardens) {
             for (final garden in gardens) {
-//              _parcelsSubscription?.cancel();
+              _parcelsSubscription?.cancel();
               _parcelsSubscription = _dataRepository.loadParcels(garden.id, event.userId, event.userPseudo).listen((parcels){
                 gardensParcels[garden.id] = parcels;
               });
@@ -185,6 +183,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   @override
   Future <void> close() {
     _gardensSubscription?.cancel();
+    _parcelsSubscription?.cancel();
     _authenticationBlocSubscription?.cancel();
     return super.close();
   }

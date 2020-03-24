@@ -99,7 +99,15 @@ class GardensUpdated extends GardensEvent {
   GardensUpdated(this.gardens, this.gardenParcels);
 
   @override
-  String toString() => 'GardensUpdated';
+  String toString() {
+    String res = "Gardens Updated: gardens = [";
+
+    for (var garden in gardens) {
+      res += " ${garden.name},";
+    }
+    res += ']';
+    return res;
+  }
 }
 
 class ParcelAdded extends GardensEvent {

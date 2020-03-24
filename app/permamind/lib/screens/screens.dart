@@ -11,4 +11,4 @@ export 'tutorials_activities_screen.dart';
 export 'add_parcel_screen.dart';
 export 'add_garden_screen.dart';
 export 'settings_parcel_screen.dart';
-export 'details_garden_screen.dart';
+export 'details_parcel_screen.dart';

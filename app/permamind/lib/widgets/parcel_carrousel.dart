@@ -54,7 +54,7 @@ class _ParcelCarouselWithIndicatorState
         onTap: () =>  Navigator.pushNamed(
           context,
           '/detailsGarden',
-          arguments: DetailsGardenScreenArguments(
+          arguments: DetailsParcelScreenArguments(
               widget.garden.id,
               parcel.parcelId
           ),

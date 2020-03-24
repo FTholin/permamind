@@ -457,7 +457,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                   Navigator.pushNamed(
                     context,
                     '/detailsGarden',
-                    arguments: DetailsGardenScreenArguments(
+                    arguments: DetailsParcelScreenArguments(
                       widget.garden.id,
                       parcel.id
                     ),

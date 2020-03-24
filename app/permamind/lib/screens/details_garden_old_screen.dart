@@ -9,14 +9,14 @@
 //import 'package:permamind/widgets/widgets.dart';
 //
 //
-//class DetailsGardenScreen extends StatelessWidget {
+//class DetailsParcelScreen extends StatelessWidget {
 //
 //  final DataRepository dataRepository;
 //
 //  final String gardenId;
 //  final User user;
 //
-//  DetailsGardenScreen({
+//  DetailsParcelScreen({
 //    Key key,
 //    @required this.dataRepository,
 //    @required this.gardenId,
@@ -24,7 +24,7 @@
 //  })
 //      : assert(dataRepository != null),
 //        assert(user != null),
-//        super(key: key ?? ArchSampleKeys.detailsGardenScreen);
+//        super(key: key ?? ArchSampleKeys.DetailsParcelScreen);
 //  @override
 //  Widget build(BuildContext context) {
 //
@@ -167,12 +167,12 @@
 //
 //
 //
-//class DetailsGardenScreenArguments {
+//class DetailsParcelScreenArguments {
 //
 //  final DataRepository dataRepository;
 //
 //  final String gardenId;
 //  final User user;
 //
-//  DetailsGardenScreenArguments(this.dataRepository, this.gardenId, this.user);
+//  DetailsParcelScreenArguments(this.dataRepository, this.gardenId, this.user);
 //}

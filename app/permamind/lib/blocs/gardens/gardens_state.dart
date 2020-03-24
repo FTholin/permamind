@@ -24,7 +24,15 @@ class GardensLoaded extends GardensState {
   GardensLoaded(this.gardens, this.gardenParcels);
 
   @override
-  String toString() => "GardensLoaded { gardenParcels : $gardenParcels }";
+  String toString() {
+    String res = "GardensLoaded: gardens = [";
+
+    for (var garden in gardens) {
+      res += " ${garden.name},";
+    }
+    res += ']';
+    return res;
+  }
 }
 
 class GardensNotLoaded extends GardensState {

@@ -1,6 +1,7 @@
 import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
@@ -75,7 +76,69 @@ class GardenItem extends StatelessWidget {
                                           fontSize: 2 * SizeConfig.textMultiplier
                                       )
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showCupertinoModalPopup(
+                                        context: context,
+                                        builder: (context) => CupertinoActionSheet(
+                                          actions: <Widget>[
+                                            CupertinoButton(
+                                              color: Colors.green,
+                                              child: Text("Ajouter des personnes"),
+                                              onPressed: null,
+                                            ),
+                                            Container(height: 10,),
+                                            CupertinoButton(
+                                              color: Colors.green,
+                                              child: Text("Renommer"),
+                                              onPressed: null,
+                                            ),
+                                            Container(height: 10,),
+                                            CupertinoButton(
+                                              color: Colors.green,
+                                              child: Text("Supprimer"),
+                                              onPressed: (){
+                                                return showDialog<void>(
+                                                  context: context,
+                                                  barrierDismissible: false, // user must tap button!
+                                                  builder: (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
+                                                      content: SingleChildScrollView(
+                                                        child: ListBody(
+                                                          children: <Widget>[
+                                                            Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                                          onPressed: () {
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                        ),
+                                                        FlatButton(
+                                                          child: Text('${AppLocalizations.of(context).buttonContinue}'),
+                                                          onPressed: () {
+                                                            BlocProvider.of<GardensBloc>(context).add(GardenDeleted(garden));
+                                                            Navigator.pushNamedAndRemoveUntil(
+                                                              context,
+                                                              '/',
+                                                                  (Route<dynamic> route) => false,
+                                                            );
+
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        )
+                                    );
+                                  },
                                 )
                               ],
                             ),

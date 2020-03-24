@@ -356,7 +356,7 @@ class DetailsModelingScreen extends StatelessWidget {
                 context,
                 '/detailsGarden',
                 (Route<dynamic> route) => false,
-                arguments: DetailsGardenScreenArguments(
+                arguments: DetailsParcelScreenArguments(
                     gardenId,
                     parcel.id
                 ),

@@ -11,14 +11,14 @@ import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
 
 
-class DetailsGardenScreen extends StatelessWidget {
+class DetailsParcelScreen extends StatelessWidget {
 
   final DataRepository dataRepository;
   final String parcelId;
   final User user;
   final String gardenId;
 
-  DetailsGardenScreen({
+  DetailsParcelScreen({
     Key key,
     @required this.dataRepository,
     @required this.parcelId,
@@ -54,6 +54,67 @@ class DetailsGardenScreen extends StatelessWidget {
                             )
                         ),
                         onPressed: () {
+                          showCupertinoModalPopup(
+                              context: context,
+                              builder: (context) => CupertinoActionSheet(
+                                actions: <Widget>[
+                                  CupertinoButton(
+                                    color: Colors.green,
+                                    child: Text("Ajouter des personnes"),
+                                    onPressed: (){},
+                                  ),
+                                  Container(height: 10,),
+                                  CupertinoButton(
+                                    color: Colors.green,
+                                    child: Text("Renommer"),
+                                    onPressed: (){},
+                                  ),
+                                  Container(height: 10,),
+                                  CupertinoButton(
+                                    color: Colors.green,
+                                    child: Text("Supprimer"),
+                                    onPressed: (){
+                                      return showDialog<void>(
+                                        context: context,
+                                        barrierDismissible: false, // user must tap button!
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
+                                            content: SingleChildScrollView(
+                                              child: ListBody(
+                                                children: <Widget>[
+                                                  Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
+                                                ],
+                                              ),
+                                            ),
+                                            actions: <Widget>[
+                                              FlatButton(
+                                                child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              FlatButton(
+                                                child: Text('${AppLocalizations.of(context).buttonContinue}'),
+                                                onPressed: () {
+                                                  BlocProvider.of<GardensBloc>(context).add(ParcelDeleted(parcelId));
+                                                  Navigator.pushNamedAndRemoveUntil(
+                                                    context,
+                                                    '/',
+                                                        (Route<dynamic> route) => false,
+                                                  );
+
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                              )
+                          );
                         },
                       )
                     ],
@@ -540,22 +601,22 @@ class DetailsGardenScreen extends StatelessWidget {
 //}
 
 
-class DetailsGardenScreenArguments {
+class DetailsParcelScreenArguments {
 
   final String gardenId;
   final String parcelId;
 
-  DetailsGardenScreenArguments(this.gardenId, this.parcelId);
+  DetailsParcelScreenArguments(this.gardenId, this.parcelId);
 }
 
-//class DetailsGardenScreenArguments {
+//class DetailsParcelScreenArguments {
 //
 //  final DataRepository dataRepository;
 //
 //  final String gardenId;
 //  final User user;
 //
-//  DetailsGardenScreenArguments(this.dataRepository, this.gardenId, this.user);
+//  DetailsParcelScreenArguments(this.dataRepository, this.gardenId, this.user);
 //}
 
 // TODO Bottom Up slide animation

@@ -289,7 +289,7 @@ class App extends StatelessWidget {
 
                   } else if (settings.name == '/detailsGarden') {
 
-                    final DetailsGardenScreenArguments args =
+                    final DetailsParcelScreenArguments args =
                         settings.arguments;
 
                     return PageRouteBuilder(
@@ -315,7 +315,7 @@ class App extends StatelessWidget {
                                   )..add(LoadDesign()),
                                 ),
                                   ],
-                                  child: DetailsGardenScreen(
+                                  child: DetailsParcelScreen(
                                       dataRepository: firebaseRepository,
                                       user: state.userAuthenticated,
                                       gardenId: args.gardenId,
@@ -338,14 +338,14 @@ class App extends StatelessWidget {
                   }
 //                  else if (settings.name == "/detailsGarden") {
 //
-//                    final DetailsGardenScreenArguments args = settings.arguments;
+//                    final DetailsParcelScreenArguments args = settings.arguments;
 //                    return MaterialPageRoute(builder: (_) {
 //                      return BlocProvider<ParcelsBloc>(
 //                          create: (context) => ParcelsBloc(
 //                              gardensBloc: BlocProvider.of<GardensBloc>(context),
 //                              dataRepository: args.dataRepository)
 //                            ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
-//                          child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
+//                          child: DetailsParcelScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
 //                    });
 //
 //                  }
