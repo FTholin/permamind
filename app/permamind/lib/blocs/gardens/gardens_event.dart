@@ -96,7 +96,7 @@ class GardensUpdated extends GardensEvent {
   final Map<String, List<Parcel>> gardenParcels;
   final List<Garden> gardens;
 
-  GardensUpdated(this.gardens, this.gardenParcels);
+  GardensUpdated([this.gardens = const [], this.gardenParcels]) : super([gardens, gardenParcels]);
 
   @override
   String toString() {
@@ -129,6 +129,7 @@ class DesignParcelAdded extends GardensEvent {
   final String parcelId;
 
   DesignParcelAdded(this.gardenId, this.parcelId, this.designs);
+
 
   @override
   String toString() => 'DesignParcelAdded { designs: $designs }';
