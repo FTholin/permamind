@@ -2,6 +2,7 @@ import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/blocs/blocs.dart';
@@ -54,22 +55,214 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                 child: Theme(
                   data: ThemeData(canvasColor: Colors.white),
                   child: AddGardenStepper(
-                    type: AddGardenStepperType.horizontal,
                     steps: [
                       AddGardenStep(
                         title: Text(""),
-                        isActive: true,
-                        content: Text("This is our first example."),
+                        content: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/utils_image/sowing.png',
+                              fit: BoxFit.scaleDown,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5 * SizeConfig.heightMultiplier),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Créer un jardin",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: const Color(0xFF01534F),
+                                              fontSize: 2.5 *
+                                                  SizeConfig.textMultiplier,
+                                              fontWeight: FontWeight.bold
+//                          fontWeight: FontWeight.bold,
+                                              )),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 2 * SizeConfig.heightMultiplier),
+                                    child: TextField(
+                                      controller: _gardenName,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5.0)),
+                                              borderSide: BorderSide(
+                                                  color: Colors.green)),
+                                          hintText:
+                                              'Donner un nom à votre jardin'),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        isActive: _currentStep >= 0,
                       ),
                       AddGardenStep(
                         title: Text(""),
-                        content: Text("This is our second example."),
+                        content: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/utils_image/growing_plant.png',
+                              fit: BoxFit.scaleDown,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5 * SizeConfig.heightMultiplier),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Rendre le jardin public",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: const Color(0xFF01534F),
+                                              fontSize: 2.5 *
+                                                  SizeConfig.textMultiplier,
+                                              fontWeight: FontWeight.bold
+//                          fontWeight: FontWeight.bold,
+                                          )),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 2 * SizeConfig.heightMultiplier),
+                                      child: Container(
+                                        height: 50,
+                                        color: Colors.grey,
+                                      ),
+//                                    child: TextField(
+//                                      controller: _gardenName,
+//                                      decoration: InputDecoration(
+//                                          border: OutlineInputBorder(
+//                                              borderRadius: BorderRadius.all(
+//                                                  Radius.circular(5.0)),
+//                                              borderSide: BorderSide(
+//                                                  color: Colors.green)),
+//                                          hintText:
+//                                          'Donner un nom à votre jardin'),
+//                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        isActive: _currentStep >= 1,
                       ),
                       AddGardenStep(
                         title: Text(""),
-                        content: Text("This is our second example."),
+                        content: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/utils_image/rake_plant.png',
+                              fit: BoxFit.scaleDown,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5 * SizeConfig.heightMultiplier),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Ajouter des jardiniers",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: const Color(0xFF01534F),
+                                              fontSize: 2.5 *
+                                                  SizeConfig.textMultiplier,
+                                              fontWeight: FontWeight.bold
+//                          fontWeight: FontWeight.bold,
+                                          )),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 2 * SizeConfig.heightMultiplier),
+                                    child: Container(
+                                      height: 50,
+                                      color: Colors.grey,
+                                    ),
+//                                    child: TextField(
+//                                      controller: _gardenName,
+//                                      decoration: InputDecoration(
+//                                          border: OutlineInputBorder(
+//                                              borderRadius: BorderRadius.all(
+//                                                  Radius.circular(5.0)),
+//                                              borderSide: BorderSide(
+//                                                  color: Colors.green)),
+//                                          hintText:
+//                                          'Donner un nom à votre jardin'),
+//                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        isActive: _currentStep >= 2,
                       ),
                     ],
+                    controlsBuilder: _createEventControlBuilder,
+                    onStepContinue: _currentStep < 3
+                        ? () => setState(() => _currentStep += 1)
+                        : null,
+                    onStepCancel: _currentStep > -1
+                        ? () => setState(() => _currentStep -= 1)
+                        : null,
+                    // Using a variable here for handling the currentStep
+                    currentAddGardenStep: this._currentStep,
+                    // List the steps you would like to have
+                    type: AddGardenStepperType.horizontal,
+                    // StepperType.vertical   :  Vertical Style
+                    // Know the step that is tapped
+                    onAddGardenStepTapped: (step) {
+                      // On hitting step itself, change the state and jump to that step
+                      setState(() {
+                        // update the variable handling the current step value
+                        // jump to the tapped step
+                        _currentStep = step;
+                      });
+                      // Log function call
+                      print("onStepTapped : " + step.toString());
+                    },
+//                    onStepCancel: () {
+//                      // On hitting cancel button, change the state
+//                      setState(() {
+//                        // update the variable handling the current step value
+//                        // going back one step i.e subtracting 1, until its 0
+//                        if (_currentStep > 0) {
+//                          _currentStep = _currentStep - 1;
+//                        } else {
+//                          _currentStep = 0;
+//                        }
+//                      });
+//                      // Log function call
+//                      print("onStepCancel : " + _currentStep.toString());
+//                    },
+                    // On hitting continue button, change the state
+//                    onStepContinue: () {
+//                      setState(() {
+//                        // update the variable handling the current step value
+//                        // going back one step i.e adding 1, until its the length of the step
+//                        if (_currentStep < 3 - 1) {
+//                          _currentStep = _currentStep + 1;
+//                        } else {
+//                          _currentStep = 0;
+//                        }
+//                      });
+//                      // Log function call
+//                      print("onStepContinue : " + _currentStep.toString());
+//                    },
                   ),
                 ),
               ),
@@ -77,15 +270,17 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-              icon: Icon(Icons.close, size: 7 * SizeConfig.widthMultiplier,),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
+                icon: Icon(
+                  Icons.close,
+                  size: 7 * SizeConfig.widthMultiplier,
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
             )
           ],
         ),
       ),
     );
-
 
 //    return Scaffold(
 //      appBar: new AppBar(title: new Text('${AppLocalizations.of(context).addGardenTitle}')),
@@ -318,36 +513,54 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
+                textColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.green)),
+                color: Colors.white,
                 onPressed: () {
-                  _gardenMembers.add(GardenMember(
-                      id: widget._user.id, pseudo: widget._user.pseudo));
-
-                  final Garden garden = Garden(
-                      "${_gardenName.text}",
-                      _publicVisibility,
-                      widget._user.id,
-                      _gardenMembers,
-                      DateTime.now(),
-                      0);
-
-                  BlocProvider.of<GardensBloc>(context).add(AddGarden(garden));
-
-                  Navigator.pop(context);
-//                  Navigator.pushNamedAndRemoveUntil(
-//                      context, (_) => false);
+                  if (_gardenName.text.isNotEmpty) {
+                    onStepCancel();
+                  } else {
+                    setState(() {
+                      _gardenName.text.isEmpty
+                          ? _gardenNameValidate = true
+                          : _gardenNameValidate = false;
+                    });
+                  }
+                },
+                child: Text('${AppLocalizations.of(context).backButton}')),
+            RaisedButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {
+                  // TODO Création du jardin !
+//                  _gardenMembers.add(GardenMember(
+//                      id: widget._user.id, pseudo: widget._user.pseudo));
+//
+//                  final Garden garden = Garden(
+//                      "${_gardenName.text}",
+//                      _publicVisibility,
+//                      widget._user.id,
+//                      _gardenMembers,
+//                      DateTime.now(),
+//                      0);
+//
+//                  BlocProvider.of<GardensBloc>(context).add(AddGarden(garden));
+//
+//                  Navigator.pop(context);
+////                  Navigator.pushNamedAndRemoveUntil(
+////                      context, (_) => false);
                 },
                 child: Text('${AppLocalizations.of(context).finalizeButton}')),
           ]);
     } else if (_currentStep == 0) {
       return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(onPressed: () {
-              Navigator.pop(context);
-            }, child: Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
+                color: Colors.green,
+                textColor: Colors.white,
                 onPressed: () {
                   if (_gardenName.text.isNotEmpty) {
                     onStepContinue();
@@ -359,15 +572,44 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                     });
                   }
                 },
-                child:  Text('${AppLocalizations.of(context).continueButton}')),
+                child: Text('${AppLocalizations.of(context).continueButton}')),
           ]);
     } else {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RaisedButton(onPressed: onStepCancel, child: Text('${AppLocalizations.of(context).backButton}')),
             RaisedButton(
-                onPressed: onStepContinue, child:  Text('${AppLocalizations.of(context).continueButton}')),
+                textColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.green)),
+                color: Colors.white,
+                onPressed: () {
+                  if (_gardenName.text.isNotEmpty) {
+                    onStepCancel();
+                  } else {
+                    setState(() {
+                      _gardenName.text.isEmpty
+                          ? _gardenNameValidate = true
+                          : _gardenNameValidate = false;
+                    });
+                  }
+                },
+                child: Text('${AppLocalizations.of(context).backButton}')),
+            RaisedButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                onPressed: () {
+                  if (_gardenName.text.isNotEmpty) {
+                    onStepContinue();
+                  } else {
+                    setState(() {
+                      _gardenName.text.isEmpty
+                          ? _gardenNameValidate = true
+                          : _gardenNameValidate = false;
+                    });
+                  }
+                },
+                child: Text('${AppLocalizations.of(context).continueButton}')),
           ]);
     }
   }

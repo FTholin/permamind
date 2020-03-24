@@ -628,17 +628,11 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
     ];
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Material(
-          elevation: 2.0,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Row(
-              children: children,
-            ),
-          ),
-        ),
-        Expanded(
+        // TODO Ici
+        Flexible(
+          flex: 6,
           child: ListView(
             padding: const EdgeInsets.all(24.0),
             children: <Widget>[
@@ -648,10 +642,26 @@ class _AddGardenStepperState extends State<AddGardenStepper> with TickerProvider
                 vsync: this,
                 child: widget.steps[widget.currentAddGardenStep].content,
               ),
-              _buildVerticalControls(),
             ],
           ),
         ),
+        Flexible(
+          flex: 2,
+          child: _buildVerticalControls(),
+        ),
+        Flexible(
+//          flex: 1,
+          child: Material(
+            color:  Color(0xFFF9F9F9),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Row(
+                children: children,
+              ),
+            ),
+          ),
+        )
+
       ],
     );
   }
