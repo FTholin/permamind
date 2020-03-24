@@ -28,6 +28,8 @@ class GardenItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    TextEditingController _gardenNameTextController = TextEditingController();
+
     return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
       if (state is GardensLoaded) {
         
@@ -90,7 +92,56 @@ class GardenItem extends StatelessWidget {
                                             CupertinoButton(
                                               color: Colors.green,
                                               child: Text("Renommer"),
-                                              onPressed: null,
+                                              onPressed: () {
+                                                return showDialog<void>(
+                                                  context: context,
+                                                  barrierDismissible: false, // user must tap button!
+                                                  builder: (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: Text('Renommer ce jardin'),
+                                                      content: TextField(
+                                                        controller: _gardenNameTextController,
+                                                        decoration: InputDecoration(hintText: "Nom jardin"),
+                                                      ),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                                          onPressed: () {
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                        ),
+                                                        FlatButton(
+                                                          child: Text('Mettre à jour'),
+                                                          onPressed: () {
+
+                                                            if (_gardenNameTextController.text.isNotEmpty) {
+
+                                                              BlocProvider.of<GardensBloc>(context).add(
+                                                                UpdateGarden(
+                                                                    garden.copyWith(
+                                                                      name: _gardenNameTextController.text,
+                                                                      id: garden.id,
+                                                                      publicVisibility: garden.publicVisibility ,
+                                                                      admin: garden.admin,
+                                                                      members: garden.members,
+                                                                      creationDate: garden.creationDate,
+                                                                      dayActivitiesCount: garden.dayActivitiesCount
+                                                                    )
+                                                                ),
+                                                              );
+                                                              Navigator.pushNamedAndRemoveUntil(
+                                                                context,
+                                                                '/',
+                                                                    (Route<dynamic> route) => false,
+                                                              );
+                                                            }
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
                                             ),
                                             Container(height: 10,),
                                             CupertinoButton(
