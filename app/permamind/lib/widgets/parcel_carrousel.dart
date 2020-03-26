@@ -63,14 +63,14 @@ class _ParcelCarouselWithIndicatorState
           color: Colors.green,
           child: Stack(
             children: <Widget>[
-              Positioned(
-                top: 6 * SizeConfig.heightMultiplier,
-                left: 55 * SizeConfig.widthMultiplier,
-                child: Image.asset(
-                  'assets/utils_image/tree.png',
-                  width: 20 * SizeConfig.widthMultiplier,
-                ),
-              ),
+//              Positioned(
+//                top: 6 * SizeConfig.heightMultiplier,
+//                left: 55 * SizeConfig.widthMultiplier,
+//                child: Image.asset(
+//                  'assets/utils_image/tree.png',
+//                  width: 20 * SizeConfig.widthMultiplier,
+//                ),
+//              ),
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 child: Container(
@@ -117,7 +117,8 @@ class _ParcelCarouselWithIndicatorState
         )
       ));
     }
-    carouselContent.add(Container(
+    carouselContent.add(
+        Container(
       margin: EdgeInsets.all(5.0),
       child: InkWell(
           onTap: () => Navigator.pushNamed(
