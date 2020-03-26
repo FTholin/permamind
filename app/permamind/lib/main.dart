@@ -259,6 +259,7 @@ class App extends StatelessWidget {
                                 return AddParcelScreen(
                                     garden: args.garden,
                                     user: state.userAuthenticated,
+                                    dataRepository: firebaseRepository,
                                 );
                               } else if (state is Unauthenticated) {
                                 return LoginScreen(userRepository: userRepository);
@@ -287,7 +288,7 @@ class App extends StatelessWidget {
                           ),
                     );
 
-                  } else if (settings.name == '/detailsGarden') {
+                  } else if (settings.name == '/detailsParcel') {
 
                     final DetailsParcelScreenArguments args =
                         settings.arguments;

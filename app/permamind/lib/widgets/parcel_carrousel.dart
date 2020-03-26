@@ -53,56 +53,68 @@ class _ParcelCarouselWithIndicatorState
       carouselContent.add(InkWell(
         onTap: () =>  Navigator.pushNamed(
           context,
-          '/detailsGarden',
+          '/detailsParcel',
           arguments: DetailsParcelScreenArguments(
               widget.garden.id,
               parcel.parcelId
           ),
         ),
         child: Container(
-          margin: EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            child: Container(
-              color: Colors.green,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text("${parcel.parcelName}",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 2.5 * SizeConfig.textMultiplier)),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Text("Vous avez 4 tâches à effectuer",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 2 * SizeConfig.textMultiplier)),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Text("${parcel.modelingName}",
-                            style: TextStyle(
-                                color: Color.fromRGBO(214, 211, 94, 1),
-                                fontWeight: FontWeight.normal,
-                                fontSize: 2 * SizeConfig.textMultiplier)),
-                      ],
-                    )
-                  ],
+          color: Colors.green,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: 6 * SizeConfig.heightMultiplier,
+                left: 55 * SizeConfig.widthMultiplier,
+                child: Image.asset(
+                  'assets/utils_image/tree.png',
+                  width: 20 * SizeConfig.widthMultiplier,
                 ),
               ),
-            ),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: Container(
+//                color: Colors.green,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text("${parcel.parcelName}",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 2.5 * SizeConfig.textMultiplier)),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text("Vous avez ${parcel.dayActivitiesCount} tâches à effectuer",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 2 * SizeConfig.textMultiplier)),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text("${parcel.modelingName}",
+                                style: TextStyle(
+                                    color: Color.fromRGBO(214, 211, 94, 1),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 2 * SizeConfig.textMultiplier)),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
+        )
       ));
     }
     carouselContent.add(Container(

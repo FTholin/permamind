@@ -65,8 +65,8 @@ class GardenItem extends StatelessWidget {
                                     "$name",
                                     style: TextStyle(
                                         color: const Color(0xFF01534F),
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 2 * SizeConfig.textMultiplier
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 2.7 * SizeConfig.textMultiplier
                                     )
                                 ),
                                 FlatButton(
@@ -201,7 +201,6 @@ class GardenItem extends StatelessWidget {
                                       "$dayActivitiesCount activités à réaliser aujourd'hui.",
                                       style: TextStyle(
                                           color: const Color(0xFF01534F),
-                                          fontWeight: FontWeight.bold,
                                           fontSize: 2.2 * SizeConfig.textMultiplier
                                       )
                                   ),

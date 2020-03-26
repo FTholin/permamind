@@ -100,7 +100,6 @@ flutter:
     - assets/
     - assets/modelings/
     - assets/bar_buttons_icons/
-    - assets/utils_icons/
     - assets/gardens/
     - assets/tutorials/
     - assets/empty_states/
