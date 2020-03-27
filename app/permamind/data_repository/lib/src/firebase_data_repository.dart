@@ -209,6 +209,17 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+  @override
+  Stream<List<Vegetable>> fetchVeggies() {
+    logger.i("READ::fetchVeggies");
+    return Firestore.instance.collection('veggies')
+        .snapshots().map((snapshot) {
+      return snapshot.documents
+          .map((doc) => Vegetable.fromEntity(VegetableEntity.fromSnapshot(doc)))
+          .toList();
+    });
+  }
+
 
   Stream<List<Tutorial>> loadTutorials() {
     logger.i("READ::loadTutorials");

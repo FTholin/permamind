@@ -7,3 +7,4 @@ export 'modeling_activities.dart';
 export 'garden_member.dart';
 export 'design_parcel.dart';
 export 'parcel.dart';
+export 'vegetable.dart';

@@ -104,6 +104,7 @@ flutter:
     - assets/tutorials/
     - assets/empty_states/
     - assets/utils_image/
+    - assets/veggies/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

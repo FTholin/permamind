@@ -57,5 +57,5 @@ abstract class DataRepository {
 
   Future<void> updateParcelsFromGarden(String gardenId, String userId);
 
-
+  Stream<List<Vegetable>> fetchVeggies();
   }

@@ -256,10 +256,16 @@ class App extends StatelessWidget {
                           BlocBuilder<AuthenticationBloc, AuthenticationState>(
                             builder: (context, state) {
                               if (state is Authenticated) {
-                                return AddParcelScreen(
+
+                                return BlocProvider<ModelingsBloc>(
+                                  create: (context) =>
+                                  ModelingsBloc(dataRepository: firebaseRepository)
+                                    ..add(FetchVeggies()),
+                                  child: AddParcelScreen(
                                     garden: args.garden,
                                     user: state.userAuthenticated,
                                     dataRepository: firebaseRepository,
+                                  ),
                                 );
                               } else if (state is Unauthenticated) {
                                 return LoginScreen(userRepository: userRepository);
