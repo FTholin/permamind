@@ -181,25 +181,25 @@ class DetailsParcelScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(padding: EdgeInsets.all(20),child:Text("${AppLocalizations.of(context).detailsParcelAssociationEmpty}")),
                     RaisedButton(
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (_) {
-
-                                  return MultiBlocProvider(
-                                    providers: [
-                                      BlocProvider<ModelingsBloc>(
-                                        create: (context) =>
-                                        ModelingsBloc(dataRepository: dataRepository)
-                                          ..add(FetchModelings()),
-                                      )
-                                    ],
-                                    child: DiscoverModelingsScreen(gardenId: gardenId, parcel: currentParcel),
-                                  );
-
-                                })
-                        );
-                      },
+//                      onPressed: () async {
+//                        await Navigator.of(context).push(
+//                            MaterialPageRoute(
+//                                builder: (_) {
+//
+////                                  return MultiBlocProvider(
+////                                    providers: [
+////                                      BlocProvider<ModelingsBloc>(
+////                                        create: (context) =>
+////                                        ModelingsBloc(dataRepository: dataRepository)
+////                                          ..add(FetchModelings()),
+////                                      )
+////                                    ],
+////                                    child: DiscoverModelingsScreen(gardenId: gardenId, parcel: currentParcel),
+////                                  );
+//
+//                                })
+//                        );
+//                      },
                       child: Text("${AppLocalizations.of(context).detailsParcelAddAssociationMessage}"),
                     )
                   ],

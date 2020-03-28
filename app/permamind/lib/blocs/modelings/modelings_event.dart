@@ -9,7 +9,9 @@ abstract class ModelingsEvent extends Equatable {
 
 class FetchModelings extends ModelingsEvent {
 
-  FetchModelings() : super([]);
+  final List<String> veggiesList;
+
+  FetchModelings(this.veggiesList) : super([]);
 
   @override
   String toString() => 'FetchModelings ';

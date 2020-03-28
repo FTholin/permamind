@@ -564,7 +564,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                             ),
                           ],
                           controlsBuilder: _createEventControlBuilder,
-                          onStepContinue: _currentStep < 4
+                          onStepContinue: _currentStep < 5
                               ? () => setState(() => _currentStep += 1)
                               : null,
                           onStepCancel: _currentStep > -1
@@ -654,19 +654,27 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                   DateTime.now(),
                   0, []);
 
-              BlocProvider.of<GardensBloc>(context).add(ParcelAdded(parcel));
+              List<String> veggiesList = List<String>();
 
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/',
-                    (Route<dynamic> route) => false,
+              veggiesSelected.forEach((k,v) {
+                if (v) {
+                  veggiesList.add(k);
+                }
+              }
               );
-//              Navigator.pushNamed(
-//                context,
-//                '/detailsParcel',
-//                arguments:
-//                    DetailsParcelScreenArguments(widget.garden.id, parcel.id),
-//              );
+
+
+              BlocProvider.of<ModelingsBloc>(context).add(FetchModelings(veggiesList));
+
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return BlocProvider.value(
+                      value: BlocProvider.of<ModelingsBloc>(context),
+                      child: ModelingsFoundScreen(),
+                    );
+              }
+                ));
+
+
             },
             child: Text('Rechercher')),
       ]);

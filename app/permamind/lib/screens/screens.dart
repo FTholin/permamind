@@ -12,3 +12,4 @@ export 'add_parcel_screen.dart';
 export 'add_garden_screen.dart';
 export 'settings_parcel_screen.dart';
 export 'details_parcel_screen.dart';
+export 'modelings_found_screen.dart';

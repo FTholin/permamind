@@ -197,15 +197,27 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+//  @override
+//  Stream<List<Modeling>> fetchModelings() {
+//    logger.i("READ::fetchModelings");
+//
+//    return Firestore.instance.collection('modelings')
+//    .snapshots().map((snapshot) {
+//      return snapshot.documents
+//        .map((doc) => Modeling.fromEntity(ModelingEntity.fromSnapshot(doc)))
+//        .toList();
+//    });
+//  }
+
   @override
-  Stream<List<Modeling>> fetchModelings() {
+  Stream<List<Modeling>> fetchModelings(List<String> veggiesList) {
     logger.i("READ::fetchModelings");
 
     return Firestore.instance.collection('modelings')
-    .snapshots().map((snapshot) {
+        .snapshots().map((snapshot) {
       return snapshot.documents
-        .map((doc) => Modeling.fromEntity(ModelingEntity.fromSnapshot(doc)))
-        .toList();
+          .map((doc) => Modeling.fromEntity(ModelingEntity.fromSnapshot(doc)))
+          .toList();
     });
   }
 

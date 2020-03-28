@@ -62,20 +62,98 @@ class EnumeratedGardens extends StatelessWidget {
         } else {
           return Column(
             children: <Widget>[
-              Expanded(
-                  child: ListView.builder(
-                    itemCount: gardens.length,
-                    itemBuilder: (context, i) {
-                      return GardenItem(
-                        name: gardens[i].name,
-                        garden: gardens[i],
-                        user: _user,
-                        index: i,
-                        dayActivitiesCount: 8,
-                      );
-                    },
-                  )
-              ),
+//              Expanded(
+////                  child: ListView.builder(
+////                    itemCount: gardens.length,
+////                    itemBuilder: (context, i) {
+////                      return GardenItem(
+////                        name: gardens[i].name,
+////                        garden: gardens[i],
+////                        user: _user,
+////                        index: i,
+////                        dayActivitiesCount: 8,
+////                      );
+////                    },
+////                  )
+////              ),
+
+              InkWell(
+                  onTap: () {},
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Container(
+                        height: 245,
+                        color: Colors.grey,
+                        child: Column(
+                          children: <Widget>[
+                            Flexible(
+                              flex: 5,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Flexible(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Container(
+                                            height: 40,
+                                            color: Colors.yellowAccent,
+                                            child: Center(
+                                              child: Text("Poivron Basilic"),
+                                            )
+                                        ),
+                                      )
+                                  ),
+                                  Spacer(),
+                                  Flexible(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Container(
+                                            height: 40,
+                                            color: Colors.yellowAccent,
+                                            child: Center(
+                                              child: Text("Infos"),
+                                            )
+                                        ),
+                                      )
+                                  )
+                                ],
+                              ),
+                            ),
+                            Flexible(
+                              flex: 9,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Flexible(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Container(
+                                            height: 200,
+                                            color: Colors.yellowAccent,
+                                            child: Center(
+                                              child: Text("associations"),
+                                            )
+                                        ),
+                                      )
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Text("Ceci est du texte intéressant")
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  )),
+
             ],
           );
         }
