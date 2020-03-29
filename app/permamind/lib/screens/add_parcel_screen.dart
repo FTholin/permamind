@@ -666,13 +666,16 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 
               BlocProvider.of<ModelingsBloc>(context).add(FetchModelings(veggiesList));
 
-//              await Navigator.of(context).push(
-//                  MaterialPageRoute(builder: (_) {
-//                    return BlocProvider.value(
-//                      value: BlocProvider.of<ModelingsBloc>(context),
-//                      child: ModelingsFoundScreen(),
-//                    );
-//                  }));
+              await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) {
+                    return BlocProvider.value(
+                      value: BlocProvider.of<ModelingsBloc>(context),
+                      child: ModelingsFoundScreen(),
+                    );
+                  },
+                  ),
+              );
             },
             child: Text('Rechercher')),
       ]);

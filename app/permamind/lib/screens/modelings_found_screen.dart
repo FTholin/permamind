@@ -33,44 +33,43 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-//              RaisedButton.icon(
-//                icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.white,),
-//                label: Text(
-//                  "Retour",
-//                  style: TextStyle(
-//                      color: Colors.white,
-//                      fontWeight: FontWeight.bold,
-//                      fontSize: 2.2 * SizeConfig.textMultiplier
-//                  )
-//                ),
-//                onPressed: () {
-//                  BlocProvider.of<ModelingsBloc>(context).add(FetchVeggies());
-//                  Navigator.of(context).pop();
-//                },
-//              ),
-
-
+              RaisedButton.icon(
+                color: Colors.transparent,
+                icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
+                label: Text(
+                  "Retour",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 2.2 * SizeConfig.textMultiplier
+                  )
+                ),
+                onPressed: () {
+                  BlocProvider.of<ModelingsBloc>(context).add(FetchVeggies());
+                  Navigator.of(context).pop();
+                },
+              ),
                   Flexible(
                     flex: 1,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Flexible(
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(child: Container(),),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.close,
-                                    size: 7 * SizeConfig.widthMultiplier,
-                                  ),
-                                  onPressed: () {
-
-                                  },
-                                ),
-                              ],
-                            )
-                        ),
+//                        Flexible(
+//                            child: Row(
+//                              children: <Widget>[
+//                                Expanded(child: Container(),),
+//                                IconButton(
+//                                  icon: Icon(
+//                                    Icons.close,
+//                                    size: 7 * SizeConfig.widthMultiplier,
+//                                  ),
+//                                  onPressed: () {
+//
+//                                  },
+//                                ),
+//                              ],
+//                            )
+//                        ),
                         Flexible(
                             flex: 2,
                             child: Padding(
