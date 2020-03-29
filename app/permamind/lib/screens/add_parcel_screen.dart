@@ -636,7 +636,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
         RaisedButton(
             color: Colors.green,
             textColor: Colors.white,
-            onPressed: () {
+            onPressed: () async {
               _parcelMembers.add(
                   GardenMember(id: widget.user.id, pseudo: widget.user.pseudo));
 
@@ -666,15 +666,13 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 
               BlocProvider.of<ModelingsBloc>(context).add(FetchModelings(veggiesList));
 
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                return BlocProvider.value(
-                      value: BlocProvider.of<ModelingsBloc>(context),
-                      child: ModelingsFoundScreen(),
-                    );
-              }
-                ));
-
-
+//              await Navigator.of(context).push(
+//                  MaterialPageRoute(builder: (_) {
+//                    return BlocProvider.value(
+//                      value: BlocProvider.of<ModelingsBloc>(context),
+//                      child: ModelingsFoundScreen(),
+//                    );
+//                  }));
             },
             child: Text('Rechercher')),
       ]);

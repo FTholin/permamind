@@ -33,6 +33,23 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+//              RaisedButton.icon(
+//                icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.white,),
+//                label: Text(
+//                  "Retour",
+//                  style: TextStyle(
+//                      color: Colors.white,
+//                      fontWeight: FontWeight.bold,
+//                      fontSize: 2.2 * SizeConfig.textMultiplier
+//                  )
+//                ),
+//                onPressed: () {
+//                  BlocProvider.of<ModelingsBloc>(context).add(FetchVeggies());
+//                  Navigator.of(context).pop();
+//                },
+//              ),
+
+
                   Flexible(
                     flex: 1,
                     child: Column(
@@ -48,8 +65,7 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
                                     size: 7 * SizeConfig.widthMultiplier,
                                   ),
                                   onPressed: () {
-                                    BlocProvider.of<ModelingsBloc>(context).add(FetchVeggies());
-                                    Navigator.of(context).pop();
+
                                   },
                                 ),
                               ],
@@ -81,31 +97,173 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
                       flex: 6,
                       child: ListView(
                         children: state.modelingsFetched.map((modeling) {
-                          return Container(
-                            margin: EdgeInsets.all(5.0),
-                            child: InkWell(
-                                onTap: () {},
-                                child: ClipRRect(
+                          return InkWell(
+                              onTap: () {},
+                              child: ClipRRect(
                                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                  child: Container(
-                                    color: Color.fromRGBO(214, 211, 94, 1),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Row(
-                                            children: <Widget>[
-                                              Container(color: Colors.red, child: Text("${modeling.name}"),),
-                                              Container(color: Colors.blue, child: Text("${modeling.name}"),),
-                                            ],
-                                          )
-                                        ],
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Card(
+//                          color: Colors.grey,
+                                      child: Container(
+                                        height: 29 * SizeConfig.heightMultiplier,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            Flexible(
+                                              flex: 5,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                                children: <Widget>[
+                                                  Flexible(
+                                                      flex: 2,
+                                                      child: Padding(
+                                                        padding: EdgeInsets.all(10),
+                                                        child: Container(
+                                                            decoration: BoxDecoration(
+                                                              color: Color(0xFFD7D35F),
+//                                                  border: Border.all(color: const Color(0xFF01534F), width: 2),
+                                                              borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(5)),
+                                                            ),
+                                                            height: 4.5 *
+                                                                SizeConfig.heightMultiplier,
+                                                            child: Center(
+                                                              child: Text(
+                                                                  "${modeling.name}",
+                                                                  textAlign:
+                                                                  TextAlign.center,
+                                                                  style: TextStyle(
+                                                                    color: const Color(
+                                                                        0xFF01534F),
+                                                                    fontSize: 1.7 *
+                                                                        SizeConfig
+                                                                            .textMultiplier,
+                                                                    fontWeight:
+                                                                    FontWeight.bold,
+                                                                  )),
+                                                            )),
+                                                      )),
+//                                      Spacer(),
+                                                  Flexible(
+                                                      flex: 1,
+                                                      child: Padding(
+                                                        padding: EdgeInsets.all(10),
+                                                        child: Container(
+                                                            decoration: BoxDecoration(
+                                                              color: Color(0xFF4BB16C),
+                                                              borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(5)),
+                                                            ),
+                                                            height: 4.5 *
+                                                                SizeConfig.heightMultiplier,
+                                                            child: Center(
+                                                              child: Text("Infos",
+                                                                  textAlign:
+                                                                  TextAlign.center,
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontSize: 1.7 *
+                                                                        SizeConfig
+                                                                            .textMultiplier,
+                                                                    fontWeight:
+                                                                    FontWeight.bold,
+                                                                  )),
+                                                            )),
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                            Flexible(
+                                              flex: 8,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                                children: <Widget>[
+                                                  Flexible(
+                                                      flex: 2,
+                                                      child: Padding(
+                                                        padding: EdgeInsets.all(5),
+                                                        child: ListView.builder(
+                                                            scrollDirection:
+                                                            Axis.horizontal,
+                                                            itemCount: modeling.composition.length,
+                                                            itemBuilder: (context, index) {
+                                                              return Container(
+                                                                width: 22 *
+                                                                    SizeConfig
+                                                                        .widthMultiplier,
+                                                                child: Card(
+                                                                  color: const Color(
+                                                                      0xFFE6F1D9),
+                                                                  child: Column(
+//                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                    children: <Widget>[
+                                                                      Flexible(
+                                                                        flex: 1,
+                                                                        child: Container(),
+                                                                      ),
+                                                                      Flexible(
+                                                                        flex: 4,
+                                                                        child: Image.asset(
+                                                                          "assets/utils_image/tree.png",
+                                                                          fit: BoxFit
+                                                                              .scaleDown,
+                                                                        ),
+                                                                      ),
+                                                                      Flexible(
+                                                                          flex: 3,
+                                                                          child: Center(
+                                                                            child: Text(
+                                                                                "${modeling.composition[index]}",
+                                                                                textAlign:
+                                                                                TextAlign
+                                                                                    .center,
+                                                                                style:
+                                                                                TextStyle(
+                                                                                  color: const Color(
+                                                                                      0xFF01534F),
+                                                                                  fontSize: 1.4 *
+                                                                                      SizeConfig
+                                                                                          .textMultiplier,
+                                                                                  fontWeight:
+                                                                                  FontWeight
+                                                                                      .bold,
+                                                                                )),
+                                                                          ))
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            }),
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                            Flexible(
+                                                flex: 4,
+                                                child: Padding(
+                                                    padding: EdgeInsets.all(10),
+                                                    child: Container(
+                                                      child: Text(
+                                                          "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
+                                                          textAlign: TextAlign.left,
+                                                          style: TextStyle(
+                                                            color: const Color(0xFF01534F),
+                                                            fontSize: 1.8 * SizeConfig.textMultiplier,
+//                          fontWeight: FontWeight.bold,
+                                                          )),
+                                                    )
+                                                )
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )),
-                          );
+                                  )));
                         }).toList(),
                       ),
                   )

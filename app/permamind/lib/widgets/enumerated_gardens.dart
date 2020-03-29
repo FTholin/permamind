@@ -25,7 +25,6 @@ class EnumeratedGardens extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
       if (state is GardensLoaded) {
-
         final gardens = state.gardens;
 
         // Si aucun jardin
@@ -42,8 +41,7 @@ class EnumeratedGardens extends StatelessWidget {
                     child: Image.asset(
                       'assets/empty_states/empty_garden.png',
                       fit: BoxFit.scaleDown,
-                    )
-                ),
+                    )),
                 Flexible(
                     flex: 1,
                     child: Text(
@@ -53,106 +51,27 @@ class EnumeratedGardens extends StatelessWidget {
                           color: const Color(0xFF01534F),
                           fontSize: 2.5 * SizeConfig.textMultiplier,
 //                          fontWeight: FontWeight.bold,
-                        )
-                    )
-                )
+                        )))
               ],
             ),
           );
         } else {
           return Column(
             children: <Widget>[
-//              Expanded(
-////                  child: ListView.builder(
-////                    itemCount: gardens.length,
-////                    itemBuilder: (context, i) {
-////                      return GardenItem(
-////                        name: gardens[i].name,
-////                        garden: gardens[i],
-////                        user: _user,
-////                        index: i,
-////                        dayActivitiesCount: 8,
-////                      );
-////                    },
-////                  )
-////              ),
-
-              InkWell(
-                  onTap: () {},
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Container(
-                        height: 245,
-                        color: Colors.grey,
-                        child: Column(
-                          children: <Widget>[
-                            Flexible(
-                              flex: 5,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Flexible(
-                                      flex: 2,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Container(
-                                            height: 40,
-                                            color: Colors.yellowAccent,
-                                            child: Center(
-                                              child: Text("Poivron Basilic"),
-                                            )
-                                        ),
-                                      )
-                                  ),
-                                  Spacer(),
-                                  Flexible(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Container(
-                                            height: 40,
-                                            color: Colors.yellowAccent,
-                                            child: Center(
-                                              child: Text("Infos"),
-                                            )
-                                        ),
-                                      )
-                                  )
-                                ],
-                              ),
-                            ),
-                            Flexible(
-                              flex: 9,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Flexible(
-                                      flex: 2,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Container(
-                                            height: 200,
-                                            color: Colors.yellowAccent,
-                                            child: Center(
-                                              child: Text("associations"),
-                                            )
-                                        ),
-                                      )
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Text("Ceci est du texte intéressant")
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  )),
+              Expanded(
+                  child: ListView.builder(
+                    itemCount: gardens.length,
+                    itemBuilder: (context, i) {
+                      return GardenItem(
+                        name: gardens[i].name,
+                        garden: gardens[i],
+                        user: _user,
+                        index: i,
+                        dayActivitiesCount: 8,
+                      );
+                    },
+                  )
+              ),
 
             ],
           );
@@ -163,4 +82,3 @@ class EnumeratedGardens extends StatelessWidget {
     });
   }
 }
-
