@@ -5,15 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/screens/screens.dart';
 
 
 class ModelingsFoundScreen extends StatefulWidget {
  
-//  final Parcel parcel;
+  final Parcel parcel;
+  final String gardenId;
+  final List<String> veggiesList;
 
-  ModelingsFoundScreen(
-//    @required this.parcel
-  );
+  ModelingsFoundScreen({this.parcel, this.gardenId, this.veggiesList});
 
   @override
   _ModelingsFoundScreenState createState() => _ModelingsFoundScreenState();
@@ -26,7 +27,6 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
 
     return BlocBuilder<ModelingsBloc, ModelingsState>(builder: (context, state) {
       if (state is ModelingsLoaded) {
-
         return Scaffold(
           body: Padding(
               padding: EdgeInsets.all(30),
@@ -34,7 +34,8 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
               RaisedButton.icon(
-                color: Colors.transparent,
+                elevation: 0,
+                color: Colors.white,
                 icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
                 label: Text(
                   "Retour",
@@ -75,7 +76,7 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
                             child: Padding(
                               padding: EdgeInsets.only(left: 30, right: 30),
                               child: Container(
-                                color: Colors.green,
+//                                color: Colors.green,
                                 child: Text(
                                     "Voici les associations que nous avons trouvé:",
                                     maxLines: 3,
@@ -95,9 +96,23 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
                   Flexible(
                       flex: 6,
                       child: ListView(
+                        padding: EdgeInsets.only(top: 1.0),
                         children: state.modelingsFetched.map((modeling) {
                           return InkWell(
-                              onTap: () {},
+                              onTap: () async {
+                                return Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_) {
+                                      return DetailsModelingScreen(
+                                          gardenId: widget.gardenId,
+                                          parcel: widget.parcel,
+                                          modeling: modeling,
+                                          schedule: modeling.schedule,
+                                          designs: modeling.designs,
+
+                                      );
+                                    })
+                                );
+                              },
                               child: ClipRRect(
                                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                                   child: Padding(

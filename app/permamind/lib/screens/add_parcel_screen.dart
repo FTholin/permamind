@@ -583,6 +583,8 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
         ),
       );
     } else {
+      print("addParcelScreen");
+      print("state: ${state}");
       return CircularProgressIndicator();
     }});
 
@@ -660,21 +662,19 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                 if (v) {
                   veggiesList.add(k);
                 }
-              }
-              );
+              });
 
 
               BlocProvider.of<ModelingsBloc>(context).add(FetchModelings(veggiesList));
 
-              await Navigator.of(context).push(
+              return  Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) {
                     return BlocProvider.value(
                       value: BlocProvider.of<ModelingsBloc>(context),
-                      child: ModelingsFoundScreen(),
+                      child: ModelingsFoundScreen(parcel: parcel, gardenId: widget.garden.id),
                     );
-                  },
-                  ),
+                  },),
               );
             },
             child: Text('Rechercher')),
