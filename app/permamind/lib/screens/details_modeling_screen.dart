@@ -311,7 +311,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                child: Padding(
                                                  padding: EdgeInsets.only(left: 10),
                                                  child: Text(
-                                                     "Difficulté",
+                                                     "Ensoleillement",
                                                      textAlign:
                                                      TextAlign.left,
                                                      style:
@@ -328,7 +328,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                              flex: 1,
                                              child: Padding(
                                                padding: EdgeInsets.only(top: 7, left: 5, right: 7),
-                                               child: _buildModelingNotation(context,modeling.difficultyLevel),
+                                               child: _buildModelingNotation(context,modeling.sunlightRequirement),
                                              )
                                            )
                                          ],
@@ -343,19 +343,21 @@ class DetailsModelingScreen extends StatelessWidget {
                                      flex: 12,
                                      child: Container(
                                        decoration: BoxDecoration(
-                                         color: Colors.green,
+                                         color: const Color(
+                                             0xFFE6F1D9),
                                          borderRadius: BorderRadius.all(
                                              Radius.circular(8)),
                                        ),
                                        child: Column(
+                                         mainAxisAlignment: MainAxisAlignment.center,
                                          crossAxisAlignment: CrossAxisAlignment.start,
                                          children: <Widget>[
                                            Flexible(
                                                flex: 1,
                                                child: Padding(
-                                                 padding: EdgeInsets.all(5),
+                                                 padding: EdgeInsets.only(left: 10),
                                                  child: Text(
-                                                     "Rendement",
+                                                     "Eau",
                                                      textAlign:
                                                      TextAlign.left,
                                                      style:
@@ -369,30 +371,158 @@ class DetailsModelingScreen extends StatelessWidget {
                                                )
                                            ),
                                            Flexible(
-                                             flex: 2,
-                                             child: Container(
-                                               color: Colors.green,
-                                             ),
+                                               flex: 1,
+                                               child: Padding(
+                                                 padding: EdgeInsets.only(top: 7, left: 5, right: 7),
+                                                 child: _buildModelingNotation(context,modeling.waterRequirement),
+                                               )
                                            )
                                          ],
                                        ),
                                      ),
-                                   )
+                                   ),
                                  ],
                                )
                              ),
                              Flexible(
-                               flex: 2,
-                               child: Container(
-                                 color: Colors.red,
-                               ),
+                                 flex: 2,
+                                 child: Row(
+                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                   children: <Widget>[
+                                     Flexible(
+                                       flex: 12,
+                                       child: Container(
+                                         decoration: BoxDecoration(
+                                           color: const Color(
+                                               0xFFE6F1D9),
+                                           borderRadius: BorderRadius.all(
+                                               Radius.circular(8)),
+                                         ),
+                                         child: Column(
+                                           mainAxisAlignment: MainAxisAlignment.center,
+                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                           children: <Widget>[
+                                             Flexible(
+                                                 flex: 1,
+                                                 child: Padding(
+                                                   padding: EdgeInsets.only(left: 10),
+                                                   child: Text(
+                                                       "Difficulté",
+                                                       textAlign:
+                                                       TextAlign.left,
+                                                       style:
+                                                       TextStyle(
+                                                         color: const Color(
+                                                             0xFF01534F),
+                                                         fontSize: 2.3 *
+                                                             SizeConfig
+                                                                 .textMultiplier,
+                                                       )),
+                                                 )
+                                             ),
+                                             Flexible(
+                                                 flex: 1,
+                                                 child: Padding(
+                                                   padding: EdgeInsets.only(top: 7, left: 5, right: 7),
+                                                   child: _buildModelingNotation(context,modeling.difficultyLevel),
+                                                 )
+                                             )
+                                           ],
+                                         ),
+                                       ),
+                                     ),
+                                     Flexible(
+                                       flex: 1,
+                                       child: Container(),
+                                     ),
+                                     Flexible(
+                                       flex: 12,
+                                       child: Container(
+                                         decoration: BoxDecoration(
+                                           color: const Color(
+                                               0xFFE6F1D9),
+                                           borderRadius: BorderRadius.all(
+                                               Radius.circular(8)),
+                                         ),
+                                         child: Column(
+                                           mainAxisAlignment: MainAxisAlignment.center,
+                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                           children: <Widget>[
+                                             Flexible(
+                                                 flex: 1,
+                                                 child: Padding(
+                                                   padding: EdgeInsets.only(left: 10),
+                                                   child: Text(
+                                                       "Rendement",
+                                                       textAlign:
+                                                       TextAlign.left,
+                                                       style:
+                                                       TextStyle(
+                                                         color: const Color(
+                                                             0xFF01534F),
+                                                         fontSize: 2.3 *
+                                                             SizeConfig
+                                                                 .textMultiplier,
+                                                       )),
+                                                 )
+                                             ),
+                                             Flexible(
+                                                 flex: 1,
+                                                 child: Padding(
+                                                   padding: EdgeInsets.only(top: 7, left: 5, right: 7),
+                                                   child: _buildModelingNotation(context,modeling.yield),
+                                                 )
+                                             )
+                                           ],
+                                         ),
+                                       ),
+                                     ),
+                                   ],
+                                 )
                              ),
 
                              Flexible(
                                flex: 2,
-                               child: Container(
-                                 color: Colors.red,
-                               ),
+                               child: Padding(
+                                 padding: EdgeInsets.all(3),
+                                 child: InkWell(
+                                   onTap: () {
+                                     Parcel completedParcel = parcel.copyWith(
+                                         name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
+                                         publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
+                                         currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+                                         modelingsMonitoring: [modeling.id], id: parcel.id);
+
+//                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
+//                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
+//                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
+                                   },
+                                   child: Container(
+                                     decoration: BoxDecoration(
+                                       color: Colors.green,
+                                       borderRadius:
+                                       BorderRadius.all(
+                                           Radius.circular(5)),
+                                     ),
+                                     height: 6 *
+                                         SizeConfig.heightMultiplier,
+                                     width: double.infinity,
+                                     child: Padding(
+                                       padding: EdgeInsets.all(15),
+                                       child: Text("Sélectionner l'association",
+                                           maxLines: 2,
+                                           textAlign:
+                                           TextAlign.center,
+                                           style: TextStyle(
+                                             color: Colors.white,
+                                             fontSize: 2.5 *
+                                                 SizeConfig
+                                                     .textMultiplier,
+//                                             fontWeight: FontWeight.bold
+                                           )),
+                                     ),),
+                                 ),
+                               )
                              ),
                            ],
                          )
@@ -404,343 +534,6 @@ class DetailsModelingScreen extends StatelessWidget {
           )
       ),
     );
-
-
-//    return Scaffold(
-//      appBar: AppBar(
-//        title: Text('${parcel.name}'),
-//      ),
-//        body: Padding(
-//          padding: EdgeInsets.all(20.0),
-//          child: Column(
-//            children: <Widget>[
-//              Padding(
-//                padding: EdgeInsets.symmetric(vertical: 10),
-//                child: Container(
-//                  height: mediaHeight * 230 / 896,
-//                  child: Center(
-//                    child: Image.asset(
-//                      'assets/modelings/${modeling.name}.png',
-//                      fit: BoxFit.cover,
-//                    )
-//                  )),
-//              ),
-//              Padding(
-//                padding: EdgeInsets.symmetric(vertical: 5),
-//                child: Container(
-//                  height: mediaHeight * 50 / 896,
-//                  child: ClipRRect(
-//                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-//                    child: Center(
-//                      child: Text(
-//                          "${modeling.composition.join(" - ")}",
-//                          style: TextStyle(
-//                              color: const Color(0xFF01534F),
-//                              fontWeight: FontWeight.bold,
-//                              fontSize: 19)
-//                      ),
-//                    )
-//                  ),
-//                  decoration: BoxDecoration(
-//                    border: Border.all(color: const Color(0xFF01534F), width: 2),
-//                    borderRadius: BorderRadius.all(Radius.circular(18)),
-//                  ),
-//                ),
-//              ),
-//              Padding(
-//                padding: EdgeInsets.symmetric(vertical: 5),
-//                child: Container(
-//                    height: mediaHeight * 65 / 896,
-//                    child: ClipRRect(
-//                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-//                        child: _buildModelingSchedule(
-//                            mediaHeight,
-//                            mediaWidth,
-//                            modeling.culturePeriod,
-//                            modeling.sowingPeriod,
-//                            modeling.harvestPeriod
-//                        ),
-//                    ),
-//                  decoration: BoxDecoration(
-//                    border: Border.all(color: const Color(0xFF01534F), width: 2),
-//                    borderRadius: BorderRadius.all(Radius.circular(18)),
-//                  ),
-//                ),
-//              ),
-//
-//              Padding(
-//                padding: EdgeInsets.symmetric(vertical: 10),
-//                child: Container(
-//                  height: mediaHeight * 70 / 896,
-//                  child: Row(
-//                    children: <Widget>[
-//                      Expanded(
-//                        child: Container(
-//                          child: Column(
-//                            children: <Widget>[
-//                              Expanded(
-//                                child: Row(
-//                                  children: <Widget>[
-//                                    Flexible(
-//                                      child: Center(
-//                                        child: Container(
-//                                          height: mediaHeight * 27 / 896,
-//                                          width:  mediaWidth * 27 / 414,
-//                                          padding: EdgeInsets.all(12),
-//                                          decoration: new BoxDecoration(
-//                                            color: Colors.yellow,
-//                                            borderRadius: BorderRadius.circular(15),
-//                                          ),
-//                                        ),
-//                                      ),
-//                                    ),
-//                                    Flexible(
-//                                      flex: 2,
-//                                      child: Center(
-//                                        child: Text(
-//                                            "${AppLocalizations.of(context).detailsModelingScreenSowingTitle}",
-//                                            style: TextStyle(
-//                                                color: const Color(0xFF01534F),
-//                                                fontSize: 14)
-//                                        ),
-//                                      ),
-//                                    ),
-//
-//                                  ],
-//                                ),
-//                              ),
-//                              Expanded(
-//                                child: Row(
-//                                  children: <Widget>[
-//                                    Flexible(
-//                                      child: Center(
-//                                        child: Container(
-//                                          height: mediaHeight * 27 / 896,
-//                                          width:  mediaWidth * 27 / 414,
-//                                          padding: EdgeInsets.all(12),
-//                                          decoration: new BoxDecoration(
-//                                            color: Colors.red,
-//                                            borderRadius: BorderRadius.circular(15),
-//                                          ),
-//                                        ),
-//                                      ),
-//                                    ),
-//                                    Flexible(
-//                                      flex: 2,
-//                                      child: Center(
-//                                        child: Text(
-//                                            "  ${AppLocalizations.of(context).detailsModelingScreenHarvestTitle}",
-//                                            style: TextStyle(
-//                                                color: const Color(0xFF01534F),
-//                                                fontSize: 14)
-//                                        ),
-//                                      ),
-//                                    ),
-//                                  ],
-//                                ),
-//                              ),
-//                            ],
-//                          ),
-//                        ),
-//                      ),
-//                      Container(height: mediaHeight * 40 / 896, child: VerticalDivider(color: const Color(0xFF01534F))),
-//                      Expanded(
-//                        child: Container(
-//                          height: mediaHeight * 70 / 896,
-//                          child: Row(
-//                            children: <Widget>[
-//                              Expanded(
-//                                child: Container(
-//                                  child: Column(
-//                                    children: <Widget>[
-//                                      Expanded(
-//                                        child: Center(
-//                                          child: Text(
-//                                              "${AppLocalizations.of(context).detailsModelingScreenDurationTitle}",
-//                                              style: TextStyle(
-//                                                  color: const Color(0xFF01534F),
-//                                                  fontWeight: FontWeight.bold,
-//                                                  fontSize: 19)
-//                                          ),
-//                                        ),
-//                                      ),
-//                                      Expanded(
-//                                        child: Center(
-//                                          child: Text(
-//                                              "${modeling.productionDuration} ${AppLocalizations.of(context).detailsModelingScreenMonthsLabel}",
-//                                              style: TextStyle(
-//                                                  color: const Color(0xFF01534F),
-//                                                  fontSize: 14)
-//                                          ),
-//                                        ),
-//                                      ),
-//                                    ],
-//                                  ),
-//                                ),
-//                              ),
-//                            ],
-//                          ),
-//                        ),
-//                      ),
-//                    ],
-//                  ),
-//                  decoration: BoxDecoration(
-//                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
-//                    borderRadius: BorderRadius.all(Radius.circular(18)),
-//                  ),
-//                ),
-//              ),
-//
-//              Padding(
-//                padding: EdgeInsets.symmetric(vertical: 10),
-//                child: Container(
-//                  height: mediaHeight * 70 / 896,
-//                    child: Row(
-//                      children: <Widget>[
-//                        Expanded(
-//                          child: Container(
-//                            child: Column(
-//                              children: <Widget>[
-//                                Expanded(
-//                                    child: Center(
-//                                      child: Text(
-//                                          "${AppLocalizations.of(context).detailsModelingScreenDifficultyTitle}",
-//                                          style: TextStyle(
-//                                                color: const Color(0xFF01534F),
-//                                                fontWeight: FontWeight.bold,
-//                                                fontSize: 19)
-//                                      ),
-//                                    ),
-//                                ),
-//                                Expanded(
-//                                  child: _buildModelingNotation(context, modeling.difficultyLevel),
-//                                )
-//                              ],
-//                            ),
-//                          ),
-//                        ),
-//                        Container(height: mediaHeight * 40 / 896, child: VerticalDivider(color: const Color(0xFF01534F))),
-//                        Expanded(
-//                          child: Container(
-//                            child: Column(
-//                              children: <Widget>[
-//                                Expanded(
-//                                  child: Center(
-//                                    child: Text(
-//                                        "${AppLocalizations.of(context).detailsModelingScreenYieldTitle}",
-//                                        style: TextStyle(
-//                                            color: const Color(0xFF01534F),
-//                                            fontWeight: FontWeight.bold,
-//                                            fontSize: 19)
-//                                    ),
-//                                  ),
-//                                ),
-//                                Expanded(
-//                                  child: _buildModelingNotation(context, modeling.difficultyLevel),
-//                                )
-//                              ],
-//                            ),
-//                          ),
-//                        ),
-//                      ],
-//                    ),
-//                  decoration: BoxDecoration(
-//                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
-//                    borderRadius: BorderRadius.all(Radius.circular(18)),
-//                  ),
-//                ),
-//              ),
-//              Padding(
-//                padding: EdgeInsets.symmetric(vertical: 10),
-//                child: Container(
-//                  height: mediaHeight * 70 / 896,
-//                  child: Row(
-//                    children: <Widget>[
-//                      Expanded(
-//                        child: Container(
-//                          child: Column(
-//                            children: <Widget>[
-//                              Expanded(
-//                                child: Center(
-//                                  child: Text(
-//                                      "${AppLocalizations.of(context).detailsModelingScreenSunlightTitle}",
-//                                      style: TextStyle(
-//                                          color: const Color(0xFF01534F),
-//                                          fontWeight: FontWeight.bold,
-//                                          fontSize: 19)
-//                                  ),
-//                                ),
-//                              ),
-//                              Expanded(
-//                                child: _buildModelingNotation(context, modeling.sunlightRequirement),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      ),
-//                      Container(height: mediaHeight * 40 / 896, child: VerticalDivider(color: const Color(0xFF01534F))),
-//                      Expanded(
-//                        child: Container(
-//                          child: Column(
-//                            children: <Widget>[
-//                              Expanded(
-//                                child: Center(
-//                                  child: Text(
-//                                      "${AppLocalizations.of(context).detailsModelingScreenWaterTitle}",
-//                                      style: TextStyle(
-//                                          color: const Color(0xFF01534F),
-//                                          fontWeight: FontWeight.bold,
-//                                          fontSize: 19)
-//                                  ),
-//                                ),
-//                              ),
-//                              Expanded(
-//                                child: _buildModelingNotation(context, modeling.waterRequirement),
-//                              )
-//                            ],
-//                          ),
-//                        ),
-//                      ),
-//                    ],
-//                  ),
-//                  decoration: BoxDecoration(
-//                    border: Border.all(color: const Color(0xFF01534F), width: 2.5),
-//                    borderRadius: BorderRadius.all(Radius.circular(18)),
-//                  ),
-//                ),
-//              ),
-//            ],
-//          ),
-//        ),
-//      floatingActionButton: FloatingActionButton(
-//          child: Icon(Icons.check, color: Colors.white,),
-//          onPressed: modeling == null
-//              ? null
-//              : () async {
-//
-//              Parcel alteredParcel = parcel.copyWith(
-//                  name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
-//                  publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-//                  currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
-//                  modelingsMonitoring: [modeling.id], id: parcel.id);
-//
-//              BlocProvider.of<GardensBloc>(context).add(ParcelUpdated(alteredParcel));
-//              BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
-//              BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
-//
-//              Navigator.pushNamedAndRemoveUntil(
-//                context,
-//                '/detailsGarden',
-//                (Route<dynamic> route) => false,
-//                arguments: DetailsParcelScreenArguments(
-//                    gardenId,
-//                    parcel.id
-//                ),
-//              );
-//
-//          }),
-//
-//    );
 
   }
 
@@ -835,21 +628,13 @@ Widget _buildModelingNotation(BuildContext context,
     if (i <= difficulty) {
       notationsRowItems.add(
           Expanded(
-              child:  Icon(
-                Icons.star ,
-                color: const Color(0xFF01534F),
-                size: MediaQuery.of(context).size.width / 14,
-              )
+            child: Image.asset("assets/utils_image/full_leaf.png", fit: BoxFit.scaleDown),
           )
     );
     } else {
       notationsRowItems.add(
           Expanded(
-              child: Icon(
-                Icons.star_border ,
-                color: const Color(0xFF01534F),
-                size: MediaQuery.of(context).size.width / 14,
-              )
+            child: Image.asset("assets/utils_image/transparent_leaf.png", fit: BoxFit.scaleDown),
           )
       );
     }
