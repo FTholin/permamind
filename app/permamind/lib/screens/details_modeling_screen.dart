@@ -1,4 +1,5 @@
 import 'package:arch/arch.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,68 +53,61 @@ class DetailsModelingScreen extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
               ),
-               Expanded(
+               Flexible(
                  child: Column(
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                    children: <Widget>[
                      Flexible(
-                       flex: 5,
-                       child: Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                         children: <Widget>[
-                           Flexible(
-                             flex: 1,
-                             child: Container(
-                               decoration: BoxDecoration(
-                                 color: Color.fromRGBO(214, 211, 94, 1),
-                                 borderRadius:
-                                 BorderRadius.all(
-                                     Radius.circular(5)),
-                               ),
-                               height: 4.5 *
-                                   SizeConfig.heightMultiplier,
-                               child: Padding(
-                                 padding: EdgeInsets.all(6),
-                                 child: Text("${modeling.name}",
-                                     maxLines: 2,
-                                     textAlign:
-                                     TextAlign.left,
-                                     style: TextStyle(
-                                       color: const Color(0xFF01534F),
-                                       fontSize: 2.2 *
-                                           SizeConfig
-                                               .textMultiplier,
-                                     )),
-                               ),)
-                           ),
-                           // TODO Mettre du texte scrollable ici
-                           Flexible(
-                             flex: 5,
-                             child: Container(
-//                               color: Colors.pink,
-                               child: Text("On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte.",
-                                   maxLines: 10,
-//                                   textAlign: TextAlign.center,
-                                   style: TextStyle(
-                                     color: const Color(0xFF01534F),
-                                     fontSize: 2 *
-                                         SizeConfig
-                                             .textMultiplier,
-
-                                   ))
-                             ),
-                           )
-                         ],
-                       )
-                     ),
-                     Flexible(
-                       flex: 9,
-                       child: Container(
-//                         color: Colors.blue,
+                         flex: 5,
                          child: Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                            children: <Widget>[
                              Flexible(
-                               flex: 1,
+                                 flex: 1,
+                                 child: Container(
+                                   decoration: BoxDecoration(
+                                     color: Color.fromRGBO(214, 211, 94, 1),
+                                     borderRadius:
+                                     BorderRadius.all(
+                                         Radius.circular(5)),
+                                   ),
+                                   height: 4.5 *
+                                       SizeConfig.heightMultiplier,
+                                   child: Padding(
+                                     padding: EdgeInsets.all(6),
+                                     child: Text("${modeling.name}",
+                                         maxLines: 2,
+                                         textAlign:
+                                         TextAlign.left,
+                                         style: TextStyle(
+                                           color: const Color(0xFF01534F),
+                                           fontSize: 2.2 *
+                                               SizeConfig
+                                                   .textMultiplier,
+                                         )),
+                                   ),)
+                             ),
+                             // TODO Mettre du texte scrollable ici
+                             Flexible(
+                               flex: 5,
+                               child: Container(
+                               color: Colors.pink,
+                                   child: Text("On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte.",
+                                       maxLines: 10,
+//                                   textAlign: TextAlign.center,
+                                       style: TextStyle(
+                                         color: const Color(0xFF01534F),
+                                         fontSize: 2 *
+                                             SizeConfig
+                                                 .textMultiplier,
+
+                                       ))
+                               ),
+                             ),
+
+                             Flexible(
+                               flex: 3,
                                child: Container(
 //                                 color: Colors.orange,
                                  child: ListView.builder(
@@ -170,95 +164,242 @@ class DetailsModelingScreen extends StatelessWidget {
                                      }),
                                ),
                              ),
+
                              Flexible(
-                               flex: 1,
+                               flex: 2,
                                child: Container(
-                                 color: Colors.grey,
+                                 decoration: BoxDecoration(
+                                   color: const Color(
+                                       0xFFE6F1D9),
+                                   borderRadius: BorderRadius.all(
+                                       Radius.circular(8)),
+                                 ),
                                  child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                    children: <Widget>[
+                                     Flexible(
+                                         flex: 1,
+                                         child: Padding(
+                                           padding: EdgeInsets.all(1),
+                                           child: Padding(
+                                             padding: EdgeInsets.all(5),
+                                             child: Row(
+//                                               mainAxisAlignment: MainAxisAlignment.start,
+                                               children: <Widget>[
+                                                 Container(
+                                                   height: 3 * SizeConfig.heightMultiplier,
+                                                   width:  25 * SizeConfig.widthMultiplier,
+                                                   child: Row(
+                                                     //                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                     children: <Widget>[
+                                                       Flexible(
+                                                           flex: 1,
+                                                           child: Padding(
+                                                             padding: EdgeInsets.all(2),
+                                                             child: Container(
+                                                               decoration: BoxDecoration(
+                                                                 color: Colors.amber,
+                                                                 borderRadius: BorderRadius.all(
+                                                                     Radius.circular(8)),
+                                                               ),
+                                                             ),
+                                                           )
+                                                       ),
+                                                       Flexible(
+                                                           flex: 3,
+                                                           child: Center(
+                                                             child: Text(
+                                                                 "Semi",
+                                                                 textAlign:
+                                                                 TextAlign
+                                                                     .center,
+                                                                 style:
+                                                                 TextStyle(
+                                                                   color: const Color(
+                                                                       0xFF01534F),
+                                                                   fontSize: 1.7 *
+                                                                       SizeConfig
+                                                                           .textMultiplier,
+                                                                 )),
+                                                           ))
+                                                     ],
+                                                   ),
+                                                 ),
+                                                 Container(
+//                                                   color: Colors.white,
+                                                   height: 3 * SizeConfig.heightMultiplier,
+                                                   width: 25 * SizeConfig.widthMultiplier,
+                                                   child: Row(
+//                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                     children: <Widget>[
+                                                       Flexible(
+                                                           flex: 1,
+                                                           child: Padding(
+                                                             padding: EdgeInsets.all(2),
+                                                             child: Container(
+                                                               decoration: BoxDecoration(
+                                                                 color: Colors.green,
+                                                                 borderRadius: BorderRadius.all(
+                                                                     Radius.circular(8)),
+                                                               ),
+                                                             ),
+                                                           )
+                                                       ),
+                                                       Flexible(
+                                                           flex: 3,
+                                                           child: Center(
+                                                             child: Text(
+                                                                 "Récolte",
+                                                                 textAlign:
+                                                                 TextAlign
+                                                                     .center,
+                                                                 style:
+                                                                 TextStyle(
+                                                                   color: const Color(
+                                                                       0xFF01534F),
+                                                                   fontSize: 1.7 *
+                                                                       SizeConfig
+                                                                           .textMultiplier,
+                                                                 )),
+                                                           ))
+                                                     ],
+                                                   ),
+                                                 ),
+                                               ],
+                                             ),
+                                           ),
+                                         )
+                                     ),
                                      Flexible(
                                        flex: 1,
                                        child: Container(
-                                         color: Colors.green,
-                                         child: Row(
-                                           children: <Widget>[
-//                                             Padding(
-//                                               padding: EdgeInsets.all(10),
-//                                               child: Flexible(
-//                                                   flex: 2,
-//                                                   child: Row(
-//                                                     children: <Widget>[
-//                                                       Container(
-//                                                         color: Colors.orange,
-//                                                         height: 20,
-//                                                         width: 20,
-//                                                       ),
-//                                                       Text("Semi")
-//                                                     ],
-//                                                   )
-//                                               ),
-//                                             ),
-                                           ],
+//                                         color: Colors.yellow,
+                                         child: Padding(
+                                             padding: EdgeInsets.all(5),
+                                             child: _buildModelingSchedule(
+                                                 modeling.culturePeriod,
+                                                 modeling.sowingPeriod,
+                                                 modeling.harvestPeriod)
                                          ),
-                                       ),
-                                     ),
-                                     Flexible(
-                                       flex: 2,
-                                       child: Container(
-                                         color: Colors.blue,
                                        ),
                                      )
                                    ],
                                  ),
                                ),
                              ),
+
                              Flexible(
-                               flex: 1,
-                               child: Container(
-                                 color: Colors.pink,
-                               ),
+                               flex: 2,
+                               child: Row(
+                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                 children: <Widget>[
+                                   Flexible(
+                                     flex: 12,
+                                     child: Container(
+                                       decoration: BoxDecoration(
+                                         color: const Color(
+                                             0xFFE6F1D9),
+                                         borderRadius: BorderRadius.all(
+                                             Radius.circular(8)),
+                                       ),
+                                       child: Column(
+                                         mainAxisAlignment: MainAxisAlignment.center,
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                         children: <Widget>[
+                                           Flexible(
+                                               flex: 1,
+                                               child: Padding(
+                                                 padding: EdgeInsets.only(left: 10),
+                                                 child: Text(
+                                                     "Difficulté",
+                                                     textAlign:
+                                                     TextAlign.left,
+                                                     style:
+                                                     TextStyle(
+                                                       color: const Color(
+                                                           0xFF01534F),
+                                                       fontSize: 2.3 *
+                                                           SizeConfig
+                                                               .textMultiplier,
+                                                     )),
+                                               )
+                                           ),
+                                           Flexible(
+                                             flex: 1,
+                                             child: Padding(
+                                               padding: EdgeInsets.only(top: 7, left: 5, right: 7),
+                                               child: _buildModelingNotation(context,modeling.difficultyLevel),
+                                             )
+                                           )
+                                         ],
+                                       ),
+                                     ),
+                                   ),
+                                   Flexible(
+                                     flex: 1,
+                                     child: Container(),
+                                   ),
+                                   Flexible(
+                                     flex: 12,
+                                     child: Container(
+                                       decoration: BoxDecoration(
+                                         color: Colors.green,
+                                         borderRadius: BorderRadius.all(
+                                             Radius.circular(8)),
+                                       ),
+                                       child: Column(
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                         children: <Widget>[
+                                           Flexible(
+                                               flex: 1,
+                                               child: Padding(
+                                                 padding: EdgeInsets.all(5),
+                                                 child: Text(
+                                                     "Rendement",
+                                                     textAlign:
+                                                     TextAlign.left,
+                                                     style:
+                                                     TextStyle(
+                                                       color: const Color(
+                                                           0xFF01534F),
+                                                       fontSize: 2.3 *
+                                                           SizeConfig
+                                                               .textMultiplier,
+                                                     )),
+                                               )
+                                           ),
+                                           Flexible(
+                                             flex: 2,
+                                             child: Container(
+                                               color: Colors.green,
+                                             ),
+                                           )
+                                         ],
+                                       ),
+                                     ),
+                                   )
+                                 ],
+                               )
                              ),
                              Flexible(
-                               flex: 1,
+                               flex: 2,
                                child: Container(
-                                 color: Colors.blue,
+                                 color: Colors.red,
                                ),
-                             )
+                             ),
+
+                             Flexible(
+                               flex: 2,
+                               child: Container(
+                                 color: Colors.red,
+                               ),
+                             ),
                            ],
-                         ),
-                       ),
+                         )
                      ),
-                     Flexible(
-                       flex: 2,
-                       child: Container(
-                         color: Colors.green,
-                       ),
-                     )
                    ],
-                 )
+                 ),
                )
-//              Flexible(
-//                flex: 2,
-//                child: Column(
-//                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                  children: <Widget>[
-//                    Flexible(
-//                        flex: 8,
-//                        child: Container(
-//                          color: Colors.blue,
-//                        )
-//                    )
-//                  ],
-//                ),
-//              ),
-//              Flexible(
-//                flex: 7,
-//                child: Container(color: Colors.red,),
-//              ),
-//              Flexible(
-//                flex: 1,
-//                child: Container(color: Colors.green,),
-//              )
             ],
           )
       ),
@@ -619,56 +760,66 @@ class DetailsModelingScreen extends StatelessWidget {
       if (sowingPeriod.contains(i)) {
         monthSpot = new BoxDecoration(
           color: Colors.amber,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(3),
         );
 
         textMonthColor = Colors.white;
       } else if (harvestPeriod.contains(i)) {
         monthSpot = new BoxDecoration(
-          color: Colors.deepOrangeAccent,
-          borderRadius: BorderRadius.circular(15),
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(3),
         );
         textMonthColor = Colors.white;
 
-      } else if (culturePeriod.contains(i)) {
+      }  else {
         monthSpot = new BoxDecoration(
-          border: Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(15),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(3),
         );
-        textMonthColor = Colors.white;
-
-      } else {
-        monthSpot = new BoxDecoration(
-          border: Border.all(color: const Color(0xFF01534F)),
-          borderRadius: BorderRadius.circular(15),
-        );
-        textMonthColor = const Color(0xFF01534F);
+        textMonthColor = Colors.black;
       }
 
       monthsBoxList.add(
-        Expanded(
-          child: Container(
-            color: culturePeriod.contains(i) ? const Color(0xFF01534F) : Colors.white,
-            child: Center(
+
+//        Expanded(
+//          child: Container(
+//            color: culturePeriod.contains(i) ? const Color(0xFF01534F) : Colors.white,
+//            child: Center(
+//              child: Container(
+//                height: 20,
+//                width: 200,
+////                padding: EdgeInsets.all(12),
+//                decoration: monthSpot,
+//                child: Center(
+//                    child: Text(
+//                      '${months[i]}',
+//                      style: TextStyle(fontSize: 1.7 * SizeConfig.textMultiplier, color: textMonthColor),
+//                    )
+//                ),
+//              ),
+//            ),
+//          ),
+//        ),
+        Flexible(
+            child: Padding(
+              padding: EdgeInsets.only(left: 2, right: 2),
               child: Container(
-                height: 20,
-                width: 200,
-//                padding: EdgeInsets.all(12),
-                decoration: monthSpot,
-                child: Center(
-                    child: Text(
-                      '${months[i]}',
-                      style: TextStyle(fontSize: 1.7 * SizeConfig.textMultiplier, color: textMonthColor),
-                    )
-                ),
+                width: 7 * SizeConfig.widthMultiplier,
+                  decoration: monthSpot,
+                  child: Center(
+                  child: Text(
+                    '${months[i]}',
+                    style: TextStyle(fontSize: 2.6 * SizeConfig.textMultiplier, color: textMonthColor),
+                  ),
+                )
               ),
-            ),
-          ),
+            )
         ),
       );
     }
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: monthsBoxList
     );
   }
@@ -680,7 +831,7 @@ Widget _buildModelingNotation(BuildContext context,
 
   List<Widget> notationsRowItems = List<Widget>();
 
-  for(var i = 1; i <= 3; i++) {
+  for(var i = 1; i <= 5; i++) {
     if (i <= difficulty) {
       notationsRowItems.add(
           Expanded(
