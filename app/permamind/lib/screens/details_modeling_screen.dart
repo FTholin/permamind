@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:permamind/screens/screens.dart';
+import 'package:uuid/uuid.dart';
 
 class DetailsModelingScreen extends StatelessWidget {
 
@@ -491,15 +492,15 @@ class DetailsModelingScreen extends StatelessWidget {
                                          name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
                                          publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
                                          currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
-                                         modelingsMonitoring: [modeling.id], id: parcel.id);
+                                         modelingsMonitoring: [modeling.id], id: Uuid().v4());
 
                                      BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
-                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
-                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
+                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
+                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
 
-                                     // TODO à changer plus tard
                                      Navigator.of(context).pushNamedAndRemoveUntil(
-                                         '/', (Route<dynamic> route) => false
+                                         '/detailsParcel', (Route<dynamic> route) => false,
+                                       arguments: DetailsParcelScreenArguments(gardenId, completedParcel.id)
                                      );
                                    },
                                    child: Container(

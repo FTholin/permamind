@@ -43,8 +43,9 @@ dependencies:
   bubble_bottom_bar: ^1.2.0
   charts_flutter: ^0.8.1
 
-
   carousel_slider: ^1.4.1
+
+  uuid: 2.0.4
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^4.0.2

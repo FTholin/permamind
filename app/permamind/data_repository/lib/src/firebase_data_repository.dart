@@ -36,7 +36,7 @@ class FirebaseDataRepository implements DataRepository {
   @override
   Future<void> addNewParcel(Parcel parcel) {
     logger.i("WRITE::addNewParcel");
-    return Firestore.instance.collection('parcels').add(parcel.toEntity().toDocument());
+    return Firestore.instance.collection('parcels').document(parcel.id).setData(parcel.toEntity().toDocument());
   }
 
   @override
@@ -126,7 +126,7 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Future<void> deleteActivitiesFromParcel(String parcelId) async {
-    logger.i("READ::deleteActivitiesFromParcel");
+    logger.i("DELETE::deleteActivitiesFromParcel");
 
     Firestore.instance.collection('activities').where("parcelId",isEqualTo: parcelId).getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
