@@ -209,6 +209,10 @@ class DetailsParcelScreen extends StatelessWidget {
             return Scaffold(
               appBar: AppBar(
                 title: Text(currentParcel.name),
+                leading:  IconButton(
+                  icon: new Icon(Icons.arrow_back_ios),
+                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false,),
+                ),
                 actions: <Widget>[
                   FlatButton(
                     child: Text(
@@ -277,7 +281,12 @@ class DetailsParcelScreen extends StatelessWidget {
                                                   ),
                                                 );
 
-                                                Navigator.of(context).pop();
+                                                Navigator.pushNamedAndRemoveUntil(
+                                                  context,
+                                                  '/detailsParcel',
+                                                      (Route<dynamic> route) => false,
+                                                  arguments: DetailsParcelScreenArguments(gardenId, parcelId)
+                                                );
                                               }
                                             },
                                           ),
@@ -321,7 +330,6 @@ class DetailsParcelScreen extends StatelessWidget {
                                                 '/',
                                                 (Route<dynamic> route) => false,
                                               );
-
                                             },
                                           ),
                                         ],

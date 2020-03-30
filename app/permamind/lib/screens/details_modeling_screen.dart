@@ -493,9 +493,14 @@ class DetailsModelingScreen extends StatelessWidget {
                                          currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
                                          modelingsMonitoring: [modeling.id], id: parcel.id);
 
-//                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
-//                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
-//                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
+                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
+                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, parcel.id, schedule));
+                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, parcel.id, designs));
+
+                                     // TODO à changer plus tard
+                                     Navigator.of(context).pushNamedAndRemoveUntil(
+                                         '/', (Route<dynamic> route) => false
+                                     );
                                    },
                                    child: Container(
                                      decoration: BoxDecoration(
