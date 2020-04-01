@@ -41,7 +41,7 @@ abstract class DataRepository {
 
   Stream<List<Modeling>> fetchModelings(List<String> veggiesList);
 
-  Stream<List<Activity>> loadParcelActivities(String parcelId);
+  Stream<List<Activity>> loadParcelActivities(String parcelId, DateTime first, DateTime last);
 
   Stream<List<DesignParcel>> loadDesignParcel(String gardenId);
 

@@ -50,7 +50,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 
   Stream<ActivitiesState> _mapLoadActivitiesToState(LoadActivities event) async* {
     _activitiesSubscription?.cancel();
-    _activitiesSubscription = dataRepository.loadParcelActivities(event.parcelId).listen(
+    _activitiesSubscription = dataRepository.loadParcelActivities(event.parcelId, event.start, event.last).listen(
           (activities) {
         final Map<DateTime, List> mapActivities = Map<DateTime, List>();
 

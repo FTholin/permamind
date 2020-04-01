@@ -129,8 +129,6 @@ class DesignParcelAdded extends GardensEvent {
   final String parcelId;
 
   DesignParcelAdded(this.gardenId, this.parcelId, this.designs);
-
-
   @override
   String toString() => 'DesignParcelAdded { designs: $designs }';
 }

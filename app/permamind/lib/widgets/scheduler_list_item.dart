@@ -10,7 +10,6 @@ class ScheduleListItem extends StatefulWidget {
 
   final Activity activity;
 
-
   ScheduleListItem({
     @required this.activity,
     Key key}) : super(key: key);
@@ -46,7 +45,8 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
                     expectedDate: widget.activity.expectedDate,
                     category : widget.activity.category,
                     completeActivityUserId : widget.activity.completeActivityUserId
-                ),)
+                ),
+                )
             );
           });
         },

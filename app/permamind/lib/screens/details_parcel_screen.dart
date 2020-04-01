@@ -375,41 +375,47 @@ class DetailsParcelScreen extends StatelessWidget {
                           }
                         }
                     ),
-                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                        builder: (context, state) {
-                          if (state is ActivitiesLoaded) {
-                            return SchedulerCalendar(
-                              referenceDate: DateTime.now(),
-                              schedule: state.schedule,
-                            );
-                          } else {
-                            return Expanded(
-                                child: Container(
-                                )
-                            );
-                          }
-                        }
-                    ),
-                    const SizedBox(height: 8.0),
-//          _buildButtons(),
-                    const SizedBox(height: 8.0),
-                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                        builder: (context, state) {
-                          if (state is ActivitiesLoaded) {
-                            return Expanded(
-                              child: Container(
-                                  child: _buildEventList(state.referenceDate, state.schedule)
-                              ),
-                            );
-                          } else {
-                            return Expanded(
-                                child: Container(
-                                  child: Text("$state"),
-                                )
-                            );
-                          }
-                        }
-                    ),
+
+              SchedulerCalendar(
+//                referenceDate: DateTime.now(),
+                parcelId: parcelId,
+              ),
+//                    const SizedBox(height: 8.0),
+//                    const SizedBox(height: 8.0),
+//                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                        builder: (context, state) {
+//
+//                          if (state is ActivitiesLoaded) {
+//                            return SchedulerCalendar(
+//                              referenceDate: DateTime.now(),
+//                              parcelId: parcelId,
+//                            );
+//                          } else {
+//                            return Expanded(
+//                                child: Container(
+//                                )
+//                            );
+//                          }
+//                        }
+//                    ),
+//                   :
+//                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                        builder: (context, state) {
+//                          if (state is ActivitiesLoaded) {
+//                            return Expanded(
+//                              child: Container(
+//                                  child: _buildEventList(state.referenceDate, state.schedule)
+//                              ),
+//                            );
+//                          } else {
+//                            return Expanded(
+//                                child: Container(
+//                                  child: Text("$state"),
+//                                )
+//                            );
+//                          }
+//                        }
+//                    ),
 //          Expanded(child: _buildEventList()),
                   ]),
               floatingActionButton: ActivitySpeedDial(
@@ -563,33 +569,6 @@ class DetailsParcelScreen extends StatelessWidget {
 //        floatingActionButton: ActivitySpeedDial(visible: true),
 //      );
 //    });
-  }
-
-
-  Widget _buildEventList(DateTime referenceDate, Map<DateTime, List> schedule) {
-
-    List<Container> items = List<Container>();
-
-    if (schedule[referenceDate] != null) {
-      for (var activity in schedule[referenceDate]) {
-        items.add(
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.8),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              margin:
-              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-              child: ScheduleListItem(activity: activity),
-            )
-        );
-      }
-    }
-
-    return ListView(
-        children: items
-    );
-
   }
 
 }

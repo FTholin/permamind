@@ -244,10 +244,13 @@ class FirebaseDataRepository implements DataRepository {
 
 
   @override
-  Stream<List<Activity>> loadParcelActivities(String parcelId) {
+  Stream<List<Activity>> loadParcelActivities(String parcelId, DateTime first, DateTime last) {
+
     logger.i("READ::loadParcelActivities");
     return Firestore.instance.collection('activities')
         .where("parcelId", isEqualTo: parcelId)
+        .where("expectedDate", isGreaterThanOrEqualTo: first)
+        .where("expectedDate", isLessThanOrEqualTo: last)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Activity.fromEntity(ActivityEntity.fromSnapshot(doc)))

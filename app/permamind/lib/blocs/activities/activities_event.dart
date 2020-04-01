@@ -7,11 +7,13 @@ abstract class ActivitiesEvent extends Equatable {
 
 class LoadActivities extends ActivitiesEvent {
   final String parcelId;
+  final DateTime start;
+  final DateTime last;
 
-  LoadActivities(this.parcelId);
+  LoadActivities(this.parcelId, this.start, this.last);
 
   @override
-  List<Object> get props => [parcelId];
+  List<Object> get props => [parcelId, start, last];
 }
 
 

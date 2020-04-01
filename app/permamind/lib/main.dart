@@ -312,7 +312,7 @@ class App extends StatelessWidget {
                                       dataRepository: firebaseRepository,
                                       gardensBloc: BlocProvider.of<GardensBloc>(context),
 //                                      parcelId: parcels[index].id
-                                  )..add(LoadActivities(args.parcelId)),
+                                  ),
                                 ),
                                 BlocProvider(
                                   create: (context) => DesignBloc(
