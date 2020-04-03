@@ -23,6 +23,18 @@ class LoadGardens extends GardensEvent {
   String toString() => 'LoadGardens { userId: $userId}';
 }
 
+//class LoadParcels extends GardensEvent {
+//
+//  final String gardenId;
+//  final String userId;
+//  final String userPseudo;
+//
+//  LoadParcels(this.gardenId, this.userId, this.userPseudo) : super([gardenId, userId, userPseudo]);
+//
+//  @override
+//  String toString() => 'LoadParcels { userId: $userId}';
+//}
+
 class AddGarden extends GardensEvent {
   final Garden garden;
 
@@ -93,10 +105,9 @@ class ToggleAll extends GardensEvent {
 
 class GardensUpdated extends GardensEvent {
 
-  final Map<String, List<Parcel>> gardenParcels;
   final List<Garden> gardens;
 
-  GardensUpdated([this.gardens = const [], this.gardenParcels]) : super([gardens, gardenParcels]);
+  GardensUpdated([this.gardens = const []]) : super([gardens]);
 
   @override
   String toString() {
@@ -110,84 +121,85 @@ class GardensUpdated extends GardensEvent {
   }
 }
 
-class ParcelAdded extends GardensEvent {
-  final Parcel parcel;
 
-  ParcelAdded(this.parcel);
+//class ParcelAdded extends GardensEvent {
+//  final Parcel parcel;
+//
+//  ParcelAdded(this.parcel);
+//
+//  @override
+//  List<Object> get props => [parcel];
+//
+//  @override
+//  String toString() => 'ParcelAdded { parcel: $parcel }';
+//}
+//
+//class DesignParcelAdded extends GardensEvent {
+//
+//  final String gardenId;
+//  final List<Design> designs;
+//  final String parcelId;
+//
+//  DesignParcelAdded(this.gardenId, this.parcelId, this.designs);
+//  @override
+//  String toString() => 'DesignParcelAdded { designs: $designs }';
+//}
 
-  @override
-  List<Object> get props => [parcel];
 
-  @override
-  String toString() => 'ParcelAdded { parcel: $parcel }';
-}
+//class ParcelDeleted extends GardensEvent {
+//  final String parcelId;
+//
+//  ParcelDeleted(this.parcelId);
+//
+//  @override
+//  List<Object> get props => [parcelId];
+//
+//  @override
+//  String toString() => 'ParcelsDeleted { parcelId: $parcelId }';
+//}
+//
+//class ParcelLeaved extends GardensEvent {
+//  final Parcel leavedParcel;
+//  final String userId;
+//
+//  ParcelLeaved(this.leavedParcel, this.userId);
+//
+//  @override
+//  List<Object> get props => [leavedParcel, userId];
+//
+//  @override
+//  String toString() => 'ParcelLeaved { leavedParcel: $leavedParcel }';
+//}
 
-class DesignParcelAdded extends GardensEvent {
+//class ParcelCopied extends GardensEvent {
+//  final Parcel copiedParcel;
+//
+//  ParcelCopied(this.copiedParcel);
+//
+//  @override
+//  List<Object> get props => [copiedParcel];
+//
+//  @override
+//  String toString() => 'ParcelCopied { copiedParcel: $copiedParcel }';
+//}
 
-  final String gardenId;
-  final List<Design> designs;
-  final String parcelId;
+//class ParcelUpdated extends GardensEvent {
+//  final Parcel parcelUpdated;
+//
+//  ParcelUpdated(this.parcelUpdated);
+//
+//  @override
+//  String toString() => 'ParcelsUpdated { parcelsUpdated: $parcelUpdated }';
+//}
 
-  DesignParcelAdded(this.gardenId, this.parcelId, this.designs);
-  @override
-  String toString() => 'DesignParcelAdded { designs: $designs }';
-}
-
-
-class ParcelDeleted extends GardensEvent {
-  final String parcelId;
-
-  ParcelDeleted(this.parcelId);
-
-  @override
-  List<Object> get props => [parcelId];
-
-  @override
-  String toString() => 'ParcelsDeleted { parcelId: $parcelId }';
-}
-
-class ParcelLeaved extends GardensEvent {
-  final Parcel leavedParcel;
-  final String userId;
-
-  ParcelLeaved(this.leavedParcel, this.userId);
-
-  @override
-  List<Object> get props => [leavedParcel, userId];
-
-  @override
-  String toString() => 'ParcelLeaved { leavedParcel: $leavedParcel }';
-}
-
-class ParcelCopied extends GardensEvent {
-  final Parcel copiedParcel;
-
-  ParcelCopied(this.copiedParcel);
-
-  @override
-  List<Object> get props => [copiedParcel];
-
-  @override
-  String toString() => 'ParcelCopied { copiedParcel: $copiedParcel }';
-}
-
-class ParcelUpdated extends GardensEvent {
-  final Parcel parcelUpdated;
-
-  ParcelUpdated(this.parcelUpdated);
-
-  @override
-  String toString() => 'ParcelsUpdated { parcelsUpdated: $parcelUpdated }';
-}
-
-class ActivitiesCopied extends GardensEvent {
-  final List<Activity> activities;
-
-  ActivitiesCopied(this.activities);
-
-  @override
-  String toString() => 'ActivitiesCopied { activities: $activities }';
-}
+//class ActivitiesCopied extends GardensEvent {
+//  final List<Activity> activities;
+//
+//  ActivitiesCopied(this.activities);
+//
+//  @override
+//  String toString() => 'ActivitiesCopied { activities: $activities }';
+//}
 
 
 class ModelingAdded extends GardensEvent {
@@ -201,17 +213,7 @@ class ModelingAdded extends GardensEvent {
   String toString() => 'ModelingAdded { activities: $schedule, gardenId: $gardenId}';
 }
 
-class ParcelsUpdated extends GardensEvent {
-  final List<Parcel> parcels;
 
-  ParcelsUpdated(this.parcels);
-
-  @override
-  List<Object> get props => [parcels];
-
-  @override
-  String toString() => 'ParcelsUpdated { parcels: $parcels }';
-}
 
 
 //

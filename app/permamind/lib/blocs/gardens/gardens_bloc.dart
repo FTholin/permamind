@@ -1,4 +1,4 @@
-import 'dart:async';
+ import 'dart:async';
 import 'package:authentication/authentication.dart';
 import 'package:bloc/bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
@@ -28,15 +28,22 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   Stream<GardensState> mapEventToState(GardensEvent event) async* {
     if (event is LoadGardens) {
       yield* _mapLoadGardensToState(event);
-    } else if (event is AddGarden) {
+    }
+//    else if (event is LoadParcels) {
+//      yield* _mapLoadParcelsToState(event);
+//
+//    }
+    else if (event is AddGarden) {
       yield* _mapAddGardenToState(event);
     } else if (event is UpdateGarden) {
       yield* _mapUpdateGardensToState(event);
     } else if (event is GardenDeleted) {
       yield* _mapGardenDeletedToState(event);
-    } else if (event is ParcelAdded) {
-      yield* _mapParcelAddedToState(event);
-    } else if (event is GardensUpdated) {
+    }
+//    else if (event is ParcelAdded) {
+//      yield* _mapParcelAddedToState(event);
+//    }
+    else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
     } else if (event is LeaveGarden) {
       yield* _mapLeaveGardensToState(event);
@@ -44,44 +51,62 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
       yield* _mapCopyActivitiesToState(event);
     } else if (event is CopyGarden) {
       yield* _mapCopyGardenToState(event);
-    } else if (event is ParcelDeleted) {
-      yield* _mapParcelDeletedToState(event);
-    } else if (event is ParcelCopied) {
-      yield* _mapParcelCopiedToState(event);
-    } else if (event is ParcelLeaved) {
-      yield* _mapParcelLeavedToState(event);
-    } else if (event is ActivitiesCopied) {
-      yield* _mapActivitiesCopiedToState(event);
-    } else if (event is ModelingAdded) {
-      yield* _mapModelingAddedToState(event);
-    } else if (event is ParcelUpdated) {
-      yield* _mapParcelUpdatedToState(event);
-    } else if (event is DesignParcelAdded) {
-      yield* _mapDesignParcelAdded(event);
-
     }
+//    else if (event is ParcelDeleted) {
+//      yield* _mapParcelDeletedToState(event);
+//    }
+//    else if (event is ParcelCopied) {
+//      yield* _mapParcelCopiedToState(event);
+//    }
+//    else if (event is ParcelLeaved) {
+//      yield* _mapParcelLeavedToState(event);
+//    } else if (event is ActivitiesCopied) {
+//      yield* _mapActivitiesCopiedToState(event);
+//    }
+    else if (event is ModelingAdded) {
+      yield* _mapModelingAddedToState(event);
+    }
+//    else if (event is ParcelUpdated) {
+//      yield* _mapParcelUpdatedToState(event);
+//    }
+//    else if (event is DesignParcelAdded) {
+//      yield* _mapDesignParcelAdded(event);
+//    }
+//    else if (event is ParcelsUpdated) {
+//      yield* _mapParcelsUpdatedToState(event);
+//    }
   }
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
-
-    Map<String, List<Parcel>> gardensParcels =  Map<String, List<Parcel>>();
-
     _gardensSubscription?.cancel();
 
     _gardensSubscription = _dataRepository.gardens(event.userId, event.userPseudo).listen(
           (gardens) {
-            for (final garden in gardens) {
-              _parcelsSubscription?.cancel();
-              _parcelsSubscription = _dataRepository.loadParcels(garden.id, event.userId, event.userPseudo).listen((parcels){
-                gardensParcels[garden.id] = parcels;
-              });
-            }
-        add(GardensUpdated(gardens, gardensParcels));
-      },
+            add(GardensUpdated(gardens));
+          }
     );
+
+//    for (final garden in gardens) {
+//      _parcelsSubscription?.cancel();
+//      _dataRepository.loadParcels(garden.id, event.userId, event.userPseudo).listen((parcels){
+//        gardensParcels[garden.id] = parcels;
+//      });
+//    }
+//    add(ParcelsUpdated(gardensParcels));
+
   }
 
-  Stream<GardensState> _mapAddGardenToState(AddGarden event) async* {
+//  Stream<GardensState> _mapLoadParcelsToState(LoadParcels event) async* {
+//    _parcelsSubscription?.cancel();
+//    _parcelsSubscription = _dataRepository.loadParcels(event.gardenId, event.userId, event.userPseudo).listen(
+//            (parcels) {
+//          add(ParcelsUpdated(parcels));
+//        }
+//    );
+//  }
+
+
+    Stream<GardensState> _mapAddGardenToState(AddGarden event) async* {
     _dataRepository.addNewGarden(event.garden);
   }
 
@@ -117,44 +142,44 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
 
   Stream<GardensState> _mapGardensUpdateToState(GardensUpdated event) async* {
-    yield GardensLoaded(event.gardens, event.gardenParcels);
+    yield GardensLoaded(event.gardens);
   }
 
 
-  Stream<GardensState> _mapParcelAddedToState(ParcelAdded event) async* {
-    _dataRepository.addNewParcel(event.parcel);
-  }
+//  Stream<GardensState> _mapParcelAddedToState(ParcelAdded event) async* {
+//    _dataRepository.addNewParcel(event.parcel);
+//  }
 
-  Stream<GardensState> _mapDesignParcelAdded(DesignParcelAdded designParcel) async* {
-    _dataRepository.addNewDesignParcel(
-        DesignParcel(designParcel.gardenId, designParcel.parcelId, designParcel.designs));
-  }
+//  Stream<GardensState> _mapDesignParcelAdded(DesignParcelAdded designParcel) async* {
+//    _dataRepository.addNewDesignParcel(
+//        DesignParcel(designParcel.gardenId, designParcel.parcelId, designParcel.designs));
+//  }
 
 
-  Stream<GardensState> _mapParcelUpdatedToState(ParcelUpdated event) async* {
-    _dataRepository.updateParcel(event.parcelUpdated);
-  }
+//  Stream<GardensState> _mapParcelUpdatedToState(ParcelUpdated event) async* {
+//    _dataRepository.updateParcel(event.parcelUpdated);
+//  }
+//
+//  Stream<GardensState> _mapParcelDeletedToState(ParcelDeleted event) async* {
+//    _dataRepository.deleteDesignsParcel(event.parcelId);
+//    _dataRepository.deleteActivitiesFromParcel(event.parcelId);
+//    _dataRepository.deleteParcel(event.parcelId);
+//  }
 
-  Stream<GardensState> _mapParcelDeletedToState(ParcelDeleted event) async* {
-    _dataRepository.deleteDesignsParcel(event.parcelId);
-    _dataRepository.deleteActivitiesFromParcel(event.parcelId);
-    _dataRepository.deleteParcel(event.parcelId);
-  }
+//  Stream<GardensState> _mapParcelCopiedToState(ParcelCopied event) async* {
+//    _dataRepository.copyParcel(event.copiedParcel);
+//  }
+//
+//  Stream<GardensState> _mapParcelLeavedToState(ParcelLeaved event) async* {
+//
+//    event.leavedParcel.members.removeWhere((item) => item.id == event.userId);
+//    _dataRepository.updateParcel(event.leavedParcel);
+//  }
 
-  Stream<GardensState> _mapParcelCopiedToState(ParcelCopied event) async* {
-    _dataRepository.copyParcel(event.copiedParcel);
-  }
-
-  Stream<GardensState> _mapParcelLeavedToState(ParcelLeaved event) async* {
-
-    event.leavedParcel.members.removeWhere((item) => item.id == event.userId);
-    _dataRepository.updateParcel(event.leavedParcel);
-  }
-
-  Stream<GardensState> _mapActivitiesCopiedToState(
-      ActivitiesCopied schedule) async* {
-    _dataRepository.addParcelActivities(schedule.activities);
-  }
+//  Stream<GardensState> _mapActivitiesCopiedToState(
+//      ActivitiesCopied schedule) async* {
+//    _dataRepository.addParcelActivities(schedule.activities);
+//  }
 
 
   Stream<GardensState> _mapModelingAddedToState(ModelingAdded event) async* {
@@ -180,10 +205,13 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     }
   }
 
+//  Stream<GardensState> _mapParcelsUpdatedToState(ParcelsUpdated event) async* {
+//    yield ParcelsLoaded(event.gardensParcels);
+//  }
+
   @override
   Future <void> close() {
     _gardensSubscription?.cancel();
-    _parcelsSubscription?.cancel();
     _authenticationBlocSubscription?.cancel();
     return super.close();
   }

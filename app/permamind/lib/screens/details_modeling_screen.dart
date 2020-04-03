@@ -494,9 +494,9 @@ class DetailsModelingScreen extends StatelessWidget {
                                          currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
                                          modelingsMonitoring: [modeling.id], id: Uuid().v4());
 
-                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
+//                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
                                      BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
-                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
+//                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
 
                                      Navigator.of(context).pushNamedAndRemoveUntil(
                                          '/detailsParcel', (Route<dynamic> route) => false,

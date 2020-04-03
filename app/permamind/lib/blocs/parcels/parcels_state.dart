@@ -8,18 +8,49 @@ abstract class ParcelsState extends Equatable {
   List<Object> get props => [];
 }
 
-class ParcelsLoading extends ParcelsState {}
+class ParcelsGardensLoadInProgress extends ParcelsState {}
 
-class ParcelsLoaded extends ParcelsState {
-  final List<Parcel> parcels;
+class ParcelsGardensLoadSuccess extends ParcelsState {
+  final List<Garden> gardens;
 
-  ParcelsLoaded(this.parcels);
-
+  ParcelsGardensLoadSuccess(this.gardens);
   @override
-  List<Object> get props => [parcels];
+  List<Object> get props => [gardens];
 
   @override
   String toString() {
-    return 'ParcelsLoaded { parcels: $parcels }';
+    return 'ParcelsGardensLoadSuccess { gardens: $gardens}';
   }
 }
+
+class ParcelsLoaded extends ParcelsState {
+
+  final List<Parcel> parcels;
+
+  ParcelsLoaded([this.parcels]) : super();
+}
+
+//
+//abstract class ParcelsState extends Equatable {
+//  ParcelsState();
+//
+//  @override
+//  List<Object> get props => [];
+//}
+//
+//class ParcelsLoading extends ParcelsState {}
+//
+//class ParcelsLoaded extends ParcelsState {
+//  final List<Parcel> parcels;
+//
+//  ParcelsLoaded(this.parcels);
+//
+//  @override
+//  List<Object> get props => [parcels];
+//
+//  @override
+//  String toString() {
+//    return 'ParcelsLoaded { parcels: $parcels }';
+//  }
+//}
+

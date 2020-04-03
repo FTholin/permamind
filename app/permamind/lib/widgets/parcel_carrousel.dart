@@ -13,9 +13,9 @@ class ParcelCarouselWithIndicator extends StatefulWidget {
   final User user;
   final Garden garden;
 
-  final List<ParcelCarouselData> parcels;
+//  final List<ParcelCarouselData> parcels;
 
-  ParcelCarouselWithIndicator(this.parcels, this.garden, this.user);
+  ParcelCarouselWithIndicator( this.garden, this.user);
 
   @override
   _ParcelCarouselWithIndicatorState createState() =>
@@ -30,33 +30,61 @@ class _ParcelCarouselWithIndicatorState
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: loadCarouselContent(context),
-      autoPlay: false,
-      enlargeCenterPage: true,
-      height: 17 * SizeConfig.heightMultiplier,
+
+    return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
+      if (state is ParcelsLoaded) {
+        return CarouselSlider(
+          items: loadCarouselContent(context, state.parcels),
+          autoPlay: false,
+          enlargeCenterPage: true,
+          height: 17 * SizeConfig.heightMultiplier,
 //      aspectRatio: 3.5,
 //      viewportFraction: 0.9,
-      enableInfiniteScroll: false,
-      onPageChanged: (index) {
-        setState(() {
-          _current = index;
-        });
-      },
-    );
+          enableInfiniteScroll: false,
+          onPageChanged: (index) {
+            setState(() {
+              _current = index;
+            });
+          },
+        );
+      } else {
+        return CarouselSlider(
+          items: [
+            Container(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                )
+            )
+          ],
+          autoPlay: false,
+          enlargeCenterPage: true,
+          height: 17 * SizeConfig.heightMultiplier,
+//      aspectRatio: 3.5,
+//      viewportFraction: 0.9,
+          enableInfiniteScroll: false,
+          onPageChanged: (index) {
+            setState(() {
+              _current = index;
+            });
+          },
+        );
+      }
+    });
+
   }
 
-  List<Widget> loadCarouselContent(BuildContext context) {
+  List<Widget> loadCarouselContent(BuildContext context, List<Parcel> parcels) {
+
     List<Widget> carouselContent = List<Widget>();
 
-    for (final parcel in widget.parcels) {
+    for (final parcel in parcels) {
       carouselContent.add(InkWell(
         onTap: () =>  Navigator.pushNamed(
           context,
           '/detailsParcel',
           arguments: DetailsParcelScreenArguments(
               widget.garden.id,
-              parcel.parcelId
+              parcel.id
           ),
         ),
         child: Container(
@@ -82,7 +110,7 @@ class _ParcelCarouselWithIndicatorState
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text("${parcel.parcelName}",
+                            Text("${parcel.name}",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -100,7 +128,7 @@ class _ParcelCarouselWithIndicatorState
                         ),
                         Row(
                           children: <Widget>[
-                            Text("${parcel.modelingName}",
+                            Text("${parcel.currentModelingName}",
                                 style: TextStyle(
                                     color: Color.fromRGBO(214, 211, 94, 1),
                                     fontWeight: FontWeight.normal,

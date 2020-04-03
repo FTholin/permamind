@@ -196,6 +196,13 @@ class App extends StatelessWidget {
                                             dataRepository: firebaseRepository)
                                           ..add(LoadTutos()),
                                       ),
+                                      BlocProvider<ParcelsBloc>(
+                                        create: (context) => ParcelsBloc(
+                                            gardensBloc: BlocProvider.of<GardensBloc>(context),
+                                            dataRepository: firebaseRepository,
+                                            user: state.userAuthenticated
+                                        )
+                                      ),
                                     ],
                                     child: HomeScreen(
                                         dataRepository: firebaseRepository,

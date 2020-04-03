@@ -30,188 +30,187 @@ class GardenItem extends StatelessWidget {
 
     TextEditingController _gardenNameTextController = TextEditingController();
 
-    return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
-      if (state is GardensLoaded) {
-        
-        final List<Parcel> parcels = state.gardenParcels[garden.id] ??  List<Parcel>();
+    BlocProvider.of<GardensBloc>(context).add(LoadParcels(garden.id, user.id, user.pseudo));
 
-        return Padding(
-          padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
-          child: Container(
-            height: 34 * SizeConfig.heightMultiplier,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(253, 255, 242, 1),
-              border: Border.all(
-                color: Colors.black,
-                width: 0.1,
-              ),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                      height: 11 * SizeConfig.heightMultiplier,
+    return Padding(
+      padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
+      child: Container(
+        height: 34 * SizeConfig.heightMultiplier,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(253, 255, 242, 1),
+          border: Border.all(
+            color: Colors.black,
+            width: 0.1,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(1 * SizeConfig.heightMultiplier),
+          child: Column(
+            children: <Widget>[
+              Container(
+                  height: 11 * SizeConfig.heightMultiplier,
 //                color: Colors.blue,
-                      child: Padding(
-                        padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
-                        child: Column(
+                  child: Padding(
+                    padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                    "$name",
-                                    style: TextStyle(
-                                        color: const Color(0xFF01534F),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 2.7 * SizeConfig.textMultiplier
-                                    )
-                                ),
-                                FlatButton(
-                                  child: Text(
-                                      "Modifier",
-                                      style: TextStyle(
-                                          color: const Color(0xFF4FB06E),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 2 * SizeConfig.textMultiplier
-                                      )
-                                  ),
-                                  onPressed: () {
-                                    showCupertinoModalPopup(
-                                        context: context,
-                                        builder: (context) => CupertinoActionSheet(
-                                          actions: <Widget>[
-                                            CupertinoButton(
-                                              color: Colors.green,
-                                              child: Text("Ajouter des personnes"),
-                                              onPressed: null,
-                                            ),
-                                            Container(height: 10,),
-                                            CupertinoButton(
-                                              color: Colors.green,
-                                              child: Text("Renommer"),
-                                              onPressed: () {
-                                                return showDialog<void>(
-                                                  context: context,
-                                                  barrierDismissible: false, // user must tap button!
-                                                  builder: (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text('Renommer ce jardin'),
-                                                      content: TextField(
-                                                        controller: _gardenNameTextController,
-                                                        decoration: InputDecoration(hintText: "Nom jardin"),
-                                                      ),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text('${AppLocalizations.of(context).buttonCancel}'),
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop();
-                                                          },
-                                                        ),
-                                                        FlatButton(
-                                                          child: Text('Mettre à jour'),
-                                                          onPressed: () {
-
-                                                            if (_gardenNameTextController.text.isNotEmpty) {
-
-                                                              BlocProvider.of<GardensBloc>(context).add(
-                                                                UpdateGarden(
-                                                                    garden.copyWith(
-                                                                      name: _gardenNameTextController.text,
-                                                                      id: garden.id,
-                                                                      publicVisibility: garden.publicVisibility ,
-                                                                      admin: garden.admin,
-                                                                      members: garden.members,
-                                                                      creationDate: garden.creationDate,
-                                                                      dayActivitiesCount: garden.dayActivitiesCount
-                                                                    )
-                                                                ),
-                                                              );
-                                                              Navigator.pushNamedAndRemoveUntil(
-                                                                context,
-                                                                '/',
-                                                                    (Route<dynamic> route) => false,
-                                                              );
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                            Container(height: 10,),
-                                            CupertinoButton(
-                                              color: Colors.green,
-                                              child: Text("Supprimer"),
-                                              onPressed: (){
-                                                return showDialog<void>(
-                                                  context: context,
-                                                  barrierDismissible: false, // user must tap button!
-                                                  builder: (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
-                                                      content: SingleChildScrollView(
-                                                        child: ListBody(
-                                                          children: <Widget>[
-                                                            Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text('${AppLocalizations.of(context).buttonCancel}'),
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop();
-                                                          },
-                                                        ),
-                                                        FlatButton(
-                                                          child: Text('${AppLocalizations.of(context).buttonContinue}'),
-                                                          onPressed: () {
-                                                            BlocProvider.of<GardensBloc>(context).add(GardenDeleted(garden));
-                                                            Navigator.pushNamedAndRemoveUntil(
-                                                              context,
-                                                              '/',
-                                                                  (Route<dynamic> route) => false,
-                                                            );
-
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        )
-                                    );
-                                  },
+                            Text(
+                                "$name",
+                                style: TextStyle(
+                                    color: const Color(0xFF01534F),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 2.7 * SizeConfig.textMultiplier
                                 )
-                              ],
                             ),
-                            Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
-                                  child: Text(
-                                      "$dayActivitiesCount activités à réaliser aujourd'hui.",
-                                      style: TextStyle(
-                                          color: const Color(0xFF01534F),
-                                          fontSize: 2.2 * SizeConfig.textMultiplier
-                                      )
-                                  ),
-                                ),
-                              ],
+                            FlatButton(
+                              child: Text(
+                                  "Modifier",
+                                  style: TextStyle(
+                                      color: const Color(0xFF4FB06E),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 2 * SizeConfig.textMultiplier
+                                  )
+                              ),
+                              onPressed: () {
+                                showCupertinoModalPopup(
+                                    context: context,
+                                    builder: (context) => CupertinoActionSheet(
+                                      actions: <Widget>[
+                                        CupertinoButton(
+                                          color: Colors.green,
+                                          child: Text("Ajouter des personnes"),
+                                          onPressed: null,
+                                        ),
+                                        Container(height: 10,),
+                                        CupertinoButton(
+                                          color: Colors.green,
+                                          child: Text("Renommer"),
+                                          onPressed: () {
+                                            return showDialog<void>(
+                                              context: context,
+                                              barrierDismissible: false, // user must tap button!
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text('Renommer ce jardin'),
+                                                  content: TextField(
+                                                    controller: _gardenNameTextController,
+                                                    decoration: InputDecoration(hintText: "Nom jardin"),
+                                                  ),
+                                                  actions: <Widget>[
+                                                    FlatButton(
+                                                      child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                                      onPressed: () {
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                    ),
+                                                    FlatButton(
+                                                      child: Text('Mettre à jour'),
+                                                      onPressed: () {
+
+                                                        if (_gardenNameTextController.text.isNotEmpty) {
+
+                                                          BlocProvider.of<GardensBloc>(context).add(
+                                                            UpdateGarden(
+                                                                garden.copyWith(
+                                                                    name: _gardenNameTextController.text,
+                                                                    id: garden.id,
+                                                                    publicVisibility: garden.publicVisibility ,
+                                                                    admin: garden.admin,
+                                                                    members: garden.members,
+                                                                    creationDate: garden.creationDate,
+                                                                    dayActivitiesCount: garden.dayActivitiesCount
+                                                                )
+                                                            ),
+                                                          );
+                                                          Navigator.pushNamedAndRemoveUntil(
+                                                            context,
+                                                            '/',
+                                                                (Route<dynamic> route) => false,
+                                                          );
+                                                        }
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                        Container(height: 10,),
+                                        CupertinoButton(
+                                          color: Colors.green,
+                                          child: Text("Supprimer"),
+                                          onPressed: (){
+                                            return showDialog<void>(
+                                              context: context,
+                                              barrierDismissible: false, // user must tap button!
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
+                                                  content: SingleChildScrollView(
+                                                    child: ListBody(
+                                                      children: <Widget>[
+                                                        Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  actions: <Widget>[
+                                                    FlatButton(
+                                                      child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                                      onPressed: () {
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                    ),
+                                                    FlatButton(
+                                                      child: Text('${AppLocalizations.of(context).buttonContinue}'),
+                                                      onPressed: () {
+                                                        BlocProvider.of<GardensBloc>(context).add(GardenDeleted(garden));
+                                                        Navigator.pushNamedAndRemoveUntil(
+                                                          context,
+                                                          '/',
+                                                              (Route<dynamic> route) => false,
+                                                        );
+
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                );
+                              },
                             )
                           ],
                         ),
-                      )
-                  ),
-                  ParcelCarouselWithIndicator(parcels.map((item) => ParcelCarouselData(parcelName: item.name, parcelId: item.id, modelingName: item.currentModelingName, dayActivitiesCount: item.dayActivitiesCount)).toList(), garden, user),
+                        Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
+                              child: Text(
+                                  "$dayActivitiesCount activités à réaliser aujourd'hui.",
+                                  style: TextStyle(
+                                      color: const Color(0xFF01534F),
+                                      fontSize: 2.2 * SizeConfig.textMultiplier
+                                  )
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+              ),
+              ParcelCarouselWithIndicator(
+//                      parcels.map((item) => ParcelCarouselData(parcelName: item.name, parcelId: item.id, modelingName: item.currentModelingName, dayActivitiesCount: item.dayActivitiesCount)).toList(),
+                  garden, user),
 //                  Row(
 //                    mainAxisAlignment: MainAxisAlignment.center,
 //                    children: <Widget>[
@@ -228,15 +227,11 @@ class GardenItem extends StatelessWidget {
 //                      ),
 //                    ],
 //                  )
-                ],
-              ),
-            ),
+            ],
           ),
-        );
-      } else {
-        return Container();
-      }
-    });
+        ),
+      ),
+    );
   }
 
 
