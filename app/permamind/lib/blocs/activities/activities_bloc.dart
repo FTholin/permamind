@@ -8,7 +8,6 @@ import 'package:permamind/blocs/blocs.dart';
 class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 
   final ParcelsBloc parcelsBloc;
-  StreamSubscription gardensSubscription;
   StreamSubscription _activitiesSubscription;
 
   final DataRepository dataRepository;
@@ -20,22 +19,21 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   }) {
     DateTime now = new DateTime.now();
     referenceDate = new DateTime(now.year, now.month, now.day, 1);
-
   }
 
   @override
-  ActivitiesState get initialState => ActivitiesLoading();
+  ActivitiesState get initialState => ActivitiesLoadInProgress();
 
     @override
     Stream<ActivitiesState> mapEventToState(ActivitiesEvent event) async* {
 
-      if (event is LoadActivities) {
-        yield* _mapLoadActivitiesToState(event);
+      if (event is ActivitiesLoadedSuccess) {
+        yield* _mapActivitiesLoadedToState(event);
       } else if (event is ActivitiesUpdated) {
         yield* _mapActivitiesUpdateToState(event);
       }  else if (event is SelectDayActivities) {
         yield* _mapSelectDayActivitiesToState(event);
-      } else if (event is UpdateActivity) {
+      } else if (event is ActivityUpdated) {
         yield* _mapUpdateActivityToState(event);
       } else if (event is AddActivity) {
         yield* _mapAddActivityToState(event);
@@ -48,7 +46,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     }
 
 
-  Stream<ActivitiesState> _mapLoadActivitiesToState(LoadActivities event) async* {
+  Stream<ActivitiesState> _mapActivitiesLoadedToState(ActivitiesLoadedSuccess event) async* {
     _activitiesSubscription?.cancel();
     _activitiesSubscription = dataRepository.loadParcelActivities(event.parcelId, event.start, event.last).listen(
           (activities) {
@@ -68,12 +66,12 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 
 
   Stream<ActivitiesState> _mapActivitiesUpdateToState(ActivitiesUpdated event) async* {
-    yield ActivitiesLoaded(referenceDate, event.activities);
+    yield ActivitiesLoadSuccess(referenceDate, event.activities);
   }
 
   Stream<ActivitiesState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
     referenceDate =  event.selectedDay;
-    yield ActivitiesLoaded(referenceDate, event.dayActivities);
+    yield ActivitiesLoadSuccess(referenceDate, event.dayActivities);
   }
 
   Stream<ActivitiesState> _mapDeleteActivitiesToState(ActivitiesDeletedFromParcel event) async* {
@@ -81,7 +79,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   }
 
 
-  Stream<ActivitiesState> _mapUpdateActivityToState(UpdateActivity event) async* {
+  Stream<ActivitiesState> _mapUpdateActivityToState(ActivityUpdated event) async* {
     dataRepository.updateActivity(event.updatedActivity);
   }
 
@@ -93,8 +91,6 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
   @override
   Future<void> close() {
     _activitiesSubscription.cancel();
-    if (gardensSubscription != null)
-      gardensSubscription.cancel();
     return super.close();
   }
 

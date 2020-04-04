@@ -8,32 +8,23 @@ abstract class ActivitiesState extends Equatable {
   List<Object> get props => [];
 }
 
+class ActivitiesLoadInProgress extends ActivitiesState {}
 
-class ActivitiesLoading extends ActivitiesState {
-  @override
-  String toString() => "ActivitiesLoading";
-}
-
-
-class ActivitiesNotLoaded extends ActivitiesState {
-  @override
-  String toString() => "ActivitiesNotLoaded";
-}
-
-
-class ActivitiesLoaded extends ActivitiesState {
+class ActivitiesLoadSuccess extends ActivitiesState {
 
   final DateTime referenceDate;
   final Map<DateTime, List> schedule;
 
-  ActivitiesLoaded([this.referenceDate, this.schedule]);
+  ActivitiesLoadSuccess([this.referenceDate, this.schedule]);
 
   @override
   List<Object> get props => [referenceDate, schedule];
 
   @override
-  String toString() => 'ActivitiesLoaded { activities: $schedule }';
+  String toString() => 'ActivitiesLoadSuccess { activities: $schedule }';
 }
+
+class ActivitiesLoadFailure extends ActivitiesState {}
 
 
 

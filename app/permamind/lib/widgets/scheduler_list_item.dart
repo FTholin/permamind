@@ -36,7 +36,7 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
             checkboxValue = value;
             // TODO Add user for completeActivityUser
             BlocProvider.of<ActivitiesBloc>(context).add(
-                UpdateActivity(
+                ActivityUpdated(
                     widget.activity.copyWith(
                     id: widget.activity.id,
                     parcelId: widget.activity.parcelId,

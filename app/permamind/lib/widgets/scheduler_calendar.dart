@@ -38,7 +38,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
 
     return BlocBuilder<ActivitiesBloc, ActivitiesState>(
         builder: (context, state) {
-      if (state is ActivitiesLoaded) {
+      if (state is ActivitiesLoadSuccess) {
         _events = state.schedule;
         return Expanded(
           child: Column(
@@ -96,14 +96,14 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
 
   void _onVisibleDaysChanged(DateTime first, DateTime last, CalendarFormat format) {
     referenceDate = first.add(new Duration(days: 1));
-    BlocProvider.of<ActivitiesBloc>(context).add(LoadActivities(widget.parcelId, first, last));
+    BlocProvider.of<ActivitiesBloc>(context).add(ActivitiesLoadedSuccess(widget.parcelId, first, last));
   }
 
   // Method call when the calendar is created
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {
     BlocProvider.of<ActivitiesBloc>(context)
-        .add(LoadActivities(widget.parcelId, first, last));
+        .add(ActivitiesLoadedSuccess(widget.parcelId, first, last));
   }
 
 

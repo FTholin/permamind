@@ -5,12 +5,12 @@ abstract class ActivitiesEvent extends Equatable {
   ActivitiesEvent([List props = const []]) : super(props);
 }
 
-class LoadActivities extends ActivitiesEvent {
+class ActivitiesLoadedSuccess extends ActivitiesEvent {
   final String parcelId;
   final DateTime start;
   final DateTime last;
 
-  LoadActivities(this.parcelId, this.start, this.last);
+  ActivitiesLoadedSuccess(this.parcelId, this.start, this.last);
 
   @override
   List<Object> get props => [parcelId, start, last];
@@ -43,13 +43,16 @@ class SelectDayActivities extends ActivitiesEvent {
 }
 
 
-class UpdateActivity extends ActivitiesEvent {
+class ActivityUpdated extends ActivitiesEvent {
   final Activity updatedActivity;
 
-  UpdateActivity(this.updatedActivity) : super([updatedActivity]);
+  ActivityUpdated(this.updatedActivity) : super([updatedActivity]);
 
   @override
-  String toString() => 'UpdateActivity { updatedActivity: $updatedActivity }';
+  List<Object> get props => [updatedActivity];
+
+  @override
+  String toString() => 'ActivityUpdated { updatedActivity: $updatedActivity }';
 
 }
 
@@ -57,6 +60,9 @@ class AddActivity extends ActivitiesEvent {
   final Activity newActivity;
 
   AddActivity(this.newActivity) : super([AddActivity]);
+
+  @override
+  List<Object> get props => [newActivity];
 
   @override
   String toString() => 'UpdateActivity { newActivity: $newActivity }';
@@ -68,25 +74,11 @@ class ActivitiesDeletedFromParcel extends ActivitiesEvent {
   ActivitiesDeletedFromParcel(this.parcelId) : super([parcelId]);
 
   @override
+  List<Object> get props => [parcelId];
+
+  @override
   String toString() => 'ActivitiesDeletedFromParcel { gardenId: $parcelId }';
 }
-
-//class LoadActivities extends ActivitiesEvent {
-//
-//  final String gardenId;
-//
-//  LoadActivities(this.gardenId) : super([gardenId]);
-//
-//  @override
-//  String toString() => 'LoadActivities { gardenId: $gardenId}';
-//}
-
-
-//
-
-
-
-
 
 
 //class ScheduleUpdated extends ActivitiesEvent {
