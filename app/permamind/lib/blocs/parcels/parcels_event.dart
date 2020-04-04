@@ -71,3 +71,27 @@ class ParcelAdded extends ParcelsEvent {
   @override
   String toString() => 'ParcelAdded { parcel: $parcel }';
 }
+
+class ParcelDeleted extends ParcelsEvent {
+  final String parcelId;
+
+  ParcelDeleted(this.parcelId);
+
+  @override
+  List<Object> get props => [parcelId];
+
+  @override
+  String toString() => 'ParcelsDeleted { parcelId: $parcelId }';
+}
+
+
+class ModelingAdded extends ParcelsEvent {
+  final List<ModelingSchedule> schedule;
+  final String gardenId;
+  final String parcelId;
+
+  ModelingAdded(this.gardenId, this.parcelId, this.schedule);
+
+  @override
+  String toString() => 'ModelingAdded { activities: $schedule, gardenId: $gardenId}';
+}

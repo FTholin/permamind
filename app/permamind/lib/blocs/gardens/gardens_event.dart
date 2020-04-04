@@ -135,17 +135,7 @@ class GardensUpdated extends GardensEvent {
 //}
 
 
-//class ParcelDeleted extends GardensEvent {
-//  final String parcelId;
-//
-//  ParcelDeleted(this.parcelId);
-//
-//  @override
-//  List<Object> get props => [parcelId];
-//
-//  @override
-//  String toString() => 'ParcelsDeleted { parcelId: $parcelId }';
-//}
+
 //
 //class ParcelLeaved extends GardensEvent {
 //  final Parcel leavedParcel;
@@ -184,16 +174,7 @@ class GardensUpdated extends GardensEvent {
 //}
 
 
-class ModelingAdded extends GardensEvent {
-  final List<ModelingSchedule> schedule;
-  final String gardenId;
-  final String parcelId;
 
-  ModelingAdded(this.gardenId, this.parcelId, this.schedule);
-
-  @override
-  String toString() => 'ModelingAdded { activities: $schedule, gardenId: $gardenId}';
-}
 
 
 

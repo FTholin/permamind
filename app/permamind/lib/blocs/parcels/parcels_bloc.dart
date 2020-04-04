@@ -11,18 +11,12 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
   final FirebaseDataRepository dataRepository;
   final User user;
 
-  StreamSubscription gardensSubscription;
-  StreamSubscription parcelsSubscription;
+//  StreamSubscription gardensSubscription;
+//  StreamSubscription parcelsSubscription;
 
 
   ParcelsBloc({@required this.gardensBloc, @required this.dataRepository, @required this.user})  {
-//    gardensSubscription = gardensBloc.listen((state) {
-//      if (state is GardensLoaded) {
-//
-////        add(GardensUpdated(state.gardens));
-////        add(TodosUpdated((todosBloc.state as TodosLoadSuccess).todos));
-//      }
-//    });
+
   }
 
 
@@ -40,7 +34,10 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapParcelUpdatedToState(event);
     } else if (event is ParcelAdded) {
       yield* _mapParcelAddedToState(event);
-
+    } else if (event is ParcelDeleted) {
+      yield* _mapParcelDeletedToState(event);
+    } else if (event is ModelingAdded) {
+      yield* _mapModelingAddedToState(event);
     }
   }
 
@@ -67,6 +64,29 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
     dataRepository.addNewParcel(event.parcel);
   }
 
+
+  Stream<ParcelsState> _mapModelingAddedToState(ModelingAdded event) async* {
+    DateTime referenceDate = DateTime.now();
+    List<Activity> activities = List<Activity>();
+    for (int i = 0; i < event.schedule.length; i++) {
+      for (int j = 0; j < event.schedule[i].dayActivities.length; j++) {
+        DateTime expectedDate = referenceDate.add(Duration(days: i));
+        expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
+        activities.add(
+            Activity( event.schedule[i].dayActivities[j].name, event.gardenId, event.parcelId, false, expectedDate, event.schedule[i].dayActivities[j].category, '')
+        );
+      }
+    }
+    if (activities.isNotEmpty) {
+      dataRepository.addParcelActivities(activities);
+    }
+  }
+
+  Stream<ParcelsState> _mapParcelDeletedToState(ParcelDeleted event) async* {
+    dataRepository.deleteActivitiesFromParcel(event.parcelId);
+    dataRepository.deleteParcel(event.parcelId);
+  }
+
   @override
   Future<void> close() {
     // TODO Attention
@@ -75,41 +95,3 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
     return super.close();
   }
 }
-
-//class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
-//
-//  final GardensBloc gardensBloc;
-//  StreamSubscription gardenSubscription;
-//  final DataRepository dataRepository;
-//
-//
-//  ParcelsBloc({@required this.gardensBloc, @required this.dataRepository});
-//
-//  @override
-//  ParcelsState get initialState => ParcelsLoading();
-//
-//  @override
-//  Stream<ParcelsState> mapEventToState(ParcelsEvent event) async* {
-//    if (event is LoadParcels) {
-//      yield* _mapLoadParcelsToState(event);
-//    } else if (event is ParcelsUpdated) {
-//      yield* _mapParcelsUpdatedToState(event);
-//    }
-//
-//  }
-//
-
-//
-//  Stream<ParcelsState> _mapParcelsUpdatedToState(ParcelsUpdated event) async* {
-//    yield ParcelsLoaded(event.parcels);
-//  }
-//
-//
-//
-//
-//  @override
-//  Future<void> close() {
-//    gardenSubscription.cancel();
-//    return super.close();
-//  }
-//}

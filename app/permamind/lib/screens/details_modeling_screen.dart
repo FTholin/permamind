@@ -496,12 +496,11 @@ class DetailsModelingScreen extends StatelessWidget {
                                          modelingsMonitoring: [modeling.id], id: Uuid().v4());
 
                                      BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
-//                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
+                                     BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
 //                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
 
 
-                                     Navigator.pushAndRemoveUntil(
-                                       context,
+                                     Navigator.of(context).push(
                                        MaterialPageRoute(
                                          builder: (context) {
                                            return MultiBlocProvider(
@@ -521,9 +520,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                            );
                                          },
                                        ),
-                                       ModalRoute.withName('/detailsGarden'),
                                      );
-
                                    },
                                    child: Container(
                                      decoration: BoxDecoration(
