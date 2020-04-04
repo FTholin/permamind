@@ -488,20 +488,20 @@ class DetailsModelingScreen extends StatelessWidget {
                                  padding: EdgeInsets.all(3),
                                  child: InkWell(
                                    onTap: () {
-                                     Parcel completedParcel = parcel.copyWith(
-                                         name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
-                                         publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-                                         currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
-                                         modelingsMonitoring: [modeling.id], id: Uuid().v4());
-
-//                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
-                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
-//                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
-
-                                     Navigator.of(context).pushNamedAndRemoveUntil(
-                                         '/detailsParcel', (Route<dynamic> route) => false,
-                                       arguments: DetailsParcelScreenArguments(gardenId, completedParcel.id)
-                                     );
+//                                     Parcel completedParcel = parcel.copyWith(
+//                                         name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
+//                                         publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
+//                                         currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+//                                         modelingsMonitoring: [modeling.id], id: Uuid().v4());
+//
+////                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
+//                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
+////                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
+//
+//                                     Navigator.of(context).pushNamedAndRemoveUntil(
+//                                         '/detailsParcel', (Route<dynamic> route) => false,
+//                                       arguments: DetailsParcelScreenArguments(gardenId, completedParcel.id)
+//                                     );
                                    },
                                    child: Container(
                                      decoration: BoxDecoration(

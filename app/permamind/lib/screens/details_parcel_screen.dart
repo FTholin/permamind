@@ -13,16 +13,16 @@ import 'package:permamind/widgets/widgets.dart';
 
 class DetailsParcelScreen extends StatelessWidget {
 
-  final DataRepository dataRepository;
+//  final DataRepository dataRepository;
   final String parcelId;
-  final User user;
+//  final User user;
   final String gardenId;
 
   DetailsParcelScreen({
     Key key,
-    @required this.dataRepository,
+//    @required this.dataRepository,
     @required this.parcelId,
-    @required this.user,
+//    @required this.user,
     @required this.gardenId,
   })
       : super(key: key);
@@ -35,16 +35,12 @@ class DetailsParcelScreen extends StatelessWidget {
 
     return BlocBuilder<ParcelsBloc, ParcelsState>(
       builder: (context, state) {
-//        if (state is ParcelsLoadSuccess) {
-//
-//
-//        } else {
-//          return Container();
-//        }
 
         final currentParcel = (state as ParcelsLoadSuccess)
             .parcels
             .firstWhere((parcel) => parcel.id == parcelId, orElse: () => null);
+
+        final parcelsBloc = BlocProvider.of<ParcelsBloc>(context);
 
         return currentParcel != null ? Scaffold(
           appBar: AppBar(
@@ -77,8 +73,8 @@ class DetailsParcelScreen extends StatelessWidget {
                           CupertinoButton(
                             color: Colors.green,
                             child: Text("Renommer"),
-                            onPressed: (){
-                              return showDialog<void>(
+                            onPressed: () async {
+                              await showDialog<void>(
                                 context: context,
                                 barrierDismissible: false, // user must tap button!
                                 builder: (BuildContext context) {
@@ -101,32 +97,27 @@ class DetailsParcelScreen extends StatelessWidget {
 
                                           if (_parcelNameTextController.text.isNotEmpty) {
 
-//                                            BlocProvider.of<ParcelsBloc>(context).add(
-//                                              ParcelUpdated(
-//                                                  currentParcel.copyWith(
-//                                                    name: _parcelNameTextController.text,
-//                                                    gardenId: currentParcel.gardenId,
-//                                                    length: currentParcel.length,
-//                                                    width: currentParcel.width,
-//                                                    parcelGround: currentParcel.parcelGround,
-//                                                    publicVisibility: currentParcel.publicVisibility,
-//                                                    admin: currentParcel.admin,
-//                                                    members: currentParcel.members,
-//                                                    currentModelingId: currentParcel.currentModelingId,
-//                                                    currentModelingName: currentParcel.currentModelingName,
-//                                                    creationDate: currentParcel.creationDate,
-//                                                    dayActivitiesCount: currentParcel.dayActivitiesCount,
-//                                                    modelingsMonitoring: currentParcel.modelingsMonitoring,
-//                                                  )
-//                                              ),
-//                                            );
-
-                                            Navigator.pushNamedAndRemoveUntil(
-                                                context,
-                                                '/detailsParcel',
-                                                    (Route<dynamic> route) => false,
-                                                arguments: DetailsParcelScreenArguments(gardenId, parcelId)
+                                            parcelsBloc.add(
+                                              ParcelUpdated(
+                                                  currentParcel.copyWith(
+                                                    name: _parcelNameTextController.text,
+                                                    gardenId: currentParcel.gardenId,
+                                                    length: currentParcel.length,
+                                                    width: currentParcel.width,
+                                                    parcelGround: currentParcel.parcelGround,
+                                                    publicVisibility: currentParcel.publicVisibility,
+                                                    admin: currentParcel.admin,
+                                                    members: currentParcel.members,
+                                                    currentModelingId: currentParcel.currentModelingId,
+                                                    currentModelingName: currentParcel.currentModelingName,
+                                                    creationDate: currentParcel.creationDate,
+                                                    dayActivitiesCount: currentParcel.dayActivitiesCount,
+                                                    modelingsMonitoring: currentParcel.modelingsMonitoring,
+                                                  )
+                                              ),
                                             );
+
+                                            Navigator.pop(context, true);
                                           }
                                         },
                                       ),
@@ -134,6 +125,7 @@ class DetailsParcelScreen extends StatelessWidget {
                                   );
                                 },
                               );
+                              Navigator.pop(context, true);
                             },
                           ),
                           Container(height: 10,),
@@ -187,34 +179,55 @@ class DetailsParcelScreen extends StatelessWidget {
           ),
           body: Column(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
 
-                BlocBuilder<DesignBloc, DesignState>(
-                    builder: (context, state) {
-                      if (state is DesignLoaded) {
-                        if (state.designParcel.designs.isEmpty) {
-                          return Container(
-                            height: 230,
-                            child: Center(
-                                child: VeggiesDesignChart(80.0, 100.0, [])
-                            ),
-                          );
-                        } else {
-                          return Container(
-                            height: 230,
-                            child: Center(
-                                child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
-                            ),
-                          );
-                        }
-                      } else {
-                        return Container(
-                          height: 230,
-                          child: LoadingIndicator(),
+                Material(
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context){
+                              return AlertDialog(
+                                title: Text("Alert Dialog"),
+                                content: Text("Dialog Content"),
+                              );
+                            }
                         );
-                      }
-                    }
+                      },
+                      child: Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset("assets/utils_image/empty_parcel.jpg", fit: BoxFit.contain, height: 28 * SizeConfig.heightMultiplier,),
+                        ),),
+                    )
                 ),
+//                BlocBuilder<DesignBloc, DesignState>(
+//                    builder: (context, state) {
+//                      if (state is DesignLoaded) {
+//                        if (state.designParcel.designs.isEmpty) {
+//                          return Container(
+//                            height: 230,
+//                            child: Center(
+//                                child: VeggiesDesignChart(80.0, 100.0, [])
+//                            ),
+//                          );
+//                        } else {
+//                          return Container(
+//                            height: 230,
+//                            child: Center(
+//                                child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
+//                            ),
+//                          );
+//                        }
+//                      } else {
+//                        return Container(
+//                          height: 230,
+//                          child: LoadingIndicator(),
+//                        );
+//                      }
+//                    }
+//                ),
 
                 SchedulerCalendar(
 //                referenceDate: DateTime.now(),
@@ -717,8 +730,9 @@ class DetailsParcelScreenArguments {
 
   final String gardenId;
   final String parcelId;
+  final ParcelsBloc parcelsBloc;
 
-  DetailsParcelScreenArguments(this.gardenId, this.parcelId);
+  DetailsParcelScreenArguments(this.parcelsBloc, this.gardenId, this.parcelId);
 }
 
 //class DetailsParcelScreenArguments {

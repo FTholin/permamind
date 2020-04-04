@@ -36,6 +36,11 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
       yield* _mapLoadParcelsToState(event);
     } else if (event is ParcelsUpdated) {
       yield* _mapParcelsUpdatedToState(event);
+    } else if (event is ParcelUpdated) {
+      yield* _mapParcelUpdatedToState(event);
+    } else if (event is ParcelAdded) {
+      yield* _mapParcelAddedToState(event);
+
     }
   }
 
@@ -53,10 +58,20 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
     yield ParcelsLoadSuccess(event.parcels);
   }
 
+
+  Stream<ParcelsState> _mapParcelUpdatedToState(ParcelUpdated event) async* {
+    dataRepository.updateParcel(event.parcel);
+  }
+
+  Stream<ParcelsState> _mapParcelAddedToState(ParcelAdded event) async* {
+    dataRepository.addNewParcel(event.parcel);
+  }
+
   @override
   Future<void> close() {
+    // TODO Attention
     parcelsSubscription.cancel();
-    gardensSubscription.cancel();
+//    gardensSubscription.cancel();
     return super.close();
   }
 }

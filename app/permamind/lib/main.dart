@@ -294,26 +294,27 @@ class App extends StatelessWidget {
                           ),
                     );
 
-                  } else if (settings.name == '/detailsParcel') {
-
-                    final DetailsParcelScreenArguments args =
-                        settings.arguments;
-
-                    return PageRouteBuilder(
-                      pageBuilder: (_, __, ___) =>
-                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                            builder: (context, state) {
-                              if (state is Authenticated) {
-
-                                return MultiBlocProvider(
-                                  providers: [
-                                  BlocProvider(
-                                  create: (context) => ActivitiesBloc(
-                                      dataRepository: firebaseRepository,
-                                      gardensBloc: BlocProvider.of<GardensBloc>(context),
-//                                      parcelId: parcels[index].id
-                                  ),
-                                ),
+                  }
+//                  else if (settings.name == '/detailsParcel') {
+//
+//                    final DetailsParcelScreenArguments args =
+//                        settings.arguments;
+//
+//                    return PageRouteBuilder(
+//                      pageBuilder: (_, __, ___) =>
+//                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//                            builder: (context, state) {
+//                              if (state is Authenticated) {
+//
+//                                return MultiBlocProvider(
+//                                  providers: [
+//                                  BlocProvider(
+//                                  create: (context) => ActivitiesBloc(
+//                                      dataRepository: firebaseRepository,
+//                                      gardensBloc: BlocProvider.of<GardensBloc>(context),
+////                                      parcelId: parcels[index].id
+//                                  ),
+//                                ),
 //                                BlocProvider(
 //                                  create: (context) => DesignBloc(
 //                                      dataRepository: firebaseRepository,
@@ -321,28 +322,29 @@ class App extends StatelessWidget {
 ////                                      parcelId: parcels[index].id
 //                                  )..add(LoadDesign()),
 //                                ),
-                                  ],
-                                  child: DetailsParcelScreen(
-                                      dataRepository: firebaseRepository,
-                                      user: state.userAuthenticated,
-                                      gardenId: args.gardenId,
-                                      parcelId: args.parcelId,
-                                  ),
-                                );
-
-                              } else if (state is Unauthenticated) {
-                                return LoginScreen(userRepository: userRepository);
-                              } else {
-                                return Center(child: CircularProgressIndicator());
-                              }
-                            },
-                          ),
-                      transitionsBuilder: (c, anim, a2, child) =>
-                          FadeTransition(opacity: anim, child: child),
-                      transitionDuration: Duration(milliseconds: 800),
-                    );
-
-                  }
+//                                BlocProvider.value(value: null)
+//                                  ],
+//                                  child: DetailsParcelScreen(
+//                                      dataRepository: firebaseRepository,
+//                                      user: state.userAuthenticated,
+//                                      gardenId: args.gardenId,
+//                                      parcelId: args.parcelId,
+//                                  ),
+//                                );
+//
+//                              } else if (state is Unauthenticated) {
+//                                return LoginScreen(userRepository: userRepository);
+//                              } else {
+//                                return Center(child: CircularProgressIndicator());
+//                              }
+//                            },
+//                          ),
+//                      transitionsBuilder: (c, anim, a2, child) =>
+//                          FadeTransition(opacity: anim, child: child),
+//                      transitionDuration: Duration(milliseconds: 800),
+//                    );
+//
+//                  }
 //                  else if (settings.name == "/detailsGarden") {
 //
 //                    final DetailsParcelScreenArguments args = settings.arguments;

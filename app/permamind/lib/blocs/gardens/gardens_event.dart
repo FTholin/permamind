@@ -121,17 +121,7 @@ class GardensUpdated extends GardensEvent {
 }
 
 
-//class ParcelAdded extends GardensEvent {
-//  final Parcel parcel;
-//
-//  ParcelAdded(this.parcel);
-//
-//  @override
-//  List<Object> get props => [parcel];
-//
-//  @override
-//  String toString() => 'ParcelAdded { parcel: $parcel }';
-//}
+
 //
 //class DesignParcelAdded extends GardensEvent {
 //
@@ -182,14 +172,7 @@ class GardensUpdated extends GardensEvent {
 //  String toString() => 'ParcelCopied { copiedParcel: $copiedParcel }';
 //}
 
-//class ParcelUpdated extends GardensEvent {
-//  final Parcel parcelUpdated;
-//
-//  ParcelUpdated(this.parcelUpdated);
-//
-//  @override
-//  String toString() => 'ParcelsUpdated { parcelsUpdated: $parcelUpdated }';
-//}
+
 
 //class ActivitiesCopied extends GardensEvent {
 //  final List<Activity> activities;

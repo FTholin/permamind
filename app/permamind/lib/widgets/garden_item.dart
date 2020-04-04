@@ -30,6 +30,7 @@ class GardenItem extends StatelessWidget {
 
     TextEditingController _gardenNameTextController = TextEditingController();
 
+
     return Padding(
       padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
       child: Container(
@@ -206,12 +207,9 @@ class GardenItem extends StatelessWidget {
                     ),
                   )
               ),
-            BlocProvider.value(
-              value: BlocProvider.of<ParcelsBloc>(context),
-              child:     ParcelCarouselWithIndicator(
-//                      parcels.map((item) => ParcelCarouselData(parcelName: item.name, parcelId: item.id, modelingName: item.currentModelingName, dayActivitiesCount: item.dayActivitiesCount)).toList(),
+
+              ParcelCarouselWithIndicator(
                   garden, user),
-            )
 
 //                  Row(
 //                    mainAxisAlignment: MainAxisAlignment.center,

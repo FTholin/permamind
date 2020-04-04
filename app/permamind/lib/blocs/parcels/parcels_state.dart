@@ -22,6 +22,8 @@ class ParcelsLoadSuccess extends ParcelsState {
     return 'ParcelsGardensLoadSuccess { gardens: $parcels}';
   }
 }
+
+
 //
 //class ParcelsLoaded extends ParcelsState {
 //

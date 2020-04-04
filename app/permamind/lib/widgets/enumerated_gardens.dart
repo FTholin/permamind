@@ -64,7 +64,6 @@ class EnumeratedGardens extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: gardens.length,
                     itemBuilder: (context, i) {
-
                       return BlocProvider(
                         create: (BuildContext context) => ParcelsBloc(
                           gardensBloc: BlocProvider.of<GardensBloc>(context),

@@ -15,7 +15,7 @@ class ParcelCarouselWithIndicator extends StatefulWidget {
 
 //  final List<ParcelCarouselData> parcels;
 
-  ParcelCarouselWithIndicator( this.garden, this.user);
+  ParcelCarouselWithIndicator(this.garden, this.user);
 
   @override
   _ParcelCarouselWithIndicatorState createState() =>
@@ -51,26 +51,50 @@ class _ParcelCarouselWithIndicatorState
         return CircularProgressIndicator();
       }
     });
-
   }
 
   List<Widget> loadCarouselContent(BuildContext context, List<Parcel> parcels) {
+    final parcelsBloc = BlocProvider.of<ParcelsBloc>(context);
 
     List<Widget> carouselContent = List<Widget>();
     for (final parcel in parcels) {
       carouselContent.add(InkWell(
-        onTap: () =>  Navigator.pushNamed(
-          context,
-          '/detailsParcel',
-          arguments: DetailsParcelScreenArguments(
-              widget.garden.id,
-              parcel.id
-          ),
-        ),
-        child: Container(
-          color: Colors.green,
-          child: Stack(
-            children: <Widget>[
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return MultiBlocProvider(
+                    providers: [
+                  BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                  BlocProvider(
+                        create: (context) => ActivitiesBloc(
+                          dataRepository: parcelsBloc.dataRepository,
+                          parcelsBloc: parcelsBloc,
+//                                    parcelId: parcels[index].id
+                        ),
+                      ),
+                    ],
+                    child: DetailsParcelScreen(
+                      gardenId: widget.garden.id,
+                      parcelId: parcel.id,
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+//        } =>  Navigator.pushNamed(
+//          context,
+//          '/detailsParcel',
+//          arguments: DetailsParcelScreenArguments(
+//              widget.garden.id,
+//              parcel.id,
+//          ),
+//        ),
+          child: Container(
+            color: Colors.green,
+            child: Stack(
+              children: <Widget>[
 //              Positioned(
 //                top: 6 * SizeConfig.heightMultiplier,
 //                left: 55 * SizeConfig.widthMultiplier,
@@ -79,64 +103,61 @@ class _ParcelCarouselWithIndicatorState
 //                  width: 20 * SizeConfig.widthMultiplier,
 //                ),
 //              ),
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: Container(
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Container(
 //                color: Colors.green,
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text("${parcel.name}",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 2.5 * SizeConfig.textMultiplier)),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text("Vous avez ${parcel.dayActivitiesCount} tâches à effectuer",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 2 * SizeConfig.textMultiplier)),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text("${parcel.currentModelingName}",
-                                style: TextStyle(
-                                    color: Color.fromRGBO(214, 211, 94, 1),
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 2 * SizeConfig.textMultiplier)),
-                          ],
-                        )
-                      ],
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Text("${parcel.name}",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize:
+                                          2.5 * SizeConfig.textMultiplier)),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                  "Vous avez ${parcel.dayActivitiesCount} tâches à effectuer",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 2 * SizeConfig.textMultiplier)),
+                            ],
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text("${parcel.currentModelingName}",
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(214, 211, 94, 1),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 2 * SizeConfig.textMultiplier)),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        )
-      ));
+              ],
+            ),
+          )));
     }
-    carouselContent.add(
-        Container(
+    carouselContent.add(Container(
       margin: EdgeInsets.all(5.0),
       child: InkWell(
           onTap: () => Navigator.pushNamed(
-            context,
-            '/addParcel',
-            arguments: AddParcelScreenArguments(
-              widget.garden,
-              widget.user
-            ),
-          ),// handle your onTap here
+                context,
+                '/addParcel',
+                arguments: AddParcelScreenArguments(widget.garden, widget.user),
+              ), // handle your onTap here
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             child: Container(
