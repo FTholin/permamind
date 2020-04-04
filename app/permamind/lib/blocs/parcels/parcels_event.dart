@@ -6,20 +6,46 @@ abstract class ParcelsEvent extends Equatable {
   ParcelsEvent([List props = const []]) : super(props);
 }
 
-class LoadParcels extends ParcelsEvent {
+//
 
+class ParcelsLoadedSuccess extends ParcelsEvent {
   final String gardenId;
-  final String userPseudo;
   final String userId;
+  final String userPseudo;
 
-  LoadParcels(this.gardenId, this.userPseudo, this.userId);
+  ParcelsLoadedSuccess(this.gardenId, this.userId, this.userPseudo);
+  @override
+  List<Object> get props => [gardenId, userId, userPseudo];
 
   @override
-  String toString() => 'LoadParcels { gardenId: $gardenId, userPseudo: $userPseudo }';
+  String toString() {
+    return 'ParcelsGardensLoadedSuccess';
+  }
 }
 
+//class LoadUpdated extends  {
+//  final List<Garden> gardens;
+//
+//   GardensUpdated(this.gardens);
+//
+//  @override
+//  List<Object> get props => [gardens];
+//
+//  @override
+//  String toString() => 'GardensUpdated { todos: $gardens }';
+//}
 
+class ParcelsUpdated extends ParcelsEvent {
+  final List<Parcel> parcels;
 
+  ParcelsUpdated(this.parcels);
+
+  @override
+  List<Object> get props => [parcels];
+
+  @override
+  String toString() => 'ParcelsUpdated { parcels: $parcels }';
+}
 
 
 

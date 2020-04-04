@@ -8,7 +8,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
   final DataRepository _dataRepository;
   StreamSubscription _gardensSubscription;
 
-  StreamSubscription _parcelsSubscription;
 
   final AuthenticationBloc _authenticationBloc;
   StreamSubscription _authenticationBlocSubscription;
@@ -29,10 +28,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     if (event is LoadGardens) {
       yield* _mapLoadGardensToState(event);
     }
-//    else if (event is LoadParcels) {
-//      yield* _mapLoadParcelsToState(event);
-//
-//    }
     else if (event is AddGarden) {
       yield* _mapAddGardenToState(event);
     } else if (event is UpdateGarden) {
@@ -45,7 +40,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 //    }
     else if (event is GardensUpdated) {
       yield* _mapGardensUpdateToState(event);
-    } else if (event is LeaveGarden) {
+    }
+    else if (event is LeaveGarden) {
       yield* _mapLeaveGardensToState(event);
     } else if (event is CopyActivities) {
       yield* _mapCopyActivitiesToState(event);
@@ -72,38 +68,21 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 //    else if (event is DesignParcelAdded) {
 //      yield* _mapDesignParcelAdded(event);
 //    }
-//    else if (event is ParcelsUpdated) {
-//      yield* _mapParcelsUpdatedToState(event);
-//    }
+
   }
+
+
 
   Stream<GardensState> _mapLoadGardensToState(LoadGardens event) async* {
     _gardensSubscription?.cancel();
-
     _gardensSubscription = _dataRepository.gardens(event.userId, event.userPseudo).listen(
           (gardens) {
             add(GardensUpdated(gardens));
           }
     );
 
-//    for (final garden in gardens) {
-//      _parcelsSubscription?.cancel();
-//      _dataRepository.loadParcels(garden.id, event.userId, event.userPseudo).listen((parcels){
-//        gardensParcels[garden.id] = parcels;
-//      });
-//    }
-//    add(ParcelsUpdated(gardensParcels));
-
   }
 
-//  Stream<GardensState> _mapLoadParcelsToState(LoadParcels event) async* {
-//    _parcelsSubscription?.cancel();
-//    _parcelsSubscription = _dataRepository.loadParcels(event.gardenId, event.userId, event.userPseudo).listen(
-//            (parcels) {
-//          add(ParcelsUpdated(parcels));
-//        }
-//    );
-//  }
 
 
     Stream<GardensState> _mapAddGardenToState(AddGarden event) async* {
@@ -205,9 +184,7 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     }
   }
 
-//  Stream<GardensState> _mapParcelsUpdatedToState(ParcelsUpdated event) async* {
-//    yield ParcelsLoaded(event.gardensParcels);
-//  }
+
 
   @override
   Future <void> close() {

@@ -23,17 +23,6 @@ class LoadGardens extends GardensEvent {
   String toString() => 'LoadGardens { userId: $userId}';
 }
 
-//class LoadParcels extends GardensEvent {
-//
-//  final String gardenId;
-//  final String userId;
-//  final String userPseudo;
-//
-//  LoadParcels(this.gardenId, this.userId, this.userPseudo) : super([gardenId, userId, userPseudo]);
-//
-//  @override
-//  String toString() => 'LoadParcels { userId: $userId}';
-//}
 
 class AddGarden extends GardensEvent {
   final Garden garden;
@@ -103,22 +92,32 @@ class ToggleAll extends GardensEvent {
   String toString() => 'ToggleAll';
 }
 
-class GardensUpdated extends GardensEvent {
+//class GardensUpdated extends GardensEvent {
+//
+//  final List<Garden> gardens;
+//
+//  GardensUpdated([this.gardens = const []]) : super([gardens]);
+//
+//  @override
+//  String toString() {
+//    String res = "Gardens Updated: gardens = [";
+//
+//    for (var garden in gardens) {
+//      res += " ${garden.name},";
+//    }
+//    res += ']';
+//    return res;
+//  }
+//}
 
+
+class GardensUpdated extends GardensEvent {
   final List<Garden> gardens;
 
-  GardensUpdated([this.gardens = const []]) : super([gardens]);
+  GardensUpdated(this.gardens);
 
   @override
-  String toString() {
-    String res = "Gardens Updated: gardens = [";
-
-    for (var garden in gardens) {
-      res += " ${garden.name},";
-    }
-    res += ']';
-    return res;
-  }
+  List<Object> get props => [gardens];
 }
 
 

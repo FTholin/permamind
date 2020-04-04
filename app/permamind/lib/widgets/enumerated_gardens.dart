@@ -13,12 +13,14 @@ import 'package:permamind/screens/screens.dart';
 
 class EnumeratedGardens extends StatelessWidget {
   final User _user;
+  final DataRepository _dataRepository;
 
   EnumeratedGardens(
       {Key key, @required DataRepository dataRepository, @required User user})
       : assert(dataRepository != null),
         assert(user != null),
         _user = user,
+        _dataRepository = dataRepository,
         super(key: key);
 
   @override
@@ -62,12 +64,20 @@ class EnumeratedGardens extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: gardens.length,
                     itemBuilder: (context, i) {
-                      return GardenItem(
-                        name: gardens[i].name,
-                        garden: gardens[i],
-                        user: _user,
-                        index: i,
-                        dayActivitiesCount: 8,
+
+                      return BlocProvider(
+                        create: (BuildContext context) => ParcelsBloc(
+                          gardensBloc: BlocProvider.of<GardensBloc>(context),
+                          dataRepository: _dataRepository,
+                          user: _user
+                        )..add(ParcelsLoadedSuccess(gardens[i].id, _user.id, _user.pseudo)),
+                        child: GardenItem(
+                          name: gardens[i].name,
+                          garden: gardens[i],
+                          user: _user,
+                          index: i,
+                          dayActivitiesCount: 8,
+                        ),
                       );
                     },
                   )

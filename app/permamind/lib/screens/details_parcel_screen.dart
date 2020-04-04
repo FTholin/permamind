@@ -33,6 +33,239 @@ class DetailsParcelScreen extends StatelessWidget {
 
     TextEditingController _parcelNameTextController = TextEditingController();
 
+    return BlocBuilder<ParcelsBloc, ParcelsState>(
+      builder: (context, state) {
+//        if (state is ParcelsLoadSuccess) {
+//
+//
+//        } else {
+//          return Container();
+//        }
+
+        final currentParcel = (state as ParcelsLoadSuccess)
+            .parcels
+            .firstWhere((parcel) => parcel.id == parcelId, orElse: () => null);
+
+        return currentParcel != null ? Scaffold(
+          appBar: AppBar(
+            title: Text(currentParcel.name),
+            leading:  IconButton(
+              icon: new Icon(Icons.arrow_back_ios),
+              onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false,),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(
+                    "Modifier",
+                    style: TextStyle(
+                        color: Colors.white,
+//                        fontWeight: FontWeight.bold,
+                        fontSize: 1.9 * SizeConfig.textMultiplier
+                    )
+                ),
+                onPressed: () {
+                  showCupertinoModalPopup(
+                      context: context,
+                      builder: (context) => CupertinoActionSheet(
+                        actions: <Widget>[
+                          CupertinoButton(
+                            color: Colors.green,
+                            child: Text("Ajouter des personnes"),
+                            onPressed: null,
+                          ),
+                          Container(height: 10,),
+                          CupertinoButton(
+                            color: Colors.green,
+                            child: Text("Renommer"),
+                            onPressed: (){
+                              return showDialog<void>(
+                                context: context,
+                                barrierDismissible: false, // user must tap button!
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Renommer cette parcelle'),
+                                    content: TextField(
+                                      controller: _parcelNameTextController,
+                                      decoration: InputDecoration(hintText: "Nom parcelle"),
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      FlatButton(
+                                        child: Text('Mettre à jour'),
+                                        onPressed: () {
+
+                                          if (_parcelNameTextController.text.isNotEmpty) {
+
+//                                            BlocProvider.of<ParcelsBloc>(context).add(
+//                                              ParcelUpdated(
+//                                                  currentParcel.copyWith(
+//                                                    name: _parcelNameTextController.text,
+//                                                    gardenId: currentParcel.gardenId,
+//                                                    length: currentParcel.length,
+//                                                    width: currentParcel.width,
+//                                                    parcelGround: currentParcel.parcelGround,
+//                                                    publicVisibility: currentParcel.publicVisibility,
+//                                                    admin: currentParcel.admin,
+//                                                    members: currentParcel.members,
+//                                                    currentModelingId: currentParcel.currentModelingId,
+//                                                    currentModelingName: currentParcel.currentModelingName,
+//                                                    creationDate: currentParcel.creationDate,
+//                                                    dayActivitiesCount: currentParcel.dayActivitiesCount,
+//                                                    modelingsMonitoring: currentParcel.modelingsMonitoring,
+//                                                  )
+//                                              ),
+//                                            );
+
+                                            Navigator.pushNamedAndRemoveUntil(
+                                                context,
+                                                '/detailsParcel',
+                                                    (Route<dynamic> route) => false,
+                                                arguments: DetailsParcelScreenArguments(gardenId, parcelId)
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          Container(height: 10,),
+                          CupertinoButton(
+                            color: Colors.green,
+                            child: Text("Supprimer"),
+                            onPressed: (){
+                              return showDialog<void>(
+                                context: context,
+                                barrierDismissible: false, // user must tap button!
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
+                                    content: SingleChildScrollView(
+                                      child: ListBody(
+                                        children: <Widget>[
+                                          Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      FlatButton(
+                                        child: Text('${AppLocalizations.of(context).buttonContinue}'),
+                                        onPressed: () {
+//                                          BlocProvider.of<GardensBloc>(context).add(ParcelDeleted(parcelId));
+                                          Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            '/',
+                                                (Route<dynamic> route) => false,
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      )
+                  );
+                },
+              )
+            ],
+          ),
+          body: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+
+                BlocBuilder<DesignBloc, DesignState>(
+                    builder: (context, state) {
+                      if (state is DesignLoaded) {
+                        if (state.designParcel.designs.isEmpty) {
+                          return Container(
+                            height: 230,
+                            child: Center(
+                                child: VeggiesDesignChart(80.0, 100.0, [])
+                            ),
+                          );
+                        } else {
+                          return Container(
+                            height: 230,
+                            child: Center(
+                                child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
+                            ),
+                          );
+                        }
+                      } else {
+                        return Container(
+                          height: 230,
+                          child: LoadingIndicator(),
+                        );
+                      }
+                    }
+                ),
+
+                SchedulerCalendar(
+//                referenceDate: DateTime.now(),
+                  parcelId: parcelId,
+                ),
+//                    const SizedBox(height: 8.0),
+//                    const SizedBox(height: 8.0),
+//                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                        builder: (context, state) {
+//
+//                          if (state is ActivitiesLoaded) {
+//                            return SchedulerCalendar(
+//                              referenceDate: DateTime.now(),
+//                              parcelId: parcelId,
+//                            );
+//                          } else {
+//                            return Expanded(
+//                                child: Container(
+//                                )
+//                            );
+//                          }
+//                        }
+//                    ),
+//                   :
+//                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                        builder: (context, state) {
+//                          if (state is ActivitiesLoaded) {
+//                            return Expanded(
+//                              child: Container(
+//                                  child: _buildEventList(state.referenceDate, state.schedule)
+//                              ),
+//                            );
+//                          } else {
+//                            return Expanded(
+//                                child: Container(
+//                                  child: Text("$state"),
+//                                )
+//                            );
+//                          }
+//                        }
+//                    ),
+//          Expanded(child: _buildEventList()),
+              ]),
+          floatingActionButton: ActivitySpeedDial(
+              gardenId: gardenId,
+              parcelId: parcelId,
+              visible: true
+          ),
+        ) : Container();
+      },
+    );
 
 //    return BlocBuilder<GardensBloc, GardensState>(
 //      builder: (context, state) {
@@ -206,224 +439,7 @@ class DetailsParcelScreen extends StatelessWidget {
 //                )
 //            );
 //          } else {
-//            return Scaffold(
-//              appBar: AppBar(
-//                title: Text(currentParcel.name),
-//                leading:  IconButton(
-//                  icon: new Icon(Icons.arrow_back_ios),
-//                  onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false,),
-//                ),
-//                actions: <Widget>[
-//                  FlatButton(
-//                    child: Text(
-//                        "Modifier",
-//                        style: TextStyle(
-//                            color: Colors.white,
-////                        fontWeight: FontWeight.bold,
-//                            fontSize: 1.9 * SizeConfig.textMultiplier
-//                        )
-//                    ),
-//                    onPressed: () {
-//                      showCupertinoModalPopup(
-//                          context: context,
-//                          builder: (context) => CupertinoActionSheet(
-//                            actions: <Widget>[
-//                              CupertinoButton(
-//                                color: Colors.green,
-//                                child: Text("Ajouter des personnes"),
-//                                onPressed: null,
-//                              ),
-//                              Container(height: 10,),
-//                              CupertinoButton(
-//                                color: Colors.green,
-//                                child: Text("Renommer"),
-//                                onPressed: (){
-//                                  return showDialog<void>(
-//                                    context: context,
-//                                    barrierDismissible: false, // user must tap button!
-//                                    builder: (BuildContext context) {
-//                                      return AlertDialog(
-//                                        title: Text('Renommer cette parcelle'),
-//                                        content: TextField(
-//                                          controller: _parcelNameTextController,
-//                                          decoration: InputDecoration(hintText: "Nom parcelle"),
-//                                        ),
-//                                        actions: <Widget>[
-//                                        FlatButton(
-//                                            child: Text('${AppLocalizations.of(context).buttonCancel}'),
-//                                            onPressed: () {
-//                                              Navigator.of(context).pop();
-//                                            },
-//                                          ),
-//                                          FlatButton(
-//                                            child: Text('Mettre à jour'),
-//                                            onPressed: () {
-//
-//                                              if (_parcelNameTextController.text.isNotEmpty) {
-//
-//                                                BlocProvider.of<GardensBloc>(context).add(
-//                                                  ParcelUpdated(
-//                                                    currentParcel.copyWith(
-//                                                        name: _parcelNameTextController.text,
-//                                                        gardenId: currentParcel.gardenId,
-//                                                        length: currentParcel.length,
-//                                                        width: currentParcel.width,
-//                                                        parcelGround: currentParcel.parcelGround,
-//                                                        publicVisibility: currentParcel.publicVisibility,
-//                                                        admin: currentParcel.admin,
-//                                                        members: currentParcel.members,
-//                                                        currentModelingId: currentParcel.currentModelingId,
-//                                                        currentModelingName: currentParcel.currentModelingName,
-//                                                        creationDate: currentParcel.creationDate,
-//                                                        dayActivitiesCount: currentParcel.dayActivitiesCount,
-//                                                        modelingsMonitoring: currentParcel.modelingsMonitoring,
-//                                                    )
-//                                                  ),
-//                                                );
-//
-//                                                Navigator.pushNamedAndRemoveUntil(
-//                                                  context,
-//                                                  '/detailsParcel',
-//                                                      (Route<dynamic> route) => false,
-//                                                  arguments: DetailsParcelScreenArguments(gardenId, parcelId)
-//                                                );
-//                                              }
-//                                            },
-//                                          ),
-//                                        ],
-//                                      );
-//                                    },
-//                                  );
-//                                },
-//                              ),
-//                              Container(height: 10,),
-//                              CupertinoButton(
-//                                color: Colors.green,
-//                                child: Text("Supprimer"),
-//                                onPressed: (){
-//                                  return showDialog<void>(
-//                                    context: context,
-//                                    barrierDismissible: false, // user must tap button!
-//                                    builder: (BuildContext context) {
-//                                      return AlertDialog(
-//                                        title: Text('${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
-//                                        content: SingleChildScrollView(
-//                                          child: ListBody(
-//                                            children: <Widget>[
-//                                              Text('${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
-//                                            ],
-//                                          ),
-//                                        ),
-//                                        actions: <Widget>[
-//                                          FlatButton(
-//                                            child: Text('${AppLocalizations.of(context).buttonCancel}'),
-//                                            onPressed: () {
-//                                              Navigator.of(context).pop();
-//                                            },
-//                                          ),
-//                                          FlatButton(
-//                                            child: Text('${AppLocalizations.of(context).buttonContinue}'),
-//                                            onPressed: () {
-//                                              BlocProvider.of<GardensBloc>(context).add(ParcelDeleted(parcelId));
-//                                              Navigator.pushNamedAndRemoveUntil(
-//                                                context,
-//                                                '/',
-//                                                (Route<dynamic> route) => false,
-//                                              );
-//                                            },
-//                                          ),
-//                                        ],
-//                                      );
-//                                    },
-//                                  );
-//                                },
-//                              ),
-//                            ],
-//                          )
-//                      );
-//                    },
-//                  )
-//                ],
-//              ),
-//              body: Column(
-//                  mainAxisSize: MainAxisSize.max,
-//                  children: <Widget>[
-//
-//                    BlocBuilder<DesignBloc, DesignState>(
-//                        builder: (context, state) {
-//                          if (state is DesignLoaded) {
-//                            if (state.designParcel.designs.isEmpty) {
-//                              return Container(
-//                                height: 230,
-//                                child: Center(
-//                                    child: VeggiesDesignChart(80.0, 100.0, [])
-//                                ),
-//                              );
-//                            } else {
-//                              return Container(
-//                                height: 230,
-//                                child: Center(
-//                                    child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
-//                                ),
-//                              );
-//                            }
-//                          } else {
-//                            return Container(
-//                              height: 230,
-//                              child: LoadingIndicator(),
-//                            );
-//                          }
-//                        }
-//                    ),
-//
-//              SchedulerCalendar(
-////                referenceDate: DateTime.now(),
-//                parcelId: parcelId,
-//              ),
-////                    const SizedBox(height: 8.0),
-////                    const SizedBox(height: 8.0),
-////                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-////                        builder: (context, state) {
-////
-////                          if (state is ActivitiesLoaded) {
-////                            return SchedulerCalendar(
-////                              referenceDate: DateTime.now(),
-////                              parcelId: parcelId,
-////                            );
-////                          } else {
-////                            return Expanded(
-////                                child: Container(
-////                                )
-////                            );
-////                          }
-////                        }
-////                    ),
-////                   :
-////                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-////                        builder: (context, state) {
-////                          if (state is ActivitiesLoaded) {
-////                            return Expanded(
-////                              child: Container(
-////                                  child: _buildEventList(state.referenceDate, state.schedule)
-////                              ),
-////                            );
-////                          } else {
-////                            return Expanded(
-////                                child: Container(
-////                                  child: Text("$state"),
-////                                )
-////                            );
-////                          }
-////                        }
-////                    ),
-////          Expanded(child: _buildEventList()),
-//                  ]),
-//              floatingActionButton: ActivitySpeedDial(
-//                  gardenId: gardenId,
-//                  parcelId: parcelId,
-//                  visible: true
-//              ),
-//            );
+//            ;
 //          }
 //
 ////

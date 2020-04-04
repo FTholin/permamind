@@ -31,8 +31,8 @@ class _ParcelCarouselWithIndicatorState
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
-      if (state is ParcelsLoaded) {
+    return BlocBuilder<ParcelsBloc, ParcelsState>(builder: (context, state) {
+      if (state is ParcelsLoadSuccess) {
         return CarouselSlider(
           items: loadCarouselContent(context, state.parcels),
           autoPlay: false,
@@ -48,26 +48,7 @@ class _ParcelCarouselWithIndicatorState
           },
         );
       } else {
-        return CarouselSlider(
-          items: [
-            Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                )
-            )
-          ],
-          autoPlay: false,
-          enlargeCenterPage: true,
-          height: 17 * SizeConfig.heightMultiplier,
-//      aspectRatio: 3.5,
-//      viewportFraction: 0.9,
-          enableInfiniteScroll: false,
-          onPageChanged: (index) {
-            setState(() {
-              _current = index;
-            });
-          },
-        );
+        return CircularProgressIndicator();
       }
     });
 
@@ -76,7 +57,6 @@ class _ParcelCarouselWithIndicatorState
   List<Widget> loadCarouselContent(BuildContext context, List<Parcel> parcels) {
 
     List<Widget> carouselContent = List<Widget>();
-
     for (final parcel in parcels) {
       carouselContent.add(InkWell(
         onTap: () =>  Navigator.pushNamed(

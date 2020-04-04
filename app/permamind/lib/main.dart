@@ -196,13 +196,6 @@ class App extends StatelessWidget {
                                             dataRepository: firebaseRepository)
                                           ..add(LoadTutos()),
                                       ),
-                                      BlocProvider<ParcelsBloc>(
-                                        create: (context) => ParcelsBloc(
-                                            gardensBloc: BlocProvider.of<GardensBloc>(context),
-                                            dataRepository: firebaseRepository,
-                                            user: state.userAuthenticated
-                                        )
-                                      ),
                                     ],
                                     child: HomeScreen(
                                         dataRepository: firebaseRepository,
@@ -321,13 +314,13 @@ class App extends StatelessWidget {
 //                                      parcelId: parcels[index].id
                                   ),
                                 ),
-                                BlocProvider(
-                                  create: (context) => DesignBloc(
-                                      dataRepository: firebaseRepository,
-                                      activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
-//                                      parcelId: parcels[index].id
-                                  )..add(LoadDesign()),
-                                ),
+//                                BlocProvider(
+//                                  create: (context) => DesignBloc(
+//                                      dataRepository: firebaseRepository,
+//                                      activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
+////                                      parcelId: parcels[index].id
+//                                  )..add(LoadDesign()),
+//                                ),
                                   ],
                                   child: DetailsParcelScreen(
                                       dataRepository: firebaseRepository,
