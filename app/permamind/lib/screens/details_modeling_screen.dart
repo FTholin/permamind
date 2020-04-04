@@ -30,6 +30,7 @@ class DetailsModelingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final parcelsBloc = BlocProvider.of<ParcelsBloc>(context);
 
     return Scaffold(
       body: Padding(
@@ -487,21 +488,42 @@ class DetailsModelingScreen extends StatelessWidget {
                                child: Padding(
                                  padding: EdgeInsets.all(3),
                                  child: InkWell(
-                                   onTap: () {
-//                                     Parcel completedParcel = parcel.copyWith(
-//                                         name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
-//                                         publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-//                                         currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
-//                                         modelingsMonitoring: [modeling.id], id: Uuid().v4());
-//
-////                                     BlocProvider.of<GardensBloc>(context).add(ParcelAdded(completedParcel));
+                                   onTap: () async {
+                                     Parcel completedParcel = parcel.copyWith(
+                                         name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
+                                         publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
+                                         currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+                                         modelingsMonitoring: [modeling.id], id: Uuid().v4());
+
+                                     BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
 //                                     BlocProvider.of<GardensBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
-////                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
-//
-//                                     Navigator.of(context).pushNamedAndRemoveUntil(
-//                                         '/detailsParcel', (Route<dynamic> route) => false,
-//                                       arguments: DetailsParcelScreenArguments(gardenId, completedParcel.id)
-//                                     );
+//                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
+
+
+                                     Navigator.pushAndRemoveUntil(
+                                       context,
+                                       MaterialPageRoute(
+                                         builder: (context) {
+                                           return MultiBlocProvider(
+                                             providers: [
+                                               BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                                               BlocProvider(
+                                                 create: (context) => ActivitiesBloc(
+                                                   dataRepository: parcelsBloc.dataRepository,
+                                                   parcelsBloc: parcelsBloc,
+                                                 ),
+                                               ),
+                                             ],
+                                             child: DetailsParcelScreen(
+                                               gardenId: gardenId,
+                                               parcelId: completedParcel.id,
+                                             ),
+                                           );
+                                         },
+                                       ),
+                                       ModalRoute.withName('/detailsGarden'),
+                                     );
+
                                    },
                                    child: Container(
                                      decoration: BoxDecoration(

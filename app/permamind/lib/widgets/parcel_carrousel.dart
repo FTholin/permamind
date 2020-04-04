@@ -30,7 +30,6 @@ class _ParcelCarouselWithIndicatorState
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<ParcelsBloc, ParcelsState>(builder: (context, state) {
       if (state is ParcelsLoadSuccess) {
         return CarouselSlider(
@@ -65,8 +64,8 @@ class _ParcelCarouselWithIndicatorState
                 builder: (context) {
                   return MultiBlocProvider(
                     providers: [
-                  BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
-                  BlocProvider(
+                      BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                      BlocProvider(
                         create: (context) => ActivitiesBloc(
                           dataRepository: parcelsBloc.dataRepository,
                           parcelsBloc: parcelsBloc,
@@ -153,11 +152,39 @@ class _ParcelCarouselWithIndicatorState
     carouselContent.add(Container(
       margin: EdgeInsets.all(5.0),
       child: InkWell(
-          onTap: () => Navigator.pushNamed(
-                context,
-                '/addParcel',
-                arguments: AddParcelScreenArguments(widget.garden, widget.user),
-              ), // handle your onTap here
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return MultiBlocProvider(
+                      providers: [
+                        BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                        BlocProvider<ModelingsBloc>(
+                          create: (context) => ModelingsBloc(
+                              dataRepository: parcelsBloc.dataRepository)
+                            ..add(FetchVeggies()),
+                        )
+                      ],
+                      child: AddParcelScreen(
+                        garden: widget.garden,
+                        user: widget.user,
+                        dataRepository: parcelsBloc.dataRepository,
+                      ));
+                },
+              ),
+            );
+
+//            return BlocProvider<ModelingsBloc>(
+//              create: (context) =>
+//              ModelingsBloc(dataRepository: firebaseRepository)
+//                ..add(FetchVeggies()),
+//              child: AddParcelScreen(
+//                garden: args.garden,
+//                user: state.userAuthenticated,
+//                dataRepository: firebaseRepository,
+//              ),
+//            );
+          },
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             child: Container(

@@ -70,7 +70,7 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
   @override
   Future<void> close() {
     // TODO Attention
-    parcelsSubscription.cancel();
+//    parcelsSubscription.cancel();
 //    gardensSubscription.cancel();
     return super.close();
   }
