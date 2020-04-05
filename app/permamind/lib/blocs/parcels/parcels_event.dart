@@ -19,7 +19,7 @@ class ParcelsLoadedSuccess extends ParcelsEvent {
 
   @override
   String toString() {
-    return 'ParcelsGardensLoadSuccessSuccess';
+    return 'ParcelsGardensLoadSuccess';
   }
 }
 

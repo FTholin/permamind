@@ -36,6 +36,9 @@ class GardenEntity extends Equatable {
   }
 
   @override
+  List<Object> get props => [id, name, publicVisibility, admin, members, creationDate, dayActivitiesCount];
+
+  @override
   String toString() {
     return 'GardenEntity { id: $id, name: $name, publicVisibility: $publicVisibility, members: $members }';
   }

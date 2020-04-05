@@ -53,7 +53,7 @@ class Garden extends Equatable {
 
   @override
   String toString() {
-    return 'Garden { id: $id, name: $name, publicVisibility: $publicVisibility, members: $members }';
+    return 'Garden { name: $name }';
   }
 
   GardenEntity toEntity() {

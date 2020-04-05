@@ -87,7 +87,7 @@ class EnumeratedGardens extends StatelessWidget {
           );
         }
       } else {
-        return Container();
+        return Container(child: Center(child: Text("$state"),),);
       }
     });
   }

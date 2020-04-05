@@ -30,8 +30,6 @@ class GardenItem extends StatelessWidget {
 
     TextEditingController _gardenNameTextController = TextEditingController();
 
-    final gardensBloc = BlocProvider.of<GardensBloc>(context);
-
 
     return Padding(
       padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
@@ -114,7 +112,7 @@ class GardenItem extends StatelessWidget {
 
                                                         if (_gardenNameTextController.text.isNotEmpty) {
 
-                                                          gardensBloc.add(
+                                                          BlocProvider.of<GardensBloc>(context).add(
                                                             GardenUpdated(
                                                                 garden.copyWith(
                                                                     name: _gardenNameTextController.text,
@@ -169,7 +167,8 @@ class GardenItem extends StatelessWidget {
                                                     FlatButton(
                                                       child: Text('${AppLocalizations.of(context).buttonContinue}'),
                                                       onPressed: () {
-                                                        gardensBloc.add(GardenDeleted(garden));
+                                                        BlocProvider.of<GardensBloc>(context)
+                                                            .add(GardenDeleted(garden));
                                                         Navigator.pushNamedAndRemoveUntil(
                                                           context,
                                                           '/',
