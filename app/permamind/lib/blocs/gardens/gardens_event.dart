@@ -19,7 +19,7 @@ class GardensLoadedSuccess extends GardensEvent {
 
   @override
   String toString() {
-    return 'GardensLoadedSuccessSuccess';
+    return 'GardensLoadedSuccess';
   }
 }
 

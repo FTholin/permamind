@@ -17,21 +17,15 @@ class GardensLoadSuccess extends GardensState {
 
   final List<Garden> gardens;
 
-  GardensLoadSuccess([this.gardens]);
+  GardensLoadSuccess(this.gardens);
 
   @override
   List<Object> get props => [gardens];
 
-  @override
-  String toString() {
-    String res = "GardensLoadSuccess: gardens = [";
 
-    for (var garden in gardens) {
-      res += " ${garden.name},";
-    }
-    res += ']';
-    return res;
-  }
+  @override
+  String toString() => "GardensLoadSuccess { gardens : $gardens }";
+
 }
 
 
@@ -43,6 +37,5 @@ class GardensLoadSuccess extends GardensState {
 //
 //  GardensLoadSuccess([this.gardens = const []]) : super([gardens]);
 //
-//  @override
-//  String toString() => "GardensLoadSuccess { gardens : $gardens }";
+
 //}

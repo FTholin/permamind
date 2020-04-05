@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   final DataRepository dataRepository;
   final User user;
 
-  HomeScreen({Key key, this.dataRepository, this.user})
+   HomeScreen({Key key, this.dataRepository, this.user})
       : assert(dataRepository != null),
         assert(user != null),
         super(key: key);

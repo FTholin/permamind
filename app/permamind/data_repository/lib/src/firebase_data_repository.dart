@@ -279,7 +279,7 @@ class FirebaseDataRepository implements DataRepository {
   }
 
   @override
-  Future<void> GardenUpdated(Garden update) {
+  Future<void> updateGarden(Garden update) {
     logger.i("WRITE::GardenUpdated");
 
     return Firestore.instance.collection('gardens')
