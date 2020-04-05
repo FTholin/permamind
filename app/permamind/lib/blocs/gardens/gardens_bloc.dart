@@ -1,5 +1,4 @@
  import 'dart:async';
-import 'package:authentication/authentication.dart';
 import 'package:bloc/bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:data_repository/data_repository.dart';

@@ -29,8 +29,10 @@ class EnumeratedGardens extends StatelessWidget {
         builder: (context, state) {
       if (state is GardensLoadSuccess) {
 
-        // TODO Trier par date de création
-        final gardens = state.gardens;
+        List<Garden> gardens = state.gardens as List<Garden>;
+
+        gardens.sort((a, b) => a.creationDate.compareTo(b.creationDate));
+
         // Si aucun jardin
         if (gardens.length == 0) {
           return Padding(
@@ -77,7 +79,7 @@ class EnumeratedGardens extends StatelessWidget {
                           garden: gardens[i],
                           user: _user,
                           index: i,
-                          dayActivitiesCount: 8,
+                          dayActivitiesCount: 0,
                         ),
                       );
                     },

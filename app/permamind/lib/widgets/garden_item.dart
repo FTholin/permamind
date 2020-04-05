@@ -194,13 +194,16 @@ class GardenItem extends StatelessWidget {
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.only(top: 0.3 * SizeConfig.heightMultiplier, bottom: 0.3 * SizeConfig.heightMultiplier),
-                              child: Text(
+                              child: dayActivitiesCount != 0 ? Text(
                                   "$dayActivitiesCount activités à réaliser aujourd'hui.",
                                   style: TextStyle(
                                       color: const Color(0xFF01534F),
                                       fontSize: 2.2 * SizeConfig.textMultiplier
                                   )
-                              ),
+                              ) : Text("Pas d'activités aujourd'hui", style: TextStyle(
+                                  color: const Color(0xFF01534F),
+                                  fontSize: 2.2 * SizeConfig.textMultiplier
+                              ))
                             ),
                           ],
                         )

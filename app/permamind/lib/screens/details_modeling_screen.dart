@@ -497,7 +497,9 @@ class DetailsModelingScreen extends StatelessWidget {
 
                                      BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
                                      BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
-//                                     BlocProvider.of<GardensBloc>(context).add(DesignParcelAdded(gardenId, completedParcel.id, designs));
+
+                                     // TODO Rajouter ici une mise à jour de jardin pour le daysActivitiesCount
+//                                     BlocProvider.of<GardensBloc>(context).add((gardenId, completedParcel.id, designs));
 
 
                                      Navigator.of(context).push(
