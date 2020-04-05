@@ -33,7 +33,7 @@ void main() {
       BlocProvider<GardensBloc>(
         create: (context) {
           return GardensBloc(authenticationBloc, firebaseRepository)
-            ..add(GardensInit());
+          ;
         },
       ),
       BlocProvider<ThemeBloc>(
@@ -114,7 +114,7 @@ class App extends StatelessWidget {
 //            isEditing: false,
 //          );
 //        },
-//          '/addGarden': (context) {},
+//          '/GardenAdded': (context) {},
 //              '/discoverModelings': (context) {
 //                return BlocProvider<ModelingsBloc>(
 //                  create: (context) =>
@@ -138,7 +138,7 @@ class App extends StatelessWidget {
 //                            gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
 ////
 ////                            BlocProvider.of<GardensBloc>(context).add(
-////                              AddGarden(Garden(gardenName, gardenLength,
+////                              GardenAdded(Garden(gardenName, gardenLength,
 ////                                  gardenWidth, gardenGround,
 ////                                  publicVisibility,
 ////                                  state.userAuthenticated.id,
@@ -209,14 +209,14 @@ class App extends StatelessWidget {
                               },
                             ));
 
-                  } else if (settings.name == '/addGarden') {
+                  } else if (settings.name == '/GardenAdded') {
 
                     return PageRouteBuilder(
                         pageBuilder: (_, __, ___) =>
                             BlocBuilder<AuthenticationBloc, AuthenticationState>(
                               builder: (context, state) {
                                 if (state is Authenticated) {
-                                  return AddGardenScreen(
+                                  return GardenAddedScreen(
                                       user: state.userAuthenticated,
                                       dataRepository: firebaseRepository);
                                 } else if (state is Unauthenticated) {

@@ -62,7 +62,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 
 //    return BlocBuilder<GardensBloc, GardensState>(
 //    builder: (context, state) {
-//      final garden = (state as GardensLoaded)
+//      final garden = (state as GardensLoadSuccess)
 //          .gardens.firstWhere((garden) => garden.id == widget.gardenId,
 //          orElse: () => null);
 //
@@ -192,7 +192,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                                      _gardenMembers.add(GardenMember(id: widget.user.id, pseudo: widget.user.pseudo));
 //
 //                                      BlocProvider.of<GardensBloc>(context).add(
-//                                        UpdateGarden(
+//                                        GardenUpdated(
 //                                          garden.copyWith(
 //                                              name: _newGardenNameController.text,
 //                                              id: garden.id,
@@ -394,7 +394,7 @@ class _SettingsGardenScreenState extends State<SettingsGardenScreen> {
 //                                      _gardenMembers.add(GardenMember(id: widget.user.id, pseudo: widget.user.pseudo));
 //
 //                                      BlocProvider.of<GardensBloc>(context).add(
-//                                        UpdateGarden(
+//                                        GardenUpdated(
 //                                          garden.copyWith(
 //                                              name: _newGardenNameController.text,
 //                                              id: garden.id,

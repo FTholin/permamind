@@ -40,7 +40,7 @@ class GardenSpeedDialState extends State<GardenSpeedDial>
         SpeedDialChild(
           child: Icon(Icons.nature, color: Colors.white,),
           backgroundColor: Colors.green,
-          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.addGarden),
+          onTap: () => Navigator.pushNamed(context, ArchSampleRoutes.GardenAdded),
           label: '${AppLocalizations.of(context).speedDialCreateGarden}',
           labelStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
           labelBackgroundColor: Colors.green,

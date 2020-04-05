@@ -9,11 +9,11 @@ import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
 import 'package:permamind/widgets/my_stepper.dart';
 
-class AddGardenScreen extends StatefulWidget {
+class GardenAddedScreen extends StatefulWidget {
   final User _user;
   final DataRepository _dataRepository;
 
-  AddGardenScreen(
+  GardenAddedScreen(
       {Key key, @required User user, @required DataRepository dataRepository})
       : assert(user != null),
         assert(dataRepository != null),
@@ -22,10 +22,10 @@ class AddGardenScreen extends StatefulWidget {
         super(key: key);
 
   @override
-  _AddGardenScreenState createState() => _AddGardenScreenState();
+  _GardenAddedScreenState createState() => _GardenAddedScreenState();
 }
 
-class _AddGardenScreenState extends State<AddGardenScreen> {
+class _GardenAddedScreenState extends State<GardenAddedScreen> {
   TextEditingController _gardenName = TextEditingController();
 
   int _currentStep = 0;
@@ -365,12 +365,9 @@ class _AddGardenScreenState extends State<AddGardenScreen> {
                       DateTime.now(),
                       0);
 
-                  BlocProvider.of<GardensBloc>(context).add(AddGarden(garden));
+                  BlocProvider.of<GardensBloc>(context).add(GardenAdded(garden));
 
                   Navigator.pop(context);
-                  // TODO Ce débrouiller pour aller directement dans le jardin crée
-//                  Navigator.pushNamedAndRemoveUntil(
-//                      context, (_) => false);
                 },
                 child: Text('${AppLocalizations.of(context).finalizeButton}')),
           ]);

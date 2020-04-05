@@ -30,7 +30,7 @@
 //
 //    return BlocBuilder<GardensBloc, GardensState>(
 //    builder: (context, state) {
-//      if (state is GardensLoaded) {
+//      if (state is GardensLoadSuccess) {
 //
 //        final garden = state.gardens.firstWhere((garden) => garden.id == gardenId,
 //            orElse: () => null);
@@ -82,7 +82,7 @@
 //  Widget build(BuildContext context) {
 ////    return BlocBuilder<GardensBloc, GardensState>(
 ////        builder: (context, state) {
-//          final currentGarden = (state as GardensLoaded)
+//          final currentGarden = (state as GardensLoadSuccess)
 //              .gardens.firstWhere((garden) => garden.id == widget.gardenId,
 //              orElse: () => null);
 ////

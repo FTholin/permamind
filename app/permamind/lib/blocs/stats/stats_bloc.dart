@@ -9,7 +9,7 @@
 //
 //  StatsBloc({@required this.gardensBloc}) {
 //    gardensSubscription = gardensBloc.listen((state) {
-//      if (state is GardensLoaded) {
+//      if (state is GardensLoadSuccess) {
 //        add(UpdateStats(state.gardens));
 //      }
 //    });

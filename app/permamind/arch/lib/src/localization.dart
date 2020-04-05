@@ -240,23 +240,23 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['button_cancel'];
   }
 
-  String get addGardenTitle {
+  String get GardenAddedTitle {
     return _localizedValues[locale.languageCode]['add_garden_title'];
   }
 
-  String get addGardenNameTitle {
+  String get GardenAddedNameTitle {
     return _localizedValues[locale.languageCode]['add_garden_name_title'];
   }
 
-  String get addGardenNameHint {
+  String get GardenAddedNameHint {
     return _localizedValues[locale.languageCode]['add_garden_name_hint'];
   }
 
-  String get addGardenNameError {
+  String get GardenAddedNameError {
     return _localizedValues[locale.languageCode]['add_garden_name_error'];
   }
 
-  String get addGardenVisibilityTitle {
+  String get GardenAddedVisibilityTitle {
     return _localizedValues[locale.languageCode]['add_garden_visibilityTitle'];
   }
 

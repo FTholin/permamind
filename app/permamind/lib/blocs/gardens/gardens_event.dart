@@ -2,95 +2,188 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:data_repository/data_repository.dart';
 
-@immutable
+
 abstract class GardensEvent extends Equatable {
   GardensEvent([List props = const []]) : super(props);
 }
 
-class GardensInit extends GardensEvent {
-  @override
-  String toString() => 'GardensInit';
-}
+//
 
-class LoadGardens extends GardensEvent {
-
+class GardensLoadedSuccess extends GardensEvent {
   final String userId;
   final String userPseudo;
 
-  LoadGardens(this.userId, this.userPseudo) : super([userId, userPseudo]);
+  GardensLoadedSuccess(this.userId, this.userPseudo);
+  @override
+  List<Object> get props => [userId, userPseudo];
 
   @override
-  String toString() => 'LoadGardens { userId: $userId}';
+  String toString() {
+    return 'GardensLoadedSuccessSuccess';
+  }
 }
 
+class GardensUpdated extends GardensEvent {
+  final List<Garden> gardens;
 
-class AddGarden extends GardensEvent {
+  GardensUpdated(this.gardens);
+
+  @override
+  List<Object> get props => [gardens];
+
+  @override
+  String toString() => 'GardensUpdated { gardens: $gardens }';
+}
+
+class GardenUpdated extends GardensEvent {
   final Garden garden;
 
-  AddGarden(this.garden) : super([garden]);
+  GardenUpdated(this.garden);
 
   @override
-  String toString() => 'AddGarden { garden: $garden }';
+  List<Object> get props => [garden];
+
+  @override
+  String toString() => 'GardenUpdated { garden: $garden }';
 }
 
 
-
-class CopyGarden extends GardensEvent {
+class GardenAdded extends GardensEvent {
   final Garden garden;
 
-  CopyGarden(this.garden) : super([garden]);
+  GardenAdded(this.garden);
 
   @override
-  String toString() => 'CopyGarden { garden: $garden }';
-}
-
-class CopyActivities extends GardensEvent {
-  final List<Activity> activities;
-
-  CopyActivities(this.activities) : super([activities]);
+  List<Object> get props => [garden];
 
   @override
-  String toString() => 'CopyActivities { activities: $activities }';
-}
-
-
-class UpdateGarden extends GardensEvent {
-  final Garden updatedGarden;
-
-  UpdateGarden(this.updatedGarden) : super([updatedGarden]);
-
-  @override
-  String toString() => 'UpdateGarden { updatedGarden: $updatedGarden }';
+  String toString() => 'GardenAdded { garden: $garden }';
 }
 
 class GardenDeleted extends GardensEvent {
   final Garden garden;
 
-  GardenDeleted(this.garden) : super([garden]);
+  GardenDeleted(this.garden);
 
   @override
-  String toString() => 'GardenDeleted { garden: $garden }';
-}
-
-class LeaveGarden extends GardensEvent {
-  final Garden garden;
-  final String userId;
-
-  LeaveGarden(this.garden, this.userId) : super([garden, userId]);
+  List<Object> get props => [garden];
 
   @override
-  String toString() => 'LeaveGarden { garden: $garden }';
+  String toString() => 'GardensDeleted { garden: $garden }';
 }
 
-class ClearCompleted extends GardensEvent {
-  @override
-  String toString() => 'ClearCompleted';
-}
 
-class ToggleAll extends GardensEvent {
-  @override
-  String toString() => 'ToggleAll';
-}
+
+
+
+
+//@immutable
+//abstract class GardensEvent extends Equatable {
+//  GardensEvent([List props = const []]) : super(props);
+//}
+//
+//class GardensInit extends GardensEvent {
+//  @override
+//  String toString() => 'GardensInit';
+//}
+//
+//class GardensLoadedSuccess extends GardensEvent {
+//
+//  final String userId;
+//  final String userPseudo;
+//
+//  GardensLoadedSuccess(this.userId, this.userPseudo) : super([userId, userPseudo]);
+//
+//  @override
+//  List<Object> get props => [userId, userPseudo];
+//
+//  @override
+//  String toString() => 'GardensLoadedSuccess { userId: $userId}';
+//}
+//
+//
+//class GardenAdded extends GardensEvent {
+//  final Garden garden;
+//
+//  GardenAdded(this.garden) : super([garden]);
+//
+//  @override
+//  List<Object> get props => [garden];
+//
+//  @override
+//  String toString() => 'GardenAdded { garden: $garden }';
+//}
+//
+//
+//
+//class CopyGarden extends GardensEvent {
+//  final Garden garden;
+//
+//  CopyGarden(this.garden) : super([garden]);
+//
+//  @override
+//  List<Object> get props => [garden];
+//
+//  @override
+//  String toString() => 'CopyGarden { garden: $garden }';
+//}
+//
+//class CopyActivities extends GardensEvent {
+//  final List<Activity> activities;
+//
+//  CopyActivities(this.activities) : super([activities]);
+//
+//  @override
+//  List<Object> get props => [activities];
+//
+//  @override
+//  String toString() => 'CopyActivities { activities: $activities }';
+//}
+//
+//
+//class GardenUpdated extends GardensEvent {
+//  final Garden updatedGarden;
+//
+//  GardenUpdated(this.updatedGarden) : super([updatedGarden]);
+//
+//  @override
+//  List<Object> get props => [updatedGarden];
+//
+//  @override
+//  String toString() => 'GardenUpdated { updatedGarden: $updatedGarden }';
+//}
+//
+//class GardenDeleted extends GardensEvent {
+//  final Garden garden;
+//
+//  GardenDeleted(this.garden) : super([garden]);
+//
+//  @override
+//  List<Object> get props => [garden];
+//
+//  @override
+//  String toString() => 'GardenDeleted { garden: $garden }';
+//}
+//
+//class LeaveGarden extends GardensEvent {
+//  final Garden garden;
+//  final String userId;
+//
+//  LeaveGarden(this.garden, this.userId) : super([garden, userId]);
+//
+//
+//  @override
+//  List<Object> get props => [garden, userId];
+//
+//  @override
+//  String toString() => 'LeaveGarden { garden: $garden }';
+//}
+//
+//
+
+
+
+
 
 //class GardensUpdated extends GardensEvent {
 //
@@ -111,55 +204,55 @@ class ToggleAll extends GardensEvent {
 //}
 
 
-class GardensUpdated extends GardensEvent {
-  final List<Garden> gardens;
-
-  GardensUpdated(this.gardens);
-
-  @override
-  List<Object> get props => [gardens];
-}
+//class GardensUpdated extends GardensEvent {
+//  final List<Garden> gardens;
+//
+//  GardensUpdated(this.gardens);
+//
+//  @override
+//  List<Object> get props => [gardens];
+//}
 
 
 
 //
-//class DesignParcelAdded extends GardensEvent {
+//class DesignGardenAdded extends GardensEvent {
 //
 //  final String gardenId;
 //  final List<Design> designs;
-//  final String parcelId;
+//  final String gardenId;
 //
-//  DesignParcelAdded(this.gardenId, this.parcelId, this.designs);
+//  DesignGardenAdded(this.gardenId, this.gardenId, this.designs);
 //  @override
-//  String toString() => 'DesignParcelAdded { designs: $designs }';
+//  String toString() => 'DesignGardenAdded { designs: $designs }';
 //}
 
 
 
 //
-//class ParcelLeaved extends GardensEvent {
-//  final Parcel leavedParcel;
+//class GardenLeaved extends GardensEvent {
+//  final Garden leavedGarden;
 //  final String userId;
 //
-//  ParcelLeaved(this.leavedParcel, this.userId);
+//  GardenLeaved(this.leavedGarden, this.userId);
 //
 //  @override
-//  List<Object> get props => [leavedParcel, userId];
+//  List<Object> get props => [leavedGarden, userId];
 //
 //  @override
-//  String toString() => 'ParcelLeaved { leavedParcel: $leavedParcel }';
+//  String toString() => 'GardenLeaved { leavedGarden: $leavedGarden }';
 //}
 
-//class ParcelCopied extends GardensEvent {
-//  final Parcel copiedParcel;
+//class GardenCopied extends GardensEvent {
+//  final Garden copiedGarden;
 //
-//  ParcelCopied(this.copiedParcel);
-//
-//  @override
-//  List<Object> get props => [copiedParcel];
+//  GardenCopied(this.copiedGarden);
 //
 //  @override
-//  String toString() => 'ParcelCopied { copiedParcel: $copiedParcel }';
+//  List<Object> get props => [copiedGarden];
+//
+//  @override
+//  String toString() => 'GardenCopied { copiedGarden: $copiedGarden }';
 //}
 
 
@@ -180,12 +273,12 @@ class GardensUpdated extends GardensEvent {
 
 
 //
-//class AddGardenActivities extends GardensEvent {
+//class GardenAddedActivities extends GardensEvent {
 //
 //  final List<ModelingSchedule> schedule;
 //  final String gardenId;
 //
-//  AddGardenActivities(this.gardenId, this.schedule);
+//  GardenAddedActivities(this.gardenId, this.schedule);
 //
 //  @override
 //  String toString() => 'GardensUpdated';

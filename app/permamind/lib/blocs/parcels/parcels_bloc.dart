@@ -8,7 +8,7 @@ import 'package:permamind/blocs/blocs.dart';
 
 class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
   final GardensBloc gardensBloc;
-  final FirebaseDataRepository dataRepository;
+  final DataRepository dataRepository;
   final User user;
 
 //  StreamSubscription gardensSubscription;

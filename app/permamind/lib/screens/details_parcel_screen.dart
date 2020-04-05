@@ -284,7 +284,7 @@ class DetailsParcelScreen extends StatelessWidget {
 
 //    return BlocBuilder<GardensBloc, GardensState>(
 //      builder: (context, state) {
-//        if (state is GardensLoaded) {
+//        if (state is GardensLoadSuccess) {
 //
 //          final List<Parcel> parcels = state.gardenParcels[gardenId];
 //

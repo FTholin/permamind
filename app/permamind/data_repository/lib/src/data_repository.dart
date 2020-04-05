@@ -45,7 +45,7 @@ abstract class DataRepository {
 
   Stream<List<DesignParcel>> loadDesignParcel(String gardenId);
 
-  Future<void> updateGarden(Garden garden);
+  Future<void> GardenUpdated(Garden garden);
 
   Future<void> updateActivity(Activity update);
 

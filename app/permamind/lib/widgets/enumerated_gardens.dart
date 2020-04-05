@@ -26,7 +26,7 @@ class EnumeratedGardens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GardensBloc, GardensState>(builder: (context, state) {
-      if (state is GardensLoaded) {
+      if (state is GardensLoadSuccess) {
         final gardens = state.gardens;
 
         // Si aucun jardin

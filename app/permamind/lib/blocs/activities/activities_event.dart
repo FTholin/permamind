@@ -124,15 +124,15 @@ class ActivitiesDeletedFromParcel extends ActivitiesEvent {
 
 //
 //
-//class UpdateGardenActivities extends ActivitiesEvent {
+//class GardenUpdatedActivities extends ActivitiesEvent {
 //
 //  final Garden garden;
 //
-//  UpdateGardenActivities(this.garden);
+//  GardenUpdatedActivities(this.garden);
 //
 //  @override
 //  List<Object> get props => [garden];
 //
 //  @override
-//  String toString() => 'UpdateGardenActivities { garden: $garden }';
+//  String toString() => 'GardenUpdatedActivities { garden: $garden }';
 //}

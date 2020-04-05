@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                         fontSize: 1.9 * SizeConfig.textMultiplier
                     )
                 ),
-                onPressed: () => Navigator.pushNamed(context, '/addGarden'),
+                onPressed: () => Navigator.pushNamed(context, '/GardenAdded'),
         )
             ],
           ),
@@ -99,12 +99,12 @@ class HomeScreen extends StatelessWidget {
 //
 //
 ////      return FloatingActionButton(
-////        key: ArchSampleKeys.addGardenFab,
+////        key: ArchSampleKeys.GardenAddedFab,
 ////        onPressed: () {
-////          Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
+////          Navigator.pushNamed(context, ArchSampleRoutes.GardenAdded);
 ////        },
 ////        child: Icon(Icons.add, color: Colors.white),
-////        tooltip: ArchSampleLocalizations.of(context).addGarden,
+////        tooltip: ArchSampleLocalizations.of(context).GardenAdded,
 ////      );
 //      return GardenSpeedDial(visible: true);
 //      break;

@@ -113,7 +113,7 @@ class GardenItem extends StatelessWidget {
                                                         if (_gardenNameTextController.text.isNotEmpty) {
 
                                                           BlocProvider.of<GardensBloc>(context).add(
-                                                            UpdateGarden(
+                                                            GardenUpdated(
                                                                 garden.copyWith(
                                                                     name: _gardenNameTextController.text,
                                                                     id: garden.id,

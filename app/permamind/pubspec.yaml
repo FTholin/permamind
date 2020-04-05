@@ -27,7 +27,7 @@ dependencies:
 
   meta: ">=1.1.0 <2.0.0"
   equatable: ^0.3.0
-  flutter_bloc: ^3.1.0
+  flutter_bloc: ^3.2.0
 
   path_provider: ^1.2.0
 
@@ -35,7 +35,7 @@ dependencies:
 
   logger: ^0.8.3
 
-  firebase_core: ^0.4.0+8
+  firebase_core: ^0.4.4+3
   circular_check_box: ^1.0.1
   table_calendar: ^2.2.3
   flutter_svg: ^0.14.3
@@ -52,8 +52,8 @@ dependencies:
 
   # Add the dependencies for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore
-  firebase_auth: ^0.15.4
-  cloud_firestore: ^0.13.0+1
+  firebase_auth: ^0.15.5+3
+  cloud_firestore: ^0.13.4+2
 
 
 
