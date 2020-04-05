@@ -100,7 +100,6 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
 
   Stream<GardensState> _mapLeaveGardensToState(LeaveGarden event) async* {
 
-
     _dataRepository.updateParcelsFromGarden(event.garden.id, event.userId);
     event.garden.members.removeWhere((item) => item.id == event.userId);
     _dataRepository.updateGarden(event.garden);
