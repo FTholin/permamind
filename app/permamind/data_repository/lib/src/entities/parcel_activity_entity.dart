@@ -36,6 +36,11 @@ class ActivityEntity extends Equatable {
     };
   }
 
+
+  @override
+  List<Object> get props => [id, title, gardenId, parcelId, complete, expectedDate, category, completeActivityUserId];
+
+
   @override
   String toString() {
     return 'ActivityEntity { id: $id, title: $title }';

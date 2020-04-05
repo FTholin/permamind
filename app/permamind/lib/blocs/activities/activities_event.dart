@@ -46,7 +46,7 @@ class SelectDayActivities extends ActivitiesEvent {
 class ActivityUpdated extends ActivitiesEvent {
   final Activity updatedActivity;
 
-  ActivityUpdated(this.updatedActivity) : super([updatedActivity]);
+  ActivityUpdated(this.updatedActivity);
 
   @override
   List<Object> get props => [updatedActivity];

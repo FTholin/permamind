@@ -15,7 +15,7 @@ class ActivitiesLoadSuccess extends ActivitiesState {
   final DateTime referenceDate;
   final Map<DateTime, List> schedule;
 
-  ActivitiesLoadSuccess([this.referenceDate, this.schedule]);
+  ActivitiesLoadSuccess(this.referenceDate, this.schedule);
 
   @override
   List<Object> get props => [referenceDate, schedule];

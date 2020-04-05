@@ -510,8 +510,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
                                                BlocProvider(
                                                  create: (context) => ActivitiesBloc(
-                                                   dataRepository: parcelsBloc.dataRepository,
-                                                   parcelsBloc: parcelsBloc,
+                                                   parcelsBloc.dataRepository,
                                                  ),
                                                ),
                                              ],

@@ -237,38 +237,13 @@ class DetailsParcelScreen extends StatelessWidget {
                         ),
                       ),
                     )),
-//                BlocBuilder<DesignBloc, DesignState>(
-//                    builder: (context, state) {
-//                      if (state is DesignLoaded) {
-//                        if (state.designParcel.designs.isEmpty) {
-//                          return Container(
-//                            height: 230,
-//                            child: Center(
-//                                child: VeggiesDesignChart(80.0, 100.0, [])
-//                            ),
-//                          );
-//                        } else {
-//                          return Container(
-//                            height: 230,
-//                            child: Center(
-//                                child: VeggiesDesignChart(80.0, 100.0, state.designParcel.designs.first.positioning)
-//                            ),
-//                          );
-//                        }
-//                      } else {
-//                        return Container(
-//                          height: 230,
-//                          child: LoadingIndicator(),
-//                        );
-//                      }
-//                    }
-//                ),
-                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-                        builder: (context, state) {
-                          return SchedulerCalendar(
-                            parcelId: parcelId,
-                          );
-                    })
+                SchedulerCalendar(
+                  parcelId: parcelId,
+                )
+//                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
+//                        builder: (context, state) {
+//
+//                    })
                   ]),
               floatingActionButton: ActivitySpeedDial(
                   gardenId: gardenId, parcelId: parcelId, visible: true),

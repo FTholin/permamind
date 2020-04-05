@@ -67,9 +67,7 @@ class _ParcelCarouselWithIndicatorState
                       BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
                       BlocProvider(
                         create: (context) => ActivitiesBloc(
-                          dataRepository: parcelsBloc.dataRepository,
-                          parcelsBloc: parcelsBloc,
-//                                    parcelId: parcels[index].id
+                          parcelsBloc.dataRepository,
                         ),
                       ),
                     ],
