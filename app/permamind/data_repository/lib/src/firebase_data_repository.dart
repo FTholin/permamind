@@ -178,7 +178,7 @@ class FirebaseDataRepository implements DataRepository {
 //    // logger.i("READ::gardens");
     return Firestore.instance.collection('gardens')
         .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
-        .orderBy('creationDate', descending: false)
+//        .orderBy('creationDate', descending: false)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Garden.fromEntity(GardenEntity.fromSnapshot(doc)))

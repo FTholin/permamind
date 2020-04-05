@@ -28,8 +28,9 @@ class EnumeratedGardens extends StatelessWidget {
     return BlocBuilder<GardensBloc, GardensState>(
         builder: (context, state) {
       if (state is GardensLoadSuccess) {
-        final gardens = state.gardens;
 
+        // TODO Trier par date de création
+        final gardens = state.gardens;
         // Si aucun jardin
         if (gardens.length == 0) {
           return Padding(
@@ -87,7 +88,7 @@ class EnumeratedGardens extends StatelessWidget {
           );
         }
       } else {
-        return Container(child: Center(child: Text("$state"),),);
+        return Container();
       }
     });
   }
