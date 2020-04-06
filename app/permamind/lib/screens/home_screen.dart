@@ -2,6 +2,7 @@ import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:permamind/screens/screens.dart';
 import 'package:permamind/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permamind/blocs/blocs.dart';
@@ -12,26 +13,36 @@ class HomeScreen extends StatelessWidget {
   final DataRepository dataRepository;
   final User user;
 
-  HomeScreen({Key key, this.dataRepository, this.user})
+   HomeScreen({Key key, this.dataRepository, this.user})
       : assert(dataRepository != null),
         assert(user != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<TabBloc, AppTab>(
       builder: (context, activeTab) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("Mes potagers"),
+            title: Text("${AppLocalizations.of(context).home}"),
 //            title:  Image.asset(
 //              'assets/logo-light.png',
 //              width:  MediaQuery.of(context).size.width / 2,
 //              fit: BoxFit.contain,
 //            ),
             actions: [
-//              FilterButton(visible: activeTab == AppTab.gardens),
-              ExtraActions(userId: user.id),
+              FlatButton(
+                child: Text(
+                    "Ajouter",
+                    style: TextStyle(
+                        color: Colors.white,
+//                        fontWeight: FontWeight.bold,
+                        fontSize: 1.9 * SizeConfig.textMultiplier
+                    )
+                ),
+                onPressed: () => Navigator.pushNamed(context, '/GardenAdded'),
+        )
             ],
           ),
           body: _buildTabPage(context, activeTab),
@@ -64,7 +75,13 @@ class HomeScreen extends StatelessWidget {
       case AppTab.profile:
         return Scaffold(
           body: Center(
-            child: Text("👋 ${user.pseudo} !"),
+//            child: Text("👋 ${user.pseudo} !"),
+            child: Column(
+              children: <Widget>[
+                Text("👋 ${user.pseudo} !"),
+                ExtraActions(userId: user.id),
+              ],
+            )
           ),
         );
         break;
@@ -84,12 +101,12 @@ class HomeScreen extends StatelessWidget {
 //
 //
 ////      return FloatingActionButton(
-////        key: ArchSampleKeys.addGardenFab,
+////        key: ArchSampleKeys.GardenAddedFab,
 ////        onPressed: () {
-////          Navigator.pushNamed(context, ArchSampleRoutes.addGarden);
+////          Navigator.pushNamed(context, ArchSampleRoutes.GardenAdded);
 ////        },
 ////        child: Icon(Icons.add, color: Colors.white),
-////        tooltip: ArchSampleLocalizations.of(context).addGarden,
+////        tooltip: ArchSampleLocalizations.of(context).GardenAdded,
 ////      );
 //      return GardenSpeedDial(visible: true);
 //      break;

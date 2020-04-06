@@ -29,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
 //                        Icons.mail,
 //                        size: 24.0,
 //                        semanticLabel:
-//                            '${AppLocalizations.of(context).addActivityDaySelection}',
+//                            '${AppLocalizations.of(context).ActivityAddedDaySelection}',
 //                      ),
 //                      title: Text('Nous contacter'),
 //                      onTap: () {},
@@ -42,7 +42,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.language,
                           size: 24.0,
                           semanticLabel:
-                          '${AppLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
                         title: Text('Changer la langue'),
                         onTap: () {},
@@ -55,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.description,
                           size: 24.0,
                           semanticLabel:
-                          '${AppLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
                         title: Text("Conditions d'utilisation"),
                         onTap: () {},
@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.favorite,
                           size: 24.0,
                           semanticLabel:
-                          '${AppLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
                         title: Text("Aknowledgements"),
                         onTap: () {},
@@ -81,7 +81,7 @@ class SettingsScreen extends StatelessWidget {
                           Icons.directions_run,
                           size: 24.0,
                           semanticLabel:
-                          '${AppLocalizations.of(context).addActivityDaySelection}',
+                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
                         title: Text("Supprimer compte"),
                         onTap: () {

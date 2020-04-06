@@ -318,6 +318,8 @@ PODS:
   - nanopb/encode (0.3.9011)
   - path_provider (0.0.1):
     - Flutter
+  - path_provider_macos (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -331,6 +333,7 @@ DEPENDENCIES:
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - google_sign_in_web (from `.symlinks/plugins/google_sign_in_web/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
 
 SPEC REPOS:
   trunk:
@@ -381,18 +384,20 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_sign_in_web/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  path_provider_macos:
+    :path: ".symlinks/plugins/path_provider_macos/ios"
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  cloud_firestore: 11c87f1d0b4193831045a320aed50723b67f2ea3
+  cloud_firestore: 31454d48df21f3e1a900015e36143c0d46a304b7
   cloud_firestore_web: 9ec3dc7f5f98de5129339802d491c1204462bfec
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   firebase_analytics: 5afaaf8f43ae6a640f200d98f3ecff32e9873538
-  firebase_auth: 1f46484071219159ad6c64d304af425ad7373052
+  firebase_auth: 4ee3a54d3f09434c508c284a62f895a741a30637
   firebase_auth_web: 0955c07bcc06e84af76b9d4e32e6f31518f2d7de
-  firebase_core: dc539d4bdc69894823e4a6e557034a9e48960f21
+  firebase_core: 0d8be0e0d14c4902953aeb5ac5d7316d1fe4b978
   firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAuth: 831577b184ecaba38bc886768c1c22a450cc44e3
@@ -403,7 +408,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 52120e2833f804a874ba1a9f59aab864a8ae2286
   FirebaseInstanceID: ce993a3c3670a8f5d47ce371ac5d143c560608c5
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  google_sign_in: decaf71f56e22fb1dc179de062177ae6df415716
+  google_sign_in: f32920a589fdf4ab2918ec6dc5e5b0d5b8040ff5
   google_sign_in_web: 52deb24929ac0992baff65c57956031c44ed44c3
   GoogleAppMeasurement: db118eb61a97dd8c4f7014e368d3c335cbbcf80a
   GoogleDataTransport: 8e9b210c97d55fbff306cc5468ff91b9cb32dcf5
@@ -417,7 +422,8 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

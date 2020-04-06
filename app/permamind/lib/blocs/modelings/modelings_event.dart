@@ -9,12 +9,14 @@ abstract class ModelingsEvent extends Equatable {
 
 class FetchModelings extends ModelingsEvent {
 
+  final List<String> veggiesList;
 
-  FetchModelings() : super([]);
+  FetchModelings(this.veggiesList) : super([]);
 
   @override
   String toString() => 'FetchModelings ';
 }
+
 
 class UpdatedModelings extends ModelingsEvent {
   final List<Modeling> modelings;
@@ -23,6 +25,27 @@ class UpdatedModelings extends ModelingsEvent {
 
   @override
   String toString() => 'FetchModelings { modelings: $modelings }';
+}
+
+
+class FetchVeggies extends ModelingsEvent {
+
+  final List<Vegetable> veggies;
+
+  FetchVeggies([this.veggies = const []]) : super([veggies]);
+
+  @override
+  String toString() => 'FetchVeggies { veggies: $veggies }';
+}
+
+
+class UpdatedVeggies extends ModelingsEvent {
+  final List<Vegetable> veggies;
+
+  UpdatedVeggies(this.veggies) : super([veggies]);
+
+  @override
+  String toString() => 'UpdatedVeggies { veggies: $veggies }';
 }
 
 //class UpdatedModelings extends ModelingsEvent {

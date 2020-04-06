@@ -5,7 +5,16 @@ abstract class ActivitiesEvent extends Equatable {
   ActivitiesEvent([List props = const []]) : super(props);
 }
 
-class LoadActivities extends ActivitiesEvent {}
+class ActivitiesLoadedSuccess extends ActivitiesEvent {
+  final String parcelId;
+  final DateTime start;
+  final DateTime last;
+
+  ActivitiesLoadedSuccess(this.parcelId, this.start, this.last);
+
+  @override
+  List<Object> get props => [parcelId, start, last];
+}
 
 
 class ActivitiesUpdated extends ActivitiesEvent {
@@ -18,36 +27,42 @@ class ActivitiesUpdated extends ActivitiesEvent {
 }
 
 
-class SelectDayActivities extends ActivitiesEvent {
+class DayActivitiesSelected extends ActivitiesEvent {
 
   final DateTime selectedDay;
   final Map<DateTime, List> dayActivities;
 
 
-  SelectDayActivities(this.selectedDay, this.dayActivities);
+  DayActivitiesSelected(this.selectedDay, this.dayActivities);
 
   @override
   List<Object> get props => [selectedDay, dayActivities];
 
   @override
-  String toString() => 'selectDayActivities {dayActivities: $dayActivities }';
+  String toString() => 'DayActivitiesSelected {dayActivities: $dayActivities }';
 }
 
 
-class UpdateActivity extends ActivitiesEvent {
+class ActivityUpdated extends ActivitiesEvent {
   final Activity updatedActivity;
 
-  UpdateActivity(this.updatedActivity) : super([updatedActivity]);
+  ActivityUpdated(this.updatedActivity);
 
   @override
-  String toString() => 'UpdateActivity { updatedActivity: $updatedActivity }';
+  List<Object> get props => [updatedActivity];
+
+  @override
+  String toString() => 'ActivityUpdated { updatedActivity: $updatedActivity }';
 
 }
 
-class AddActivity extends ActivitiesEvent {
+class ActivityAdded extends ActivitiesEvent {
   final Activity newActivity;
 
-  AddActivity(this.newActivity) : super([AddActivity]);
+  ActivityAdded(this.newActivity) : super([ActivityAdded]);
+
+  @override
+  List<Object> get props => [newActivity];
 
   @override
   String toString() => 'UpdateActivity { newActivity: $newActivity }';
@@ -59,25 +74,11 @@ class ActivitiesDeletedFromParcel extends ActivitiesEvent {
   ActivitiesDeletedFromParcel(this.parcelId) : super([parcelId]);
 
   @override
+  List<Object> get props => [parcelId];
+
+  @override
   String toString() => 'ActivitiesDeletedFromParcel { gardenId: $parcelId }';
 }
-
-//class LoadActivities extends ActivitiesEvent {
-//
-//  final String gardenId;
-//
-//  LoadActivities(this.gardenId) : super([gardenId]);
-//
-//  @override
-//  String toString() => 'LoadActivities { gardenId: $gardenId}';
-//}
-
-
-//
-
-
-
-
 
 
 //class ScheduleUpdated extends ActivitiesEvent {
@@ -90,19 +91,19 @@ class ActivitiesDeletedFromParcel extends ActivitiesEvent {
 //  List<Object> get props => [schedule];
 //}
 //
-//class SelectDayActivities extends ActivitiesEvent {
+//class DayActivitiesSelected extends ActivitiesEvent {
 //
 //  final DateTime selectedDay;
 //  final Map<DateTime, List> dayActivities;
 //
 //
-//  SelectDayActivities(this.selectedDay, this.dayActivities);
+//  DayActivitiesSelected(this.selectedDay, this.dayActivities);
 //
 //  @override
 //  List<Object> get props => [selectedDay, dayActivities];
 //
 //  @override
-//  String toString() => 'selectDayActivities {dayActivities: $dayActivities }';
+//  String toString() => 'DayActivitiesSelected {dayActivities: $dayActivities }';
 //}
 //class UpdateScheduler extends ActivitiesEvent {
 ////  final List<PlanningDay> schedule;
@@ -123,15 +124,15 @@ class ActivitiesDeletedFromParcel extends ActivitiesEvent {
 
 //
 //
-//class UpdateGardenActivities extends ActivitiesEvent {
+//class GardenUpdatedActivities extends ActivitiesEvent {
 //
 //  final Garden garden;
 //
-//  UpdateGardenActivities(this.garden);
+//  GardenUpdatedActivities(this.garden);
 //
 //  @override
 //  List<Object> get props => [garden];
 //
 //  @override
-//  String toString() => 'UpdateGardenActivities { garden: $garden }';
+//  String toString() => 'GardenUpdatedActivities { garden: $garden }';
 //}

@@ -4,7 +4,7 @@ class ArchSampleKeys {
   // Home Screens
   static final homeScreen = const Key('__homeScreen__');
   static final addTodoFab = const Key('__addTodoFab__');
-  static final addGardenFab = const Key('__addGardenFab__');
+  static final GardenAddedFab = const Key('__GardenAddedFab__');
   static final snackbar = const Key('__snackbar__');
   static Key snackbarAction(String id) => Key('__snackbar_action_${id}__');
 
@@ -62,13 +62,13 @@ class ArchSampleKeys {
   static final noteField = const Key('__noteField__');
 
   // Add Garden Screen
-  // TODO put all addGardenScreen's widgets id
-  static final addGardenScreen = const Key('__addGardenScreen__');
+  // TODO put all GardenAddedScreen's widgets id
+  static final GardenAddedScreen = const Key('__GardenAddedScreen__');
 
 
   // Details Garden Screen
-  // TODO put all detailsGardenScreen's widgets id
-  static final detailsGardenScreen = const Key('__detailsGardenScreen__');
+  // TODO put all DetailsParcelScreen's widgets id
+  static final DetailsParcelScreen = const Key('__DetailsParcelScreen__');
 
 
   // Discover Modelings Screen

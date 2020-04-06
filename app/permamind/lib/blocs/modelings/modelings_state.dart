@@ -21,3 +21,13 @@ class ModelingsLoaded extends ModelingsState {
   @override
   String toString() => 'ModelingsLoaded { modelingsFetched: $modelingsFetched }';
 }
+
+class VeggiesLoaded extends ModelingsState {
+  final List<Vegetable> veggies;
+
+  VeggiesLoaded(this.veggies)
+      : super([veggies]);
+
+  @override
+  String toString() => 'VeggiesLoaded { veggiesFetched: $veggies }';
+}

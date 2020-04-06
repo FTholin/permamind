@@ -134,9 +134,9 @@ class ArchSampleLocalizations {
     locale: locale.toString(),
   );
 
-  String get addGarden => Intl.message(
+  String get GardenAdded => Intl.message(
     'Add Garden',
-    name: 'addGarden',
+    name: 'GardenAdded',
     args: [],
     locale: locale.toString(),
   );

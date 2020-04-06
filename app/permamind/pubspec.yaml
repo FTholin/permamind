@@ -27,7 +27,7 @@ dependencies:
 
   meta: ">=1.1.0 <2.0.0"
   equatable: ^0.3.0
-  flutter_bloc: ^3.1.0
+  flutter_bloc: ^3.2.0
 
   path_provider: ^1.2.0
 
@@ -35,24 +35,25 @@ dependencies:
 
   logger: ^0.8.3
 
-  firebase_core: ^0.4.0+8
+  firebase_core: ^0.4.4+3
   circular_check_box: ^1.0.1
-  table_calendar: ^2.2.1
+  table_calendar: ^2.2.3
   flutter_svg: ^0.14.3
   flutter_speed_dial: ^1.2.4
   bubble_bottom_bar: ^1.2.0
   charts_flutter: ^0.8.1
 
-
   carousel_slider: ^1.4.1
+
+  uuid: 2.0.4
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^4.0.2
 
   # Add the dependencies for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore
-  firebase_auth: ^0.15.4
-  cloud_firestore: ^0.13.0+1
+  firebase_auth: ^0.15.5+3
+  cloud_firestore: ^0.13.4+2
 
 
 
@@ -100,9 +101,11 @@ flutter:
     - assets/
     - assets/modelings/
     - assets/bar_buttons_icons/
-    - assets/utils_icons/
     - assets/gardens/
     - assets/tutorials/
+    - assets/empty_states/
+    - assets/utils_image/
+    - assets/veggies/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

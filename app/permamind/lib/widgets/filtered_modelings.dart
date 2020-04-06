@@ -51,21 +51,18 @@ class FilteredModelings extends StatelessWidget {
                   ),
                   onTap: () async {
 
-                      // TODO retrieve all form infos and transfer them
+
+
 
                     await Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) {
-                          return BlocProvider.value(
-                              value: BlocProvider.of<ParcelsBloc>(context),
-                              child: DetailsModelingScreen(
-                                  gardenId: gardenId,
-                                  parcel: parcel,
-                                  modeling: modelings[index],
-                                  schedule: modelings[index].schedule,
-                                  designs: modelings[index].designs
-                              )
+                          return DetailsModelingScreen(
+                              gardenId: gardenId,
+                              parcel: parcel,
+                              modeling: modelings[index],
+                              schedule: modelings[index].schedule,
+                              designs: modelings[index].designs
                           );
-
                         })
                     );
 

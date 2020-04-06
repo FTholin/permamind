@@ -30,14 +30,13 @@ void main() {
           return authenticationBloc..add(AppStarted());
         },
       ),
-      BlocProvider<GardensBloc>(
-        create: (context) {
-          return GardensBloc(authenticationBloc, firebaseRepository)
-            ..add(GardensInit());
-        },
-      ),
       BlocProvider<ThemeBloc>(
         create: (context) => ThemeBloc(),
+      ),
+      BlocProvider<GardensBloc>(
+        create: (context) {
+          return GardensBloc(firebaseRepository);
+        },
       ),
     ],
     child: App(
@@ -114,7 +113,7 @@ class App extends StatelessWidget {
 //            isEditing: false,
 //          );
 //        },
-//          '/addGarden': (context) {},
+//          '/GardenAdded': (context) {},
 //              '/discoverModelings': (context) {
 //                return BlocProvider<ModelingsBloc>(
 //                  create: (context) =>
@@ -138,7 +137,7 @@ class App extends StatelessWidget {
 //                            gardenMembers.add(GardenMember(id: state.userAuthenticated.id, pseudo: state.userAuthenticated.pseudo));
 ////
 ////                            BlocProvider.of<GardensBloc>(context).add(
-////                              AddGarden(Garden(gardenName, gardenLength,
+////                              GardenAdded(Garden(gardenName, gardenLength,
 ////                                  gardenWidth, gardenGround,
 ////                                  publicVisibility,
 ////                                  state.userAuthenticated.id,
@@ -186,7 +185,8 @@ class App extends StatelessWidget {
                             BlocBuilder<AuthenticationBloc, AuthenticationState>(
                               builder: (context, state) {
                                 if (state is Authenticated) {
-                                  return MultiBlocProvider(
+                                  BlocProvider.of<GardensBloc>(context).add(GardensLoadedSuccess(state.userAuthenticated.id, state.userAuthenticated.pseudo));
+                                return MultiBlocProvider(
                                     providers: [
                                       BlocProvider<TabBloc>(
                                         create: (context) => TabBloc(),
@@ -196,6 +196,7 @@ class App extends StatelessWidget {
                                             dataRepository: firebaseRepository)
                                           ..add(LoadTutos()),
                                       ),
+
                                     ],
                                     child: HomeScreen(
                                         dataRepository: firebaseRepository,
@@ -209,14 +210,14 @@ class App extends StatelessWidget {
                               },
                             ));
 
-                  } else if (settings.name == '/addGarden') {
+                  } else if (settings.name == '/GardenAdded') {
 
                     return PageRouteBuilder(
                         pageBuilder: (_, __, ___) =>
                             BlocBuilder<AuthenticationBloc, AuthenticationState>(
                               builder: (context, state) {
                                 if (state is Authenticated) {
-                                  return AddGardenScreen(
+                                  return GardenAddedScreen(
                                       user: state.userAuthenticated,
                                       dataRepository: firebaseRepository);
                                 } else if (state is Unauthenticated) {
@@ -225,21 +226,145 @@ class App extends StatelessWidget {
                                   return Center(child: CircularProgressIndicator());
                                 }
                               },
-                            ));
+                            ),
+                      transitionsBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child,
+                          ) =>
+                          ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 0.0,
+                              end: 1.0,
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.fastOutSlowIn,
+                              ),
+                            ),
+                            child: child,
+                          ),
+                    );
 
-                  }  else if (settings.name == "/detailsGarden") {
+                  } else if (settings.name == '/addParcel') {
 
-                    final DetailsGardenScreenArguments args = settings.arguments;
-                    return MaterialPageRoute(builder: (_) {
-                      return BlocProvider<ParcelsBloc>(
-                          create: (context) => ParcelsBloc(
-                              gardensBloc: BlocProvider.of<GardensBloc>(context),
-                              dataRepository: args.dataRepository)
-                            ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
-                          child: DetailsGardenScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
-                    });
+                    final AddParcelScreenArguments args =
+                        settings.arguments;
 
-                  } else if (settings.name == "/settings") {
+                    return PageRouteBuilder(
+                      pageBuilder: (_, __, ___) =>
+                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                            builder: (context, state) {
+                              if (state is Authenticated) {
+
+                                return BlocProvider<ModelingsBloc>(
+                                  create: (context) =>
+                                  ModelingsBloc(dataRepository: firebaseRepository)
+                                    ..add(FetchVeggies()),
+                                  child: AddParcelScreen(
+                                    garden: args.garden,
+                                    user: state.userAuthenticated,
+                                    dataRepository: firebaseRepository,
+                                  ),
+                                );
+                              } else if (state is Unauthenticated) {
+                                return LoginScreen(userRepository: userRepository);
+                              } else {
+                                return Center(child: CircularProgressIndicator());
+                              }
+                            },
+                          ),
+                      transitionsBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child,
+                          ) =>
+                          ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 0.0,
+                              end: 1.0,
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.fastOutSlowIn,
+                              ),
+                            ),
+                            child: child,
+                          ),
+                    );
+
+                  }
+//                  else if (settings.name == '/detailsParcel') {
+//
+//                    final DetailsParcelScreenArguments args =
+//                        settings.arguments;
+//
+//                    return PageRouteBuilder(
+//                      pageBuilder: (_, __, ___) =>
+//                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//                            builder: (context, state) {
+//                              if (state is Authenticated) {
+//
+//                                return MultiBlocProvider(
+//                                  providers: [
+//                                  BlocProvider(
+//                                  create: (context) => ActivitiesBloc(
+//                                      dataRepository: firebaseRepository,
+//                                      gardensBloc: BlocProvider.of<GardensBloc>(context),
+////                                      parcelId: parcels[index].id
+//                                  ),
+//                                ),
+//                                BlocProvider(
+//                                  create: (context) => DesignBloc(
+//                                      dataRepository: firebaseRepository,
+//                                      activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
+////                                      parcelId: parcels[index].id
+//                                  )..add(LoadDesign()),
+//                                ),
+//                                BlocProvider.value(value: null)
+//                                  ],
+//                                  child: DetailsParcelScreen(
+//                                      dataRepository: firebaseRepository,
+//                                      user: state.userAuthenticated,
+//                                      gardenId: args.gardenId,
+//                                      parcelId: args.parcelId,
+//                                  ),
+//                                );
+//
+//                              } else if (state is Unauthenticated) {
+//                                return LoginScreen(userRepository: userRepository);
+//                              } else {
+//                                return Center(child: CircularProgressIndicator());
+//                              }
+//                            },
+//                          ),
+//                      transitionsBuilder: (c, anim, a2, child) =>
+//                          FadeTransition(opacity: anim, child: child),
+//                      transitionDuration: Duration(milliseconds: 800),
+//                    );
+//
+//                  }
+//                  else if (settings.name == "/detailsGarden") {
+//
+//                    final DetailsParcelScreenArguments args = settings.arguments;
+//                    return MaterialPageRoute(builder: (_) {
+//                      return BlocProvider<ParcelsBloc>(
+//                          create: (context) => ParcelsBloc(
+//                              gardensBloc: BlocProvider.of<GardensBloc>(context),
+//                              dataRepository: args.dataRepository)
+//                            ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
+//                          child: DetailsParcelScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
+//                    });
+//
+//                  }
+
+//                  else if (settings.name == "/modelingsFound") {
+//                    return MaterialPageRoute(
+//                        builder: (context) => ModelingsFoundScreen());
+//                  }
+                  else if (settings.name == "/settings") {
 
                     final SettingsScreenArguments args = settings.arguments;
 
@@ -260,7 +385,6 @@ class App extends StatelessWidget {
                         builder: (context) => TutorialActivitiesScreen());
 
                   } else {
-
                     return PageRouteBuilder(
                         pageBuilder: (_, __, ___) =>
                             BlocBuilder<AuthenticationBloc, AuthenticationState>(

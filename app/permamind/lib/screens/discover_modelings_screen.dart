@@ -82,13 +82,11 @@ class DiscoverModelingsScreen extends StatelessWidget {
                   return LoadingIndicator();
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
-                  return BlocProvider.value(
-                      value: BlocProvider.of<ParcelsBloc>(context),
-                      child: FilteredModelings(
-                        gardenId: gardenId,
-                        parcel: parcel,
-                        modelings: modelings,
-                      ));
+                  return FilteredModelings(
+                    gardenId: gardenId,
+                    parcel: parcel,
+                    modelings: modelings,
+                  );
                 } else {
                   return Container();
                 }
@@ -115,14 +113,11 @@ class DiscoverModelingsScreen extends StatelessWidget {
                   return LoadingIndicator();
                 } else if (state is ModelingsLoaded) {
                   final modelings = state.modelingsFetched;
-                  return BlocProvider.value(
-                      value: BlocProvider.of<ParcelsBloc>(context),
-                      child: FilteredModelings(
-                        gardenId: gardenId,
-                        parcel: parcel,
-                        modelings: modelings,
-                      ));
-//
+                  return FilteredModelings(
+                    gardenId: gardenId,
+                    parcel: parcel,
+                    modelings: modelings,
+                  );
                 } else {
                   return Container();
                 }

@@ -7,19 +7,21 @@ import 'package:permamind/arch_bricks/arch_bricks.dart';
 import 'package:permamind/blocs/blocs.dart';
 
 
-  class AddActivityScreen extends StatefulWidget {
+  class ActivityAddedScreen extends StatefulWidget {
     final String gardenId;
+    final String parcelId;
 
-    AddActivityScreen({
+    ActivityAddedScreen({
       Key key,
       @required this.gardenId,
-    }) : assert(gardenId != null), super(key: key ?? ArchSampleKeys.addTodoScreen);
+      @required this.parcelId,
+    }) : assert(gardenId != null, parcelId != null), super(key: key ?? ArchSampleKeys.addTodoScreen);
 
     @override
-    _AddActivityScreenState createState() => _AddActivityScreenState();
+    _ActivityAddedScreenState createState() => _ActivityAddedScreenState();
   }
 
-  class _AddActivityScreenState extends State<AddActivityScreen> {
+  class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
 
     final TextEditingController _activityNameController = TextEditingController();
     bool _activityNameValidate = false;
@@ -48,7 +50,7 @@ import 'package:permamind/blocs/blocs.dart';
             icon: new Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(null),
           ),
-          title: Text("${AppLocalizations.of(context).addActivityTitle}"),
+          title: Text("${AppLocalizations.of(context).ActivityAddedTitle}"),
           actions: <Widget>[
             IconButton(
   //            tooltip: localizations.deleteGarden,
@@ -62,11 +64,11 @@ import 'package:permamind/blocs/blocs.dart';
                   DateTime referenceDate  = new DateTime(selectedDate.year, selectedDate.month, selectedDate.day, 1);
 
                   BlocProvider.of<ActivitiesBloc>(context).add(
-                    AddActivity(
+                    ActivityAdded(
                       Activity(
                         _activityNameController.text,
                         widget.gardenId,
-                        BlocProvider.of<ActivitiesBloc>(context).parcelId,
+                        widget.parcelId,
                         false,
                         referenceDate,
                         '',
@@ -100,8 +102,8 @@ import 'package:permamind/blocs/blocs.dart';
                           child: TextFormField(
                             controller: _activityNameController,
                             decoration: InputDecoration(
-                              hintText: "${AppLocalizations.of(context).addActivityName}",
-                              errorText: _activityNameValidate ? '${AppLocalizations.of(context).addActivityNameError}' : null,
+                              hintText: "${AppLocalizations.of(context).ActivityAddedName}",
+                              errorText: _activityNameValidate ? '${AppLocalizations.of(context).ActivityAddedNameError}' : null,
                               border: OutlineInputBorder(),
                             ),
                             onChanged: (value) {
@@ -119,7 +121,7 @@ import 'package:permamind/blocs/blocs.dart';
                                 leading: Icon(
                                   Icons.access_time,
                                   size: 24.0,
-                                  semanticLabel: '${AppLocalizations.of(context).addActivityDaySelection}',
+                                  semanticLabel: '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                                 ),
                                 title: Text('${new DateFormat.yMMMd().format(selectedDate)}'),
                                 trailing: Icon(Icons.keyboard_arrow_right),

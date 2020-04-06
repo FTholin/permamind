@@ -14,5 +14,5 @@ export 'tutorial_item.dart';
 export 'veggies_design_chart.dart';
 export 'speed_dial_parcel.dart';
 export 'parcel_item.dart';
-export 'enumerated_parcels.dart';
 export 'parcel_carrousel.dart';
+export 'my_stepper.dart';

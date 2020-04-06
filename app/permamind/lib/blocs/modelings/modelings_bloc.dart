@@ -22,16 +22,32 @@ class ModelingsBloc extends Bloc<ModelingsEvent, ModelingsState> {
     }
     else if (event is UpdatedModelings) {
       yield* _mapGardensUpdateToState(event);
+    } else if (event is FetchVeggies) {
+      yield* _mapFetchVeggiesToState(event);
+    } else if (event is UpdatedVeggies) {
+      yield* _mapVeggiesUpdateToState(event);
     }
   }
 
 
-  Stream<ModelingsState> _mapFetchModelingsToState(ModelingsEvent event) async* {
+  Stream<ModelingsState> _mapFetchVeggiesToState(FetchVeggies event) async* {
     _dataSubscription?.cancel();
-    _dataSubscription = dataRepository.fetchModelings().listen(
-          (gardens) {
+    _dataSubscription = dataRepository.fetchVeggies().listen(
+          (veggies) {
         add(
-          UpdatedModelings(gardens),
+          UpdatedVeggies(veggies),
+        );
+      },
+    );
+  }
+
+
+  Stream<ModelingsState> _mapFetchModelingsToState(FetchModelings event) async* {
+    _dataSubscription?.cancel();
+    _dataSubscription = dataRepository.fetchModelings(event.veggiesList).listen(
+          (modelings) {
+        add(
+          UpdatedModelings(modelings),
         );
       },
     );
@@ -41,4 +57,14 @@ class ModelingsBloc extends Bloc<ModelingsEvent, ModelingsState> {
     yield ModelingsLoaded(event.modelings);
   }
 
+  Stream<ModelingsState> _mapVeggiesUpdateToState(UpdatedVeggies event) async* {
+    yield VeggiesLoaded(event.veggies);
+  }
+
+
+  @override
+  Future <void> close() {
+    _dataSubscription?.cancel();
+    return super.close();
+  }
 }

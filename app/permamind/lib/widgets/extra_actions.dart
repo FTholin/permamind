@@ -19,11 +19,11 @@ class ExtraActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GardensBloc, GardensState>(
       builder: (context, state) {
-        if (state is GardensLoaded) {
+        if (state is GardensLoadSuccess) {
 
           return PopupMenuButton<ExtraAction>(
             icon: Icon(
-              Icons.more_vert,
+              Icons.settings,
               size: 24.0,
               semanticLabel: 'Settings menu',
             ),

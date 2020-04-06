@@ -12,6 +12,7 @@ class AppLocalizations {
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
+      'home': "My gardens",
       'title': 'Hello World',
       'settings_garden_title': "Garden's Settings",
       'settings_garden_name': "Garden's Name",
@@ -89,27 +90,28 @@ class AppLocalizations {
       'registration_title': 'Registration',
       'registration_failure': 'Registration Failure',
       'registration_loading': 'Registering...',
-      'registration_button': "Create an Account"
-
+      'registration_button': "Create an Account",
+      'activities_calendar_header': "en_US"
 },
     'fr': {
+      'home': "Mes jardins",
       'title': "Partie pédagogie",
-      'settings_garden_title': "Paramètres du potager",
-      'settings_garden_name': "Nom du potager",
-      'settings_garden_name_error': "Nom du potager ne peut être vide",
-      'settings_garden_friends_title': "Amis du potager 😃",
+      'settings_garden_title': "Paramètres du jardin",
+      'settings_garden_name': "Nom du jardin",
+      'settings_garden_name_error': "Nom du jardin ne peut être vide",
+      'settings_garden_friends_title': "Amis du jardin 😃",
       'settings_confirm_changes': "Confirmer changements",
-      'settings_garden_delete_button': "Supprimer potager",
-      'settings_garden_delete_title': "Supprimer ce potager ?",
-      'settings_garden_delete_message': "Cette action entraîne la suppression définitive de toutes les données de ce potager.",
-      'settings_garden_leave_button': "Quitter potager",
-      'settings_garden_leave_title': "Quitter ce potager ?",
-      'settings_garden_leave_message': "Cette action entraîne votre départ de ce potager et de ces parcelles.",
-      'add_garden_title': "Créer un potager",
-      'add_garden_name_title': "Quel est le nom de votre potager ?",
-      'add_garden_name_hint': "Nom potager",
-      'add_garden_name_error': "Nom du potager ne peut être vide",
-      'add_garden_visibilityTitle': "Souhaitez vous rendre ce potager public ?",
+      'settings_garden_delete_button': "Supprimer jardin",
+      'settings_garden_delete_title': "Supprimer ce jardin ?",
+      'settings_garden_delete_message': "Cette action entraîne la suppression définitive de toutes les données de ce jardin.",
+      'settings_garden_leave_button': "Quitter jardin",
+      'settings_garden_leave_title': "Quitter ce jardin ?",
+      'settings_garden_leave_message': "Cette action entraîne votre départ de ce jardin et de ces parcelles.",
+      'add_garden_title': "Créer un jardin",
+      'add_garden_name_title': "Quel est le nom de votre jardin ?",
+      'add_garden_name_hint': "Nom jardin",
+      'add_garden_name_error': "Nom du jardin ne peut être vide",
+      'add_garden_visibilityTitle': "Souhaitez vous rendre ce jardin public ?",
       'button_continue': "Continuer",
       'button_cancel': "Annuler",
       'yes_choice': 'Oui',
@@ -119,12 +121,12 @@ class AppLocalizations {
       'continue_button': "CONTINUER",
       'back_button': "REVENIR",
       'finalize_button': 'FINALISER',
-      'tab_bar_garden': "Potagers",
+      'tab_bar_garden': "Jardins",
       'tab_bar_tutos': "Tutoriels",
       'tab_bar_profile': "Profil",
       'speed_dial_add_activity': "Ajouter Activité",
-      'speed_dial_create_garden': "Créer un potager",
-      'speed_dial_join_garden': "Rejoindre un potager",
+      'speed_dial_create_garden': "Créer un jardin",
+      'speed_dial_join_garden': "Rejoindre un jardin",
       'speed_dial_create_parcel': "Créer une parcelle",
       'details_parcel_none_association_message': 'Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?',
       'details_parcel_add_association_message': "Ajouter une nouvelle association",
@@ -170,12 +172,18 @@ class AppLocalizations {
       'registration_title': "Inscription",
       'registration_failure': "Échec de l'inscription",
       'registration_loading': "Inscription en cours",
-      'registration_button': "Créer un compte"
+      'registration_button': "Créer un compte",
+      'activities_calendar_header': "fr_FR"
+
     },
   };
 
   String get title {
     return _localizedValues[locale.languageCode]['title'];
+  }
+
+  String get home {
+    return _localizedValues[locale.languageCode]['home'];
   }
 
   String get settingsGardenTitle {
@@ -234,23 +242,23 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['button_cancel'];
   }
 
-  String get addGardenTitle {
+  String get GardenAddedTitle {
     return _localizedValues[locale.languageCode]['add_garden_title'];
   }
 
-  String get addGardenNameTitle {
+  String get GardenAddedNameTitle {
     return _localizedValues[locale.languageCode]['add_garden_name_title'];
   }
 
-  String get addGardenNameHint {
+  String get GardenAddedNameHint {
     return _localizedValues[locale.languageCode]['add_garden_name_hint'];
   }
 
-  String get addGardenNameError {
+  String get GardenAddedNameError {
     return _localizedValues[locale.languageCode]['add_garden_name_error'];
   }
 
-  String get addGardenVisibilityTitle {
+  String get GardenAddedVisibilityTitle {
     return _localizedValues[locale.languageCode]['add_garden_visibilityTitle'];
   }
 
@@ -294,7 +302,7 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['tab_bar_profile'];
   }
 
-  String get speedDialAddActivity {
+  String get speedDialActivityAdded {
     return _localizedValues[locale.languageCode]['speed_dial_add_activity'];
   }
 
@@ -444,19 +452,19 @@ class AppLocalizations {
   }
 
 
-  String get addActivityTitle  {
+  String get ActivityAddedTitle  {
     return _localizedValues[locale.languageCode]['add_activity_title'];
   }
 
-  String get addActivityName  {
+  String get ActivityAddedName  {
     return _localizedValues[locale.languageCode]['add_activity_name'];
   }
 
-  String get addActivityNameError {
+  String get ActivityAddedNameError {
     return _localizedValues[locale.languageCode]['add_activity_name_error'];
   }
 
-  String get addActivityDaySelection {
+  String get ActivityAddedDaySelection {
     return _localizedValues[locale.languageCode]['add_activity_day_selection'];
   }
 
@@ -496,6 +504,9 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['registration_button'];
   }
 
+  String get activitiesCalendarHeader {
+    return _localizedValues[locale.languageCode]['activities_calendar_header'];
+  }
 
 
 }

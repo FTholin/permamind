@@ -11,21 +11,31 @@ abstract class GardensState extends Equatable {
   GardensState([List props = const []]) : super(props);
 }
 
-class GardensLoading extends GardensState {
-  @override
-  String toString() => "GardensLoading";
-}
+class GardensLoadInProgress extends GardensState {}
 
-class GardensLoaded extends GardensState {
+class GardensLoadSuccess extends GardensState {
+
   final List<Garden> gardens;
 
-  GardensLoaded([this.gardens = const []]) : super([gardens]);
+  GardensLoadSuccess(this.gardens);
 
   @override
-  String toString() => "GardensLoaded { gardens : $gardens }";
+  List<Object> get props => [gardens];
+
+
+  @override
+  String toString() => "GardensLoadSuccess { gardens : $gardens }";
+
 }
 
-class GardensNotLoaded extends GardensState {
-  @override
-  String toString() => "GardensNotLoaded";
-}
+
+
+
+
+//class GardensLoadSuccess extends GardensState {
+//  final List<Garden> gardens;
+//
+//  GardensLoadSuccess([this.gardens = const []]) : super([gardens]);
+//
+
+//}
