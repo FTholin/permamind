@@ -44,7 +44,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
           child:  Icon(
             Icons.event,
             color: Colors.white,
-            semanticLabel: '${AppLocalizations.of(context).speedDialAddActivity}',
+            semanticLabel: '${AppLocalizations.of(context).speedDialActivityAdded}',
           ),
           backgroundColor: Colors.green,
           onTap: () async {
@@ -55,7 +55,7 @@ class ActivitySpeedDialState extends State<ActivitySpeedDial>
 
                       return BlocProvider.value(
                         value: BlocProvider.of<ActivitiesBloc>(context),
-                        child: AddActivityScreen(gardenId: widget.gardenId, parcelId: widget.parcelId),
+                        child: ActivityAddedScreen(gardenId: widget.gardenId, parcelId: widget.parcelId),
                       );
 
                     })

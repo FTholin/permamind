@@ -300,7 +300,7 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['tab_bar_profile'];
   }
 
-  String get speedDialAddActivity {
+  String get speedDialActivityAdded {
     return _localizedValues[locale.languageCode]['speed_dial_add_activity'];
   }
 
@@ -450,19 +450,19 @@ class AppLocalizations {
   }
 
 
-  String get addActivityTitle  {
+  String get ActivityAddedTitle  {
     return _localizedValues[locale.languageCode]['add_activity_title'];
   }
 
-  String get addActivityName  {
+  String get ActivityAddedName  {
     return _localizedValues[locale.languageCode]['add_activity_name'];
   }
 
-  String get addActivityNameError {
+  String get ActivityAddedNameError {
     return _localizedValues[locale.languageCode]['add_activity_name_error'];
   }
 
-  String get addActivityDaySelection {
+  String get ActivityAddedDaySelection {
     return _localizedValues[locale.languageCode]['add_activity_day_selection'];
   }
 

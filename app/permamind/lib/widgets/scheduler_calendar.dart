@@ -60,28 +60,55 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   }
 
   Widget _buildTableCalendar( Map<DateTime, List> events) {
+
     return TableCalendar(
-//      locale: 'fr_FR',
-      events: events,
+      calendarController: _calendarController,
+      events: _events,
       initialCalendarFormat: CalendarFormat.week,
+      calendarStyle: CalendarStyle(
+        selectedColor: Colors.deepOrange[400],
+        todayColor: Colors.deepOrange[200],
+        markersColor: Colors.brown[700],
+        outsideDaysVisible: false,
+      ),
       availableCalendarFormats: const {
         CalendarFormat.week: '',
       },
-      calendarController: _calendarController,
+      headerStyle: HeaderStyle(
+        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+        formatButtonDecoration: BoxDecoration(
+          color: Colors.deepOrange[400],
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+      ),
       onDaySelected: _onDaySelected,
       onVisibleDaysChanged: _onVisibleDaysChanged,
       onCalendarCreated: _onCalendarCreated,
     );
+
   }
 
   Widget _buildEmptyTableCalendar() {
+
     return TableCalendar(
-//      locale: 'fr_FR',
+      calendarController: _calendarController,
       initialCalendarFormat: CalendarFormat.week,
+      calendarStyle: CalendarStyle(
+        selectedColor: Colors.deepOrange[400],
+        todayColor: Colors.deepOrange[200],
+        markersColor: Colors.brown[700],
+        outsideDaysVisible: false,
+      ),
       availableCalendarFormats: const {
         CalendarFormat.week: '',
       },
-      calendarController: _calendarController,
+      headerStyle: HeaderStyle(
+        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+        formatButtonDecoration: BoxDecoration(
+          color: Colors.deepOrange[400],
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+      ),
       onDaySelected: _onDaySelected,
       onVisibleDaysChanged: _onVisibleDaysChanged,
       onCalendarCreated: _onCalendarCreated,
@@ -136,7 +163,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
     DateTime referenceDate =
         new DateTime(selectedDay.year, selectedDay.month, selectedDay.day, 1);
     BlocProvider.of<ActivitiesBloc>(context)
-        .add(SelectDayActivities(referenceDate, _events));
+        .add(DayActivitiesSelected(referenceDate, _events));
   }
 }
 
@@ -211,6 +238,6 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
 //
 //  void _onDaySelected(DateTime selectedDay, List events) {
 //    DateTime referenceDate = new DateTime(selectedDay.year, selectedDay.month, selectedDay.day, 1);
-//    BlocProvider.of<ActivitiesBloc>(context).add(SelectDayActivities(referenceDate, widget.schedule));
+//    BlocProvider.of<ActivitiesBloc>(context).add(DayActivitiesSelected(referenceDate, widget.schedule));
 //  }
 //}

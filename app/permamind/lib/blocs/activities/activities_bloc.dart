@@ -26,6 +26,10 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
       yield* _mapActivitiesUpdatedToState(event);
     } else if (event is ActivityUpdated) {
       yield* _mapActivityUpdatedToState(event);
+    } else if (event is DayActivitiesSelected) {
+      yield* _mapDayActivitiesSelectedToState(event);
+    } else if (event is ActivityAdded) {
+      yield* _mapActivityAddedToState(event);
     }
   }
 
@@ -51,8 +55,17 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
     yield ActivitiesLoadSuccess(referenceDate, event.activities);
   }
 
+  Stream<ActivitiesState> _mapDayActivitiesSelectedToState(DayActivitiesSelected event) async* {
+    referenceDate =  event.selectedDay;
+    yield ActivitiesLoadSuccess(referenceDate, event.dayActivities);
+  }
+
   Stream<ActivitiesState> _mapActivityUpdatedToState(ActivityUpdated event) async* {
     dataRepository.updateActivity(event.updatedActivity);
+  }
+
+  Stream<ActivitiesState> _mapActivityAddedToState(ActivityAdded event) async* {
+    dataRepository.addNewActivity(event.newActivity);
   }
 
   @override
@@ -94,12 +107,12 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 //        yield* _mapActivitiesLoadedToState(event);
 //      } else if (event is ActivitiesUpdated) {
 //        yield* _mapActivitiesUpdateToState(event);
-//      }  else if (event is SelectDayActivities) {
-//        yield* _mapSelectDayActivitiesToState(event);
+//      }  else if (event is DayActivitiesSelected) {
+//        yield* _mapDayActivitiesSelectedToState(event);
 //      } else if (event is ActivityUpdated) {
 //        yield* _mapUpdateActivityToState(event);
-//      } else if (event is AddActivity) {
-//        yield* _mapAddActivityToState(event);
+//      } else if (event is ActivityAdded) {
+//        yield* _mapActivityAddedToState(event);
 //      } else if (event is ActivitiesDeletedFromParcel) {
 //        yield* _mapDeleteActivitiesToState(event);
 //      } else {
@@ -130,10 +143,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 //
 
 //
-//  Stream<ActivitiesState> _mapSelectDayActivitiesToState(SelectDayActivities event) async* {
-//    referenceDate =  event.selectedDay;
-//    yield ActivitiesLoadSuccess(referenceDate, event.dayActivities);
-//  }
+
 //
 //  Stream<ActivitiesState> _mapDeleteActivitiesToState(ActivitiesDeletedFromParcel event) async* {
 //    dataRepository.deleteActivitiesFromParcel(event.parcelId);
@@ -144,9 +154,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
 //    dataRepository.updateActivity(event.updatedActivity);
 //  }
 //
-//  Stream<ActivitiesState> _mapAddActivityToState(AddActivity event) async* {
-//    dataRepository.addNewActivity(event.newActivity);
-//  }
+
 //
 //
 //  @override

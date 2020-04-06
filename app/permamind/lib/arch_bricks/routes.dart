@@ -6,7 +6,7 @@ class ArchSampleRoutes {
   static final detailsModeling = "/detailsModeling";
   static final tutorialActivities = "/tutorialActivities";
   static final settings = "/settings";
-  static final addActivity = "/addActivity";
+  static final ActivityAdded = "/ActivityAdded";
   static final joinGarden = "/joinGarden";
   static final addParcel = "/addParcel";
 

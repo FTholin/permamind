@@ -240,10 +240,6 @@ class DetailsParcelScreen extends StatelessWidget {
                 SchedulerCalendar(
                   parcelId: parcelId,
                 )
-//                    BlocBuilder<ActivitiesBloc, ActivitiesState>(
-//                        builder: (context, state) {
-//
-//                    })
                   ]),
               floatingActionButton: ActivitySpeedDial(
                   gardenId: gardenId, parcelId: parcelId, visible: true),
