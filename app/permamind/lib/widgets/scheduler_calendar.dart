@@ -1,3 +1,4 @@
+import 'package:arch/arch.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +63,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   Widget _buildTableCalendar( Map<DateTime, List> events) {
 
     return TableCalendar(
+      locale: AppLocalizations.of(context).activitiesCalendarHeader,
       calendarController: _calendarController,
       events: _events,
       initialCalendarFormat: CalendarFormat.week,
@@ -91,6 +93,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   Widget _buildEmptyTableCalendar() {
 
     return TableCalendar(
+      locale: AppLocalizations.of(context).activitiesCalendarHeader,
       calendarController: _calendarController,
       initialCalendarFormat: CalendarFormat.week,
       calendarStyle: CalendarStyle(

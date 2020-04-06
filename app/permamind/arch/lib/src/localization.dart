@@ -90,8 +90,8 @@ class AppLocalizations {
       'registration_title': 'Registration',
       'registration_failure': 'Registration Failure',
       'registration_loading': 'Registering...',
-      'registration_button': "Create an Account"
-
+      'registration_button': "Create an Account",
+      'activities_calendar_header': "en_US"
 },
     'fr': {
       'home': "Mes jardins",
@@ -172,7 +172,9 @@ class AppLocalizations {
       'registration_title': "Inscription",
       'registration_failure': "Échec de l'inscription",
       'registration_loading': "Inscription en cours",
-      'registration_button': "Créer un compte"
+      'registration_button': "Créer un compte",
+      'activities_calendar_header': "fr_FR"
+
     },
   };
 
@@ -502,6 +504,9 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['registration_button'];
   }
 
+  String get activitiesCalendarHeader {
+    return _localizedValues[locale.languageCode]['activities_calendar_header'];
+  }
 
 
 }
