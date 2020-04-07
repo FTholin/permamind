@@ -1190,8 +1190,6 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                 DateTime.now(),
                                                 0, []);
 
-                                            // TODO ICI
-
                                             Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) {
@@ -1200,6 +1198,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                       BlocProvider<ParcelsBloc>.value(value: parcelBloc),
                                                     ],
                                                     child: DetailsModelingScreen(
+                                                        user: widget.user,
                                                         gardenId: widget.garden.id,
                                                         parcel: parcel,
                                                         modeling: modeling,

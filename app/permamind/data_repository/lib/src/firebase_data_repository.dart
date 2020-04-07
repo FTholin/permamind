@@ -278,6 +278,12 @@ class FirebaseDataRepository implements DataRepository {
         .getDocuments();
   }
 
+  Future<int> gardenParcelsCounting(String gardenId) {
+    return Firestore.instance.collection('parcels')
+        .where('gardenId', isEqualTo: gardenId)
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
   @override
   Future<void> updateGarden(Garden update) {
     // logger.i("WRITE::GardenUpdated");
@@ -303,7 +309,6 @@ class FirebaseDataRepository implements DataRepository {
         .document(update.id)
         .updateData(update.toEntity().toDocument());
   }
-
 
   @override
   Future<void> updateParcelsFromGarden(String gardenId, String userId) {

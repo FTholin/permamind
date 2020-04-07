@@ -4,6 +4,7 @@ import 'package:authentication/src/entities/entities.dart';
 @immutable
 class User {
   final String id;
+  final String authenticationId;
   final String pseudo;
   final String nationality;
   final String email;
@@ -13,33 +14,39 @@ class User {
   final int accountStatus;
 
   User(
-    this.id,
+    this.authenticationId,
     this.pseudo,
     this.email,
-    this.searchKey, {
-    String nationality = 'French',
-    int gardenCounter = 0,
-    int parcelCounter = 0,
-    int accountStatus = 0,
-  }) : this.nationality = nationality ?? 'French', this.gardenCounter = 0, this.parcelCounter = 0, this.accountStatus = 0;
+    this.searchKey,
+    this.nationality,
+    this.gardenCounter,
+    this.parcelCounter,
+    this.accountStatus,
+    {String id}) : this.id = id;
 
   User copyWith(
-      {String id,
+      {String id, String authenticationId,
       String pseudo,
       String email,
       String nationality,
-      String searchKey}) {
+      String searchKey,
+      int gardenCounter,
+      int parcelCounter,
+      int accountStatus}) {
     return User(
-      id ?? this.id,
+      authenticationId ?? this.authenticationId,
       pseudo ?? this.pseudo,
       email ?? this.email,
       searchKey ?? this.searchKey,
-      nationality: nationality ?? this.nationality,
+      nationality ?? this.nationality,
+      gardenCounter ?? this.gardenCounter, parcelCounter ?? this.parcelCounter,
+      accountStatus ?? this.accountStatus,
+      id: id ?? this.id,
     );
   }
 
   @override
-  int get hashCode =>
+  int get hashCode => authenticationId.hashCode ^
       id.hashCode ^ pseudo.hashCode ^ email.hashCode ^ nationality.hashCode ^ searchKey.hashCode;
 
   @override
@@ -47,6 +54,7 @@ class User {
       identical(this, other) ||
       other is User &&
           runtimeType == other.runtimeType &&
+          authenticationId == other.authenticationId &&
           id == other.id &&
           pseudo == other.pseudo &&
           email == other.email &&
@@ -62,19 +70,20 @@ class User {
   }
 
   UserEntity toEntity() {
-    return UserEntity(id, pseudo, email, nationality, searchKey, gardenCounter, parcelCounter, accountStatus);
+    return UserEntity(id, authenticationId, pseudo, email, nationality, searchKey, gardenCounter, parcelCounter, accountStatus);
   }
 
   static User fromEntity(UserEntity entity) {
     return User(
-      entity.id,
+      entity.authenticationId,
       entity.pseudo,
       entity.email,
       entity.searchKey,
-      nationality: entity.nationality ?? 'French',
-      gardenCounter: entity.gardenCounter ?? 0,
-      parcelCounter: entity.gardenCounter ?? 0,
-      accountStatus: entity.accountStatus ?? 0
+      entity.nationality,
+      entity.gardenCounter,
+      entity.gardenCounter,
+      entity.accountStatus,
+      id: entity.id,
     );
   }
 }

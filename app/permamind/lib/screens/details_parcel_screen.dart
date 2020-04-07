@@ -14,14 +14,14 @@ class DetailsParcelScreen extends StatelessWidget {
 //  final DataRepository dataRepository;
   final String parcelId;
 
-//  final User user;
+  final User user;
   final String gardenId;
 
   DetailsParcelScreen({
     Key key,
 //    @required this.dataRepository,
     @required this.parcelId,
-//    @required this.user,
+    @required this.user,
     @required this.gardenId,
   }) : super(key: key);
 
@@ -189,6 +189,22 @@ class DetailsParcelScreen extends StatelessWidget {
                                                 onPressed: () {
                                                   parcelsBloc.add(
                                                       ParcelDeleted(parcelId));
+
+                                                  final int newParcelCounter = user.parcelCounter - 1;
+
+                                                  BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
+                                                      user.copyWith(
+                                                          id: user.id,
+                                                          pseudo: user.pseudo,
+                                                          email: user.email,
+                                                          nationality: user.nationality,
+                                                          searchKey: user.searchKey,
+                                                          gardenCounter: user.gardenCounter,
+                                                          parcelCounter: newParcelCounter,
+                                                          accountStatus: user.accountStatus
+                                                      )
+                                                  ),);
+
                                                   Navigator
                                                       .pushNamedAndRemoveUntil(
                                                     context,
@@ -314,7 +330,7 @@ class DetailsParcelScreen extends StatelessWidget {
 //
 //                                                  if (_parcelNameTextController.text.isNotEmpty) {
 //
-//                                                    BlocProvider.of<GardensBloc>(context).add(
+////                                                    BlocProvider.of<GardensBloc>(context).add(
 //                                                      ParcelUpdated(
 //                                                          currentParcel.copyWith(
 //                                                            name: _parcelNameTextController.text,

@@ -366,7 +366,20 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                       0);
 
                   BlocProvider.of<GardensBloc>(context).add(GardenAdded(garden));
+                  final int newGardenCounter = widget._user.gardenCounter + 1;
 
+                  BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
+                      widget._user.copyWith(
+                          id: widget._user.id,
+                          pseudo: widget._user.pseudo,
+                          email: widget._user.email,
+                          nationality: widget._user.nationality,
+                          searchKey: widget._user.searchKey,
+                          gardenCounter: newGardenCounter,
+                          parcelCounter: widget._user.parcelCounter,
+                          accountStatus: widget._user.accountStatus
+                      )
+                  ),);
                   Navigator.pop(context);
                 },
                 child: Text('${AppLocalizations.of(context).finalizeButton}')),

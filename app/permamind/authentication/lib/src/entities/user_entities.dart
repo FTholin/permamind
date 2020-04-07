@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 class UserEntity extends Equatable {
   final String id;
+  final String authenticationId;
   final String pseudo;
   final String nationality;
   final String email;
@@ -11,11 +12,12 @@ class UserEntity extends Equatable {
   final int parcelCounter;
   final int accountStatus;
 
-  UserEntity(this.id, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.parcelCounter, this.accountStatus);
+  UserEntity(this.id, this.authenticationId, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.parcelCounter, this.accountStatus);
 
   Map<String, Object> toJson() {
     return {
       'id': id,
+      'authenticationId': authenticationId,
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,
@@ -26,6 +28,12 @@ class UserEntity extends Equatable {
     };
   }
 
+
+
+  @override
+  List<Object> get props => [id, authenticationId, pseudo, email, nationality, searchKey,gardenCounter,parcelCounter, accountStatus];
+
+
   @override
   String toString() {
     return 'UserEntity { id: $id, pseudo: $pseudo, email: $email, nationality: $nationality, searchKey: $searchKey }';
@@ -34,6 +42,7 @@ class UserEntity extends Equatable {
   static UserEntity fromJson(Map<String, Object> json) {
     return UserEntity(
       json['id'] as String,
+      json['authenticationId'] as String,
       json['pseudo'] as String,
       json['email'] as String,
       json['nationality'] as String,
@@ -47,6 +56,7 @@ class UserEntity extends Equatable {
   static UserEntity fromSnapshot(DocumentSnapshot snap) {
     return UserEntity(
       snap.documentID,
+      snap.data['authenticationId'],
       snap.data['pseudo'],
       snap.data['email'],
       snap.data['nationality'],
@@ -59,7 +69,7 @@ class UserEntity extends Equatable {
 
   Map<String, Object> toDocument() {
     return {
-      'id': id,
+      'authenticationId': authenticationId,
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,

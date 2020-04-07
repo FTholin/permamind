@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,7 +41,15 @@ class UserRepository {
       password: password,
     );
 
-    User newUser = User(result.user.uid, pseudo, email, pseudo.substring(0, 1).toUpperCase());
+    User newUser = User(
+      result.user.uid,
+      pseudo, email,
+      pseudo.substring(0, 1).toUpperCase(),
+      'French',
+      0,
+      0,
+      0
+    );
     await addNewUser(newUser);
   }
 
@@ -58,20 +67,28 @@ class UserRepository {
 
   Future<User> getUserFromId() async {
 
-    final userData = (await searchById((await _firebaseAuth.currentUser()).uid)).documents.first.data;
+    final userData = (await searchById((await _firebaseAuth.currentUser()).uid));
 
-    return User(userData['id'],userData['pseudo'], userData['email'], userData['searchKey']);
+    return User.fromEntity(UserEntity.fromSnapshot(userData));
+
   }
 
-  Future<QuerySnapshot> searchById(String value) {
-    return Firestore.instance.collection('users')
-        .where('id',
-        isEqualTo: value)
-        .getDocuments();
+  Future<DocumentSnapshot> searchById(String value) {
+    return  Firestore.instance.collection('users').where("authenticationId",isEqualTo: value).getDocuments().then((snapshot) {
+      return snapshot.documents.first;
+    });
   }
 
   Future<void> addNewUser(User user) {
     return Firestore.instance.collection('users').add(user.toEntity().toDocument());
+  }
+
+
+  Future<void> updateUser(User update) {
+    // logger.i("WRITE::updateParcel");
+    return Firestore.instance.collection('users')
+        .document(update.id)
+        .updateData(update.toEntity().toDocument());
   }
 
 
@@ -88,12 +105,12 @@ class UserRepository {
     Firestore.instance.collection('gardens').where("admin",isEqualTo: currentUser.uid).getDocuments().then((snapshot) {
       for (DocumentSnapshot garden in snapshot.documents) {
 
-        // Supprime tous les designs associé au jardin
-        Firestore.instance.collection('designs').where("gardenId",isEqualTo: garden.documentID).getDocuments().then((snapshot) {
-          for (DocumentSnapshot design in snapshot.documents) {
-            design.reference.delete();
-          }
-        });
+//        // Supprime tous les designs associé au jardin
+//        Firestore.instance.collection('designs').where("gardenId",isEqualTo: garden.documentID).getDocuments().then((snapshot) {
+//          for (DocumentSnapshot design in snapshot.documents) {
+//            design.reference.delete();
+//          }
+//        });
 
         // Supprime tous activités associées au jardin
         Firestore.instance.collection('activities').where("gardenId",isEqualTo: garden.documentID).getDocuments().then((snapshot) {

@@ -12,86 +12,165 @@ import 'package:permamind/widgets/widgets.dart';
 import 'package:permamind/screens/screens.dart';
 
 class EnumeratedGardens extends StatelessWidget {
-  final User _user;
   final DataRepository _dataRepository;
+  final User user;
 
   EnumeratedGardens(
       {Key key, @required DataRepository dataRepository, @required User user})
       : assert(dataRepository != null),
-        assert(user != null),
-        _user = user,
+        user = user,
         _dataRepository = dataRepository,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<GardensBloc, GardensState>(
         builder: (context, state) {
-      if (state is GardensLoadSuccess) {
+          if (state is GardensLoadSuccess) {
 
-        List<Garden> gardens = state.gardens as List<Garden>;
+            List<Garden> gardens = state.gardens as List<Garden>;
 
-        gardens.sort((a, b) => a.creationDate.compareTo(b.creationDate));
+            gardens.sort((a, b) => a.creationDate.compareTo(b.creationDate));
 
-        // Si aucun jardin
-        if (gardens.length == 0) {
-          return Padding(
-            padding: EdgeInsets.all(
-              1 * SizeConfig.heightMultiplier,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Flexible(
-                    flex: 1,
-                    child: Image.asset(
-                      'assets/empty_states/empty_garden.png',
-                      fit: BoxFit.scaleDown,
-                    )),
-                Flexible(
-                    flex: 1,
-                    child: Text(
-                        "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: const Color(0xFF01534F),
-                          fontSize: 2.5 * SizeConfig.textMultiplier,
+            // Si aucun jardin
+            if (gardens.length == 0) {
+              return Padding(
+                padding: EdgeInsets.all(
+                  1 * SizeConfig.heightMultiplier,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Flexible(
+                        flex: 1,
+                        child: Image.asset(
+                          'assets/empty_states/empty_garden.png',
+                          fit: BoxFit.scaleDown,
+                        )),
+                    Flexible(
+                        flex: 1,
+                        child: Text(
+                            "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: const Color(0xFF01534F),
+                              fontSize: 2.5 * SizeConfig.textMultiplier,
 //                          fontWeight: FontWeight.bold,
-                        )))
-              ],
-            ),
-          );
-        } else {
-          return Column(
-            children: <Widget>[
-              Expanded(
-                  child: ListView.builder(
-                    itemCount: gardens.length,
-                    itemBuilder: (context, i) {
-                      return BlocProvider(
-                        create: (BuildContext context) => ParcelsBloc(
-                          gardensBloc: BlocProvider.of<GardensBloc>(context),
-                          dataRepository: _dataRepository,
-                          user: _user
-                        )..add(ParcelsLoadedSuccess(gardens[i].id, _user.id, _user.pseudo)),
-                        child: GardenItem(
-                          name: gardens[i].name,
-                          garden: gardens[i],
-                          user: _user,
-                          index: i,
-                          dayActivitiesCount: 0,
-                        ),
-                      );
-                    },
-                  )
-              ),
+                            )))
+                  ],
+                ),
+              );
+            } else {
+              return Column(
+                children: <Widget>[
+                  Expanded(
+                      child: ListView.builder(
+                        itemCount: gardens.length,
+                        itemBuilder: (context, i) {
+                          return BlocProvider(
+                            create: (BuildContext context) => ParcelsBloc(
+                                gardensBloc: BlocProvider.of<GardensBloc>(context),
+                                dataRepository: _dataRepository,
+                                user: user
+                            )..add(ParcelsLoadedSuccess(gardens[i].id, user.id, user.pseudo)),
+                            child: GardenItem(
+                              name: gardens[i].name,
+                              garden: gardens[i],
+                              user: user,
+                              index: i,
+                              dayActivitiesCount: 0,
+                            ),
+                          );
+                        },
+                      )
+                  ),
 
-            ],
-          );
-        }
-      } else {
-        return Container();
-      }
-    });
+                ],
+              );
+            }
+          } else {
+            return Container();
+          }
+        });
+
+//    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+//    builder: (context, state) {
+//      if (state is Authenticated) {
+//        final user =  state.userAuthenticated;
+////        return BlocBuilder<GardensBloc, GardensState>(
+////            builder: (context, state) {
+////              if (state is GardensLoadSuccess) {
+////
+////                List<Garden> gardens = state.gardens as List<Garden>;
+////
+////                gardens.sort((a, b) => a.creationDate.compareTo(b.creationDate));
+////
+////                // Si aucun jardin
+////                if (gardens.length == 0) {
+////                  return Padding(
+////                    padding: EdgeInsets.all(
+////                      1 * SizeConfig.heightMultiplier,
+////                    ),
+////                    child: Column(
+////                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+////                      children: <Widget>[
+////                        Flexible(
+////                            flex: 1,
+////                            child: Image.asset(
+////                              'assets/empty_states/empty_garden.png',
+////                              fit: BoxFit.scaleDown,
+////                            )),
+////                        Flexible(
+////                            flex: 1,
+////                            child: Text(
+////                                "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
+////                                textAlign: TextAlign.center,
+////                                style: TextStyle(
+////                                  color: const Color(0xFF01534F),
+////                                  fontSize: 2.5 * SizeConfig.textMultiplier,
+//////                          fontWeight: FontWeight.bold,
+////                                )))
+////                      ],
+////                    ),
+////                  );
+////                } else {
+////                  return Column(
+////                    children: <Widget>[
+////                      Expanded(
+////                          child: ListView.builder(
+////                            itemCount: gardens.length,
+////                            itemBuilder: (context, i) {
+////                              return BlocProvider(
+////                                create: (BuildContext context) => ParcelsBloc(
+////                                    gardensBloc: BlocProvider.of<GardensBloc>(context),
+////                                    dataRepository: _dataRepository,
+////                                    user: user
+////                                )..add(ParcelsLoadedSuccess(gardens[i].id, user.id, user.pseudo)),
+////                                child: GardenItem(
+////                                  name: gardens[i].name,
+////                                  garden: gardens[i],
+////                                  user: user,
+////                                  index: i,
+////                                  dayActivitiesCount: 0,
+////                                ),
+////                              );
+////                            },
+////                          )
+////                      ),
+////
+////                    ],
+////                  );
+////                }
+////              } else {
+////                return Container();
+////              }
+////            });
+//
+//      } else {
+//        return Container();
+//      }
+//    });
+
   }
 }

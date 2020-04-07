@@ -57,6 +57,14 @@ class ParcelEntity extends Equatable {
     return 'ParcelEntity { id: $id, name: $name, gardenId: $gardenId}';
   }
 
+
+  @override
+  List<Object> get props => [id,
+    name, gardenId,publicVisibility,
+    admin, members,currentModelingName,
+    creationDate,dayActivitiesCount, modelingsMonitoring];
+
+
   static ParcelEntity fromJson(Map<String, Object> json) {
     return ParcelEntity(
         json['id'] as String,

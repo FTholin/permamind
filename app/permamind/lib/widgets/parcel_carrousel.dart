@@ -72,6 +72,7 @@ class _ParcelCarouselWithIndicatorState
                       ),
                     ],
                     child: DetailsParcelScreen(
+                      user: widget.user,
                       gardenId: widget.garden.id,
                       parcelId: parcel.id,
                     ),
@@ -150,38 +151,52 @@ class _ParcelCarouselWithIndicatorState
     carouselContent.add(Container(
       margin: EdgeInsets.all(5.0),
       child: InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return MultiBlocProvider(
-                      providers: [
-                        BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
-                        BlocProvider<ModelingsBloc>(
-                          create: (context) => ModelingsBloc(
-                              dataRepository: parcelsBloc.dataRepository)
-                            ..add(FetchVeggies()),
-                        )
-                      ],
-                      child: AddParcelScreen(
-                        garden: widget.garden,
-                        user: widget.user,
-                        dataRepository: parcelsBloc.dataRepository,
-                      ));
-                },
-              ),
-            );
+          onTap: () async {
 
-//            return BlocProvider<ModelingsBloc>(
-//              create: (context) =>
-//              ModelingsBloc(dataRepository: firebaseRepository)
-//                ..add(FetchVeggies()),
-//              child: AddParcelScreen(
-//                garden: args.garden,
-//                user: state.userAuthenticated,
-//                dataRepository: firebaseRepository,
-//              ),
-//            );
+            final int gardenParcelCounter = await BlocProvider.of<GardensBloc>(context).dataRepository.gardenParcelsCounting(widget.garden.id);
+
+            if (widget.user.accountStatus == 0 && gardenParcelCounter >= 3) {
+
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  // TODO Peaufiner ce dialog pour le rentre propre
+                  return AlertDialog(
+                    title: new Text("Nombre de parcelle dépassé"),
+                    content: new Text("Passer à la version premium pour profiter pleinement de l'offre"),
+                    actions: <Widget>[
+                      // usually buttons at the bottom of the dialog
+                      new FlatButton(
+                        child: new Text("Close"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MultiBlocProvider(
+                          providers: [
+                            BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                            BlocProvider<ModelingsBloc>(
+                              create: (context) => ModelingsBloc(
+                                  dataRepository: parcelsBloc.dataRepository)
+                                ..add(FetchVeggies()),
+                            )
+                          ],
+                          child: AddParcelScreen(
+                            garden: widget.garden,
+                            user: widget.user,
+                            dataRepository: parcelsBloc.dataRepository,
+                          ));
+                    },
+                  ));
+            }
           },
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),

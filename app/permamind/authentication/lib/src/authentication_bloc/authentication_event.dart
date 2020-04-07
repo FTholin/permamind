@@ -1,3 +1,4 @@
+import 'package:authentication/authentication.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -30,4 +31,17 @@ class DeletedAccount extends AuthenticationEvent {
 
   @override
   String toString() => 'DeletedAccount';
+}
+
+
+class UserUpdated extends AuthenticationEvent {
+  final User user;
+
+  UserUpdated(this.user);
+
+  @override
+  List<Object> get props => [user];
+
+  @override
+  String toString() => 'UserUpdated { user: $user }';
 }

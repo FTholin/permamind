@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<TabBloc, AppTab>(
       builder: (context, activeTab) {
         return Scaffold(
@@ -32,17 +31,53 @@ class HomeScreen extends StatelessWidget {
 //              fit: BoxFit.contain,
 //            ),
             actions: [
-              FlatButton(
-                child: Text(
-                    "Ajouter",
-                    style: TextStyle(
-                        color: Colors.white,
+              activeTab == AppTab.gardens ? FlatButton(
+                  child: Text(
+                      "Ajouter",
+                      style: TextStyle(
+                          color: Colors.white,
 //                        fontWeight: FontWeight.bold,
-                        fontSize: 1.9 * SizeConfig.textMultiplier
-                    )
+                          fontSize: 1.9 * SizeConfig.textMultiplier
+                      )
+                  ),
+                  onPressed: () {
+                    // SI accountStatus == 0 et gardenCounter <= 1
+                    if (user.accountStatus == 0 && user.gardenCounter >= 1) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          // TODO Peaufiner ce dialog pour le rentre propre
+                          return AlertDialog(
+                            title: new Text("Nombre de jardin dépassé"),
+                            content: new Text("Passer à la version premium pour profiter pleinement de l'offre"),
+                            actions: <Widget>[
+                              // usually buttons at the bottom of the dialog
+                              new FlatButton(
+                                child: new Text("Close"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      Navigator.pushNamed(context, '/GardenAdded');
+                    }
+                  }
+              ) :  FlatButton(
+                child: Icon(Icons.settings, color: Colors.white,),
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  '/settings',
+                  arguments: SettingsScreenArguments(
+                      user.id
+                  ),
                 ),
-                onPressed: () => Navigator.pushNamed(context, '/GardenAdded'),
-        )
+              )
+//              ExtraActions(userId: user.id),
+
             ],
           ),
           body: _buildTabPage(context, activeTab),
@@ -79,7 +114,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text("👋 ${user.pseudo} !"),
-                ExtraActions(userId: user.id),
               ],
             )
           ),
@@ -89,38 +123,16 @@ class HomeScreen extends StatelessWidget {
   }
 
 
-  Widget _buildFloatActionButton(AppTab activeTab, context) {
-
-    if (activeTab == AppTab.gardens) {
-      return GardenSpeedDial(visible: true);
-    } else {
-      return GardenSpeedDial(visible: false);
-    }
-//  switch (activeTab) {
-//    case AppTab.gardens:
+//  Widget _buildFloatActionButton(AppTab activeTab, context) {
 //
-//
-////      return FloatingActionButton(
-////        key: ArchSampleKeys.GardenAddedFab,
-////        onPressed: () {
-////          Navigator.pushNamed(context, ArchSampleRoutes.GardenAdded);
-////        },
-////        child: Icon(Icons.add, color: Colors.white),
-////        tooltip: ArchSampleLocalizations.of(context).GardenAdded,
-////      );
+//    if (activeTab == AppTab.gardens) {
 //      return GardenSpeedDial(visible: true);
-//      break;
-//    case AppTab.abc:
+//    } else {
 //      return GardenSpeedDial(visible: false);
-//      break;
-//    case AppTab.learning:
-//      return GardenSpeedDial(visible: false);
-//      break;
-//    case AppTab.profile:
-//      return GardenSpeedDial(visible: false);
-//      break;
-
-  }
+//    }
+//
+//
+//  }
 
 }
 
