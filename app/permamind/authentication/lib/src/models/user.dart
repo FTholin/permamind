@@ -8,6 +8,9 @@ class User {
   final String nationality;
   final String email;
   final String searchKey;
+  final int gardenCounter;
+  final int parcelCounter;
+  final int accountStatus;
 
   User(
     this.id,
@@ -15,17 +18,16 @@ class User {
     this.email,
     this.searchKey, {
     String nationality = 'French',
-  }) : this.nationality = nationality ?? 'French';
+    int gardenCounter = 0,
+    int parcelCounter = 0,
+    int accountStatus = 0,
+  }) : this.nationality = nationality ?? 'French', this.gardenCounter = 0, this.parcelCounter = 0, this.accountStatus = 0;
 
   User copyWith(
       {String id,
       String pseudo,
       String email,
-      String firstName,
-      String lastName,
       String nationality,
-      List<String> gardensAssociated,
-      List<String> activitiesAssignated,
       String searchKey}) {
     return User(
       id ?? this.id,
@@ -48,7 +50,11 @@ class User {
           id == other.id &&
           pseudo == other.pseudo &&
           email == other.email &&
-          nationality == other.nationality && searchKey == other.searchKey;
+          nationality == other.nationality &&
+          searchKey == other.searchKey &&
+          gardenCounter == other.gardenCounter &&
+          parcelCounter == other.parcelCounter &&
+          accountStatus == other.accountStatus;
 
   @override
   String toString() {
@@ -56,7 +62,7 @@ class User {
   }
 
   UserEntity toEntity() {
-    return UserEntity(id, pseudo, email, nationality, searchKey);
+    return UserEntity(id, pseudo, email, nationality, searchKey, gardenCounter, parcelCounter, accountStatus);
   }
 
   static User fromEntity(UserEntity entity) {
@@ -66,6 +72,9 @@ class User {
       entity.email,
       entity.searchKey,
       nationality: entity.nationality ?? 'French',
+      gardenCounter: entity.gardenCounter ?? 0,
+      parcelCounter: entity.gardenCounter ?? 0,
+      accountStatus: entity.accountStatus ?? 0
     );
   }
 }

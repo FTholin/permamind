@@ -7,8 +7,11 @@ class UserEntity extends Equatable {
   final String nationality;
   final String email;
   final String searchKey;
+  final int gardenCounter;
+  final int parcelCounter;
+  final int accountStatus;
 
-  UserEntity(this.id, this.pseudo, this.email, this.nationality, this.searchKey);
+  UserEntity(this.id, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.parcelCounter, this.accountStatus);
 
   Map<String, Object> toJson() {
     return {
@@ -16,7 +19,10 @@ class UserEntity extends Equatable {
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,
-      'searchKey': searchKey
+      'searchKey': searchKey,
+      'gardenCounter': gardenCounter,
+      'parcelCounter': parcelCounter,
+      'accountStatus': accountStatus
     };
   }
 
@@ -31,7 +37,10 @@ class UserEntity extends Equatable {
       json['pseudo'] as String,
       json['email'] as String,
       json['nationality'] as String,
-      json['searchKey'] as String
+      json['searchKey'] as String,
+      json['gardenCounter'] as int,
+      json['parcelCounter'] as int,
+      json['accountStatus'] as int
     );
   }
 
@@ -41,7 +50,10 @@ class UserEntity extends Equatable {
       snap.data['pseudo'],
       snap.data['email'],
       snap.data['nationality'],
-      snap.data['searchKey']
+      snap.data['searchKey'],
+      snap.data['gardenCounter'],
+      snap.data['parcelCounter'],
+      snap.data['accountStatus'],
     );
   }
 
@@ -51,7 +63,10 @@ class UserEntity extends Equatable {
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,
-      'searchKey': searchKey
+      'searchKey': searchKey,
+      'gardenCounter': gardenCounter,
+      'parcelCounter': parcelCounter,
+      'accountStatus': accountStatus,
     };
   }
 }
