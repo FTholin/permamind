@@ -255,6 +255,7 @@ class DetailsParcelScreen extends StatelessWidget {
                     )),
                 SchedulerCalendar(
                   parcelId: parcelId,
+                  userId: user.id,
                 )
                   ]),
               floatingActionButton: ActivitySpeedDial(

@@ -9,9 +9,11 @@ import 'package:permamind/blocs/blocs.dart';
 class ScheduleListItem extends StatefulWidget {
 
   final Activity activity;
+  final String userId;
 
   ScheduleListItem({
     @required this.activity,
+    @required this.userId,
     Key key}) : super(key: key);
 
   @override
@@ -34,7 +36,6 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
         onChanged: (bool value) {
           setState((){
             checkboxValue = value;
-            // TODO Add user for completeActivityUser
             BlocProvider.of<ActivitiesBloc>(context).add(
                 ActivityUpdated(
                     widget.activity.copyWith(
@@ -44,7 +45,7 @@ class _ScheduleListItemState extends State<ScheduleListItem> {
                     complete: checkboxValue,
                     expectedDate: widget.activity.expectedDate,
                     category : widget.activity.category,
-                    completeActivityUserId : widget.activity.completeActivityUserId
+                    completeActivityUserId : widget.activity.completeActivityUserId.isEmpty ? widget.userId : widget.activity.completeActivityUserId
                 ),
                 )
             );

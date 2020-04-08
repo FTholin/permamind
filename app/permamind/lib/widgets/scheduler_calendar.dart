@@ -8,10 +8,12 @@ import 'package:table_calendar/table_calendar.dart';
 
 class SchedulerCalendar extends StatefulWidget {
   final String parcelId;
+  final String userId;
+
   SchedulerCalendar(
       {Key key,
       @required this.parcelId,
-
+      @required this.userId,
       })
       : super(key: key);
 
@@ -151,7 +153,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
               ),
               margin:
               const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-              child: ScheduleListItem(activity: activity),
+              child: ScheduleListItem(activity: activity, userId: widget.userId),
             )
         );
       }
