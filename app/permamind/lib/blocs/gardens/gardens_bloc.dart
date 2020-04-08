@@ -55,6 +55,8 @@ class GardensBloc extends Bloc<GardensEvent, GardensState> {
     dataRepository.deleteGarden(event.garden);
   }
 
+
+
   @override
   Future<void> close() {
     _gardensSubscription?.cancel();

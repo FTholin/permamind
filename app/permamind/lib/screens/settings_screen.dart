@@ -74,7 +74,54 @@ class SettingsScreen extends StatelessWidget {
                         onTap: () {},
                       ),
                     ),
+                    Card(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.exit_to_app,
+                          size: 24.0,
+                          semanticLabel:
+                          '${AppLocalizations.of(context).extraActionsSettingsButton}',
+                        ),
+                        title: Text("${AppLocalizations.of(context).extraActionsLogOutButton}"),
+                        onTap: () {
+                          return showDialog<void>(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Déconnexion de votre compte'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: <Widget>[
+                                      Text("Vous vous apprétez à vous déconnecter de Permamind."),
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('${AppLocalizations.of(context).buttonCancel}'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  FlatButton(
+                                    child: Text('${AppLocalizations.of(context).buttonContinue}'),
+                                    onPressed: () {
+                                      BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
 
+                                      Navigator.of(context).pushNamedAndRemoveUntil(
+                                          '/', (Route<dynamic> route) => false
+                                      );
+
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
                     Card(
                       child: ListTile(
                         leading: Icon(

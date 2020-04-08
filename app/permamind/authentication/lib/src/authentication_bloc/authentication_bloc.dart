@@ -27,6 +27,8 @@ class AuthenticationBloc
       yield* _mapLoggedOutToState();
     } else if (event is DeletedAccount) {
       yield* _mapDeletedAccountToState(event);
+    } else if (event is UserUpdated) {
+      yield* _mapUserUpdatedToState(event);
     }
   }
 
@@ -50,6 +52,12 @@ class AuthenticationBloc
   Stream<AuthenticationState> _mapLoggedOutToState() async* {
     yield Unauthenticated();
     _userRepository.signOut();
+  }
+
+
+  Stream<AuthenticationState> _mapUserUpdatedToState(UserUpdated event) async* {
+    _userRepository.updateUser(event.user);
+    yield Authenticated(event.user);
   }
 
   Stream<AuthenticationState> _mapDeletedAccountToState(DeletedAccount event) async* {

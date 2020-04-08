@@ -1,4 +1,5 @@
 import 'package:arch/arch.dart';
+import 'package:authentication/authentication.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,16 +17,18 @@ class DetailsModelingScreen extends StatelessWidget {
   final String gardenId;
   final List<Design> designs;
   final List<String> veggiesList;
+  final User user;
 
   DetailsModelingScreen({
     Key key,
+    @required this.user,
     @required this.gardenId,
     @required this.parcel,
     @required this.modeling,
     @required this.schedule,
     @required this.designs,
     @required this.veggiesList
-  }): assert(parcel != null), assert(modeling != null), assert(schedule != null), assert(designs != null), assert(gardenId != null);
+  }): assert(user != null), assert(parcel != null), assert(modeling != null), assert(schedule != null), assert(designs != null), assert(gardenId != null);
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +137,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                Flexible(
                                                  flex: 4,
                                                  child: Image.asset(
-                                                   "assets/utils_image/tree.png",
+                                                   "assets/veggies/${modeling.composition[index]}.png",
                                                    fit: BoxFit
                                                        .scaleDown,
                                                  ),
@@ -501,6 +504,20 @@ class DetailsModelingScreen extends StatelessWidget {
                                      // TODO Rajouter ici une mise à jour de jardin pour le daysActivitiesCount
 //                                     BlocProvider.of<GardensBloc>(context).add((gardenId, completedParcel.id, designs));
 
+                                     final int newParcelCounter = user.parcelCounter + 1;
+
+                                     BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
+                                         user.copyWith(
+                                             id: user.id,
+                                             pseudo: user.pseudo,
+                                             email: user.email,
+                                             nationality: user.nationality,
+                                             searchKey: user.searchKey,
+                                             gardenCounter: user.gardenCounter,
+                                             parcelCounter: newParcelCounter,
+                                             accountStatus: user.accountStatus
+                                         )
+                                     ),);
 
                                      Navigator.of(context).push(
                                        MaterialPageRoute(
@@ -515,6 +532,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                ),
                                              ],
                                              child: DetailsParcelScreen(
+                                               user: user,
                                                gardenId: gardenId,
                                                parcelId: completedParcel.id,
                                              ),

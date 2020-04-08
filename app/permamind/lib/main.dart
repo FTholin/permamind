@@ -198,9 +198,7 @@ class App extends StatelessWidget {
                                       ),
 
                                     ],
-                                    child: HomeScreen(
-                                        dataRepository: firebaseRepository,
-                                        user: state.userAuthenticated),
+                                    child: HomeScreen(dataRepository: firebaseRepository, user: state.userAuthenticated),
                                   );
                                 }
                                 if (state is Unauthenticated) {
@@ -402,8 +400,7 @@ class App extends StatelessWidget {
                                       ),
                                     ],
                                     child: HomeScreen(
-                                        dataRepository: firebaseRepository,
-                                        user: state.userAuthenticated),
+                                        dataRepository: firebaseRepository,),
                                   );
                                 }
                                 if (state is Unauthenticated) {

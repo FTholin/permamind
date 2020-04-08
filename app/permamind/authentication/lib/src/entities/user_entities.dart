@@ -3,22 +3,36 @@ import 'package:equatable/equatable.dart';
 
 class UserEntity extends Equatable {
   final String id;
+  final String authenticationId;
   final String pseudo;
   final String nationality;
   final String email;
   final String searchKey;
+  final int gardenCounter;
+  final int parcelCounter;
+  final int accountStatus;
 
-  UserEntity(this.id, this.pseudo, this.email, this.nationality, this.searchKey);
+  UserEntity(this.id, this.authenticationId, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.parcelCounter, this.accountStatus);
 
   Map<String, Object> toJson() {
     return {
       'id': id,
+      'authenticationId': authenticationId,
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,
-      'searchKey': searchKey
+      'searchKey': searchKey,
+      'gardenCounter': gardenCounter,
+      'parcelCounter': parcelCounter,
+      'accountStatus': accountStatus
     };
   }
+
+
+
+  @override
+  List<Object> get props => [id, authenticationId, pseudo, email, nationality, searchKey,gardenCounter,parcelCounter, accountStatus];
+
 
   @override
   String toString() {
@@ -28,30 +42,41 @@ class UserEntity extends Equatable {
   static UserEntity fromJson(Map<String, Object> json) {
     return UserEntity(
       json['id'] as String,
+      json['authenticationId'] as String,
       json['pseudo'] as String,
       json['email'] as String,
       json['nationality'] as String,
-      json['searchKey'] as String
+      json['searchKey'] as String,
+      json['gardenCounter'] as int,
+      json['parcelCounter'] as int,
+      json['accountStatus'] as int
     );
   }
 
   static UserEntity fromSnapshot(DocumentSnapshot snap) {
     return UserEntity(
       snap.documentID,
+      snap.data['authenticationId'],
       snap.data['pseudo'],
       snap.data['email'],
       snap.data['nationality'],
-      snap.data['searchKey']
+      snap.data['searchKey'],
+      snap.data['gardenCounter'],
+      snap.data['parcelCounter'],
+      snap.data['accountStatus'],
     );
   }
 
   Map<String, Object> toDocument() {
     return {
-      'id': id,
+      'authenticationId': authenticationId,
       'pseudo': pseudo,
       'email': email,
       'nationality': nationality,
-      'searchKey': searchKey
+      'searchKey': searchKey,
+      'gardenCounter': gardenCounter,
+      'parcelCounter': parcelCounter,
+      'accountStatus': accountStatus,
     };
   }
 }

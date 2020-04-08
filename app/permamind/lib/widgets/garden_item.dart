@@ -23,13 +23,10 @@ class GardenItem extends StatelessWidget {
     this.dayActivitiesCount
   });
 
-  // TODO Internationalisation des labels !!
-
   @override
   Widget build(BuildContext context) {
 
     TextEditingController _gardenNameTextController = TextEditingController();
-
 
     return Padding(
       padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
@@ -143,7 +140,7 @@ class GardenItem extends StatelessWidget {
                                         CupertinoButton(
                                           color: Colors.green,
                                           child: Text("Supprimer"),
-                                          onPressed: (){
+                                          onPressed: ()  {
                                             return showDialog<void>(
                                               context: context,
                                               barrierDismissible: false, // user must tap button!
@@ -166,9 +163,29 @@ class GardenItem extends StatelessWidget {
                                                     ),
                                                     FlatButton(
                                                       child: Text('${AppLocalizations.of(context).buttonContinue}'),
-                                                      onPressed: () {
+                                                      onPressed: () async {
                                                         BlocProvider.of<GardensBloc>(context)
                                                             .add(GardenDeleted(garden));
+
+                                                        final int newGardenCounter = user.gardenCounter - 1;
+
+                                                        final int gardenParcelCounter = await BlocProvider.of<GardensBloc>(context).dataRepository.gardenParcelsCounting(garden.id);
+                                                        final int newParcelCounter = user.parcelCounter - gardenParcelCounter;
+
+                                                        BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
+                                                            user.copyWith(
+                                                                id: user.id,
+                                                                pseudo: user.pseudo,
+                                                                email: user.email,
+                                                                nationality: user.nationality,
+                                                                searchKey: user.searchKey,
+                                                                gardenCounter: newGardenCounter,
+                                                                parcelCounter: newParcelCounter,
+                                                                accountStatus: user.accountStatus
+                                                            )
+                                                        ),);
+
+
                                                         Navigator.pushNamedAndRemoveUntil(
                                                           context,
                                                           '/',
@@ -215,22 +232,6 @@ class GardenItem extends StatelessWidget {
               ParcelCarouselWithIndicator(
                   garden, user),
 
-//                  Row(
-//                    mainAxisAlignment: MainAxisAlignment.center,
-//                    children: <Widget>[
-//                      Padding(
-//                        padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),
-//                        child: Text(
-//                            "Voir mes parcelles",
-//                            style: TextStyle(
-//                                color: const Color(0xFF01534F),
-//                                fontWeight: FontWeight.normal,
-//                                fontSize: 2.2 * SizeConfig.textMultiplier
-//                            )
-//                        ),
-//                      ),
-//                    ],
-//                  )
             ],
           ),
         ),
