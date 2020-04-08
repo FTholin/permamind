@@ -1327,7 +1327,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                                                   Flexible(
                                                                                     flex: 4,
                                                                                     child: Image.asset(
-                                                                                      "assets/utils_image/tree.png",
+                                                                                      "assets/veggies/${modeling.composition[index]}.png",
                                                                                       fit: BoxFit.scaleDown,
                                                                                     ),
                                                                                   ),
