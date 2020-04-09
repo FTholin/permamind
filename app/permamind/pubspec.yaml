@@ -42,6 +42,8 @@ dependencies:
   flutter_speed_dial: ^1.2.4
   bubble_bottom_bar: ^1.2.0
   charts_flutter: ^0.8.1
+  flutter_reaction_button: ^1.0.0
+
 
   carousel_slider: ^1.4.1
 
@@ -106,6 +108,7 @@ flutter:
     - assets/empty_states/
     - assets/utils_image/
     - assets/veggies/
+    - assets/user_reactions/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

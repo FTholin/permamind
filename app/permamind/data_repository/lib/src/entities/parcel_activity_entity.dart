@@ -10,7 +10,7 @@ class ActivityEntity extends Equatable {
   final DateTime expectedDate;
   final String category;
   final String completeActivityUserId;
-
+  final int feedback;
 
   ActivityEntity(
       this.id,
@@ -20,7 +20,8 @@ class ActivityEntity extends Equatable {
       this.complete,
       this.expectedDate,
       this.category,
-      this.completeActivityUserId
+      this.completeActivityUserId,
+      this.feedback
       );
 
   Map<String, Object> toJson() {
@@ -32,13 +33,14 @@ class ActivityEntity extends Equatable {
       'complete': complete,
       'expectedDate': expectedDate,
       'category': category,
-      'completeActivityUserId': completeActivityUserId
+      'completeActivityUserId': completeActivityUserId,
+      'feedback': feedback
     };
   }
 
 
   @override
-  List<Object> get props => [id, title, gardenId, parcelId, complete, expectedDate, category, completeActivityUserId];
+  List<Object> get props => [id, title, gardenId, parcelId, complete, expectedDate, category, completeActivityUserId, feedback];
 
 
   @override
@@ -55,7 +57,8 @@ class ActivityEntity extends Equatable {
         json['complete'] as bool,
         json['expectedDate'],
         json['category'] as String,
-        json['completeActivityUserId']
+        json['completeActivityUserId'],
+        json['feedback']
     );
   }
 
@@ -70,7 +73,8 @@ class ActivityEntity extends Equatable {
         DateTime.fromMillisecondsSinceEpoch(
             snap.data["expectedDate"].millisecondsSinceEpoch),
         snap.data['category'],
-        snap.data['completeActivityUserId']
+        snap.data['completeActivityUserId'],
+        snap.data['feedback']
     );
   }
 
@@ -82,7 +86,8 @@ class ActivityEntity extends Equatable {
       'complete': complete,
       'expectedDate': expectedDate,
       'category': category,
-      'completeActivityUserId': completeActivityUserId
+      'completeActivityUserId': completeActivityUserId,
+      'feedback': feedback
     };
   }
 }

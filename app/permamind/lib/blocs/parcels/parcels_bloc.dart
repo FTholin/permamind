@@ -73,7 +73,7 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
         DateTime expectedDate = referenceDate.add(Duration(days: i));
         expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
         activities.add(
-            Activity( event.schedule[i].dayActivities[j].name, event.gardenId, event.parcelId, false, expectedDate, event.schedule[i].dayActivities[j].category, '')
+            Activity( event.schedule[i].dayActivities[j].name, event.gardenId, event.parcelId, false, expectedDate, event.schedule[i].dayActivities[j].category, '', null)
         );
       }
     }

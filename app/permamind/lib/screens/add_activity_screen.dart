@@ -72,7 +72,8 @@ import 'package:permamind/blocs/blocs.dart';
                         false,
                         referenceDate,
                         '',
-                        ''
+                        '',
+                          null
                       )
                     )
                   );
