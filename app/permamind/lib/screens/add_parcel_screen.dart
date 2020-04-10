@@ -71,7 +71,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
     return BlocBuilder<ModelingsBloc, ModelingsState>(
         builder: (context, state) {
       if (state is VeggiesLoaded) {
-        state.veggies.map((item) => veggiesSelected[item.name] = false);
+        state.veggies.map((item) => veggiesSelected[item.nameFr] = false);
 
         return Scaffold(
           body: Padding(
@@ -571,72 +571,38 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                               ),
                               MyStep(
                                 title: Text(""),
-                                content: Column(
-//                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                content:  Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
                                   children: <Widget>[
-//                                  TextField(
-//                                    controller: null,
-//                                    decoration: InputDecoration(
-//                                        border: OutlineInputBorder(
-//                                            borderRadius: BorderRadius.all(
-//                                                Radius.circular(5.0)),
-//                                            borderSide: BorderSide(
-//                                                color: Colors.green)),
-//                                        hintText: 'Chercher des légumes'
-//                                    ),
-//                                    onChanged: (value) {
-//
-//                                    },
-//                                  ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 5 * SizeConfig.heightMultiplier),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("Légumes de saison",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color:
-                                                      const Color(0xFF01534F),
-                                                  fontSize: 2.5 *
-                                                      SizeConfig.textMultiplier,
-                                                  fontWeight: FontWeight.bold
-//                          fontWeight: FontWeight.bold,
-                                                  )),
-                                          Container(
-                                            color: Colors.white70,
-                                            height: 500,
-                                            child: ListView(
-                                              children: state.veggies
-                                                  .map((vegetable) {
-                                                return new CheckboxListTile(
-                                                  title:
-                                                      new Text(vegetable.name),
-                                                  value: veggiesSelected[
-                                                              vegetable.name] ==
-                                                          null
-                                                      ? false
-                                                      : veggiesSelected[
-                                                          vegetable.name],
-                                                  secondary: Image(
-                                                    height: 40,
-                                                    width: 40,
-                                                    image: AssetImage(
-                                                        'assets/mache.png'),
-                                                  ),
-                                                  onChanged: (bool value) {
-                                                    setState(() {
-                                                      veggiesSelected[vegetable
-                                                          .name] = value;
-                                                    });
-                                                  },
-                                                );
-                                              }).toList(),
+                                    Container(
+                                      color: Colors.white70,
+                                      height: 500,
+                                      child: ListView(
+                                        children: state.veggies
+                                            .map((vegetable) {
+                                          return new CheckboxListTile(
+                                            title:
+                                            new Text(vegetable.nameFr),
+                                            value: veggiesSelected[
+                                            vegetable.nameFr] ==
+                                                null
+                                                ? false
+                                                : veggiesSelected[
+                                            vegetable.nameFr],
+                                            secondary: Image(
+                                              height: 40,
+                                              width: 40,
+                                              image: AssetImage(
+                                                  'assets/veggies/${vegetable.imageName}.png'),
                                             ),
-                                          )
-                                        ],
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                veggiesSelected[vegetable.nameFr] = value;
+                                              });
+                                            },
+                                          );
+                                        }).toList(),
                                       ),
                                     )
                                   ],
@@ -696,10 +662,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                             child: Padding(
                               padding: EdgeInsets.only(left: 30, right: 30),
                               child: Container(
-                                color: Colors.green,
                                 child: _currentStep == 4
                                     ? Text(
-                                        "Voici les associations que nous avons trouvés:",
+                                        "Voici les associations que nous vous conseillons !",
                                         maxLines: 3,
                                         style: TextStyle(
                                           color: const Color(0xFF01534F),

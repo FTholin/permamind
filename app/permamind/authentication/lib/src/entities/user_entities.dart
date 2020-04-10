@@ -11,8 +11,9 @@ class UserEntity extends Equatable {
   final int gardenCounter;
   final int parcelCounter;
   final int accountStatus;
+  final List<String> tutorialsCompleted;
 
-  UserEntity(this.id, this.authenticationId, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.parcelCounter, this.accountStatus);
+  UserEntity(this.id, this.authenticationId, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.parcelCounter, this.accountStatus, this.tutorialsCompleted);
 
   Map<String, Object> toJson() {
     return {
@@ -24,7 +25,8 @@ class UserEntity extends Equatable {
       'searchKey': searchKey,
       'gardenCounter': gardenCounter,
       'parcelCounter': parcelCounter,
-      'accountStatus': accountStatus
+      'accountStatus': accountStatus,
+      'tutorialsCompleted': tutorialsCompleted,
     };
   }
 
@@ -49,7 +51,8 @@ class UserEntity extends Equatable {
       json['searchKey'] as String,
       json['gardenCounter'] as int,
       json['parcelCounter'] as int,
-      json['accountStatus'] as int
+      json['accountStatus'] as int,
+      json['tutorialsCompleted']
     );
   }
 
@@ -64,6 +67,8 @@ class UserEntity extends Equatable {
       snap.data['gardenCounter'],
       snap.data['parcelCounter'],
       snap.data['accountStatus'],
+      new List<String>.from(snap.data['tutorialsCompleted']),
+
     );
   }
 
@@ -77,6 +82,7 @@ class UserEntity extends Equatable {
       'gardenCounter': gardenCounter,
       'parcelCounter': parcelCounter,
       'accountStatus': accountStatus,
+      'tutorialsCompleted': tutorialsCompleted
     };
   }
 }

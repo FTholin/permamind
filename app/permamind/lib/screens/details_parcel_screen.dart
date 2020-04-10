@@ -30,7 +30,7 @@ class DetailsParcelScreen extends StatelessWidget {
     TextEditingController _parcelNameTextController = TextEditingController();
 
     final parcelsBloc = BlocProvider.of<ParcelsBloc>(context);
-
+    
     return BlocBuilder<ParcelsBloc, ParcelsState>(
       builder: (context, state) {
         if (state is ParcelsLoadSuccess && state.parcels.isNotEmpty) {

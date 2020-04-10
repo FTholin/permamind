@@ -50,7 +50,7 @@ dependencies:
   uuid: 2.0.4
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
-  firebase_analytics: ^4.0.2
+  firebase_analytics: ^5.0.11
 
   # Add the dependencies for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore

@@ -4,25 +4,31 @@ import 'package:intl/intl.dart';
 
 class Vegetable {
   final String id;
-  final String name;
+  final String imageName;
+  final String nameFr;
+  final String nameEn;
   final DateTime seasonPeriodStartDate;
   final DateTime seasonPeriodEndDate;
 
 
   Vegetable(
-      this.name,
+      this.nameFr,
+      this.nameEn,
+      this.imageName,
       this.seasonPeriodStartDate,
       this.seasonPeriodEndDate,
       {String id})
       : this.id = id;
 
   Vegetable copyWith({String id,
-    String name,
+    String imageName,
     seasonPeriodStartDate,
     seasonPeriodEndDate
   }) {
     return Vegetable(
-        name ?? this.name,
+        imageName ?? this.imageName,
+        nameFr ?? this.nameFr,
+        nameEn ?? this.nameEn,
         seasonPeriodStartDate ?? this.seasonPeriodStartDate,
         seasonPeriodEndDate ?? this.seasonPeriodEndDate,
         id: id ?? this.id
@@ -31,7 +37,7 @@ class Vegetable {
 
   @override
   int get hashCode =>
-      id.hashCode ^ name.hashCode;
+      id.hashCode ^ imageName.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -39,24 +45,28 @@ class Vegetable {
           other is Vegetable &&
               runtimeType == other.runtimeType &&
               id == other.id &&
-              name == other.name &&
+              imageName == other.imageName &&
+              nameFr == other.nameFr &&
+              nameEn == other.nameEn &&
               seasonPeriodStartDate == other.seasonPeriodStartDate &&
               seasonPeriodEndDate == other.seasonPeriodEndDate;
 
   @override
   String toString() {
-    return 'Vegetable { id: $id, name: $name,}';
+    return 'Vegetable { id: $id, imageName: $imageName,}';
   }
 
   VegetableEntity toEntity() {
     return VegetableEntity(
-        id, name, seasonPeriodStartDate, seasonPeriodEndDate
+        id, nameFr, nameEn, imageName, seasonPeriodStartDate, seasonPeriodEndDate
     );
   }
 
   static Vegetable fromEntity(VegetableEntity entity) {
     return Vegetable(
-      entity.name,
+      entity.nameFr,
+      entity.nameEn,
+      entity.imageName,
       entity.seasonPeriodStartDate,
       entity.seasonPeriodEndDate,
       id: entity.id,

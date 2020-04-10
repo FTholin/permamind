@@ -48,7 +48,7 @@ class UserRepository {
       'French',
       0,
       0,
-      0
+      0, []
     );
     await addNewUser(newUser);
   }

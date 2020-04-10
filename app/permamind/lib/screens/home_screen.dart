@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, activeTab) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("${AppLocalizations.of(context).home}"),
+            title: activeTab == AppTab.gardens ? Text("${AppLocalizations.of(context).home}") : Text(""),
 //            title:  Image.asset(
 //              'assets/logo-light.png',
 //              width:  MediaQuery.of(context).size.width / 2,
