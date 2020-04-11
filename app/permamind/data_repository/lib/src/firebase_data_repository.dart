@@ -200,8 +200,7 @@ class FirebaseDataRepository implements DataRepository {
 
   //TODO  fetchModelings
   @override
-  Stream<List<Modeling>> fetchModelings(List<String> veggiesList) {
-    // logger.i("READ::fetchModelings");
+  Stream<List<Modeling>> fetchModelings(List<ModelingComposition> veggiesList) {
     if (veggiesList.isEmpty) {
       return Firestore.instance.collection('modelings')
           .snapshots().map((snapshot) {
@@ -211,9 +210,10 @@ class FirebaseDataRepository implements DataRepository {
       });
     } else {
       return Firestore.instance.collection('modelings')
-          .where('composition', arrayContainsAny: veggiesList)
-//          .where("composition",arrayContains: {'vegetableId': veggiesList, 'pseudo': userPseudo})
-
+          .where('composition', whereIn: [{'vegetableId': veggiesList[0].vegetableId,
+        'nameFr': veggiesList[0].nameFr,
+        'nameEn': veggiesList[0].nameEn,
+        'imageName': veggiesList[0].imageName}])
           .snapshots().map((snapshot) {
         return snapshot.documents
             .map((doc) => Modeling.fromEntity(ModelingEntity.fromSnapshot(doc)))

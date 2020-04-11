@@ -128,6 +128,8 @@ class ModelingComposition {
   String nameEn;
   String imageName;
 
+  ModelingComposition(this.vegetableId, this.nameFr, this.nameEn, this.imageName);
+
   ModelingComposition.fromMap(Map<dynamic, dynamic> data)
       : vegetableId = data['vegetableId'],
         nameFr = data['nameFr'],

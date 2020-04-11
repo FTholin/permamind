@@ -9,7 +9,7 @@ abstract class ModelingsEvent extends Equatable {
 
 class FetchModelings extends ModelingsEvent {
 
-  final List<String> veggiesList;
+  final List<ModelingComposition> veggiesList;
 
   FetchModelings(this.veggiesList) : super([]);
 

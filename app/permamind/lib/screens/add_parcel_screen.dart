@@ -60,7 +60,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 
   final List<String> widths = <String>["60", "80", "100"];
 
-  Map<String, bool> veggiesSelected = Map<String, bool>();
+  Map<Vegetable, bool> veggiesSelected = Map<Vegetable, bool>();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
     return BlocBuilder<ModelingsBloc, ModelingsState>(
         builder: (context, state) {
       if (state is VeggiesLoaded) {
-        state.veggies.map((item) => veggiesSelected[item.nameFr] = false);
+        state.veggies.map((item) => veggiesSelected[item] = false);
 
         return Scaffold(
           body: Padding(
@@ -598,7 +598,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             ),
                                             onChanged: (bool value) {
                                               setState(() {
-                                                veggiesSelected[vegetable.nameFr] = value;
+                                                veggiesSelected[vegetable] = value;
                                               });
                                             },
                                           );
@@ -1433,15 +1433,15 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                 color: Colors.green,
                 textColor: Colors.white,
                 onPressed: () async {
-                  List<String> veggiesList = List<String>();
+                  List<ModelingComposition> modelings = List<ModelingComposition>();
 
                   veggiesSelected.forEach((k, v) {
                     if (v) {
-                      veggiesList.add(k);
+                      modelings.add(ModelingComposition(k.id, k.nameFr, k.nameEn, k.imageName));
                     }
                   });
                   BlocProvider.of<ModelingsBloc>(context)
-                      .add(FetchModelings(veggiesList));
+                      .add(FetchModelings(modelings));
                 },
                 child: Text('Rechercher')),
           ]);
