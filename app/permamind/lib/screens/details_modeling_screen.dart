@@ -16,7 +16,7 @@ class DetailsModelingScreen extends StatelessWidget {
   final List<ModelingSchedule> schedule;
   final String gardenId;
   final List<Design> designs;
-  final List<String> veggiesList;
+  final Map<String, Vegetable> veggiesComposition;
   final User user;
 
   DetailsModelingScreen({
@@ -27,7 +27,7 @@ class DetailsModelingScreen extends StatelessWidget {
     @required this.modeling,
     @required this.schedule,
     @required this.designs,
-    @required this.veggiesList
+    @required this.veggiesComposition
   }): assert(user != null), assert(parcel != null), assert(modeling != null), assert(schedule != null), assert(designs != null), assert(gardenId != null);
 
   @override
@@ -43,7 +43,8 @@ class DetailsModelingScreen extends StatelessWidget {
             children: <Widget>[
               RaisedButton.icon(
                 elevation: 0,
-                color: Colors.white,
+                // TODO
+                color: Color(0xFFF9F9F9),
                 icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
                 label: Text(
                     "Retour",
@@ -97,8 +98,8 @@ class DetailsModelingScreen extends StatelessWidget {
                              Flexible(
                                flex: 5,
                                child: Container(
-                               color: Colors.pink,
-                                   child: Text("On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source.",
+//                               color: Colors.pink,
+                                   child: Text("${modeling.descriptionFr}",
                                        maxLines: 10,
 //                                   textAlign: TextAlign.center,
                                        style: TextStyle(
@@ -136,7 +137,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                Flexible(
                                                  flex: 4,
                                                  child: Image.asset(
-                                                   "assets/veggies/${modeling.composition[index]}.png",
+                                                   "assets/veggies/${veggiesComposition[modeling.composition[index]].imageName}.png",
                                                    fit: BoxFit
                                                        .scaleDown,
                                                  ),
@@ -145,7 +146,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                    flex: 3,
                                                    child: Center(
                                                      child: Text(
-                                                         "${modeling.composition[index]}",
+                                                         "${veggiesComposition[modeling.composition[index]].nameFr}",
                                                          textAlign:
                                                          TextAlign
                                                              .center,
@@ -597,7 +598,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                            textAlign:
                                            TextAlign.center,
                                            style: TextStyle(
-                                             color: Colors.white,
+                                             color: const Color(0xFFF9F9F9),
                                              fontSize: 2.5 *
                                                  SizeConfig
                                                      .textMultiplier,

@@ -14,9 +14,10 @@ class ModelingsLoading extends ModelingsState {
 
 class ModelingsLoaded extends ModelingsState {
   final List<Modeling> modelingsFetched;
+  final Map<String, Vegetable> veggiesComposition;
 
-  ModelingsLoaded(this.modelingsFetched)
-      : super([modelingsFetched]);
+  ModelingsLoaded(this.modelingsFetched, this.veggiesComposition)
+      : super([modelingsFetched, veggiesComposition]);
 
   @override
   String toString() => 'ModelingsLoaded { modelingsFetched: $modelingsFetched }';

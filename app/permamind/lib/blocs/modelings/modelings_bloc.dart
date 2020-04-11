@@ -47,14 +47,14 @@ class ModelingsBloc extends Bloc<ModelingsEvent, ModelingsState> {
     _dataSubscription = dataRepository.fetchModelings(event.veggiesList).listen(
           (modelings) {
         add(
-          UpdatedModelings(modelings),
+          UpdatedModelings(modelings, event.veggiesComposition),
         );
       },
     );
   }
 
   Stream<ModelingsState> _mapGardensUpdateToState(UpdatedModelings event) async* {
-    yield ModelingsLoaded(event.modelings);
+    yield ModelingsLoaded(event.modelings, event.veggiesComposition);
   }
 
   Stream<ModelingsState> _mapVeggiesUpdateToState(UpdatedVeggies event) async* {

@@ -60,7 +60,8 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 
   final List<String> widths = <String>["60", "80", "100"];
 
-  Map<Vegetable, bool> veggiesSelected = Map<Vegetable, bool>();
+  Map<Vegetable, bool> veggiesSelected;
+  Map<String, Vegetable> veggiesComposition = Map<String, Vegetable>();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,12 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
     return BlocBuilder<ModelingsBloc, ModelingsState>(
         builder: (context, state) {
       if (state is VeggiesLoaded) {
-        state.veggies.map((item) => veggiesSelected[item] = false);
+
+        if (veggiesSelected == null) {
+          veggiesSelected = Map.fromIterable(state.veggies, key: (v) => v, value: (v) => false);
+        }
+
+        veggiesComposition = Map.fromIterable(state.veggies, key: (v) => v.id, value: (v) => v);
 
         return Scaffold(
           body: Padding(
@@ -584,12 +590,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                           return new CheckboxListTile(
                                             title:
                                             new Text(vegetable.nameFr),
-                                            value: veggiesSelected[
-                                            vegetable.nameFr] ==
-                                                null
-                                                ? false
-                                                : veggiesSelected[
-                                            vegetable.nameFr],
+                                            value: veggiesSelected[vegetable],
                                             secondary: Image(
                                               height: 40,
                                               width: 40,
@@ -598,7 +599,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             ),
                                             onChanged: (bool value) {
                                               setState(() {
-                                                veggiesSelected[vegetable] = value;
+                                                veggiesSelected.update(vegetable, (existingValue) => value, ifAbsent: () => value,);
                                               });
                                             },
                                           );
@@ -1170,6 +1171,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                         modeling: modeling,
                                                         schedule: modeling.schedule,
                                                         designs: modeling.designs,
+                                                        veggiesComposition: veggiesComposition
                                                       ),
                                                   );
                                                 },
@@ -1274,9 +1276,13 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                                         EdgeInsets
                                                                             .all(5),
                                                                     child: ListView.builder(
+                                                                       // TODO
                                                                         scrollDirection: Axis.horizontal,
                                                                         itemCount: modeling.composition.length,
                                                                         itemBuilder: (context, index) {
+
+//                                                                          print(${state.veggiesComposition[modeling.composition[index]].imageName});
+
                                                                           return Container(
                                                                             width:
                                                                                 22 * SizeConfig.widthMultiplier,
@@ -1293,14 +1299,14 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                                                   Flexible(
                                                                                     flex: 4,
                                                                                     child: Image.asset(
-                                                                                      "assets/veggies/${modeling.composition[index]}.png",
+                                                                                      "assets/veggies/${state.veggiesComposition[modeling.composition[index]].imageName}.png",
                                                                                       fit: BoxFit.scaleDown,
                                                                                     ),
                                                                                   ),
                                                                                   Flexible(
                                                                                       flex: 3,
                                                                                       child: Center(
-                                                                                        child: Text("${modeling.composition[index]}",
+                                                                                        child: Text("${state.veggiesComposition[modeling.composition[index]].nameFr}",
                                                                                             textAlign: TextAlign.center,
                                                                                             style: TextStyle(
                                                                                               color: const Color(0xFF01534F),
@@ -1327,7 +1333,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                                 child:
                                                                     Container(
                                                                   child: Text(
-                                                                      "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
+                                                                      "${modeling.descriptionFr}",
                                                                       textAlign:
                                                                           TextAlign
                                                                               .left,
@@ -1440,8 +1446,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                       veggiesList.add(k.id);
                     }
                   });
+
                   BlocProvider.of<ModelingsBloc>(context)
-                      .add(FetchModelings(veggiesList));
+                      .add(FetchModelings(veggiesList, veggiesComposition));
                 },
                 child: Text('Rechercher')),
           ]);
