@@ -97,12 +97,12 @@ class HomeScreen extends StatelessWidget {
       case AppTab.gardens:
         return EnumeratedGardens(dataRepository: dataRepository, user: user);
         break;
-      case AppTab.abc:
-        return Scaffold(
-          body: Center(
-            child: Text("${AppLocalizations.of(context).title}"),
-          ),
-        );
+//      case AppTab.abc:
+//        return Scaffold(
+//          body: Center(
+//            child: Text("${AppLocalizations.of(context).title}"),
+//          ),
+//        );
         break;
       case AppTab.learning:
         return EnumeratedTutorials();

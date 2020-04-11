@@ -11,10 +11,10 @@ class ModelingEntity extends Equatable {
   final int waterRequirement;
   final int yield;
   List<ModelingSchedule> schedule = new List<ModelingSchedule>();
-  final List<String> composition;
-  final List<int> culturePeriod;
+  List<ModelingComposition> composition = new List<ModelingComposition>();
   final List<int> sowingPeriod;
   final List<int> harvestPeriod;
+  final String descriptionFr;
   List<Design> designs = new List<Design>();
 
 
@@ -24,10 +24,10 @@ class ModelingEntity extends Equatable {
       this.waterRequirement, this.yield,
       this.schedule,
       this.composition,
-      this.culturePeriod,
       this.sowingPeriod,
       this.harvestPeriod,
-      this.designs
+      this.designs,
+      this.descriptionFr
       );
 
   Map<String, Object> toJson() {
@@ -39,7 +39,8 @@ class ModelingEntity extends Equatable {
       'sunlightRequirement': sunlightRequirement,
       'waterRequirement': waterRequirement,
       'yield': yield,
-      'designs': designs
+      'designs': designs,
+      'descriptionFr': descriptionFr
     };
   }
 
@@ -64,16 +65,15 @@ class ModelingEntity extends Equatable {
       json['yield'] as int,
       json['schedule'],
       json['composition'],
-      json['culturePeriod'],
       json['sowingPeriod'],
       json['harvestPeriod'],
-      json['designs']
+      json['designs'],
+      json['descriptionFr']
     );
   }
 
   static ModelingEntity fromSnapshot(DocumentSnapshot snap) {
 
-    List<String> compositionList = new List<String>.from(snap.data['composition']);
     return ModelingEntity(
       snap.documentID,
       snap.data['name'],
@@ -85,13 +85,15 @@ class ModelingEntity extends Equatable {
       snap.data['schedule'].map<ModelingSchedule>((item) {
           return ModelingSchedule.fromMap(item);
         }).toList(),
-      compositionList,
-      new List<int>.from(snap.data['culturePeriod']),
+      snap.data['composition'].map<ModelingComposition>((item) {
+          return ModelingComposition.fromMap(item);
+        }).toList(),
       new List<int>.from(snap.data['sowingPeriod']),
       new List<int>.from(snap.data['harvestPeriod']),
       snap.data['designs'].map<Design>((item) {
         return Design.fromMap(item);
       }).toList(),
+      snap.data['descriptionFr']
     );
   }
 
@@ -104,9 +106,9 @@ class ModelingEntity extends Equatable {
       'sunlightRequirement': sunlightRequirement,
       'waterRequirement': waterRequirement,
       'yield': yield,
-      'culturePeriod': culturePeriod,
       'sowingPeriod': sowingPeriod,
-      'harvestPeriod': harvestPeriod
+      'harvestPeriod': harvestPeriod,
+      'descriptionFr': descriptionFr
     };
   }
 }

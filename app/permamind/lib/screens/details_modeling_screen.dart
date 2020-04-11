@@ -98,7 +98,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                flex: 5,
                                child: Container(
                                color: Colors.pink,
-                                   child: Text("On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte.",
+                                   child: Text("On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source.",
                                        maxLines: 10,
 //                                   textAlign: TextAlign.center,
                                        style: TextStyle(
@@ -114,7 +114,6 @@ class DetailsModelingScreen extends StatelessWidget {
                              Flexible(
                                flex: 3,
                                child: Container(
-//                                 color: Colors.orange,
                                  child: ListView.builder(
                                      scrollDirection:
                                      Axis.horizontal,
@@ -230,12 +229,52 @@ class DetailsModelingScreen extends StatelessWidget {
                                                      ],
                                                    ),
                                                  ),
+                                               ],
+                                             ),
+                                           ),
+                                         )
+                                     ),
+                                     Flexible(
+                                       flex: 1,
+                                       child: Container(
+//                                         color: Colors.yellow,
+                                         child: Padding(
+                                             padding: EdgeInsets.all(5),
+                                             child: _buildModelingSchedule(modeling.sowingPeriod, Colors.amber
+                                         ),
+                                       ),
+                                     ),
+                                     )
+                                   ],
+                                 ),
+                               ),
+                             ),
+                             Flexible(
+                               flex: 2,
+                               child: Container(
+                                 decoration: BoxDecoration(
+                                   color: const Color(
+                                       0xFFE6F1D9),
+                                   borderRadius: BorderRadius.all(
+                                       Radius.circular(8)),
+                                 ),
+                                 child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                   children: <Widget>[
+                                     Flexible(
+                                         flex: 1,
+                                         child: Padding(
+                                           padding: EdgeInsets.all(1),
+                                           child: Padding(
+                                             padding: EdgeInsets.all(5),
+                                             child: Row(
+//                                               mainAxisAlignment: MainAxisAlignment.start,
+                                               children: <Widget>[
                                                  Container(
-//                                                   color: Colors.white,
                                                    height: 3 * SizeConfig.heightMultiplier,
-                                                   width: 25 * SizeConfig.widthMultiplier,
+                                                   width:  25 * SizeConfig.widthMultiplier,
                                                    child: Row(
-//                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                     //                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                      children: <Widget>[
                                                        Flexible(
                                                            flex: 1,
@@ -280,11 +319,9 @@ class DetailsModelingScreen extends StatelessWidget {
                                        child: Container(
 //                                         color: Colors.yellow,
                                          child: Padding(
-                                             padding: EdgeInsets.all(5),
-                                             child: _buildModelingSchedule(
-                                                 modeling.culturePeriod,
-                                                 modeling.sowingPeriod,
-                                                 modeling.harvestPeriod)
+                                           padding: EdgeInsets.all(5),
+                                           child: _buildModelingSchedule(modeling.harvestPeriod, Colors.green
+                                           ),
                                          ),
                                        ),
                                      )
@@ -292,6 +329,8 @@ class DetailsModelingScreen extends StatelessWidget {
                                  ),
                                ),
                              ),
+
+
 
                              Flexible(
                                flex: 2,
@@ -581,10 +620,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
   }
 
-  Widget _buildModelingSchedule(
-      List<int> culturePeriod,
-      List<int> sowingPeriod,
-      List<int> harvestPeriod) {
+  Widget _buildModelingSchedule(List<int> period, Color monthColor) {
 
     // TODO Faire plus propre dans un fichier central pour l'internationalisation
     List<String> months = ["J","F","M","A","M","J","J","A","S","O","N","D"];
@@ -594,20 +630,12 @@ class DetailsModelingScreen extends StatelessWidget {
       BoxDecoration monthSpot;
       Color textMonthColor;
 
-      if (sowingPeriod.contains(i)) {
+      if (period.contains(i)) {
         monthSpot = new BoxDecoration(
-          color: Colors.amber,
-          borderRadius: BorderRadius.circular(3),
-        );
-
-        textMonthColor = Colors.white;
-      } else if (harvestPeriod.contains(i)) {
-        monthSpot = new BoxDecoration(
-          color: Colors.green,
+          color: monthColor,
           borderRadius: BorderRadius.circular(3),
         );
         textMonthColor = Colors.white;
-
       }  else {
         monthSpot = new BoxDecoration(
           color: Colors.white,
@@ -618,25 +646,6 @@ class DetailsModelingScreen extends StatelessWidget {
 
       monthsBoxList.add(
 
-//        Expanded(
-//          child: Container(
-//            color: culturePeriod.contains(i) ? const Color(0xFF01534F) : Colors.white,
-//            child: Center(
-//              child: Container(
-//                height: 20,
-//                width: 200,
-////                padding: EdgeInsets.all(12),
-//                decoration: monthSpot,
-//                child: Center(
-//                    child: Text(
-//                      '${months[i]}',
-//                      style: TextStyle(fontSize: 1.7 * SizeConfig.textMultiplier, color: textMonthColor),
-//                    )
-//                ),
-//              ),
-//            ),
-//          ),
-//        ),
         Flexible(
             child: Padding(
               padding: EdgeInsets.only(left: 2, right: 2),

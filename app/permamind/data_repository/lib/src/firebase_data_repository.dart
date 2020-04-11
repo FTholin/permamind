@@ -198,6 +198,7 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+  //TODO  fetchModelings
   @override
   Stream<List<Modeling>> fetchModelings(List<String> veggiesList) {
     // logger.i("READ::fetchModelings");
@@ -211,6 +212,8 @@ class FirebaseDataRepository implements DataRepository {
     } else {
       return Firestore.instance.collection('modelings')
           .where('composition', arrayContainsAny: veggiesList)
+//          .where("composition",arrayContains: {'vegetableId': veggiesList, 'pseudo': userPseudo})
+
           .snapshots().map((snapshot) {
         return snapshot.documents
             .map((doc) => Modeling.fromEntity(ModelingEntity.fromSnapshot(doc)))
