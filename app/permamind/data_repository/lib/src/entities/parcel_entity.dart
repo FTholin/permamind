@@ -17,7 +17,7 @@ class ParcelEntity extends Equatable {
   final DateTime creationDate;
   final int dayActivitiesCount;
   final List<String> modelingsMonitoring;
-
+  final bool isActive;
 
   ParcelEntity(
       this.id,
@@ -33,7 +33,8 @@ class ParcelEntity extends Equatable {
       this.currentModelingName,
       this.creationDate,
       this.dayActivitiesCount,
-      this.modelingsMonitoring);
+      this.modelingsMonitoring,
+      this.isActive);
 
   Map<String, Object> toJson() {
     return {
@@ -48,7 +49,8 @@ class ParcelEntity extends Equatable {
       'currentModelingName': currentModelingName,
       'creationDate': creationDate,
       'dayActivitiesCount': dayActivitiesCount,
-      'modelingsMonitoring': modelingsMonitoring
+      'modelingsMonitoring': modelingsMonitoring,
+      'isActive': isActive
     };
   }
 
@@ -62,7 +64,7 @@ class ParcelEntity extends Equatable {
   List<Object> get props => [id,
     name, gardenId,publicVisibility,
     admin, members,currentModelingName,
-    creationDate,dayActivitiesCount, modelingsMonitoring];
+    creationDate,dayActivitiesCount, modelingsMonitoring, isActive];
 
 
   static ParcelEntity fromJson(Map<String, Object> json) {
@@ -80,7 +82,8 @@ class ParcelEntity extends Equatable {
         json['currentModelingName'] as String,
         json['creationDate'],
         json['dayActivitiesCount'],
-        json['modelingsMonitoring']
+        json['modelingsMonitoring'],
+        json['isActive']
     );
   }
 
@@ -104,6 +107,7 @@ class ParcelEntity extends Equatable {
             snap.data["creationDate"].millisecondsSinceEpoch),
         snap.data['dayActivitiesCount'],
         new List<String>.from(snap.data['modelingsMonitoring']),
+        snap.data['isActive']
     );
   }
 
@@ -123,7 +127,8 @@ class ParcelEntity extends Equatable {
       'currentModelingName': currentModelingName,
       'creationDate': creationDate,
       'dayActivitiesCount': dayActivitiesCount,
-      'modelingsMonitoring': modelingsMonitoring
+      'modelingsMonitoring': modelingsMonitoring,
+      'isActive': isActive
     };
   }
 }

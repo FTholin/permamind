@@ -37,212 +37,426 @@ class DetailsParcelScreen extends StatelessWidget {
           final currentParcel =
               state.parcels.firstWhere((parcel) => parcel.id == parcelId);
           if (currentParcel != null) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(currentParcel.name),
-                leading: IconButton(
-                  icon: new Icon(Icons.arrow_back_ios),
-                  onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/',
-                    (Route<dynamic> route) => false,
+            if (currentParcel.isActive == true) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text(currentParcel.name),
+                  leading: IconButton(
+                    icon: new Icon(Icons.arrow_back_ios),
+                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/',
+                          (Route<dynamic> route) => false,
+                    ),
                   ),
-                ),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text("Modifier",
-                        style: TextStyle(
-                            color: Colors.white,
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Modifier",
+                          style: TextStyle(
+                              color: Colors.white,
 //                        fontWeight: FontWeight.bold,
-                            fontSize: 1.9 * SizeConfig.textMultiplier)),
-                    onPressed: () {
-                      showCupertinoModalPopup(
-                          context: context,
-                          builder: (context) => CupertinoActionSheet(
-                                actions: <Widget>[
-                                  CupertinoButton(
-                                    color: Colors.green,
-                                    child: Text("Ajouter des personnes"),
-                                    onPressed: null,
-                                  ),
-                                  Container(
-                                    height: 10,
-                                  ),
-                                  CupertinoButton(
-                                    color: Colors.green,
-                                    child: Text("Renommer"),
-                                    onPressed: () async {
-                                      await showDialog<void>(
-                                        context: context,
-                                        barrierDismissible: false,
-                                        // user must tap button!
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title:
-                                                Text('Renommer cette parcelle'),
-                                            content: TextField(
-                                              controller:
-                                                  _parcelNameTextController,
-                                              decoration: InputDecoration(
-                                                  hintText: "Nom parcelle"),
-                                            ),
-                                            actions: <Widget>[
-                                              FlatButton(
-                                                child: Text(
-                                                    '${AppLocalizations.of(context).buttonCancel}'),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                              FlatButton(
-                                                child: Text('Mettre à jour'),
-                                                onPressed: () {
-                                                  if (_parcelNameTextController
-                                                      .text.isNotEmpty) {
-                                                    parcelsBloc.add(
-                                                      ParcelUpdated(
-                                                          currentParcel
-                                                              .copyWith(
-                                                        name:
-                                                            _parcelNameTextController
-                                                                .text,
-                                                        gardenId: currentParcel
-                                                            .gardenId,
-                                                        length: currentParcel
-                                                            .length,
-                                                        width:
-                                                            currentParcel.width,
-                                                        parcelGround:
-                                                            currentParcel
-                                                                .parcelGround,
-                                                        publicVisibility:
-                                                            currentParcel
-                                                                .publicVisibility,
-                                                        admin:
-                                                            currentParcel.admin,
-                                                        members: currentParcel
-                                                            .members,
-                                                        currentModelingId:
-                                                            currentParcel
-                                                                .currentModelingId,
-                                                        currentModelingName:
-                                                            currentParcel
-                                                                .currentModelingName,
-                                                        creationDate:
-                                                            currentParcel
-                                                                .creationDate,
-                                                        dayActivitiesCount:
-                                                            currentParcel
-                                                                .dayActivitiesCount,
-                                                        modelingsMonitoring:
-                                                            currentParcel
-                                                                .modelingsMonitoring,
-                                                      )),
-                                                    );
-
-                                                    Navigator.pop(
-                                                        context, true);
-                                                  }
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      Navigator.pop(context, true);
-                                    },
-                                  ),
-                                  Container(
-                                    height: 10,
-                                  ),
-                                  CupertinoButton(
-                                    color: Colors.green,
-                                    child: Text("Supprimer"),
-                                    onPressed: () {
-                                      showDialog<void>(
-                                        context: context,
-                                        barrierDismissible: false,
-                                        // user must tap button!
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                '${AppLocalizations.of(context).settingsParcelDeleteTitle}'),
-                                            content: SingleChildScrollView(
-                                              child: ListBody(
-                                                children: <Widget>[
-                                                  Text(
-                                                      '${AppLocalizations.of(context).settingsParcelDeleteMessage}'),
-                                                ],
-                                              ),
-                                            ),
-                                            actions: <Widget>[
-                                              FlatButton(
-                                                child: Text(
-                                                    '${AppLocalizations.of(context).buttonCancel}'),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                              FlatButton(
-                                                child: Text(
-                                                    '${AppLocalizations.of(context).buttonContinue}'),
-                                                onPressed: () {
-                                                  parcelsBloc.add(
-                                                      ParcelDeleted(parcelId));
-
-                                                  final int newParcelCounter = user.parcelCounter - 1;
-
-                                                  BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
-                                                      user.copyWith(
-                                                          id: user.id,
-                                                          pseudo: user.pseudo,
-                                                          email: user.email,
-                                                          nationality: user.nationality,
-                                                          searchKey: user.searchKey,
-                                                          gardenCounter: user.gardenCounter,
-                                                          parcelCounter: newParcelCounter,
-                                                          accountStatus: user.accountStatus
-                                                      )
-                                                  ),);
-
-                                                  Navigator
-                                                      .pushNamedAndRemoveUntil(
-                                                    context,
-                                                    '/',
-                                                    (Route<dynamic> route) =>
-                                                        false,
-                                                  );
-                                                },
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ));
-                    },
-                  )
-                ],
-              ),
-              body: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Material(
-                        child: InkWell(
-                      onTap: () {
-                        showDialog(
+                              fontSize: 1.9 * SizeConfig.textMultiplier)),
+                      onPressed: () {
+                        showCupertinoModalPopup(
                             context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text("Alert Dialog"),
-                                content: Text("Dialog Content"),
-                              );
-                            });
+                            builder: (context) => CupertinoActionSheet(
+                              actions: <Widget>[
+                                CupertinoButton(
+                                  color: Colors.green,
+                                  child: Text("Ajouter des personnes"),
+                                  onPressed: null,
+                                ),
+                                Container(
+                                  height: 10,
+                                ),
+                                CupertinoButton(
+                                  color: Colors.green,
+                                  child: Text("Renommer"),
+                                  onPressed: () async {
+                                    await showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title:
+                                          Text('Renommer cette parcelle'),
+                                          content: TextField(
+                                            controller:
+                                            _parcelNameTextController,
+                                            decoration: InputDecoration(
+                                                hintText: "Nom parcelle"),
+                                          ),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              child: Text(
+                                                  '${AppLocalizations.of(context).buttonCancel}'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            FlatButton(
+                                              child: Text('Mettre à jour'),
+                                              onPressed: () {
+                                                if (_parcelNameTextController
+                                                    .text.isNotEmpty) {
+                                                  parcelsBloc.add(
+                                                    ParcelUpdated(
+                                                        currentParcel
+                                                            .copyWith(
+                                                          name:
+                                                          _parcelNameTextController
+                                                              .text,
+                                                          gardenId: currentParcel
+                                                              .gardenId,
+                                                          length: currentParcel
+                                                              .length,
+                                                          width:
+                                                          currentParcel.width,
+                                                          parcelGround:
+                                                          currentParcel
+                                                              .parcelGround,
+                                                          publicVisibility:
+                                                          currentParcel
+                                                              .publicVisibility,
+                                                          admin:
+                                                          currentParcel.admin,
+                                                          members: currentParcel
+                                                              .members,
+                                                          currentModelingId:
+                                                          currentParcel
+                                                              .currentModelingId,
+                                                          currentModelingName:
+                                                          currentParcel
+                                                              .currentModelingName,
+                                                          creationDate:
+                                                          currentParcel
+                                                              .creationDate,
+                                                          dayActivitiesCount:
+                                                          currentParcel
+                                                              .dayActivitiesCount,
+                                                          modelingsMonitoring:
+                                                          currentParcel
+                                                              .modelingsMonitoring,
+                                                        )),
+                                                  );
+
+                                                  Navigator.pop(
+                                                      context, true);
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                                Container(
+                                  height: 10,
+                                ),
+                                CupertinoButton(
+                                  color: Colors.green,
+                                  child: Text("Supprimer"),
+                                  onPressed: () {
+                                    showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              '${AppLocalizations.of(context).settingsParcelDeleteTitle}'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text(
+                                                    '${AppLocalizations.of(context).settingsParcelDeleteMessage}'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              child: Text(
+                                                  '${AppLocalizations.of(context).buttonCancel}'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            FlatButton(
+                                              child: Text(
+                                                  '${AppLocalizations.of(context).buttonContinue}'),
+                                              onPressed: () {
+                                                parcelsBloc.add(
+                                                    ParcelDeleted(parcelId));
+
+                                                final int newParcelCounter = user.parcelCounter - 1;
+
+                                                BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
+                                                    user.copyWith(
+                                                        id: user.id,
+                                                        pseudo: user.pseudo,
+                                                        email: user.email,
+                                                        nationality: user.nationality,
+                                                        searchKey: user.searchKey,
+                                                        gardenCounter: user.gardenCounter,
+                                                        parcelCounter: newParcelCounter,
+                                                        accountStatus: user.accountStatus
+                                                    )
+                                                ),);
+
+                                                Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                  context,
+                                                  '/',
+                                                      (Route<dynamic> route) =>
+                                                  false,
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ));
                       },
-                      child: Container(
+                    )
+                  ],
+                ),
+                body: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Material(
+                          child: InkWell(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Alert Dialog"),
+                                      content: Text("Dialog Content"),
+                                    );
+                                  });
+                            },
+                            child: Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image.asset(
+                                  "assets/utils_image/empty_parcel.jpg",
+                                  fit: BoxFit.contain,
+                                  height: 28 * SizeConfig.heightMultiplier,
+                                ),
+                              ),
+                            ),
+                          )),
+                      SchedulerCalendar(
+                        parcelId: parcelId,
+                        userId: user.id,
+                      )
+                    ]),
+                floatingActionButton: ActivitySpeedDial(
+                    gardenId: gardenId, parcelId: parcelId, visible: true),
+              );
+            } else {
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text(currentParcel.name),
+                  leading: IconButton(
+                    icon: new Icon(Icons.arrow_back_ios),
+                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/',
+                          (Route<dynamic> route) => false,
+                    ),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Modifier",
+                          style: TextStyle(
+                              color: Colors.white,
+//                        fontWeight: FontWeight.bold,
+                              fontSize: 1.9 * SizeConfig.textMultiplier)),
+                      onPressed: () {
+                        showCupertinoModalPopup(
+                            context: context,
+                            builder: (context) => CupertinoActionSheet(
+                              actions: <Widget>[
+                                CupertinoButton(
+                                  color: Colors.green,
+                                  child: Text("Ajouter des personnes"),
+                                  onPressed: null,
+                                ),
+                                Container(
+                                  height: 10,
+                                ),
+                                CupertinoButton(
+                                  color: Colors.green,
+                                  child: Text("Renommer"),
+                                  onPressed: () async {
+                                    await showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title:
+                                          Text('Renommer cette parcelle'),
+                                          content: TextField(
+                                            controller:
+                                            _parcelNameTextController,
+                                            decoration: InputDecoration(
+                                                hintText: "Nom parcelle"),
+                                          ),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              child: Text(
+                                                  '${AppLocalizations.of(context).buttonCancel}'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            FlatButton(
+                                              child: Text('Mettre à jour'),
+                                              onPressed: () {
+                                                if (_parcelNameTextController
+                                                    .text.isNotEmpty) {
+                                                  parcelsBloc.add(
+                                                    ParcelUpdated(
+                                                        currentParcel
+                                                            .copyWith(
+                                                          name:
+                                                          _parcelNameTextController
+                                                              .text,
+                                                          gardenId: currentParcel
+                                                              .gardenId,
+                                                          length: currentParcel
+                                                              .length,
+                                                          width:
+                                                          currentParcel.width,
+                                                          parcelGround:
+                                                          currentParcel
+                                                              .parcelGround,
+                                                          publicVisibility:
+                                                          currentParcel
+                                                              .publicVisibility,
+                                                          admin:
+                                                          currentParcel.admin,
+                                                          members: currentParcel
+                                                              .members,
+                                                          currentModelingId:
+                                                          currentParcel
+                                                              .currentModelingId,
+                                                          currentModelingName:
+                                                          currentParcel
+                                                              .currentModelingName,
+                                                          creationDate:
+                                                          currentParcel
+                                                              .creationDate,
+                                                          dayActivitiesCount:
+                                                          currentParcel
+                                                              .dayActivitiesCount,
+                                                          modelingsMonitoring:
+                                                          currentParcel
+                                                              .modelingsMonitoring,
+                                                        )),
+                                                  );
+
+                                                  Navigator.pop(
+                                                      context, true);
+                                                }
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                                Container(
+                                  height: 10,
+                                ),
+                                CupertinoButton(
+                                  color: Colors.green,
+                                  child: Text("Supprimer"),
+                                  onPressed: () {
+                                    showDialog<void>(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      // user must tap button!
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              '${AppLocalizations.of(context).settingsParcelDeleteTitle}'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text(
+                                                    '${AppLocalizations.of(context).settingsParcelDeleteMessage}'),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            FlatButton(
+                                              child: Text(
+                                                  '${AppLocalizations.of(context).buttonCancel}'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            FlatButton(
+                                              child: Text(
+                                                  '${AppLocalizations.of(context).buttonContinue}'),
+                                              onPressed: () {
+                                                parcelsBloc.add(
+                                                    ParcelDeleted(parcelId));
+
+                                                final int newParcelCounter = user.parcelCounter - 1;
+
+                                                BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
+                                                    user.copyWith(
+                                                        id: user.id,
+                                                        pseudo: user.pseudo,
+                                                        email: user.email,
+                                                        nationality: user.nationality,
+                                                        searchKey: user.searchKey,
+                                                        gardenCounter: user.gardenCounter,
+                                                        parcelCounter: newParcelCounter,
+                                                        accountStatus: user.accountStatus
+                                                    )
+                                                ),);
+
+                                                Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                  context,
+                                                  '/',
+                                                      (Route<dynamic> route) =>
+                                                  false,
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ));
+                      },
+                    )
+                  ],
+                ),
+                body: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),
                           child: Image.asset(
@@ -252,15 +466,52 @@ class DetailsParcelScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    )),
-                SchedulerCalendar(
-                  parcelId: parcelId,
-                  userId: user.id,
-                )
-                  ]),
-              floatingActionButton: ActivitySpeedDial(
-                  gardenId: gardenId, parcelId: parcelId, visible: true),
-            );
+                      InkWell(
+                        onTap: () {
+                          currentParcel.
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                            child: Container(
+                              color: Color.fromRGBO(214, 211, 94, 1),
+                              child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text("Lancer modélisation",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 2.5 * SizeConfig.textMultiplier))
+                                      ],
+                                    ),
+                                    Text(
+                                      "Cliquer ici pour démarrer l'aventure !",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 2 * SizeConfig.textMultiplier,
+                                      ),
+                                      maxLines: 3,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ),
+                      )
+                    ]),
+//                floatingActionButton: ActivitySpeedDial(
+//                    gardenId: gardenId, parcelId: parcelId, visible: true),
+              );
+            }
           } else {
             return Container();
           }

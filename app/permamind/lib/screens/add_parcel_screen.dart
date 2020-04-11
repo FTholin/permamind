@@ -1155,7 +1155,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                 '',
                                                 '',
                                                 DateTime.now(),
-                                                0, []);
+                                                0, [], false);
 
                                             Navigator.of(context).push(
                                               MaterialPageRoute(
