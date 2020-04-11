@@ -1433,15 +1433,15 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                 color: Colors.green,
                 textColor: Colors.white,
                 onPressed: () async {
-                  List<ModelingComposition> modelings = List<ModelingComposition>();
+                  List<String> veggiesList = List<String>();
 
                   veggiesSelected.forEach((k, v) {
                     if (v) {
-                      modelings.add(ModelingComposition(k.id, k.nameFr, k.nameEn, k.imageName));
+                      veggiesList.add(k.id);
                     }
                   });
                   BlocProvider.of<ModelingsBloc>(context)
-                      .add(FetchModelings(modelings));
+                      .add(FetchModelings(veggiesList));
                 },
                 child: Text('Rechercher')),
           ]);

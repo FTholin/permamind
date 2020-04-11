@@ -15,7 +15,7 @@ class Modeling {
   final List<int> harvestPeriod;
   final String descriptionFr;
 
-  List<ModelingComposition> composition = new List<ModelingComposition>();
+  List<String> composition = new List<String>();
 
   List<Design> designs = new List<Design>();
 
@@ -121,32 +121,32 @@ class Modeling {
 }
 
 
-class ModelingComposition {
-
-  String vegetableId;
-  String nameFr;
-  String nameEn;
-  String imageName;
-
-  ModelingComposition(this.vegetableId, this.nameFr, this.nameEn, this.imageName);
-
-  ModelingComposition.fromMap(Map<dynamic, dynamic> data)
-      : vegetableId = data['vegetableId'],
-        nameFr = data['nameFr'],
-        nameEn = data['nameEn'],
-        imageName = data['imageName'];
-
-  Map<String, Object> toJson() {
-    return {
-      'vegetableId': vegetableId,
-      'nameFr': nameFr,
-      'nameEn': nameEn,
-      'imageName': imageName
-    };
-  }
-
-  @override
-  String toString() {
-    return nameFr;
-  }
-}
+//class ModelingComposition {
+//
+//  String vegetableId;
+//  String nameFr;
+//  String nameEn;
+//  String imageName;
+//
+//  ModelingComposition(this.vegetableId, this.nameFr, this.nameEn, this.imageName);
+//
+//  ModelingComposition.fromMap(Map<dynamic, dynamic> data)
+//      : vegetableId = data['vegetableId'],
+//        nameFr = data['nameFr'],
+//        nameEn = data['nameEn'],
+//        imageName = data['imageName'];
+//
+//  Map<String, Object> toJson() {
+//    return {
+//      'vegetableId': vegetableId,
+//      'nameFr': nameFr,
+//      'nameEn': nameEn,
+//      'imageName': imageName
+//    };
+//  }
+//
+//  @override
+//  String toString() {
+//    return nameFr;
+//  }
+//}

@@ -11,7 +11,7 @@ class ModelingEntity extends Equatable {
   final int waterRequirement;
   final int yield;
   List<ModelingSchedule> schedule = new List<ModelingSchedule>();
-  List<ModelingComposition> composition = new List<ModelingComposition>();
+  List<String> composition = new List<String>();
   final List<int> sowingPeriod;
   final List<int> harvestPeriod;
   final String descriptionFr;
@@ -85,9 +85,7 @@ class ModelingEntity extends Equatable {
       snap.data['schedule'].map<ModelingSchedule>((item) {
           return ModelingSchedule.fromMap(item);
         }).toList(),
-      snap.data['composition'].map<ModelingComposition>((item) {
-          return ModelingComposition.fromMap(item);
-        }).toList(),
+        new List<String>.from(snap.data['composition']),
       new List<int>.from(snap.data['sowingPeriod']),
       new List<int>.from(snap.data['harvestPeriod']),
       snap.data['designs'].map<Design>((item) {
