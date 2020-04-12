@@ -9,6 +9,7 @@ class VegetableEntity extends Equatable {
   final DateTime seasonPeriodEndDate;
   final String nameFr;
   final String nameEn;
+  final bool isAvailable;
 
   VegetableEntity(
       this.id,
@@ -16,7 +17,8 @@ class VegetableEntity extends Equatable {
       this.nameEn,
       this.imageName,
       this.seasonPeriodStartDate,
-      this.seasonPeriodEndDate
+      this.seasonPeriodEndDate,
+      this.isAvailable
       );
 
   Map<String, Object> toJson() {
@@ -26,7 +28,8 @@ class VegetableEntity extends Equatable {
       'nameEn': nameEn,
       'imageName': imageName,
       'seasonPeriodStartDate': seasonPeriodStartDate,
-      'seasonPeriodEndDate': seasonPeriodEndDate
+      'seasonPeriodEndDate': seasonPeriodEndDate,
+      'isAvailable': isAvailable
     };
   }
 
@@ -43,7 +46,7 @@ class VegetableEntity extends Equatable {
         json['imageName'] as String,
         json['seasonPeriodStartDate'],
         json['seasonPeriodEndDate'],
-
+        json['isAvailable']
     );
   }
 
@@ -57,6 +60,7 @@ class VegetableEntity extends Equatable {
           snap.data["seasonPeriodStartDate"].millisecondsSinceEpoch),
       DateTime.fromMillisecondsSinceEpoch(
           snap.data["seasonPeriodEndDate"].millisecondsSinceEpoch),
+      snap.data['isAvailable']
 
     );
   }
@@ -68,7 +72,8 @@ class VegetableEntity extends Equatable {
       'nameEn': nameEn,
       'imageName': imageName,
       'seasonPeriodStartDate': seasonPeriodStartDate,
-      'seasonPeriodEndDate': seasonPeriodEndDate
+      'seasonPeriodEndDate': seasonPeriodEndDate,
+      'isAvailable': isAvailable
     };
   }
 }

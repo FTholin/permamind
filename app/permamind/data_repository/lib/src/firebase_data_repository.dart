@@ -233,6 +233,7 @@ class FirebaseDataRepository implements DataRepository {
   Stream<List<Vegetable>> fetchVeggies() {
     // logger.i("READ::fetchVeggies");
     return Firestore.instance.collection('veggies')
+        .where('isAvailable', isEqualTo: true)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Vegetable.fromEntity(VegetableEntity.fromSnapshot(doc)))
@@ -260,7 +261,7 @@ class FirebaseDataRepository implements DataRepository {
     // logger.i("READ::loadParcelActivities");
     return Firestore.instance.collection('activities')
         .where("parcelId", isEqualTo: parcelId)
-        .where("expectedDate", isGreaterThan: first)
+        .where("expectedDate", isGreaterThanOrEqualTo: first)
         .where("expectedDate", isLessThanOrEqualTo: last)
         .snapshots().map((snapshot) {
       return snapshot.documents

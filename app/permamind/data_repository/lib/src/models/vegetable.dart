@@ -9,7 +9,7 @@ class Vegetable {
   final String nameEn;
   final DateTime seasonPeriodStartDate;
   final DateTime seasonPeriodEndDate;
-
+  final bool isAvailable;
 
   Vegetable(
       this.nameFr,
@@ -17,6 +17,7 @@ class Vegetable {
       this.imageName,
       this.seasonPeriodStartDate,
       this.seasonPeriodEndDate,
+      this.isAvailable,
       {String id})
       : this.id = id;
 
@@ -31,6 +32,7 @@ class Vegetable {
         nameEn ?? this.nameEn,
         seasonPeriodStartDate ?? this.seasonPeriodStartDate,
         seasonPeriodEndDate ?? this.seasonPeriodEndDate,
+        isAvailable ?? this.isAvailable,
         id: id ?? this.id
     );
   }
@@ -49,7 +51,8 @@ class Vegetable {
               nameFr == other.nameFr &&
               nameEn == other.nameEn &&
               seasonPeriodStartDate == other.seasonPeriodStartDate &&
-              seasonPeriodEndDate == other.seasonPeriodEndDate;
+              seasonPeriodEndDate == other.seasonPeriodEndDate &&
+              isAvailable == other.isAvailable;
 
   @override
   String toString() {
@@ -58,7 +61,7 @@ class Vegetable {
 
   VegetableEntity toEntity() {
     return VegetableEntity(
-        id, nameFr, nameEn, imageName, seasonPeriodStartDate, seasonPeriodEndDate
+        id, nameFr, nameEn, imageName, seasonPeriodStartDate, seasonPeriodEndDate, isAvailable
     );
   }
 
@@ -69,6 +72,7 @@ class Vegetable {
       entity.imageName,
       entity.seasonPeriodStartDate,
       entity.seasonPeriodEndDate,
+      entity.isAvailable,
       id: entity.id,
     );
   }

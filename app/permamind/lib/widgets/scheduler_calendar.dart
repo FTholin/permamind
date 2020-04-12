@@ -135,7 +135,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {
     BlocProvider.of<ActivitiesBloc>(context)
-        .add(ActivitiesLoadedSuccess(widget.parcelId, first, last));
+        .add(ActivitiesLoadedSuccess(widget.parcelId, DateTime(first.year, first.month, first.day, 1), DateTime(last.year, last.month, last.day, 1)));
   }
 
 

@@ -13,9 +13,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
   final Parcel parcel;
   final Modeling modeling;
-  final List<ModelingSchedule> schedule;
   final String gardenId;
-  final List<Design> designs;
   final Map<String, Vegetable> veggiesComposition;
   final User user;
 
@@ -25,10 +23,8 @@ class DetailsModelingScreen extends StatelessWidget {
     @required this.gardenId,
     @required this.parcel,
     @required this.modeling,
-    @required this.schedule,
-    @required this.designs,
     @required this.veggiesComposition
-  }): assert(user != null), assert(parcel != null), assert(modeling != null), assert(schedule != null), assert(designs != null), assert(gardenId != null);
+  }): assert(user != null), assert(parcel != null), assert(modeling != null), assert(gardenId != null);
 
   @override
   Widget build(BuildContext context) {
@@ -535,7 +531,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                      Parcel completedParcel = parcel.copyWith(
                                          name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
                                          publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-                                         currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+                                         currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount:  0,
                                          modelingsMonitoring: [modeling.id], id: Uuid().v4(), isActive: false);
 
                                      BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
