@@ -109,6 +109,7 @@ flutter:
     - assets/utils_image/
     - assets/veggies/
     - assets/user_reactions/
+    - assets/gardens_imagery/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

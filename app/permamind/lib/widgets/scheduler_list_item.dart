@@ -262,19 +262,6 @@ class _ArticleDescription extends StatelessWidget {
   }
 }
 
-//class CustomListItemTwo extends StatelessWidget {
-//  CustomListItemTwo({
-//    Key key,
-//    this.content
-//  }) : super(key: key);
-//
-//  final String content;
-//
-//  @override
-//  Widget build(BuildContext context) {
-//
-//  }
-//}
 
 final defaultInitialReaction = Reaction(
   previewIcon: _buildPreviewIconFacebook('assets/user_reactions/like.png'),

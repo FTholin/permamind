@@ -44,6 +44,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
       if (state is ActivitiesLoadSuccess) {
         _events = state.schedule;
         return Expanded(
+          flex: 6,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
