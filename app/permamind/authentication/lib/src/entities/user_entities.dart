@@ -9,11 +9,10 @@ class UserEntity extends Equatable {
   final String email;
   final String searchKey;
   final int gardenCounter;
-  final int parcelCounter;
   final int accountStatus;
   final List<String> tutorialsCompleted;
 
-  UserEntity(this.id, this.authenticationId, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.parcelCounter, this.accountStatus, this.tutorialsCompleted);
+  UserEntity(this.id, this.authenticationId, this.pseudo, this.email, this.nationality, this.searchKey, this.gardenCounter, this.accountStatus, this.tutorialsCompleted);
 
   Map<String, Object> toJson() {
     return {
@@ -24,7 +23,6 @@ class UserEntity extends Equatable {
       'nationality': nationality,
       'searchKey': searchKey,
       'gardenCounter': gardenCounter,
-      'parcelCounter': parcelCounter,
       'accountStatus': accountStatus,
       'tutorialsCompleted': tutorialsCompleted,
     };
@@ -33,7 +31,7 @@ class UserEntity extends Equatable {
 
 
   @override
-  List<Object> get props => [id, authenticationId, pseudo, email, nationality, searchKey,gardenCounter,parcelCounter, accountStatus];
+  List<Object> get props => [id, authenticationId, pseudo, email, nationality, searchKey,gardenCounter, accountStatus];
 
 
   @override
@@ -50,7 +48,6 @@ class UserEntity extends Equatable {
       json['nationality'] as String,
       json['searchKey'] as String,
       json['gardenCounter'] as int,
-      json['parcelCounter'] as int,
       json['accountStatus'] as int,
       json['tutorialsCompleted']
     );
@@ -65,7 +62,6 @@ class UserEntity extends Equatable {
       snap.data['nationality'],
       snap.data['searchKey'],
       snap.data['gardenCounter'],
-      snap.data['parcelCounter'],
       snap.data['accountStatus'],
       new List<String>.from(snap.data['tutorialsCompleted']),
 
@@ -80,7 +76,6 @@ class UserEntity extends Equatable {
       'nationality': nationality,
       'searchKey': searchKey,
       'gardenCounter': gardenCounter,
-      'parcelCounter': parcelCounter,
       'accountStatus': accountStatus,
       'tutorialsCompleted': tutorialsCompleted
     };

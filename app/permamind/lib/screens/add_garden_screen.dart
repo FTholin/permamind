@@ -376,7 +376,6 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                           nationality: widget._user.nationality,
                           searchKey: widget._user.searchKey,
                           gardenCounter: newGardenCounter,
-                          parcelCounter: widget._user.parcelCounter,
                           accountStatus: widget._user.accountStatus
                       )
                   ),);

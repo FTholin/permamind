@@ -535,29 +535,14 @@ class DetailsModelingScreen extends StatelessWidget {
                                      Parcel completedParcel = parcel.copyWith(
                                          name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
                                          publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-                                         currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+                                         currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
                                          modelingsMonitoring: [modeling.id], id: Uuid().v4(), isActive: false);
 
                                      BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
-                                     BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
+//                                     BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
 
                                      // TODO Rajouter ici une mise à jour de jardin pour le daysActivitiesCount
 //                                     BlocProvider.of<GardensBloc>(context).add((gardenId, completedParcel.id, designs));
-
-                                     final int newParcelCounter = user.parcelCounter + 1;
-
-                                     BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
-                                         user.copyWith(
-                                             id: user.id,
-                                             pseudo: user.pseudo,
-                                             email: user.email,
-                                             nationality: user.nationality,
-                                             searchKey: user.searchKey,
-                                             gardenCounter: user.gardenCounter,
-                                             parcelCounter: newParcelCounter,
-                                             accountStatus: user.accountStatus
-                                         )
-                                     ),);
 
                                      Navigator.of(context).push(
                                        MaterialPageRoute(

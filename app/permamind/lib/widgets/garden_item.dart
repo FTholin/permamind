@@ -170,7 +170,6 @@ class GardenItem extends StatelessWidget {
                                                         final int newGardenCounter = user.gardenCounter - 1;
 
                                                         final int gardenParcelCounter = await BlocProvider.of<GardensBloc>(context).dataRepository.gardenParcelsCounting(garden.id);
-                                                        final int newParcelCounter = user.parcelCounter - gardenParcelCounter;
 
                                                         BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
                                                             user.copyWith(
@@ -180,7 +179,6 @@ class GardenItem extends StatelessWidget {
                                                                 nationality: user.nationality,
                                                                 searchKey: user.searchKey,
                                                                 gardenCounter: newGardenCounter,
-                                                                parcelCounter: newParcelCounter,
                                                                 accountStatus: user.accountStatus
                                                             )
                                                         ),);

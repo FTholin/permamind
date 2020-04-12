@@ -47,7 +47,6 @@ class UserRepository {
       pseudo.substring(0, 1).toUpperCase(),
       'French',
       0,
-      0,
       0, []
     );
     await addNewUser(newUser);

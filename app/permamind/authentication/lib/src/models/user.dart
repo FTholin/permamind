@@ -10,7 +10,6 @@ class User {
   final String email;
   final String searchKey;
   final int gardenCounter;
-  final int parcelCounter;
   final int accountStatus;
   final List<String> tutorialsCompleted;
 
@@ -21,7 +20,6 @@ class User {
     this.searchKey,
     this.nationality,
     this.gardenCounter,
-    this.parcelCounter,
     this.accountStatus,
     this.tutorialsCompleted,
     {String id}) : this.id = id;
@@ -33,7 +31,6 @@ class User {
       String nationality,
       String searchKey,
       int gardenCounter,
-      int parcelCounter,
       int accountStatus,
       List<String> tutorialsCompleted}) {
     return User(
@@ -42,7 +39,7 @@ class User {
       email ?? this.email,
       searchKey ?? this.searchKey,
       nationality ?? this.nationality,
-      gardenCounter ?? this.gardenCounter, parcelCounter ?? this.parcelCounter,
+      gardenCounter ?? this.gardenCounter,
       accountStatus ?? this.accountStatus,
       tutorialsCompleted ?? this.tutorialsCompleted,
       id: id ?? this.id,
@@ -65,7 +62,6 @@ class User {
           nationality == other.nationality &&
           searchKey == other.searchKey &&
           gardenCounter == other.gardenCounter &&
-          parcelCounter == other.parcelCounter &&
           accountStatus == other.accountStatus && tutorialsCompleted == other.tutorialsCompleted;
 
   @override
@@ -74,7 +70,7 @@ class User {
   }
 
   UserEntity toEntity() {
-    return UserEntity(id, authenticationId, pseudo, email, nationality, searchKey, gardenCounter, parcelCounter, accountStatus, tutorialsCompleted);
+    return UserEntity(id, authenticationId, pseudo, email, nationality, searchKey, gardenCounter,  accountStatus, tutorialsCompleted);
   }
 
   static User fromEntity(UserEntity entity) {
@@ -84,7 +80,6 @@ class User {
       entity.email,
       entity.searchKey,
       entity.nationality,
-      entity.gardenCounter,
       entity.gardenCounter,
       entity.accountStatus,
       entity.tutorialsCompleted,

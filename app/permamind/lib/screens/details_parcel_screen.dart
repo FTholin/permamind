@@ -9,6 +9,7 @@ import 'package:permamind/models/member_profile.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:permamind/widgets/speed_dial_activity.dart';
 import 'package:permamind/widgets/widgets.dart';
+import 'package:uuid/uuid.dart';
 
 class DetailsParcelScreen extends StatelessWidget {
 //  final DataRepository dataRepository;
@@ -191,7 +192,6 @@ class DetailsParcelScreen extends StatelessWidget {
                                                 parcelsBloc.add(
                                                     ParcelDeleted(parcelId));
 
-                                                final int newParcelCounter = user.parcelCounter - 1;
 
                                                 BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
                                                     user.copyWith(
@@ -201,7 +201,6 @@ class DetailsParcelScreen extends StatelessWidget {
                                                         nationality: user.nationality,
                                                         searchKey: user.searchKey,
                                                         gardenCounter: user.gardenCounter,
-                                                        parcelCounter: newParcelCounter,
                                                         accountStatus: user.accountStatus
                                                     )
                                                 ),);
@@ -416,7 +415,6 @@ class DetailsParcelScreen extends StatelessWidget {
                                                 parcelsBloc.add(
                                                     ParcelDeleted(parcelId));
 
-                                                final int newParcelCounter = user.parcelCounter - 1;
 
                                                 BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
                                                     user.copyWith(
@@ -426,7 +424,6 @@ class DetailsParcelScreen extends StatelessWidget {
                                                         nationality: user.nationality,
                                                         searchKey: user.searchKey,
                                                         gardenCounter: user.gardenCounter,
-                                                        parcelCounter: newParcelCounter,
                                                         accountStatus: user.accountStatus
                                                     )
                                                 ),);
@@ -467,8 +464,18 @@ class DetailsParcelScreen extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          currentParcel.
+                        onTap: () async {
+                          final List<ModelingSchedule> schedule = await BlocProvider.of<ParcelsBloc>(context).dataRepository.fetchModelingActivities(currentParcel.currentModelingId);
+
+                          BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, currentParcel.id, schedule));
+                          BlocProvider.of<ParcelsBloc>(context).add(ParcelUpdated(
+                              currentParcel.copyWith(
+                                  name: currentParcel.name, gardenId: currentParcel.gardenId, length: currentParcel.length, width: currentParcel.width, parcelGround: currentParcel.parcelGround,
+                                  publicVisibility:currentParcel.publicVisibility , admin:currentParcel.admin , members:currentParcel.members, currentModelingId: currentParcel.currentModelingId,
+                                  currentModelingName: currentParcel.currentModelingName, creationDate: currentParcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
+                                  modelingsMonitoring: [currentParcel.currentModelingId], id: currentParcel.id, isActive: true
+                              )),);
+
                         },
                         child: Padding(
                           padding: EdgeInsets.all(10),

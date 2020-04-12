@@ -149,6 +149,17 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+
+  @override
+  Future<List<ModelingSchedule>> fetchModelingActivities(String modelingId) async {
+    return Firestore.instance.collection('modelings').document(modelingId).get().then((doc) {
+      return doc.data['schedule'].map<ModelingSchedule>((item) {
+        return ModelingSchedule.fromMap(item);
+      }).toList();
+    });
+  }
+
+
   @override
   Future<void> deleteDesignsFromGarden(String gardenId) async {
     // logger.i("READ::deleteDesignsFromGarden");
@@ -198,7 +209,6 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
-  //TODO  fetchModelings
   @override
   Stream<List<Modeling>> fetchModelings(List<String> veggiesList) {
     if (veggiesList.isEmpty) {
