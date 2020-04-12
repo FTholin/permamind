@@ -33,7 +33,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -58,13 +58,16 @@ class DetailsModelingScreen extends StatelessWidget {
                Flexible(
                  child: Column(
                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                    children: <Widget>[
                      Flexible(
                          flex: 5,
                          child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: <Widget>[
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                              Flexible(
                                  flex: 1,
                                  child: Container(
@@ -90,7 +93,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                          )),
                                    ),)
                              ),
-                             // TODO Mettre du texte scrollable ici
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
                              Flexible(
                                flex: 5,
                                child: Container(
@@ -107,7 +110,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                        ))
                                ),
                              ),
-
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
                              Flexible(
                                flex: 3,
                                child: Container(
@@ -165,6 +168,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                      }),
                                ),
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
                                flex: 2,
@@ -246,6 +250,8 @@ class DetailsModelingScreen extends StatelessWidget {
                                  ),
                                ),
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                              Flexible(
                                flex: 2,
                                child: Container(
@@ -326,8 +332,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                  ),
                                ),
                              ),
-
-
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
                                flex: 2,
@@ -425,6 +430,8 @@ class DetailsModelingScreen extends StatelessWidget {
                                  ],
                                )
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                              Flexible(
                                  flex: 2,
                                  child: Row(
@@ -521,11 +528,12 @@ class DetailsModelingScreen extends StatelessWidget {
                                    ],
                                  )
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
                                flex: 2,
                                child: Padding(
-                                 padding: EdgeInsets.all(3),
+                                 padding: EdgeInsets.all(1),
                                  child: InkWell(
                                    onTap: () async {
                                      Parcel completedParcel = parcel.copyWith(
