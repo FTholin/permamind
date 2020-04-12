@@ -583,8 +583,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                   children: <Widget>[
                                     Container(
                                       color: Colors.white70,
-                                      height: 500,
+                                      height: 50 * SizeConfig.heightMultiplier,
                                       child: ListView(
+                                        padding: const EdgeInsets.all(2),
                                         children: state.veggies
                                             .map((vegetable) {
                                           return new CheckboxListTile(
@@ -1816,7 +1817,6 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                                       EdgeInsets
                                                                           .all(5),
                                                                       child: ListView.builder(
-                                                                        // TODO
                                                                           scrollDirection: Axis.horizontal,
                                                                           itemCount: modeling.composition.length,
                                                                           itemBuilder: (context, index) {
