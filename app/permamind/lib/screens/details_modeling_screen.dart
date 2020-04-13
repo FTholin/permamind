@@ -69,7 +69,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                                 flex: 1,
+                                 flex: 2,
                                  child: Container(
                                    decoration: BoxDecoration(
                                      color: Color.fromRGBO(214, 211, 94, 1),
@@ -77,22 +77,20 @@ class DetailsModelingScreen extends StatelessWidget {
                                      BorderRadius.all(
                                          Radius.circular(5)),
                                    ),
-                                   height: 6 *
+                                   height: 4.5 *
                                        SizeConfig.heightMultiplier,
                                    child: Padding(
                                      padding: EdgeInsets.all(6),
-                                     child: Center(
-                                       child: Text("${modeling.name}",
-                                           maxLines: 2,
-                                           textAlign:
-                                           TextAlign.left,
-                                           style: TextStyle(
-                                             color: const Color(0xFF01534F),
-                                             fontSize: 2.2 *
-                                                 SizeConfig
-                                                     .textMultiplier,
-                                           )),
-                                     ),
+                                     child: Text("${modeling.name}",
+                                         maxLines: 2,
+                                         textAlign:
+                                         TextAlign.left,
+                                         style: TextStyle(
+                                           color: const Color(0xFF01534F),
+                                           fontSize: 2.2 *
+                                               SizeConfig
+                                                   .textMultiplier,
+                                         )),
                                    ),)
                              ),
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
@@ -114,7 +112,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              ),
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
                              Flexible(
-                               flex: 3,
+                               flex: 4,
                                child: Container(
                                  child: ListView.builder(
                                      scrollDirection:
@@ -173,7 +171,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                               flex: 2,
+                               flex: 3,
                                child: Container(
                                  decoration: BoxDecoration(
                                    color: const Color(
@@ -255,7 +253,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                               flex: 2,
+                               flex: 3,
                                child: Container(
                                  decoration: BoxDecoration(
                                    color: const Color(
@@ -337,7 +335,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                               flex: 2,
+                               flex: 3,
                                child: Row(
                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                  children: <Widget>[
@@ -435,7 +433,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                                 flex: 2,
+                                 flex: 3,
                                  child: Row(
                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                    children: <Widget>[

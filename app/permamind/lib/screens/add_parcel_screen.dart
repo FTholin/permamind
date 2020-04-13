@@ -63,6 +63,8 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
   Map<Vegetable, bool> veggiesSelected;
   Map<String, Vegetable> veggiesComposition = Map<String, Vegetable>();
 
+  bool buttonFlag = false;
+
   @override
   Widget build(BuildContext context) {
 
@@ -72,6 +74,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
     return BlocBuilder<ModelingsBloc, ModelingsState>(
         builder: (context, state) {
       if (state is VeggiesLoaded) {
+        buttonFlag = false;
 
         if (veggiesSelected == null) {
           veggiesSelected = Map.fromIterable(state.veggies, key: (v) => v, value: (v) => false);
@@ -592,9 +595,10 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             title:
                                             new Text(vegetable.nameFr),
                                             value: veggiesSelected[vegetable],
+                                            activeColor: Colors.green,
                                             secondary: Image(
-                                              height: 40,
-                                              width: 40,
+                                              height: 5 * SizeConfig.heightMultiplier,
+                                              width: 7 * SizeConfig.widthMultiplier,
                                               image: AssetImage(
                                                   'assets/veggies/${vegetable.imageName}.png'),
                                             ),
@@ -634,6 +638,8 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
               )),
         );
       } else if (state is ModelingsLoaded) {
+
+        buttonFlag = true;
 
         if (state.modelingsFetched.isEmpty) {
           return Scaffold(
@@ -1971,29 +1977,40 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
           ]);
     } else if (_currentStep == 3) {
        // TODO
-      return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            RaisedButton(
-                onPressed: onStepCancel,
-                child: Text('${AppLocalizations.of(context).backButton}')),
-            RaisedButton(
-                color: Colors.green,
-                textColor: Colors.white,
-                onPressed: () async {
-                  List<String> veggiesList = List<String>();
+      if (buttonFlag == true) {
+        return  Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              RaisedButton(
+                  onPressed: onStepCancel,
+                  child: Text('${AppLocalizations.of(context).backButton}')),
+            ]);
+      } else {
+        return  Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              RaisedButton(
+                  onPressed: onStepCancel,
+                  child: Text('${AppLocalizations.of(context).backButton}')),
+              RaisedButton(
+                  color: Colors.green,
+                  textColor: Colors.white,
+                  onPressed: () async {
+                    List<String> veggiesList = List<String>();
 
-                  veggiesSelected.forEach((k, v) {
-                    if (v) {
-                      veggiesList.add(k.id);
-                    }
-                  });
+                    veggiesSelected.forEach((k, v) {
+                      if (v) {
+                        veggiesList.add(k.id);
+                      }
+                    });
 
-                  BlocProvider.of<ModelingsBloc>(context)
-                      .add(FetchModelings(veggiesList, veggiesComposition));
-                },
-                child: Text('Rechercher')),
-          ]);
+                    BlocProvider.of<ModelingsBloc>(context)
+                        .add(FetchModelings(veggiesList, veggiesComposition));
+                  },
+                  child: Text('Rechercher')),
+            ]);
+      }
+
     } else {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

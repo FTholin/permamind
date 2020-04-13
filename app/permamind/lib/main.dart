@@ -300,7 +300,8 @@ class App extends StatelessWidget {
                           BlocBuilder<AuthenticationBloc, AuthenticationState>(
                             builder: (context, state) {
                               if (state is Authenticated) {
-                                return ContactUsScreen(user: state.userAuthenticated);
+//                                return ContactUsScreen(user: state.userAuthenticated);
+                              return ContactUsScreen();
                               } else if (state is Unauthenticated) {
                                 return LoginScreen(userRepository: userRepository);
                               } else {

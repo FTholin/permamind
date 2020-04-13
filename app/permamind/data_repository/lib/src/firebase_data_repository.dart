@@ -307,6 +307,25 @@ class FirebaseDataRepository implements DataRepository {
         .getDocuments().then((ds) => ds.documents.length);
   }
 
+  Future<int> gardenDayActivitiesCounting(String gardenId) {
+    DateTime reference = DateTime.now();
+    return Firestore.instance.collection('activities')
+        .where('gardenId', isEqualTo: gardenId)
+        .where('expectedDate', isEqualTo: DateTime(reference.year, reference.month, reference.day, 1 ))
+        .where('complete', isEqualTo: false)
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
+
+  Future<int> parcelDayActivitiesCounting(String parcelId) {
+    DateTime reference = DateTime.now();
+    return Firestore.instance.collection('activities')
+        .where('parcelId', isEqualTo: parcelId)
+        .where('expectedDate', isEqualTo: DateTime(reference.year, reference.month, reference.day, 1 ))
+        .where('complete', isEqualTo: false)
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
   @override
   Future<void> updateGarden(Garden update) {
     // logger.i("WRITE::GardenUpdated");

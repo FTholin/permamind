@@ -21,29 +21,27 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-//    var res = await _dataRepository.userParcelCounting(user.id, user.pseudo);
-//
-//    _dataRepository.userActivitiesCounting(user.id);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Expanded(
-            flex: 2,
+            flex: 3,
             child: Padding(
               padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               child: Container(
 //                color: Colors.red,
                 child: Row(
                   children: <Widget>[
-
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(50.0),
-                      child: Container(
-                        color: Colors.teal,
-                        child: Image.asset('assets/utils_image/farmer.png', fit: BoxFit.scaleDown,),
-                      )
+                        borderRadius: BorderRadius.circular(50.0),
+                        child: Container(
+
+                          height: 10 * SizeConfig.heightMultiplier,
+                          color: Colors.teal,
+                          child: Image.asset('assets/utils_image/farmer.png', fit: BoxFit.scaleDown,),
+                        )
                     ),
                     Expanded(
                       child: Padding(
@@ -101,85 +99,85 @@ class Profile extends StatelessWidget {
                       aspectRatio: 1,
                       child: Image.asset('assets/utils_image/hat.png', fit: BoxFit.contain,)
                   ),
-                  title: Text('Vous êtes un pionnier !', style: TextStyle(fontSize: 20)),
+                  title: Text('Vous êtes un pionnier !', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                     aspectRatio: 1,
                     child: Center(
 //                      color: Colors.yellow,
-                       child: Text("${user.gardenCounter}", style: TextStyle(fontSize: 50),)
+                       child: Text("${user.gardenCounter}", style: TextStyle(fontSize: 4 * SizeConfig.textMultiplier),)
                     )
                   ),
-                  title: Text('${AppLocalizations.of(context).profileGardenCounter}', style: TextStyle(fontSize: 20)),
+                  title: Text('${AppLocalizations.of(context).profileGardenCounter}', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
                       child: FutureBuilder<int>(
-                        future: _dataRepository.userActivitiesCounting(user.id), // a previously-obtained Future<String> or null
+                        future:  _dataRepository.userParcelCounting(user.id, user.pseudo),
+                        // a previously-obtained Future<String> or null
                         builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                           if (snapshot.hasData) {
-                            return Center(child: Text("${snapshot.data}", style: TextStyle(fontSize: 50)),);
+                            return Center(child: Text("${snapshot.data}", style: TextStyle(fontSize: 4 * SizeConfig.textMultiplier)),);
                           } else {
                             return CircularProgressIndicator();
                           }
                         },
                       )
                   ),
-                  title: Text('${AppLocalizations.of(context).profileGardenParcels}',style: TextStyle(fontSize: 20)),
+                  title: Text('${AppLocalizations.of(context).profileGardenParcels}',style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
                       child: FutureBuilder<int>(
-                        future: _dataRepository.userParcelCounting(user.id, user.pseudo), // a previously-obtained Future<String> or null
+                        future: _dataRepository.userActivitiesCounting(user.id),
                         builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                           if (snapshot.hasData) {
-                            return Center(child: Text("${snapshot.data}", style: TextStyle(fontSize: 50)));
+                            return Center(child: Text("${snapshot.data}", style: TextStyle(fontSize: 4 * SizeConfig.textMultiplier)));
                           } else {
                             return CircularProgressIndicator();
                           }
                         },
                       )
                   ),
-                  title: Text('${AppLocalizations.of(context).profileActivitesCounter}', style: TextStyle(fontSize: 20)),
+                  title: Text('${AppLocalizations.of(context).profileActivitesCounter}', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
-                InkWell(
-                  onTap: () async {
-                    Navigator.pushNamed(
-                      context,
-                      '/contactUs',
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    height: 7 * SizeConfig.heightMultiplier,
-                    width: double.infinity,
-                    child: Padding(
-                        padding: EdgeInsets.all(15),
-                        // TODO Changer internationalisation
-                        child: Center(
-                          // TODO Internationalisation
-                          child: Text("Contact us !",
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: const Color(0xFFF9F9F9),
-                                fontSize: 2.5 * SizeConfig.textMultiplier,
-//                                             fontWeight: FontWeight.bold
-                              )),
-                        )
-                    ),
-                  ),
-                )
               ],
             ),
           ),
-        )
+        ),
+        InkWell(
+          onTap: () async {
+            Navigator.pushNamed(
+              context,
+              '/contactUs',
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
+            height: 7 * SizeConfig.heightMultiplier,
+            width: double.infinity,
+            child: Padding(
+                padding: EdgeInsets.all(15),
+                // TODO Changer internationalisation
+                child: Center(
+                  // TODO Internationalisation
+                  child: Text("Contact us !",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: const Color(0xFFF9F9F9),
+                        fontSize: 2.5 * SizeConfig.textMultiplier,
+//                                             fontWeight: FontWeight.bold
+                      )),
+                )
+            ),
+          ),
+        ),
         // TODO Changer internationalisation
       ],
     );

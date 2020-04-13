@@ -510,7 +510,7 @@ class DetailsParcelScreen extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Text("Lancer modélisation",
+                                        Text("Lancer la culture",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,

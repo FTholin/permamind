@@ -56,6 +56,11 @@ abstract class DataRepository {
 
   Future<int> userActivitiesCounting(String userId);
 
+  Future<int> gardenDayActivitiesCounting(String gardenId);
+
+  Future<int> parcelDayActivitiesCounting(String parcelId);
+
+
   Future<void> updateActivity(Activity update);
 
   Future<QuerySnapshot> searchByName(String value);
