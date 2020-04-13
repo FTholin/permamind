@@ -91,8 +91,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       floatingActionButton: FloatingActionButton.extended(
         icon: IconButton(
           icon: Icon(Icons.send),
+          color: Colors.white,
         ),
-        label: Text('Send Mail'),
+        label: Text('Send Mail', style: TextStyle(color: Colors.white),),
         onPressed: send,
       ),
     );

@@ -26,7 +26,7 @@ class Profile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Expanded(
+        Flexible(
             flex: 3,
             child: Padding(
               padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -37,7 +37,6 @@ class Profile extends StatelessWidget {
                     ClipRRect(
                         borderRadius: BorderRadius.circular(50.0),
                         child: Container(
-
                           height: 10 * SizeConfig.heightMultiplier,
                           color: Colors.teal,
                           child: Image.asset('assets/utils_image/farmer.png', fit: BoxFit.scaleDown,),
@@ -69,9 +68,10 @@ class Profile extends StatelessWidget {
                 ),
               ),
             )),
-        Expanded(
-          flex: 1,
+        Flexible(
+          flex: 3,
           child: Container(
+            height: 5 * SizeConfig.heightMultiplier,
             color: Color.fromRGBO(214, 211, 94, 1),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -86,13 +86,12 @@ class Profile extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
+        Flexible(
           flex: 9,
           child: Container(
 //            color: Colors.green,
             child: ListView(
               padding: const EdgeInsets.all(20.0),
-              itemExtent: 106.0,
               children: [
                 ListTile(
                   leading: AspectRatio(
@@ -101,6 +100,8 @@ class Profile extends StatelessWidget {
                   ),
                   title: Text('Vous êtes un pionnier !', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
+                Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                 ListTile(
                   leading: AspectRatio(
                     aspectRatio: 1,
@@ -111,6 +112,8 @@ class Profile extends StatelessWidget {
                   ),
                   title: Text('${AppLocalizations.of(context).profileGardenCounter}', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
+                Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
@@ -128,6 +131,8 @@ class Profile extends StatelessWidget {
                   ),
                   title: Text('${AppLocalizations.of(context).profileGardenParcels}',style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
+                Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
@@ -148,36 +153,39 @@ class Profile extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () async {
-            Navigator.pushNamed(
-              context,
-              '/contactUs',
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-            ),
-            height: 7 * SizeConfig.heightMultiplier,
-            width: double.infinity,
-            child: Padding(
-                padding: EdgeInsets.all(15),
-                // TODO Changer internationalisation
-                child: Center(
-                  // TODO Internationalisation
-                  child: Text("Contact us !",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: const Color(0xFFF9F9F9),
-                        fontSize: 2.5 * SizeConfig.textMultiplier,
+        Flexible(
+          flex: 2,
+          child:InkWell(
+            onTap: () async {
+              Navigator.pushNamed(
+                context,
+                '/contactUs',
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
+              height: 7 * SizeConfig.heightMultiplier,
+              width: double.infinity,
+              child: Padding(
+                  padding: EdgeInsets.all(15),
+                  // TODO Changer internationalisation
+                  child: Center(
+                    // TODO Internationalisation
+                    child: Text("Contact us !",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: const Color(0xFFF9F9F9),
+                          fontSize: 2.5 * SizeConfig.textMultiplier,
 //                                             fontWeight: FontWeight.bold
-                      )),
-                )
+                        )),
+                  )
+              ),
             ),
           ),
-        ),
+        )
         // TODO Changer internationalisation
       ],
     );
