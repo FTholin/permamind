@@ -93,8 +93,12 @@ class AppLocalizations {
       'registration_failure': 'Registration Failure',
       'registration_loading': 'Registering...',
       'registration_button': "Create an Account",
-      'activities_calendar_header': "en_US"
-},
+      'activities_calendar_header': "en_US",
+      'profile_garden_counter': 'gardens',
+      'profile_parcel_counter': 'parcels',
+      'profile_activites_counter': 'completed activities',
+
+    },
     'fr': {
       'home': "Mes jardins",
       'learning_title': 'Tutoriels',
@@ -177,8 +181,10 @@ class AppLocalizations {
       'registration_failure': "Échec de l'inscription",
       'registration_loading': "Inscription en cours",
       'registration_button': "Créer un compte",
-      'activities_calendar_header': "fr_FR"
-
+      'activities_calendar_header': "fr_FR",
+      'profile_garden_counter': 'jardins',
+      'profile_parcel_counter': 'parcelles',
+      'profile_activites_counter': 'activités réalisées',
     },
   };
 
@@ -519,6 +525,19 @@ class AppLocalizations {
   String get profileTitle {
     return _localizedValues[locale.languageCode]['profile_title'];
   }
+
+  String get profileGardenCounter {
+    return _localizedValues[locale.languageCode]['profile_garden_counter'];
+  }
+
+  String get profileGardenParcels {
+    return _localizedValues[locale.languageCode]['profile_parcel_counter'];
+  }
+
+  String get profileActivitesCounter {
+    return _localizedValues[locale.languageCode]['profile_activites_counter'];
+  }
+
 
 
 }

@@ -90,38 +90,38 @@ class Profile extends StatelessWidget {
         Expanded(
           flex: 9,
           child: Container(
-            color: Colors.green,
+//            color: Colors.green,
             child: ListView(
               padding: const EdgeInsets.all(20.0),
               itemExtent: 106.0,
               children: [
                 ListTile(
                   leading: AspectRatio(
-                    aspectRatio: 1,
-                    child: Text("1", style: TextStyle(fontSize: 50),)
+                      aspectRatio: 1,
+                      child: Container(color: Colors.red,)
                   ),
-                  title: Text('jardin'),
+                  title: Text('Vous êtes un pionnier !', style: TextStyle(fontSize: 20)),
+                ),
+                ListTile(
+                  leading: AspectRatio(
+                    aspectRatio: 1,
+                    child: Text("${user.gardenCounter}", style: TextStyle(fontSize: 50),)
+                  ),
+                  title: Text('${AppLocalizations.of(context).profileGardenCounter}', style: TextStyle(fontSize: 20)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
                       child: Text("3", style: TextStyle(fontSize: 50),)
                   ),
-                  title: Text('Parcelles'),
+                  title: Text('${AppLocalizations.of(context).profileGardenParcels}',style: TextStyle(fontSize: 20)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
                       child: Text("10", style: TextStyle(fontSize: 50),)
                   ),
-                  title: Text('Activités réalisées'),
-                ),
-                ListTile(
-                  leading: AspectRatio(
-                      aspectRatio: 1,
-                      child: Text("1", style: TextStyle(fontSize: 50),)
-                  ),
-                  title: Text('One-line with leading widget'),
+                  title: Text('${AppLocalizations.of(context).profileActivitesCounter}', style: TextStyle(fontSize: 20)),
                 ),
               ],
             ),
