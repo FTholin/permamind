@@ -243,19 +243,21 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
                 color: Colors.green,
                 borderRadius: BorderRadius.all(Radius.circular(5)),
               ),
-              height: 6 * SizeConfig.heightMultiplier,
+              height: 7 * SizeConfig.heightMultiplier,
               width: double.infinity,
               child: Padding(
                 padding: EdgeInsets.all(15),
                 // TODO Changer internationalisation
-                child: Text("Soumettre l'activité",
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: const Color(0xFFF9F9F9),
-                      fontSize: 2.5 * SizeConfig.textMultiplier,
+                child: Center(
+                  child: Text("Soumettre l'activité",
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: const Color(0xFFF9F9F9),
+                        fontSize: 2.5 * SizeConfig.textMultiplier,
 //                                             fontWeight: FontWeight.bold
-                    )),
+                      )),
+                )
               ),
             ),
           )

@@ -77,20 +77,22 @@ class DetailsModelingScreen extends StatelessWidget {
                                      BorderRadius.all(
                                          Radius.circular(5)),
                                    ),
-                                   height: 4.5 *
+                                   height: 6 *
                                        SizeConfig.heightMultiplier,
                                    child: Padding(
                                      padding: EdgeInsets.all(6),
-                                     child: Text("${modeling.name}",
-                                         maxLines: 2,
-                                         textAlign:
-                                         TextAlign.left,
-                                         style: TextStyle(
-                                           color: const Color(0xFF01534F),
-                                           fontSize: 2.2 *
-                                               SizeConfig
-                                                   .textMultiplier,
-                                         )),
+                                     child: Center(
+                                       child: Text("${modeling.name}",
+                                           maxLines: 2,
+                                           textAlign:
+                                           TextAlign.left,
+                                           style: TextStyle(
+                                             color: const Color(0xFF01534F),
+                                             fontSize: 2.2 *
+                                                 SizeConfig
+                                                     .textMultiplier,
+                                           )),
+                                     ),
                                    ),)
                              ),
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
@@ -573,27 +575,25 @@ class DetailsModelingScreen extends StatelessWidget {
                                    child: Container(
                                      decoration: BoxDecoration(
                                        color: Colors.green,
-                                       borderRadius:
-                                       BorderRadius.all(
-                                           Radius.circular(5)),
+                                       borderRadius: BorderRadius.all(Radius.circular(5)),
                                      ),
-                                     height: 6 *
-                                         SizeConfig.heightMultiplier,
+                                     height: 7 * SizeConfig.heightMultiplier,
                                      width: double.infinity,
                                      child: Padding(
                                        padding: EdgeInsets.all(15),
-                                       child: Text("Sélectionner l'association",
-                                           maxLines: 2,
-                                           textAlign:
-                                           TextAlign.center,
-                                           style: TextStyle(
-                                             color: const Color(0xFFF9F9F9),
-                                             fontSize: 2.5 *
-                                                 SizeConfig
-                                                     .textMultiplier,
+                                       // TODO Changer internationalisation
+                                       child: Center(
+                                         child: Text("Soumettre l'activité",
+                                             maxLines: 2,
+                                             textAlign: TextAlign.center,
+                                             style: TextStyle(
+                                               color: const Color(0xFFF9F9F9),
+                                               fontSize: 2.5 * SizeConfig.textMultiplier,
 //                                             fontWeight: FontWeight.bold
-                                           )),
-                                     ),),
+                                             )),
+                                       ),
+                                     ),
+                                   ),
                                  ),
                                )
                              ),

@@ -5,11 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/widgets/widgets.dart';
-import 'package:permamind/screens/screens.dart';
+
 
 class Profile extends StatelessWidget {
   final DataRepository _dataRepository;
@@ -24,6 +20,11 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+//    var res = await _dataRepository.userParcelCounting(user.id, user.pseudo);
+//
+//    _dataRepository.userActivitiesCounting(user.id);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,31 +99,83 @@ class Profile extends StatelessWidget {
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
-                      child: Container(color: Colors.red,)
+                      child: Image.asset('assets/utils_image/hat.png', fit: BoxFit.contain,)
                   ),
                   title: Text('Vous êtes un pionnier !', style: TextStyle(fontSize: 20)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                     aspectRatio: 1,
-                    child: Text("${user.gardenCounter}", style: TextStyle(fontSize: 50),)
+                    child: Center(
+//                      color: Colors.yellow,
+                       child: Text("${user.gardenCounter}", style: TextStyle(fontSize: 50),)
+                    )
                   ),
                   title: Text('${AppLocalizations.of(context).profileGardenCounter}', style: TextStyle(fontSize: 20)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
-                      child: Text("3", style: TextStyle(fontSize: 50),)
+                      child: FutureBuilder<int>(
+                        future: _dataRepository.userActivitiesCounting(user.id), // a previously-obtained Future<String> or null
+                        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                          if (snapshot.hasData) {
+                            return Center(child: Text("${snapshot.data}", style: TextStyle(fontSize: 50)),);
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
+                      )
                   ),
                   title: Text('${AppLocalizations.of(context).profileGardenParcels}',style: TextStyle(fontSize: 20)),
                 ),
                 ListTile(
                   leading: AspectRatio(
                       aspectRatio: 1,
-                      child: Text("10", style: TextStyle(fontSize: 50),)
+                      child: FutureBuilder<int>(
+                        future: _dataRepository.userParcelCounting(user.id, user.pseudo), // a previously-obtained Future<String> or null
+                        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                          if (snapshot.hasData) {
+                            return Center(child: Text("${snapshot.data}", style: TextStyle(fontSize: 50)));
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
+                      )
                   ),
                   title: Text('${AppLocalizations.of(context).profileActivitesCounter}', style: TextStyle(fontSize: 20)),
                 ),
+                InkWell(
+                  onTap: () async {
+                    Navigator.pushNamed(
+                      context,
+                      '/contactUs',
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                    height: 7 * SizeConfig.heightMultiplier,
+                    width: double.infinity,
+                    child: Padding(
+                        padding: EdgeInsets.all(15),
+                        // TODO Changer internationalisation
+                        child: Center(
+                          // TODO Internationalisation
+                          child: Text("Contact us !",
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: const Color(0xFFF9F9F9),
+                                fontSize: 2.5 * SizeConfig.textMultiplier,
+//                                             fontWeight: FontWeight.bold
+                              )),
+                        )
+                    ),
+                  ),
+                )
               ],
             ),
           ),

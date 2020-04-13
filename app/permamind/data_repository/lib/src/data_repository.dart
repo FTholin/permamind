@@ -50,7 +50,11 @@ abstract class DataRepository {
 
   Future<int> gardenParcelsCounting(String gardenId);
 
-    Future<void> updateGarden(Garden update);
+  Future<void> updateGarden(Garden update);
+
+  Future<int> userParcelCounting(String userId, String userPseudo);
+
+  Future<int> userActivitiesCounting(String userId);
 
   Future<void> updateActivity(Activity update);
 

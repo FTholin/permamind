@@ -295,6 +295,18 @@ class FirebaseDataRepository implements DataRepository {
         .getDocuments().then((ds) => ds.documents.length);
   }
 
+  Future<int> userParcelCounting(String userId, String userPseudo) {
+    return Firestore.instance.collection('parcels')
+        .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
+  Future<int> userActivitiesCounting(String userId) {
+    return Firestore.instance.collection('activities')
+        .where('completeActivityUserId', isEqualTo: userId)
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
   @override
   Future<void> updateGarden(Garden update) {
     // logger.i("WRITE::GardenUpdated");

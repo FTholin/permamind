@@ -65,6 +65,7 @@ dependencies:
 
   flutter_chips_input: ^1.5.1
 
+  flutter_email_sender: ^3.0.1
 
 
   data_repository:

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:permamind/blocs/blocs.dart';
+import 'package:permamind/screens/contact_us_screen.dart';
 import 'package:permamind/screens/screens.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:authentication/authentication.dart';
@@ -178,7 +179,7 @@ class App extends StatelessWidget {
 //              }
 //        },
                 onGenerateRoute: (settings) {
-                  if (settings.name == "/") {
+                  if (settings.name == "/")  {
 
                     return PageRouteBuilder(
                         pageBuilder: (_, __, ___) =>
@@ -293,75 +294,40 @@ class App extends StatelessWidget {
                           ),
                     );
 
+                  } else if (settings.name == '/contactUs') {
+                    return PageRouteBuilder(
+                      pageBuilder: (_, __, ___) =>
+                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                            builder: (context, state) {
+                              if (state is Authenticated) {
+                                return ContactUsScreen(user: state.userAuthenticated);
+                              } else if (state is Unauthenticated) {
+                                return LoginScreen(userRepository: userRepository);
+                              } else {
+                                return Center(child: CircularProgressIndicator());
+                              }
+                            },
+                          ),
+                      transitionsBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child,
+                          ) =>
+                          ScaleTransition(
+                            scale: Tween<double>(
+                              begin: 0.0,
+                              end: 1.0,
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.fastOutSlowIn,
+                              ),
+                            ),
+                            child: child,
+                          ),
+                    );
                   }
-//                  else if (settings.name == '/detailsParcel') {
-//
-//                    final DetailsParcelScreenArguments args =
-//                        settings.arguments;
-//
-//                    return PageRouteBuilder(
-//                      pageBuilder: (_, __, ___) =>
-//                          BlocBuilder<AuthenticationBloc, AuthenticationState>(
-//                            builder: (context, state) {
-//                              if (state is Authenticated) {
-//
-//                                return MultiBlocProvider(
-//                                  providers: [
-//                                  BlocProvider(
-//                                  create: (context) => ActivitiesBloc(
-//                                      dataRepository: firebaseRepository,
-//                                      gardensBloc: BlocProvider.of<GardensBloc>(context),
-////                                      parcelId: parcels[index].id
-//                                  ),
-//                                ),
-//                                BlocProvider(
-//                                  create: (context) => DesignBloc(
-//                                      dataRepository: firebaseRepository,
-//                                      activitiesBloc: BlocProvider.of<ActivitiesBloc>(context),
-////                                      parcelId: parcels[index].id
-//                                  )..add(LoadDesign()),
-//                                ),
-//                                BlocProvider.value(value: null)
-//                                  ],
-//                                  child: DetailsParcelScreen(
-//                                      dataRepository: firebaseRepository,
-//                                      user: state.userAuthenticated,
-//                                      gardenId: args.gardenId,
-//                                      parcelId: args.parcelId,
-//                                  ),
-//                                );
-//
-//                              } else if (state is Unauthenticated) {
-//                                return LoginScreen(userRepository: userRepository);
-//                              } else {
-//                                return Center(child: CircularProgressIndicator());
-//                              }
-//                            },
-//                          ),
-//                      transitionsBuilder: (c, anim, a2, child) =>
-//                          FadeTransition(opacity: anim, child: child),
-//                      transitionDuration: Duration(milliseconds: 800),
-//                    );
-//
-//                  }
-//                  else if (settings.name == "/detailsGarden") {
-//
-//                    final DetailsParcelScreenArguments args = settings.arguments;
-//                    return MaterialPageRoute(builder: (_) {
-//                      return BlocProvider<ParcelsBloc>(
-//                          create: (context) => ParcelsBloc(
-//                              gardensBloc: BlocProvider.of<GardensBloc>(context),
-//                              dataRepository: args.dataRepository)
-//                            ..add(LoadParcels(args.gardenId, args.user.pseudo, args.user.id)),
-//                          child: DetailsParcelScreen(gardenId: args.gardenId, user: args.user, dataRepository: args.dataRepository));
-//                    });
-//
-//                  }
-
-//                  else if (settings.name == "/modelingsFound") {
-//                    return MaterialPageRoute(
-//                        builder: (context) => ModelingsFoundScreen());
-//                  }
                   else if (settings.name == "/settings") {
 
                     final SettingsScreenArguments args = settings.arguments;
