@@ -16,3 +16,4 @@ export 'speed_dial_parcel.dart';
 export 'parcel_item.dart';
 export 'parcel_carrousel.dart';
 export 'my_stepper.dart';
+export 'profile.dart';

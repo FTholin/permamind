@@ -13,6 +13,8 @@ class AppLocalizations {
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
       'home': "My gardens",
+      'learning_title': 'Tutorials',
+      'profile_title': 'My profile',
       'title': 'Hello World',
       'settings_garden_title': "Garden's Settings",
       'settings_garden_name': "Garden's Name",
@@ -95,6 +97,8 @@ class AppLocalizations {
 },
     'fr': {
       'home': "Mes jardins",
+      'learning_title': 'Tutoriels',
+      'profile_title': 'Mon profil',
       'title': "Partie pédagogie",
       'settings_garden_title': "Paramètres du jardin",
       'settings_garden_name': "Nom du jardin",
@@ -506,6 +510,14 @@ class AppLocalizations {
 
   String get activitiesCalendarHeader {
     return _localizedValues[locale.languageCode]['activities_calendar_header'];
+  }
+
+  String get learningTitle {
+    return _localizedValues[locale.languageCode]['learning_title'];
+  }
+
+  String get profileTitle {
+    return _localizedValues[locale.languageCode]['profile_title'];
   }
 
 
