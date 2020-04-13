@@ -26,9 +26,19 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
   final TextEditingController _activityNameController = TextEditingController();
   bool _activityNameValidate = false;
 
-  final List<String> types = <String>["60", "80", "100"];
+  final List<Map<String, String>> types = [
+    {'nameFr': 'Arrosage', 'nameEn': 'Watering'},
+    {'nameFr': 'Semis', 'nameEn': 'Sowing'},
+    {'nameFr': 'Repiquage/Plantation', 'nameEn': 'Transplanting/Plantation'},
+    {'nameFr': 'Désherbage', 'nameEn': 'Weeding'},
+    {'nameFr': 'Récolte', 'nameEn': 'Harvest'},
+    {'nameFr': 'Faux semis', 'nameEn': 'Stale seed bed'},
+    {'nameFr': 'Fertilisation', 'nameEn': 'Fertilization'},
+    {'nameFr': 'Paillage', 'nameEn': 'Mulching'},
+    {'nameFr': 'Diagnostique maladie', 'nameEn': 'Disease diagnosis'},
+  ];
 
-  String gardenLengthValue;
+  Map<String, String> activityTypeValue;
 
   DateTime selectedDate = DateTime.now();
 
@@ -71,11 +81,15 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset(
-                'assets/utils_image/tree.png',
+                // TODO Changer internationalisation
+
+              'assets/utils_image/tree.png',
                 fit: BoxFit.scaleDown,
               ),
             ],
           )),
+          // TODO Changer internationalisation
+
           Text("Titre de la nouvelle activité ?",
               textAlign: TextAlign.left,
               maxLines: 2,
@@ -102,6 +116,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               setState(() {});
             },
           ),
+          // TODO Changer internationalisation
           Text("Type d'activité ?",
               textAlign: TextAlign.left,
               maxLines: 2,
@@ -111,18 +126,19 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
                   fontWeight: FontWeight.bold
 //                          fontWeight: FontWeight.bold,
                   )),
-          PopupMenuButton<String>(
+          PopupMenuButton<Map<String, String>>(
             itemBuilder: (context) {
-              return types.map((String item) {
-                return PopupMenuItem<String>(
+              return types.map((Map<String, String> item) {
+                return PopupMenuItem<Map<String, String>>(
                   value: item,
-                  child: Text(item),
+                  // TODO Changer ici avec l'internationalisation
+                  child: Text(item['nameFr']),
                 );
               }).toList();
             },
-            onSelected: (String newValue) {
+            onSelected: (Map<String, String> newValue) {
               setState(() {
-                gardenLengthValue = newValue;
+                activityTypeValue = newValue;
               });
             },
             child: Container(
@@ -139,7 +155,8 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child:
-                        Text(gardenLengthValue == null ? "Type d'activité" : '',
+                    // TODO Changer internationalisation
+                    Text(activityTypeValue == null ? "Type d'activité" : activityTypeValue['nameFr'],
 //                            textAlign:
 //                            TextAlign.left,
                             style: TextStyle(
@@ -164,6 +181,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               ),
             ),
           ),
+          // TODO Changer internationalisation
           Text("Quand souhaitez vous la réaliser ?",
               textAlign: TextAlign.left,
               maxLines: 2,
@@ -192,7 +210,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
           ),
           InkWell(
             onTap: () async {
-              if (_activityNameController.text.isNotEmpty) {
+              if (_activityNameController.text.isNotEmpty && activityTypeValue.isNotEmpty) {
 
 
                 DateTime referenceDate  = new DateTime(selectedDate.year, selectedDate.month, selectedDate.day, 1);
@@ -205,7 +223,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
                             widget.parcelId,
                             false,
                             referenceDate,
-                            '',
+                            activityTypeValue['nameEn'],
                             '',
                             null
                         )
@@ -229,6 +247,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               width: double.infinity,
               child: Padding(
                 padding: EdgeInsets.all(15),
+                // TODO Changer internationalisation
                 child: Text("Soumettre l'activité",
                     maxLines: 2,
                     textAlign: TextAlign.center,

@@ -110,7 +110,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                               padding: EdgeInsets.only(left: 30, right: 30),
                               child: Container(
 //                              color: Colors.green,
-                                child: _currentStep == 4
+                                child: _currentStep == 3
                                     ? Text(
                                         "Quels légumes voulez-vous cultiver ?",
                                         maxLines: 3,
@@ -440,141 +440,141 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                 ),
                                 isActive: _currentStep >= 2,
                               ),
-                              MyStep(
-                                title: Text(""),
-                                content: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Image.asset(
-                                      'assets/utils_image/rake_plant.png',
-                                      fit: BoxFit.scaleDown,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 5 * SizeConfig.heightMultiplier),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Row(
-                                            children: <Widget>[
-                                              Text("Ajouter des jardiniers",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: const Color(
-                                                          0xFF01534F),
-                                                      fontSize: 2.5 *
-                                                          SizeConfig
-                                                              .textMultiplier,
-                                                      fontWeight:
-                                                          FontWeight.bold
-//                          fontWeight: FontWeight.bold,
-                                                      )),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 2 *
-                                                    SizeConfig
-                                                        .heightMultiplier),
-                                            child: ChipsInput(
-                                              keyboardAppearance:
-                                                  Brightness.dark,
-                                              textCapitalization:
-                                                  TextCapitalization.words,
-                                              enabled: true,
-                                              maxChips: 15,
-                                              textStyle: TextStyle(
-                                                  height: 1.5,
-                                                  fontFamily: "Roboto",
-                                                  fontSize: 16),
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5.0)),
-                                                      borderSide: BorderSide(
-                                                          color: Colors.green)),
-                                                  hintText:
-                                                      'Inviter des jardiniers'),
-                                              findSuggestions:
-                                                  (String query) async {
-                                                queryResProfile = [];
-                                                if (query.length != 0) {
-                                                  _parcelMembers = [];
-
-                                                  var queryRes = await widget
-                                                      .dataRepository
-                                                      .searchByName(query);
-                                                  for (int i = 0;
-                                                      i <
-                                                          queryRes
-                                                              .documents.length;
-                                                      ++i) {
-                                                    var data = queryRes
-                                                        .documents[i].data;
-                                                    queryResProfile
-                                                        .add(MemberProfile(
-                                                      data["id"],
-                                                      data["pseudo"],
-//                                  data["email"],
-//                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
-                                                    ));
-                                                  }
-                                                }
-                                                return queryResProfile;
-                                              },
-                                              onChanged: (data) {
-                                                _parcelMembers.clear();
-                                                data.forEach((elem) {
-                                                  if (elem.pseudo !=
-                                                      widget.user.pseudo) {
-                                                    _parcelMembers.add(
-                                                        GardenMember(
-                                                            id: elem.id,
-                                                            pseudo:
-                                                                elem.pseudo));
-                                                  }
-                                                });
-                                              },
-                                              chipBuilder:
-                                                  (context, state, profile) {
-                                                return InputChip(
-                                                  key: ObjectKey(profile),
-                                                  label: Text(profile.pseudo),
-//                            avatar: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                                                  onDeleted: () =>
-                                                      state.deleteChip(profile),
-                                                  materialTapTargetSize:
-                                                      MaterialTapTargetSize
-                                                          .shrinkWrap,
-                                                );
-                                              },
-                                              suggestionBuilder:
-                                                  (context, state, profile) {
-                                                return ListTile(
-                                                  key: ObjectKey(profile),
-//                            leading: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                                                  title: Text(profile.pseudo),
-//                            subtitle: Text(profile.email),
-                                                  onTap: () =>
-                                                      state.selectSuggestion(
-                                                          profile),
-                                                );
-                                              },
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                isActive: _currentStep >= 3,
-                              ),
+//                              MyStep(
+//                                title: Text(""),
+//                                content: Column(
+//                                  mainAxisAlignment:
+//                                      MainAxisAlignment.spaceEvenly,
+//                                  children: <Widget>[
+//                                    Image.asset(
+//                                      'assets/utils_image/rake_plant.png',
+//                                      fit: BoxFit.scaleDown,
+//                                    ),
+//                                    Padding(
+//                                      padding: EdgeInsets.only(
+//                                          top: 5 * SizeConfig.heightMultiplier),
+//                                      child: Column(
+//                                        children: <Widget>[
+//                                          Row(
+//                                            children: <Widget>[
+//                                              Text("Ajouter des jardiniers",
+//                                                  textAlign: TextAlign.center,
+//                                                  style: TextStyle(
+//                                                      color: const Color(
+//                                                          0xFF01534F),
+//                                                      fontSize: 2.5 *
+//                                                          SizeConfig
+//                                                              .textMultiplier,
+//                                                      fontWeight:
+//                                                          FontWeight.bold
+////                          fontWeight: FontWeight.bold,
+//                                                      )),
+//                                            ],
+//                                          ),
+//                                          Padding(
+//                                            padding: EdgeInsets.only(
+//                                                top: 2 *
+//                                                    SizeConfig
+//                                                        .heightMultiplier),
+//                                            child: ChipsInput(
+//                                              keyboardAppearance:
+//                                                  Brightness.dark,
+//                                              textCapitalization:
+//                                                  TextCapitalization.words,
+//                                              enabled: true,
+//                                              maxChips: 15,
+//                                              textStyle: TextStyle(
+//                                                  height: 1.5,
+//                                                  fontFamily: "Roboto",
+//                                                  fontSize: 16),
+//                                              decoration: InputDecoration(
+//                                                  border: OutlineInputBorder(
+//                                                      borderRadius:
+//                                                          BorderRadius.all(
+//                                                              Radius.circular(
+//                                                                  5.0)),
+//                                                      borderSide: BorderSide(
+//                                                          color: Colors.green)),
+//                                                  hintText:
+//                                                      'Inviter des jardiniers'),
+//                                              findSuggestions:
+//                                                  (String query) async {
+//                                                queryResProfile = [];
+//                                                if (query.length != 0) {
+//                                                  _parcelMembers = [];
+//
+//                                                  var queryRes = await widget
+//                                                      .dataRepository
+//                                                      .searchByName(query);
+//                                                  for (int i = 0;
+//                                                      i <
+//                                                          queryRes
+//                                                              .documents.length;
+//                                                      ++i) {
+//                                                    var data = queryRes
+//                                                        .documents[i].data;
+//                                                    queryResProfile
+//                                                        .add(MemberProfile(
+//                                                      data["id"],
+//                                                      data["pseudo"],
+////                                  data["email"],
+////                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+//                                                    ));
+//                                                  }
+//                                                }
+//                                                return queryResProfile;
+//                                              },
+//                                              onChanged: (data) {
+//                                                _parcelMembers.clear();
+//                                                data.forEach((elem) {
+//                                                  if (elem.pseudo !=
+//                                                      widget.user.pseudo) {
+//                                                    _parcelMembers.add(
+//                                                        GardenMember(
+//                                                            id: elem.id,
+//                                                            pseudo:
+//                                                                elem.pseudo));
+//                                                  }
+//                                                });
+//                                              },
+//                                              chipBuilder:
+//                                                  (context, state, profile) {
+//                                                return InputChip(
+//                                                  key: ObjectKey(profile),
+//                                                  label: Text(profile.pseudo),
+////                            avatar: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                                  onDeleted: () =>
+//                                                      state.deleteChip(profile),
+//                                                  materialTapTargetSize:
+//                                                      MaterialTapTargetSize
+//                                                          .shrinkWrap,
+//                                                );
+//                                              },
+//                                              suggestionBuilder:
+//                                                  (context, state, profile) {
+//                                                return ListTile(
+//                                                  key: ObjectKey(profile),
+////                            leading: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                                  title: Text(profile.pseudo),
+////                            subtitle: Text(profile.email),
+//                                                  onTap: () =>
+//                                                      state.selectSuggestion(
+//                                                          profile),
+//                                                );
+//                                              },
+//                                            ),
+//                                          )
+//                                        ],
+//                                      ),
+//                                    )
+//                                  ],
+//                                ),
+//                                isActive: _currentStep >= 3,
+//                              ),
                               MyStep(
                                 title: Text(""),
                                 content:  Column(
@@ -986,141 +986,141 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                   ),
                                   isActive: _currentStep >= 2,
                                 ),
-                                MyStep(
-                                  title: Text(""),
-                                  content: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Image.asset(
-                                        'assets/utils_image/rake_plant.png',
-                                        fit: BoxFit.scaleDown,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 5 * SizeConfig.heightMultiplier),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Text("Ajouter des jardiniers",
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        color: const Color(
-                                                            0xFF01534F),
-                                                        fontSize: 2.5 *
-                                                            SizeConfig
-                                                                .textMultiplier,
-                                                        fontWeight:
-                                                        FontWeight.bold
-//                          fontWeight: FontWeight.bold,
-                                                    )),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 2 *
-                                                      SizeConfig
-                                                          .heightMultiplier),
-                                              child: ChipsInput(
-                                                keyboardAppearance:
-                                                Brightness.dark,
-                                                textCapitalization:
-                                                TextCapitalization.words,
-                                                enabled: true,
-                                                maxChips: 15,
-                                                textStyle: TextStyle(
-                                                    height: 1.5,
-                                                    fontFamily: "Roboto",
-                                                    fontSize: 16),
-                                                decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                5.0)),
-                                                        borderSide: BorderSide(
-                                                            color: Colors.green)),
-                                                    hintText:
-                                                    'Inviter des jardiniers'),
-                                                findSuggestions:
-                                                    (String query) async {
-                                                  queryResProfile = [];
-                                                  if (query.length != 0) {
-                                                    _parcelMembers = [];
-
-                                                    var queryRes = await widget
-                                                        .dataRepository
-                                                        .searchByName(query);
-                                                    for (int i = 0;
-                                                    i <
-                                                        queryRes
-                                                            .documents.length;
-                                                    ++i) {
-                                                      var data = queryRes
-                                                          .documents[i].data;
-                                                      queryResProfile
-                                                          .add(MemberProfile(
-                                                        data["id"],
-                                                        data["pseudo"],
-//                                  data["email"],
-//                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
-                                                      ));
-                                                    }
-                                                  }
-                                                  return queryResProfile;
-                                                },
-                                                onChanged: (data) {
-                                                  _parcelMembers.clear();
-                                                  data.forEach((elem) {
-                                                    if (elem.pseudo !=
-                                                        widget.user.pseudo) {
-                                                      _parcelMembers.add(
-                                                          GardenMember(
-                                                              id: elem.id,
-                                                              pseudo:
-                                                              elem.pseudo));
-                                                    }
-                                                  });
-                                                },
-                                                chipBuilder:
-                                                    (context, state, profile) {
-                                                  return InputChip(
-                                                    key: ObjectKey(profile),
-                                                    label: Text(profile.pseudo),
-//                            avatar: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                                                    onDeleted: () =>
-                                                        state.deleteChip(profile),
-                                                    materialTapTargetSize:
-                                                    MaterialTapTargetSize
-                                                        .shrinkWrap,
-                                                  );
-                                                },
-                                                suggestionBuilder:
-                                                    (context, state, profile) {
-                                                  return ListTile(
-                                                    key: ObjectKey(profile),
-//                            leading: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                                                    title: Text(profile.pseudo),
-//                            subtitle: Text(profile.email),
-                                                    onTap: () =>
-                                                        state.selectSuggestion(
-                                                            profile),
-                                                  );
-                                                },
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  isActive: _currentStep >= 3,
-                                ),
+//                                MyStep(
+//                                  title: Text(""),
+//                                  content: Column(
+//                                    mainAxisAlignment:
+//                                    MainAxisAlignment.spaceEvenly,
+//                                    children: <Widget>[
+//                                      Image.asset(
+//                                        'assets/utils_image/rake_plant.png',
+//                                        fit: BoxFit.scaleDown,
+//                                      ),
+//                                      Padding(
+//                                        padding: EdgeInsets.only(
+//                                            top: 5 * SizeConfig.heightMultiplier),
+//                                        child: Column(
+//                                          children: <Widget>[
+//                                            Row(
+//                                              children: <Widget>[
+//                                                Text("Ajouter des jardiniers",
+//                                                    textAlign: TextAlign.center,
+//                                                    style: TextStyle(
+//                                                        color: const Color(
+//                                                            0xFF01534F),
+//                                                        fontSize: 2.5 *
+//                                                            SizeConfig
+//                                                                .textMultiplier,
+//                                                        fontWeight:
+//                                                        FontWeight.bold
+////                          fontWeight: FontWeight.bold,
+//                                                    )),
+//                                              ],
+//                                            ),
+//                                            Padding(
+//                                              padding: EdgeInsets.only(
+//                                                  top: 2 *
+//                                                      SizeConfig
+//                                                          .heightMultiplier),
+//                                              child: ChipsInput(
+//                                                keyboardAppearance:
+//                                                Brightness.dark,
+//                                                textCapitalization:
+//                                                TextCapitalization.words,
+//                                                enabled: true,
+//                                                maxChips: 15,
+//                                                textStyle: TextStyle(
+//                                                    height: 1.5,
+//                                                    fontFamily: "Roboto",
+//                                                    fontSize: 16),
+//                                                decoration: InputDecoration(
+//                                                    border: OutlineInputBorder(
+//                                                        borderRadius:
+//                                                        BorderRadius.all(
+//                                                            Radius.circular(
+//                                                                5.0)),
+//                                                        borderSide: BorderSide(
+//                                                            color: Colors.green)),
+//                                                    hintText:
+//                                                    'Inviter des jardiniers'),
+//                                                findSuggestions:
+//                                                    (String query) async {
+//                                                  queryResProfile = [];
+//                                                  if (query.length != 0) {
+//                                                    _parcelMembers = [];
+//
+//                                                    var queryRes = await widget
+//                                                        .dataRepository
+//                                                        .searchByName(query);
+//                                                    for (int i = 0;
+//                                                    i <
+//                                                        queryRes
+//                                                            .documents.length;
+//                                                    ++i) {
+//                                                      var data = queryRes
+//                                                          .documents[i].data;
+//                                                      queryResProfile
+//                                                          .add(MemberProfile(
+//                                                        data["id"],
+//                                                        data["pseudo"],
+////                                  data["email"],
+////                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+//                                                      ));
+//                                                    }
+//                                                  }
+//                                                  return queryResProfile;
+//                                                },
+//                                                onChanged: (data) {
+//                                                  _parcelMembers.clear();
+//                                                  data.forEach((elem) {
+//                                                    if (elem.pseudo !=
+//                                                        widget.user.pseudo) {
+//                                                      _parcelMembers.add(
+//                                                          GardenMember(
+//                                                              id: elem.id,
+//                                                              pseudo:
+//                                                              elem.pseudo));
+//                                                    }
+//                                                  });
+//                                                },
+//                                                chipBuilder:
+//                                                    (context, state, profile) {
+//                                                  return InputChip(
+//                                                    key: ObjectKey(profile),
+//                                                    label: Text(profile.pseudo),
+////                            avatar: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                                    onDeleted: () =>
+//                                                        state.deleteChip(profile),
+//                                                    materialTapTargetSize:
+//                                                    MaterialTapTargetSize
+//                                                        .shrinkWrap,
+//                                                  );
+//                                                },
+//                                                suggestionBuilder:
+//                                                    (context, state, profile) {
+//                                                  return ListTile(
+//                                                    key: ObjectKey(profile),
+////                            leading: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                                    title: Text(profile.pseudo),
+////                            subtitle: Text(profile.email),
+//                                                    onTap: () =>
+//                                                        state.selectSuggestion(
+//                                                            profile),
+//                                                  );
+//                                                },
+//                                              ),
+//                                            )
+//                                          ],
+//                                        ),
+//                                      )
+//                                    ],
+//                                  ),
+//                                  isActive: _currentStep >= 3,
+//                                ),
                                 MyStep(
                                   title: Text(""),
                                   content: Container(
@@ -1151,12 +1151,12 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                 ),
                               ],
                               controlsBuilder: _createEventControlBuilder,
-                              onStepContinue: _currentStep < 5
+                              onStepContinue: _currentStep < 4
                                   ? () => setState(() => _currentStep += 1)
                                   : null,
                               onStepCancel: _currentStep > -1
                                   ? () {
-                                if (_currentStep == 4) {
+                                if (_currentStep == 3) {
                                   BlocProvider.of<ModelingsBloc>(context)
                                       .add(FetchVeggies());
                                 } else {
@@ -1205,7 +1205,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 30, right: 30),
                                 child: Container(
-                                  child: _currentStep == 4
+                                  child: _currentStep == 3
                                       ? Text(
                                       "Voici les associations que nous vous conseillons !",
                                       maxLines: 3,
@@ -1535,141 +1535,141 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                   ),
                                   isActive: _currentStep >= 2,
                                 ),
-                                MyStep(
-                                  title: Text(""),
-                                  content: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Image.asset(
-                                        'assets/utils_image/rake_plant.png',
-                                        fit: BoxFit.scaleDown,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 5 * SizeConfig.heightMultiplier),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Text("Ajouter des jardiniers",
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        color: const Color(
-                                                            0xFF01534F),
-                                                        fontSize: 2.5 *
-                                                            SizeConfig
-                                                                .textMultiplier,
-                                                        fontWeight:
-                                                        FontWeight.bold
-//                          fontWeight: FontWeight.bold,
-                                                    )),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 2 *
-                                                      SizeConfig
-                                                          .heightMultiplier),
-                                              child: ChipsInput(
-                                                keyboardAppearance:
-                                                Brightness.dark,
-                                                textCapitalization:
-                                                TextCapitalization.words,
-                                                enabled: true,
-                                                maxChips: 15,
-                                                textStyle: TextStyle(
-                                                    height: 1.5,
-                                                    fontFamily: "Roboto",
-                                                    fontSize: 16),
-                                                decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                5.0)),
-                                                        borderSide: BorderSide(
-                                                            color: Colors.green)),
-                                                    hintText:
-                                                    'Inviter des jardiniers'),
-                                                findSuggestions:
-                                                    (String query) async {
-                                                  queryResProfile = [];
-                                                  if (query.length != 0) {
-                                                    _parcelMembers = [];
-
-                                                    var queryRes = await widget
-                                                        .dataRepository
-                                                        .searchByName(query);
-                                                    for (int i = 0;
-                                                    i <
-                                                        queryRes
-                                                            .documents.length;
-                                                    ++i) {
-                                                      var data = queryRes
-                                                          .documents[i].data;
-                                                      queryResProfile
-                                                          .add(MemberProfile(
-                                                        data["id"],
-                                                        data["pseudo"],
-//                                  data["email"],
-//                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
-                                                      ));
-                                                    }
-                                                  }
-                                                  return queryResProfile;
-                                                },
-                                                onChanged: (data) {
-                                                  _parcelMembers.clear();
-                                                  data.forEach((elem) {
-                                                    if (elem.pseudo !=
-                                                        widget.user.pseudo) {
-                                                      _parcelMembers.add(
-                                                          GardenMember(
-                                                              id: elem.id,
-                                                              pseudo:
-                                                              elem.pseudo));
-                                                    }
-                                                  });
-                                                },
-                                                chipBuilder:
-                                                    (context, state, profile) {
-                                                  return InputChip(
-                                                    key: ObjectKey(profile),
-                                                    label: Text(profile.pseudo),
-//                            avatar: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                                                    onDeleted: () =>
-                                                        state.deleteChip(profile),
-                                                    materialTapTargetSize:
-                                                    MaterialTapTargetSize
-                                                        .shrinkWrap,
-                                                  );
-                                                },
-                                                suggestionBuilder:
-                                                    (context, state, profile) {
-                                                  return ListTile(
-                                                    key: ObjectKey(profile),
-//                            leading: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                                                    title: Text(profile.pseudo),
-//                            subtitle: Text(profile.email),
-                                                    onTap: () =>
-                                                        state.selectSuggestion(
-                                                            profile),
-                                                  );
-                                                },
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  isActive: _currentStep >= 3,
-                                ),
+//                                MyStep(
+//                                  title: Text(""),
+//                                  content: Column(
+//                                    mainAxisAlignment:
+//                                    MainAxisAlignment.spaceEvenly,
+//                                    children: <Widget>[
+//                                      Image.asset(
+//                                        'assets/utils_image/rake_plant.png',
+//                                        fit: BoxFit.scaleDown,
+//                                      ),
+//                                      Padding(
+//                                        padding: EdgeInsets.only(
+//                                            top: 5 * SizeConfig.heightMultiplier),
+//                                        child: Column(
+//                                          children: <Widget>[
+//                                            Row(
+//                                              children: <Widget>[
+//                                                Text("Ajouter des jardiniers",
+//                                                    textAlign: TextAlign.center,
+//                                                    style: TextStyle(
+//                                                        color: const Color(
+//                                                            0xFF01534F),
+//                                                        fontSize: 2.5 *
+//                                                            SizeConfig
+//                                                                .textMultiplier,
+//                                                        fontWeight:
+//                                                        FontWeight.bold
+////                          fontWeight: FontWeight.bold,
+//                                                    )),
+//                                              ],
+//                                            ),
+//                                            Padding(
+//                                              padding: EdgeInsets.only(
+//                                                  top: 2 *
+//                                                      SizeConfig
+//                                                          .heightMultiplier),
+//                                              child: ChipsInput(
+//                                                keyboardAppearance:
+//                                                Brightness.dark,
+//                                                textCapitalization:
+//                                                TextCapitalization.words,
+//                                                enabled: true,
+//                                                maxChips: 15,
+//                                                textStyle: TextStyle(
+//                                                    height: 1.5,
+//                                                    fontFamily: "Roboto",
+//                                                    fontSize: 16),
+//                                                decoration: InputDecoration(
+//                                                    border: OutlineInputBorder(
+//                                                        borderRadius:
+//                                                        BorderRadius.all(
+//                                                            Radius.circular(
+//                                                                5.0)),
+//                                                        borderSide: BorderSide(
+//                                                            color: Colors.green)),
+//                                                    hintText:
+//                                                    'Inviter des jardiniers'),
+//                                                findSuggestions:
+//                                                    (String query) async {
+//                                                  queryResProfile = [];
+//                                                  if (query.length != 0) {
+//                                                    _parcelMembers = [];
+//
+//                                                    var queryRes = await widget
+//                                                        .dataRepository
+//                                                        .searchByName(query);
+//                                                    for (int i = 0;
+//                                                    i <
+//                                                        queryRes
+//                                                            .documents.length;
+//                                                    ++i) {
+//                                                      var data = queryRes
+//                                                          .documents[i].data;
+//                                                      queryResProfile
+//                                                          .add(MemberProfile(
+//                                                        data["id"],
+//                                                        data["pseudo"],
+////                                  data["email"],
+////                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+//                                                      ));
+//                                                    }
+//                                                  }
+//                                                  return queryResProfile;
+//                                                },
+//                                                onChanged: (data) {
+//                                                  _parcelMembers.clear();
+//                                                  data.forEach((elem) {
+//                                                    if (elem.pseudo !=
+//                                                        widget.user.pseudo) {
+//                                                      _parcelMembers.add(
+//                                                          GardenMember(
+//                                                              id: elem.id,
+//                                                              pseudo:
+//                                                              elem.pseudo));
+//                                                    }
+//                                                  });
+//                                                },
+//                                                chipBuilder:
+//                                                    (context, state, profile) {
+//                                                  return InputChip(
+//                                                    key: ObjectKey(profile),
+//                                                    label: Text(profile.pseudo),
+////                            avatar: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                                    onDeleted: () =>
+//                                                        state.deleteChip(profile),
+//                                                    materialTapTargetSize:
+//                                                    MaterialTapTargetSize
+//                                                        .shrinkWrap,
+//                                                  );
+//                                                },
+//                                                suggestionBuilder:
+//                                                    (context, state, profile) {
+//                                                  return ListTile(
+//                                                    key: ObjectKey(profile),
+////                            leading: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                                    title: Text(profile.pseudo),
+////                            subtitle: Text(profile.email),
+//                                                    onTap: () =>
+//                                                        state.selectSuggestion(
+//                                                            profile),
+//                                                  );
+//                                                },
+//                                              ),
+//                                            )
+//                                          ],
+//                                        ),
+//                                      )
+//                                    ],
+//                                  ),
+//                                  isActive: _currentStep >= 3,
+//                                ),
                                 MyStep(
                                   title: Text(""),
                                   content: Container(
@@ -1895,16 +1895,16 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                       }).toList(),
                                     ),
                                   ),
-                                  isActive: _currentStep >= 4,
+                                  isActive: _currentStep >= 3,
                                 ),
                               ],
                               controlsBuilder: _createEventControlBuilder,
-                              onStepContinue: _currentStep < 5
+                              onStepContinue: _currentStep < 4
                                   ? () => setState(() => _currentStep += 1)
                                   : null,
                               onStepCancel: _currentStep > -1
                                   ? () {
-                                if (_currentStep == 4) {
+                                if (_currentStep == 3) {
                                   BlocProvider.of<ModelingsBloc>(context)
                                       .add(FetchVeggies());
                                 } else {
@@ -1969,7 +1969,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                 },
                 child: Text('${AppLocalizations.of(context).continueButton}')),
           ]);
-    } else if (_currentStep == 4) {
+    } else if (_currentStep == 3) {
        // TODO
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
