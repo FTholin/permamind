@@ -130,7 +130,7 @@ class SettingsScreen extends StatelessWidget {
                           semanticLabel:
                           '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
-                        title: Text("Supprimer compte"),
+                        title: Text("${AppLocalizations.of(context).delete} compte"),
                         onTap: () {
                           return showDialog<void>(
                             context: context,

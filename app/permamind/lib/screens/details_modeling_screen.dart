@@ -171,7 +171,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                               flex: 3,
+                               flex: 4,
                                child: Container(
                                  decoration: BoxDecoration(
                                    color: const Color(
@@ -253,7 +253,7 @@ class DetailsModelingScreen extends StatelessWidget {
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                               flex: 3,
+                               flex: 4,
                                child: Container(
                                  decoration: BoxDecoration(
                                    color: const Color(
@@ -530,71 +530,68 @@ class DetailsModelingScreen extends StatelessWidget {
                              ),
                              Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
-                             Flexible(
-                               flex: 2,
-                               child: Padding(
-                                 padding: EdgeInsets.all(1),
-                                 child: InkWell(
-                                   onTap: () async {
-                                     Parcel completedParcel = parcel.copyWith(
-                                         name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
-                                         publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-                                         currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount:  0,
-                                         modelingsMonitoring: [modeling.id], id: Uuid().v4(), isActive: false);
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: <Widget>[
+                                 Flexible(
+                                   flex: 2,
+                                   child: Padding(
+                                     padding: EdgeInsets.all(1),
 
-                                     BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
+                                       child: SizedBox(
+                                           width: 60 * SizeConfig.widthMultiplier,
+                                           height: 7 * SizeConfig.heightMultiplier,
+                                           child: RaisedButton(
+                                             shape: new RoundedRectangleBorder(
+                                               borderRadius: new BorderRadius.circular(18.0),
+                                             ),
+                                             onPressed: () {
+                                               Parcel completedParcel = parcel.copyWith(
+                                                   name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
+                                                   publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
+                                                   currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount:  0,
+                                                   modelingsMonitoring: [modeling.id], id: Uuid().v4(), isActive: false);
+
+                                               BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
 //                                     BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
 
-                                     // TODO Rajouter ici une mise à jour de jardin pour le daysActivitiesCount
+                                               // TODO Rajouter ici une mise à jour de jardin pour le daysActivitiesCount
 //                                     BlocProvider.of<GardensBloc>(context).add((gardenId, completedParcel.id, designs));
 
-                                     Navigator.of(context).push(
-                                       MaterialPageRoute(
-                                         builder: (context) {
-                                           return MultiBlocProvider(
-                                             providers: [
-                                               BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
-                                               BlocProvider(
-                                                 create: (context) => ActivitiesBloc(
-                                                   parcelsBloc.dataRepository,
+                                               Navigator.of(context).push(
+                                                 MaterialPageRoute(
+                                                   builder: (context) {
+                                                     return MultiBlocProvider(
+                                                       providers: [
+                                                         BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                                                         BlocProvider(
+                                                           create: (context) => ActivitiesBloc(
+                                                             parcelsBloc.dataRepository,
+                                                           ),
+                                                         ),
+                                                       ],
+                                                       child: DetailsParcelScreen(
+                                                         user: user,
+                                                         gardenId: gardenId,
+                                                         parcelId: completedParcel.id,
+                                                       ),
+                                                     );
+                                                   },
                                                  ),
-                                               ),
-                                             ],
-                                             child: DetailsParcelScreen(
-                                               user: user,
-                                               gardenId: gardenId,
-                                               parcelId: completedParcel.id,
-                                             ),
-                                           );
-                                         },
+                                               );
+                                             },
+                                             color: Colors.green,
+                                             textColor: Colors.white,
+                                             child: Text("Soumettre l'activité",
+                                                 style: TextStyle(fontSize: 2.2 * SizeConfig.textMultiplier)),
+                                           )
                                        ),
-                                     );
-                                   },
-                                   child: Container(
-                                     decoration: BoxDecoration(
-                                       color: Colors.green,
-                                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                                     ),
-                                     height: 7 * SizeConfig.heightMultiplier,
-                                     width: double.infinity,
-                                     child: Padding(
-                                       padding: EdgeInsets.all(15),
-                                       // TODO Changer internationalisation
-                                       child: Center(
-                                         child: Text("Soumettre l'activité",
-                                             maxLines: 2,
-                                             textAlign: TextAlign.center,
-                                             style: TextStyle(
-                                               color: const Color(0xFFF9F9F9),
-                                               fontSize: 2.5 * SizeConfig.textMultiplier,
-//                                             fontWeight: FontWeight.bold
-                                             )),
-                                       ),
-                                     ),
+//                                   ),
                                    ),
-                                 ),
-                               )
-                             ),
+                                 )
+                               ],
+                             )
+
                            ],
                          )
                      ),

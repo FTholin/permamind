@@ -37,7 +37,6 @@ class _ParcelCarouselWithIndicatorState
           autoPlay: false,
           enlargeCenterPage: true,
           height: 17 * SizeConfig.heightMultiplier,
-          viewportFraction: 0.8,
           enableInfiniteScroll: false,
           onPageChanged: (index) {
             setState(() {
@@ -83,6 +82,7 @@ class _ParcelCarouselWithIndicatorState
                 );
               },
               child: Container(
+                margin: EdgeInsets.all(5.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.green,
@@ -92,7 +92,7 @@ class _ParcelCarouselWithIndicatorState
                     Positioned(
                         bottom: 7,
                         right: -4,
-                        height: 10 * SizeConfig.heightMultiplier,
+                        height: 6 * SizeConfig.heightMultiplier,
                         width: 20 * SizeConfig.widthMultiplier,
                         child: Container(
                           decoration: new BoxDecoration(

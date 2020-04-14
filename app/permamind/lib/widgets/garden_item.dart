@@ -69,18 +69,18 @@ class GardenItem extends StatelessWidget {
                                     context: context,
                                     builder: (context) => CupertinoActionSheet(
                                           actions: <Widget>[
+//                                            CupertinoButton(
+//                                              color: Colors.green,
+//                                              child:
+//                                                  Text("Ajouter des personnes"),
+//                                              onPressed: null,
+//                                            ),
+//                                            Container(
+//                                              height: 10,
+//                                            ),
                                             CupertinoButton(
                                               color: Colors.green,
-                                              child:
-                                                  Text("Ajouter des personnes"),
-                                              onPressed: null,
-                                            ),
-                                            Container(
-                                              height: 10,
-                                            ),
-                                            CupertinoButton(
-                                              color: Colors.green,
-                                              child: Text("Renommer"),
+                                              child: Text('${AppLocalizations.of(context).rename}'),
                                               onPressed: () {
                                                 return showDialog<void>(
                                                   context: context,
@@ -157,11 +157,11 @@ class GardenItem extends StatelessWidget {
                                               },
                                             ),
                                             Container(
-                                              height: 10,
+                                              height: 1.5 * SizeConfig.heightMultiplier,
                                             ),
                                             CupertinoButton(
                                               color: Colors.green,
-                                              child: Text("Supprimer"),
+                                              child: Text("${AppLocalizations.of(context).delete}"),
                                               onPressed: () {
                                                 return showDialog<void>(
                                                   context: context,

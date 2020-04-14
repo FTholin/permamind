@@ -109,7 +109,14 @@ class AppLocalizations {
       'add_activity_title': 'Title of the new activity ?',
       'add_activity_type': "Type of activity ?",
       'add_activity_snooze': 'When would you like to do it ?',
-      'add_activity_submit': 'Submit the activity'
+      'add_activity_submit': 'Submit the activity',
+      'rename': 'Rename',
+      'update': 'Mettre à jour',
+      'delete': 'Delete',
+      'details_parcel_rename_title': "Renommer cette parcelle",
+      'details_parcel_add_culture': 'Launching the culture',
+      'details_parcel_add_culture_more': "Click here to start the adventure !",
+
     },
     'fr': {
       'home': "Mes jardins",
@@ -209,7 +216,13 @@ class AppLocalizations {
       'add_activity_title': 'Titre de la nouvelle activité ?',
       'add_activity_type': "Type d'activité ?",
       'add_activity_snooze': 'Quand souhaitez vous la réaliser ?',
-      'add_activity_submit': "Soumettre l'activité"
+      'add_activity_submit': "Soumettre l'activité",
+      'rename': 'Renommer',
+      'update': 'Mettre à jour',
+      'delete': 'Supprimer',
+      'details_parcel_rename_title': "Renommer cette parcelle",
+      'details_parcel_add_culture': 'Lancer la culture',
+      'details_parcel_add_culture_more': "Cliquer ici pour démarrer l'aventure !",
 
     },
   };
@@ -619,6 +632,29 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['add_activity_submit'];
   }
 
+  String get rename {
+    return _localizedValues[locale.languageCode]['rename'];
+  }
+
+  String get detailsParcelRenameTitle {
+    return _localizedValues[locale.languageCode]['details_parcel_rename_title'];
+  }
+
+  String get update {
+    return _localizedValues[locale.languageCode]['update'];
+  }
+
+  String get delete {
+    return _localizedValues[locale.languageCode]['delete'];
+  }
+
+  String get detailsParcelAddCulture {
+    return _localizedValues[locale.languageCode]['details_parcel_add_culture'];
+  }
+
+  String get detailsParcelAddCultureMore {
+    return _localizedValues[locale.languageCode]['details_parcel_add_culture_more'];
+  }
 
 
 

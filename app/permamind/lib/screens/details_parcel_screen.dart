@@ -51,12 +51,24 @@ class DetailsParcelScreen extends StatelessWidget {
                     ),
                   ),
                   actions: <Widget>[
-                    FlatButton(
-                      child: Text("Modifier",
-                          style: TextStyle(
-                              color: Colors.white,
-//                        fontWeight: FontWeight.bold,
-                              fontSize: 1.9 * SizeConfig.textMultiplier)),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      tooltip: 'add new activity',
+                      onPressed: () {
+                        return MaterialPageRoute(
+                            builder: (_) {
+
+                              return BlocProvider.value(
+                                value: BlocProvider.of<ActivitiesBloc>(context),
+                                child: ActivityAddedScreen(gardenId: gardenId, parcelId: parcelId),
+                              );
+
+                            });
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      tooltip: 'edit parcel',
                       onPressed: () {
                         showCupertinoModalPopup(
                             context: context,
@@ -67,12 +79,10 @@ class DetailsParcelScreen extends StatelessWidget {
 //                                  child: Text("Ajouter des personnes"),
 //                                  onPressed: null,
 //                                ),
-                                Container(
-                                  height: 10,
-                                ),
+
                                 CupertinoButton(
                                   color: Colors.green,
-                                  child: Text("Renommer"),
+                                  child: Text('${AppLocalizations.of(context).rename}'),
                                   onPressed: () async {
                                     await showDialog<void>(
                                       context: context,
@@ -81,12 +91,12 @@ class DetailsParcelScreen extends StatelessWidget {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title:
-                                          Text('Renommer cette parcelle'),
+                                          Text('${AppLocalizations.of(context).detailsParcelRenameTitle}'),
                                           content: TextField(
                                             controller:
                                             _parcelNameTextController,
                                             decoration: InputDecoration(
-                                                hintText: "Nom parcelle"),
+                                                hintText: "${AppLocalizations.of(context).addParcelNameHint}"),
                                           ),
                                           actions: <Widget>[
                                             FlatButton(
@@ -97,7 +107,7 @@ class DetailsParcelScreen extends StatelessWidget {
                                               },
                                             ),
                                             FlatButton(
-                                              child: Text('Mettre à jour'),
+                                              child: Text('${AppLocalizations.of(context).update}'),
                                               onPressed: () {
                                                 if (_parcelNameTextController
                                                     .text.isNotEmpty) {
@@ -155,11 +165,11 @@ class DetailsParcelScreen extends StatelessWidget {
                                   },
                                 ),
                                 Container(
-                                  height: 10,
+                                  height: 1.5 * SizeConfig.heightMultiplier,
                                 ),
                                 CupertinoButton(
                                   color: Colors.green,
-                                  child: Text("Supprimer"),
+                                  child: Text("${AppLocalizations.of(context).delete}"),
                                   onPressed: () {
                                     showDialog<void>(
                                       context: context,
@@ -223,7 +233,7 @@ class DetailsParcelScreen extends StatelessWidget {
                               ],
                             ));
                       },
-                    )
+                    ),
                   ],
                 ),
                 body: Column(
@@ -271,7 +281,7 @@ class DetailsParcelScreen extends StatelessWidget {
                         parcelId: parcelId,
                         userId: user.id,
                       ),
-                      const Padding(padding: EdgeInsets.only(bottom: 40)),
+
 
                     ]),
                 floatingActionButton: ActivitySpeedDial(
@@ -290,12 +300,9 @@ class DetailsParcelScreen extends StatelessWidget {
                     ),
                   ),
                   actions: <Widget>[
-                    FlatButton(
-                      child: Text("Modifier",
-                          style: TextStyle(
-                              color: Colors.white,
-//                        fontWeight: FontWeight.bold,
-                              fontSize: 1.9 * SizeConfig.textMultiplier)),
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      tooltip: 'edit parcel',
                       onPressed: () {
                         showCupertinoModalPopup(
                             context: context,
@@ -306,12 +313,10 @@ class DetailsParcelScreen extends StatelessWidget {
 //                                  child: Text("Ajouter des personnes"),
 //                                  onPressed: null,
 //                                ),
-                                Container(
-                                  height: 10,
-                                ),
+
                                 CupertinoButton(
                                   color: Colors.green,
-                                  child: Text("Renommer"),
+                                  child: Text('${AppLocalizations.of(context).rename}'),
                                   onPressed: () async {
                                     await showDialog<void>(
                                       context: context,
@@ -320,12 +325,12 @@ class DetailsParcelScreen extends StatelessWidget {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title:
-                                          Text('Renommer cette parcelle'),
+                                          Text('${AppLocalizations.of(context).detailsParcelRenameTitle}'),
                                           content: TextField(
                                             controller:
                                             _parcelNameTextController,
                                             decoration: InputDecoration(
-                                                hintText: "Nom parcelle"),
+                                                hintText: "${AppLocalizations.of(context).addParcelNameHint}"),
                                           ),
                                           actions: <Widget>[
                                             FlatButton(
@@ -336,7 +341,7 @@ class DetailsParcelScreen extends StatelessWidget {
                                               },
                                             ),
                                             FlatButton(
-                                              child: Text('Mettre à jour'),
+                                              child: Text('${AppLocalizations.of(context).update}'),
                                               onPressed: () {
                                                 if (_parcelNameTextController
                                                     .text.isNotEmpty) {
@@ -394,11 +399,11 @@ class DetailsParcelScreen extends StatelessWidget {
                                   },
                                 ),
                                 Container(
-                                  height: 10,
+                                  height: 1.5 * SizeConfig.heightMultiplier,
                                 ),
                                 CupertinoButton(
                                   color: Colors.green,
-                                  child: Text("Supprimer"),
+                                  child: Text("${AppLocalizations.of(context).delete}"),
                                   onPressed: () {
                                     showDialog<void>(
                                       context: context,
@@ -507,7 +512,7 @@ class DetailsParcelScreen extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Text("Lancer la culture",
+                                        Text("${AppLocalizations.of(context).detailsParcelAddCulture}",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
@@ -515,7 +520,7 @@ class DetailsParcelScreen extends StatelessWidget {
                                       ],
                                     ),
                                     Text(
-                                      "Cliquer ici pour démarrer l'aventure !",
+                                      "${AppLocalizations.of(context).detailsParcelAddCultureMore}",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.normal,

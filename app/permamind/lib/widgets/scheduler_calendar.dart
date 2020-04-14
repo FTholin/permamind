@@ -43,16 +43,14 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
         builder: (context, state) {
       if (state is ActivitiesLoadSuccess) {
         _events = state.schedule;
-        return Expanded(
-          flex: 6,
+        return Flexible(
+          flex: 5,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               _buildTableCalendar(state.schedule),
-              // _buildTableCalendarWithBuilders(),
-              const SizedBox(height: 8.0),
+               SizedBox(height: 1 * SizeConfig.heightMultiplier,child: Container(),),
 //            _buildButtons(),
-              const SizedBox(height: 8.0),
               Expanded(child: _buildEventList(state.referenceDate, state.schedule)),
             ],
           ),
