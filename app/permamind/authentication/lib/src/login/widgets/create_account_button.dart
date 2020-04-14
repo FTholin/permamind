@@ -14,6 +14,8 @@ class CreateAccountButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      color: Colors.green,
+      textColor: Colors.white,
       child: Text(
         '${AppLocalizations.of(context).registrationButton}',
       ),
