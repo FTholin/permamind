@@ -55,7 +55,7 @@ class DetailsParcelScreen extends StatelessWidget {
                       icon: Icon(Icons.add),
                       tooltip: 'add new activity',
                       onPressed: () {
-                        return MaterialPageRoute(
+                         MaterialPageRoute(
                             builder: (_) {
 
                               return BlocProvider.value(

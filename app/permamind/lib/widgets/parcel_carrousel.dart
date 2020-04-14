@@ -135,7 +135,7 @@ class _ParcelCarouselWithIndicatorState
                                         if (snapshot.data == 0) {
                                           if (parcel.isActive == false) {
                                             return Text(
-                                                "En attente",
+                                                "${AppLocalizations.of(context).parcelCarousselWait}",
                                                 style: TextStyle(
                                                     color: const Color(
                                                         0xFF01534F),
@@ -144,7 +144,7 @@ class _ParcelCarouselWithIndicatorState
                                                             .textMultiplier));
                                           } else {
                                             return Text(
-                                                "Pas d'activités à réaliser aujourd'hui.",
+                                                "${AppLocalizations.of(context).gardenItemNoneActivity}",
                                                 style: TextStyle(
                                                     color: const Color(
                                                         0xFF01534F),
@@ -155,7 +155,7 @@ class _ParcelCarouselWithIndicatorState
                                         } else if (snapshot.data == 1) {
                                           return Text(
                                               "${snapshot
-                                                  .data} activité à réaliser aujourd'hui.",
+                                                  .data} ${AppLocalizations.of(context).gardenItemOneActivity}",
                                               style: TextStyle(
                                                   color: const Color(0xFF01534F),
                                                   fontSize: 1.8 *
@@ -163,7 +163,7 @@ class _ParcelCarouselWithIndicatorState
                                         } else {
                                           return Text(
                                               "${snapshot
-                                                  .data} activités à réaliser aujourd'hui.",
+                                                  .data} ${AppLocalizations.of(context).gardenItemMultipleActivity}",
                                               style: TextStyle(
                                                   color: const Color(0xFF01534F),
                                                   fontSize: 1.8 *
@@ -213,15 +213,14 @@ class _ParcelCarouselWithIndicatorState
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      // TODO Peaufiner ce dialog pour le rentre propre
                       return AlertDialog(
-                        title: new Text("Nombre de parcelle dépassé"),
+                        title: new Text("${AppLocalizations.of(context).parcelPremiumDialogTitle}"),
                         content: new Text(
-                            "Passer à la version premium pour profiter pleinement de l'offre"),
+                            "${AppLocalizations.of(context).premiumDialogContent}"),
                         actions: <Widget>[
                           // usually buttons at the bottom of the dialog
                           new FlatButton(
-                            child: new Text("Close"),
+                            child: new Text("${AppLocalizations.of(context).close}"),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -272,7 +271,7 @@ class _ParcelCarouselWithIndicatorState
                               size: 28,
                               color: Colors.white,
                             ),
-                            Text("Ajouter une parcelle",
+                            Text("${AppLocalizations.of(context).createParcel}",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -280,7 +279,7 @@ class _ParcelCarouselWithIndicatorState
                           ],
                         ),
                         Text(
-                          "Cliquer ici pour ajouter une parcelle à votre potager",
+                          "${AppLocalizations.of(context).createParcelContent}",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.normal,

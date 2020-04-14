@@ -94,14 +94,13 @@ class HomeScreen extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    // TODO Peaufiner ce dialog pour le rentre propre
                     return AlertDialog(
-                      title: new Text("Nombre de jardin dépassé"),
-                      content: new Text("Passer à la version premium pour profiter pleinement de l'offre"),
+                      title: new Text("${AppLocalizations.of(context).premiumDialogTitle}"),
+                      content: new Text("${AppLocalizations.of(context).premiumDialogContent}"),
                       actions: <Widget>[
                         // usually buttons at the bottom of the dialog
                         new FlatButton(
-                          child: new Text("Close"),
+                          child: new Text("${AppLocalizations.of(context).close}"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
@@ -150,14 +149,13 @@ class HomeScreen extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    // TODO Peaufiner ce dialog pour le rentre propre
                     return AlertDialog(
-                      title: new Text("Nombre de jardin dépassé"),
-                      content: new Text("Passer à la version premium pour profiter pleinement de l'offre"),
+                      title: new Text("${AppLocalizations.of(context).premiumDialogTitle}"),
+                      content: new Text("${AppLocalizations.of(context).premiumDialogContent}"),
                       actions: <Widget>[
                         // usually buttons at the bottom of the dialog
                         new FlatButton(
-                          child: new Text("Close"),
+                          child: new Text("${AppLocalizations.of(context).close}"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

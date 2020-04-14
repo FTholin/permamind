@@ -47,7 +47,7 @@ class AppLocalizations {
       'speed_dial_add_activity': "Add Activity",
       'speed_dial_create_garden': "Create a garden",
       'speed_dial_join_garden': "Join a garden",
-      'speed_dial_create_parcel': "Create a parcel",
+      'create_parcel': "Create a parcel",
       'details_parcel_none_association_message': 'No combination of plants is planned in this parcel. Shall we add one ?',
       'details_parcel_add_association_message': "Add a new plant's association",
       'discover_modelings_modeling_tile': "Associations",
@@ -113,10 +113,25 @@ class AppLocalizations {
       'rename': 'Rename',
       'update': 'Mettre à jour',
       'delete': 'Delete',
-      'details_parcel_rename_title': "Renommer cette parcelle",
+      'close': 'Close',
+      'details_parcel_rename_title': "Rename this parcel",
       'details_parcel_add_culture': 'Launching the culture',
       'details_parcel_add_culture_more': "Click here to start the adventure !",
-
+      'contact_us_title': 'Contact us',
+      'contact_us_subject_title': 'Subject',
+      'contact_us_subject_hint': "Mail's subject",
+      'contact_us_body_title': "Body",
+      'contact_us_body_send': "Send Email",
+      'premium_dialog_title': "Number of gardens exceeded",
+      'premium_dialog_content': "Upgrade to the premium version to take full advantage of the offer",
+      'garden_item_rename_tile': "Rename this garden",
+      'garden_item_rename_tile': "Rename this garden",
+      'garden_item_none_activity': "No activities today",
+      'garden_item_one_activity': "activity to be carried out today.",
+      'garden_item_multiple_activity': "activities to be carried out today.",
+      'parcel_caroussel_wait': "Awaiting launch",
+      'parcel_premium_dialog_title': "Number of parcels exceeded",
+      'create_parcel_content': "Click here to add a parcel to your garden"
     },
     'fr': {
       'home': "Mes jardins",
@@ -154,7 +169,7 @@ class AppLocalizations {
       'speed_dial_add_activity': "Ajouter Activité",
       'speed_dial_create_garden': "Créer un jardin",
       'speed_dial_join_garden': "Rejoindre un jardin",
-      'speed_dial_create_parcel': "Créer une parcelle",
+      'create_parcel': "Créer une parcelle",
       'details_parcel_none_association_message': 'Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?',
       'details_parcel_add_association_message': "Ajouter une nouvelle association",
       'discover_modelings_modeling_tile': "Associations",
@@ -220,9 +235,24 @@ class AppLocalizations {
       'rename': 'Renommer',
       'update': 'Mettre à jour',
       'delete': 'Supprimer',
+      'close': 'Fermer',
       'details_parcel_rename_title': "Renommer cette parcelle",
       'details_parcel_add_culture': 'Lancer la culture',
       'details_parcel_add_culture_more': "Cliquer ici pour démarrer l'aventure !",
+      'contact_us_title': 'Contactez nous',
+      'contact_us_subject_title': 'Objet',
+      'contact_us_subject_hint': "Objet du mail",
+      'contact_us_body_title': "Contenu",
+      'contact_us_body_send': "Envoyer email",
+      'premium_dialog_title': "Nombre de jardins dépassé",
+      'premium_dialog_content': "Passer à la version premium pour profiter pleinement de l'offre",
+      'garden_item_rename_tile': "Renommer ce jardin",
+      'garden_item_none_activity': "Pas d'activités aujourd'hui",
+      'garden_item_one_activity': "activité à réaliser aujourd'hui.",
+      'garden_item_multiple_activity': "activités à réaliser aujourd'hui.",
+      'parcel_caroussel_wait': "En attente de lancement",
+      'parcel_premium_dialog_title': "Nombre de parcelles dépassé",
+      'create_parcel_content': "Cliquer ici pour ajouter une parcelle à votre potager"
 
     },
   };
@@ -363,8 +393,8 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['speed_dial_join_garden'];
   }
 
-  String get speedDialCreateParcel {
-    return _localizedValues[locale.languageCode]['speed_dial_create_parcel'];
+  String get createParcel {
+    return _localizedValues[locale.languageCode]['create_parcel'];
   }
 
   String get detailsParcelAssociationEmpty {
@@ -654,6 +684,70 @@ class AppLocalizations {
 
   String get detailsParcelAddCultureMore {
     return _localizedValues[locale.languageCode]['details_parcel_add_culture_more'];
+  }
+
+  String get contactUsTitle {
+    return _localizedValues[locale.languageCode]['contact_us_title'];
+  }
+
+
+  String get contactUsSubjectHint {
+    return _localizedValues[locale.languageCode]['contact_us_subject_hint'];
+  }
+
+  String get contactUsSubjectTitle {
+    return _localizedValues[locale.languageCode]['contact_us_subject_title'];
+  }
+
+  String get contactUsBodyTitle {
+    return _localizedValues[locale.languageCode]['contact_us_body_title'];
+  }
+
+
+  String get contactUsBodySend {
+    return _localizedValues[locale.languageCode]['contact_us_body_send'];
+  }
+
+  String get premiumDialogTitle {
+    return _localizedValues[locale.languageCode]['premium_dialog_title'];
+  }
+
+  String get premiumDialogContent {
+    return _localizedValues[locale.languageCode]['premium_dialog_content'];
+  }
+
+
+  String get close {
+    return _localizedValues[locale.languageCode]['close'];
+  }
+
+  String get gardenItemRenameTitle {
+    return _localizedValues[locale.languageCode]['garden_item_rename_tile'];
+  }
+
+  String get gardenItemNoneActivity {
+    return _localizedValues[locale.languageCode]['garden_item_none_activity'];
+  }
+
+
+  String get gardenItemOneActivity {
+    return _localizedValues[locale.languageCode]['garden_item_one_activity'];
+  }
+
+  String get gardenItemMultipleActivity {
+    return _localizedValues[locale.languageCode]['garden_item_multiple_activity'];
+  }
+
+  String get parcelCarousselWait {
+    return _localizedValues[locale.languageCode]['parcel_caroussel_wait'];
+  }
+
+  String get parcelPremiumDialogTitle {
+    return _localizedValues[locale.languageCode]['parcel_premium_dialog_title'];
+  }
+
+  String get createParcelContent {
+    return _localizedValues[locale.languageCode]['create_parcel_content'];
   }
 
 

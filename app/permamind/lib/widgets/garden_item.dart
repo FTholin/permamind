@@ -58,204 +58,223 @@ class GardenItem extends StatelessWidget {
                                     color: const Color(0xFF01534F),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 2.7 * SizeConfig.textMultiplier)),
-                            FlatButton(
-                              child: Text("Modifier",
-                                  style: TextStyle(
-                                      color: const Color(0xFF4FB06E),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 2 * SizeConfig.textMultiplier)),
-                              onPressed: () {
-                                showCupertinoModalPopup(
-                                    context: context,
-                                    builder: (context) => CupertinoActionSheet(
-                                          actions: <Widget>[
+                            IconButton(
+                            icon: Icon(Icons.edit),
+                            tooltip: 'edit garden',
+                            onPressed: () {
+                              showCupertinoModalPopup(
+                                  context: context,
+                                  builder: (context) =>
+                                      CupertinoActionSheet(
+                                        actions: <Widget>[
 //                                            CupertinoButton(
 //                                              color: Colors.green,
 //                                              child:
 //                                                  Text("Ajouter des personnes"),
 //                                              onPressed: null,
 //                                            ),
-//                                            Container(
-//                                              height: 10,
-//                                            ),
-                                            CupertinoButton(
-                                              color: Colors.green,
-                                              child: Text('${AppLocalizations.of(context).rename}'),
-                                              onPressed: () {
-                                                return showDialog<void>(
-                                                  context: context,
-                                                  barrierDismissible: false,
-                                                  // user must tap button!
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'Renommer ce jardin'),
-                                                      content: TextField(
-                                                        controller:
-                                                            _gardenNameTextController,
-                                                        decoration:
-                                                            InputDecoration(
-                                                                hintText:
-                                                                    "Nom jardin"),
+                                          CupertinoButton(
+                                            color: Colors.green,
+                                            child: Text('${AppLocalizations
+                                                .of(context)
+                                                .rename}'),
+                                            onPressed: () {
+                                              return showDialog<void>(
+                                                context: context,
+                                                barrierDismissible: false,
+                                                // user must tap button!
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        '${AppLocalizations.of(context).gardenItemRenameTitle}'),
+                                                    content: TextField(
+                                                      controller:
+                                                      _gardenNameTextController,
+                                                      decoration:
+                                                      InputDecoration(
+                                                          hintText:
+                                                          "${AppLocalizations.of(context).gardenAddedNameHint}"),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        child: Text(
+                                                            '${AppLocalizations
+                                                                .of(context)
+                                                                .buttonCancel}'),
+                                                        onPressed: () {
+                                                          Navigator.of(
+                                                              context)
+                                                              .pop();
+                                                        },
                                                       ),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text(
-                                                              '${AppLocalizations.of(context).buttonCancel}'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                        ),
-                                                        FlatButton(
-                                                          child: Text(
-                                                              'Mettre à jour'),
-                                                          onPressed: () {
-                                                            if (_gardenNameTextController
-                                                                .text
-                                                                .isNotEmpty) {
-                                                              BlocProvider.of<
-                                                                          GardensBloc>(
-                                                                      context)
-                                                                  .add(
-                                                                GardenUpdated(garden.copyWith(
-                                                                    name: _gardenNameTextController
-                                                                        .text,
-                                                                    id: garden
-                                                                        .id,
-                                                                    publicVisibility:
-                                                                        garden
-                                                                            .publicVisibility,
-                                                                    admin: garden
-                                                                        .admin,
-                                                                    members: garden
-                                                                        .members,
-                                                                    creationDate:
-                                                                        garden
-                                                                            .creationDate,
-                                                                    dayActivitiesCount:
-                                                                        garden
-                                                                            .dayActivitiesCount)),
-                                                              );
-                                                              Navigator
-                                                                  .pushNamedAndRemoveUntil(
-                                                                context,
-                                                                '/',
-                                                                (Route<dynamic>
-                                                                        route) =>
-                                                                    false,
-                                                              );
-                                                            }
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                            Container(
-                                              height: 1.5 * SizeConfig.heightMultiplier,
-                                            ),
-                                            CupertinoButton(
-                                              color: Colors.green,
-                                              child: Text("${AppLocalizations.of(context).delete}"),
-                                              onPressed: () {
-                                                return showDialog<void>(
-                                                  context: context,
-                                                  barrierDismissible: false,
-                                                  // user must tap button!
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          '${AppLocalizations.of(context).settingsGardenDeleteTitle}'),
-                                                      content:
-                                                          SingleChildScrollView(
-                                                        child: ListBody(
-                                                          children: <Widget>[
-                                                            Text(
-                                                                '${AppLocalizations.of(context).settingsGardenDeleteMessage}'),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      actions: <Widget>[
-                                                        FlatButton(
-                                                          child: Text(
-                                                              '${AppLocalizations.of(context).buttonCancel}'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                        ),
-                                                        FlatButton(
-                                                          child: Text(
-                                                              '${AppLocalizations.of(context).buttonContinue}'),
-                                                          onPressed: () async {
+                                                      FlatButton(
+                                                        child: Text(
+                                                            '${AppLocalizations.of(context).update}'),
+                                                        onPressed: () {
+                                                          if (_gardenNameTextController
+                                                              .text
+                                                              .isNotEmpty) {
                                                             BlocProvider.of<
-                                                                        GardensBloc>(
-                                                                    context)
-                                                                .add(GardenDeleted(
-                                                                    garden));
-
-                                                            final int
-                                                                newGardenCounter =
-                                                                user.gardenCounter -
-                                                                    1;
-
-                                                            final int
-                                                                gardenParcelCounter =
-                                                                await BlocProvider.of<
-                                                                            GardensBloc>(
-                                                                        context)
-                                                                    .dataRepository
-                                                                    .gardenParcelsCounting(
-                                                                        garden
-                                                                            .id);
-
-                                                            BlocProvider.of<
-                                                                        AuthenticationBloc>(
-                                                                    context)
+                                                                GardensBloc>(
+                                                                context)
                                                                 .add(
-                                                              UserUpdated(user.copyWith(
-                                                                  id: user.id,
-                                                                  pseudo: user
-                                                                      .pseudo,
-                                                                  email: user
-                                                                      .email,
-                                                                  nationality: user
-                                                                      .nationality,
-                                                                  searchKey: user
-                                                                      .searchKey,
-                                                                  gardenCounter:
-                                                                      newGardenCounter,
-                                                                  accountStatus:
-                                                                      user.accountStatus)),
+                                                              GardenUpdated(
+                                                                  garden
+                                                                      .copyWith(
+                                                                      name: _gardenNameTextController
+                                                                          .text,
+                                                                      id: garden
+                                                                          .id,
+                                                                      publicVisibility:
+                                                                      garden
+                                                                          .publicVisibility,
+                                                                      admin: garden
+                                                                          .admin,
+                                                                      members: garden
+                                                                          .members,
+                                                                      creationDate:
+                                                                      garden
+                                                                          .creationDate,
+                                                                      dayActivitiesCount:
+                                                                      garden
+                                                                          .dayActivitiesCount)),
                                                             );
-
                                                             Navigator
                                                                 .pushNamedAndRemoveUntil(
                                                               context,
                                                               '/',
-                                                              (Route<dynamic>
-                                                                      route) =>
-                                                                  false,
+                                                                  (
+                                                                  Route<dynamic>
+                                                                  route) =>
+                                                              false,
                                                             );
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                          ],
-                                        ));
-                              },
-                            )
+                                                          }
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
+                                          Container(
+                                            height: 1.5 *
+                                                SizeConfig.heightMultiplier,
+                                          ),
+                                          CupertinoButton(
+                                            color: Colors.green,
+                                            child: Text("${AppLocalizations
+                                                .of(context)
+                                                .delete}"),
+                                            onPressed: () {
+                                              return showDialog<void>(
+                                                context: context,
+                                                barrierDismissible: false,
+                                                // user must tap button!
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        '${AppLocalizations
+                                                            .of(context)
+                                                            .settingsGardenDeleteTitle}'),
+                                                    content:
+                                                    SingleChildScrollView(
+                                                      child: ListBody(
+                                                        children: <Widget>[
+                                                          Text(
+                                                              '${AppLocalizations
+                                                                  .of(context)
+                                                                  .settingsGardenDeleteMessage}'),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    actions: <Widget>[
+                                                      FlatButton(
+                                                        child: Text(
+                                                            '${AppLocalizations
+                                                                .of(context)
+                                                                .buttonCancel}'),
+                                                        onPressed: () {
+                                                          Navigator.of(
+                                                              context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                      FlatButton(
+                                                        child: Text(
+                                                            '${AppLocalizations
+                                                                .of(context)
+                                                                .buttonContinue}'),
+                                                        onPressed: () async {
+                                                          BlocProvider.of<
+                                                              GardensBloc>(
+                                                              context)
+                                                              .add(
+                                                              GardenDeleted(
+                                                                  garden));
+
+                                                          final int
+                                                          newGardenCounter =
+                                                              user
+                                                                  .gardenCounter -
+                                                                  1;
+
+                                                          final int
+                                                          gardenParcelCounter =
+                                                          await BlocProvider
+                                                              .of<
+                                                              GardensBloc>(
+                                                              context)
+                                                              .dataRepository
+                                                              .gardenParcelsCounting(
+                                                              garden
+                                                                  .id);
+
+                                                          BlocProvider.of<
+                                                              AuthenticationBloc>(
+                                                              context)
+                                                              .add(
+                                                            UserUpdated(
+                                                                user.copyWith(
+                                                                    id: user.id,
+                                                                    pseudo: user
+                                                                        .pseudo,
+                                                                    email: user
+                                                                        .email,
+                                                                    nationality: user
+                                                                        .nationality,
+                                                                    searchKey: user
+                                                                        .searchKey,
+                                                                    gardenCounter:
+                                                                    newGardenCounter,
+                                                                    accountStatus:
+                                                                    user
+                                                                        .accountStatus)),
+                                                          );
+
+                                                          Navigator
+                                                              .pushNamedAndRemoveUntil(
+                                                            context,
+                                                            '/',
+                                                                (Route<dynamic>
+                                                            route) =>
+                                                            false,
+                                                          );
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ));
+                            })
+
+
                           ],
                         ),
                         Row(
@@ -272,22 +291,21 @@ class GardenItem extends StatelessWidget {
                                     if (snapshot.hasData) {
                                       if (snapshot.data == 0) {
                                         return Text(
-                                            // TODO Internationalisation
-                                            "Pas d'activités aujourd'hui",
+                                            "${AppLocalizations.of(context).gardenItemNoneActivity}",
                                             style: TextStyle(
                                                 color: const Color(0xFF01534F),
                                                 fontSize: 2.2 *
                                                     SizeConfig.textMultiplier));
                                       }  else if (snapshot.data == 1) {
                                         return Text(
-                                            "${snapshot.data} activité à réaliser aujourd'hui.",
+                                            "${snapshot.data} ${AppLocalizations.of(context).gardenItemOneActivity}",
                                             style: TextStyle(
                                                 color: const Color(0xFF01534F),
                                                 fontSize: 2.2 *
                                                     SizeConfig.textMultiplier));
                                       } else {
                                         return Text(
-                                            "${snapshot.data} activités à réaliser aujourd'hui.",
+                                            "${snapshot.data} ${AppLocalizations.of(context).gardenItemMultipleActivity}",
                                             style: TextStyle(
                                                 color: const Color(0xFF01534F),
                                                 fontSize: 2.2 *
