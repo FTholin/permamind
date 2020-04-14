@@ -5,6 +5,9 @@ import 'package:meta/meta.dart';
 @immutable
 abstract class AuthenticationEvent extends Equatable {
   AuthenticationEvent([List props = const []]) : super(props);
+
+  @override
+  List<Object> get props => [];
 }
 
 class AppStarted extends AuthenticationEvent {
