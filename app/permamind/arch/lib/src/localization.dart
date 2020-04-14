@@ -140,6 +140,7 @@ class AppLocalizations {
       'app_settings_disconnect_content': "You're about to disconnect from Permamind.",
       'app_settings_delete_account_title': "Deleting your account",
       'app_settings_delete_account_content': "The deletion of your account will be final.",
+      'add_parcel_choose': "Choose this association",
 
     },
     'fr': {
@@ -270,6 +271,7 @@ class AppLocalizations {
       'app_settings_disconnect_content': "Vous êtes sur le point de vous déconnecter de Permamind.",
       'app_settings_delete_account_title': "Suppression de votre compte",
       'app_settings_delete_account_content': "La suppression de votre compte sera définitive.",
+      'add_parcel_choose': "Choisir cette association",
     },
   };
 
@@ -800,6 +802,10 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['app_settings_delete_account_content'];
   }
 
+
+  String get addParcelChoose {
+    return _localizedValues[locale.languageCode]['add_parcel_choose'];
+  }
 
 
 

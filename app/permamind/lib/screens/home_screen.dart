@@ -93,8 +93,17 @@ class HomeScreen extends StatelessWidget {
                     title: new Text("${AppLocalizations.of(context).premiumDialogTitle}"),
                     content: new Text("${AppLocalizations.of(context).premiumDialogContent}"),
                     actions: <Widget>[
-                      // usually buttons at the bottom of the dialog
-                      new FlatButton(
+                      FlatButton(
+                        color: Colors.green,
+                        child: new Text("${AppLocalizations.of(context).contactUsTitle}"),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/contactUs',
+                          );
+                        },
+                      ),
+                       FlatButton(
                         child: new Text("${AppLocalizations.of(context).close}"),
                         onPressed: () {
                           Navigator.of(context).pop();

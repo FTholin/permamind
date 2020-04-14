@@ -43,7 +43,7 @@ class DetailsModelingScreen extends StatelessWidget {
                 color: Color(0xFFF9F9F9),
                 icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
                 label: Text(
-                    "Retour",
+                    "${AppLocalizations.of(context).backButton}",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -214,7 +214,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                            flex: 3,
                                                            child: Center(
                                                              child: Text(
-                                                                 "Semi",
+                                                                 "${AppLocalizations.of(context).detailsModelingScreenSowingTitle}",
                                                                  textAlign:
                                                                  TextAlign
                                                                      .center,
@@ -296,7 +296,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                            flex: 3,
                                                            child: Center(
                                                              child: Text(
-                                                                 "Récolte",
+                                                                 "${AppLocalizations.of(context).detailsModelingScreenHarvestTitle}",
                                                                  textAlign:
                                                                  TextAlign
                                                                      .center,
@@ -357,7 +357,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                child: Padding(
                                                  padding: EdgeInsets.only(left: 10),
                                                  child: Text(
-                                                     "Ensoleillement",
+                                                     "${AppLocalizations.of(context).detailsModelingScreenSunlightTitle}",
                                                      textAlign:
                                                      TextAlign.left,
                                                      style:
@@ -403,7 +403,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                child: Padding(
                                                  padding: EdgeInsets.only(left: 10),
                                                  child: Text(
-                                                     "Eau",
+                                                     "${AppLocalizations.of(context).detailsModelingScreenWaterTitle}",
                                                      textAlign:
                                                      TextAlign.left,
                                                      style:
@@ -455,7 +455,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                  child: Padding(
                                                    padding: EdgeInsets.only(left: 10),
                                                    child: Text(
-                                                       "Difficulté",
+                                                       "${AppLocalizations.of(context).detailsModelingScreenDifficultyTitle}",
                                                        textAlign:
                                                        TextAlign.left,
                                                        style:
@@ -582,7 +582,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                              },
                                              color: Colors.green,
                                              textColor: Colors.white,
-                                             child: Text("Soumettre l'activité",
+                                             child: Text("${AppLocalizations.of(context).addParcelChoose}",
                                                  style: TextStyle(fontSize: 2.2 * SizeConfig.textMultiplier)),
                                            )
                                        ),
