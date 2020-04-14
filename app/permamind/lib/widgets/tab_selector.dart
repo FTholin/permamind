@@ -35,14 +35,14 @@ class TabSelector extends StatelessWidget {
                   );
                   text = Text("${AppLocalizations.of(context).tabBarGarden}");
                   break;
-                case AppTab.abc:
-                  picture = Image.asset(
-                    "assets/bar_buttons_icons/abc.png",
-                    semanticLabel: 'abc icon bottom nav bar',
-                    height: 35,
-                    width: 37,
-                  );
-                  text = Text("ABC");
+//                case AppTab.abc:
+//                  picture = Image.asset(
+//                    "assets/bar_buttons_icons/abc.png",
+//                    semanticLabel: 'abc icon bottom nav bar',
+//                    height: 35,
+//                    width: 37,
+//                  );
+//                  text = Text("ABC");
                   break;
                 case AppTab.learning:
                   picture = Image.asset(

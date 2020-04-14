@@ -11,6 +11,7 @@ class Activity extends Equatable {
   final DateTime expectedDate;
   final String category;
   final String completeActivityUserId;
+  final int feedback;
 
   Activity(
       this.title,
@@ -20,6 +21,7 @@ class Activity extends Equatable {
       this.expectedDate,
       this.category,
       this.completeActivityUserId,
+      this.feedback,
       {String id})
       : this.id = id;
 
@@ -31,7 +33,8 @@ class Activity extends Equatable {
     bool complete,
     DateTime expectedDate,
     String category,
-    String completeActivityUserId
+    String completeActivityUserId,
+    int feedback
   }) {
     return Activity(
       title ?? this.title,
@@ -41,6 +44,7 @@ class Activity extends Equatable {
       expectedDate ?? this.expectedDate,
       category ?? this.category,
       completeActivityUserId ?? this.completeActivityUserId,
+      feedback ?? this.feedback,
       id: id ?? this.id,
     );
   }
@@ -62,7 +66,8 @@ class Activity extends Equatable {
               parcelId == other.parcelId &&
               complete == other.complete &&
               category == other.category &&
-              expectedDate == other.expectedDate;
+              expectedDate == other.expectedDate && 
+              feedback == other.feedback;
 
 
   ActivityEntity toEntity() {
@@ -74,7 +79,8 @@ class Activity extends Equatable {
         complete,
         expectedDate,
         category,
-        completeActivityUserId
+        completeActivityUserId,
+        feedback
     );
   }
 
@@ -88,6 +94,7 @@ class Activity extends Equatable {
       entity.expectedDate,
       entity.category,
       entity.completeActivityUserId,
+      entity.feedback,
       id: entity.id,
     );
   }

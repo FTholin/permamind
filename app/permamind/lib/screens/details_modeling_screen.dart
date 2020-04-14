@@ -13,10 +13,8 @@ class DetailsModelingScreen extends StatelessWidget {
 
   final Parcel parcel;
   final Modeling modeling;
-  final List<ModelingSchedule> schedule;
   final String gardenId;
-  final List<Design> designs;
-  final List<String> veggiesList;
+  final Map<String, Vegetable> veggiesComposition;
   final User user;
 
   DetailsModelingScreen({
@@ -25,10 +23,8 @@ class DetailsModelingScreen extends StatelessWidget {
     @required this.gardenId,
     @required this.parcel,
     @required this.modeling,
-    @required this.schedule,
-    @required this.designs,
-    @required this.veggiesList
-  }): assert(user != null), assert(parcel != null), assert(modeling != null), assert(schedule != null), assert(designs != null), assert(gardenId != null);
+    @required this.veggiesComposition
+  }): assert(user != null), assert(parcel != null), assert(modeling != null), assert(gardenId != null);
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +33,17 @@ class DetailsModelingScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RaisedButton.icon(
                 elevation: 0,
-                color: Colors.white,
+                // TODO
+                color: Color(0xFFF9F9F9),
                 icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.black,),
                 label: Text(
-                    "Retour",
+                    "${AppLocalizations.of(context).backButton}",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -61,15 +58,18 @@ class DetailsModelingScreen extends StatelessWidget {
                Flexible(
                  child: Column(
                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                    children: <Widget>[
                      Flexible(
                          flex: 5,
                          child: Column(
                            crossAxisAlignment: CrossAxisAlignment.start,
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: <Widget>[
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                              Flexible(
-                                 flex: 1,
+                                 flex: 2,
                                  child: Container(
                                    decoration: BoxDecoration(
                                      color: Color.fromRGBO(214, 211, 94, 1),
@@ -93,12 +93,12 @@ class DetailsModelingScreen extends StatelessWidget {
                                          )),
                                    ),)
                              ),
-                             // TODO Mettre du texte scrollable ici
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
                              Flexible(
                                flex: 5,
                                child: Container(
-                               color: Colors.pink,
-                                   child: Text("On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte.",
+//                               color: Colors.pink,
+                                   child: Text("${modeling.descriptionFr}",
                                        maxLines: 10,
 //                                   textAlign: TextAlign.center,
                                        style: TextStyle(
@@ -110,11 +110,10 @@ class DetailsModelingScreen extends StatelessWidget {
                                        ))
                                ),
                              ),
-
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
                              Flexible(
-                               flex: 3,
+                               flex: 4,
                                child: Container(
-//                                 color: Colors.orange,
                                  child: ListView.builder(
                                      scrollDirection:
                                      Axis.horizontal,
@@ -137,7 +136,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                Flexible(
                                                  flex: 4,
                                                  child: Image.asset(
-                                                   "assets/veggies/${modeling.composition[index]}.png",
+                                                   "assets/veggies/${veggiesComposition[modeling.composition[index]].imageName}.png",
                                                    fit: BoxFit
                                                        .scaleDown,
                                                  ),
@@ -146,7 +145,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                    flex: 3,
                                                    child: Center(
                                                      child: Text(
-                                                         "${modeling.composition[index]}",
+                                                         "${veggiesComposition[modeling.composition[index]].nameFr}",
                                                          textAlign:
                                                          TextAlign
                                                              .center,
@@ -169,9 +168,10 @@ class DetailsModelingScreen extends StatelessWidget {
                                      }),
                                ),
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                               flex: 2,
+                               flex: 4,
                                child: Container(
                                  decoration: BoxDecoration(
                                    color: const Color(
@@ -214,47 +214,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                            flex: 3,
                                                            child: Center(
                                                              child: Text(
-                                                                 "Semi",
-                                                                 textAlign:
-                                                                 TextAlign
-                                                                     .center,
-                                                                 style:
-                                                                 TextStyle(
-                                                                   color: const Color(
-                                                                       0xFF01534F),
-                                                                   fontSize: 1.7 *
-                                                                       SizeConfig
-                                                                           .textMultiplier,
-                                                                 )),
-                                                           ))
-                                                     ],
-                                                   ),
-                                                 ),
-                                                 Container(
-//                                                   color: Colors.white,
-                                                   height: 3 * SizeConfig.heightMultiplier,
-                                                   width: 25 * SizeConfig.widthMultiplier,
-                                                   child: Row(
-//                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                     children: <Widget>[
-                                                       Flexible(
-                                                           flex: 1,
-                                                           child: Padding(
-                                                             padding: EdgeInsets.all(2),
-                                                             child: Container(
-                                                               decoration: BoxDecoration(
-                                                                 color: Colors.green,
-                                                                 borderRadius: BorderRadius.all(
-                                                                     Radius.circular(8)),
-                                                               ),
-                                                             ),
-                                                           )
-                                                       ),
-                                                       Flexible(
-                                                           flex: 3,
-                                                           child: Center(
-                                                             child: Text(
-                                                                 "Récolte",
+                                                                 "${AppLocalizations.of(context).detailsModelingScreenSowingTitle}",
                                                                  textAlign:
                                                                  TextAlign
                                                                      .center,
@@ -281,10 +241,90 @@ class DetailsModelingScreen extends StatelessWidget {
 //                                         color: Colors.yellow,
                                          child: Padding(
                                              padding: EdgeInsets.all(5),
-                                             child: _buildModelingSchedule(
-                                                 modeling.culturePeriod,
-                                                 modeling.sowingPeriod,
-                                                 modeling.harvestPeriod)
+                                             child: _buildModelingSchedule(modeling.sowingPeriod, Colors.amber
+                                         ),
+                                       ),
+                                     ),
+                                     )
+                                   ],
+                                 ),
+                               ),
+                             ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
+                             Flexible(
+                               flex: 4,
+                               child: Container(
+                                 decoration: BoxDecoration(
+                                   color: const Color(
+                                       0xFFE6F1D9),
+                                   borderRadius: BorderRadius.all(
+                                       Radius.circular(8)),
+                                 ),
+                                 child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                   children: <Widget>[
+                                     Flexible(
+                                         flex: 1,
+                                         child: Padding(
+                                           padding: EdgeInsets.all(1),
+                                           child: Padding(
+                                             padding: EdgeInsets.all(5),
+                                             child: Row(
+//                                               mainAxisAlignment: MainAxisAlignment.start,
+                                               children: <Widget>[
+                                                 Container(
+                                                   height: 3 * SizeConfig.heightMultiplier,
+                                                   width:  25 * SizeConfig.widthMultiplier,
+                                                   child: Row(
+                                                     //                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                     children: <Widget>[
+                                                       Flexible(
+                                                           flex: 1,
+                                                           child: Padding(
+                                                             padding: EdgeInsets.all(2),
+                                                             child: Container(
+                                                               decoration: BoxDecoration(
+                                                                 color: Colors.green,
+                                                                 borderRadius: BorderRadius.all(
+                                                                     Radius.circular(8)),
+                                                               ),
+                                                             ),
+                                                           )
+                                                       ),
+                                                       Flexible(
+                                                           flex: 3,
+                                                           child: Center(
+                                                             child: Text(
+                                                                 "${AppLocalizations.of(context).detailsModelingScreenHarvestTitle}",
+                                                                 textAlign:
+                                                                 TextAlign
+                                                                     .center,
+                                                                 style:
+                                                                 TextStyle(
+                                                                   color: const Color(
+                                                                       0xFF01534F),
+                                                                   fontSize: 1.7 *
+                                                                       SizeConfig
+                                                                           .textMultiplier,
+                                                                 )),
+                                                           ))
+                                                     ],
+                                                   ),
+                                                 ),
+                                               ],
+                                             ),
+                                           ),
+                                         )
+                                     ),
+                                     Flexible(
+                                       flex: 1,
+                                       child: Container(
+//                                         color: Colors.yellow,
+                                         child: Padding(
+                                           padding: EdgeInsets.all(5),
+                                           child: _buildModelingSchedule(modeling.harvestPeriod, Colors.green
+                                           ),
                                          ),
                                        ),
                                      )
@@ -292,9 +332,10 @@ class DetailsModelingScreen extends StatelessWidget {
                                  ),
                                ),
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
                              Flexible(
-                               flex: 2,
+                               flex: 3,
                                child: Row(
                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                  children: <Widget>[
@@ -316,7 +357,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                child: Padding(
                                                  padding: EdgeInsets.only(left: 10),
                                                  child: Text(
-                                                     "Ensoleillement",
+                                                     "${AppLocalizations.of(context).detailsModelingScreenSunlightTitle}",
                                                      textAlign:
                                                      TextAlign.left,
                                                      style:
@@ -362,7 +403,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                child: Padding(
                                                  padding: EdgeInsets.only(left: 10),
                                                  child: Text(
-                                                     "Eau",
+                                                     "${AppLocalizations.of(context).detailsModelingScreenWaterTitle}",
                                                      textAlign:
                                                      TextAlign.left,
                                                      style:
@@ -389,8 +430,10 @@ class DetailsModelingScreen extends StatelessWidget {
                                  ],
                                )
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
+
                              Flexible(
-                                 flex: 2,
+                                 flex: 3,
                                  child: Row(
                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                    children: <Widget>[
@@ -412,7 +455,7 @@ class DetailsModelingScreen extends StatelessWidget {
                                                  child: Padding(
                                                    padding: EdgeInsets.only(left: 10),
                                                    child: Text(
-                                                       "Difficulté",
+                                                       "${AppLocalizations.of(context).detailsModelingScreenDifficultyTitle}",
                                                        textAlign:
                                                        TextAlign.left,
                                                        style:
@@ -485,89 +528,70 @@ class DetailsModelingScreen extends StatelessWidget {
                                    ],
                                  )
                              ),
+                             Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
-                             Flexible(
-                               flex: 2,
-                               child: Padding(
-                                 padding: EdgeInsets.all(3),
-                                 child: InkWell(
-                                   onTap: () async {
-                                     Parcel completedParcel = parcel.copyWith(
-                                         name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
-                                         publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
-                                         currentModelingName: modeling.composition.join("-"), creationDate: parcel.creationDate, dayActivitiesCount: schedule.isNotEmpty ? schedule[0].dayActivities.length : 0,
-                                         modelingsMonitoring: [modeling.id], id: Uuid().v4());
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: <Widget>[
+                                 Flexible(
+                                   flex: 2,
+                                   child: Padding(
+                                     padding: EdgeInsets.all(1),
 
-                                     BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
-                                     BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
+                                       child: SizedBox(
+                                           width: 60 * SizeConfig.widthMultiplier,
+                                           height: 7 * SizeConfig.heightMultiplier,
+                                           child: RaisedButton(
+                                             shape: new RoundedRectangleBorder(
+                                               borderRadius: new BorderRadius.circular(18.0),
+                                             ),
+                                             onPressed: () {
+                                               Parcel completedParcel = parcel.copyWith(
+                                                   name: parcel.name, gardenId: parcel.gardenId, length: parcel.length, width: parcel.width, parcelGround: parcel.parcelGround,
+                                                   publicVisibility:parcel.publicVisibility , admin:parcel.admin , members:parcel.members, currentModelingId: modeling.id,
+                                                   currentModelingName: modeling.name, creationDate: parcel.creationDate, dayActivitiesCount:  0,
+                                                   modelingsMonitoring: [modeling.id], id: Uuid().v4(), isActive: false);
 
-                                     // TODO Rajouter ici une mise à jour de jardin pour le daysActivitiesCount
+                                               BlocProvider.of<ParcelsBloc>(context).add(ParcelAdded(completedParcel));
+//                                     BlocProvider.of<ParcelsBloc>(context).add(ModelingAdded(gardenId, completedParcel.id, schedule));
+
+                                               // TODO Rajouter ici une mise à jour de jardin pour le daysActivitiesCount
 //                                     BlocProvider.of<GardensBloc>(context).add((gardenId, completedParcel.id, designs));
 
-                                     final int newParcelCounter = user.parcelCounter + 1;
-
-                                     BlocProvider.of<AuthenticationBloc>(context).add(UserUpdated(
-                                         user.copyWith(
-                                             id: user.id,
-                                             pseudo: user.pseudo,
-                                             email: user.email,
-                                             nationality: user.nationality,
-                                             searchKey: user.searchKey,
-                                             gardenCounter: user.gardenCounter,
-                                             parcelCounter: newParcelCounter,
-                                             accountStatus: user.accountStatus
-                                         )
-                                     ),);
-
-                                     Navigator.of(context).push(
-                                       MaterialPageRoute(
-                                         builder: (context) {
-                                           return MultiBlocProvider(
-                                             providers: [
-                                               BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
-                                               BlocProvider(
-                                                 create: (context) => ActivitiesBloc(
-                                                   parcelsBloc.dataRepository,
+                                               Navigator.of(context).push(
+                                                 MaterialPageRoute(
+                                                   builder: (context) {
+                                                     return MultiBlocProvider(
+                                                       providers: [
+                                                         BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                                                         BlocProvider(
+                                                           create: (context) => ActivitiesBloc(
+                                                             parcelsBloc.dataRepository,
+                                                           ),
+                                                         ),
+                                                       ],
+                                                       child: DetailsParcelScreen(
+                                                         user: user,
+                                                         gardenId: gardenId,
+                                                         parcelId: completedParcel.id,
+                                                       ),
+                                                     );
+                                                   },
                                                  ),
-                                               ),
-                                             ],
-                                             child: DetailsParcelScreen(
-                                               user: user,
-                                               gardenId: gardenId,
-                                               parcelId: completedParcel.id,
-                                             ),
-                                           );
-                                         },
+                                               );
+                                             },
+                                             color: Colors.green,
+                                             textColor: Colors.white,
+                                             child: Text("${AppLocalizations.of(context).addParcelChoose}",
+                                                 style: TextStyle(fontSize: 2.2 * SizeConfig.textMultiplier)),
+                                           )
                                        ),
-                                     );
-                                   },
-                                   child: Container(
-                                     decoration: BoxDecoration(
-                                       color: Colors.green,
-                                       borderRadius:
-                                       BorderRadius.all(
-                                           Radius.circular(5)),
-                                     ),
-                                     height: 6 *
-                                         SizeConfig.heightMultiplier,
-                                     width: double.infinity,
-                                     child: Padding(
-                                       padding: EdgeInsets.all(15),
-                                       child: Text("Sélectionner l'association",
-                                           maxLines: 2,
-                                           textAlign:
-                                           TextAlign.center,
-                                           style: TextStyle(
-                                             color: Colors.white,
-                                             fontSize: 2.5 *
-                                                 SizeConfig
-                                                     .textMultiplier,
-//                                             fontWeight: FontWeight.bold
-                                           )),
-                                     ),),
-                                 ),
-                               )
-                             ),
+//                                   ),
+                                   ),
+                                 )
+                               ],
+                             )
+
                            ],
                          )
                      ),
@@ -581,10 +605,7 @@ class DetailsModelingScreen extends StatelessWidget {
 
   }
 
-  Widget _buildModelingSchedule(
-      List<int> culturePeriod,
-      List<int> sowingPeriod,
-      List<int> harvestPeriod) {
+  Widget _buildModelingSchedule(List<int> period, Color monthColor) {
 
     // TODO Faire plus propre dans un fichier central pour l'internationalisation
     List<String> months = ["J","F","M","A","M","J","J","A","S","O","N","D"];
@@ -594,20 +615,12 @@ class DetailsModelingScreen extends StatelessWidget {
       BoxDecoration monthSpot;
       Color textMonthColor;
 
-      if (sowingPeriod.contains(i)) {
+      if (period.contains(i)) {
         monthSpot = new BoxDecoration(
-          color: Colors.amber,
-          borderRadius: BorderRadius.circular(3),
-        );
-
-        textMonthColor = Colors.white;
-      } else if (harvestPeriod.contains(i)) {
-        monthSpot = new BoxDecoration(
-          color: Colors.green,
+          color: monthColor,
           borderRadius: BorderRadius.circular(3),
         );
         textMonthColor = Colors.white;
-
       }  else {
         monthSpot = new BoxDecoration(
           color: Colors.white,
@@ -618,25 +631,6 @@ class DetailsModelingScreen extends StatelessWidget {
 
       monthsBoxList.add(
 
-//        Expanded(
-//          child: Container(
-//            color: culturePeriod.contains(i) ? const Color(0xFF01534F) : Colors.white,
-//            child: Center(
-//              child: Container(
-//                height: 20,
-//                width: 200,
-////                padding: EdgeInsets.all(12),
-//                decoration: monthSpot,
-//                child: Center(
-//                    child: Text(
-//                      '${months[i]}',
-//                      style: TextStyle(fontSize: 1.7 * SizeConfig.textMultiplier, color: textMonthColor),
-//                    )
-//                ),
-//              ),
-//            ),
-//          ),
-//        ),
         Flexible(
             child: Padding(
               padding: EdgeInsets.only(left: 2, right: 2),

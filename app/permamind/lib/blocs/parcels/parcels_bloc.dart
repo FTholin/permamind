@@ -11,13 +11,7 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
   final DataRepository dataRepository;
   final User user;
 
-//  StreamSubscription gardensSubscription;
-//  StreamSubscription parcelsSubscription;
-
-
-  ParcelsBloc({@required this.gardensBloc, @required this.dataRepository, @required this.user})  {
-
-  }
+  ParcelsBloc({@required this.gardensBloc, @required this.dataRepository, @required this.user});
 
 
   @override
@@ -66,6 +60,7 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
 
 
   Stream<ParcelsState> _mapModelingAddedToState(ModelingAdded event) async* {
+
     DateTime referenceDate = DateTime.now();
     List<Activity> activities = List<Activity>();
     for (int i = 0; i < event.schedule.length; i++) {
@@ -73,7 +68,7 @@ class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {
         DateTime expectedDate = referenceDate.add(Duration(days: i));
         expectedDate = DateTime(expectedDate.year, expectedDate.month, expectedDate.day, 1);
         activities.add(
-            Activity( event.schedule[i].dayActivities[j].name, event.gardenId, event.parcelId, false, expectedDate, event.schedule[i].dayActivities[j].category, '')
+            Activity( event.schedule[i].dayActivities[j].name, event.gardenId, event.parcelId, false, expectedDate, event.schedule[i].dayActivities[j].category, '', null)
         );
       }
     }

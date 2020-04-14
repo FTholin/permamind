@@ -26,82 +26,6 @@ class _StepperState extends State<EnumeratedTutorials> {
 
   var _index = 0;
 
-
-//  Widget _builderStep(Map<int, List<Tutorial>> tutorials) {
-//
-//    List<Step> steps = List<Step>();
-//
-//    List<Step> steps2 = [
-//        Step(
-//            title: Text("Activité 1"),
-//            isActive: true,
-//            content: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-//        ),
-//      Step(
-//          title: Text("Activité 2"),
-//          isActive: false,
-//          content: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-//      ),
-//
-//    ];
-//
-//    tutorials.forEach((k,v) {
-//
-//      final tutorialHeading = v.first;
-//
-//      List<Stepper> activitiesItem = List<Stepper>();
-//
-//      for (int i = 1; i < v.length; i++) {
-//
-//        activitiesItem.add(
-//            Stepper(
-//                steps: steps2,
-//                currentStep: _index2,
-//                onStepTapped: (index2) {
-//                  setState(() {
-//                    _index2 = index2;
-//                  });
-//                },
-//                controlsBuilder: (BuildContext context,
-//                    {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
-//                    Container()
-//            ),
-//        );
-//      }
-//
-//      steps.add(
-//        Step(
-//          title: Text("${tutorialHeading.tutorialHeading}"),
-//          state: StepState.editing,
-//          isActive: _index == k,
-//          content: Column(
-//            children: activitiesItem
-//          )
-//        ),
-//      );
-//
-//    });
-//
-//
-//    return Container(
-//      margin: EdgeInsets.only(top: 10),
-//      child: Stepper(
-//        steps: steps,
-//        currentStep: _index,
-//        onStepTapped: (index) {
-//          setState(() {
-//            _index = index;
-//          });
-//        },
-//        controlsBuilder: (BuildContext context,
-//            {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
-//            Container(),
-//      ),
-//    );
-//  }
-
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -113,19 +37,6 @@ class _StepperState extends State<EnumeratedTutorials> {
           );
         } else if (state is TutosLoaded) {
           final tutorials = state.tutorials;
-
-//          return Padding(
-//            padding: EdgeInsets.all(8),
-//            child: GridView.count(
-//              primary: true,
-//              crossAxisCount: 2,
-//              childAspectRatio: 1.6,
-////              mainAxisSpacing: 2.0,
-//              children: List.generate(tutorials.keys.length, (index) {
-//                return TutorialItem(name: tutorials[index][0].tutorialHeading);
-//              }),
-//            )
-//          );
 
           return Padding(
               padding: EdgeInsets.all(8),

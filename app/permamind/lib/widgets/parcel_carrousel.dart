@@ -37,8 +37,6 @@ class _ParcelCarouselWithIndicatorState
           autoPlay: false,
           enlargeCenterPage: true,
           height: 17 * SizeConfig.heightMultiplier,
-//      aspectRatio: 3.5,
-//      viewportFraction: 0.9,
           enableInfiniteScroll: false,
           onPageChanged: (index) {
             setState(() {
@@ -57,186 +55,244 @@ class _ParcelCarouselWithIndicatorState
 
     List<Widget> carouselContent = List<Widget>();
     for (final parcel in parcels) {
-      carouselContent.add(InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return MultiBlocProvider(
-                    providers: [
-                      BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
-                      BlocProvider(
-                        create: (context) => ActivitiesBloc(
-                          parcelsBloc.dataRepository,
-                        ),
-                      ),
-                    ],
-                    child: DetailsParcelScreen(
-                      user: widget.user,
-                      gardenId: widget.garden.id,
-                      parcelId: parcel.id,
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-//        } =>  Navigator.pushNamed(
-//          context,
-//          '/detailsParcel',
-//          arguments: DetailsParcelScreenArguments(
-//              widget.garden.id,
-//              parcel.id,
-//          ),
-//        ),
-          child: Container(
-            color: Colors.green,
-            child: Stack(
-              children: <Widget>[
-//              Positioned(
-//                top: 6 * SizeConfig.heightMultiplier,
-//                left: 55 * SizeConfig.widthMultiplier,
-//                child: Image.asset(
-//                  'assets/utils_image/tree.png',
-//                  width: 20 * SizeConfig.widthMultiplier,
-//                ),
-//              ),
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: Container(
-//                color: Colors.green,
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Text("${parcel.name}",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize:
-                                          2.5 * SizeConfig.textMultiplier)),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                  "Vous avez ${parcel.dayActivitiesCount} tâches à effectuer",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 2 * SizeConfig.textMultiplier)),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Text("${parcel.currentModelingName}",
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(214, 211, 94, 1),
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 2 * SizeConfig.textMultiplier)),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )));
-    }
-    carouselContent.add(Container(
-      margin: EdgeInsets.all(5.0),
-      child: InkWell(
-          onTap: () async {
-
-            final int gardenParcelCounter = await BlocProvider.of<GardensBloc>(context).dataRepository.gardenParcelsCounting(widget.garden.id);
-
-            if (widget.user.accountStatus == 0 && gardenParcelCounter >= 3) {
-
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  // TODO Peaufiner ce dialog pour le rentre propre
-                  return AlertDialog(
-                    title: new Text("Nombre de parcelle dépassé"),
-                    content: new Text("Passer à la version premium pour profiter pleinement de l'offre"),
-                    actions: <Widget>[
-                      // usually buttons at the bottom of the dialog
-                      new FlatButton(
-                        child: new Text("Close"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            } else {
-              Navigator.of(context).push(
+      carouselContent.add(
+          InkWell(
+              onTap: () {
+                Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) {
                       return MultiBlocProvider(
-                          providers: [
-                            BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
-                            BlocProvider<ModelingsBloc>(
-                              create: (context) => ModelingsBloc(
-                                  dataRepository: parcelsBloc.dataRepository)
-                                ..add(FetchVeggies()),
-                            )
-                          ],
-                          child: AddParcelScreen(
-                            garden: widget.garden,
-                            user: widget.user,
-                            dataRepository: parcelsBloc.dataRepository,
-                          ));
-                    },
-                  ));
-            }
-          },
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            child: Container(
-              color: Color.fromRGBO(214, 211, 94, 1),
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(
-                          Icons.add,
-                          size: 28,
-                          color: Colors.white,
+                        providers: [
+                          BlocProvider<ParcelsBloc>.value(value: parcelsBloc),
+                          BlocProvider(
+                            create: (context) =>
+                                ActivitiesBloc(
+                                  parcelsBloc.dataRepository,
+                                ),
+                          ),
+                        ],
+                        child: DetailsParcelScreen(
+                          user: widget.user,
+                          gardenId: widget.garden.id,
+                          parcelId: parcel.id,
                         ),
-                        Text("Ajouter une parcelle",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 2.5 * SizeConfig.textMultiplier)),
-                      ],
+                      );
+                    },
+                  ),
+                );
+              },
+              child: Container(
+                margin: EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Colors.green,
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                        bottom: 7,
+                        right: -4,
+                        height: 6 * SizeConfig.heightMultiplier,
+                        width: 20 * SizeConfig.widthMultiplier,
+                        child: Container(
+                          decoration: new BoxDecoration(
+                            image: new DecorationImage(
+                              image: new ExactAssetImage(
+                                'assets/utils_image/tree.png',
+                              ),
+//                            fit: BoxFit.scaleDown,
+                            ),
+                          ),
+                        )
                     ),
-                    Text(
-                      "Cliquer ici pour ajouter une parcelle à votre potager",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 2 * SizeConfig.textMultiplier,
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      child: Container(
+//                      color: Colors.green,
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Text("${parcel.name}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize:
+                                          2.5 * SizeConfig.textMultiplier)),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  FutureBuilder<int>(
+                                    future: parcelsBloc.dataRepository
+                                        .parcelDayActivitiesCounting(parcel.id),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<int> snapshot) {
+                                      if (snapshot.hasData) {
+                                        if (snapshot.data == 0) {
+                                          if (parcel.isActive == false) {
+                                            return Text(
+                                                "${AppLocalizations.of(context).parcelCarousselWait}",
+                                                style: TextStyle(
+                                                    color: const Color(
+                                                        0xFF01534F),
+                                                    fontSize: 2.2 *
+                                                        SizeConfig
+                                                            .textMultiplier));
+                                          } else {
+                                            return Text(
+                                                "${AppLocalizations.of(context).gardenItemNoneActivity}",
+                                                style: TextStyle(
+                                                    color: const Color(
+                                                        0xFF01534F),
+                                                    fontSize: 1.8 *
+                                                        SizeConfig
+                                                            .textMultiplier));
+                                          }
+                                        } else if (snapshot.data == 1) {
+                                          return Text(
+                                              "${snapshot
+                                                  .data} ${AppLocalizations.of(context).gardenItemOneActivity}",
+                                              style: TextStyle(
+                                                  color: const Color(0xFF01534F),
+                                                  fontSize: 1.8 *
+                                                      SizeConfig.textMultiplier));
+                                        } else {
+                                          return Text(
+                                              "${snapshot
+                                                  .data} ${AppLocalizations.of(context).gardenItemMultipleActivity}",
+                                              style: TextStyle(
+                                                  color: const Color(0xFF01534F),
+                                                  fontSize: 1.8 *
+                                                      SizeConfig.textMultiplier));
+                                        }
+                                      } else {
+                                        return CircularProgressIndicator();
+                                      }
+                                    },
+                                  )
+
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text("${parcel.currentModelingName}",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(214, 211, 94, 1),
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 2 *
+                                              SizeConfig.textMultiplier)),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      maxLines: 3,
                     ),
                   ],
                 ),
-              ),
-            ),
-          )),
-    ));
+              )
+          )
+      );
+    }
+    carouselContent.add(
+        Container(
+          margin: EdgeInsets.all(5.0),
+          child: InkWell(
+              onTap: () async {
+                final int gardenParcelCounter = await BlocProvider
+                    .of<GardensBloc>(context)
+                    .dataRepository
+                    .gardenParcelsCounting(widget.garden.id);
+
+                if (widget.user.accountStatus == 0 &&
+                    gardenParcelCounter >= 3) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: new Text("${AppLocalizations.of(context).parcelPremiumDialogTitle}"),
+                        content: new Text(
+                            "${AppLocalizations.of(context).premiumDialogContent}"),
+                        actions: <Widget>[
+                          // usually buttons at the bottom of the dialog
+                          new FlatButton(
+                            child: new Text("${AppLocalizations.of(context).close}"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return MultiBlocProvider(
+                              providers: [
+                                BlocProvider<ParcelsBloc>.value(
+                                    value: parcelsBloc),
+                                BlocProvider<ModelingsBloc>(
+                                  create: (context) =>
+                                  ModelingsBloc(
+                                      dataRepository: parcelsBloc
+                                          .dataRepository)
+                                    ..add(FetchVeggies()),
+                                )
+                              ],
+                              child: AddParcelScreen(
+                                garden: widget.garden,
+                                user: widget.user,
+                                dataRepository: parcelsBloc.dataRepository,
+                              ));
+                        },
+                      ));
+                }
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                child: Container(
+                  color: Color.fromRGBO(214, 211, 94, 1),
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(
+                              Icons.add,
+                              size: 28,
+                              color: Colors.white,
+                            ),
+                            Text("${AppLocalizations.of(context).createParcel}",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 2.5 * SizeConfig.textMultiplier)),
+                          ],
+                        ),
+                        Text(
+                          "${AppLocalizations.of(context).createParcelContent}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 2 * SizeConfig.textMultiplier,
+                          ),
+                          maxLines: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )),
+        ));
 
     return carouselContent;
   }

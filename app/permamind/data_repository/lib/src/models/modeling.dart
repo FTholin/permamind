@@ -11,11 +11,11 @@ class Modeling {
   final int waterRequirement;
   final int yield;
   List<ModelingSchedule> schedule = new List<ModelingSchedule>();
-  final List<String> composition;
-  final List<int> culturePeriod;
   final List<int> sowingPeriod;
   final List<int> harvestPeriod;
+  final String descriptionFr;
 
+  List<String> composition = new List<String>();
 
   List<Design> designs = new List<Design>();
 
@@ -29,10 +29,10 @@ class Modeling {
       this.yield,
       this.schedule,
       this.composition,
-      this.culturePeriod,
       this.sowingPeriod,
       this.harvestPeriod,
       this.designs,
+      this.descriptionFr,
       {String id})
       : this.id = id;
 
@@ -50,10 +50,10 @@ class Modeling {
       yield ?? this.yield,
       schedule ?? this.schedule,
       composition ?? this.composition,
-      culturePeriod ?? this.culturePeriod,
       sowingPeriod ?? this.sowingPeriod,
       harvestPeriod ?? this.harvestPeriod,
       designs ?? this.designs,
+        descriptionFr ?? this.descriptionFr,
       id: id ?? this.id
     );
   }
@@ -77,10 +77,10 @@ class Modeling {
               yield == other.yield &&
               productionDuration == other.productionDuration &&
               difficultyLevel == other.difficultyLevel &&
-              culturePeriod == other.culturePeriod &&
               sowingPeriod == other.sowingPeriod &&
               harvestPeriod == other.harvestPeriod &&
-              designs == other.designs;
+              designs == other.designs &&
+              descriptionFr == other.descriptionFr;
 
   @override
   String toString() {
@@ -94,10 +94,10 @@ class Modeling {
         waterRequirement, yield,
         schedule,
         composition,
-        culturePeriod,
         sowingPeriod,
         harvestPeriod,
-        designs
+        designs,
+        descriptionFr
     );
   }
 
@@ -111,13 +111,42 @@ class Modeling {
       entity.yield,
       entity.schedule,
       entity.composition,
-      entity.culturePeriod,
       entity.sowingPeriod,
       entity.harvestPeriod,
       entity.designs,
+      entity.descriptionFr,
       id: entity.id,
     );
   }
 }
 
 
+//class ModelingComposition {
+//
+//  String vegetableId;
+//  String nameFr;
+//  String nameEn;
+//  String imageName;
+//
+//  ModelingComposition(this.vegetableId, this.nameFr, this.nameEn, this.imageName);
+//
+//  ModelingComposition.fromMap(Map<dynamic, dynamic> data)
+//      : vegetableId = data['vegetableId'],
+//        nameFr = data['nameFr'],
+//        nameEn = data['nameEn'],
+//        imageName = data['imageName'];
+//
+//  Map<String, Object> toJson() {
+//    return {
+//      'vegetableId': vegetableId,
+//      'nameFr': nameFr,
+//      'nameEn': nameEn,
+//      'imageName': imageName
+//    };
+//  }
+//
+//  @override
+//  String toString() {
+//    return nameFr;
+//  }
+//}

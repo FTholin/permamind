@@ -4,21 +4,18 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
 import 'package:permamind/widgets/my_stepper.dart';
 
 class GardenAddedScreen extends StatefulWidget {
   final User _user;
-  final DataRepository _dataRepository;
 
   GardenAddedScreen(
       {Key key, @required User user, @required DataRepository dataRepository})
       : assert(user != null),
         assert(dataRepository != null),
         _user = user,
-        _dataRepository = dataRepository,
         super(key: key);
 
   @override
@@ -71,7 +68,7 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                      Text("Créer un jardin",
+                                      Text("${AppLocalizations.of(context).gardenAddedTitle}",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: const Color(0xFF01534F),
@@ -94,8 +91,8 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                               borderSide: BorderSide(
                                                   color: Colors.green)),
                                           hintText:
-                                              'Donner un nom à votre jardin',
-                                        errorText: _gardenNameValidate ? 'Le nom du jardin ne peut être vide' : null,
+                                              '${AppLocalizations.of(context).gardenAddedNameTitle}',
+                                        errorText: _gardenNameValidate ? '${AppLocalizations.of(context).gardenAddedNameError}' : null,
                                       ),
                                       onChanged: (value) {
                                         _gardenName.text.isEmpty
@@ -126,7 +123,7 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                   top: 2 * SizeConfig.heightMultiplier),
                               child: Row(
                                 children: <Widget>[
-                                  Text("Rendre le jardin public",
+                                  Text("${AppLocalizations.of(context).gardenAddedVisibilityTitle}",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: const Color(0xFF01534F),
@@ -159,12 +156,12 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                                           .widthMultiplier),
                                               child: _publicVisibility == true
                                                   ? Text(
-                                                      "Le jardin est public.",
+                                                      "${AppLocalizations.of(context).addGardenPublicVisibility}",
                                                       style: TextStyle(
                                                           color: const Color(
                                                               0xFF01534F),
                                                           fontSize: 19))
-                                                  : Text("Le jardin est privé.",
+                                                  : Text("${AppLocalizations.of(context).addGardenPrivateVisibility}",
                                                       style: TextStyle(
                                                           color: const Color(
                                                               0xFF01534F),
@@ -184,120 +181,120 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                         ),
                         isActive: _currentStep >= 1,
                       ),
-                      MyStep(
-                        title: Text(""),
-                        content: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/utils_image/rake_plant.png',
-                              fit: BoxFit.scaleDown,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: 5 * SizeConfig.heightMultiplier),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Ajouter des jardiniers",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: const Color(0xFF01534F),
-                                              fontSize: 2.5 *
-                                                  SizeConfig.textMultiplier,
-                                              fontWeight: FontWeight.bold
-//                          fontWeight: FontWeight.bold,
-                                              )),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 2 * SizeConfig.heightMultiplier),
-                                    child: ChipsInput(
-                                      keyboardAppearance: Brightness.dark,
-                                      textCapitalization:
-                                          TextCapitalization.words,
-                                      enabled: true,
-                                      maxChips: 15,
-                                      textStyle: TextStyle(
-                                          height: 1.5,
-                                          fontFamily: "Roboto",
-                                          fontSize: 16),
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.0)),
-                                              borderSide: BorderSide(
-                                                  color: Colors.green)),
-                                          hintText: 'Inviter des jardiniers'),
-                                      findSuggestions: (String query) async {
-                                        queryResProfile = [];
-                                        if (query.length != 0) {
-                                          _gardenMembers = [];
-
-                                          var queryRes = await widget._dataRepository.searchByName(query);
-                                          for (int i = 0; i < queryRes.documents.length; ++i) {
-                                            var data = queryRes.documents[i].data;
-                                            queryResProfile.add(
-                                                MemberProfile(data["id"],
-                                                  data["pseudo"],
-//                                  data["email"],
-//                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
-                                            ));
-                                          }
-                                        }
-                                        return queryResProfile;
-                                      },
-                                      onChanged: (data) {
-                                        _gardenMembers.clear();
-                                        data.forEach((elem) {
-                                          if (elem.pseudo !=
-                                              widget._user.pseudo) {
-                                            _gardenMembers.add(GardenMember(
-                                                id: elem.id,
-                                                pseudo: elem.pseudo));
-                                          }
-                                        });
-                                      },
-                                      chipBuilder: (context, state, profile) {
-                                        return InputChip(
-                                          key: ObjectKey(profile),
-                                          label: Text(profile.pseudo),
-//                            avatar: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
+//                       MyStep(
+//                        title: Text(""),
+//                        content: Column(
+//                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                          children: <Widget>[
+//                            Image.asset(
+//                              'assets/utils_image/rake_plant.png',
+//                              fit: BoxFit.scaleDown,
 //                            ),
-                                          onDeleted: () =>
-                                              state.deleteChip(profile),
-                                          materialTapTargetSize:
-                                              MaterialTapTargetSize.shrinkWrap,
-                                        );
-                                      },
-                                      suggestionBuilder:
-                                          (context, state, profile) {
-                                        return ListTile(
-                                          key: ObjectKey(profile),
-//                            leading: CircleAvatar(
-//                              backgroundImage: NetworkImage(profile.imageUrl),
-//                            ),
-                                          title: Text(profile.pseudo),
-//                            subtitle: Text(profile.email),
-                                          onTap: () =>
-                                              state.selectSuggestion(profile),
-                                        );
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        isActive: _currentStep >= 2,
-                      ),
+//                            Padding(
+//                              padding: EdgeInsets.only(
+//                                  top: 5 * SizeConfig.heightMultiplier),
+//                              child: Column(
+//                                children: <Widget>[
+//                                  Row(
+//                                    children: <Widget>[
+//                                      Text("Ajouter des jardiniers",
+//                                          textAlign: TextAlign.center,
+//                                          style: TextStyle(
+//                                              color: const Color(0xFF01534F),
+//                                              fontSize: 2.5 *
+//                                                  SizeConfig.textMultiplier,
+//                                              fontWeight: FontWeight.bold
+////                          fontWeight: FontWeight.bold,
+//                                              )),
+//                                    ],
+//                                  ),
+//                                  Padding(
+//                                    padding: EdgeInsets.only(
+//                                        top: 2 * SizeConfig.heightMultiplier),
+//                                    child: ChipsInput(
+//                                      keyboardAppearance: Brightness.dark,
+//                                      textCapitalization:
+//                                          TextCapitalization.words,
+//                                      enabled: true,
+//                                      maxChips: 15,
+//                                      textStyle: TextStyle(
+//                                          height: 1.5,
+//                                          fontFamily: "Roboto",
+//                                          fontSize: 16),
+//                                      decoration: InputDecoration(
+//                                          border: OutlineInputBorder(
+//                                              borderRadius: BorderRadius.all(
+//                                                  Radius.circular(5.0)),
+//                                              borderSide: BorderSide(
+//                                                  color: Colors.green)),
+//                                          hintText: 'Inviter des jardiniers'),
+//                                      findSuggestions: (String query) async {
+//                                        queryResProfile = [];
+//                                        if (query.length != 0) {
+//                                          _gardenMembers = [];
+//
+//                                          var queryRes = await widget._dataRepository.searchByName(query);
+//                                          for (int i = 0; i < queryRes.documents.length; ++i) {
+//                                            var data = queryRes.documents[i].data;
+//                                            queryResProfile.add(
+//                                                MemberProfile(data["id"],
+//                                                  data["pseudo"],
+////                                  data["email"],
+////                                  'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'
+//                                            ));
+//                                          }
+//                                        }
+//                                        return queryResProfile;
+//                                      },
+//                                      onChanged: (data) {
+//                                        _gardenMembers.clear();
+//                                        data.forEach((elem) {
+//                                          if (elem.pseudo !=
+//                                              widget._user.pseudo) {
+//                                            _gardenMembers.add(GardenMember(
+//                                                id: elem.id,
+//                                                pseudo: elem.pseudo));
+//                                          }
+//                                        });
+//                                      },
+//                                      chipBuilder: (context, state, profile) {
+//                                        return InputChip(
+//                                          key: ObjectKey(profile),
+//                                          label: Text(profile.pseudo),
+////                            avatar: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                          onDeleted: () =>
+//                                              state.deleteChip(profile),
+//                                          materialTapTargetSize:
+//                                              MaterialTapTargetSize.shrinkWrap,
+//                                        );
+//                                      },
+//                                      suggestionBuilder:
+//                                          (context, state, profile) {
+//                                        return ListTile(
+//                                          key: ObjectKey(profile),
+////                            leading: CircleAvatar(
+////                              backgroundImage: NetworkImage(profile.imageUrl),
+////                            ),
+//                                          title: Text(profile.pseudo),
+////                            subtitle: Text(profile.email),
+//                                          onTap: () =>
+//                                              state.selectSuggestion(profile),
+//                                        );
+//                                      },
+//                                    ),
+//                                  )
+//                                ],
+//                              ),
+//                            )
+//                          ],
+//                        ),
+//                        isActive: _currentStep >= 2,
+//                      ),
                     ],
                     controlsBuilder: _createEventControlBuilder,
-                    onStepContinue: _currentStep < 3
+                    onStepContinue: _currentStep < 2
                         ? () => setState(() => _currentStep += 1)
                         : null,
                     onStepCancel: _currentStep > -1
@@ -329,7 +326,7 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
 
   Widget _createEventControlBuilder(BuildContext context,
       {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
-    if (_currentStep == 2) {
+    if (_currentStep == 1) {
       return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -376,7 +373,6 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                           nationality: widget._user.nationality,
                           searchKey: widget._user.searchKey,
                           gardenCounter: newGardenCounter,
-                          parcelCounter: widget._user.parcelCounter,
                           accountStatus: widget._user.accountStatus
                       )
                   ),);

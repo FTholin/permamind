@@ -4,49 +4,63 @@ import 'package:equatable/equatable.dart';
 
 class VegetableEntity extends Equatable {
   final String id;
-  final String name;
+  final String imageName;
   final DateTime seasonPeriodStartDate;
   final DateTime seasonPeriodEndDate;
+  final String nameFr;
+  final String nameEn;
+  final bool isAvailable;
 
   VegetableEntity(
       this.id,
-      this.name,
+      this.nameFr,
+      this.nameEn,
+      this.imageName,
       this.seasonPeriodStartDate,
-      this.seasonPeriodEndDate
+      this.seasonPeriodEndDate,
+      this.isAvailable
       );
 
   Map<String, Object> toJson() {
     return {
       'id': id,
-      'name': name,
+      'nameFr': nameFr,
+      'nameEn': nameEn,
+      'imageName': imageName,
       'seasonPeriodStartDate': seasonPeriodStartDate,
-      'seasonPeriodEndDate': seasonPeriodEndDate
+      'seasonPeriodEndDate': seasonPeriodEndDate,
+      'isAvailable': isAvailable
     };
   }
 
   @override
   String toString() {
-    return 'VegetableEntity { id: $id, name: $name}';
+    return 'VegetableEntity { id: $id, imageName: $imageName}';
   }
 
   static VegetableEntity fromJson(Map<String, Object> json) {
     return VegetableEntity(
         json['id'] as String,
-        json['name'] as String,
+        json['nameFr'] as String,
+        json['nameEn'] as String,
+        json['imageName'] as String,
         json['seasonPeriodStartDate'],
         json['seasonPeriodEndDate'],
-
+        json['isAvailable']
     );
   }
 
   static VegetableEntity fromSnapshot(DocumentSnapshot snap) {
     return VegetableEntity(
       snap.documentID,
-      snap.data['name'],
+      snap.data['nameFr'],
+      snap.data['nameEn'],
+      snap.data['imageName'],
       DateTime.fromMillisecondsSinceEpoch(
           snap.data["seasonPeriodStartDate"].millisecondsSinceEpoch),
       DateTime.fromMillisecondsSinceEpoch(
           snap.data["seasonPeriodEndDate"].millisecondsSinceEpoch),
+      snap.data['isAvailable']
 
     );
   }
@@ -54,9 +68,12 @@ class VegetableEntity extends Equatable {
   Map<String, Object> toDocument() {
     return {
       'id': id,
-      'name': name,
+      'nameFr': nameFr,
+      'nameEn': nameEn,
+      'imageName': imageName,
       'seasonPeriodStartDate': seasonPeriodStartDate,
-      'seasonPeriodEndDate': seasonPeriodEndDate
+      'seasonPeriodEndDate': seasonPeriodEndDate,
+      'isAvailable': isAvailable
     };
   }
 }

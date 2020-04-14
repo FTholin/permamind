@@ -8,10 +8,12 @@ import 'package:table_calendar/table_calendar.dart';
 
 class SchedulerCalendar extends StatefulWidget {
   final String parcelId;
+  final String userId;
+
   SchedulerCalendar(
       {Key key,
       @required this.parcelId,
-
+      @required this.userId,
       })
       : super(key: key);
 
@@ -41,15 +43,14 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
         builder: (context, state) {
       if (state is ActivitiesLoadSuccess) {
         _events = state.schedule;
-        return Expanded(
+        return Flexible(
+          flex: 5,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               _buildTableCalendar(state.schedule),
-              // _buildTableCalendarWithBuilders(),
-              const SizedBox(height: 8.0),
+               SizedBox(height: 1 * SizeConfig.heightMultiplier,child: Container(),),
 //            _buildButtons(),
-              const SizedBox(height: 8.0),
               Expanded(child: _buildEventList(state.referenceDate, state.schedule)),
             ],
           ),
@@ -63,7 +64,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   Widget _buildTableCalendar( Map<DateTime, List> events) {
 
     return TableCalendar(
-      locale: AppLocalizations.of(context).activitiesCalendarHeader,
+      locale: AppLocalizations.of(context).language,
       calendarController: _calendarController,
       events: _events,
       initialCalendarFormat: CalendarFormat.week,
@@ -93,7 +94,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   Widget _buildEmptyTableCalendar() {
 
     return TableCalendar(
-      locale: AppLocalizations.of(context).activitiesCalendarHeader,
+      locale: AppLocalizations.of(context).language,
       calendarController: _calendarController,
       initialCalendarFormat: CalendarFormat.week,
       calendarStyle: CalendarStyle(
@@ -133,7 +134,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {
     BlocProvider.of<ActivitiesBloc>(context)
-        .add(ActivitiesLoadedSuccess(widget.parcelId, first, last));
+        .add(ActivitiesLoadedSuccess(widget.parcelId, DateTime(first.year, first.month, first.day, 1), DateTime(last.year, last.month, last.day, 1)));
   }
 
 
@@ -151,7 +152,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
               ),
               margin:
               const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-              child: ScheduleListItem(activity: activity),
+              child: ScheduleListItem(activity: activity, userId: widget.userId),
             )
         );
       }

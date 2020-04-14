@@ -149,6 +149,17 @@ class FirebaseDataRepository implements DataRepository {
     });
   }
 
+
+  @override
+  Future<List<ModelingSchedule>> fetchModelingActivities(String modelingId) async {
+    return Firestore.instance.collection('modelings').document(modelingId).get().then((doc) {
+      return doc.data['schedule'].map<ModelingSchedule>((item) {
+        return ModelingSchedule.fromMap(item);
+      }).toList();
+    });
+  }
+
+
   @override
   Future<void> deleteDesignsFromGarden(String gardenId) async {
     // logger.i("READ::deleteDesignsFromGarden");
@@ -200,7 +211,6 @@ class FirebaseDataRepository implements DataRepository {
 
   @override
   Stream<List<Modeling>> fetchModelings(List<String> veggiesList) {
-    // logger.i("READ::fetchModelings");
     if (veggiesList.isEmpty) {
       return Firestore.instance.collection('modelings')
           .snapshots().map((snapshot) {
@@ -223,6 +233,7 @@ class FirebaseDataRepository implements DataRepository {
   Stream<List<Vegetable>> fetchVeggies() {
     // logger.i("READ::fetchVeggies");
     return Firestore.instance.collection('veggies')
+        .where('isAvailable', isEqualTo: true)
         .snapshots().map((snapshot) {
       return snapshot.documents
           .map((doc) => Vegetable.fromEntity(VegetableEntity.fromSnapshot(doc)))
@@ -250,7 +261,7 @@ class FirebaseDataRepository implements DataRepository {
     // logger.i("READ::loadParcelActivities");
     return Firestore.instance.collection('activities')
         .where("parcelId", isEqualTo: parcelId)
-        .where("expectedDate", isGreaterThan: first)
+        .where("expectedDate", isGreaterThanOrEqualTo: first)
         .where("expectedDate", isLessThanOrEqualTo: last)
         .snapshots().map((snapshot) {
       return snapshot.documents
@@ -281,6 +292,37 @@ class FirebaseDataRepository implements DataRepository {
   Future<int> gardenParcelsCounting(String gardenId) {
     return Firestore.instance.collection('parcels')
         .where('gardenId', isEqualTo: gardenId)
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
+  Future<int> userParcelCounting(String userId, String userPseudo) {
+    return Firestore.instance.collection('parcels')
+        .where("members",arrayContains: {'id': userId, 'pseudo': userPseudo})
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
+  Future<int> userActivitiesCounting(String userId) {
+    return Firestore.instance.collection('activities')
+        .where('completeActivityUserId', isEqualTo: userId)
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
+  Future<int> gardenDayActivitiesCounting(String gardenId) {
+    DateTime reference = DateTime.now();
+    return Firestore.instance.collection('activities')
+        .where('gardenId', isEqualTo: gardenId)
+        .where('expectedDate', isEqualTo: DateTime(reference.year, reference.month, reference.day, 1 ))
+        .where('complete', isEqualTo: false)
+        .getDocuments().then((ds) => ds.documents.length);
+  }
+
+
+  Future<int> parcelDayActivitiesCounting(String parcelId) {
+    DateTime reference = DateTime.now();
+    return Firestore.instance.collection('activities')
+        .where('parcelId', isEqualTo: parcelId)
+        .where('expectedDate', isEqualTo: DateTime(reference.year, reference.month, reference.day, 1 ))
+        .where('complete', isEqualTo: false)
         .getDocuments().then((ds) => ds.documents.length);
   }
 

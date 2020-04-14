@@ -79,7 +79,7 @@ class EnumeratedGardens extends StatelessWidget {
                               garden: gardens[i],
                               user: user,
                               index: i,
-                              dayActivitiesCount: 0,
+                              dataRepository: _dataRepository,
                             ),
                           );
                         },

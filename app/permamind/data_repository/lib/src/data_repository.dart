@@ -42,13 +42,24 @@ abstract class DataRepository {
 
   Stream<List<Modeling>> fetchModelings(List<String> veggiesList);
 
+  Future<List<ModelingSchedule>> fetchModelingActivities(String modelingId);
+
   Stream<List<Activity>> loadParcelActivities(String parcelId, DateTime first, DateTime last);
 
   Stream<List<DesignParcel>> loadDesignParcel(String gardenId);
 
   Future<int> gardenParcelsCounting(String gardenId);
 
-    Future<void> updateGarden(Garden update);
+  Future<void> updateGarden(Garden update);
+
+  Future<int> userParcelCounting(String userId, String userPseudo);
+
+  Future<int> userActivitiesCounting(String userId);
+
+  Future<int> gardenDayActivitiesCounting(String gardenId);
+
+  Future<int> parcelDayActivitiesCounting(String parcelId);
+
 
   Future<void> updateActivity(Activity update);
 

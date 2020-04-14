@@ -18,6 +18,7 @@ class Parcel extends Equatable {
   final List<String> modelingsMonitoring;
   final DateTime creationDate;
   final int dayActivitiesCount;
+  final bool isActive;
 
   Parcel(
       this.name,
@@ -33,6 +34,7 @@ class Parcel extends Equatable {
       this.creationDate,
       this.dayActivitiesCount,
       this.modelingsMonitoring,
+      this.isActive,
       {String id})
       :  this.id = id;
 
@@ -40,7 +42,7 @@ class Parcel extends Equatable {
     double width, bool parcelGround, bool publicVisibility, String admin,
     List<GardenMember> members, String currentModelingId, String currentModelingName,
     DateTime creationDate, int dayActivitiesCount, List<String> modelingsMonitoring,
-      String id}) {
+      String id, bool isActive}) {
     return Parcel(
       name ?? this.name,
       gardenId ?? this.gardenId,
@@ -55,6 +57,7 @@ class Parcel extends Equatable {
       creationDate ?? this.creationDate,
       dayActivitiesCount ?? this.dayActivitiesCount,
       modelingsMonitoring ?? this.modelingsMonitoring,
+      isActive ?? this.isActive,
       id: id ?? this.id,
     );
   }
@@ -74,7 +77,8 @@ class Parcel extends Equatable {
               publicVisibility == other.publicVisibility &&
               admin == other.admin &&
               members == other.members &&
-              dayActivitiesCount == other.dayActivitiesCount;
+              dayActivitiesCount == other.dayActivitiesCount &&
+              isActive == other.isActive;
 
 
   @override
@@ -97,7 +101,8 @@ class Parcel extends Equatable {
         currentModelingName,
         creationDate,
         dayActivitiesCount,
-        modelingsMonitoring
+        modelingsMonitoring,
+        isActive
     );
   }
 
@@ -117,6 +122,7 @@ class Parcel extends Equatable {
       entity.creationDate,
       entity.dayActivitiesCount,
       entity.modelingsMonitoring,
+      entity.isActive,
       id: entity.id,
     );
   }

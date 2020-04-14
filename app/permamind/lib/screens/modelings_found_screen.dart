@@ -106,9 +106,6 @@ class _ModelingsFoundScreenState extends State<ModelingsFoundScreen> {
                                           gardenId: widget.gardenId,
                                           parcel: widget.parcel,
                                           modeling: modeling,
-                                          schedule: modeling.schedule,
-                                          designs: modeling.designs,
-
                                       );
                                     })
                                 );

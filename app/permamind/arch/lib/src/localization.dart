@@ -13,6 +13,8 @@ class AppLocalizations {
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
       'home': "My gardens",
+      'learning_title': 'Tutorials',
+      'profile_title': 'My profile',
       'title': 'Hello World',
       'settings_garden_title': "Garden's Settings",
       'settings_garden_name': "Garden's Name",
@@ -28,10 +30,10 @@ class AppLocalizations {
       'settings_garden_leave_title': "Leave this garden ?",
       'settings_garden_leave_message': "This action will result in the permanent leaving of the garden.",
       'add_garden_title': "Create a garden",
-      'add_garden_name_title': "What's garden's name ?",
+      'add_garden_name_title': "Give a name to your garden",
       'add_garden_name_hint': "Garden's name",
       'add_garden_name_error': "Garden's name can't be empty",
-      'add_garden_visibilityTitle': "Would you like to make this garden public ?",
+      'add_garden_visibilityTitle': "Making the garden public ?",
       'yes_choice': 'Yes',
       'no_choice': 'No',
       'add_garden_gardeners_title': "Add a few gardeners ?",
@@ -45,7 +47,7 @@ class AppLocalizations {
       'speed_dial_add_activity': "Add Activity",
       'speed_dial_create_garden': "Create a garden",
       'speed_dial_join_garden': "Join a garden",
-      'speed_dial_create_parcel': "Create a parcel",
+      'create_parcel': "Create a parcel",
       'details_parcel_none_association_message': 'No combination of plants is planned in this parcel. Shall we add one ?',
       'details_parcel_add_association_message': "Add a new plant's association",
       'discover_modelings_modeling_tile': "Associations",
@@ -64,7 +66,7 @@ class AppLocalizations {
       'add_parcel_name_hint': "Parcel's name",
       'add_parcel_name_error': "Parcel's name can't be empty",
       'add_parcel_garden_ground_title': "Do you use a garden box ?",
-      'add_parcel_dimensions_title': "What are the dimensions of the parcel ?",
+      'add_parcel_dimensions_title': "Dimensions in centimeters",
       'add_parcel_garden_scale_label': "(centimeters)",
       'settings_parcel_title': "Parcel's Settings",
       'settings_parcel_delete_button': "Delete this parcel",
@@ -91,10 +93,60 @@ class AppLocalizations {
       'registration_failure': 'Registration Failure',
       'registration_loading': 'Registering...',
       'registration_button': "Create an Account",
-      'activities_calendar_header': "en_US"
-},
+      'language': "en_US",
+      'profile_garden_counter': "gardens",
+      'profile_parcel_counter': "parcels",
+      'profile_activites_counter': "completed activities",
+      'add_parcel_veggies_asking': "What vegetables do you want to grow ?",
+      'add_parcel_hint_name': "Give parcel's name",
+      'add_parcel_width': 'Width',
+      'add_parcel_length': 'Length',
+      'add_parcel_none_modeling': 'No association corresponding to your search.',
+      'add_parcel_modeling_propositions': 'Here are the associations we recommend !',
+      'search': 'Search',
+      'add_garden_public_visibility': "The garden is public.",
+      'add_garden_private_visibility': "The garden is private.",
+      'add_activity_title': 'Title of the new activity ?',
+      'add_activity_type': "Type of activity ?",
+      'add_activity_snooze': 'When would you like to do it ?',
+      'add_activity_submit': 'Submit the activity',
+      'rename': 'Rename',
+      'update': 'Update',
+      'delete': 'Delete',
+      'close': 'Close',
+      'details_parcel_rename_title': "Rename this parcel",
+      'details_parcel_add_culture': 'Launching the culture',
+      'details_parcel_add_culture_more': "Click here to start the adventure !",
+      'contact_us_title': 'Contact us',
+      'contact_us_subject_title': 'Subject',
+      'contact_us_subject_hint': "Mail's subject",
+      'contact_us_body_title': "Body",
+      'contact_us_body_send': "Send Email",
+      'premium_dialog_title': "Number of gardens exceeded",
+      'premium_dialog_content': "Upgrade to the premium version to take full advantage of the offer",
+      'garden_item_rename_tile': "Rename this garden",
+      'garden_item_rename_tile': "Rename this garden",
+      'garden_item_none_activity': "No activities today",
+      'garden_item_one_activity': "activity to be carried out today.",
+      'garden_item_multiple_activity': "activities to be carried out today.",
+      'parcel_caroussel_wait': "Awaiting launch",
+      'parcel_premium_dialog_title': "Number of parcels exceeded",
+      'create_parcel_content': "Click here to add a parcel to your garden",
+      'profile_stats_tile': "My Stats",
+      'profile_status': 'You are a pioneer !',
+      'app_settings_cgu': "End-user license agreement",
+      'app_settings_thanks': "Acknowledgements",
+      'app_settings_disconnect_title': "Logging out of your account",
+      'app_settings_disconnect_content': "You're about to disconnect from Permamind.",
+      'app_settings_delete_account_title': "Deleting your account",
+      'app_settings_delete_account_content': "The deletion of your account will be final.",
+      'add_parcel_choose': "Choose this association",
+
+    },
     'fr': {
       'home': "Mes jardins",
+      'learning_title': 'Tutoriels',
+      'profile_title': 'Mon profil',
       'title': "Partie pédagogie",
       'settings_garden_title': "Paramètres du jardin",
       'settings_garden_name': "Nom du jardin",
@@ -108,10 +160,10 @@ class AppLocalizations {
       'settings_garden_leave_title': "Quitter ce jardin ?",
       'settings_garden_leave_message': "Cette action entraîne votre départ de ce jardin et de ces parcelles.",
       'add_garden_title': "Créer un jardin",
-      'add_garden_name_title': "Quel est le nom de votre jardin ?",
+      'add_garden_name_title': "Donner un nom à votre jardin",
       'add_garden_name_hint': "Nom jardin",
-      'add_garden_name_error': "Nom du jardin ne peut être vide",
-      'add_garden_visibilityTitle': "Souhaitez vous rendre ce jardin public ?",
+      'add_garden_name_error': "Le nom du jardin ne peut être vide",
+      'add_garden_visibilityTitle': "Rendre le jardin public ?",
       'button_continue': "Continuer",
       'button_cancel': "Annuler",
       'yes_choice': 'Oui',
@@ -127,7 +179,7 @@ class AppLocalizations {
       'speed_dial_add_activity': "Ajouter Activité",
       'speed_dial_create_garden': "Créer un jardin",
       'speed_dial_join_garden': "Rejoindre un jardin",
-      'speed_dial_create_parcel': "Créer une parcelle",
+      'create_parcel': "Créer une parcelle",
       'details_parcel_none_association_message': 'Aucune association de plantes prévu dans cette parcelle. On en rajoute une ?',
       'details_parcel_add_association_message': "Ajouter une nouvelle association",
       'discover_modelings_modeling_tile': "Associations",
@@ -144,9 +196,9 @@ class AppLocalizations {
       'add_parcel_title': "Créer une parcelle",
       'add_parcel_name_title': "Quel est le nom de la parcelle ?",
       'add_parcel_name_hint': "Nom parcelle",
-      'add_parcel_name_error': "Nom de la parcelle ne peut être vide",
-      'add_parcel_garden_ground_title': "Utilisez vous un bac de culture ?",
-      'add_parcel_dimensions_title': "Quelles sont les dimensions de la parcelle ?",
+      'add_parcel_name_error': "Le nom d'une parcelle ne peut être vide",
+      'add_parcel_garden_ground_title': "Utilisez-vous un bac de culture ?",
+      'add_parcel_dimensions_title': "Dimensions en centimètres",
       'add_parcel_garden_scale_label': "(centimètres)",
       'settings_parcel_title': "Paramètres de la parcelle",
       'settings_parcel_delete_button': "Supprimer parcelle",
@@ -173,8 +225,53 @@ class AppLocalizations {
       'registration_failure': "Échec de l'inscription",
       'registration_loading': "Inscription en cours",
       'registration_button': "Créer un compte",
-      'activities_calendar_header': "fr_FR"
-
+      'language': "fr_FR",
+      'profile_garden_counter': 'jardins',
+      'profile_parcel_counter': 'parcelles',
+      'profile_activites_counter': 'activités réalisées',
+      'add_parcel_veggies_asking': 'Quels légumes voulez-vous cultiver ?',
+      'add_parcel_hint_name': "Donner un nom à votre parcelle",
+      'add_parcel_width': 'Largeur',
+      'add_parcel_length': 'Longueur',
+      'add_parcel_none_modeling': 'Aucune association correspondante à votre recherche.',
+      'add_parcel_modeling_propositions': 'Voici les associations que nous vous conseillons !',
+      'search': 'Rechercher',
+      'add_garden_public_visibility': "Le jardin est public.",
+      'add_garden_private_visibility': "Le jardin est privé.",
+      'add_activity_title': 'Titre de la nouvelle activité ?',
+      'add_activity_type': "Type d'activité ?",
+      'add_activity_snooze': 'Quand souhaitez vous la réaliser ?',
+      'add_activity_submit': "Soumettre l'activité",
+      'rename': 'Renommer',
+      'update': 'Mettre à jour',
+      'delete': 'Supprimer',
+      'close': 'Fermer',
+      'details_parcel_rename_title': "Renommer cette parcelle",
+      'details_parcel_add_culture': 'Lancer la culture',
+      'details_parcel_add_culture_more': "Cliquer ici pour démarrer l'aventure !",
+      'contact_us_title': 'Contactez nous',
+      'contact_us_subject_title': 'Objet',
+      'contact_us_subject_hint': "Objet du mail",
+      'contact_us_body_title': "Contenu",
+      'contact_us_body_send': "Envoyer email",
+      'premium_dialog_title': "Nombre de jardins dépassé",
+      'premium_dialog_content': "Passer à la version premium pour profiter pleinement de l'offre",
+      'garden_item_rename_tile': "Renommer ce jardin",
+      'garden_item_none_activity': "Pas d'activités aujourd'hui",
+      'garden_item_one_activity': "activité à réaliser aujourd'hui.",
+      'garden_item_multiple_activity': "activités à réaliser aujourd'hui.",
+      'parcel_caroussel_wait': "En attente de lancement",
+      'parcel_premium_dialog_title': "Nombre de parcelles dépassé",
+      'create_parcel_content': "Cliquer ici pour ajouter une parcelle à votre potager",
+      'profile_stats_tile': "Mes statistiques",
+      'profile_status': 'Vous êtes un pionnier',
+      'app_settings_cgu': "Conditions générales d'utilisation",
+      'app_settings_thanks': "Remerciements",
+      'app_settings_disconnect_title': "Déconnexion de votre compte",
+      'app_settings_disconnect_content': "Vous êtes sur le point de vous déconnecter de Permamind.",
+      'app_settings_delete_account_title': "Suppression de votre compte",
+      'app_settings_delete_account_content': "La suppression de votre compte sera définitive.",
+      'add_parcel_choose': "Choisir cette association",
     },
   };
 
@@ -242,23 +339,23 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['button_cancel'];
   }
 
-  String get GardenAddedTitle {
+  String get gardenAddedTitle {
     return _localizedValues[locale.languageCode]['add_garden_title'];
   }
 
-  String get GardenAddedNameTitle {
+  String get gardenAddedNameTitle {
     return _localizedValues[locale.languageCode]['add_garden_name_title'];
   }
 
-  String get GardenAddedNameHint {
+  String get gardenAddedNameHint {
     return _localizedValues[locale.languageCode]['add_garden_name_hint'];
   }
 
-  String get GardenAddedNameError {
+  String get gardenAddedNameError {
     return _localizedValues[locale.languageCode]['add_garden_name_error'];
   }
 
-  String get GardenAddedVisibilityTitle {
+  String get gardenAddedVisibilityTitle {
     return _localizedValues[locale.languageCode]['add_garden_visibilityTitle'];
   }
 
@@ -314,8 +411,8 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['speed_dial_join_garden'];
   }
 
-  String get speedDialCreateParcel {
-    return _localizedValues[locale.languageCode]['speed_dial_create_parcel'];
+  String get createParcel {
+    return _localizedValues[locale.languageCode]['create_parcel'];
   }
 
   String get detailsParcelAssociationEmpty {
@@ -504,9 +601,212 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['registration_button'];
   }
 
-  String get activitiesCalendarHeader {
-    return _localizedValues[locale.languageCode]['activities_calendar_header'];
+  String get language {
+    return _localizedValues[locale.languageCode]['language'];
   }
+
+  String get learningTitle {
+    return _localizedValues[locale.languageCode]['learning_title'];
+  }
+
+  String get profileTitle {
+    return _localizedValues[locale.languageCode]['profile_title'];
+  }
+
+  String get profileGardenCounter {
+    return _localizedValues[locale.languageCode]['profile_garden_counter'];
+  }
+
+  String get profileGardenParcels {
+    return _localizedValues[locale.languageCode]['profile_parcel_counter'];
+  }
+
+  String get profileActivitiesCounter {
+    return _localizedValues[locale.languageCode]['profile_activites_counter'];
+  }
+
+
+  String get addParcelVeggiesAsking {
+    return _localizedValues[locale.languageCode]['add_parcel_veggies_asking'];
+  }
+
+  String get addParcelHintName {
+    return _localizedValues[locale.languageCode]['add_parcel_hint_name'];
+  }
+
+
+  String get addParcelWidth {
+    return _localizedValues[locale.languageCode]['add_parcel_width'];
+  }
+
+  String get addParcelLength {
+    return _localizedValues[locale.languageCode]['add_parcel_length'];
+  }
+
+  String get addParcelNoneModeling {
+    return _localizedValues[locale.languageCode]['add_parcel_none_modeling'];
+  }
+
+
+  String get addParcelModelingPropositions {
+    return _localizedValues[locale.languageCode]['add_parcel_modeling_propositions'];
+  }
+
+  String get search {
+    return _localizedValues[locale.languageCode]['search'];
+  }
+
+  String get addGardenPublicVisibility {
+    return _localizedValues[locale.languageCode]['add_garden_public_visibility'];
+  }
+
+  String get addGardenPrivateVisibility {
+    return _localizedValues[locale.languageCode]['add_garden_private_visibility'];
+  }
+
+  String get addActivityTitle {
+    return _localizedValues[locale.languageCode]['add_activity_title'];
+  }
+
+  String get addActivityType {
+    return _localizedValues[locale.languageCode]['add_activity_type'];
+  }
+
+  String get addActivitySnooze {
+    return _localizedValues[locale.languageCode]['add_activity_snooze'];
+  }
+
+  String get addActivitySubmit {
+    return _localizedValues[locale.languageCode]['add_activity_submit'];
+  }
+
+  String get rename {
+    return _localizedValues[locale.languageCode]['rename'];
+  }
+
+  String get detailsParcelRenameTitle {
+    return _localizedValues[locale.languageCode]['details_parcel_rename_title'];
+  }
+
+  String get update {
+    return _localizedValues[locale.languageCode]['update'];
+  }
+
+  String get delete {
+    return _localizedValues[locale.languageCode]['delete'];
+  }
+
+  String get detailsParcelAddCulture {
+    return _localizedValues[locale.languageCode]['details_parcel_add_culture'];
+  }
+
+  String get detailsParcelAddCultureMore {
+    return _localizedValues[locale.languageCode]['details_parcel_add_culture_more'];
+  }
+
+  String get contactUsTitle {
+    return _localizedValues[locale.languageCode]['contact_us_title'];
+  }
+
+
+  String get contactUsSubjectHint {
+    return _localizedValues[locale.languageCode]['contact_us_subject_hint'];
+  }
+
+  String get contactUsSubjectTitle {
+    return _localizedValues[locale.languageCode]['contact_us_subject_title'];
+  }
+
+  String get contactUsBodyTitle {
+    return _localizedValues[locale.languageCode]['contact_us_body_title'];
+  }
+
+
+  String get contactUsBodySend {
+    return _localizedValues[locale.languageCode]['contact_us_body_send'];
+  }
+
+  String get premiumDialogTitle {
+    return _localizedValues[locale.languageCode]['premium_dialog_title'];
+  }
+
+  String get premiumDialogContent {
+    return _localizedValues[locale.languageCode]['premium_dialog_content'];
+  }
+
+
+  String get close {
+    return _localizedValues[locale.languageCode]['close'];
+  }
+
+  String get gardenItemRenameTitle {
+    return _localizedValues[locale.languageCode]['garden_item_rename_tile'];
+  }
+
+  String get gardenItemNoneActivity {
+    return _localizedValues[locale.languageCode]['garden_item_none_activity'];
+  }
+
+
+  String get gardenItemOneActivity {
+    return _localizedValues[locale.languageCode]['garden_item_one_activity'];
+  }
+
+  String get gardenItemMultipleActivity {
+    return _localizedValues[locale.languageCode]['garden_item_multiple_activity'];
+  }
+
+  String get parcelCarousselWait {
+    return _localizedValues[locale.languageCode]['parcel_caroussel_wait'];
+  }
+
+  String get parcelPremiumDialogTitle {
+    return _localizedValues[locale.languageCode]['parcel_premium_dialog_title'];
+  }
+
+  String get createParcelContent {
+    return _localizedValues[locale.languageCode]['create_parcel_content'];
+  }
+
+  String get profileStatsTile {
+    return _localizedValues[locale.languageCode]['profile_stats_tile'];
+  }
+
+
+  String get profileStatus {
+    return _localizedValues[locale.languageCode]['profile_status'];
+  }
+
+  String get appSettingsCgu {
+    return _localizedValues[locale.languageCode]['app_settings_cgu'];
+  }
+
+  String get appSettingsThanks {
+    return _localizedValues[locale.languageCode]['app_settings_thanks'];
+  }
+
+
+  String get appSettingsDisconnectTitle {
+    return _localizedValues[locale.languageCode]['app_settings_disconnect_title'];
+  }
+
+  String get appSettingsDisconnectContent {
+    return _localizedValues[locale.languageCode]['app_settings_disconnect_content'];
+  }
+
+  String get appSettingsDeleteAccountTitle {
+    return _localizedValues[locale.languageCode]['app_settings_delete_account_title'];
+  }
+
+  String get appSettingsDeleteAccountContent {
+    return _localizedValues[locale.languageCode]['app_settings_delete_account_content'];
+  }
+
+
+  String get addParcelChoose {
+    return _localizedValues[locale.languageCode]['add_parcel_choose'];
+  }
+
 
 
 }
