@@ -66,7 +66,7 @@ class AppLocalizations {
       'add_parcel_name_hint': "Parcel's name",
       'add_parcel_name_error': "Parcel's name can't be empty",
       'add_parcel_garden_ground_title': "Do you use a garden box ?",
-      'add_parcel_dimensions_title': "What are the dimensions of the parcel ?",
+      'add_parcel_dimensions_title': "Dimensions in centimeters",
       'add_parcel_garden_scale_label': "(centimeters)",
       'settings_parcel_title': "Parcel's Settings",
       'settings_parcel_delete_button': "Delete this parcel",
@@ -94,10 +94,16 @@ class AppLocalizations {
       'registration_loading': 'Registering...',
       'registration_button': "Create an Account",
       'activities_calendar_header': "en_US",
-      'profile_garden_counter': 'gardens',
-      'profile_parcel_counter': 'parcels',
-      'profile_activites_counter': 'completed activities',
-
+      'profile_garden_counter': "gardens",
+      'profile_parcel_counter': "parcels",
+      'profile_activites_counter': "completed activities",
+      'add_parcel_veggies_asking': "What vegetables do you want to grow ?",
+      'add_parcel_hint_name': "Give parcel's name",
+      'add_parcel_width': 'Width',
+      'add_parcel_length': 'Length',
+      'add_parcel_none_modeling': 'No association corresponding to your search.',
+      'add_parcel_modeling_propositions': 'Here are the associations we recommend !',
+      'search': 'Search',
     },
     'fr': {
       'home': "Mes jardins",
@@ -152,9 +158,9 @@ class AppLocalizations {
       'add_parcel_title': "Créer une parcelle",
       'add_parcel_name_title': "Quel est le nom de la parcelle ?",
       'add_parcel_name_hint': "Nom parcelle",
-      'add_parcel_name_error': "Nom de la parcelle ne peut être vide",
-      'add_parcel_garden_ground_title': "Utilisez vous un bac de culture ?",
-      'add_parcel_dimensions_title': "Quelles sont les dimensions de la parcelle ?",
+      'add_parcel_name_error': "Le nom d'une parcelle ne peut être vide",
+      'add_parcel_garden_ground_title': "Utilisez-vous un bac de culture ?",
+      'add_parcel_dimensions_title': "Dimensions en centimètres",
       'add_parcel_garden_scale_label': "(centimètres)",
       'settings_parcel_title': "Paramètres de la parcelle",
       'settings_parcel_delete_button': "Supprimer parcelle",
@@ -185,6 +191,14 @@ class AppLocalizations {
       'profile_garden_counter': 'jardins',
       'profile_parcel_counter': 'parcelles',
       'profile_activites_counter': 'activités réalisées',
+      'add_parcel_veggies_asking': 'Quels légumes voulez-vous cultiver ?',
+      'add_parcel_hint_name': "Donner un nom à votre parcelle",
+      'add_parcel_width': 'Largeur',
+      'add_parcel_length': 'Longueur',
+      'add_parcel_none_modeling': 'Aucune association correspondante à votre recherche.',
+      'add_parcel_modeling_propositions': 'Voici les associations que nous vous conseillons !',
+      'search': 'Rechercher',
+
     },
   };
 
@@ -534,8 +548,39 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['profile_parcel_counter'];
   }
 
-  String get profileActivitesCounter {
+  String get profileActivitiesCounter {
     return _localizedValues[locale.languageCode]['profile_activites_counter'];
+  }
+
+
+  String get addParcelVeggiesAsking {
+    return _localizedValues[locale.languageCode]['add_parcel_veggies_asking'];
+  }
+
+  String get addParcelHintName {
+    return _localizedValues[locale.languageCode]['add_parcel_hint_name'];
+  }
+
+
+  String get addParcelWidth {
+    return _localizedValues[locale.languageCode]['add_parcel_width'];
+  }
+
+  String get addParcelLength {
+    return _localizedValues[locale.languageCode]['add_parcel_length'];
+  }
+
+  String get addParcelNoneModeling {
+    return _localizedValues[locale.languageCode]['add_parcel_none_modeling'];
+  }
+
+
+  String get addParcelModelingPropositions {
+    return _localizedValues[locale.languageCode]['add_parcel_modeling_propositions'];
+  }
+
+  String get search {
+    return _localizedValues[locale.languageCode]['search'];
   }
 
 

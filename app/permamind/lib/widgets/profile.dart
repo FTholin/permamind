@@ -147,7 +147,7 @@ class Profile extends StatelessWidget {
                         },
                       )
                   ),
-                  title: Text('${AppLocalizations.of(context).profileActivitesCounter}', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
+                  title: Text('${AppLocalizations.of(context).profileActivitiesCounter}', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
               ],
             ),

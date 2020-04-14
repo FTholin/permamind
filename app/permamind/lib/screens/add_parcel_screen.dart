@@ -115,7 +115,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
 //                              color: Colors.green,
                                 child: _currentStep == 3
                                     ? Text(
-                                        "Quels légumes voulez-vous cultiver ?",
+                                        "${AppLocalizations.of(context).addParcelVeggiesAsking}",
                                         maxLines: 3,
                                         style: TextStyle(
                                           color: const Color(0xFF01534F),
@@ -154,7 +154,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                         children: <Widget>[
                                           Row(
                                             children: <Widget>[
-                                              Text("Créer une parcelle",
+                                              Text("${AppLocalizations.of(context).addParcelTitle}",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: const Color(
@@ -184,9 +184,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                     borderSide: BorderSide(
                                                         color: Colors.green)),
                                                 hintText:
-                                                    'Donner un nom à votre parcelle',
+                                                    '',
                                                 errorText: _parcelNameValidate
-                                                    ? "Le nom d'une parcelle ne peut être vide"
+                                                    ? "${AppLocalizations.of(context).addParcelNameError}"
                                                     : null,
                                               ),
                                               onChanged: (value) {
@@ -220,7 +220,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                           top: 2 * SizeConfig.heightMultiplier),
                                       child: Row(
                                         children: <Widget>[
-                                          Text("Dimensions en centimètres",
+                                          Text("${AppLocalizations.of(context).addParcelDimensionTitle}",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color:
@@ -279,7 +279,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                       Text(
                                                           gardenLengthValue ==
                                                                   null
-                                                              ? "Longueur"
+                                                              ? "${AppLocalizations.of(context).addParcelLength}"
                                                               : gardenLengthValue,
                                                           textAlign:
                                                               TextAlign.center,
@@ -344,7 +344,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                       Text(
                                                           gardenWidthValue ==
                                                                   null
-                                                              ? "Largeur"
+                                                              ? "${AppLocalizations.of(context).addParcelWidth}"
                                                               : gardenWidthValue,
                                                           textAlign:
                                                               TextAlign.center,
@@ -391,7 +391,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                       padding: EdgeInsets.only(
                                           top: 2 * SizeConfig.heightMultiplier),
                                       child: Text(
-                                          "Utilisez-vous un bac de culture ?",
+                                          "${AppLocalizations.of(context).addParcelGardenGroundTitle}",
                                           textAlign: TextAlign.center,
                                           maxLines: 2,
                                           style: TextStyle(
@@ -410,7 +410,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                           Flexible(
                                             flex: 10,
                                             child: RadioListTile<bool>(
-                                              title: const Text('Oui'),
+                                              title: Text('${AppLocalizations.of(context).yesChoice}'),
                                               value: true,
                                               groupValue: _parcelOnBac,
                                               activeColor: Colors.green,
@@ -425,7 +425,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                           Flexible(
                                             flex: 10,
                                             child: RadioListTile<bool>(
-                                              title: const Text('Non'),
+                                              title: Text('${AppLocalizations.of(context).noChoice}'),
                                               value: false,
                                               activeColor: Colors.green,
                                               groupValue: _parcelOnBac,
@@ -703,7 +703,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                           children: <Widget>[
                                             Row(
                                               children: <Widget>[
-                                                Text("Créer une parcelle",
+                                                Text("${AppLocalizations.of(context).addParcelTitle}",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         color: const Color(
@@ -733,9 +733,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                       borderSide: BorderSide(
                                                           color: Colors.green)),
                                                   hintText:
-                                                  'Donner un nom à votre parcelle',
+                                                  '${AppLocalizations.of(context).addParcelHintName}',
                                                   errorText: _parcelNameValidate
-                                                      ? "Le nom d'une parcelle ne peut être vide"
+                                                      ? "${AppLocalizations.of(context).addParcelNameError}"
                                                       : null,
                                                 ),
                                                 onChanged: (value) {
@@ -769,7 +769,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             top: 2 * SizeConfig.heightMultiplier),
                                         child: Row(
                                           children: <Widget>[
-                                            Text("Dimensions en centimètres",
+                                            Text("${AppLocalizations.of(context).addParcelDimensionTitle}",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     color:
@@ -828,7 +828,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                         Text(
                                                             gardenLengthValue ==
                                                                 null
-                                                                ? "Longueur"
+                                                                ? "${AppLocalizations.of(context).addParcelLength}"
                                                                 : gardenLengthValue,
                                                             textAlign:
                                                             TextAlign.center,
@@ -893,7 +893,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                         Text(
                                                             gardenWidthValue ==
                                                                 null
-                                                                ? "Largeur"
+                                                                ? "${AppLocalizations.of(context).addParcelWidth}"
                                                                 : gardenWidthValue,
                                                             textAlign:
                                                             TextAlign.center,
@@ -940,7 +940,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                         padding: EdgeInsets.only(
                                             top: 2 * SizeConfig.heightMultiplier),
                                         child: Text(
-                                            "Utilisez-vous un bac de culture ?",
+                                            "${AppLocalizations.of(context).addParcelGardenGroundTitle}",
                                             textAlign: TextAlign.center,
                                             maxLines: 2,
                                             style: TextStyle(
@@ -959,7 +959,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             Flexible(
                                               flex: 10,
                                               child: RadioListTile<bool>(
-                                                title: const Text('Oui'),
+                                                title:  Text('${AppLocalizations.of(context).yesChoice}'),
                                                 value: true,
                                                 groupValue: _parcelOnBac,
                                                 activeColor: Colors.green,
@@ -974,7 +974,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             Flexible(
                                               flex: 10,
                                               child: RadioListTile<bool>(
-                                                title: const Text('Non'),
+                                                title:  Text('${AppLocalizations.of(context).noChoice}'),
                                                 value: false,
                                                 activeColor: Colors.green,
                                                 groupValue: _parcelOnBac,
@@ -1138,7 +1138,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                           'assets/empty_states/empty_garden.png',
                                           fit: BoxFit.scaleDown,
                                         ),
-                                        Text("Aucune modélisation correspondante à votre recherche.",
+                                        Text("${AppLocalizations.of(context).addParcelNoneModeling}",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 color: const Color(
@@ -1213,7 +1213,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                 child: Container(
                                   child: _currentStep == 3
                                       ? Text(
-                                      "Voici les associations que nous vous conseillons !",
+                                      "${AppLocalizations.of(context).addParcelModelingPropositions}",
                                       maxLines: 3,
                                       style: TextStyle(
                                         color: const Color(0xFF01534F),
@@ -1252,7 +1252,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                           children: <Widget>[
                                             Row(
                                               children: <Widget>[
-                                                Text("Créer une parcelle",
+                                                Text("${AppLocalizations.of(context).addParcelTitle}",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         color: const Color(
@@ -1282,9 +1282,9 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                       borderSide: BorderSide(
                                                           color: Colors.green)),
                                                   hintText:
-                                                  'Donner un nom à votre parcelle',
+                                                  '${AppLocalizations.of(context).addParcelHintName}',
                                                   errorText: _parcelNameValidate
-                                                      ? "Le nom d'une parcelle ne peut être vide"
+                                                      ? "${AppLocalizations.of(context).addParcelNameError}"
                                                       : null,
                                                 ),
                                                 onChanged: (value) {
@@ -1318,7 +1318,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             top: 2 * SizeConfig.heightMultiplier),
                                         child: Row(
                                           children: <Widget>[
-                                            Text("Dimensions en centimètres",
+                                            Text("${AppLocalizations.of(context).addParcelDimensionTitle}",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     color:
@@ -1377,7 +1377,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                         Text(
                                                             gardenLengthValue ==
                                                                 null
-                                                                ? "Longueur"
+                                                                ? "${AppLocalizations.of(context).addParcelLength}"
                                                                 : gardenLengthValue,
                                                             textAlign:
                                                             TextAlign.center,
@@ -1442,7 +1442,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                         Text(
                                                             gardenWidthValue ==
                                                                 null
-                                                                ? "Largeur"
+                                                                ? "${AppLocalizations.of(context).addParcelWidth}"
                                                                 : gardenWidthValue,
                                                             textAlign:
                                                             TextAlign.center,
@@ -1489,7 +1489,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                         padding: EdgeInsets.only(
                                             top: 2 * SizeConfig.heightMultiplier),
                                         child: Text(
-                                            "Utilisez-vous un bac de culture ?",
+                                            "${AppLocalizations.of(context).addParcelGardenGroundTitle}",
                                             textAlign: TextAlign.center,
                                             maxLines: 2,
                                             style: TextStyle(
@@ -1508,7 +1508,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             Flexible(
                                               flex: 10,
                                               child: RadioListTile<bool>(
-                                                title: const Text('Oui'),
+                                                title:  Text('${AppLocalizations.of(context).yesChoice}'),
                                                 value: true,
                                                 groupValue: _parcelOnBac,
                                                 activeColor: Colors.green,
@@ -1523,7 +1523,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                             Flexible(
                                               flex: 10,
                                               child: RadioListTile<bool>(
-                                                title: const Text('Non'),
+                                                title:  Text('${AppLocalizations.of(context).noChoice}'),
                                                 value: false,
                                                 activeColor: Colors.green,
                                                 groupValue: _parcelOnBac,
@@ -2007,7 +2007,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                     BlocProvider.of<ModelingsBloc>(context)
                         .add(FetchModelings(veggiesList, veggiesComposition));
                   },
-                  child: Text('Rechercher')),
+                  child: Text('${AppLocalizations.of(context).search}')),
             ]);
       }
 

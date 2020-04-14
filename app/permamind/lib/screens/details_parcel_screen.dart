@@ -271,11 +271,8 @@ class DetailsParcelScreen extends StatelessWidget {
                         parcelId: parcelId,
                         userId: user.id,
                       ),
-                      Flexible(
-                        flex: 1,
-                        child: Container(
-                        ),
-                      )
+                      const Padding(padding: EdgeInsets.only(bottom: 40)),
+
                     ]),
                 floatingActionButton: ActivitySpeedDial(
                     gardenId: gardenId, parcelId: parcelId, visible: true),
