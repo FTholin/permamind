@@ -55,15 +55,18 @@ class DetailsParcelScreen extends StatelessWidget {
                       icon: Icon(Icons.add),
                       tooltip: 'add new activity',
                       onPressed: () {
-                         MaterialPageRoute(
-                            builder: (_) {
 
-                              return BlocProvider.value(
-                                value: BlocProvider.of<ActivitiesBloc>(context),
-                                child: ActivityAddedScreen(gardenId: gardenId, parcelId: parcelId),
-                              );
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) {
 
-                            });
+                                  return BlocProvider.value(
+                                    value: BlocProvider.of<ActivitiesBloc>(context),
+                                    child: ActivityAddedScreen(gardenId: gardenId, parcelId: parcelId),
+                                  );
+
+                                })
+                        );
                       },
                     ),
                     IconButton(
@@ -284,8 +287,6 @@ class DetailsParcelScreen extends StatelessWidget {
 
 
                     ]),
-                floatingActionButton: ActivitySpeedDial(
-                    gardenId: gardenId, parcelId: parcelId, visible: true),
               );
             } else {
               return Scaffold(
@@ -536,8 +537,7 @@ class DetailsParcelScreen extends StatelessWidget {
                         ),
                       )
                     ]),
-//                floatingActionButton: ActivitySpeedDial(
-//                    gardenId: gardenId, parcelId: parcelId, visible: true),
+
               );
             }
           } else {

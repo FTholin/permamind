@@ -11,8 +11,6 @@ export 'scheduler_calendar.dart';
 export 'scheduler_list_item.dart';
 export 'tutorial_item.dart';
 export 'veggies_design_chart.dart';
-export 'speed_dial_parcel.dart';
-export 'parcel_item.dart';
 export 'parcel_carrousel.dart';
 export 'my_stepper.dart';
 export 'profile.dart';

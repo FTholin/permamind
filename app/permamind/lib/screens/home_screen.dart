@@ -79,40 +79,35 @@ class HomeScreen extends StatelessWidget {
   Widget actionButton(AppTab activeTab, BuildContext context) {
     switch(activeTab) {
       case AppTab.gardens:
-        return  FlatButton(
-            child: Text(
-                "Ajouter",
-                style: TextStyle(
-                    color: Colors.white,
-//                        fontWeight: FontWeight.bold,
-                    fontSize: 1.9 * SizeConfig.textMultiplier
-                )
-            ),
-            onPressed: () {
-              // SI accountStatus == 0 et gardenCounter <= 1
-              if (user.accountStatus == 0 && user.gardenCounter >= 1) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: new Text("${AppLocalizations.of(context).premiumDialogTitle}"),
-                      content: new Text("${AppLocalizations.of(context).premiumDialogContent}"),
-                      actions: <Widget>[
-                        // usually buttons at the bottom of the dialog
-                        new FlatButton(
-                          child: new Text("${AppLocalizations.of(context).close}"),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              } else {
-                Navigator.pushNamed(context, '/GardenAdded');
-              }
+
+        return IconButton(
+          icon: Icon(Icons.add),
+          tooltip: 'add new garden',
+          onPressed: () {
+            // SI accountStatus == 0 et gardenCounter <= 1
+            if (user.accountStatus == 0 && user.gardenCounter >= 1) {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: new Text("${AppLocalizations.of(context).premiumDialogTitle}"),
+                    content: new Text("${AppLocalizations.of(context).premiumDialogContent}"),
+                    actions: <Widget>[
+                      // usually buttons at the bottom of the dialog
+                      new FlatButton(
+                        child: new Text("${AppLocalizations.of(context).close}"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              Navigator.pushNamed(context, '/GardenAdded');
             }
+          },
         );
         break;
 

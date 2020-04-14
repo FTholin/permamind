@@ -36,18 +36,18 @@ class SettingsScreen extends StatelessWidget {
 //                    ),
 //                  ),
 
-                    Card(
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.language,
-                          size: 24.0,
-                          semanticLabel:
-                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
-                        ),
-                        title: Text('Changer la langue'),
-                        onTap: () {},
-                      ),
-                    ),
+//                    Card(
+//                      child: ListTile(
+//                        leading: Icon(
+//                          Icons.language,
+//                          size: 24.0,
+//                          semanticLabel:
+//                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
+//                        ),
+//                        title: Text('Changer la langue'),
+//                        onTap: () {},
+//                      ),
+//                    ),
 
                     Card(
                       child: ListTile(
@@ -57,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
                           semanticLabel:
                           '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
-                        title: Text("Conditions d'utilisation"),
+                        title: Text("${AppLocalizations.of(context).appSettingsCgu}"),
                         onTap: () {},
                       ),
                     ),
@@ -70,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
                           semanticLabel:
                           '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
-                        title: Text("Aknowledgements"),
+                        title: Text("${AppLocalizations.of(context).appSettingsThanks}"),
                         onTap: () {},
                       ),
                     ),
@@ -89,11 +89,11 @@ class SettingsScreen extends StatelessWidget {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Déconnexion de votre compte'),
+                                title: Text('${AppLocalizations.of(context).appSettingsDisconnectTitle}'),
                                 content: SingleChildScrollView(
                                   child: ListBody(
                                     children: <Widget>[
-                                      Text("Vous vous apprétez à vous déconnecter de Permamind."),
+                                      Text("${AppLocalizations.of(context).appSettingsDisconnectContent}"),
                                     ],
                                   ),
                                 ),
@@ -130,18 +130,18 @@ class SettingsScreen extends StatelessWidget {
                           semanticLabel:
                           '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
-                        title: Text("${AppLocalizations.of(context).delete} compte"),
+                        title: Text("${AppLocalizations.of(context).appSettingsDeleteAccountTitle}"),
                         onTap: () {
                           return showDialog<void>(
                             context: context,
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Suppression de votre compte'),
+                                title: Text('${AppLocalizations.of(context).appSettingsDeleteAccountTitle}'),
                                 content: SingleChildScrollView(
                                   child: ListBody(
                                     children: <Widget>[
-                                      Text("Message informatif pour informer l'user"),
+                                      Text("${AppLocalizations.of(context).appSettingsDeleteAccountContent}"),
                                     ],
                                   ),
                                 ),

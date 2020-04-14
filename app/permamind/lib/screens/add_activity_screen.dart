@@ -29,7 +29,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
   final List<Map<String, String>> types = [
     {'fr_FR': 'Arrosage', 'en_US': 'Watering'},
     {'fr_FR': 'Semis', 'en_US': 'Sowing'},
-    {'fr_FR': 'Repiquage/Plantation', 'nameEn': 'Transplanting/Plantation'},
+    {'fr_FR': 'Repiquage/Plantation', 'en_US': 'Transplanting/Plantation'},
     {'fr_FR': 'Désherbage', 'en_US': 'Weeding'},
     {'fr_FR': 'Récolte', 'en_US': 'Harvest'},
     {'fr_FR': 'Faux semis', 'en_US': 'Stale seed bed'},
@@ -126,7 +126,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               return types.map((Map<String, String> item) {
                 return PopupMenuItem<Map<String, String>>(
                   value: item,
-                  child: Text(item['${AppLocalizations.of(context).language}']),
+                  child: Text('${item['${AppLocalizations.of(context).language}']}')
                 );
               }).toList();
             },

@@ -111,7 +111,7 @@ class AppLocalizations {
       'add_activity_snooze': 'When would you like to do it ?',
       'add_activity_submit': 'Submit the activity',
       'rename': 'Rename',
-      'update': 'Mettre à jour',
+      'update': 'Update',
       'delete': 'Delete',
       'close': 'Close',
       'details_parcel_rename_title': "Rename this parcel",
@@ -131,7 +131,16 @@ class AppLocalizations {
       'garden_item_multiple_activity': "activities to be carried out today.",
       'parcel_caroussel_wait': "Awaiting launch",
       'parcel_premium_dialog_title': "Number of parcels exceeded",
-      'create_parcel_content': "Click here to add a parcel to your garden"
+      'create_parcel_content': "Click here to add a parcel to your garden",
+      'profile_stats_tile': "My Stats",
+      'profile_status': 'You are a pioneer !',
+      'app_settings_cgu': "End-user license agreement",
+      'app_settings_thanks': "Acknowledgements",
+      'app_settings_disconnect_title': "Logging out of your account",
+      'app_settings_disconnect_content': "You're about to disconnect from Permamind.",
+      'app_settings_delete_account_title': "Deleting your account",
+      'app_settings_delete_account_content': "The deletion of your account will be final.",
+
     },
     'fr': {
       'home': "Mes jardins",
@@ -252,8 +261,15 @@ class AppLocalizations {
       'garden_item_multiple_activity': "activités à réaliser aujourd'hui.",
       'parcel_caroussel_wait': "En attente de lancement",
       'parcel_premium_dialog_title': "Nombre de parcelles dépassé",
-      'create_parcel_content': "Cliquer ici pour ajouter une parcelle à votre potager"
-
+      'create_parcel_content': "Cliquer ici pour ajouter une parcelle à votre potager",
+      'profile_stats_tile': "Mes statistiques",
+      'profile_status': 'Vous êtes un pionnier',
+      'app_settings_cgu': "Conditions générales d'utilisation",
+      'app_settings_thanks': "Remerciements",
+      'app_settings_disconnect_title': "Déconnexion de votre compte",
+      'app_settings_disconnect_content': "Vous êtes sur le point de vous déconnecter de Permamind.",
+      'app_settings_delete_account_title': "Suppression de votre compte",
+      'app_settings_delete_account_content': "La suppression de votre compte sera définitive.",
     },
   };
 
@@ -748,6 +764,40 @@ class AppLocalizations {
 
   String get createParcelContent {
     return _localizedValues[locale.languageCode]['create_parcel_content'];
+  }
+
+  String get profileStatsTile {
+    return _localizedValues[locale.languageCode]['profile_stats_tile'];
+  }
+
+
+  String get profileStatus {
+    return _localizedValues[locale.languageCode]['profile_status'];
+  }
+
+  String get appSettingsCgu {
+    return _localizedValues[locale.languageCode]['app_settings_cgu'];
+  }
+
+  String get appSettingsThanks {
+    return _localizedValues[locale.languageCode]['app_settings_thanks'];
+  }
+
+
+  String get appSettingsDisconnectTitle {
+    return _localizedValues[locale.languageCode]['app_settings_disconnect_title'];
+  }
+
+  String get appSettingsDisconnectContent {
+    return _localizedValues[locale.languageCode]['app_settings_disconnect_content'];
+  }
+
+  String get appSettingsDeleteAccountTitle {
+    return _localizedValues[locale.languageCode]['app_settings_delete_account_title'];
+  }
+
+  String get appSettingsDeleteAccountContent {
+    return _localizedValues[locale.languageCode]['app_settings_delete_account_content'];
   }
 
 

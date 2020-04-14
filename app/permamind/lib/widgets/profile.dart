@@ -57,9 +57,7 @@ class Profile extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 )),
                             const Padding(padding: EdgeInsets.only(bottom: 2.0)),
-                            RaisedButton(
-                              child: Text("Edit profile"),
-                            )
+
                           ],
                         ),
                       )
@@ -76,7 +74,7 @@ class Profile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("MY STATS",
+                Text("${AppLocalizations.of(context).profileStatsTile}",
                     style: TextStyle(
                       color: const Color(0xFF01534F),
                       fontSize: 1.8 * SizeConfig.textMultiplier,
@@ -98,7 +96,7 @@ class Profile extends StatelessWidget {
                       aspectRatio: 1,
                       child: Image.asset('assets/utils_image/hat.png', fit: BoxFit.contain,)
                   ),
-                  title: Text('Vous êtes un pionnier !', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
+                  title: Text('${AppLocalizations.of(context).profileStatus}', style: TextStyle(fontSize: 2 * SizeConfig.textMultiplier)),
                 ),
                 Padding(padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),),
 
@@ -171,10 +169,8 @@ class Profile extends StatelessWidget {
               width: double.infinity,
               child: Padding(
                   padding: EdgeInsets.all(15),
-                  // TODO Changer internationalisation
                   child: Center(
-                    // TODO Internationalisation
-                    child: Text("Contact us !",
+                    child: Text("${AppLocalizations.of(context).contactUsTitle}",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: const Color(0xFFF9F9F9),
