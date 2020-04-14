@@ -66,7 +66,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   Widget _buildTableCalendar( Map<DateTime, List> events) {
 
     return TableCalendar(
-      locale: AppLocalizations.of(context).activitiesCalendarHeader,
+      locale: AppLocalizations.of(context).language,
       calendarController: _calendarController,
       events: _events,
       initialCalendarFormat: CalendarFormat.week,
@@ -96,7 +96,7 @@ class _SchedulerCalendarState extends State<SchedulerCalendar> {
   Widget _buildEmptyTableCalendar() {
 
     return TableCalendar(
-      locale: AppLocalizations.of(context).activitiesCalendarHeader,
+      locale: AppLocalizations.of(context).language,
       calendarController: _calendarController,
       initialCalendarFormat: CalendarFormat.week,
       calendarStyle: CalendarStyle(

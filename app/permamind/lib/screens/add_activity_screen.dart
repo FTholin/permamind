@@ -27,15 +27,15 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
   bool _activityNameValidate = false;
 
   final List<Map<String, String>> types = [
-    {'nameFr': 'Arrosage', 'nameEn': 'Watering'},
-    {'nameFr': 'Semis', 'nameEn': 'Sowing'},
-    {'nameFr': 'Repiquage/Plantation', 'nameEn': 'Transplanting/Plantation'},
-    {'nameFr': 'Désherbage', 'nameEn': 'Weeding'},
-    {'nameFr': 'Récolte', 'nameEn': 'Harvest'},
-    {'nameFr': 'Faux semis', 'nameEn': 'Stale seed bed'},
-    {'nameFr': 'Fertilisation', 'nameEn': 'Fertilization'},
-    {'nameFr': 'Paillage', 'nameEn': 'Mulching'},
-    {'nameFr': 'Diagnostique maladie', 'nameEn': 'Disease diagnosis'},
+    {'fr_FR': 'Arrosage', 'en_US': 'Watering'},
+    {'fr_FR': 'Semis', 'en_US': 'Sowing'},
+    {'fr_FR': 'Repiquage/Plantation', 'nameEn': 'Transplanting/Plantation'},
+    {'fr_FR': 'Désherbage', 'en_US': 'Weeding'},
+    {'fr_FR': 'Récolte', 'en_US': 'Harvest'},
+    {'fr_FR': 'Faux semis', 'en_US': 'Stale seed bed'},
+    {'fr_FR': 'Fertilisation', 'en_US': 'Fertilization'},
+    {'fr_FR': 'Paillage', 'en_US': 'Mulching'},
+    {'fr_FR': 'Diagnostique maladie', 'en_US': 'Disease diagnosis'},
   ];
 
   Map<String, String> activityTypeValue;
@@ -81,16 +81,12 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset(
-                // TODO Changer internationalisation
-
               'assets/utils_image/tree.png',
                 fit: BoxFit.scaleDown,
               ),
             ],
           )),
-          // TODO Changer internationalisation
-
-          Text("Titre de la nouvelle activité ?",
+          Text("${AppLocalizations.of(context).addActivityTitle}",
               textAlign: TextAlign.left,
               maxLines: 2,
               style: TextStyle(
@@ -116,8 +112,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               setState(() {});
             },
           ),
-          // TODO Changer internationalisation
-          Text("Type d'activité ?",
+          Text("${AppLocalizations.of(context).addActivityType}",
               textAlign: TextAlign.left,
               maxLines: 2,
               style: TextStyle(
@@ -131,8 +126,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               return types.map((Map<String, String> item) {
                 return PopupMenuItem<Map<String, String>>(
                   value: item,
-                  // TODO Changer ici avec l'internationalisation
-                  child: Text(item['nameFr']),
+                  child: Text(item['${AppLocalizations.of(context).language}']),
                 );
               }).toList();
             },
@@ -155,8 +149,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child:
-                    // TODO Changer internationalisation
-                    Text(activityTypeValue == null ? "Type d'activité" : activityTypeValue['nameFr'],
+                    Text(activityTypeValue == null ? "${AppLocalizations.of(context).addActivityType}" : activityTypeValue['${AppLocalizations.of(context).language}'],
 //                            textAlign:
 //                            TextAlign.left,
                             style: TextStyle(
@@ -181,8 +174,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               ),
             ),
           ),
-          // TODO Changer internationalisation
-          Text("Quand souhaitez vous la réaliser ?",
+          Text("${AppLocalizations.of(context).addActivitySnooze}",
               textAlign: TextAlign.left,
               maxLines: 2,
               style: TextStyle(
@@ -223,7 +215,7 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
                             widget.parcelId,
                             false,
                             referenceDate,
-                            activityTypeValue['nameEn'],
+                            activityTypeValue['en_US'],
                             '',
                             null
                         )
@@ -247,9 +239,8 @@ class _ActivityAddedScreenState extends State<ActivityAddedScreen> {
               width: double.infinity,
               child: Padding(
                 padding: EdgeInsets.all(15),
-                // TODO Changer internationalisation
                 child: Center(
-                  child: Text("Soumettre l'activité",
+                  child: Text("${AppLocalizations.of(context).addActivitySubmit}",
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       style: TextStyle(

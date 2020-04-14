@@ -4,21 +4,18 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chips_input/flutter_chips_input.dart';
 import 'package:permamind/blocs/blocs.dart';
 import 'package:permamind/models/models.dart';
 import 'package:permamind/widgets/my_stepper.dart';
 
 class GardenAddedScreen extends StatefulWidget {
   final User _user;
-  final DataRepository _dataRepository;
 
   GardenAddedScreen(
       {Key key, @required User user, @required DataRepository dataRepository})
       : assert(user != null),
         assert(dataRepository != null),
         _user = user,
-        _dataRepository = dataRepository,
         super(key: key);
 
   @override
@@ -71,7 +68,7 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                      Text("Créer un jardin",
+                                      Text("${AppLocalizations.of(context).gardenAddedTitle}",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: const Color(0xFF01534F),
@@ -94,8 +91,8 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                               borderSide: BorderSide(
                                                   color: Colors.green)),
                                           hintText:
-                                              'Donner un nom à votre jardin',
-                                        errorText: _gardenNameValidate ? 'Le nom du jardin ne peut être vide' : null,
+                                              '${AppLocalizations.of(context).gardenAddedNameTitle}',
+                                        errorText: _gardenNameValidate ? '${AppLocalizations.of(context).gardenAddedNameError}' : null,
                                       ),
                                       onChanged: (value) {
                                         _gardenName.text.isEmpty
@@ -126,7 +123,7 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                   top: 2 * SizeConfig.heightMultiplier),
                               child: Row(
                                 children: <Widget>[
-                                  Text("Rendre le jardin public",
+                                  Text("${AppLocalizations.of(context).gardenAddedVisibilityTitle}",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: const Color(0xFF01534F),
@@ -159,12 +156,12 @@ class _GardenAddedScreenState extends State<GardenAddedScreen> {
                                                           .widthMultiplier),
                                               child: _publicVisibility == true
                                                   ? Text(
-                                                      "Le jardin est public.",
+                                                      "${AppLocalizations.of(context).addGardenPublicVisibility}",
                                                       style: TextStyle(
                                                           color: const Color(
                                                               0xFF01534F),
                                                           fontSize: 19))
-                                                  : Text("Le jardin est privé.",
+                                                  : Text("${AppLocalizations.of(context).addGardenPrivateVisibility}",
                                                       style: TextStyle(
                                                           color: const Color(
                                                               0xFF01534F),

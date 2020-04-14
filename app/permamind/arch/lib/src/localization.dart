@@ -30,10 +30,10 @@ class AppLocalizations {
       'settings_garden_leave_title': "Leave this garden ?",
       'settings_garden_leave_message': "This action will result in the permanent leaving of the garden.",
       'add_garden_title': "Create a garden",
-      'add_garden_name_title': "What's garden's name ?",
+      'add_garden_name_title': "Give a name to your garden",
       'add_garden_name_hint': "Garden's name",
       'add_garden_name_error': "Garden's name can't be empty",
-      'add_garden_visibilityTitle': "Would you like to make this garden public ?",
+      'add_garden_visibilityTitle': "Making the garden public ?",
       'yes_choice': 'Yes',
       'no_choice': 'No',
       'add_garden_gardeners_title': "Add a few gardeners ?",
@@ -93,7 +93,7 @@ class AppLocalizations {
       'registration_failure': 'Registration Failure',
       'registration_loading': 'Registering...',
       'registration_button': "Create an Account",
-      'activities_calendar_header': "en_US",
+      'language': "en_US",
       'profile_garden_counter': "gardens",
       'profile_parcel_counter': "parcels",
       'profile_activites_counter': "completed activities",
@@ -104,6 +104,12 @@ class AppLocalizations {
       'add_parcel_none_modeling': 'No association corresponding to your search.',
       'add_parcel_modeling_propositions': 'Here are the associations we recommend !',
       'search': 'Search',
+      'add_garden_public_visibility': "The garden is public.",
+      'add_garden_private_visibility': "The garden is private.",
+      'add_activity_title': 'Title of the new activity ?',
+      'add_activity_type': "Type of activity ?",
+      'add_activity_snooze': 'When would you like to do it ?',
+      'add_activity_submit': 'Submit the activity'
     },
     'fr': {
       'home': "Mes jardins",
@@ -122,10 +128,10 @@ class AppLocalizations {
       'settings_garden_leave_title': "Quitter ce jardin ?",
       'settings_garden_leave_message': "Cette action entraîne votre départ de ce jardin et de ces parcelles.",
       'add_garden_title': "Créer un jardin",
-      'add_garden_name_title': "Quel est le nom de votre jardin ?",
+      'add_garden_name_title': "Donner un nom à votre jardin",
       'add_garden_name_hint': "Nom jardin",
-      'add_garden_name_error': "Nom du jardin ne peut être vide",
-      'add_garden_visibilityTitle': "Souhaitez vous rendre ce jardin public ?",
+      'add_garden_name_error': "Le nom du jardin ne peut être vide",
+      'add_garden_visibilityTitle': "Rendre le jardin public ?",
       'button_continue': "Continuer",
       'button_cancel': "Annuler",
       'yes_choice': 'Oui',
@@ -187,7 +193,7 @@ class AppLocalizations {
       'registration_failure': "Échec de l'inscription",
       'registration_loading': "Inscription en cours",
       'registration_button': "Créer un compte",
-      'activities_calendar_header': "fr_FR",
+      'language': "fr_FR",
       'profile_garden_counter': 'jardins',
       'profile_parcel_counter': 'parcelles',
       'profile_activites_counter': 'activités réalisées',
@@ -198,6 +204,12 @@ class AppLocalizations {
       'add_parcel_none_modeling': 'Aucune association correspondante à votre recherche.',
       'add_parcel_modeling_propositions': 'Voici les associations que nous vous conseillons !',
       'search': 'Rechercher',
+      'add_garden_public_visibility': "Le jardin est public.",
+      'add_garden_private_visibility': "Le jardin est privé.",
+      'add_activity_title': 'Titre de la nouvelle activité ?',
+      'add_activity_type': "Type d'activité ?",
+      'add_activity_snooze': 'Quand souhaitez vous la réaliser ?',
+      'add_activity_submit': "Soumettre l'activité"
 
     },
   };
@@ -266,23 +278,23 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['button_cancel'];
   }
 
-  String get GardenAddedTitle {
+  String get gardenAddedTitle {
     return _localizedValues[locale.languageCode]['add_garden_title'];
   }
 
-  String get GardenAddedNameTitle {
+  String get gardenAddedNameTitle {
     return _localizedValues[locale.languageCode]['add_garden_name_title'];
   }
 
-  String get GardenAddedNameHint {
+  String get gardenAddedNameHint {
     return _localizedValues[locale.languageCode]['add_garden_name_hint'];
   }
 
-  String get GardenAddedNameError {
+  String get gardenAddedNameError {
     return _localizedValues[locale.languageCode]['add_garden_name_error'];
   }
 
-  String get GardenAddedVisibilityTitle {
+  String get gardenAddedVisibilityTitle {
     return _localizedValues[locale.languageCode]['add_garden_visibilityTitle'];
   }
 
@@ -528,8 +540,8 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['registration_button'];
   }
 
-  String get activitiesCalendarHeader {
-    return _localizedValues[locale.languageCode]['activities_calendar_header'];
+  String get language {
+    return _localizedValues[locale.languageCode]['language'];
   }
 
   String get learningTitle {
@@ -582,6 +594,32 @@ class AppLocalizations {
   String get search {
     return _localizedValues[locale.languageCode]['search'];
   }
+
+  String get addGardenPublicVisibility {
+    return _localizedValues[locale.languageCode]['add_garden_public_visibility'];
+  }
+
+  String get addGardenPrivateVisibility {
+    return _localizedValues[locale.languageCode]['add_garden_private_visibility'];
+  }
+
+  String get addActivityTitle {
+    return _localizedValues[locale.languageCode]['add_activity_title'];
+  }
+
+  String get addActivityType {
+    return _localizedValues[locale.languageCode]['add_activity_type'];
+  }
+
+  String get addActivitySnooze {
+    return _localizedValues[locale.languageCode]['add_activity_snooze'];
+  }
+
+  String get addActivitySubmit {
+    return _localizedValues[locale.languageCode]['add_activity_submit'];
+  }
+
+
 
 
 
