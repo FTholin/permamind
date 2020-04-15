@@ -141,7 +141,11 @@ class AppLocalizations {
       'app_settings_delete_account_title': "Deleting your account",
       'app_settings_delete_account_content': "The deletion of your account will be final.",
       'add_parcel_choose': "Choose this association",
-
+      'forgot_password': 'Forgot password?',
+      'log_in_not_member': 'Not a member?',
+      'log_in_join': ' Join Permamind 🌱',
+      'log_in_or_separator': 'OR',
+      'sign_in_google_title': 'Sign in with Google',
     },
     'fr': {
       'home': "Mes jardins",
@@ -272,6 +276,12 @@ class AppLocalizations {
       'app_settings_delete_account_title': "Suppression de votre compte",
       'app_settings_delete_account_content': "La suppression de votre compte sera définitive.",
       'add_parcel_choose': "Choisir cette association",
+      'forgot_password': 'Mot de passe oublié?',
+      'log_in_not_member': 'Non membre?',
+      'log_in_join': ' Rejoindre Permamind 🌱',
+      'log_in_or_separator': 'OU',
+      'sign_in_google_title': 'Connectez-vous avec Google',
+
     },
   };
 
@@ -802,11 +812,30 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['app_settings_delete_account_content'];
   }
 
-
   String get addParcelChoose {
     return _localizedValues[locale.languageCode]['add_parcel_choose'];
   }
 
+  String get forgotPassword {
+    return _localizedValues[locale.languageCode]['forgot_password'];
+  }
+
+  String get logInNotMember {
+    return _localizedValues[locale.languageCode]['log_in_not_member'];
+  }
+
+  String get logInJoin {
+    return _localizedValues[locale.languageCode]['log_in_join'];
+  }
+
+  String get logInOrSeparator {
+    return _localizedValues[locale.languageCode]['log_in_or_separator'];
+  }
+
+
+  String get signInGoogleTitle {
+    return _localizedValues[locale.languageCode]['sign_in_google_title'];
+  }
 
 
 }

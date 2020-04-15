@@ -13,12 +13,22 @@ class CreateAccountButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return FlatButton(
-      color: Colors.green,
-      textColor: Colors.white,
-      child: Text(
-        '${AppLocalizations.of(context).registrationButton}',
+      child: RichText(
+        text: TextSpan(
+          text: '${AppLocalizations.of(context).logInNotMember}',
+          style: DefaultTextStyle.of(context).style,
+          children: <TextSpan>[
+            TextSpan(text: '${AppLocalizations.of(context).logInJoin}', style: TextStyle(
+                fontWeight: FontWeight.bold,
+              fontSize: 1.8 *
+                  SizeConfig
+                      .textMultiplier,)),
+          ],
+        ),
       ),
+
       onPressed: () {
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context) {
