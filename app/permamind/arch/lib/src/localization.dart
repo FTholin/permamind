@@ -149,6 +149,8 @@ class AppLocalizations {
       'forgot_password_dialog_title': "Forgot your Password?",
       'forgot_password_dialog_content': "Enter your email address below and we'll get you back on track.",
       'reset_password': 'Reset Password',
+      'start_adventure_garden': 'Add your first garden to start the adventure with Permamind!',
+
     },
     'fr': {
       'home': "Mes jardins",
@@ -287,6 +289,7 @@ class AppLocalizations {
       'forgot_password_dialog_title': "Mot de passe oublié",
       'forgot_password_dialog_content': "Saisissez votre adresse électronique ci-dessous et nous vous remettrons sur la bonne voie.",
       'reset_password': 'Réinitialisation',
+      'start_adventure_garden': "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
 
     },
   };
@@ -852,6 +855,11 @@ class AppLocalizations {
 
   String get resetPassword {
     return _localizedValues[locale.languageCode]['reset_password'];
+  }
+
+
+  String get startAdventureGarden {
+    return _localizedValues[locale.languageCode]['start_adventure_garden'];
   }
 
 

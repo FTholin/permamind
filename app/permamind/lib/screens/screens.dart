@@ -12,3 +12,4 @@ export 'add_garden_screen.dart';
 export 'details_parcel_screen.dart';
 export 'modelings_found_screen.dart';
 export 'eula_screen.dart';
+export 'acknowledgement_screen.dart';

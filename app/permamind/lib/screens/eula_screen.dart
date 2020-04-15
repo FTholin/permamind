@@ -170,7 +170,7 @@ class _EulaScreenState extends State<EulaScreen> {
               Padding(padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),child: Container(),),
 
               Text(
-                  '''L’Application propose à tout utilisateur ayant préalablement créé un compte un service d’accompagnement dans la création et l’entretien d’un potager selon les préceptes de l’écoculture  une méthode de production diversifiée de produits agricoles, développée à la Ferme du Bec-Hellouin par Charles et Perrine Hervé-Gruyer. Le nombre de jardin disponible est limité à unique composé au maximum de 3 parcelles de culture.''',style: TextStyle(
+                  '''L’Application propose à tout utilisateur ayant préalablement créé un compte un service d’accompagnement dans la création et l’entretien d’un potager selon les préceptes de l’écoculture  une méthode de production diversifiée de produits agricoles, développée à la Ferme du Bec-Hellouin par Charles et Perrine Hervé-Gruyer. Nous proposons un unique jardin composé au maximum de 3 parcelles de culture.''',style: TextStyle(
                 fontSize: 1.6 * SizeConfig.textMultiplier,
               )),
               Padding(padding: EdgeInsets.only(top: 1 * SizeConfig.heightMultiplier),child: Container(),),

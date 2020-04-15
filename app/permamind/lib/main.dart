@@ -16,7 +16,7 @@ void main() {
   // add this, and it should be the first line in main method
   WidgetsFlutterBinding.ensureInitialized();
 
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+//  BlocSupervisor.delegate = SimpleBlocDelegate();
 
   final userRepository = UserRepository();
 
@@ -343,6 +343,9 @@ class App extends StatelessWidget {
                   } else if (settings.name == "/eula") {
                     return MaterialPageRoute(
                         builder: (context) => EulaScreen());
+                  } else if (settings.name == "/acknowledgement") {
+                    return MaterialPageRoute(
+                        builder: (context) => AcknowledgementScreen());
                   }
                   else if (settings.name == "/joinGarden") {
 

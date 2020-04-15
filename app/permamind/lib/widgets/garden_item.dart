@@ -30,7 +30,7 @@ class GardenItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 2 * SizeConfig.heightMultiplier),
       child: Container(
-        height: 34 * SizeConfig.heightMultiplier,
+        height: 37 * SizeConfig.heightMultiplier,
         decoration: BoxDecoration(
           color: Color.fromRGBO(253, 255, 242, 1),
           border: Border.all(
@@ -44,7 +44,7 @@ class GardenItem extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Container(
-                  height: 11 * SizeConfig.heightMultiplier,
+                  height: 15 * SizeConfig.heightMultiplier,
 //                color: Colors.blue,
                   child: Padding(
                     padding: EdgeInsets.all(0.1 * SizeConfig.heightMultiplier),
