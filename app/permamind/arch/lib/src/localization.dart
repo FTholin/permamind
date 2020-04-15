@@ -146,6 +146,9 @@ class AppLocalizations {
       'log_in_join': ' Join Permamind 🌱',
       'log_in_or_separator': 'OR',
       'sign_in_google_title': 'Sign in with Google',
+      'forgot_password_dialog_title': "Forgot your Password?",
+      'forgot_password_dialog_content': "Enter your email address below and we'll get you back on track.",
+      'reset_password': 'Reset Password',
     },
     'fr': {
       'home': "Mes jardins",
@@ -281,6 +284,9 @@ class AppLocalizations {
       'log_in_join': ' Rejoindre Permamind 🌱',
       'log_in_or_separator': 'OU',
       'sign_in_google_title': 'Connectez-vous avec Google',
+      'forgot_password_dialog_title': "Mot de passe oublié",
+      'forgot_password_dialog_content': "Saisissez votre adresse électronique ci-dessous et nous vous remettrons sur la bonne voie.",
+      'reset_password': 'Réinitialisation',
 
     },
   };
@@ -836,6 +842,18 @@ class AppLocalizations {
   String get signInGoogleTitle {
     return _localizedValues[locale.languageCode]['sign_in_google_title'];
   }
+  String get forgotPasswordDialogTitle {
+    return _localizedValues[locale.languageCode]['forgot_password_dialog_title'];
+  }
+
+  String get forgotPasswordDialogContent {
+    return _localizedValues[locale.languageCode]['forgot_password_dialog_content'];
+  }
+
+  String get resetPassword {
+    return _localizedValues[locale.languageCode]['reset_password'];
+  }
+
 
 
 }

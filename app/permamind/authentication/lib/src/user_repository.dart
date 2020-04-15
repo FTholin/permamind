@@ -83,6 +83,10 @@ class UserRepository {
 
   }
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    return _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
   Future<DocumentSnapshot> searchById(String value) {
     return  Firestore.instance.collection('users').where("authenticationId",isEqualTo: value).getDocuments().then((snapshot) {
       return snapshot.documents.first;
