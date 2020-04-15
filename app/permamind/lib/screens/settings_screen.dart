@@ -58,7 +58,8 @@ class SettingsScreen extends StatelessWidget {
                           '${AppLocalizations.of(context).ActivityAddedDaySelection}',
                         ),
                         title: Text("${AppLocalizations.of(context).appSettingsCgu}"),
-                        onTap: () {},
+                        onTap: () => Navigator.pushNamed(context, '/eula'),
+
                       ),
                     ),
 

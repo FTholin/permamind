@@ -110,13 +110,16 @@ class UserRepository {
 
     final currentUser = await _firebaseAuth.currentUser();
 
-    Firestore.instance.collection('users').where("id",isEqualTo: currentUser.uid).getDocuments().then((snapshot) {
-      for (DocumentSnapshot doc in snapshot.documents) {
-        doc.reference.delete();
-      }
-    });
+//    Firestore.instance.collection('users').document(userId).then((snapshot) {
+//      for (DocumentSnapshot doc in snapshot.documents) {
+//        doc.reference.delete();
+//      }
+//    });
 
-    Firestore.instance.collection('gardens').where("admin",isEqualTo: currentUser.uid).getDocuments().then((snapshot) {
+    await  Firestore.instance.collection('users').document(userId).delete();
+
+
+    Firestore.instance.collection('gardens').where("admin",isEqualTo: userId).getDocuments().then((snapshot) {
       for (DocumentSnapshot garden in snapshot.documents) {
 
 //        // Supprime tous les designs associé au jardin

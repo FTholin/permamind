@@ -194,8 +194,8 @@ class _LoginFormState extends State<LoginForm> {
                        icon: Icon(Icons.email),
                        labelText: '${AppLocalizations.of(context).email}',
                      ),
-                     autovalidate: true,
-                     autocorrect: false,
+//                     autovalidate: true,
+//                     autocorrect: false,
                      validator: (_) {
                        return !state.isEmailValid
                            ? '${AppLocalizations.of(context).invalidEmail}'
@@ -211,8 +211,8 @@ class _LoginFormState extends State<LoginForm> {
                        labelText: '${AppLocalizations.of(context).password}',
                      ),
                      obscureText: true,
-                     autovalidate: true,
-                     autocorrect: false,
+//                     autovalidate: true,
+//                     autocorrect: false,
                      validator: (_) {
                        return !state.isPasswordValid
                            ? '${AppLocalizations.of(context).invalidPassword}'

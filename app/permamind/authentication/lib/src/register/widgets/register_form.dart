@@ -86,9 +86,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       labelText: 'Pseudo',
                     ),
                     autocorrect: false,
-                    autovalidate: true,
                     validator: (_) {
-                      // TODO changer pseudo
                       return !state.isEmailValid ? 'Invalid Pseudo' : null;
                     },
                   ),
@@ -99,7 +97,6 @@ class _RegisterFormState extends State<RegisterForm> {
                       labelText: '${AppLocalizations.of(context).email}',
                     ),
                     autocorrect: false,
-                    autovalidate: true,
                     validator: (_) {
                       return !state.isEmailValid ? '${AppLocalizations.of(context).invalidEmail}' : null;
                     },
@@ -112,7 +109,6 @@ class _RegisterFormState extends State<RegisterForm> {
                     ),
                     obscureText: true,
                     autocorrect: false,
-                    autovalidate: true,
                     validator: (_) {
                       return !state.isPasswordValid ? '${AppLocalizations.of(context).invalidPassword}' : null;
                     },
