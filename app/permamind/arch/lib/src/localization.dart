@@ -150,7 +150,10 @@ class AppLocalizations {
       'forgot_password_dialog_content': "Enter your email address below and we'll get you back on track.",
       'reset_password': 'Reset Password',
       'start_adventure_garden': 'Add your first garden to start the adventure with Permamind!',
-
+      'required_password': 'Password is required',
+      'password8digits': "Password must be at least 8 char long",
+      'password_special_char': "passwords must have at least one special character",
+      'required_pseudo': "pseudo required"
     },
     'fr': {
       'home': "Mes jardins",
@@ -290,7 +293,10 @@ class AppLocalizations {
       'forgot_password_dialog_content': "Saisissez votre adresse électronique ci-dessous et nous vous remettrons sur la bonne voie.",
       'reset_password': 'Réinitialisation',
       'start_adventure_garden': "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
-
+      'required_password': 'Mot de passe requis',
+      'password8digits': "Mot de passe doit comporter au moins 8 caractères",
+      'password_special_char': "au moins un caractère spécial",
+      'required_pseudo': "Pseudo requis"
     },
   };
 
@@ -861,6 +867,23 @@ class AppLocalizations {
   String get startAdventureGarden {
     return _localizedValues[locale.languageCode]['start_adventure_garden'];
   }
+
+  String get requiredPassword {
+    return _localizedValues[locale.languageCode]['required_password'];
+  }
+
+  String get password8digits {
+    return _localizedValues[locale.languageCode]['password8digits'];
+  }
+
+  String get passwordSpecialChar {
+    return _localizedValues[locale.languageCode]['password_special_char'];
+  }
+
+  String get requiredPseudo {
+    return _localizedValues[locale.languageCode]['required_pseudo'];
+  }
+
 
 
 

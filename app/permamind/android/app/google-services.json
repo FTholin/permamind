@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:799071852422:android:f15d68fa9b1feef4067e07",
+        "mobilesdk_app_id": "1:799071852422:android:c9e4bc0709ed09a7067e07",
         "android_client_info": {
-          "package_name": "com.example.permamind"
+          "package_name": "com.app.permamind"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "799071852422-r9lhlv9vv6d61ltvb7fmns7v5onq3hss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.permamind",
+            "certificate_hash": "25c8977174dfe2eb7558ea6d71d0bd0c1cf7e7fe"
+          }
+        },
         {
           "client_id": "799071852422-c1kfg213gk9d7bhphveo9beo2nnu4k73.apps.googleusercontent.com",
           "client_type": 3
@@ -28,14 +36,14 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "799071852422-c1kfg213gk9d7bhphveo9beo2nnu4k73.apps.googleusercontent.com",
+              "client_id": "799071852422-5641e2et18d7hgcetpq4g3oe2levjkbi.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "799071852422-kp9tdjdng780ru951s2e07vssiclhfr0.apps.googleusercontent.com",
+              "client_id": "799071852422-7vq5m0crle2kd4bsu0tmdckb032uf9pc.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.permamind.app"
+                "bundle_id": "com.app.permamind"
               }
             }
           ]

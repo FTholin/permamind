@@ -1,4 +1,4 @@
-package com.example.permamind
+package com.app.permamind
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

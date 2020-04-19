@@ -13,7 +13,7 @@ class ThanksList {
     'Nicolas.B',
     'Nicolas.C',
     'Charles.B',
-    'Charles.HG'
+    'Charles.HG',
     'Kévin',
     'Valentin',
     'Christa',
@@ -30,6 +30,8 @@ class ThanksList {
     'Thomas',
     'Raghda',
     'Lucas',
+    'Jérémy',
+    'Felicia',
     'Nathan',
     'Tiphaine',
     'Corentin',
