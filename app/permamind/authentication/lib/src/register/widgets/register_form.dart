@@ -2,6 +2,7 @@ import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 
 class RegisterForm extends StatefulWidget {
@@ -80,42 +81,40 @@ class _RegisterFormState extends State<RegisterForm> {
               child: ListView(
                 children: <Widget>[
                   TextFormField(
-                    controller: _pseudoController,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.perm_identity),
-                      labelText: 'Pseudo',
-                    ),
-                    autocorrect: false,
-                    autovalidate: true,
-                    validator: (_) {
-                      // TODO changer pseudo
-                      return !state.isEmailValid ? 'Invalid Pseudo' : null;
-                    },
+                      controller: _pseudoController,
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.perm_identity),
+                          hintText: 'Pseudo'
+                      ),
+                      keyboardType: TextInputType.text,
+                      autovalidate: true,
+                      autocorrect: false,
                   ),
                   TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.email),
-                      labelText: '${AppLocalizations.of(context).email}',
-                    ),
-                    autocorrect: false,
-                    autovalidate: true,
-                    validator: (_) {
-                      return !state.isEmailValid ? '${AppLocalizations.of(context).invalidEmail}' : null;
-                    },
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.email),
+                          hintText: '${AppLocalizations.of(context).email}'
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      autovalidate: true,
+                      autocorrect: false,
+                      validator: EmailValidator(errorText: '${AppLocalizations.of(context).invalidEmail}')
                   ),
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.lock),
-                      labelText: '${AppLocalizations.of(context).password}',
+//                      labelText: ,
+                    hintText: '${AppLocalizations.of(context).password}'
                     ),
                     obscureText: true,
-                    autocorrect: false,
                     autovalidate: true,
-                    validator: (_) {
-                      return !state.isPasswordValid ? '${AppLocalizations.of(context).invalidPassword}' : null;
-                    },
+                    autocorrect: false,
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: '${AppLocalizations.of(context).requiredPassword}'),
+                      MinLengthValidator(8, errorText: '${AppLocalizations.of(context).password8digits}'),
+                    ])
                   ),
                   RegisterButton(
                     onPressed: isRegisterButtonEnabled(state)

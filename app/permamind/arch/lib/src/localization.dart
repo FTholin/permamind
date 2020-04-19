@@ -141,7 +141,19 @@ class AppLocalizations {
       'app_settings_delete_account_title': "Deleting your account",
       'app_settings_delete_account_content': "The deletion of your account will be final.",
       'add_parcel_choose': "Choose this association",
-
+      'forgot_password': 'Forgot password?',
+      'log_in_not_member': 'Not a member?',
+      'log_in_join': ' Join Permamind 🌱',
+      'log_in_or_separator': 'OR',
+      'sign_in_google_title': 'Sign in with Google',
+      'forgot_password_dialog_title': "Forgot your Password?",
+      'forgot_password_dialog_content': "Enter your email address below and we'll get you back on track.",
+      'reset_password': 'Reset Password',
+      'start_adventure_garden': 'Add your first garden to start the adventure with Permamind!',
+      'required_password': 'Password is required',
+      'password8digits': "Password must be at least 8 char long",
+      'password_special_char': "passwords must have at least one special character",
+      'required_pseudo': "pseudo required"
     },
     'fr': {
       'home': "Mes jardins",
@@ -272,6 +284,19 @@ class AppLocalizations {
       'app_settings_delete_account_title': "Suppression de votre compte",
       'app_settings_delete_account_content': "La suppression de votre compte sera définitive.",
       'add_parcel_choose': "Choisir cette association",
+      'forgot_password': 'Mot de passe oublié?',
+      'log_in_not_member': 'Non membre?',
+      'log_in_join': ' Rejoindre Permamind 🌱',
+      'log_in_or_separator': 'OU',
+      'sign_in_google_title': 'Connectez-vous avec Google',
+      'forgot_password_dialog_title': "Mot de passe oublié",
+      'forgot_password_dialog_content': "Saisissez votre adresse électronique ci-dessous et nous vous remettrons sur la bonne voie.",
+      'reset_password': 'Réinitialisation',
+      'start_adventure_garden': "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
+      'required_password': 'Mot de passe requis',
+      'password8digits': "Mot de passe doit comporter au moins 8 caractères",
+      'password_special_char': "au moins un caractère spécial",
+      'required_pseudo': "Pseudo requis"
     },
   };
 
@@ -802,10 +827,63 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]['app_settings_delete_account_content'];
   }
 
-
   String get addParcelChoose {
     return _localizedValues[locale.languageCode]['add_parcel_choose'];
   }
+
+  String get forgotPassword {
+    return _localizedValues[locale.languageCode]['forgot_password'];
+  }
+
+  String get logInNotMember {
+    return _localizedValues[locale.languageCode]['log_in_not_member'];
+  }
+
+  String get logInJoin {
+    return _localizedValues[locale.languageCode]['log_in_join'];
+  }
+
+  String get logInOrSeparator {
+    return _localizedValues[locale.languageCode]['log_in_or_separator'];
+  }
+
+
+  String get signInGoogleTitle {
+    return _localizedValues[locale.languageCode]['sign_in_google_title'];
+  }
+  String get forgotPasswordDialogTitle {
+    return _localizedValues[locale.languageCode]['forgot_password_dialog_title'];
+  }
+
+  String get forgotPasswordDialogContent {
+    return _localizedValues[locale.languageCode]['forgot_password_dialog_content'];
+  }
+
+  String get resetPassword {
+    return _localizedValues[locale.languageCode]['reset_password'];
+  }
+
+
+  String get startAdventureGarden {
+    return _localizedValues[locale.languageCode]['start_adventure_garden'];
+  }
+
+  String get requiredPassword {
+    return _localizedValues[locale.languageCode]['required_password'];
+  }
+
+  String get password8digits {
+    return _localizedValues[locale.languageCode]['password8digits'];
+  }
+
+  String get passwordSpecialChar {
+    return _localizedValues[locale.languageCode]['password_special_char'];
+  }
+
+  String get requiredPseudo {
+    return _localizedValues[locale.languageCode]['required_pseudo'];
+  }
+
 
 
 

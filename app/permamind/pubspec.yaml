@@ -1,5 +1,5 @@
 name: permamind
-description: A new Flutter application.
+description: Help to grow your veggies.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 0.2.28+2
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -44,6 +44,8 @@ dependencies:
   charts_flutter: ^0.8.1
   flutter_reaction_button: ^1.0.0
 
+  form_field_validator: ^1.0.1
+
 
   carousel_slider: ^1.4.1
 
@@ -52,9 +54,6 @@ dependencies:
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^5.0.11
 
-  # Add the dependencies for any other Firebase products you want to use in your app
-  # For example, to use Firebase Authentication and Cloud Firestore
-  firebase_auth: ^0.15.5+3
   cloud_firestore: ^0.13.4+2
 
 

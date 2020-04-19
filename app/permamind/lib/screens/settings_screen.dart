@@ -50,39 +50,42 @@ class SettingsScreen extends StatelessWidget {
 //                    ),
 
                     Card(
+                      color: Colors.green,
                       child: ListTile(
                         leading: Icon(
                           Icons.description,
                           size: 24.0,
-                          semanticLabel:
-                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
+                          color: Colors.white,
                         ),
-                        title: Text("${AppLocalizations.of(context).appSettingsCgu}"),
-                        onTap: () {},
+                        title: Text("${AppLocalizations.of(context).appSettingsCgu}", style: TextStyle(color: Colors.white),),
+                        onTap: () => Navigator.pushNamed(context, '/eula'),
+
                       ),
                     ),
 
                     Card(
+                      color: Colors.green,
                       child: ListTile(
                         leading: Icon(
                           Icons.favorite,
                           size: 24.0,
-                          semanticLabel:
-                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
+                          color: Colors.white,
+
                         ),
-                        title: Text("${AppLocalizations.of(context).appSettingsThanks}"),
-                        onTap: () {},
+                        title: Text("${AppLocalizations.of(context).appSettingsThanks}", style: TextStyle(color: Colors.white)),
+                        onTap: () => Navigator.pushNamed(context, '/acknowledgement'),
+
                       ),
                     ),
                     Card(
+                      color: Colors.green,
                       child: ListTile(
                         leading: Icon(
                           Icons.exit_to_app,
                           size: 24.0,
-                          semanticLabel:
-                          '${AppLocalizations.of(context).extraActionsSettingsButton}',
+                          color: Colors.white,
                         ),
-                        title: Text("${AppLocalizations.of(context).extraActionsLogOutButton}"),
+                        title: Text("${AppLocalizations.of(context).extraActionsLogOutButton}",  style: TextStyle(color: Colors.white)),
                         onTap: () {
                           return showDialog<void>(
                             context: context,
@@ -105,7 +108,7 @@ class SettingsScreen extends StatelessWidget {
                                     },
                                   ),
                                   FlatButton(
-                                    child: Text('${AppLocalizations.of(context).buttonContinue}'),
+                                    child: Text('${AppLocalizations.of(context).buttonContinue}',),
                                     onPressed: () {
                                       BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
 
@@ -123,14 +126,14 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     Card(
+                      color: Colors.green,
                       child: ListTile(
                         leading: Icon(
                           Icons.directions_run,
                           size: 24.0,
-                          semanticLabel:
-                          '${AppLocalizations.of(context).ActivityAddedDaySelection}',
+                          color: Colors.white,
                         ),
-                        title: Text("${AppLocalizations.of(context).appSettingsDeleteAccountTitle}"),
+                        title: Text("${AppLocalizations.of(context).appSettingsDeleteAccountTitle}", style: TextStyle(color: Colors.white)),
                         onTap: () {
                           return showDialog<void>(
                             context: context,

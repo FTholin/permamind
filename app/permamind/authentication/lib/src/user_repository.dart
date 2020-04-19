@@ -17,13 +17,24 @@ class UserRepository {
 
   Future<FirebaseUser> signInWithGoogle() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    await _firebaseAuth.signInWithCredential(credential);
+    var res = await _firebaseAuth.signInWithCredential(credential);
+    if (res.additionalUserInfo.isNewUser) {
+      User newUser = User(
+          res.user.uid,
+          res.user.displayName, res.user.email,
+          res.user.displayName.substring(0, 1).toUpperCase(),
+          'French',
+          0,
+          0, []
+      );
+      await addNewUser(newUser);
+    }
+
     return _firebaseAuth.currentUser();
   }
 
@@ -72,6 +83,10 @@ class UserRepository {
 
   }
 
+  Future<void> sendPasswordResetEmail(String email) async {
+    return _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
   Future<DocumentSnapshot> searchById(String value) {
     return  Firestore.instance.collection('users').where("authenticationId",isEqualTo: value).getDocuments().then((snapshot) {
       return snapshot.documents.first;
@@ -95,13 +110,16 @@ class UserRepository {
 
     final currentUser = await _firebaseAuth.currentUser();
 
-    Firestore.instance.collection('users').where("id",isEqualTo: currentUser.uid).getDocuments().then((snapshot) {
-      for (DocumentSnapshot doc in snapshot.documents) {
-        doc.reference.delete();
-      }
-    });
+//    Firestore.instance.collection('users').document(userId).then((snapshot) {
+//      for (DocumentSnapshot doc in snapshot.documents) {
+//        doc.reference.delete();
+//      }
+//    });
 
-    Firestore.instance.collection('gardens').where("admin",isEqualTo: currentUser.uid).getDocuments().then((snapshot) {
+    await  Firestore.instance.collection('users').document(userId).delete();
+
+
+    Firestore.instance.collection('gardens').where("admin",isEqualTo: userId).getDocuments().then((snapshot) {
       for (DocumentSnapshot garden in snapshot.documents) {
 
 //        // Supprime tous les designs associé au jardin

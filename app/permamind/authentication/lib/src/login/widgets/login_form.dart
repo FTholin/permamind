@@ -2,7 +2,7 @@ import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:form_field_validator/form_field_validator.dart';
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -16,6 +16,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -49,7 +51,11 @@ class _LoginFormState extends State<LoginForm> {
               SnackBar(
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('${AppLocalizations.of(context).loginFormFailureMessage}'), Icon(Icons.error)],
+                  children: [
+                    Text(
+                        '${AppLocalizations.of(context).loginFormFailureMessage}'),
+                    Icon(Icons.error)
+                  ],
                 ),
                 backgroundColor: Colors.red,
               ),
@@ -77,38 +83,38 @@ class _LoginFormState extends State<LoginForm> {
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(2 * SizeConfig.heightMultiplier),
             child: Form(
               child: ListView(
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Image.asset('assets/logo-dark.png', height: 200),
+                    child: Image.asset('assets/logo-dark.png', height: 20 * SizeConfig.heightMultiplier),
                   ),
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.email),
-                      labelText: '${AppLocalizations.of(context).email}',
+//                      labelText: '${AppLocalizations.of(context).email}',
+                    hintText: '${AppLocalizations.of(context).email}'
                     ),
+                    keyboardType: TextInputType.emailAddress,
                     autovalidate: true,
                     autocorrect: false,
-                    validator: (_) {
-                      return !state.isEmailValid ? '${AppLocalizations.of(context).invalidEmail}' : null;
-                    },
+                    validator: EmailValidator(errorText: '${AppLocalizations.of(context).invalidEmail}')
                   ),
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.lock),
-                      labelText: '${AppLocalizations.of(context).password}',
+                    hintText: '${AppLocalizations.of(context).password}'
                     ),
                     obscureText: true,
                     autovalidate: true,
                     autocorrect: false,
-                    validator: (_) {
-                      return !state.isPasswordValid ? '${AppLocalizations.of(context).invalidPassword}' : null;
-                    },
+//                    validator: MultiValidator([
+//                      RequiredValidator(errorText: '${AppLocalizations.of(context).requiredPassword}')
+//                    ]),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
@@ -129,7 +135,8 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           );
-        },
+
+          },
       ),
     );
   }

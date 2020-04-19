@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>799071852422-kp9tdjdng780ru951s2e07vssiclhfr0.apps.googleusercontent.com</string>
+	<string>799071852422-7vq5m0crle2kd4bsu0tmdckb032uf9pc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.799071852422-kp9tdjdng780ru951s2e07vssiclhfr0</string>
+	<string>com.googleusercontent.apps.799071852422-7vq5m0crle2kd4bsu0tmdckb032uf9pc</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCmVUXbO6AqVWHDMbU7_4bxHaS0v6q2dvc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.permamind.app</string>
+	<string>com.app.permamind</string>
 	<key>PROJECT_ID</key>
 	<string>permamind-56882</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:799071852422:ios:ec52deae64ea476c067e07</string>
+	<string>1:799071852422:ios:37dd301a81d3436d067e07</string>
 	<key>DATABASE_URL</key>
 	<string>https://permamind-56882.firebaseio.com</string>
 </dict>

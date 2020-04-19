@@ -275,8 +275,8 @@ class DetailsParcelScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0),
                           child: Image.asset(
                             "assets/gardens_imagery/${currentParcel.currentModelingId}_1.png",
-                            fit: BoxFit.contain,
-                            height: 28 * SizeConfig.heightMultiplier,
+                            fit: BoxFit.cover,
+//                            height: 28 * SizeConfig.heightMultiplier,
                           ),
                         ),
                       ),
@@ -481,7 +481,6 @@ class DetailsParcelScreen extends StatelessWidget {
                           child: Image.asset(
                             "assets/utils_image/empty_parcel.jpg",
                             fit: BoxFit.contain,
-                            height: 28 * SizeConfig.heightMultiplier,
                           ),
                         ),
                       ),

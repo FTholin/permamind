@@ -51,12 +51,11 @@ class EnumeratedGardens extends StatelessWidget {
                     Flexible(
                         flex: 1,
                         child: Text(
-                            "Ajoutez votre premier jardin pour débuter l'aventure avec Permamind !",
+                            "${AppLocalizations.of(context).startAdventureGarden}",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: const Color(0xFF01534F),
                               fontSize: 2.5 * SizeConfig.textMultiplier,
-//                          fontWeight: FontWeight.bold,
                             )))
                   ],
                 ),
