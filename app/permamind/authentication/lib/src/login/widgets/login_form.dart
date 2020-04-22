@@ -126,7 +126,8 @@ class _LoginFormState extends State<LoginForm> {
                               ? _onFormSubmitted
                               : null,
                         ),
-                        GoogleLoginButton(),
+//                        GoogleLoginButton(),
+                        ForgotPasswordButton(userRepository: _userRepository,),
                         CreateAccountButton(userRepository: _userRepository),
                       ],
                     ),

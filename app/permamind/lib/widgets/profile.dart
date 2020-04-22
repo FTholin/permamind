@@ -57,7 +57,6 @@ class Profile extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 )),
                             const Padding(padding: EdgeInsets.only(bottom: 2.0)),
-
                           ],
                         ),
                       )
@@ -182,7 +181,6 @@ class Profile extends StatelessWidget {
             ),
           ),
         )
-        // TODO Changer internationalisation
       ],
     );
   }

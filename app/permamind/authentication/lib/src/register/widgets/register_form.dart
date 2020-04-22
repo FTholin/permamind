@@ -116,6 +116,18 @@ class _RegisterFormState extends State<RegisterForm> {
                       MinLengthValidator(8, errorText: '${AppLocalizations.of(context).password8digits}'),
                     ])
                   ),
+                  TextFormField(
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.lock),
+//                      labelText: ,
+                          hintText: '${AppLocalizations.of(context).password}'
+                      ),
+                      obscureText: true,
+                      autovalidate: true,
+                      autocorrect: false,
+                    validator: (val) => MatchValidator(errorText: 'passwords do not match').validateMatch(val, _passwordController.text),
+                  ),
+
                   RegisterButton(
                     onPressed: isRegisterButtonEnabled(state)
                         ? _onFormSubmitted

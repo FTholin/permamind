@@ -335,11 +335,6 @@ class App extends StatelessWidget {
 
                     return MaterialPageRoute(builder: (context) => SettingsScreen(args.userId));
 
-                  } else if (settings.name == "/settingsGarden") {
-
-                    return MaterialPageRoute(
-                        builder: (context) => SettingsGardenScreen());
-
                   } else if (settings.name == "/eula") {
                     return MaterialPageRoute(
                         builder: (context) => EulaScreen());

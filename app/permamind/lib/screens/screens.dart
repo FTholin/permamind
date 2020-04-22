@@ -3,7 +3,6 @@ export 'home_screen.dart';
 export 'discover_modelings_screen.dart';
 export 'details_modeling_screen.dart';
 export 'settings_screen.dart';
-export 'settings_garden_screen.dart';
 export 'add_activity_screen.dart';
 export 'join_garden_screen.dart';
 export 'tutorials_activities_screen.dart';

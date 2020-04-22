@@ -157,13 +157,13 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   FlatButton(
                                     child: Text('${AppLocalizations.of(context).buttonContinue}'),
-                                    onPressed: () {
+                                    onPressed: () async {
+                                      BlocProvider.of<AuthenticationBloc>(context).add(DeletedAccount(userId));
 
                                       Navigator.of(context).pushNamedAndRemoveUntil(
                                           '/', (Route<dynamic> route) => false
                                       );
 
-                                      BlocProvider.of<AuthenticationBloc>(context).add(DeletedAccount(userId));
                                     },
                                   ),
                                 ],
