@@ -15,7 +15,7 @@ class ModelingEntity extends Equatable {
   final List<int> sowingPeriod;
   final List<int> harvestPeriod;
   final String descriptionFr;
-  List<Design> designs = new List<Design>();
+//  List<Design> designs = new List<Design>();
 
 
   ModelingEntity(this.id, this.name,
@@ -26,7 +26,7 @@ class ModelingEntity extends Equatable {
       this.composition,
       this.sowingPeriod,
       this.harvestPeriod,
-      this.designs,
+//      this.designs,
       this.descriptionFr
       );
 
@@ -39,7 +39,7 @@ class ModelingEntity extends Equatable {
       'sunlightRequirement': sunlightRequirement,
       'waterRequirement': waterRequirement,
       'yield': yield,
-      'designs': designs,
+//      'designs': designs,
       'descriptionFr': descriptionFr
     };
   }
@@ -67,7 +67,7 @@ class ModelingEntity extends Equatable {
       json['composition'],
       json['sowingPeriod'],
       json['harvestPeriod'],
-      json['designs'],
+//      json['designs'],
       json['descriptionFr']
     );
   }
@@ -88,9 +88,9 @@ class ModelingEntity extends Equatable {
         new List<String>.from(snap.data['composition']),
       new List<int>.from(snap.data['sowingPeriod']),
       new List<int>.from(snap.data['harvestPeriod']),
-      snap.data['designs'].map<Design>((item) {
-        return Design.fromMap(item);
-      }).toList(),
+//      snap.data['designs'].map<Design>((item) {
+//        return Design.fromMap(item);
+//      }).toList(),
       snap.data['descriptionFr']
     );
   }

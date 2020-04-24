@@ -183,8 +183,7 @@ class _AddParcelScreenState extends State<AddParcelScreen> {
                                                                 5.0)),
                                                     borderSide: BorderSide(
                                                         color: Colors.green)),
-                                                hintText:
-                                                    '',
+                                                hintText: "${AppLocalizations.of(context).addParcelHintName}",
                                                 errorText: _parcelNameValidate
                                                     ? "${AppLocalizations.of(context).addParcelNameError}"
                                                     : null,

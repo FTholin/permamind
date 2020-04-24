@@ -34,6 +34,15 @@ class RegisterPasswordChanged extends RegisterEvent {
   String toString() => 'PasswordChanged { password: $password }';
 }
 
+class RegisterConfirmPasswordChanged extends RegisterEvent {
+  final String confirmPassword;
+  final String password;
+  RegisterConfirmPasswordChanged({@required this.password, @required this.confirmPassword}) : super([confirmPassword]);
+
+  @override
+  String toString() => 'RegisterConfirmPasswordChanged { password: $confirmPassword }';
+}
+
 class RegisterSubmitted extends RegisterEvent {
   final String pseudo;
   final String email;

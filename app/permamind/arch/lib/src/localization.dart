@@ -153,7 +153,9 @@ class AppLocalizations {
       'required_password': 'Password is required',
       'password8digits': "Password must be at least 8 char long",
       'password_special_char': "passwords must have at least one special character",
-      'required_pseudo': "pseudo required"
+      'required_pseudo': "pseudo required",
+      'confirm_password': "Confirm password",
+      'error_confirm_password': "Must match password"
     },
     'fr': {
       'home': "Mes jardins",
@@ -296,7 +298,9 @@ class AppLocalizations {
       'required_password': 'Mot de passe requis',
       'password8digits': "Mot de passe doit comporter au moins 8 caractères",
       'password_special_char': "au moins un caractère spécial",
-      'required_pseudo': "Pseudo requis"
+      'required_pseudo': "Pseudo requis",
+      'confirm_password': "Confirmer mot de passe",
+      'error_confirm_password': "Doit correspondre au mot de passe",
     },
   };
 
@@ -882,6 +886,14 @@ class AppLocalizations {
 
   String get requiredPseudo {
     return _localizedValues[locale.languageCode]['required_pseudo'];
+  }
+
+  String get confirmPassword {
+    return _localizedValues[locale.languageCode]['confirm_password'];
+  }
+
+  String get errorConfirmPassword {
+    return _localizedValues[locale.languageCode]['error_confirm_password'];
   }
 
 

@@ -32,9 +32,7 @@ class _StepperState extends State<EnumeratedTutorials> {
     return BlocBuilder<TutorialsBloc, TutorialsState>(
       builder: (context, state) {
         if (state is TutosLoading) {
-          return Container(
-            child: Text("TutosLoading"),
-          );
+          return Container();
         } else if (state is TutosLoaded) {
           final tutorials = state.tutorials;
 

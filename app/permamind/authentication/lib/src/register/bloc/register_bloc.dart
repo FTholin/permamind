@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:authentication/authentication.dart';
 import 'package:authentication/src/validators.dart';
 import 'package:bloc/bloc.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -43,6 +44,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield* _mapPasswordChangedToState(event.password);
     } else if (event is RegisterSubmitted) {
       yield* _mapFormSubmittedToState(event.pseudo, event.email, event.password);
+    } else if (event is RegisterConfirmPasswordChanged) {
+      yield* _mapConfirmPasswordChangedToState(event.confirmPassword, event.password);
     }
   }
 
@@ -55,6 +58,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> _mapPasswordChangedToState(String password) async* {
     yield state.update(
       isPasswordValid: Validators.isValidPassword(password),
+    );
+  }
+
+
+  Stream<RegisterState>   _mapConfirmPasswordChangedToState(String password, String confirmPassword) async* {
+    yield state.update(
+      isConfirmPasswordValid:  password == confirmPassword ? true : false
     );
   }
 

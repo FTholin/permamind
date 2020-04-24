@@ -14,11 +14,12 @@ class _RegisterFormState extends State<RegisterForm> {
   final TextEditingController _pseudoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   RegisterBloc _registerBloc;
 
   bool get isPopulated => _pseudoController.text.isNotEmpty &&
-      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty && _confirmPasswordController.text.isNotEmpty;
 
   bool isRegisterButtonEnabled(RegisterState state) {
     return state.isFormValid && isPopulated && !state.isSubmitting;
@@ -31,6 +32,7 @@ class _RegisterFormState extends State<RegisterForm> {
     _pseudoController.addListener(_onPseudoChanged);
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
+    _confirmPasswordController.addListener(_onConfirmPasswordChanged);
   }
 
   @override
@@ -117,15 +119,16 @@ class _RegisterFormState extends State<RegisterForm> {
                     ])
                   ),
                   TextFormField(
+                    controller: _confirmPasswordController,
                       decoration: InputDecoration(
                           icon: Icon(Icons.lock),
 //                      labelText: ,
-                          hintText: '${AppLocalizations.of(context).password}'
+                          hintText: '${AppLocalizations.of(context).confirmPassword}'
                       ),
                       obscureText: true,
                       autovalidate: true,
                       autocorrect: false,
-                    validator: (val) => MatchValidator(errorText: 'passwords do not match').validateMatch(val, _passwordController.text),
+                    validator: (val) => MatchValidator(errorText: '${AppLocalizations.of(context).errorConfirmPassword}').validateMatch(_confirmPasswordController.text, _passwordController.text),
                   ),
 
                   RegisterButton(
@@ -165,6 +168,12 @@ class _RegisterFormState extends State<RegisterForm> {
   void _onPasswordChanged() {
     _registerBloc.add(
       RegisterPasswordChanged(password: _passwordController.text),
+    );
+  }
+
+  void _onConfirmPasswordChanged() {
+    _registerBloc.add(
+      RegisterConfirmPasswordChanged(confirmPassword: _confirmPasswordController.text, password: _passwordController.text),
     );
   }
 

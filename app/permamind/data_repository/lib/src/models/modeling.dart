@@ -17,7 +17,7 @@ class Modeling {
 
   List<String> composition = new List<String>();
 
-  List<Design> designs = new List<Design>();
+//  List<Design> designs = new List<Design>();
 
 
   Modeling(
@@ -31,7 +31,7 @@ class Modeling {
       this.composition,
       this.sowingPeriod,
       this.harvestPeriod,
-      this.designs,
+//      this.designs,
       this.descriptionFr,
       {String id})
       : this.id = id;
@@ -52,8 +52,8 @@ class Modeling {
       composition ?? this.composition,
       sowingPeriod ?? this.sowingPeriod,
       harvestPeriod ?? this.harvestPeriod,
-      designs ?? this.designs,
-        descriptionFr ?? this.descriptionFr,
+//      designs ?? this.designs,
+      descriptionFr ?? this.descriptionFr,
       id: id ?? this.id
     );
   }
@@ -79,7 +79,7 @@ class Modeling {
               difficultyLevel == other.difficultyLevel &&
               sowingPeriod == other.sowingPeriod &&
               harvestPeriod == other.harvestPeriod &&
-              designs == other.designs &&
+//              designs == other.designs &&
               descriptionFr == other.descriptionFr;
 
   @override
@@ -96,7 +96,7 @@ class Modeling {
         composition,
         sowingPeriod,
         harvestPeriod,
-        designs,
+//        designs,
         descriptionFr
     );
   }
@@ -113,7 +113,7 @@ class Modeling {
       entity.composition,
       entity.sowingPeriod,
       entity.harvestPeriod,
-      entity.designs,
+//      entity.designs,
       entity.descriptionFr,
       id: entity.id,
     );
