@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/blocs/blocs.dart';
 import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 

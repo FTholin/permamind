@@ -3,11 +3,11 @@ import 'package:authentication/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/blocs/blocs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
-import 'package:permamind/models/models.dart';
-import 'package:permamind/screens/screens.dart';
+import 'package:Permamind/arch_bricks/arch_bricks.dart';
+import 'package:Permamind/models/models.dart';
+import 'package:Permamind/screens/screens.dart';
 
 class ExtraActions extends StatelessWidget {
   final String userId;

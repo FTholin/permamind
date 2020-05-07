@@ -1,7 +1,7 @@
 import 'package:arch/arch.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:permamind/models/acknowledgements_names.dart';
+import 'package:Permamind/models/acknowledgements_names.dart';
 
 
 class AcknowledgementScreen extends StatefulWidget {

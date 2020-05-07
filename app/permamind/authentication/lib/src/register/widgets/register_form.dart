@@ -106,7 +106,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.lock),
+                        icon: Icon(Icons.lock),
 //                      labelText: ,
                     hintText: '${AppLocalizations.of(context).password}'
                     ),
@@ -116,6 +116,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     validator: MultiValidator([
                       RequiredValidator(errorText: '${AppLocalizations.of(context).requiredPassword}'),
                       MinLengthValidator(8, errorText: '${AppLocalizations.of(context).password8digits}'),
+//                      PatternValidator(r'(?=.*[!@#€£$%^&*])', errorText: '${AppLocalizations.of(context).passwordSpecialChar}')
                     ])
                   ),
                   TextFormField(

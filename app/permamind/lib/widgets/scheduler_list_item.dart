@@ -2,7 +2,7 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reaction_button/flutter_reaction_button.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/blocs/blocs.dart';
 
 class ScheduleListItem extends StatefulWidget {
   final Activity activity;

@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/arch_bricks/arch_bricks.dart';
+import 'package:Permamind/blocs/blocs.dart';
 
 class ActivityAddedScreen extends StatefulWidget {
   final String gardenId;

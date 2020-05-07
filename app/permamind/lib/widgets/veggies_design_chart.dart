@@ -1,7 +1,7 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:permamind/models/models.dart';
+import 'package:Permamind/models/models.dart';
 
 class VeggiesDesignChart extends StatelessWidget {
   

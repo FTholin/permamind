@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:Permamind/arch_bricks/arch_bricks.dart';
 import 'package:data_repository/data_repository.dart';
 
 class GardenDeletedSnackBar extends SnackBar {

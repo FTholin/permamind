@@ -1,7 +1,7 @@
 import 'package:arch/arch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
+import 'package:Permamind/arch_bricks/arch_bricks.dart';
 
 class GardenSpeedDial extends StatefulWidget {
   final bool visible;

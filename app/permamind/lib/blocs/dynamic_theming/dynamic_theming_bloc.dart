@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/blocs/blocs.dart';
 import 'package:bloc/bloc.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {

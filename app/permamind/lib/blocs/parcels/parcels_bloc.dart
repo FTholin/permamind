@@ -3,7 +3,7 @@ import 'package:authentication/authentication.dart';
 import 'package:bloc/bloc.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:meta/meta.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/blocs/blocs.dart';
 
 
 class ParcelsBloc extends Bloc<ParcelsEvent, ParcelsState> {

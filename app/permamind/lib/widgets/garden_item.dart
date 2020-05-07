@@ -4,9 +4,9 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/models/models.dart';
-import 'package:permamind/widgets/parcel_carrousel.dart';
+import 'package:Permamind/blocs/blocs.dart';
+import 'package:Permamind/models/models.dart';
+import 'package:Permamind/widgets/parcel_carrousel.dart';
 
 class GardenItem extends StatelessWidget {
   final String name;

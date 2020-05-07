@@ -4,10 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/models/parcel_carousel_data.dart';
-import 'package:permamind/screens/add_parcel_screen.dart';
-import 'package:permamind/screens/screens.dart';
+import 'package:Permamind/blocs/blocs.dart';
+import 'package:Permamind/models/parcel_carousel_data.dart';
+import 'package:Permamind/screens/add_parcel_screen.dart';
+import 'package:Permamind/screens/screens.dart';
 
 class ParcelCarouselWithIndicator extends StatefulWidget {
   final User user;

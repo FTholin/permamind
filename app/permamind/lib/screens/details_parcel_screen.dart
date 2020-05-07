@@ -4,11 +4,11 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/models/member_profile.dart';
-import 'package:permamind/screens/screens.dart';
-import 'package:permamind/widgets/speed_dial_activity.dart';
-import 'package:permamind/widgets/widgets.dart';
+import 'package:Permamind/blocs/blocs.dart';
+import 'package:Permamind/models/member_profile.dart';
+import 'package:Permamind/screens/screens.dart';
+import 'package:Permamind/widgets/speed_dial_activity.dart';
+import 'package:Permamind/widgets/widgets.dart';
 import 'package:uuid/uuid.dart';
 
 class DetailsParcelScreen extends StatelessWidget {

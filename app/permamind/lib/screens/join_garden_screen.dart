@@ -2,8 +2,8 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:permamind/arch_bricks/arch_bricks.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/arch_bricks/arch_bricks.dart';
+import 'package:Permamind/blocs/blocs.dart';
 
 
 class JoinGardenScreen extends StatefulWidget {

@@ -2,8 +2,8 @@ import 'package:arch/arch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/screens/screens.dart';
+import 'package:Permamind/blocs/blocs.dart';
+import 'package:Permamind/screens/screens.dart';
 
 class ActivitySpeedDial extends StatefulWidget {
   final bool visible;

@@ -2,10 +2,10 @@
 //import 'package:flutter/foundation.dart';
 //import 'package:flutter/widgets.dart';
 //import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:permamind/arch_bricks/arch_bricks.dart';
-//import 'package:permamind/blocs/stats/stats.dart';
-//import 'package:permamind/widgets/widgets.dart';
-//import 'package:permamind/arch_bricks/flutter_todos_keys.dart';
+//import 'package:Permamind/arch_bricks/arch_bricks.dart';
+//import 'package:Permamind/blocs/stats/stats.dart';
+//import 'package:Permamind/widgets/widgets.dart';
+//import 'package:Permamind/arch_bricks/flutter_todos_keys.dart';
 //
 //
 //class Stats extends StatelessWidget {

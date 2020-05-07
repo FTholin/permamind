@@ -4,9 +4,9 @@ import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/models/models.dart';
-import 'package:permamind/widgets/my_stepper.dart';
+import 'package:Permamind/blocs/blocs.dart';
+import 'package:Permamind/models/models.dart';
+import 'package:Permamind/widgets/my_stepper.dart';
 
 class GardenAddedScreen extends StatefulWidget {
   final User _user;

@@ -1,7 +1,7 @@
 import 'package:data_repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:permamind/models/models.dart';
+import 'package:Permamind/models/models.dart';
 
 @immutable
 abstract class TutorialsState extends Equatable {

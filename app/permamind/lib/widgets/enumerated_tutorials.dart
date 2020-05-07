@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/screens/screens.dart';
-import 'package:permamind/widgets/widgets.dart';
+import 'package:Permamind/blocs/blocs.dart';
+import 'package:Permamind/screens/screens.dart';
+import 'package:Permamind/widgets/widgets.dart';
 
 
 

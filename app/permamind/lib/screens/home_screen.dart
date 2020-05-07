@@ -2,11 +2,11 @@ import 'package:arch/arch.dart';
 import 'package:authentication/authentication.dart';
 import 'package:data_repository/data_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:permamind/screens/screens.dart';
-import 'package:permamind/widgets/widgets.dart';
+import 'package:Permamind/screens/screens.dart';
+import 'package:Permamind/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/blocs/blocs.dart';
-import 'package:permamind/models/models.dart';
+import 'package:Permamind/blocs/blocs.dart';
+import 'package:Permamind/models/models.dart';
 
 class HomeScreen extends StatelessWidget {
 

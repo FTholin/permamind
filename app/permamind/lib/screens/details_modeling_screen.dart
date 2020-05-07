@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permamind/blocs/blocs.dart';
+import 'package:Permamind/blocs/blocs.dart';
 import 'package:data_repository/data_repository.dart';
-import 'package:permamind/screens/screens.dart';
+import 'package:Permamind/screens/screens.dart';
 import 'package:uuid/uuid.dart';
 
 class DetailsModelingScreen extends StatelessWidget {
